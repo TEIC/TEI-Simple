@@ -20,9 +20,8 @@ TEI Simple has the following high-level objectives:
 
 1. Definition of a new highly constrained and prescriptive subset of the Text Encoding Initiative (TEI) Guidelines suited to the representation of early modern and modern books. The degree of detail supported will be sufficient to encompass, at a minimum, the current practices of the TCP's EEBO, ECCO, and Evans collections plus those of other major European initiatives such as Text Grid or the DTA in Germany, and the Consortium Cahier in France.
 
-1. Creation of a notation (as an extension to TEI's ODD metalanguage) for specifying processing rules for TEI encoded texts, [2
+1. Creation of a notation (as an extension to TEI's ODD metalanguage) for specifying processing rules for TEI encoded texts,  referencing web standards such as XPath, CSS and XSL FO.
 The paper on “Documenter des “attentes applicatives” (processing expectations)” by Frédéric Glorieux and Vincent Jolivet at TEI Members Meeting 2013 (http://digilab2.let.uniroma1.it/teiconf2013/program/papers/abstracts-paper/ ) also addresses this area.
-]  referencing web standards such as XPath, CSS and XSL FO.
 
 1. Reference implementations of processing rules defined for this TEI subset.
 
