@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+>
   <teiHeader>
     <fileDesc>
       <titleStmt>
@@ -8,7 +10,7 @@
       </titleStmt>
       <editionStmt>
         <edition>
-          <date>2013-12-20</date>
+          <date>2014-04-21</date>
         </edition>
       </editionStmt>
       <publicationStmt>
@@ -26,6 +28,7 @@
       </appInfo>
     </encodingDesc>
       <revisionDesc>
+	<change n="5" when="2014-04-21" who="Sebastian Rahtz">explain processing model</change>
 	<change n="4" when="2013-12-20" who="Sebastian Rahtz">comments from Lou Burnard</change>
 	<change n="3" when="2013-12-08" who="Sebastian Rahtz">rename project, and incorporate comments from TEI Board/Council</change>
 	<change n="2" when="2013-12-01" who="Sebastian Rahtz">comments from MM and KH</change>
@@ -67,6 +70,84 @@
         <p>Outcomes from TEI Simple, consisting of a documented definition in ODD of the TEI subset, a set of processing rules, and extensions to the TEI ODD language to record processing expectations, will be fully integrated into the TEI infrastructure with ongoing maintenance by the TEI Technical Council.</p>
         <p>TEI Simple is intended to be <hi rend="italic">complementary</hi> to community projects like the TAPAS project, and to the established work of TextGrid, the German Text Archive (the DTA ‘base format’, which shares many of the goals of TEI Simple) and other national projects.</p>
       </div>
+      <div>
+	<head>The processing model</head>
+	<p>The  processing model for Simple will define two stages. <list type="ordered">
+	<item>In the first stage, every TEI Simple element is assigned to a category, according to a taxonomy whose first draft is below:
+This allows a processor to decide whether to handle the element or not, and broadly speaking
+how to display or otherwise process it. Note how XPath is used to refine a name.</item>
+<item>In the second stage, a normalized set of property values is created for each element, where the combination
+of the <emph>rend</emph>, <emph>rendition</emph> and <emph>style</emph> attributes, and the
+<gi>rendition</gi> element, are interpreted to map to the names and allowed values for CSS. Again, XPath filters
+will be needed to distinguish between different uses of the same element. This all allows a
+processor to work out how to present that element in the current context. </item>
+      </list>
+	</p>
+<table>
+<head>Preliminary processing categorisation</head>
+<row role="label"><cell>Category</cell><cell>Meaning</cell><cell>Example</cell></row>
+<row><cell>1</cell><cell>metadata header</cell><cell>fileDesc</cell></row>
+<row><cell>2</cell><cell>section heading</cell><cell>head[parent::div]</cell></row>
+<row><cell>3</cell><cell>title of object (figure, table etc)</cell><cell>head[not(parent::div)]</cell></row>
+<row><cell>4</cell><cell>structural division</cell><cell>div</cell></row>
+<row><cell>5</cell><cell>uncategorized block level object</cell><cell>quotation</cell></row>
+<row><cell>6</cell><cell>semantic block level object</cell><cell>person</cell></row>
+<row><cell>7</cell><cell>uncategorized inline object</cell><cell>hi</cell></row>
+<row><cell>8</cell><cell>semantic inline object</cell><cell>persName</cell></row>
+<row><cell>9</cell><cell>list</cell><cell>list</cell></row>
+<row><cell>10</cell><cell>list item</cell><cell>item</cell></row>
+<row><cell>11</cell><cell>table</cell><cell>table</cell></row>
+<row><cell>12</cell><cell>cell</cell><cell>cell</cell></row>
+<row><cell>13</cell><cell>row</cell><cell>row</cell></row>
+<row><cell>14</cell><cell>out of line note</cell>note<cell></cell></row>
+<row><cell>15</cell><cell>figure</cell><cell>figure</cell></row>
+<row><cell>16</cell><cell>pointer</cell><cell>ptr</cell></row>
+<row><cell>17</cell><cell>Janus element (alternate children)</cell><cell>choice</cell></row>
+<row><cell>18</cell><cell>modern commentary element</cell><cell>desc</cell></row>
+</table>
+
+<p>Processors can now create a variety of outputs without having to maintain specific rule sets for TEI Simple.
+The rules for stage 1 and stage 2 are maintained as part of the ODD schema for Simple, so a processor will 
+read both the source document and the corresponding ODD file, and have access to all the information it needs.</p>
+<p>The processing model assertions will be modelled in ODD using a notation similar to Schematron constraints, allowing
+for multiple categories for a given element, depending on an XPath filter.</p>
+<p>There are two important differences between this setup and the "TEI to XXX" stylesheets (eg <ptr target="https://github.com/TEIC/Stylesheets"/>)
+which have been developed many times: <list type="ordered"><item>The initial explicit assertion of a category gives a place
+for the design of Simple to commit to a style of output, separately from the details of the rendering</item>
+<item>The rules are tied to the schema, allowing the actual (eg) TEI to LaTeX or TEI to Word transformations to be
+completely agnostic.</item></list>
+We may contrast this with an example from the TEI Stylesheets, where an XSL function which 
+determines whether to render something as bold mixes up the context with the attributes,
+and is very hard to tailor for a constrained subset like Simple:
+<egXML xmlns="http://www.tei-c.org/ns/Examples">
+ <xsl:function name="tei:render-bold" as="xs:boolean">
+    <xsl:param name="element"/>
+    <xsl:for-each select="$element">
+      <xsl:choose>
+        <xsl:when test="@rend='odd_label'">true</xsl:when>
+        <xsl:when test="parent::tei:hi[starts-with(@rend,'specList-')]">true</xsl:when>
+        <xsl:when test="self::tei:docAuthor">true</xsl:when>
+        <xsl:when test="self::tei:label[following-sibling::tei:item]">true</xsl:when>
+        <xsl:when test="starts-with(@rend,'specList-')">true</xsl:when>
+        <xsl:when test="starts-with(parent::tei:hi/@rend,'specList-')">true</xsl:when>
+        <xsl:when test="@rend='label'">true</xsl:when>
+        <xsl:when test="@rend='wovenodd'">true</xsl:when>
+        <xsl:when test="@rend='important'">true</xsl:when>
+        <xsl:when test="@rend='specChildModule'">true</xsl:when>
+        <xsl:when test="ancestor-or-self::tei:cell[@rend='wovenodd-col1']">true</xsl:when>
+        <xsl:when test="ancestor-or-self::tei:cell[@role='label']">true</xsl:when>
+        <xsl:when test="ancestor-or-self::*[@rend][contains(@rend,'bold')]">true</xsl:when>
+        <xsl:when test="parent::tei:hi[starts-with(@rend,'specList-')]">true</xsl:when>
+        <xsl:when test="self::tei:cell and parent::tei:row[@role='label']">true</xsl:when>
+        <xsl:when test="self::tei:label[following-sibling::tei:item]">true</xsl:when>
+        <xsl:otherwise>false</xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:function>
+</egXML>
+</p>
+      </div>
+
       <div>
         <head>Programme of work and budget</head>
         <p>Many of the details of a formal budget will need to be worked out before submitting a proposal to a granting agency. The following is a rough model, showing a total budget of $100,000, divided into labour costs  ($57,600), travel and meeting costs ($33,000), and a contingency fund ($9,400). We assume that the work for TEI-Simple will take the equivalent two thirds of a full-time position at an annual salary of ~$87,000, including benefits.  We further assume that the work will be done by two research associates on a contract basis and model the project as ten work packages, each to be done in a number of days at a daily cost of $360.00.</p>
