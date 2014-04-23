@@ -150,7 +150,7 @@ and is very hard to tailor for a constrained subset like Simple:
 
       <div>
         <head>Programme of work and budget</head>
-        <p>Many of the details of a formal budget will need to be worked out before submitting a proposal to a granting agency. The following is a rough model, showing a total budget of $100,000, divided into labour costs  ($57,600), travel and meeting costs ($33,000), and a contingency fund ($9,400). We assume that the work for TEI-Simple will take the equivalent two thirds of a full-time position at an annual salary of ~$87,000, including benefits.  We further assume that the work will be done by two research associates on a contract basis and model the project as ten work packages, each to be done in a number of days at a daily cost of $360.00.</p>
+        <p>Many of the details of a formal budget are not yet worked out, but the following is a rough model, showing a total budget of $100,000, divided into labour costs  ($57,600), travel and meeting costs ($33,000), and a contingency fund ($9,400). We assume that the work for TEI-Simple will take the equivalent two thirds of a full-time position at an annual salary of ~$87,000, including benefits.  We further assume that the work will be done by two research associates on a contract basis and model the project as ten work packages, each to be done in a number of days at a daily cost of $360.00.</p>
         <p>The PIs and an advisory panel to be appointed will contribute their time to the project but will be reimbursed for travel expenses. Some of the work will, with the agreement of the TEI Technical Council, be managed under the TEI's existing work group mechanism, which means funding expenses of subject experts for workshop meetings.</p>
         <p>Broadly speaking, the work packages run in sequence, each depending on the previous one.</p>
         <table rend="rules">
@@ -309,12 +309,13 @@ and is very hard to tailor for a constrained subset like Simple:
           <item>Northwestern University, Chicago: Professor Martin Mueller</item>
           <item>The University of Oxford: Sebastian Rahtz</item>
           <item>The Text Encoding Initiative Consortium: Elena Pierazzo (Chair)</item>
+	  <item>The University of Nebraska, Brian Pytlig-Zillig</item>
           <item>Université Paris-Sorbonne: Frédéric Glorieux and Vincent Jolivet</item>
           <item>The Deutsches Textarchiv (DTA)</item>
           <item>TextGrid</item>
         </list>
         <p>The project will be directed by Martin Mueller (Northwestern) and Sebastian Rahtz (Oxford). </p>
-        <p>TEI Simple will commence work on 1st April 2014, and aim to complete the first stage of work in time for the TEI Annual Meeting in late October 2014. The launch at the Annual Meeting will be followed by six more months of development and revision before final sign-off on May 1st 2015.</p>
+        <p>TEI Simple will commence work on 1st May 2014, and aim to complete the first stage of work in time for the TEI Annual Meeting in late October 2014. The launch at the Annual Meeting will be followed by six more months of development and revision before final sign-off on May 1st 2015.</p>
       </div>
     </body>
   </text>
