@@ -6,7 +6,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     <fileDesc>
       <titleStmt>
         <title>TEI Simple: towards an amenable TEI</title>
-        <author>Martin Mueller and Sebastian Rahtz</author>
+        <author>Sebastian Rahtz, Martin Mueller, Brian Pytlik Zillig</author>
       </titleStmt>
       <editionStmt>
         <edition>
@@ -28,7 +28,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
       </appInfo>
     </encodingDesc>
       <revisionDesc>
-	<change n="5" when="2014-04-21" who="Sebastian Rahtz">explain processing model</change>
+	<change n="5" when="2014-05-21" who="Sebastian Rahtz">towards Mellon</change>
 	<change n="4" when="2013-12-20" who="Sebastian Rahtz">comments from Lou Burnard</change>
 	<change n="3" when="2013-12-08" who="Sebastian Rahtz">rename project, and incorporate comments from TEI Board/Council</change>
 	<change n="2" when="2013-12-01" who="Sebastian Rahtz">comments from MM and KH</change>
@@ -72,19 +72,20 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
       </div>
       <div>
 	<head>The processing model</head>
-	<p>The  processing model for Simple will define two stages. <list type="ordered">
-	<item>In the first stage, every TEI Simple element is assigned to a category, according to a taxonomy whose first draft is below:
-This allows a processor to decide whether to handle the element or not, and broadly speaking
-how to display or otherwise process it. Note how XPath is used to refine a name.</item>
-<item>In the second stage, a normalized set of property values is created for each element, where the combination
+	<p>The  current plan for a processing model for Simple is that it will define three stages: <list type="ordered">
+	<item>In the first stage, every TEI Simple element is assigned to a category, according to a taxonomy whose first draft is below.
+This allows a processor to know whether to handle the element or not, and broadly speaking
+how to display or otherwise process it. Note how XPath may be used used to refine a name.</item>
+<item>In the second stage, the categories are mapped to a presentation format, using HTML and CSS concepts
+where possible.</item>
+<item>In the third stage, a normalized set of property values is created for each element, where the combination
 of the <emph>rend</emph>, <emph>rendition</emph> and <emph>style</emph> attributes, and the
-<gi>rendition</gi> element, are interpreted to map to the names and allowed values for CSS. Again, XPath filters
-will be needed to distinguish between different uses of the same element. This all allows a
+<gi>rendition</gi> element, are interpreted to map to the names and allowed values for CSS.  This all allows a
 processor to work out how to present that element in the current context. </item>
       </list>
 	</p>
 <table>
-<head>Preliminary processing categorisation</head>
+<head>A preliminary processing categorisation</head>
 <row role="label"><cell>Category</cell><cell>Meaning</cell><cell>Example</cell></row>
 <row><cell>1</cell><cell>metadata header</cell><cell>fileDesc</cell></row>
 <row><cell>2</cell><cell>section heading</cell><cell>head[parent::div]</cell></row>
@@ -108,12 +109,12 @@ processor to work out how to present that element in the current context. </item
 
 <p>Processors can now create a variety of outputs without having to maintain specific rule sets for TEI Simple.
 The rules for stage 1 and stage 2 are maintained as part of the ODD schema for Simple, so a processor will 
-read both the source document and the corresponding ODD file, and have access to all the information it needs.</p>
+read both the source document and the corresponding ODD file (or some compiled version of if), and have access to all the information it needs.</p>
 <p>The processing model assertions will be modelled in ODD using a notation similar to Schematron constraints, allowing
 for multiple categories for a given element, depending on an XPath filter.</p>
 <p>There are two important differences between this setup and the "TEI to XXX" stylesheets (eg <ptr target="https://github.com/TEIC/Stylesheets"/>)
 which have been developed many times: <list type="ordered"><item>The initial explicit assertion of a category gives a place
-for the design of Simple to commit to a style of output, separately from the details of the rendering</item>
+for the designer of Simple to commit to a style of output, separately from the details of the rendering</item>
 <item>The rules are tied to the schema, allowing the actual (eg) TEI to LaTeX or TEI to Word transformations to be
 completely agnostic.</item></list>
 We may contrast this with an example from the TEI Stylesheets, where an XSL function which 
@@ -150,9 +151,25 @@ and is very hard to tailor for a constrained subset like Simple:
 
       <div>
         <head>Programme of work and budget</head>
-        <p>Many of the details of a formal budget are not yet worked out, but the following is a rough model, showing a total budget of $100,000, divided into labour costs  ($57,600), travel and meeting costs ($33,000), and a contingency fund ($9,400). We assume that the work for TEI-Simple will take the equivalent two thirds of a full-time position at an annual salary of ~$87,000, including benefits.  We further assume that the work will be done by two research associates on a contract basis and model the project as ten work packages, each to be done in a number of days at a daily cost of $360.00.</p>
-        <p>The PIs and an advisory panel to be appointed will contribute their time to the project but will be reimbursed for travel expenses. Some of the work will, with the agreement of the TEI Technical Council, be managed under the TEI's existing work group mechanism, which means funding expenses of subject experts for workshop meetings.</p>
-        <p>Broadly speaking, the work packages run in sequence, each depending on the previous one.</p>
+        <p>We propose a total budget of $100,000, divided into labour costs  ($57,600), travel and meeting costs ($33,000), and a contingency fund ($9,400). </p>
+
+<p>The work will be undertaken in three ways:
+<list type="ordered">
+<item>Contributed time and expertise by members of the advisory panel, and other members
+of the TEI community, in consultation events for which travel expenses may be paid.</item>
+<item>Technical development sprints during which the core programming tasks will be completed,
+in some cases as a group activity at the same location. Staff will be paid for their participation in these sessions.</item>
+<item>Some outputs will be commissioned at an agreed cost from partner organisations or individuals.</item>
+</list>
+The aim is to ensure that payments from the project are tied to explicit deliverables.</p>
+
+<p>The PIs and  advisory panel will contribute their
+time to the project but will be reimbursed for travel expenses. Some
+of the work will, with the agreement of the TEI Technical Council, be
+managed under the TEI's existing work group mechanism, which means
+funding expenses of subject experts for workshop meetings.</p>
+
+        <p>Broadly speaking, the work packages and outputs run in sequence, each depending on the previous one.</p>
         <table rend="rules">
           <row>
             <cell/>
@@ -163,7 +180,7 @@ and is very hard to tailor for a constrained subset like Simple:
               <hi rend="bold">Method</hi>
             </cell>
             <cell>
-              <hi rend="bold">Days</hi>
+              <hi rend="bold">FTE Days</hi>
             </cell>
             <cell>
               <hi rend="bold">Salary cost ($)</hi>
@@ -171,7 +188,6 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>
               <hi rend="bold">Expenses cost ($)</hi>
             </cell>
-            <cell/>
           </row>
           <row>
             <cell>1</cell>
@@ -181,16 +197,15 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>0</cell>
             <cell>18,000</cell>
             <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>2</cell>
             <cell>Definition of the prescriptive subset in TEI ODD</cell>
-            <cell>Researcher 1, Pis, community</cell>
+            <cell>Workshop sprint</cell>
             <cell>30</cell>
             <cell>10,800</cell>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>3</cell>
             <cell>Extension to the TEI ODD language to support processing expectations</cell>
@@ -198,8 +213,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell/>
             <cell/>
             <cell>15,000</cell>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>4</cell>
             <cell>Definition of processing expectations for TEI Simple</cell>
@@ -207,8 +221,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>25</cell>
             <cell>9,000</cell>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>5</cell>
             <cell>Implementation of processing expectations</cell>
@@ -216,8 +229,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>30</cell>
             <cell>10,800</cell>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>6</cell>
             <cell>Maintainable open access documentation for TEI Simple</cell>
@@ -225,8 +237,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>20</cell>
             <cell>7,200</cell>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>7</cell>
             <cell>Mapping TEI Simple to other ontologies</cell>
@@ -234,8 +245,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>15</cell>
             <cell>5,400</cell>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>8</cell>
             <cell>Development of a markup system for recording the formal profile of a text</cell>
@@ -243,8 +253,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>15</cell>
             <cell>5,400</cell>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>9</cell>
             <cell>Implementation of profile reporting</cell>
@@ -252,8 +261,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>25</cell>
             <cell>9,000</cell>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell><anchor xml:id="GoBack1"/>10</cell>
             <cell>Integration of TEI Simple into the Guidelines and other TEI Consortium infrastructure</cell>
@@ -261,8 +269,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell/>
             <cell/>
             <cell/>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell>11</cell>
             <cell>User validation</cell>
@@ -270,8 +277,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell/>
             <cell/>
             <cell>5,000</cell>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell/>
             <cell>Contingency </cell>
@@ -279,8 +285,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell/>
             <cell/>
             <cell>4,400</cell>
-            <cell/>
-          </row>
+          <cell></cell></row>
           <row>
             <cell/>
             <cell>
@@ -299,7 +304,7 @@ and is very hard to tailor for a constrained subset like Simple:
             <cell>
               <hi rend="bold">100,000</hi>
             </cell>
-          </row>
+	  </row>
         </table>
       </div>
       <div>
@@ -309,13 +314,13 @@ and is very hard to tailor for a constrained subset like Simple:
           <item>Northwestern University, Chicago: Professor Martin Mueller</item>
           <item>The University of Oxford: Sebastian Rahtz</item>
           <item>The Text Encoding Initiative Consortium: Elena Pierazzo (Chair)</item>
-	  <item>The University of Nebraska, Brian Pytlig-Zillig</item>
+	  <item>The University of Nebraska: Brian Pytlik Zillig</item>
           <item>Université Paris-Sorbonne: Frédéric Glorieux and Vincent Jolivet</item>
-          <item>The Deutsches Textarchiv (DTA)</item>
+          <item>The Deutsches Textarchiv (DTA): Alexander Geyken</item>
           <item>TextGrid</item>
         </list>
         <p>The project will be directed by Martin Mueller (Northwestern) and Sebastian Rahtz (Oxford). </p>
-        <p>TEI Simple will commence work on 1st May 2014, and aim to complete the first stage of work in time for the TEI Annual Meeting in late October 2014. The launch at the Annual Meeting will be followed by six more months of development and revision before final sign-off on May 1st 2015.</p>
+        <p>TEI Simple will commence work on 1st August 2014, and aim to complete the first stage of work in time for the TEI Annual Meeting in late October 2014. The launch at the Annual Meeting will be followed by eight more months of development and revision before final sign-off on July 1st 2015.</p>
       </div>
     </body>
   </text>
