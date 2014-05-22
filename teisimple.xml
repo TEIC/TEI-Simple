@@ -100,7 +100,7 @@ processor to work out how to present that element in the current context. </item
 <row><cell>11</cell><cell>table</cell><cell>table</cell></row>
 <row><cell>12</cell><cell>cell</cell><cell>cell</cell></row>
 <row><cell>13</cell><cell>row</cell><cell>row</cell></row>
-<row><cell>14</cell><cell>out of line note</cell>note<cell></cell></row>
+<row><cell>14</cell><cell>out of line note</cell><cell/></row>
 <row><cell>15</cell><cell>figure</cell><cell>figure</cell></row>
 <row><cell>16</cell><cell>pointer</cell><cell>ptr</cell></row>
 <row><cell>17</cell><cell>Janus element (alternate children)</cell><cell>choice</cell></row>
@@ -114,7 +114,7 @@ read both the source document and the corresponding ODD file (or some compiled v
 for multiple categories for a given element, depending on an XPath filter.</p>
 <p>There are two important differences between this setup and the "TEI to XXX" stylesheets (eg <ptr target="https://github.com/TEIC/Stylesheets"/>)
 which have been developed many times: <list type="ordered"><item>The initial explicit assertion of a category gives a place
-for the designer of Simple to commit to a style of output, separately from the details of the rendering</item>
+for the target user of Simple to commit to a style of output, separately from the details of the rendering</item>
 <item>The rules are tied to the schema, allowing the actual (eg) TEI to LaTeX or TEI to Word transformations to be
 completely agnostic.</item></list>
 We may contrast this with an example from the TEI Stylesheets, where an XSL function which 
