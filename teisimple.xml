@@ -151,176 +151,48 @@ and is very hard to tailor for a constrained subset like Simple:
 
       <div>
         <head>Programme of work and budget</head>
-        <p>We propose a total budget of $100,000, divided into labour costs  ($57,600), travel and meeting costs ($33,000), and a contingency fund ($9,400). </p>
+        <p>We propose a total budget of $100,000, divided into labour costs  ($36,000), travel and meeting costs ($59,000), and a contingency fund ($5000). </p>
 
 <p>The work will be undertaken in three ways:
 <list type="ordered">
 <item>Contributed time and expertise by members of the advisory panel, and other members
-of the TEI community, in consultation events for which travel expenses may be paid.</item>
+of the TEI community, in consultation events.</item>
 <item>Technical development sprints during which the core programming tasks will be completed,
-in some cases as a group activity at the same location. Staff will be paid for their participation in these sessions.</item>
-<item>Some outputs will be commissioned at an agreed cost from partner organisations or individuals.</item>
+in some cases as a group activity at the same location.</item>
+<item>Outputs commissioned at an agreed cost from partner organisations or individuals, under supervision of one of the PIs.</item>
 </list>
 The aim is to ensure that payments from the project are tied to explicit deliverables.</p>
 
-<p>The PIs and  advisory panel will contribute their
-time to the project but will be reimbursed for travel expenses. Some
-of the work will, with the agreement of the TEI Technical Council, be
-managed under the TEI's existing work group mechanism, which means
-funding expenses of subject experts for workshop meetings.</p>
+<p>Costs are calculated on the following basis
+<list type="ordered">
+<item>The time of Pytlig Zillig, Mueller, Geyken, Glorieux and Jolivet will be contributed by their organizations</item>
+<item>Expert advisors (Burnard and Cummings) and technical contractors will be paid, to a maximum @$350 a day FTE</item>
+<item>Travel and living expenses will be paid for all attendees at workshops and development sprints</item>
+<item>Local expenses only will be paid for the open workshop</item>
+<item>Commissioned outputs managed by one of the PIs are allocated a number of days technical assistance which they can use to pay individuals or organisations</item>
+</list>
+</p>
 
-        <p>Broadly speaking, the work packages and outputs run in sequence, each depending on the previous one.</p>
-        <table rend="rules">
-          <row>
-            <cell/>
-            <cell>
-              <hi rend="bold">Task</hi>
-            </cell>
-            <cell>
-              <hi rend="bold">Method</hi>
-            </cell>
-            <cell>
-              <hi rend="bold">FTE Days</hi>
-            </cell>
-            <cell>
-              <hi rend="bold">Salary cost ($)</hi>
-            </cell>
-            <cell>
-              <hi rend="bold">Expenses cost ($)</hi>
-            </cell>
-          </row>
-          <row>
-            <cell>1</cell>
-            <cell>Management</cell>
-            <cell>Three face to face meetings of the PIs and the advisory group; tri-weekly video-conference planning meetings</cell>
-            <cell>0</cell>
-            <cell>0</cell>
-            <cell>18,000</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>2</cell>
-            <cell>Definition of the prescriptive subset in TEI ODD</cell>
-            <cell>Workshop sprint</cell>
-            <cell>30</cell>
-            <cell>10,800</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>3</cell>
-            <cell>Extension to the TEI ODD language to support processing expectations</cell>
-            <cell>TEI working group, 2 meetings</cell>
-            <cell/>
-            <cell/>
-            <cell>15,000</cell>
-          <cell></cell></row>
-          <row>
-            <cell>4</cell>
-            <cell>Definition of processing expectations for TEI Simple</cell>
-            <cell>Researcher 1</cell>
-            <cell>25</cell>
-            <cell>9,000</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>5</cell>
-            <cell>Implementation of processing expectations</cell>
-            <cell>PIs, Researcher 2, community</cell>
-            <cell>30</cell>
-            <cell>10,800</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>6</cell>
-            <cell>Maintainable open access documentation for TEI Simple</cell>
-            <cell>Researcher 1</cell>
-            <cell>20</cell>
-            <cell>7,200</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>7</cell>
-            <cell>Mapping TEI Simple to other ontologies</cell>
-            <cell>PIs, Researcher 1</cell>
-            <cell>15</cell>
-            <cell>5,400</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>8</cell>
-            <cell>Development of a markup system for recording the formal profile of a text</cell>
-            <cell>Researcher 1, community</cell>
-            <cell>15</cell>
-            <cell>5,400</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>9</cell>
-            <cell>Implementation of profile reporting</cell>
-            <cell>Researcher 2</cell>
-            <cell>25</cell>
-            <cell>9,000</cell>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell><anchor xml:id="GoBack1"/>10</cell>
-            <cell>Integration of TEI Simple into the Guidelines and other TEI Consortium infrastructure</cell>
-            <cell>Discussion with TEI Council, PIs</cell>
-            <cell/>
-            <cell/>
-            <cell/>
-          <cell></cell></row>
-          <row>
-            <cell>11</cell>
-            <cell>User validation</cell>
-            <cell>Open workshop at midpoint of project</cell>
-            <cell/>
-            <cell/>
-            <cell>5,000</cell>
-          <cell></cell></row>
-          <row>
-            <cell/>
-            <cell>Contingency </cell>
-            <cell/>
-            <cell/>
-            <cell/>
-            <cell>4,400</cell>
-          <cell></cell></row>
-          <row>
-            <cell/>
-            <cell>
-              <hi rend="bold">Total budget</hi>
-            </cell>
-            <cell/>
-            <cell>
-              <hi rend="bold">160</hi>
-            </cell>
-            <cell>
-              <hi rend="bold">57,600</hi>
-            </cell>
-            <cell>
-              <hi rend="bold">42,400</hi>
-            </cell>
-            <cell>
-              <hi rend="bold">100,000</hi>
-            </cell>
-	  </row>
-        </table>
       </div>
+
       <div>
         <head><anchor xml:id="SECTION_1005"/>Collaboration, management, timing</head>
         <p>TEI Simple is a cross-Atlantic collaboration between (at least) the following partners:</p>
         <list type="ordered">
           <item>Northwestern University, Chicago: Professor Martin Mueller</item>
-          <item>The University of Oxford: Sebastian Rahtz</item>
-          <item>The Text Encoding Initiative Consortium: Elena Pierazzo (Chair)</item>
+          <item>The University of Oxford: Sebastian Rahtz, Magdalena Tuurska</item>
+          <item>The Text Encoding Initiative Consortium: Elena Pierazzo (Chair), Lou Burnard, James Cummings</item>
 	  <item>The University of Nebraska: Brian Pytlik Zillig</item>
           <item>Université Paris-Sorbonne: Frédéric Glorieux and Vincent Jolivet</item>
           <item>The Deutsches Textarchiv (DTA): Alexander Geyken</item>
           <item>TextGrid</item>
         </list>
         <p>The project will be directed by Martin Mueller (Northwestern) and Sebastian Rahtz (Oxford). </p>
-        <p>TEI Simple will commence work on 1st August 2014, and aim to complete the first stage of work in time for the TEI Annual Meeting in late October 2014. The launch at the Annual Meeting will be followed by eight more months of development and revision before final sign-off on July 1st 2015.</p>
+        <p>TEI Simple will commence work on 1st August 2014, and aim
+        to complete the first stage of work in time for the TEI Annual
+        Meeting in late October 2014. The launch at the Annual Meeting
+        will be followed by eight more months of development and
+        revision before final sign-off on July 1st 2015.</p>
       </div>
     </body>
   </text>
