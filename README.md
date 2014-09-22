@@ -48,4 +48,4 @@ TEI Simple is intended to be complementary to community projects like the TAPAS 
 
 # Trello Board
 
-[Trello Board](https://trello.com/b/FYYJk2FC.png "Trello Board")
+![Trello Board](https://trello.com/b/FYYJk2FC.png "Trello Board")
