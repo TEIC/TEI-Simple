@@ -96,6 +96,7 @@ valList
   <!-- turn on debug messages -->
   <xsl:param name="debug">false</xsl:param>
   <!-- turn on messages -->
+  <xsl:param name="prefix"/>
   <xsl:param name="verbose">false</xsl:param>
   <!-- which files to look at? provide suffix -->
   <xsl:param name="suffix">xml</xsl:param>
@@ -131,7 +132,7 @@ valList
       <xsl:choose>
         <xsl:when test="$corpusList=''">
           <xsl:value-of
-            select="concat($corpus,'?select=*.',$suffix,';recurse=yes;on-error=warning')"/>
+            select="concat($corpus,'?select=',$prefix, '*.',$suffix,';recurse=yes;on-error=warning')"/>
         </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="$corpusList"/>
@@ -348,6 +349,7 @@ valList
         <xsl:for-each select="$stage1/stage1/tei/elementSpec">
           <xsl:choose>
             <xsl:when test="key('Used',@ident)">
+<xsl:message><xsl:value-of select="(@ident,count(key('Used',@ident)))"/></xsl:message>
               <elementSpec ident="{@ident}" module="{@module}"
 			   count="{count(key('Used',@ident))}" mode="keep">
                 <xsl:copy-of select="attDef"/>
