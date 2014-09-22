@@ -348,7 +348,8 @@ valList
         <xsl:for-each select="$stage1/stage1/tei/elementSpec">
           <xsl:choose>
             <xsl:when test="key('Used',@ident)">
-              <elementSpec ident="{@ident}" module="{@module}" mode="keep">
+              <elementSpec ident="{@ident}" module="{@module}"
+			   count="{count(key('Used',@ident))}" mode="keep">
                 <xsl:copy-of select="attDef"/>
               </elementSpec>
             </xsl:when>
@@ -444,8 +445,9 @@ valList
             <xsl:for-each select="$stage2/stage2/*[@mode='keep']" >
               <xsl:sort select="@ident"/>
 	      <xsl:choose>
-		<xsl:when test="self::tei:elementSpec"><elementRef key="{@ident}"/></xsl:when>
-		<xsl:when test="self::tei:classSpec"><classRef key="{@ident}"/></xsl:when>
+		<xsl:when
+		    test="self::tei:elementSpec"><elementRef   key="{@ident}" count="{@count}"/></xsl:when>
+		<!--		<xsl:when test="self::tei:classSpec"><classRef key="{@ident}"/></xsl:when>-->
 	      </xsl:choose>
 	      </xsl:for-each>
 
