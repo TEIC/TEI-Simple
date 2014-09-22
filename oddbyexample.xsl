@@ -171,7 +171,9 @@ valList
     </xsl:variable>
     <xsl:variable name="stage3">
       <xsl:for-each select="$all/*">
-        <xsl:call-template name="processAll"/>
+        <xsl:call-template name="processAll">
+	  <xsl:with-param name="all" select="$all"/>
+	</xsl:call-template>
       </xsl:for-each>
     </xsl:variable>
     <xsl:variable name="stage4">
@@ -206,6 +208,7 @@ valList
 
 
   <xsl:template name="processAll">
+    <xsl:param name="all"/>
     <xsl:variable name="count">
       <xsl:value-of select="count(/n:ROOT/*)"/>
     </xsl:variable>
@@ -347,11 +350,11 @@ valList
         </xsl:for-each>
         <!-- for every TEI element, say if it is actually used or is to be deleted -->
         <xsl:for-each select="$stage1/stage1/tei/elementSpec">
+	  <xsl:variable name="ident" select="@ident"/>
           <xsl:choose>
             <xsl:when test="key('Used',@ident)">
-<xsl:message><xsl:value-of select="(@ident,count(key('Used',@ident)))"/></xsl:message>
               <elementSpec ident="{@ident}" module="{@module}"
-			   count="{count(key('Used',@ident))}" mode="keep">
+			   count="{$all/count(key('E',$ident))}" mode="keep">
                 <xsl:copy-of select="attDef"/>
               </elementSpec>
             </xsl:when>
