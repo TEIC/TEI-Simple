@@ -28,6 +28,7 @@
             <moduleRef key="teiHeader"/>
 	    <xsl:for-each select="//row[position()&gt;1]">
 	      <xsl:choose>
+	      <xsl:when test="contains(cell[3],'header')"/>
 	      <xsl:when test="contains(cell[7],'KILL')"/>
 	      <xsl:when test="contains(cell[7],'merge')"/>
 	      <xsl:otherwise>
