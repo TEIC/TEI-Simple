@@ -44,3 +44,8 @@ The project will adhere to the following principles:
 Outcomes from TEI Simple, consisting of a documented definition in ODD of the TEI subset, a set of processing rules, and extensions to the TEI ODD language to record processing expectations, will be fully integrated into the TEI infrastructure with ongoing maintenance by the TEI Technical Council.
 
 TEI Simple is intended to be complementary to community projects like the TAPAS project, and to the established work of TextGrid, the German Text Archive (the DTA ‘base format’, which shares many of the goals of TEI Simple) and other national projects.
+
+
+# Trello Board
+
+[Trello Board](https://trello.com/b/FYYJk2FC.png "Trello Board")
