@@ -25,7 +25,8 @@
       <body>
          <schemaSpec ident="oddbyexample" start="TEI ">
             <moduleRef key="tei"/>
-            <moduleRef key="teiHeader"/>
+            <moduleRef key="header"/>
+	    <classRef key="att.global.facs"/>
 	    <xsl:for-each select="//row[position()&gt;1]">
 	      <xsl:choose>
 	      <xsl:when test="contains(cell[3],'header')"/>
