@@ -26,6 +26,9 @@
          <schemaSpec ident="oddbyexample" start="text">
             <moduleRef key="tei"/>
 	    <classRef key="att.global.facs"/>
+	    <classRef key="att.citing"/>
+	    <classRef key="att.measurement"/>
+	    <classRef key="att.milestoneUnit"/>
 	    <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
 	      <xsl:choose>
 	      <xsl:when test="contains(cell[3],'header')"/>

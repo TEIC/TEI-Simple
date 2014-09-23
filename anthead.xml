@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." default="dist" name="testtei">
+  <property name="saxon" value="lib/saxon9he.jar"/>
+  <property name="trang" value="lib/trang.jar"/>
+  <property name="jing" value="lib/jing.jar"/>
+  <property name="dir" value="."/>
+
+  <path id="classpath">
+    <pathelement path="${java.class.path}"/>
+  </path>
+
+  <taskdef name="runjing" classpath="${jing}" classname="com.thaiopensource.relaxng.util.JingTask"/>
+
+  <taskdef name="runjing" classpath="${jing}" classname="com.thaiopensource.relaxng.util.JingTask"/>
+ <macrodef name="dojob">
+    <attribute name="name"/>
+    <sequential> 
+	<echo level="info">Validate @{name} against RELAXNG teisimple.rng</echo>
+	<xslt processor="trax" force="yes" style="stripheader.xsl" in="@{name}" out="temp.xml">
+	  <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+	</xslt>
+	<runjing rngfile="teisimple.rng" file="temp.xml"/>
+	<delete file="temp.xml"/>
+    </sequential>
+ </macrodef>
+
+  <target name="dist">
