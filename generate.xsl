@@ -23,11 +23,10 @@
    </teiHeader>
    <text>
       <body>
-         <schemaSpec ident="oddbyexample" start="TEI ">
+         <schemaSpec ident="oddbyexample" start="text">
             <moduleRef key="tei"/>
-            <moduleRef key="header"/>
 	    <classRef key="att.global.facs"/>
-	    <xsl:for-each select="//row[position()&gt;1]">
+	    <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
 	      <xsl:choose>
 	      <xsl:when test="contains(cell[3],'header')"/>
 	      <xsl:when test="contains(cell[7],'KILL')"/>
