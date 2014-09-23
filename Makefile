@@ -1,5 +1,6 @@
 default: teisimple
 TEXTS=/tmp/ota
+ANT_OPTS="-Xss2m -Xmx752m" 
 docx:
 	teitodocx --profile=tei teisimple.xml teisimple.docx
 
@@ -13,7 +14,7 @@ validate:
 	cat anthead.xml> v.xml 
 	find $(TEXTS) -name "*.xml"  | sed 's/\(.*\)/<dojob name="\1"\/>/' >> v.xml
 	cat anttail.xml >> v.xml
-	ant -lib lib/saxon9he.jar:lib/jing.jar -Dbasedir=`pwd` -f v.xml       
+	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -Dbasedir=`pwd` -f v.xml       
 	rm v.xml
 
 #ANT_OPTS="-Xss2m -Xmx752m" ant -lib lib/saxon9he.jar:lib/jing.jar -Dbasedir=`pwd` -f v.xml
