@@ -105,29 +105,11 @@
       <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="teiHeader"/>
-
-    <xsl:template match="TEI|teiCorpus">
-      <xsl:apply-templates/>
+    <xsl:template match="teiHeader">
+      <xsl:copy/>
     </xsl:template>
-
-    <xsl:template match="teiHeader" mode="old">
-        <!-- cut out the teiHeader -->
-
-        <teiHeader>
-            <fileDesc>
-                <titleStmt>
-                    <title>Empty</title>
-                </titleStmt>
-                <publicationStmt>
-                    <p>Empty</p>
-                </publicationStmt>
-                <sourceDesc>
-                    <p>Empty</p>
-                </sourceDesc>
-            </fileDesc>
-        </teiHeader>
-    </xsl:template>
+    <xsl:template match="facsimile"/>
+    <xsl:template match="sourceDoc"/>
 
     <!-- merge into name, keep attributes and add @type with translated name of original elements -->
     <xsl:template

@@ -23,7 +23,7 @@
    </teiHeader>
    <text>
       <body>
-         <schemaSpec ident="oddbyexample" start="text">
+         <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
             <moduleRef key="tei"/>
 	    <classRef key="att.global.facs"/>
 	    <classRef key="att.citing"/>
@@ -31,11 +31,15 @@
 	    <classRef key="att.milestoneUnit"/>
 	    <classRef key="att.global.linking"/>
 	    <classRef key="att.typed"/>
+	    <elementRef key="teiHeader"/>
+	    <elementSpec ident="teiHeader" mode="change">
+	      <content mode="replace"/>
+	    </elementSpec>
 	    <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
 	      <xsl:choose>
-	      <xsl:when test="contains(cell[3],'header')"/>
-	      <xsl:when test="contains(cell[7],'KILL')"/>
-	      <xsl:when test="contains(cell[7],'merge')"/>
+	      <xsl:when test="contains(cell[5],'header')"/>
+	      <xsl:when test="contains(cell[9],'KILL')"/>
+	      <xsl:when test="contains(cell[9],'merge')"/>
 	      <xsl:otherwise>
 		<elementRef key="{normalize-space(cell[1])}"/>
 	      </xsl:otherwise>
