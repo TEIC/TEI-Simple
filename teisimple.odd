@@ -21,6 +21,7 @@
             <classRef key="att.citing"/>
             <classRef key="att.measurement"/>
             <classRef key="att.milestoneUnit"/>
+            <classRef key="att.global.linking"/>
             <classRef key="att.typed"/>
             <elementRef key="author"/>
             <elementRef key="ab"/>

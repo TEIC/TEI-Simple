@@ -12,7 +12,7 @@ teisimple:
 
 validate:
 	cat anthead.xml> v.xml 
-	find $(TEXTS) -name "*.xml"  | sed 's/\(.*\)/<dojob name="\1"\/>/' >> v.xml
+	find $(TEXTS) -name "*.xml"  | perl -p -e 's:(.*)/([^\.]+).xml:<dojob file="\2.xml" name="\1/\2.xml"/>:' >> v.xml
 	cat anttail.xml >> v.xml
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -Dbasedir=`pwd` -f v.xml       
 	rm v.xml

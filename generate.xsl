@@ -29,6 +29,7 @@
 	    <classRef key="att.citing"/>
 	    <classRef key="att.measurement"/>
 	    <classRef key="att.milestoneUnit"/>
+	    <classRef key="att.global.linking"/>
 	    <classRef key="att.typed"/>
 	    <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
 	      <xsl:choose>
