@@ -49,12 +49,13 @@
 
 <xsl:variable name="transtable" select="doc('simpletrans.xml')"/>
 
-    
-    <!-- p5 to simple transform -->
-    <xsl:template match="/">
+  <xsl:template match="/">
+    <xsl:for-each select="/*/tei:text">
+      <xsl:copy>
         <xsl:apply-templates/>
-    </xsl:template>
-    
+      </xsl:copy>
+    </xsl:for-each>
+  </xsl:template>
     
     <xsl:template match="tei:teiHeader">
         <!-- cut out the teiHeader -->

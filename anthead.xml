@@ -16,7 +16,7 @@
     <attribute name="name"/>
     <sequential> 
 	<echo level="info">Validate @{name} against RELAXNG teisimple.rng</echo>
-	<xslt processor="trax" force="yes" style="stripheader.xsl" in="@{name}" out="temp.xml">
+	<xslt processor="trax" force="yes" style="teitosimple.xsl" in="@{name}" out="temp.xml">
 	  <factory name="net.sf.saxon.TransformerFactoryImpl"/>
 	</xslt>
 	<runjing rngfile="teisimple.rng" file="temp.xml"/>
