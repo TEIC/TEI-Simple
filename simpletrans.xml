@@ -29,6 +29,7 @@
             <item><in>code</in><out>hi</out></item>
             <item><in>emph</in><out>hi</out></item>
             <item><in>soCalled</in><out>q</out></item>
+            <item><in>ptr</in><out>ref</out></item>
         </list>
 
     </text>
