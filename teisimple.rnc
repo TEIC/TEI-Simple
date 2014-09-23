@@ -1,0 +1,2516 @@
+default namespace = "http://www.tei-c.org/ns/1.0"
+namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
+namespace ns1 = "http://www.isocat.org/ns/dcr"
+namespace rng = "http://relaxng.org/ns/structure/1.0"
+namespace s = "http://www.ascc.net/xml/schematron"
+namespace sch = "http://purl.oclc.org/dsdl/schematron"
+namespace xlink = "http://www.w3.org/1999/xlink"
+
+# Schema generated from ODD source 2014-09-23T12:45:31Z. 
+# Edition: Version 2.7.0. Last updated on
+#	16th September 2014, revision 13036
+# Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
+#
+
+#
+
+sch:ns [ prefix = "tei" uri = "http://www.tei-c.org/ns/1.0" ]
+macro.paraContent =
+  (text | model.gLike | model.phrase | model.inter | model.global | lg)*
+macro.limitedContent = (text | model.limitedPhrase | model.inter)*
+macro.phraseSeq = (text | model.gLike | model.phrase | model.global)*
+macro.specialPara =
+  (text
+   | model.gLike
+   | model.phrase
+   | model.inter
+   | model.divPart
+   | model.global)*
+macro.xtext = (text | model.gLike)*
+data.certainty = "high" | "medium" | "low" | "unknown"
+data.probability = xsd:double { minInclusive = "0" maxInclusive = "1" }
+data.numeric =
+  xsd:double
+  | xsd:token { pattern = "(\-?[\d]+/\-?[\d]+)" }
+  | xsd:decimal
+data.count = xsd:nonNegativeInteger
+data.temporal.w3c =
+  xsd:date
+  | xsd:gYear
+  | xsd:gMonth
+  | xsd:gDay
+  | xsd:gYearMonth
+  | xsd:gMonthDay
+  | xsd:time
+  | xsd:dateTime
+data.truthValue = xsd:boolean
+data.xTruthValue = xsd:boolean | "unknown" | "inapplicable"
+data.language = xsd:language | ""
+data.outputMeasurement =
+  xsd:token {
+    pattern =
+      "[\-+]?\d+(\.\d+)?(%|cm|mm|in|pt|pc|px|em|ex|gd|rem|vw|vh|vm)"
+  }
+data.pointer = xsd:anyURI
+data.word = xsd:token { pattern = "(\p{L}|\p{N}|\p{P}|\p{S})+" }
+data.text = xsd:string
+data.name = xsd:Name
+data.enumerated = data.name
+att.ascribed.attributes = att.ascribed.attribute.who
+att.ascribed.attribute.who =
+  
+  ## indicates the person, or group of people, to whom the element content is ascribed.
+  attribute who {
+    list { data.pointer+ }
+  }?
+att.canonical.attributes =
+  att.canonical.attribute.key, att.canonical.attribute.ref
+att.canonical.attribute.key =
+  
+  ## provides an externally-defined means of identifying the entity (or entities) being named, using a coded value of some kind.
+  attribute key { data.text }?
+att.canonical.attribute.ref =
+  
+  ## (reference) provides an explicit means of locating a full definition for the entity being named by means of one or more URIs.
+  attribute ref {
+    list { data.pointer+ }
+  }?
+att.ranging.attributes =
+  att.ranging.attribute.atLeast,
+  att.ranging.attribute.atMost,
+  att.ranging.attribute.min,
+  att.ranging.attribute.max,
+  att.ranging.attribute.confidence
+att.ranging.attribute.atLeast =
+  
+  ## gives a minimum estimated value for the approximate measurement.
+  attribute atLeast { data.numeric }?
+att.ranging.attribute.atMost =
+  
+  ## gives a maximum estimated value for the approximate measurement.
+  attribute atMost { data.numeric }?
+att.ranging.attribute.min =
+  
+  ## where the measurement summarizes more than one observation or a range, supplies the minimum value observed.
+  attribute min { data.numeric }?
+att.ranging.attribute.max =
+  
+  ## where the measurement summarizes more than one observation or a range, supplies the maximum value observed.
+  attribute max { data.numeric }?
+att.ranging.attribute.confidence =
+  
+  ## specifies the degree of statistical confidence (between zero and one) that a value falls within the range specified by min and max, or the proportion of observed values that fall within that range.
+  attribute confidence { data.probability }?
+att.dimensions.attributes =
+  att.ranging.attributes,
+  att.dimensions.attribute.unit,
+  att.dimensions.attribute.quantity,
+  att.dimensions.attribute.extent,
+  att.dimensions.attribute.precision,
+  att.dimensions.attribute.scope
+att.dimensions.attribute.unit =
+  
+  ## names the unit used for the measurement
+  ## Suggested values include: 1] cm(centimetres) ; 2] mm(millimetres) ; 3] in(inches) ; 4] lines; 5] chars(characters) 
+  attribute unit {
+    
+    ## (centimetres) 
+    "cm"
+    | 
+      ## (millimetres) 
+      "mm"
+    | 
+      ## (inches) 
+      "in"
+    | 
+      ## lines of text
+      "lines"
+    | 
+      ## (characters) characters of text
+      "chars"
+    | xsd:Name
+  }?
+att.dimensions.attribute.quantity =
+  
+  ## specifies the length in the units specified
+  attribute quantity { data.numeric }?
+att.dimensions.attribute.extent =
+  
+  ## indicates the size of the object concerned using a project-specific vocabulary combining quantity and units in a single string of words.
+  attribute extent { data.text }?
+att.dimensions.attribute.precision =
+  
+  ## characterizes the precision of the values specified by the other attributes.
+  attribute precision { data.certainty }?
+att.dimensions.attribute.scope =
+  
+  ## where the measurement summarizes more than one observation, specifies the applicability of this measurement.
+  ## Sample values include: 1] all; 2] most; 3] range
+  attribute scope { data.enumerated }?
+att.breaking.attributes = att.breaking.attribute.break
+att.breaking.attribute.break =
+  
+  ## indicates whether or not the element bearing this attribute should be considered to mark the end of an orthographic token in the same way as whitespace.
+  attribute break { data.enumerated }?
+att.cReferencing.attributes = att.cReferencing.attribute.cRef
+att.cReferencing.attribute.cRef =
+  
+  ## (canonical reference) specifies the destination of the pointer by supplying a canonical reference expressed using the scheme defined in a refsDecl element in the TEI header
+  attribute cRef { data.text }?
+att.datable.w3c.attributes =
+  att.datable.w3c.attribute.when,
+  att.datable.w3c.attribute.notBefore,
+  att.datable.w3c.attribute.notAfter,
+  att.datable.w3c.attribute.from,
+  att.datable.w3c.attribute.to
+att.datable.w3c.attribute.when =
+  
+  ## supplies the value of the date or time in a standard form, e.g. yyyy-mm-dd.
+  attribute when { data.temporal.w3c }?
+att.datable.w3c.attribute.notBefore =
+  
+  ## specifies the earliest possible date for the event in standard form, e.g. yyyy-mm-dd.
+  attribute notBefore { data.temporal.w3c }?
+att.datable.w3c.attribute.notAfter =
+  
+  ## specifies the latest possible date for the event in standard form, e.g. yyyy-mm-dd.
+  attribute notAfter { data.temporal.w3c }?
+att.datable.w3c.attribute.from =
+  
+  ## indicates the starting point of the period in standard form, e.g. yyyy-mm-dd.
+  attribute from { data.temporal.w3c }?
+att.datable.w3c.attribute.to =
+  
+  ## indicates the ending point of the period in standard form, e.g. yyyy-mm-dd.
+  attribute to { data.temporal.w3c }?
+att.datable.attributes =
+  att.datable.w3c.attributes,
+  att.datable.attribute.calendar,
+  att.datable.attribute.period
+att.datable.attribute.calendar =
+  
+  ## indicates the system or calendar to which the date represented by the content of this element belongs.
+  attribute calendar { data.pointer }?
+sch:pattern [
+  id = "oddbyexample-att.datable-calendar-calendar-constraint-1"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "tei:*[@calendar]"
+    "\x{a}" ~
+    "            "
+    sch:assert [
+      test = "string-length(.) gt 0"
+      "\x{a}" ~
+      "@calendar indicates the system or calendar to which the date represented by the content of this element\x{a}" ~
+      "belongs, but this "
+      sch:name [ ]
+      " element has no textual content."
+    ]
+    "\x{a}" ~
+    "          "
+  ]
+  "\x{a}" ~
+  "   "
+]
+att.datable.attribute.period =
+  
+  ## supplies a pointer to some location defining a named period of time within which the datable item is understood to have occurred.
+  attribute period { data.pointer }?
+att.datcat.attributes =
+  att.datcat.attribute.datcat, att.datcat.attribute.valueDatcat
+att.datcat.attribute.datcat =
+  
+  ## contains a PID (persistent identifier) that aligns the given element with the appropriate Data Category (or categories) in ISOcat.
+  attribute ns1:datcat {
+    list { data.pointer+ }
+  }?
+att.datcat.attribute.valueDatcat =
+  
+  ## contains a PID (persistent identifier) that aligns the content of the given element or the value of the given attribute with the appropriate simple Data Category (or categories) in ISOcat.
+  attribute ns1:valueDatcat {
+    list { data.pointer+ }
+  }?
+att.declarable.attributes = att.declarable.attribute.default
+att.declarable.attribute.default =
+  
+  ## indicates whether or not this element is selected by default when its parent is selected.
+  [ a:defaultValue = "false" ]
+  attribute default {
+    
+    ## This element is selected if its parent is selected
+    "true"
+    | 
+      ## This element can only be selected explicitly, unless it is the only one of its kind, in which case it is selected if its parent is selected.
+      "false"
+  }?
+att.declaring.attributes = att.declaring.attribute.decls
+att.declaring.attribute.decls =
+  
+  ## identifies one or more declarable elements within the header, which are understood to apply to the element bearing this attribute and its content.
+  attribute decls {
+    list { data.pointer+ }
+  }?
+att.fragmentable.attributes = att.fragmentable.attribute.part
+att.fragmentable.attribute.part =
+  
+  ## specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.
+  [ a:defaultValue = "N" ]
+  attribute part {
+    
+    ## (yes) the element is fragmented in some (unspecified) respect
+    "Y"
+    | 
+      ## (no) either the element is not fragmented, or no claim is made as to its completeness.
+      "N"
+    | 
+      ## (initial) this is the initial part of a fragmented element
+      "I"
+    | 
+      ## (medial) this is a medial part of a fragmented element
+      "M"
+    | 
+      ## (final) this is the final part of a fragmented element
+      "F"
+  }?
+att.divLike.attributes =
+  att.fragmentable.attributes,
+  att.divLike.attribute.org,
+  att.divLike.attribute.sample
+att.divLike.attribute.org =
+  
+  ## (organization) specifies how the content of the division is organized.
+  [ a:defaultValue = "uniform" ]
+  attribute org {
+    
+    ## no claim is made about the sequence in which the immediate contents of this division are to be processed, or their inter-relationships.
+    "composite"
+    | 
+      ## the immediate contents of this element are regarded as forming a logical unit, to be processed in sequence.
+      "uniform"
+  }?
+att.divLike.attribute.sample =
+  
+  ## indicates whether this division is a sample of the original source and if so, from which part.
+  [ a:defaultValue = "complete" ]
+  attribute sample {
+    
+    ## division lacks material present at end in source.
+    "initial"
+    | 
+      ## division lacks material at start and end.
+      "medial"
+    | 
+      ## division lacks material at start.
+      "final"
+    | 
+      ## position of sampled material within original unknown.
+      "unknown"
+    | 
+      ## division is not a sample.
+      "complete"
+  }?
+att.docStatus.attributes = att.docStatus.attribute.status
+att.docStatus.attribute.status =
+  
+  ## describes the status of a document either currently or, when associated with a dated element, at the time indicated.
+  ## Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] draft; 6] embargoed; 7] expired; 8] frozen; 9] galley; 10] proposed; 11] published; 12] recommendation; 13] submitted; 14] unfinished; 15] withdrawn
+  [ a:defaultValue = "draft" ] attribute status { data.enumerated }?
+att.responsibility.attributes =
+  att.source.attributes,
+  att.responsibility.attribute.cert,
+  att.responsibility.attribute.resp
+att.responsibility.attribute.cert =
+  
+  ## (certainty) signifies the degree of certainty associated with the intervention or interpretation.
+  attribute cert { data.certainty }?
+att.responsibility.attribute.resp =
+  
+  ## (responsible party) indicates the agency responsible for the intervention or interpretation, for example an editor or transcriber.
+  attribute resp {
+    list { data.pointer+ }
+  }?
+att.editLike.attributes =
+  att.dimensions.attributes,
+  att.responsibility.attributes,
+  att.editLike.attribute.evidence,
+  att.editLike.attribute.instant
+att.editLike.attribute.evidence =
+  
+  ## indicates the nature of the evidence supporting the reliability or accuracy of the intervention or interpretation.
+  ## Suggested values include: 1] internal; 2] external; 3] conjecture
+  attribute evidence {
+    list {
+      (
+       ## there is internal evidence to support the intervention.
+       "internal"
+       | 
+         ## there is external evidence to support the intervention.
+         "external"
+       | 
+         ## the intervention or interpretation has been made by the editor, cataloguer, or scholar on the basis of their expertise.
+         "conjecture"
+       | xsd:Name)+
+    }
+  }?
+att.editLike.attribute.instant =
+  
+  ## indicates whether this is an instant revision or not.
+  [ a:defaultValue = "false" ] attribute instant { data.xTruthValue }?
+att.global.attributes =
+  att.global.facs.attributes,
+  att.global.attribute.xmlid,
+  att.global.attribute.n,
+  att.global.attribute.xmllang,
+  att.global.attribute.rend,
+  att.global.attribute.style,
+  att.global.attribute.rendition,
+  att.global.attribute.xmlbase,
+  att.global.attribute.xmlspace
+att.global.attribute.xmlid =
+  
+  ## (identifier) provides a unique identifier for the element bearing the attribute.
+  attribute xml:id { xsd:ID }?
+att.global.attribute.n =
+  
+  ## (number) gives a number (or other label) for an element, which is not necessarily unique within the document.
+  attribute n { data.text }?
+att.global.attribute.xmllang =
+  
+  ## (language) indicates the language of the element content using a tag generated according to BCP 47.
+  attribute xml:lang { data.language }?
+att.global.attribute.rend =
+  
+  ## (rendition) indicates how the element in question was rendered or presented in the source text.
+  attribute rend {
+    list { data.word+ }
+  }?
+att.global.attribute.style =
+  
+  ## contains an expression in some formal style definition language which defines the rendering or presentation used for this element in the source text
+  attribute style { data.text }?
+att.global.attribute.rendition =
+  
+  ## points to a description of the rendering or presentation used for this element in the source text.
+  attribute rendition {
+    list { data.pointer+ }
+  }?
+att.global.attribute.xmlbase =
+  
+  ## provides a base URI reference with which applications can resolve relative URI references into absolute URI references.
+  attribute xml:base { data.pointer }?
+att.global.attribute.xmlspace =
+  
+  ## signals an intention about how white space should be managed by applications.
+  attribute xml:space {
+    
+    ## signals that the application's default white-space processing modes are acceptable
+    "default"
+    | 
+      ## indicates the intent that applications preserve all white space
+      "preserve"
+  }?
+att.internetMedia.attributes = att.internetMedia.attribute.mimeType
+att.internetMedia.attribute.mimeType =
+  
+  ## (MIME media type) specifies the applicable multimedia internet mail extension (MIME) media type
+  attribute mimeType {
+    list { data.word+ }
+  }?
+att.media.attributes =
+  att.internetMedia.attributes,
+  att.media.attribute.width,
+  att.media.attribute.height,
+  att.media.attribute.scale
+att.media.attribute.width =
+  
+  ## Where the media are displayed, indicates the display width
+  attribute width { data.outputMeasurement }?
+att.media.attribute.height =
+  
+  ## Where the media are displayed, indicates the display height
+  attribute height { data.outputMeasurement }?
+att.media.attribute.scale =
+  
+  ## Where the media are displayed, indicates a scale factor to be applied when generating the desired display size
+  attribute scale { data.numeric }?
+att.resourced.attributes = att.resourced.attribute.url
+att.resourced.attribute.url =
+  
+  ## (uniform resource locator) specifies the URL from which the media concerned may be obtained.
+  attribute url { data.pointer }
+att.naming.attributes =
+  att.canonical.attributes,
+  att.naming.attribute.role,
+  att.naming.attribute.nymRef
+att.naming.attribute.role =
+  
+  ## may be used to specify further information about the entity referenced by this name in the form of a set of whitespace-separated values, for example the occupation of a person, or the status of a place.
+  attribute role {
+    list { data.enumerated+ }
+  }?
+att.naming.attribute.nymRef =
+  
+  ## (reference to the canonical name) provides a means of locating the canonical form (nym) of the names associated with the object named by the element bearing it.
+  attribute nymRef {
+    list { data.pointer+ }
+  }?
+att.placement.attributes = att.placement.attribute.place
+att.placement.attribute.place =
+  
+  ## specifies where this item is placed
+  ## Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6] overleaf; 7] above; 8] end; 9] inline; 10] inspace
+  attribute place {
+    list {
+      (
+       ## below the line
+       "below"
+       | 
+         ## at the foot of the page
+         "bottom"
+       | 
+         ## in the margin (left, right, or both)
+         "margin"
+       | 
+         ## at the top of the page
+         "top"
+       | 
+         ## on the opposite, i.e. facing, page
+         "opposite"
+       | 
+         ## on the other side of the leaf
+         "overleaf"
+       | 
+         ## above the line
+         "above"
+       | 
+         ## at the end of e.g. chapter or volume.
+         "end"
+       | 
+         ## within the body of the text.
+         "inline"
+       | 
+         ## in a predefined space, for example left by an earlier scribe.
+         "inspace"
+       | xsd:Name)+
+    }
+  }?
+att.pointing.attributes =
+  att.pointing.attribute.targetLang,
+  att.pointing.attribute.target,
+  att.pointing.attribute.evaluate
+att.pointing.attribute.targetLang =
+  
+  ## specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.
+  attribute targetLang { data.language }?
+sch:pattern [
+  id = "oddbyexample-att.pointing-targetLang-targetLang-constraint-2"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "tei:*[not(self::tei:schemaSpec)][@targetLang]"
+    "\x{a}" ~
+    "            "
+    sch:assert [
+      test = "count(@target)"
+      "@targetLang can only be used if @target is specified."
+    ]
+    "\x{a}" ~
+    "          "
+  ]
+  "\x{a}" ~
+  "   "
+]
+att.pointing.attribute.target =
+  
+  ## specifies the destination of the reference by supplying one or more URI References
+  attribute target {
+    list { data.pointer+ }
+  }?
+att.pointing.attribute.evaluate =
+  
+  ## specifies the intended meaning when the target of a pointer is itself a pointer.
+  attribute evaluate {
+    
+    ## if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.
+    "all"
+    | 
+      ## if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.
+      "one"
+    | 
+      ## no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.
+      "none"
+  }?
+att.segLike.attributes =
+  att.datcat.attributes,
+  att.fragmentable.attributes,
+  att.segLike.attribute.function
+att.segLike.attribute.function =
+  
+  ## characterizes the function of the segment.
+  attribute function { data.enumerated }?
+att.sortable.attributes = att.sortable.attribute.sortKey
+att.sortable.attribute.sortKey =
+  
+  ## supplies the sort key for this element in an index, list or group which contains it.
+  attribute sortKey { data.word }?
+att.edition.attributes =
+  att.edition.attribute.ed, att.edition.attribute.edRef
+att.edition.attribute.ed =
+  
+  ## (edition) supplies a sigil or other arbitrary identifier for the source edition in which the associated feature (for example, a page, column, or line break) occurs at this point in the text.
+  attribute ed {
+    list { data.word+ }
+  }?
+att.edition.attribute.edRef =
+  
+  ## (edition reference) provides a pointer to the source edition in which the associated feature (for example, a page, column, or line break) occurs at this point in the text.
+  attribute edRef {
+    list { data.pointer+ }
+  }?
+att.spanning.attributes = att.spanning.attribute.spanTo
+att.spanning.attribute.spanTo =
+  
+  ## indicates the end of a span initiated by the element bearing this attribute.
+  attribute spanTo { data.pointer }?
+sch:pattern [
+  id = "oddbyexample-att.spanning-spanTo-spanTo-2-constraint-3"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "tei:*[@spanTo]"
+    "\x{a}" ~
+    "            "
+    sch:assert [
+      test =
+        "id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]"
+      "\x{a}" ~
+      "The element indicated by @spanTo ("
+      sch:value-of [ select = "@spanTo" ]
+      ") must follow the current element "
+      sch:name [ ]
+      "\x{a}" ~
+      "                  "
+    ]
+    "\x{a}" ~
+    "          "
+  ]
+  "\x{a}" ~
+  "   "
+]
+att.tableDecoration.attributes =
+  att.tableDecoration.attribute.role,
+  att.tableDecoration.attribute.rows,
+  att.tableDecoration.attribute.cols
+att.tableDecoration.attribute.role =
+  
+  ## indicates the kind of information held in this cell or in each cell of this row.
+  ## Suggested values include: 1] label; 2] data
+  [ a:defaultValue = "data" ]
+  attribute role {
+    
+    ## labelling or descriptive information only.
+    "label"
+    | 
+      ## data values.
+      "data"
+    | xsd:Name
+  }?
+att.tableDecoration.attribute.rows =
+  
+  ## indicates the number of rows occupied by this cell or row.
+  [ a:defaultValue = "1" ] attribute rows { data.count }?
+att.tableDecoration.attribute.cols =
+  
+  ## (columns) indicates the number of columns occupied by this cell or row.
+  [ a:defaultValue = "1" ] attribute cols { data.count }?
+att.transcriptional.attributes =
+  att.editLike.attributes,
+  att.transcriptional.attribute.hand,
+  att.transcriptional.attribute.status,
+  att.transcriptional.attribute.cause,
+  att.transcriptional.attribute.seq
+att.transcriptional.attribute.hand =
+  
+  ## indicates the hand of the agent which made the intervention.
+  attribute hand { data.pointer }?
+att.transcriptional.attribute.status =
+  
+  ## indicates the effect of the intervention, for example in the case of a deletion, strikeouts which include too much or too little text, or in the case of an addition, an insertion which duplicates some of the text already present.
+  ## Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] excessEnd; 5] shortStart; 6] shortEnd; 7] partial; 8] unremarkable
+  [ a:defaultValue = "unremarkable" ]
+  attribute status { data.enumerated }?
+att.transcriptional.attribute.cause =
+  
+  ## documents the presumed cause for the intervention.
+  attribute cause {
+    
+    ## repeated for the purpose of fixation
+    "fix"
+    | 
+      ## repeated to clarify a previously illegible or badly written text or mark
+      "unclear"
+  }?
+att.transcriptional.attribute.seq =
+  
+  ## (sequence) assigns a sequence number related to the order in which the encoded features carrying this attribute are believed to have occurred.
+  attribute seq { data.count }?
+att.translatable.attributes = att.translatable.attribute.versionDate
+att.translatable.attribute.versionDate =
+  
+  ## specifies the date on which the source text was extracted and sent to the translator
+  attribute versionDate { data.temporal.w3c }?
+model.nameLike.agent = name
+model.nameLike.agent_alternation = name
+model.nameLike.agent_sequence = name
+model.nameLike.agent_sequenceOptional = name?
+model.nameLike.agent_sequenceOptionalRepeatable = name*
+model.nameLike.agent_sequenceRepeatable = name+
+model.segLike = c | pc | s | seg | w
+model.hiLike = hi
+model.hiLike_alternation = hi
+model.hiLike_sequence = hi
+model.hiLike_sequenceOptional = hi?
+model.hiLike_sequenceOptionalRepeatable = hi*
+model.hiLike_sequenceRepeatable = hi+
+model.emphLike = foreign | gloss | term | title
+model.emphLike_alternation = foreign | gloss | term | title
+model.emphLike_sequence = foreign, gloss, term, title
+model.emphLike_sequenceOptional = foreign?, gloss?, term?, title?
+model.emphLike_sequenceOptionalRepeatable =
+  foreign*, gloss*, term*, title*
+model.emphLike_sequenceRepeatable = foreign+, gloss+, term+, title+
+model.highlighted = model.hiLike | model.emphLike
+model.dateLike = date
+model.dateLike_alternation = date
+model.dateLike_sequence = date
+model.dateLike_sequenceOptional = date?
+model.dateLike_sequenceOptionalRepeatable = date*
+model.dateLike_sequenceRepeatable = date+
+model.measureLike = measure
+model.measureLike_alternation = measure
+model.measureLike_sequence = measure
+model.measureLike_sequenceOptional = measure?
+model.measureLike_sequenceOptionalRepeatable = measure*
+model.measureLike_sequenceRepeatable = measure+
+model.egLike = notAllowed
+model.egLike_alternation = notAllowed
+model.egLike_sequence = empty
+model.egLike_sequenceOptional = empty
+model.egLike_sequenceOptionalRepeatable = empty
+model.egLike_sequenceRepeatable = notAllowed
+model.graphicLike = formula | graphic
+model.offsetLike = notAllowed
+model.offsetLike_alternation = notAllowed
+model.offsetLike_sequence = empty
+model.offsetLike_sequenceOptional = empty
+model.offsetLike_sequenceOptionalRepeatable = empty
+model.offsetLike_sequenceRepeatable = notAllowed
+model.pPart.msdesc = notAllowed
+model.pPart.editorial = abbr | choice | expan
+model.pPart.editorial_alternation = abbr | choice | expan
+model.pPart.editorial_sequence = abbr, choice, expan
+model.pPart.editorial_sequenceOptional = abbr?, choice?, expan?
+model.pPart.editorial_sequenceOptionalRepeatable =
+  abbr*, choice*, expan*
+model.pPart.editorial_sequenceRepeatable = abbr+, choice+, expan+
+model.pPart.transcriptional =
+  add | corr | del | orig | reg | sic | supplied | unclear
+model.pPart.transcriptional_alternation =
+  add | corr | del | orig | reg | sic | supplied | unclear
+model.pPart.transcriptional_sequence =
+  add, corr, del, orig, reg, sic, supplied, unclear
+model.pPart.transcriptional_sequenceOptional =
+  add?, corr?, del?, orig?, reg?, sic?, supplied?, unclear?
+model.pPart.transcriptional_sequenceOptionalRepeatable =
+  add*, corr*, del*, orig*, reg*, sic*, supplied*, unclear*
+model.pPart.transcriptional_sequenceRepeatable =
+  add+, corr+, del+, orig+, reg+, sic+, supplied+, unclear+
+model.pPart.edit = model.pPart.editorial | model.pPart.transcriptional
+model.ptrLike = ref
+model.lPart = notAllowed
+model.global.meta = notAllowed
+model.milestoneLike = anchor | cb | fw | lb | milestone | pb
+model.gLike = g
+model.oddDecl = notAllowed
+model.oddDecl_alternation = notAllowed
+model.oddDecl_sequence = empty
+model.oddDecl_sequenceOptional = empty
+model.oddDecl_sequenceOptionalRepeatable = empty
+model.oddDecl_sequenceRepeatable = notAllowed
+model.phrase.xml = notAllowed
+model.specDescLike = notAllowed
+model.biblLike = bibl | listBibl | msDesc
+model.biblLike_alternation = bibl | listBibl | msDesc
+model.biblLike_sequence = bibl, listBibl, msDesc
+model.biblLike_sequenceOptional = bibl?, listBibl?, msDesc?
+model.biblLike_sequenceOptionalRepeatable = bibl*, listBibl*, msDesc*
+model.biblLike_sequenceRepeatable = bibl+, listBibl+, msDesc+
+model.headLike = head
+model.headLike_alternation = head
+model.headLike_sequence = head
+model.headLike_sequenceOptional = head?
+model.headLike_sequenceOptionalRepeatable = head*
+model.headLike_sequenceRepeatable = head+
+model.labelLike = desc | label
+model.labelLike_alternation = desc | label
+model.labelLike_sequence = desc, label
+model.labelLike_sequenceOptional = desc?, label?
+model.labelLike_sequenceOptionalRepeatable = desc*, label*
+model.labelLike_sequenceRepeatable = desc+, label+
+model.listLike = \list | table
+model.listLike_alternation = \list | table
+model.listLike_sequence = \list, table
+model.listLike_sequenceOptional = \list?, table?
+model.listLike_sequenceOptionalRepeatable = \list*, table*
+model.listLike_sequenceRepeatable = \list+, table+
+model.noteLike = note
+model.lLike = l
+model.lLike_alternation = l
+model.lLike_sequence = l
+model.lLike_sequenceOptional = l?
+model.lLike_sequenceOptionalRepeatable = l*
+model.lLike_sequenceRepeatable = l+
+model.pLike = ab | p
+model.pLike_alternation = ab | p
+model.pLike_sequence = ab, p
+model.pLike_sequenceOptional = ab?, p?
+model.pLike_sequenceOptionalRepeatable = ab*, p*
+model.pLike_sequenceRepeatable = ab+, p+
+model.stageLike = stage
+model.stageLike_alternation = stage
+model.stageLike_sequence = stage
+model.stageLike_sequenceOptional = stage?
+model.stageLike_sequenceOptionalRepeatable = stage*
+model.stageLike_sequenceRepeatable = stage+
+model.entryPart = notAllowed
+model.global.edit = addSpan | gap | space
+model.divPart = model.lLike | model.pLike | lg | sp | spGrp
+model.placeNamePart = notAllowed
+model.placeNamePart_alternation = notAllowed
+model.placeNamePart_sequence = empty
+model.placeNamePart_sequenceOptional = empty
+model.placeNamePart_sequenceOptionalRepeatable = empty
+model.placeNamePart_sequenceRepeatable = notAllowed
+model.placeStateLike = model.placeNamePart
+model.placeStateLike_alternation = model.placeNamePart_alternation
+model.placeStateLike_sequence = model.placeNamePart_sequence
+model.placeStateLike_sequenceOptional =
+  model.placeNamePart_sequenceOptional?
+model.placeStateLike_sequenceOptionalRepeatable =
+  model.placeNamePart_sequenceOptionalRepeatable*
+model.placeStateLike_sequenceRepeatable =
+  model.placeNamePart_sequenceRepeatable+
+model.certLike = notAllowed
+model.descLike = desc
+model.quoteLike = cit | quote
+model.quoteLike_alternation = cit | quote
+model.quoteLike_sequence = cit, quote
+model.quoteLike_sequenceOptional = cit?, quote?
+model.quoteLike_sequenceOptionalRepeatable = cit*, quote*
+model.quoteLike_sequenceRepeatable = cit+, quote+
+model.qLike = model.quoteLike | floatingText | q
+model.qLike_alternation = model.quoteLike_alternation | floatingText | q
+model.qLike_sequence = model.quoteLike_sequence, floatingText, q
+model.qLike_sequenceOptional =
+  model.quoteLike_sequenceOptional?, floatingText?, q?
+model.qLike_sequenceOptionalRepeatable =
+  model.quoteLike_sequenceOptionalRepeatable*, floatingText*, q*
+model.qLike_sequenceRepeatable =
+  model.quoteLike_sequenceRepeatable+, floatingText+, q+
+model.respLike = author
+model.divWrapper =
+  argument | byline | dateline | docAuthor | docDate | epigraph | salute
+model.divTopPart = model.headLike | opener | signed
+model.divTop = model.divWrapper | model.divTopPart
+model.frontPart.drama = castList
+model.pLike.front =
+  argument
+  | byline
+  | docAuthor
+  | docDate
+  | docEdition
+  | docImprint
+  | docTitle
+  | epigraph
+  | head
+  | titlePart
+model.divBottomPart = closer | postscript | signed | trailer
+model.divBottom = model.divWrapper | model.divBottomPart
+model.titlepagePart =
+  argument
+  | byline
+  | docAuthor
+  | docDate
+  | docEdition
+  | docImprint
+  | docTitle
+  | epigraph
+  | graphic
+  | imprimatur
+  | titlePart
+model.choicePart =
+  abbr | corr | expan | orig | reg | seg | sic | unclear
+model.imprintPart = notAllowed
+model.castItemPart = actor | role | roleDesc
+model.physDescPart_sequenceOptional = empty
+model.addressLike = address
+model.addressLike_alternation = address
+model.addressLike_sequence = address
+model.addressLike_sequenceOptional = address?
+model.addressLike_sequenceOptionalRepeatable = address*
+model.addressLike_sequenceRepeatable = address+
+model.nameLike =
+  model.nameLike.agent | model.offsetLike | model.placeStateLike
+model.nameLike_alternation =
+  model.nameLike.agent_alternation
+  | model.offsetLike_alternation
+  | model.placeStateLike_alternation
+model.nameLike_sequence =
+  model.nameLike.agent_sequence,
+  model.offsetLike_sequence,
+  model.placeStateLike_sequence
+model.nameLike_sequenceOptional =
+  model.nameLike.agent_sequenceOptional?,
+  model.offsetLike_sequenceOptional?,
+  model.placeStateLike_sequenceOptional?
+model.nameLike_sequenceOptionalRepeatable =
+  model.nameLike.agent_sequenceOptionalRepeatable*,
+  model.offsetLike_sequenceOptionalRepeatable*,
+  model.placeStateLike_sequenceOptionalRepeatable*
+model.nameLike_sequenceRepeatable =
+  model.nameLike.agent_sequenceRepeatable+,
+  model.offsetLike_sequenceRepeatable+,
+  model.placeStateLike_sequenceRepeatable+
+model.global =
+  model.global.meta
+  | model.milestoneLike
+  | model.noteLike
+  | model.global.edit
+  | figure
+model.biblPart =
+  model.respLike | model.imprintPart | bibl | msIdentifier
+model.frontPart = model.frontPart.drama | titlePage
+model.addrPart = model.nameLike | addrLine
+model.pPart.data =
+  model.dateLike
+  | model.measureLike
+  | model.addressLike
+  | model.nameLike
+model.inter =
+  model.egLike
+  | model.oddDecl
+  | model.biblLike
+  | model.labelLike
+  | model.listLike
+  | model.stageLike
+  | model.qLike
+  | castList
+model.common = model.divPart | model.inter
+model.phrase =
+  model.segLike
+  | model.highlighted
+  | model.graphicLike
+  | model.pPart.msdesc
+  | model.pPart.edit
+  | model.ptrLike
+  | model.lPart
+  | model.phrase.xml
+  | model.specDescLike
+  | model.pPart.data
+model.limitedPhrase =
+  model.hiLike
+  | model.emphLike
+  | model.pPart.msdesc
+  | model.pPart.editorial
+  | model.ptrLike
+  | model.phrase.xml
+  | model.pPart.data
+model.divLike = \div
+model.divGenLike = notAllowed
+model.div1Like = notAllowed
+att.source.attributes = att.source.attribute.source
+att.source.attribute.source =
+  
+  ## provides a pointer to the bibliographical source from which a quotation or citation is drawn.
+  attribute source {
+    list { data.pointer+ }
+  }?
+att.personal.attributes =
+  att.naming.attributes,
+  att.personal.attribute.full,
+  att.personal.attribute.sort
+att.personal.attribute.full =
+  
+  ## indicates whether the name component is given in full, as an abbreviation or simply as an initial.
+  [ a:defaultValue = "yes" ]
+  attribute full {
+    
+    ## the name component is spelled out in full.
+    "yes"
+    | 
+      ## (abbreviated) the name component is given in an abbreviated form.
+      "abb"
+    | 
+      ## (initial letter) the name component is indicated only by one initial.
+      "init"
+  }?
+att.personal.attribute.sort =
+  
+  ## specifies the sort order of the name component in relation to others within the name.
+  attribute sort { data.count }?
+att.global.facs.attributes = att.global.facs.attribute.facs
+att.global.facs.attribute.facs =
+  
+  ## (facsimile) points to all or part of an image which corresponds with the content of the element.
+  attribute facs {
+    list { data.pointer+ }
+  }?
+att.measurement.attributes =
+  att.measurement.attribute.unit,
+  att.measurement.attribute.quantity,
+  att.measurement.attribute.commodity
+att.measurement.attribute.unit =
+  
+  ## indicates the units used for the measurement, usually using the standard symbol for the desired units.
+  ## Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(hertz) ; 5] Pa(pascal) ; 6] Ω(ohm) ; 7] L(litre) ; 8] t(tonne) ; 9] ha(hectare) ; 10] Å(ångström) ; 11] mL(millilitre) ; 12] cm(centimetre) ; 13] dB(decibel) ; 14] kbit(kilobit) ; 15] Kibit(kibibit) ; 16] kB(kilobyte) ; 17] KiB(kibibyte) ; 18] MB(megabyte) ; 19] MiB(mebibyte) 
+  attribute unit {
+    
+    ## (metre) SI base unit of length
+    "m"
+    | 
+      ## (kilogram) SI base unit of mass
+      "kg"
+    | 
+      ## (second) SI base unit of time
+      "s"
+    | 
+      ## (hertz) SI unit of frequency
+      "Hz"
+    | 
+      ## (pascal) SI unit of pressure or stress
+      "Pa"
+    | 
+      ## (ohm) SI unit of electric resistance
+      "Ω"
+    | 
+      ## (litre) 1 dm³
+      "L"
+    | 
+      ## (tonne) 10³ kg
+      "t"
+    | 
+      ## (hectare) 1 hm²
+      "ha"
+    | 
+      ## (ångström) 10⁻¹⁰ m
+      "Å"
+    | 
+      ## (millilitre) 
+      "mL"
+    | 
+      ## (centimetre) 
+      "cm"
+    | 
+      ## (decibel) see remarks, below
+      "dB"
+    | 
+      ## (kilobit) 10³ or 1000 bits
+      "kbit"
+    | 
+      ## (kibibit) 2¹⁰ or 1024 bits
+      "Kibit"
+    | 
+      ## (kilobyte) 10³ or 1000 bytes
+      "kB"
+    | 
+      ## (kibibyte) 2¹⁰ or 1024 bytes
+      "KiB"
+    | 
+      ## (megabyte) 10⁶ or 1 000 000 bytes
+      "MB"
+    | 
+      ## (mebibyte) 2²⁰ or 1 048 576 bytes
+      "MiB"
+    | xsd:Name
+  }?
+att.measurement.attribute.quantity =
+  
+  ## specifies the number of the specified units that comprise the measurement
+  attribute quantity { data.numeric }?
+att.measurement.attribute.commodity =
+  
+  ## indicates the substance that is being measured
+  attribute commodity {
+    list { data.word+ }
+  }?
+att.milestoneUnit.attributes = att.milestoneUnit.attribute.unit
+att.milestoneUnit.attribute.unit =
+  
+  ## provides a conventional name for the kind of section changing at this milestone.
+  ## Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] canto; 7] speaker; 8] stanza; 9] act; 10] scene; 11] section; 12] absent; 13] unnumbered
+  attribute unit {
+    
+    ## physical page breaks (synonymous with the pb element).
+    "page"
+    | 
+      ## column breaks.
+      "column"
+    | 
+      ## line breaks (synonymous with the lb element).
+      "line"
+    | 
+      ## any units termed book, liber, etc.
+      "book"
+    | 
+      ## individual poems in a collection.
+      "poem"
+    | 
+      ## cantos or other major sections of a poem.
+      "canto"
+    | 
+      ## changes of speaker or narrator.
+      "speaker"
+    | 
+      ## stanzas within a poem, book, or canto.
+      "stanza"
+    | 
+      ## acts within a play.
+      "act"
+    | 
+      ## scenes within a play or act.
+      "scene"
+    | 
+      ## sections of any kind.
+      "section"
+    | 
+      ## passages not present in the reference edition.
+      "absent"
+    | 
+      ## passages present in the text, but not to be included as part of the reference.
+      "unnumbered"
+    | xsd:Name
+  }
+att.typed.attributes =
+  att.typed.attribute.type, att.typed.attribute.subtype
+att.typed.attribute.type =
+  
+  ## characterizes the element in some sense, using any convenient classification scheme or typology.
+  attribute type { data.enumerated }?
+att.typed.attribute.subtype =
+  
+  ## provides a sub-categorization of the element, if needed
+  attribute subtype { data.enumerated }?
+sch:pattern [
+  id = "oddbyexample-att.typed-subtypeTyped-constraint-4"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "*[@subtype]"
+    "\x{a}" ~
+    "        "
+    sch:assert [
+      test = "@type"
+      "The "
+      sch:name [ ]
+      " element should not be categorized in detail with @subtype\x{a}" ~
+      " unless also categorized in general with @type"
+    ]
+    "\x{a}" ~
+    "      "
+  ]
+  "\x{a}" ~
+  "   "
+]
+author =
+  
+  ## in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ]
+  element author {
+    macro.phraseSeq, att.global.attributes, att.naming.attributes, empty
+  }
+ab =
+  
+  ## (anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. ]
+  element ab {
+    macro.paraContent,
+    att.global.attributes,
+    att.typed.attributes,
+    att.declaring.attributes,
+    att.fragmentable.attributes,
+    empty
+  }
+abbr =
+  
+  ## (abbreviation) contains an abbreviation of any sort. [3.5.5. ]
+  element abbr {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.responsibility.attributes,
+    att.typed.attribute.subtype,
+    
+    ## allows the encoder to classify the abbreviation according to some convenient typology.
+    attribute type { data.enumerated }?,
+    empty
+  }
+actor =
+  
+  ## contains the name of an actor appearing within a cast list. [7.1.4. ]
+  element actor { macro.phraseSeq, att.global.attributes, empty }
+add =
+  
+  ## (addition) contains letters, words, or phrases inserted in the source text by an author, scribe, or a previous annotator or corrector. [3.4.3. ]
+  element add {
+    macro.paraContent,
+    att.global.attributes,
+    att.transcriptional.attributes,
+    att.placement.attributes,
+    att.typed.attributes,
+    empty
+  }
+address =
+  
+  ## contains a postal address, for example of a publisher, an organization, or an individual. [3.5.2.  2.2.4.  3.11.2.4. ]
+  element address {
+    (model.global*, (model.addrPart, model.global*)+),
+    att.global.attributes,
+    empty
+  }
+addrLine =
+  
+  ## (address line) contains one line of a postal address. [3.5.2.  2.2.4.  3.11.2.4. ]
+  element addrLine { macro.phraseSeq, att.global.attributes, empty }
+addSpan =
+  
+  ## (added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ]
+  element addSpan {
+    empty
+    >> sch:pattern [
+         id = "oddbyexample-addSpan-spanTo-constraint-5"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:addSpan"
+           "\x{a}" ~
+           "               "
+           sch:assert [
+             test = "@spanTo"
+             "The @spanTo attribute of "
+             sch:name [ ]
+             " is required."
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ]
+    >> sch:pattern [
+         id = "oddbyexample-addSpan-spanTo_fr-constraint-6"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:addSpan"
+           "\x{a}" ~
+           "               "
+           sch:assert [
+             test = "@spanTo"
+             "L'attribut spanTo est requis."
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
+    att.global.attributes,
+    att.transcriptional.attributes,
+    att.placement.attributes,
+    att.typed.attributes,
+    att.spanning.attributes,
+    empty
+  }
+anchor =
+  
+  ## (anchor point) attaches an identifier to a point within a text, whether or not it corresponds with a textual element. [8.4.2.  16.4. ]
+  element anchor {
+    empty, att.global.attributes, att.typed.attributes, empty
+  }
+argument =
+  
+  ## contains a formal list or prose description of the topics addressed by a subdivision of a text. [4.2.  4.6. ]
+  element argument {
+    ((model.global | model.headLike)*, (model.common, model.global*)+),
+    att.global.attributes,
+    empty
+  }
+back =
+  
+  ## (back matter) contains any appendixes, etc. following the main part of a text. [4.7.  4. ]
+  element back {
+    ((model.frontPart
+      | model.pLike.front
+      | model.pLike
+      | model.listLike
+      | model.global)*,
+     ((model.div1Like,
+       (model.frontPart | model.div1Like | model.global)*)
+      | (model.divLike,
+         (model.frontPart | model.divLike | model.global)*))?,
+     (model.divBottomPart, (model.divBottomPart | model.global)*)?),
+    att.global.attributes,
+    att.declaring.attributes,
+    empty
+  }
+bibl =
+  
+  ## (bibliographic citation) contains a loosely-structured bibliographic citation of which the sub-components may or may not be explicitly tagged. [3.11.1.  2.2.7.  15.3.2. ]
+  element bibl {
+    (text
+     | model.gLike
+     | model.highlighted
+     | model.pPart.data
+     | model.pPart.edit
+     | model.segLike
+     | model.ptrLike
+     | model.biblPart
+     | model.global)*,
+    att.global.attributes,
+    att.declarable.attributes,
+    att.typed.attributes,
+    att.sortable.attributes,
+    att.docStatus.attributes,
+    empty
+  }
+body =
+  
+  ## (text body) contains the whole body of a single unitary text, excluding any front or back matter. [4. ]
+  element body {
+    (model.global*,
+     (model.divTop, (model.global | model.divTop)*)?,
+     (model.divGenLike, (model.global | model.divGenLike)*)?,
+     ((model.divLike, (model.global | model.divGenLike)*)+
+      | (model.div1Like, (model.global | model.divGenLike)*)+
+      | ((model.common, model.global*)+,
+         ((model.divLike, (model.global | model.divGenLike)*)+
+          | (model.div1Like, (model.global | model.divGenLike)*)+)?)),
+     (model.divBottom, model.global*)*),
+    att.global.attributes,
+    att.declaring.attributes,
+    empty
+  }
+byline =
+  
+  ## contains the primary statement of responsibility given for a work on its title page or at the head or end of the work. [4.2.2.  4.5. ]
+  element byline {
+    (text | model.gLike | model.phrase | docAuthor | model.global)*,
+    att.global.attributes,
+    empty
+  }
+c =
+  
+  ## (character) represents a character. [17.1. ]
+  element c {
+    macro.xtext,
+    att.global.attributes,
+    att.segLike.attributes,
+    att.typed.attributes,
+    empty
+  }
+castGroup =
+  
+  ## (cast list grouping) groups one or more individual castItem elements within a cast list. [7.1.4. ]
+  element castGroup {
+    ((model.global | model.headLike)*,
+     ((castItem | castGroup | roleDesc), model.global*)+,
+     (trailer, model.global*)?),
+    att.global.attributes,
+    empty
+  }
+castItem =
+  
+  ## (cast list item) contains a single entry within a cast list, describing either a single role or a list of non-speaking roles. [7.1.4. ]
+  element castItem {
+    (text
+     | model.gLike
+     | model.castItemPart
+     | model.phrase
+     | model.global)*,
+    att.global.attributes,
+    
+    ## characterizes the cast item.
+    [ a:defaultValue = "role" ]
+    attribute type {
+      
+      ## the item describes a single role.
+      "role"
+      | 
+        ## the item describes a list of non-speaking roles.
+        "list"
+    }?,
+    empty
+  }
+castList =
+  
+  ## (cast list) contains a single cast list or dramatis personae. [7.1.4.  7.1. ]
+  element castList {
+    ((model.divTop | model.global)*,
+     (model.common, model.global*)*,
+     ((castItem | castGroup), model.global*)+,
+     (model.common, model.global*)*),
+    att.global.attributes,
+    empty
+  }
+cb =
+  
+  ## (column break) marks the beginning of a new column of a text on a multi-column page. [3.10.3. ]
+  element cb {
+    empty,
+    att.global.attributes,
+    att.typed.attributes,
+    att.edition.attributes,
+    att.spanning.attributes,
+    att.breaking.attributes,
+    empty
+  }
+cell =
+  
+  ## contains one cell of a table. [14.1.1. ]
+  element cell {
+    macro.specialPara,
+    att.global.attributes,
+    att.tableDecoration.attributes,
+    empty
+  }
+choice =
+  
+  ## groups a number of alternative encodings for the same point in a text. [3.4. ]
+  element choice {
+    (model.choicePart | choice)*, att.global.attributes, empty
+  }
+cit =
+  
+  ## (cited quotation) contains a quotation from some other document, together with a bibliographic reference to its source. In a dictionary it may contain an example text with at least one occurrence of the word form, used in the sense being described, or a translation of the headword, or an example. [3.3.3.  4.3.1.  9.3.5.1. ]
+  element cit {
+    (model.qLike
+     | model.egLike
+     | model.biblLike
+     | model.ptrLike
+     | model.global
+     | model.entryPart)+,
+    att.global.attributes,
+    att.typed.attributes,
+    empty
+  }
+closer =
+  
+  ## groups together salutations, datelines, and similar phrases appearing as a final group at the end of a division, especially of a letter. [4.2.2.  4.2. ]
+  element closer {
+    (text
+     | model.gLike
+     | signed
+     | dateline
+     | salute
+     | model.phrase
+     | model.global)*,
+    att.global.attributes,
+    empty
+  }
+corr =
+  
+  ## (correction) contains the correct form of a passage apparently erroneous in the copy text. [3.4.1. ]
+  element corr {
+    macro.paraContent,
+    att.global.attributes,
+    att.editLike.attributes,
+    att.typed.attributes,
+    empty
+  }
+date =
+  
+  ## contains a date in any format. [3.5.4.  2.2.4.  2.5.  3.11.2.4.  15.2.3.  13.3.6. ]
+  element date {
+    (text | model.gLike | model.phrase | model.global)*,
+    att.global.attributes,
+    att.datable.attributes,
+    att.editLike.attributes,
+    att.typed.attributes,
+    empty
+  }
+dateline =
+  
+  ## contains a brief description of the place, date, time, etc. of production of a letter, newspaper story, or other work, prefixed or suffixed to it as a kind of heading or trailer. [4.2.2. ]
+  element dateline {
+    (text | model.gLike | model.phrase | model.global | docDate)*,
+    att.global.attributes,
+    empty
+  }
+del =
+  
+  ## (deletion) contains a letter, word, or passage deleted, marked as deleted, or otherwise indicated as superfluous or spurious in the copy text by an author, scribe, or a previous annotator or corrector. [3.4.3. ]
+  element del {
+    macro.paraContent,
+    att.global.attributes,
+    att.transcriptional.attributes,
+    att.typed.attributes,
+    empty
+  }
+desc =
+  
+  ## (description) contains a brief description of the object documented by its parent element, including its intended usage, purpose, or application where this is appropriate. [22.4.1. ]
+  element desc {
+    macro.limitedContent,
+    att.global.attributes,
+    att.translatable.attributes,
+    att.typed.attributes,
+    empty
+  }
+\div =
+  
+  ## (text division) contains a subdivision of the front, body, or back of a text. [4.1. ]
+  element div {
+    ((model.divTop | model.global)*,
+     ((((model.divLike | model.divGenLike), model.global*)+
+       | ((model.common, model.global*)+,
+          ((model.divLike | model.divGenLike), model.global*)*)),
+      (model.divBottom, model.global*)*)?),
+    att.global.attributes,
+    att.divLike.attributes,
+    att.typed.attributes,
+    att.declaring.attributes,
+    empty
+  }
+docAuthor =
+  
+  ## (document author) contains the name of the author of the document, as given on the title page (often but not always contained in a byline). [4.6. ]
+  element docAuthor {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.canonical.attributes,
+    empty
+  }
+docDate =
+  
+  ## (document date) contains the date of a document, as given on a title page or in a dateline. [4.6. ]
+  element docDate {
+    macro.phraseSeq,
+    att.global.attributes,
+    
+    ## gives the value of the date in standard form, i.e. YYYY-MM-DD.
+    attribute when { data.temporal.w3c }?,
+    empty
+  }
+docEdition =
+  
+  ## (document edition) contains an edition statement as presented on a title page of a document. [4.6. ]
+  element docEdition { macro.paraContent, att.global.attributes, empty }
+docImprint =
+  
+  ## (document imprint) contains the imprint statement (place and date of publication, publisher name), as given (usually) at the foot of a title page. [4.6. ]
+  element docImprint {
+    (text | model.gLike | model.phrase | docDate | model.global)*,
+    att.global.attributes,
+    empty
+  }
+docTitle =
+  
+  ## (document title) contains the title of a document, including all its constituents, as given on a title page. [4.6. ]
+  element docTitle {
+    (model.global*, (titlePart, model.global*)+),
+    att.global.attributes,
+    att.canonical.attributes,
+    empty
+  }
+epigraph =
+  
+  ## contains a quotation, anonymous or attributed, appearing at the start or end of a section or on a title page. [4.2.3.  4.2.  4.6. ]
+  element epigraph {
+    (model.common | model.global)*, att.global.attributes, empty
+  }
+expan =
+  
+  ## (expansion) contains the expansion of an abbreviation. [3.5.5. ]
+  element expan {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.editLike.attributes,
+    empty
+  }
+figDesc =
+  
+  ## (description of figure) contains a brief prose description of the appearance or content of a graphic figure, for use when documenting an image without displaying it. [14.4. ]
+  element figDesc { macro.limitedContent, att.global.attributes, empty }
+figure =
+  
+  ## groups elements representing or containing graphic information such as an illustration, formula, or figure. [14.4. ]
+  element figure {
+    (model.headLike
+     | model.common
+     | figDesc
+     | model.graphicLike
+     | model.global
+     | model.divBottom)*,
+    att.global.attributes,
+    att.placement.attributes,
+    att.typed.attributes,
+    empty
+  }
+floatingText =
+  
+  ## contains a single text of any kind, whether unitary or composite, which interrupts the text containing it at any point and after which the surrounding text resumes. [4.3.2. ]
+  element floatingText {
+    (model.global*,
+     (front, model.global*)?,
+     (body | group),
+     model.global*,
+     (back, model.global*)?),
+    att.global.attributes,
+    att.declaring.attributes,
+    att.typed.attributes,
+    empty
+  }
+foreign =
+  
+  ## identifies a word or phrase as belonging to some language other than that of the surrounding text. [3.3.2.1. ]
+  element foreign { macro.phraseSeq, att.global.attributes, empty }
+formula =
+  
+  ## contains a mathematical or other formula. [14.2. ]
+  element formula {
+    (text | model.graphicLike | model.hiLike)*,
+    att.global.attributes,
+    
+    ## names the notation used for the content of the element.
+    attribute notation { data.enumerated }?,
+    empty
+  }
+front =
+  
+  ## (front matter) contains any prefatory matter (headers, title page, prefaces, dedications, etc.) found at the start of a document, before the main body. [4.6.  4. ]
+  element front {
+    ((model.frontPart
+      | model.pLike
+      | model.pLike.front
+      | model.global)*,
+     (((model.div1Like,
+        (model.div1Like | model.frontPart | model.global)*)
+       | (model.divLike,
+          (model.divLike | model.frontPart | model.global)*)),
+      (model.divBottom, (model.divBottom | model.global)*)?)?),
+    att.global.attributes,
+    att.declaring.attributes,
+    empty
+  }
+fw =
+  
+  ## (forme work) contains a running head (e.g. a header, footer), catchword, or similar material appearing on the current page. [11.6. ]
+  element fw {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.placement.attributes,
+    
+    ## classifies the material encoded according to some useful typology.
+    ## Sample values include: 1] header; 2] footer; 3] pageNum(page number) ; 4] lineNum(line number) ; 5] sig(signature) ; 6] catch(catchword) 
+    attribute type { data.enumerated }?,
+    empty
+  }
+g =
+  
+  ## (character or glyph) represents a glyph, or a non-standard character. [5. ]
+  element g {
+    text,
+    att.global.attributes,
+    att.typed.attributes,
+    
+    ## points to a description of the character or glyph intended.
+    attribute ref { data.pointer }?,
+    empty
+  }
+gap =
+  
+  ## indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible, invisible, or inaudible. [3.4.3. ]
+  element gap {
+    (model.descLike | model.certLike)*,
+    att.global.attributes,
+    att.editLike.attributes,
+    
+    ## gives the reason for omission. Sample values include sampling, inaudible, irrelevant, cancelled.
+    attribute reason {
+      list { data.word+ }
+    }?,
+    
+    ## in the case of text omitted from the transcription because of deliberate deletion by an identifiable hand, indicates the hand which made the deletion.
+    attribute hand { data.pointer }?,
+    
+    ## in the case of text omitted because of damage, categorizes the cause of the damage, if it can be identified.
+    ## Sample values include: 1] rubbing; 2] mildew; 3] smoke
+    attribute agent { data.enumerated }?,
+    empty
+  }
+gloss =
+  
+  ## identifies a phrase or word used to provide a gloss or definition for some other word or phrase. [3.3.4.  22.4.1. ]
+  element gloss {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.declaring.attributes,
+    att.translatable.attributes,
+    att.typed.attributes,
+    att.pointing.attributes,
+    att.cReferencing.attributes,
+    empty
+  }
+graphic =
+  
+  ## indicates the location of an inline graphic, illustration, or figure. [3.9. ]
+  element graphic {
+    model.descLike*,
+    att.global.attributes,
+    att.media.attributes,
+    att.resourced.attributes,
+    att.declaring.attributes,
+    empty
+  }
+group =
+  
+  ## contains the body of a composite text, grouping together a sequence of distinct texts (or groups of such texts) which are regarded as a unit for some purpose, for example the collected works of an author, a sequence of prose essays, etc. [4.  4.3.1.  15.1. ]
+  element group {
+    ((model.divTop | model.global)*,
+     ((\text | group), (\text | group | model.global)*),
+     model.divBottom*),
+    att.global.attributes,
+    att.declaring.attributes,
+    att.typed.attributes,
+    empty
+  }
+head =
+  
+  ## (heading) contains any type of heading, for example the title of a section, or the heading of a list, glossary, manuscript description, etc. [4.2.1. ]
+  element head {
+    (text
+     | lg
+     | model.gLike
+     | model.phrase
+     | model.inter
+     | model.lLike
+     | model.global)*,
+    att.global.attributes,
+    att.typed.attributes,
+    empty
+  }
+hi =
+  
+  ## (highlighted) marks a word or phrase as graphically distinct from the surrounding text, for reasons concerning which no claim is made. [3.3.2.2.  3.3.2. ]
+  element hi { macro.paraContent, att.global.attributes, empty }
+imprimatur =
+  
+  ## contains a formal statement authorizing the publication of a work, sometimes required to appear on a title page or its verso. [4.6. ]
+  element imprimatur { macro.paraContent, att.global.attributes, empty }
+item =
+  
+  ## contains one component of a list. [3.7.  2.5. ]
+  element item {
+    macro.specialPara,
+    att.global.attributes,
+    att.sortable.attributes,
+    empty
+  }
+l =
+  
+  ## (verse line) contains a single, possibly incomplete, line of verse. [3.12.1.  3.12.  7.2.5. ]
+  element l {
+    macro.paraContent,
+    att.global.attributes,
+    att.fragmentable.attributes,
+    empty
+  }
+label =
+  
+  ## contains any label or heading used to identify part of a text, typically but not exclusively in a list or glossary. [3.7. ]
+  element label {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.typed.attributes,
+    att.placement.attributes,
+    empty
+  }
+lb =
+  
+  ## (line break) marks the start of a new (typographic) line in some edition or version of a text. [3.10.3.  7.2.5. ]
+  element lb {
+    empty,
+    att.global.attributes,
+    att.typed.attributes,
+    att.edition.attributes,
+    att.spanning.attributes,
+    att.breaking.attributes,
+    empty
+  }
+lg =
+  
+  ## (line group) contains one or more verse lines functioning as a formal unit, e.g. a stanza, refrain, verse paragraph, etc. [3.12.1.  3.12.  7.2.5. ]
+  element lg {
+    ((model.divTop | model.global)*,
+     (model.lLike | model.stageLike | model.labelLike | lg),
+     (model.lLike
+      | model.stageLike
+      | model.labelLike
+      | model.global
+      | lg)*,
+     (model.divBottom, model.global*)*)
+    >> sch:pattern [
+         id = "oddbyexample-lg-atleast1oflggapl-constraint-7"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:lg"
+           "\x{a}" ~
+           "               "
+           sch:assert [
+             test =
+               "count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) > 0"
+             "An lg element\x{a}" ~
+             "        must contain at least one child l, lg or gap element."
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
+    att.global.attributes,
+    att.divLike.attributes,
+    att.typed.attributes,
+    att.declaring.attributes,
+    empty
+  }
+\list =
+  
+  ## contains any sequence of items organized as a list. [3.7. ]
+  element list {
+    ((model.divTop | model.global)*,
+     ((item, model.global*)+
+      | (label, model.global*, item, model.global*)+),
+     (model.divBottom, model.global*)*),
+    att.global.attributes,
+    att.sortable.attributes,
+    att.typed.attribute.subtype,
+    
+    ## describes the nature of the items in the list.
+    ## Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syllogism
+    attribute type {
+      
+      ## each list item glosses some term or concept, which is given by a label element preceding the list item.
+      "gloss"
+      | 
+        ## each list item is an entry in an index such as the alphabetical topical index at the back of a print volume.
+        "index"
+      | 
+        ## each list item is a step in a sequence of instructions, as in a recipe.
+        "instructions"
+      | 
+        ## each list item is one of a sequence of petitions, supplications or invocations, typically in a religious ritual.
+        "litany"
+      | 
+        ## each list item is part of an argument consisting of two or more propositions and a final conclusion derived from them.
+        "syllogism"
+      | xsd:Name
+    }?,
+    empty
+  }
+listBibl =
+  
+  ## (citation list) contains a list of bibliographic citations of any kind. [3.11.1.  2.2.7.  15.3.2. ]
+  element listBibl {
+    (model.headLike*, (model.biblLike | model.milestoneLike)+, empty*),
+    att.global.attributes,
+    att.sortable.attributes,
+    att.declarable.attributes,
+    att.typed.attributes,
+    empty
+  }
+measure =
+  
+  ## contains a word or phrase referring to some quantity of an object or commodity, usually comprising a number, a unit, and a commodity name. [3.5.3. ]
+  element measure {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.measurement.attributes,
+    
+    ## specifies the type of measurement in any convenient typology.
+    attribute type { data.enumerated }?,
+    empty
+  }
+milestone =
+  
+  ## marks a boundary point separating any kind of section of a text, typically but not necessarily indicating a point at which some part of a standard reference system changes, where the change is not represented by a structural element. [3.10.3. ]
+  element milestone {
+    empty,
+    att.global.attributes,
+    att.milestoneUnit.attributes,
+    att.typed.attributes,
+    att.edition.attributes,
+    att.spanning.attributes,
+    att.breaking.attributes,
+    empty
+  }
+msDesc =
+  
+  ## (manuscript description) contains a description of a single identifiable manuscript or other text-bearing object. [10.1. ]
+  element msDesc {
+    (msIdentifier, model.headLike*, (model.pLike+ | physDesc?)),
+    att.global.attributes,
+    att.sortable.attributes,
+    att.typed.attributes,
+    att.declaring.attributes,
+    empty
+  }
+msIdentifier =
+  
+  ## (manuscript identifier) contains the information required to identify the manuscript being described. [10.4. ]
+  element msIdentifier {
+    (model.placeNamePart_sequenceOptional, empty*)
+    >> sch:pattern [
+         id = "oddbyexample-msIdentifier-msId_minimal-constraint-1"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:msIdentifier"
+           "\x{a}" ~
+           "               "
+           sch:report [
+             test =
+               "not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')"
+             "An msIdentifier must contain either a repository or location of some type, or a manuscript name"
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
+    att.global.attributes,
+    empty
+  }
+name =
+  
+  ## (name, proper noun) contains a proper noun or noun phrase. [3.5.1. ]
+  element name {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.personal.attributes,
+    att.datable.attributes,
+    att.editLike.attributes,
+    att.typed.attributes,
+    empty
+  }
+note =
+  
+  ## contains a note or annotation. [3.8.1.  2.2.6.  3.11.2.8.  9.3.5.4. ]
+  element note {
+    macro.specialPara,
+    att.global.attributes,
+    att.placement.attributes,
+    att.pointing.attributes,
+    att.responsibility.attributes,
+    att.typed.attributes,
+    
+    ## indicates whether the copy text shows the exact place of reference for the note.
+    [ a:defaultValue = "true" ] attribute anchored { data.truthValue }?,
+    
+    ## points to the end of the span to which the note is attached, if the note is not embedded in the text at that point.
+    attribute targetEnd {
+      list { data.pointer+ }
+    }?,
+    empty
+  }
+opener =
+  
+  ## groups together dateline, byline, salutation, and similar phrases appearing as a preliminary group at the start of a division, especially of a letter. [4.2. ]
+  element opener {
+    (text
+     | model.gLike
+     | model.phrase
+     | argument
+     | byline
+     | dateline
+     | epigraph
+     | salute
+     | signed
+     | model.global)*,
+    att.global.attributes,
+    empty
+  }
+orig =
+  
+  ## (original form) contains a reading which is marked as following the original, rather than being normalized or corrected. [3.4.2.  12. ]
+  element orig {
+    macro.paraContent,
+    att.global.attributes,
+    att.responsibility.attributes,
+    empty
+  }
+p =
+  
+  ## (paragraph) marks paragraphs in prose. [3.1.  7.2.5. ]
+  element p {
+    macro.paraContent,
+    att.global.attributes,
+    att.declaring.attributes,
+    att.fragmentable.attributes,
+    empty
+  }
+pb =
+  
+  ## (page break) marks the start of a new page in a paginated document. [3.10.3. ]
+  element pb {
+    empty,
+    att.global.attributes,
+    att.typed.attributes,
+    att.edition.attributes,
+    att.spanning.attributes,
+    att.breaking.attributes,
+    empty
+  }
+pc =
+  
+  ## (punctuation character) contains a character or string of characters regarded as constituting a single punctuation mark. [17.1. ]
+  element pc {
+    (text | model.gLike | c | model.pPart.edit)*,
+    att.global.attributes,
+    att.segLike.attributes,
+    att.typed.attributes,
+    
+    ## indicates the extent to which this punctuation mark conventionally separates words or phrases
+    attribute force {
+      
+      ## the punctuation mark is a word separator
+      "strong"
+      | 
+        ## the punctuation mark is not a word separator
+        "weak"
+      | 
+        ## the punctuation mark may or may not be a word separator
+        "inter"
+    }?,
+    
+    ## provides a name for the kind of unit delimited by this punctuation mark.
+    attribute unit { data.enumerated }?,
+    
+    ## indicates whether this punctuation mark precedes or follows the unit it delimits.
+    attribute pre { data.truthValue }?,
+    empty
+  }
+physDesc =
+  
+  ## (physical description) contains a full physical description of a manuscript or manuscript part, optionally subdivided using more specialized elements from the model.physDescPart class. [10.7. ]
+  element physDesc {
+    (model.pLike*, model.physDescPart_sequenceOptional),
+    att.global.attributes,
+    empty
+  }
+postscript =
+  
+  ## contains a postscript, e.g. to a letter. [4.2. ]
+  element postscript {
+    ((model.global | model.divTopPart)*,
+     model.common,
+     (model.global | model.common)*,
+     (model.divBottomPart, model.global*)*),
+    att.global.attributes,
+    empty
+  }
+q =
+  
+  ## (quoted) contains material which is distinguished from the surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and passages that are mentioned but not used. [3.3.3. ]
+  element q {
+    macro.specialPara,
+    att.global.attributes,
+    att.ascribed.attributes,
+    att.source.attributes,
+    
+    ## may be used to indicate whether the offset passage is spoken or thought, or to characterize it more finely.
+    ## Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] foreign; 6] distinct; 7] term; 8] emph; 9] mentioned
+    attribute type {
+      
+      ## representation of speech
+      "spoken"
+      | 
+        ## representation of thought, e.g. internal monologue
+        "thought"
+      | 
+        ## quotation from a written source
+        "written"
+      | 
+        ## authorial distance
+        "soCalled"
+      | 
+        ##
+        "foreign"
+      | 
+        ## linguistically distinct
+        "distinct"
+      | 
+        ## technical term
+        "term"
+      | 
+        ## rhetorically emphasized
+        "emph"
+      | 
+        ## refering to itself, not its normal referent
+        "mentioned"
+      | xsd:Name
+    }?,
+    empty
+  }
+quote =
+  
+  ## (quotation) contains a phrase or passage attributed by the narrator or author to some agency external to the text. [3.3.3.  4.3.1. ]
+  element quote {
+    macro.specialPara,
+    att.global.attributes,
+    att.typed.attributes,
+    att.source.attributes,
+    empty
+  }
+ref =
+  
+  ## (reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]
+  element ref {
+    macro.paraContent
+    >> sch:pattern [
+         id = "oddbyexample-ref-refAtts-constraint-2"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:ref"
+           "\x{a}" ~
+           "               "
+           sch:report [
+             test = "@target and @cRef"
+             "Only one of the\x{a}" ~
+             "	attributes @target' and @cRef' may be supplied on "
+             sch:name [ ]
+             "\x{a}" ~
+             "               "
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
+    att.global.attributes,
+    att.pointing.attributes,
+    att.internetMedia.attributes,
+    att.typed.attributes,
+    att.declaring.attributes,
+    att.cReferencing.attributes,
+    empty
+  }
+reg =
+  
+  ## (regularization) contains a reading which has been regularized or normalized in some sense. [3.4.2.  12. ]
+  element reg {
+    macro.paraContent,
+    att.global.attributes,
+    att.editLike.attributes,
+    att.typed.attributes,
+    empty
+  }
+role =
+  
+  ## contains the name of a dramatic role, as given in a cast list. [7.1.4. ]
+  element role { macro.phraseSeq, att.global.attributes, empty }
+roleDesc =
+  
+  ## (role description) describes a character's role in a drama. [7.1.4. ]
+  element roleDesc { macro.phraseSeq, att.global.attributes, empty }
+row =
+  
+  ## contains one row of a table. [14.1.1. ]
+  element row {
+    cell+, att.global.attributes, att.tableDecoration.attributes, empty
+  }
+s =
+  
+  ## (s-unit) contains a sentence-like division of a text. [17.1.  8.4.1. ]
+  element s {
+    ((text
+      | model.gLike
+      | model.global
+      | formula
+      | graphic
+      | foreign
+      | gloss
+      | term
+      | title
+      | hi
+      | address
+      | date
+      | measure
+      | name
+      | abbr
+      | choice
+      | expan
+      | add
+      | corr
+      | del
+      | orig
+      | reg
+      | sic
+      | supplied
+      | unclear
+      | ref
+      | c
+      | pc
+      | seg
+      | w)*)
+    >> sch:pattern [
+         id = "oddbyexample-s-noNestedS-constraint-3"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:s"
+           "\x{a}" ~
+           "               "
+           sch:report [
+             test = "tei:s"
+             "You may not nest one s element within\x{a}" ~
+             "      another: use seg instead"
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
+    att.global.attributes,
+    att.segLike.attributes,
+    att.typed.attributes,
+    empty
+  }
+salute =
+  
+  ## (salutation) contains a salutation or greeting prefixed to a foreword, dedicatory epistle, or other division of a text, or the salutation in the closing of a letter, preface, etc. [4.2.2. ]
+  element salute { macro.paraContent, att.global.attributes, empty }
+seg =
+  
+  ## (arbitrary segment) represents any segmentation of text below the chunk level. [16.3.  6.2.  7.2.5. ]
+  element seg {
+    macro.paraContent,
+    att.global.attributes,
+    att.segLike.attributes,
+    att.typed.attributes,
+    att.responsibility.attributes,
+    empty
+  }
+sic =
+  
+  ## (Latin for thus or so
+  ##    ) contains text reproduced although apparently incorrect or inaccurate. [3.4.1. ]
+  element sic {
+    macro.paraContent,
+    att.global.attributes,
+    att.responsibility.attributes,
+    empty
+  }
+signed =
+  
+  ## (signature) contains the closing salutation, etc., appended to a foreword, dedicatory epistle, or other division of a text. [4.2.2. ]
+  element signed { macro.paraContent, att.global.attributes, empty }
+sp =
+  
+  ## (speech) contains an individual speech in a performance text, or a passage presented as such in a prose or verse text. [3.12.2.  3.12.  7.2.2. ]
+  element sp {
+    (model.global*,
+     (speaker, model.global*)?,
+     ((lg
+       | model.lLike
+       | model.pLike
+       | model.listLike
+       | model.stageLike
+       | model.qLike),
+      model.global*)+),
+    att.global.attributes,
+    att.ascribed.attributes,
+    empty
+  }
+space =
+  
+  ## indicates the location of a significant space in the copy text. [11.5.1. ]
+  element space {
+    (model.descLike | model.certLike)*,
+    att.global.attributes,
+    att.dimensions.attributes,
+    att.responsibility.attribute.cert,
+    att.source.attribute.source,
+    
+    ## (responsible party) (responsible party) indicates the individual responsible for identifying and measuring the space
+    attribute resp {
+      list { data.pointer+ }
+    }?,
+    
+    ## (dimension) indicates whether the space is horizontal or vertical.
+    attribute dim {
+      
+      ## the space is horizontal.
+      "horizontal"
+      | 
+        ## the space is vertical.
+        "vertical"
+    }?,
+    empty
+  }
+speaker =
+  
+  ## contains a specialized form of heading or label, giving the name of one or more speakers in a dramatic text or fragment. [3.12.2. ]
+  element speaker { macro.phraseSeq, att.global.attributes, empty }
+spGrp =
+  
+  ## (speech group) contains a group of speeches or songs in a performance text presented in a source as constituting a single unit or number. [7.2.3. ]
+  element spGrp {
+    (model.headLike*, (model.global | sp | model.stageLike)+),
+    att.global.attributes,
+    att.typed.attributes,
+    att.ascribed.attributes,
+    empty
+  }
+stage =
+  
+  ## (stage direction) contains any kind of stage direction within a dramatic text or fragment. [3.12.2.  3.12.  7.2.4. ]
+  element stage {
+    macro.specialPara,
+    att.ascribed.attributes,
+    att.global.attributes,
+    att.placement.attributes,
+    
+    ## indicates the kind of stage direction.
+    ## Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] novelistic; 6] delivery; 7] modifier; 8] location; 9] mixed
+    attribute type {
+      
+      ## describes a setting.
+      "setting"
+      | 
+        ## describes an entrance.
+        "entrance"
+      | 
+        ## describes an exit.
+        "exit"
+      | 
+        ## describes stage business.
+        "business"
+      | 
+        ## is a narrative, motivating stage direction.
+        "novelistic"
+      | 
+        ## describes how a character speaks.
+        "delivery"
+      | 
+        ## gives some detail about a character.
+        "modifier"
+      | 
+        ## describes a location.
+        "location"
+      | 
+        ## more than one of the above
+        "mixed"
+      | xsd:Name
+    }?,
+    empty
+  }
+supplied =
+  
+  ## signifies text supplied by the transcriber or editor for any reason, typically because the original cannot be read because of physical damage or loss to the original. [11.3.3.1. ]
+  element supplied {
+    macro.paraContent,
+    att.global.attributes,
+    att.editLike.attributes,
+    
+    ## one or more words indicating why the text has had to be supplied, e.g. overbinding, faded-ink, lost-folio, omitted-in-original.
+    attribute reason {
+      list { data.word+ }
+    }?,
+    empty
+  }
+table =
+  
+  ## contains text displayed in tabular form, in rows and columns. [14.1.1. ]
+  element table {
+    ((model.headLike | model.global)*,
+     ((row, model.global*)+ | (model.graphicLike, model.global*)+),
+     (model.divBottom, model.global*)*),
+    att.global.attributes,
+    
+    ## indicates the number of rows in the table.
+    attribute rows { data.count }?,
+    
+    ## (columns) indicates the number of columns in each row of the table.
+    attribute cols { data.count }?,
+    empty
+  }
+term =
+  
+  ## contains a single-word, multi-word, or symbolic designation which is regarded as a technical term. [3.3.4. ]
+  element term {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.declaring.attributes,
+    att.pointing.attributes,
+    att.typed.attributes,
+    att.canonical.attributes,
+    att.sortable.attributes,
+    att.cReferencing.attributes,
+    empty
+  }
+\text =
+  
+  ## contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4.  15.1. ]
+  element text {
+    (model.global*,
+     (front, model.global*)?,
+     (body | group),
+     model.global*,
+     (back, model.global*)?),
+    att.global.attributes,
+    att.declaring.attributes,
+    att.typed.attributes,
+    empty
+  }
+title =
+  
+  ## contains a title for any kind of work. [3.11.2.2.  2.2.1.  2.2.5. ]
+  element title {
+    macro.paraContent,
+    att.global.attributes,
+    att.canonical.attributes,
+    att.typed.attribute.subtype,
+    
+    ## classifies the title according to some convenient typology.
+    ## Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] short; 5] desc(descriptive) 
+    attribute type { data.enumerated }?,
+    
+    ## indicates the bibliographic level for a title, that is, whether it identifies an article, book, journal, series, or unpublished material.
+    attribute level {
+      
+      ## (analytic) the title applies to an analytic item, such as an article, poem, or other work published as part of a larger item.
+      "a"
+      | 
+        ## (monographic) the title applies to a monograph such as a book or other item considered to be a distinct publication, including single volumes of multi-volume works
+        "m"
+      | 
+        ## (journal) the title applies to any serial or periodical publication such as a journal, magazine, or newspaper
+        "j"
+      | 
+        ## (series) the title applies to a series of otherwise distinct publications such as a collection
+        "s"
+      | 
+        ## (unpublished) the title applies to any unpublished material (including theses and dissertations unless published by a commercial press)
+        "u"
+    }?,
+    empty
+  }
+titlePage =
+  
+  ## (title page) contains the title page of a text, appearing within the front or back matter. [4.6. ]
+  element titlePage {
+    (model.global*,
+     model.titlepagePart,
+     (model.titlepagePart | model.global)*),
+    att.global.attributes,
+    
+    ## classifies the title page according to any convenient typology.
+    attribute type { data.enumerated }?,
+    empty
+  }
+titlePart =
+  
+  ## contains a subsection or division of the title of a work, as indicated on a title page. [4.6. ]
+  element titlePart {
+    macro.paraContent,
+    att.global.attributes,
+    
+    ## specifies the role of this subdivision of the title.
+    ## Suggested values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] short; 5] desc(descriptive) 
+    [ a:defaultValue = "main" ]
+    attribute type {
+      
+      ## main title of the work
+      "main"
+      | 
+        ## (subordinate) subtitle of the work
+        "sub"
+      | 
+        ## (alternate) alternative title of the work
+        "alt"
+      | 
+        ## abbreviated form of title
+        "short"
+      | 
+        ## (descriptive) descriptive paraphrase of the work
+        "desc"
+      | xsd:Name
+    }?,
+    empty
+  }
+trailer =
+  
+  ## contains a closing title or footer appearing at the end of a division of a text. [4.2.4.  4.2. ]
+  element trailer {
+    (text
+     | lg
+     | model.gLike
+     | model.phrase
+     | model.inter
+     | model.lLike
+     | model.global)*,
+    att.global.attributes,
+    att.typed.attributes,
+    empty
+  }
+unclear =
+  
+  ## contains a word, phrase, or passage which cannot be transcribed with certainty because it is illegible or inaudible in the source. [11.3.3.1.  3.4.3. ]
+  element unclear {
+    macro.paraContent,
+    att.global.attributes,
+    att.editLike.attributes,
+    
+    ## indicates why the material is hard to transcribe.
+    attribute reason {
+      list { data.word+ }
+    }?,
+    
+    ## Where the difficulty in transcription arises from action (partial deletion, etc.) assignable to an identifiable hand, signifies the hand responsible for the action.
+    attribute hand { data.pointer }?,
+    
+    ## Where the difficulty in transcription arises from damage, categorizes the cause of the damage, if it can be identified.
+    ## Sample values include: 1] rubbing; 2] mildew; 3] smoke
+    attribute agent { data.enumerated }?,
+    empty
+  }
+w =
+  
+  ## (word) represents a grammatical (not necessarily orthographic) word. [17.1. ]
+  element w {
+    (text
+     | model.gLike
+     | seg
+     | w
+     | c
+     | pc
+     | model.global
+     | model.lPart
+     | model.hiLike
+     | model.pPart.edit)*,
+    att.global.attributes,
+    att.segLike.attributes,
+    att.typed.attributes,
+    
+    ## provides a lemma for the word, such as an uninflected dictionary entry form.
+    attribute lemma { data.text }?,
+    
+    ## provides a pointer to a definition of the lemma for the word, for example in an online lexicon.
+    attribute lemmaRef { data.pointer }?,
+    empty
+  }
+start = \text
