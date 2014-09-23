@@ -6,7 +6,7 @@ namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-09-23T12:45:31Z. 
+# Schema generated from ODD source 2014-09-23T14:53:53Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -410,6 +410,55 @@ att.global.attribute.xmlspace =
       ## indicates the intent that applications preserve all white space
       "preserve"
   }?
+att.handFeatures.attributes =
+  att.handFeatures.attribute.scribe,
+  att.handFeatures.attribute.scribeRef,
+  att.handFeatures.attribute.script,
+  att.handFeatures.attribute.scriptRef,
+  att.handFeatures.attribute.medium,
+  att.handFeatures.attribute.scope
+att.handFeatures.attribute.scribe =
+  
+  ## gives a name or other identifier for the scribe believed to be responsible for this hand.
+  attribute scribe { data.name }?
+att.handFeatures.attribute.scribeRef =
+  
+  ## points to a full description of the scribe concerned, typically supplied by a person element elsewhere in the description.
+  attribute scribeRef {
+    list { data.pointer+ }
+  }?
+att.handFeatures.attribute.script =
+  
+  ## characterizes the particular script or writing style used by this hand, for example secretary, copperplate, Chancery, Italian, etc.
+  attribute script {
+    list { data.name+ }
+  }?
+att.handFeatures.attribute.scriptRef =
+  
+  ## points to a full description of the script or writing style used by this hand, typically supplied by a scriptNote element elsewhere in the description.
+  attribute scriptRef {
+    list { data.pointer+ }
+  }?
+att.handFeatures.attribute.medium =
+  
+  ## describes the tint or type of ink, e.g. brown, or other writing medium, e.g. pencil
+  attribute medium {
+    list { data.enumerated+ }
+  }?
+att.handFeatures.attribute.scope =
+  
+  ## specifies how widely this hand is used in the manuscript.
+  attribute scope {
+    
+    ## only this hand is used throughout the manuscript
+    "sole"
+    | 
+      ## this hand is used through most of the manuscript
+      "major"
+    | 
+      ## this hand is used occasionally in the manuscript
+      "minor"
+  }?
 att.internetMedia.attributes = att.internetMedia.attribute.mimeType
 att.internetMedia.attribute.mimeType =
   
@@ -660,12 +709,13 @@ att.translatable.attribute.versionDate =
   
   ## specifies the date on which the source text was extracted and sent to the translator
   attribute versionDate { data.temporal.w3c }?
-model.nameLike.agent = name
-model.nameLike.agent_alternation = name
-model.nameLike.agent_sequence = name
-model.nameLike.agent_sequenceOptional = name?
-model.nameLike.agent_sequenceOptionalRepeatable = name*
-model.nameLike.agent_sequenceRepeatable = name+
+model.nameLike.agent = name | orgName | persName
+model.nameLike.agent_alternation = name | orgName | persName
+model.nameLike.agent_sequence = name, orgName, persName
+model.nameLike.agent_sequenceOptional = name?, orgName?, persName?
+model.nameLike.agent_sequenceOptionalRepeatable =
+  name*, orgName*, persName*
+model.nameLike.agent_sequenceRepeatable = name+, orgName+, persName+
 model.segLike = c | pc | s | seg | w
 model.hiLike = hi
 model.hiLike_alternation = hi
@@ -673,26 +723,30 @@ model.hiLike_sequence = hi
 model.hiLike_sequenceOptional = hi?
 model.hiLike_sequenceOptionalRepeatable = hi*
 model.hiLike_sequenceRepeatable = hi+
-model.emphLike = foreign | gloss | term | title
-model.emphLike_alternation = foreign | gloss | term | title
-model.emphLike_sequence = foreign, gloss, term, title
-model.emphLike_sequenceOptional = foreign?, gloss?, term?, title?
+model.emphLike = code | emph | foreign | gloss | soCalled | term | title
+model.emphLike_alternation =
+  code | emph | foreign | gloss | soCalled | term | title
+model.emphLike_sequence =
+  code, emph, foreign, gloss, soCalled, term, title
+model.emphLike_sequenceOptional =
+  code?, emph?, foreign?, gloss?, soCalled?, term?, title?
 model.emphLike_sequenceOptionalRepeatable =
-  foreign*, gloss*, term*, title*
-model.emphLike_sequenceRepeatable = foreign+, gloss+, term+, title+
+  code*, emph*, foreign*, gloss*, soCalled*, term*, title*
+model.emphLike_sequenceRepeatable =
+  code+, emph+, foreign+, gloss+, soCalled+, term+, title+
 model.highlighted = model.hiLike | model.emphLike
-model.dateLike = date
-model.dateLike_alternation = date
-model.dateLike_sequence = date
-model.dateLike_sequenceOptional = date?
-model.dateLike_sequenceOptionalRepeatable = date*
-model.dateLike_sequenceRepeatable = date+
-model.measureLike = measure
-model.measureLike_alternation = measure
-model.measureLike_sequence = measure
-model.measureLike_sequenceOptional = measure?
-model.measureLike_sequenceOptionalRepeatable = measure*
-model.measureLike_sequenceRepeatable = measure+
+model.dateLike = date | time
+model.dateLike_alternation = date | time
+model.dateLike_sequence = date, time
+model.dateLike_sequenceOptional = date?, time?
+model.dateLike_sequenceOptionalRepeatable = date*, time*
+model.dateLike_sequenceRepeatable = date+, time+
+model.measureLike = measure | num
+model.measureLike_alternation = measure | num
+model.measureLike_sequence = measure, num
+model.measureLike_sequenceOptional = measure?, num?
+model.measureLike_sequenceOptionalRepeatable = measure*, num*
+model.measureLike_sequenceRepeatable = measure+, num+
 model.egLike = notAllowed
 model.egLike_alternation = notAllowed
 model.egLike_sequence = empty
@@ -715,20 +769,20 @@ model.pPart.editorial_sequenceOptionalRepeatable =
   abbr*, choice*, expan*
 model.pPart.editorial_sequenceRepeatable = abbr+, choice+, expan+
 model.pPart.transcriptional =
-  add | corr | del | orig | reg | sic | supplied | unclear
+  add | corr | del | handShift | orig | reg | sic | supplied | unclear
 model.pPart.transcriptional_alternation =
-  add | corr | del | orig | reg | sic | supplied | unclear
+  add | corr | del | handShift | orig | reg | sic | supplied | unclear
 model.pPart.transcriptional_sequence =
-  add, corr, del, orig, reg, sic, supplied, unclear
+  add, corr, del, handShift, orig, reg, sic, supplied, unclear
 model.pPart.transcriptional_sequenceOptional =
-  add?, corr?, del?, orig?, reg?, sic?, supplied?, unclear?
+  add?, corr?, del?, handShift?, orig?, reg?, sic?, supplied?, unclear?
 model.pPart.transcriptional_sequenceOptionalRepeatable =
-  add*, corr*, del*, orig*, reg*, sic*, supplied*, unclear*
+  add*, corr*, del*, handShift*, orig*, reg*, sic*, supplied*, unclear*
 model.pPart.transcriptional_sequenceRepeatable =
-  add+, corr+, del+, orig+, reg+, sic+, supplied+, unclear+
+  add+, corr+, del+, handShift+, orig+, reg+, sic+, supplied+, unclear+
 model.pPart.edit = model.pPart.editorial | model.pPart.transcriptional
-model.ptrLike = ref
-model.lPart = notAllowed
+model.ptrLike = ptr | ref
+model.lPart = caesura
 model.global.meta = notAllowed
 model.milestoneLike = anchor | cb | fw | lb | milestone | pb
 model.gLike = g
@@ -740,12 +794,13 @@ model.oddDecl_sequenceOptionalRepeatable = empty
 model.oddDecl_sequenceRepeatable = notAllowed
 model.phrase.xml = notAllowed
 model.specDescLike = notAllowed
-model.biblLike = bibl | listBibl | msDesc
-model.biblLike_alternation = bibl | listBibl | msDesc
-model.biblLike_sequence = bibl, listBibl, msDesc
-model.biblLike_sequenceOptional = bibl?, listBibl?, msDesc?
-model.biblLike_sequenceOptionalRepeatable = bibl*, listBibl*, msDesc*
-model.biblLike_sequenceRepeatable = bibl+, listBibl+, msDesc+
+model.biblLike = bibl | biblFull | listBibl | msDesc
+model.biblLike_alternation = bibl | biblFull | listBibl | msDesc
+model.biblLike_sequence = bibl, biblFull, listBibl, msDesc
+model.biblLike_sequenceOptional = bibl?, biblFull?, listBibl?, msDesc?
+model.biblLike_sequenceOptionalRepeatable =
+  bibl*, biblFull*, listBibl*, msDesc*
+model.biblLike_sequenceRepeatable = bibl+, biblFull+, listBibl+, msDesc+
 model.headLike = head
 model.headLike_alternation = head
 model.headLike_sequence = head
@@ -786,12 +841,12 @@ model.stageLike_sequenceRepeatable = stage+
 model.entryPart = notAllowed
 model.global.edit = addSpan | gap | space
 model.divPart = model.lLike | model.pLike | lg | sp | spGrp
-model.placeNamePart = notAllowed
-model.placeNamePart_alternation = notAllowed
-model.placeNamePart_sequence = empty
-model.placeNamePart_sequenceOptional = empty
-model.placeNamePart_sequenceOptionalRepeatable = empty
-model.placeNamePart_sequenceRepeatable = notAllowed
+model.placeNamePart = country | placeName
+model.placeNamePart_alternation = country | placeName
+model.placeNamePart_sequence = country, placeName
+model.placeNamePart_sequenceOptional = country?, placeName?
+model.placeNamePart_sequenceOptionalRepeatable = country*, placeName*
+model.placeNamePart_sequenceRepeatable = country+, placeName+
 model.placeStateLike = model.placeNamePart
 model.placeStateLike_alternation = model.placeNamePart_alternation
 model.placeStateLike_sequence = model.placeNamePart_sequence
@@ -801,6 +856,8 @@ model.placeStateLike_sequenceOptionalRepeatable =
   model.placeNamePart_sequenceOptionalRepeatable*
 model.placeStateLike_sequenceRepeatable =
   model.placeNamePart_sequenceRepeatable+
+model.publicationStmtPart.agency = publisher
+model.publicationStmtPart.detail = address | date | idno | pubPlace
 model.certLike = notAllowed
 model.descLike = desc
 model.quoteLike = cit | quote
@@ -851,7 +908,7 @@ model.titlepagePart =
   | titlePart
 model.choicePart =
   abbr | corr | expan | orig | reg | seg | sic | unclear
-model.imprintPart = notAllowed
+model.imprintPart = publisher | pubPlace
 model.castItemPart = actor | role | roleDesc
 model.physDescPart_sequenceOptional = empty
 model.addressLike = address
@@ -861,27 +918,41 @@ model.addressLike_sequenceOptional = address?
 model.addressLike_sequenceOptionalRepeatable = address*
 model.addressLike_sequenceRepeatable = address+
 model.nameLike =
-  model.nameLike.agent | model.offsetLike | model.placeStateLike
+  model.nameLike.agent
+  | model.offsetLike
+  | model.placeStateLike
+  | idno
+  | rs
 model.nameLike_alternation =
   model.nameLike.agent_alternation
   | model.offsetLike_alternation
   | model.placeStateLike_alternation
+  | idno
+  | rs
 model.nameLike_sequence =
   model.nameLike.agent_sequence,
   model.offsetLike_sequence,
-  model.placeStateLike_sequence
+  model.placeStateLike_sequence,
+  idno,
+  rs
 model.nameLike_sequenceOptional =
   model.nameLike.agent_sequenceOptional?,
   model.offsetLike_sequenceOptional?,
-  model.placeStateLike_sequenceOptional?
+  model.placeStateLike_sequenceOptional?,
+  idno?,
+  rs?
 model.nameLike_sequenceOptionalRepeatable =
   model.nameLike.agent_sequenceOptionalRepeatable*,
   model.offsetLike_sequenceOptionalRepeatable*,
-  model.placeStateLike_sequenceOptionalRepeatable*
+  model.placeStateLike_sequenceOptionalRepeatable*,
+  idno*,
+  rs*
 model.nameLike_sequenceRepeatable =
   model.nameLike.agent_sequenceRepeatable+,
   model.offsetLike_sequenceRepeatable+,
-  model.placeStateLike_sequenceRepeatable+
+  model.placeStateLike_sequenceRepeatable+,
+  idno+,
+  rs+
 model.global =
   model.global.meta
   | model.milestoneLike
@@ -889,7 +960,7 @@ model.global =
   | model.global.edit
   | figure
 model.biblPart =
-  model.respLike | model.imprintPart | bibl | msIdentifier
+  model.respLike | model.imprintPart | bibl | extent | msIdentifier
 model.frontPart = model.frontPart.drama | titlePage
 model.addrPart = model.nameLike | addrLine
 model.pPart.data =
@@ -929,6 +1000,11 @@ model.limitedPhrase =
 model.divLike = \div
 model.divGenLike = notAllowed
 model.div1Like = notAllowed
+model.teiHeaderPart = encodingDesc | profileDesc
+model.sourceDescPart = notAllowed
+model.encodingDescPart = editorialDecl
+model.editorialDeclPart = notAllowed
+model.profileDescPart = textClass
 att.source.attributes = att.source.attribute.source
 att.source.attribute.source =
   
@@ -1167,6 +1243,16 @@ add =
     att.typed.attributes,
     empty
   }
+addName =
+  
+  ## (additional name) contains an additional name component, such as a nickname, epithet, or alias, or any other descriptive phrase used within a personal name. [13.2.1. ]
+  element addName {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
+    empty
+  }
 address =
   
   ## contains a postal address, for example of a publisher, an organization, or an individual. [3.5.2.  2.2.4.  3.11.2.4. ]
@@ -1281,6 +1367,17 @@ bibl =
     att.docStatus.attributes,
     empty
   }
+biblFull =
+  
+  ## (fully-structured bibliographic citation) contains a fully-structured bibliographic citation, in which all components of the TEI file description are present. [3.11.1.  2.2.  2.2.7.  15.3.2. ]
+  element biblFull {
+    ((titleStmt, extent?, publicationStmt), sourceDesc*),
+    att.global.attributes,
+    att.declarable.attributes,
+    att.sortable.attributes,
+    att.docStatus.attributes,
+    empty
+  }
 body =
   
   ## (text body) contains the whole body of a single unitary text, excluding any front or back matter. [4. ]
@@ -1316,6 +1413,10 @@ c =
     att.typed.attributes,
     empty
   }
+caesura =
+  
+  ## marks the point at which a metrical line may be divided. [6.2. ]
+  element caesura { empty, att.global.attributes, empty }
 castGroup =
   
   ## (cast list grouping) groups one or more individual castItem elements within a cast list. [7.1.4. ]
@@ -1381,6 +1482,23 @@ cell =
     att.tableDecoration.attributes,
     empty
   }
+change =
+  
+  ## documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.5.  2.4.1.  11.7. ]
+  element change {
+    macro.specialPara,
+    att.ascribed.attributes,
+    att.datable.attributes,
+    att.docStatus.attributes,
+    att.global.attributes,
+    att.typed.attributes,
+    
+    ## points to one or more elements that belong to this change.
+    attribute target {
+      list { data.pointer+ }
+    }?,
+    empty
+  }
 choice =
   
   ## groups a number of alternative encodings for the same point in a text. [3.4. ]
@@ -1415,6 +1533,17 @@ closer =
     att.global.attributes,
     empty
   }
+code =
+  
+  ## contains literal code from some formal language such as a programming language. [22.1.1. ]
+  element code {
+    text,
+    att.global.attributes,
+    
+    ## (formal language) a name identifying the formal language in which the code is expressed
+    attribute lang { data.word }?,
+    empty
+  }
 corr =
   
   ## (correction) contains the correct form of a passage apparently erroneous in the copy text. [3.4.1. ]
@@ -1423,6 +1552,17 @@ corr =
     att.global.attributes,
     att.editLike.attributes,
     att.typed.attributes,
+    empty
+  }
+country =
+  
+  ## contains the name of a geo-political unit, such as a nation, country, colony, or commonwealth, larger than or administratively superior to a region and smaller than a bloc. [13.2.3. ]
+  element country {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.naming.attributes,
+    att.typed.attributes,
+    att.datable.attributes,
     empty
   }
 date =
@@ -1507,7 +1647,13 @@ docImprint =
   
   ## (document imprint) contains the imprint statement (place and date of publication, publisher name), as given (usually) at the foot of a title page. [4.6. ]
   element docImprint {
-    (text | model.gLike | model.phrase | docDate | model.global)*,
+    (text
+     | model.gLike
+     | model.phrase
+     | pubPlace
+     | docDate
+     | publisher
+     | model.global)*,
     att.global.attributes,
     empty
   }
@@ -1518,6 +1664,27 @@ docTitle =
     (model.global*, (titlePart, model.global*)+),
     att.global.attributes,
     att.canonical.attributes,
+    empty
+  }
+editorialDecl =
+  
+  ## (editorial practice declaration) provides details of editorial principles and practices applied during the encoding of a text. [2.3.3.  2.3.  15.3.2. ]
+  element editorialDecl {
+    (model.pLike | model.editorialDeclPart)+,
+    att.global.attributes,
+    att.declarable.attributes,
+    empty
+  }
+emph =
+  
+  ## (emphasized) marks words or phrases which are stressed or emphasized for linguistic or rhetorical effect. [3.3.2.2.  3.3.2. ]
+  element emph { macro.paraContent, att.global.attributes, empty }
+encodingDesc =
+  
+  ## (encoding description) documents the relationship between an electronic text and the source or sources from which it was derived. [2.3.  2.1.1. ]
+  element encodingDesc {
+    (model.encodingDescPart | model.pLike)+,
+    att.global.attributes,
     empty
   }
 epigraph =
@@ -1535,6 +1702,10 @@ expan =
     att.editLike.attributes,
     empty
   }
+extent =
+  
+  ## describes the approximate size of a text stored on some carrier medium or of some other object, digital or non-digital, specified in any convenient units. [2.2.3.  2.2.  3.11.2.4.  10.7.1. ]
+  element extent { macro.phraseSeq, att.global.attributes, empty }
 figDesc =
   
   ## (description of figure) contains a brief prose description of the appearance or content of a graphic figure, for use when documenting an image without displaying it. [14.4. ]
@@ -1552,6 +1723,14 @@ figure =
     att.global.attributes,
     att.placement.attributes,
     att.typed.attributes,
+    empty
+  }
+fileDesc =
+  
+  ## (file description) contains a full bibliographic description of an electronic file. [2.2.  2.1.1. ]
+  element fileDesc {
+    ((titleStmt, extent?, publicationStmt), sourceDesc+),
+    att.global.attributes,
     empty
   }
 floatingText =
@@ -1572,6 +1751,16 @@ foreign =
   
   ## identifies a word or phrase as belonging to some language other than that of the surrounding text. [3.3.2.1. ]
   element foreign { macro.phraseSeq, att.global.attributes, empty }
+forename =
+  
+  ## contains a forename, given or baptismal name. [13.2.1. ]
+  element forename {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
+    empty
+  }
 formula =
   
   ## contains a mathematical or other formula. [14.2. ]
@@ -1646,6 +1835,16 @@ gap =
     attribute agent { data.enumerated }?,
     empty
   }
+genName =
+  
+  ## (generational name component) contains a name component used to distinguish otherwise similar names on the basis of the relative ages or generations of the persons named. [13.2.1. ]
+  element genName {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
+    empty
+  }
 gloss =
   
   ## identifies a phrase or word used to provide a gloss or definition for some other word or phrase. [3.3.4.  22.4.1. ]
@@ -1682,6 +1881,19 @@ group =
     att.typed.attributes,
     empty
   }
+handShift =
+  
+  ## marks the beginning of a sequence of text written in a new hand, or the beginning of a scribal stint. [11.3.2.1. ]
+  element handShift {
+    empty,
+    att.global.attributes,
+    att.handFeatures.attributes,
+    att.responsibility.attributes,
+    
+    ## indicates a handNote element describing the hand concerned.
+    attribute new { data.pointer }?,
+    empty
+  }
 head =
   
   ## (heading) contains any type of heading, for example the title of a section, or the heading of a list, glossary, manuscript description, etc. [4.2.1. ]
@@ -1701,6 +1913,18 @@ hi =
   
   ## (highlighted) marks a word or phrase as graphically distinct from the surrounding text, for reasons concerning which no claim is made. [3.3.2.2.  3.3.2. ]
   element hi { macro.paraContent, att.global.attributes, empty }
+idno =
+  
+  ## (identifier) supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way. [2.2.4.  2.2.5.  3.11.2.4. ]
+  element idno {
+    (text | model.gLike | idno)*,
+    att.global.attributes,
+    att.sortable.attributes,
+    
+    ## categorizes the identifier, for example as an ISBN, Social Security number, etc.
+    attribute type { data.enumerated }?,
+    empty
+  }
 imprimatur =
   
   ## contains a formal statement authorizing the publication of a work, sometimes required to appear on a title page or its verso. [4.6. ]
@@ -1712,6 +1936,17 @@ item =
     macro.specialPara,
     att.global.attributes,
     att.sortable.attributes,
+    empty
+  }
+keywords =
+  
+  ## contains a list of keywords or phrases identifying the topic or nature of a text. [2.4.3. ]
+  element keywords {
+    (term+ | \list),
+    att.global.attributes,
+    
+    ## identifies the controlled vocabulary within which the set of keywords concerned is defined identifies the classification scheme within which the set of categories concerned is defined, for example by a taxonomy element, or by some other resource.
+    attribute scheme { data.pointer }?,
     empty
   }
 l =
@@ -1828,6 +2063,18 @@ listBibl =
     att.typed.attributes,
     empty
   }
+listChange =
+  
+  ## groups a number of change descriptions associated with either the creation of a source text or the revision of an encoded text. [2.5.  11.7. ]
+  element listChange {
+    (listChange | change)+,
+    att.global.attributes,
+    att.sortable.attributes,
+    
+    ## indicates whether the ordering of its child change elements is to be considered significant or not
+    [ a:defaultValue = "true" ] attribute ordered { data.truthValue }?,
+    empty
+  }
 measure =
   
   ## contains a word or phrase referring to some quantity of an object or commodity, usually comprising a number, a unit, and a commodity name. [3.5.3. ]
@@ -1868,7 +2115,7 @@ msIdentifier =
   
   ## (manuscript identifier) contains the information required to identify the manuscript being described. [10.4. ]
   element msIdentifier {
-    (model.placeNamePart_sequenceOptional, empty*)
+    ((model.placeNamePart_sequenceOptional, idno?), empty*)
     >> sch:pattern [
          id = "oddbyexample-msIdentifier-msId_minimal-constraint-1"
          "\x{a}" ~
@@ -1903,6 +2150,12 @@ name =
     att.typed.attributes,
     empty
   }
+nameLink =
+  
+  ## (name link) contains a connecting phrase or link used within a name but not regarded as part of it, such as van der or of. [13.2.1. ]
+  element nameLink {
+    macro.phraseSeq, att.global.attributes, att.typed.attributes, empty
+  }
 note =
   
   ## contains a note or annotation. [3.8.1.  2.2.6.  3.11.2.8.  9.3.5.4. ]
@@ -1923,6 +2176,36 @@ note =
     }?,
     empty
   }
+num =
+  
+  ## (number) contains a number, written in any form. [3.5.3. ]
+  element num {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.ranging.attributes,
+    
+    ## indicates the type of numeric value.
+    ## Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage
+    attribute type {
+      
+      ## absolute number, e.g. 21, 21.5
+      "cardinal"
+      | 
+        ## ordinal number, e.g. 21st
+        "ordinal"
+      | 
+        ## fraction, e.g. one half or three-quarters
+        "fraction"
+      | 
+        ## a percentage
+        "percentage"
+      | xsd:Name
+    }?,
+    
+    ## supplies the value of the number in standard form.
+    attribute value { data.numeric }?,
+    empty
+  }
 opener =
   
   ## groups together dateline, byline, salutation, and similar phrases appearing as a preliminary group at the start of a division, especially of a letter. [4.2. ]
@@ -1938,6 +2221,18 @@ opener =
      | signed
      | model.global)*,
     att.global.attributes,
+    empty
+  }
+orgName =
+  
+  ## (organization name) contains an organizational name. [13.2.2. ]
+  element orgName {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.datable.attributes,
+    att.editLike.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
     empty
   }
 orig =
@@ -2000,12 +2295,36 @@ pc =
     attribute pre { data.truthValue }?,
     empty
   }
+persName =
+  
+  ## (personal name) contains a proper noun or proper-noun phrase referring to a person, possibly including one or more of the person's forenames, surnames, honorifics, added names, etc. [13.2.1. ]
+  element persName {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.datable.attributes,
+    att.editLike.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
+    empty
+  }
 physDesc =
   
   ## (physical description) contains a full physical description of a manuscript or manuscript part, optionally subdivided using more specialized elements from the model.physDescPart class. [10.7. ]
   element physDesc {
     (model.pLike*, model.physDescPart_sequenceOptional),
     att.global.attributes,
+    empty
+  }
+placeName =
+  
+  ## contains an absolute or relative place name. [13.2.3. ]
+  element placeName {
+    macro.phraseSeq,
+    att.datable.attributes,
+    att.editLike.attributes,
+    att.global.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
     empty
   }
 postscript =
@@ -2018,6 +2337,66 @@ postscript =
      (model.divBottomPart, model.global*)*),
     att.global.attributes,
     empty
+  }
+profileDesc =
+  
+  ## (text-profile description) provides a detailed description of non-bibliographic aspects of a text, specifically the languages and sublanguages used, the situation in which it was produced, the participants and their setting. [2.4.  2.1.1. ]
+  element profileDesc {
+    model.profileDescPart*, att.global.attributes, empty
+  }
+ptr =
+  
+  ## (pointer) defines a pointer to another location. [3.6.  16.1. ]
+  element ptr {
+    empty
+    >> sch:pattern [
+         id = "oddbyexample-ptr-ptrAtts-constraint-2"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:ptr"
+           "\x{a}" ~
+           "               "
+           sch:report [
+             test = "@target and @cRef"
+             "Only one of the\x{a}" ~
+             "attributes @target and @cRef may be supplied on "
+             sch:name [ ]
+             "."
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
+    att.global.attributes,
+    att.pointing.attributes,
+    att.internetMedia.attributes,
+    att.typed.attributes,
+    att.declaring.attributes,
+    att.cReferencing.attributes,
+    empty
+  }
+publicationStmt =
+  
+  ## (publication statement) groups information concerning the publication or distribution of an electronic or other text. [2.2.4.  2.2. ]
+  element publicationStmt {
+    ((model.publicationStmtPart.agency,
+      model.publicationStmtPart.detail*)+
+     | model.pLike+),
+    att.global.attributes,
+    empty
+  }
+publisher =
+  
+  ## provides the name of the organization responsible for the publication or distribution of a bibliographic item. [3.11.2.4.  2.2.4. ]
+  element publisher { macro.phraseSeq, att.global.attributes, empty }
+pubPlace =
+  
+  ## (publication place) contains the name of the place where a bibliographic item was published. [3.11.2.4. ]
+  element pubPlace {
+    macro.phraseSeq, att.global.attributes, att.naming.attributes, empty
   }
 q =
   
@@ -2078,7 +2457,7 @@ ref =
   element ref {
     macro.paraContent
     >> sch:pattern [
-         id = "oddbyexample-ref-refAtts-constraint-2"
+         id = "oddbyexample-ref-refAtts-constraint-3"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2125,11 +2504,32 @@ roleDesc =
   
   ## (role description) describes a character's role in a drama. [7.1.4. ]
   element roleDesc { macro.phraseSeq, att.global.attributes, empty }
+roleName =
+  
+  ## contains a name component which indicates that the referent has a particular role or position in society, such as an official title or rank. [13.2.1. ]
+  element roleName {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
+    empty
+  }
 row =
   
   ## contains one row of a table. [14.1.1. ]
   element row {
     cell+, att.global.attributes, att.tableDecoration.attributes, empty
+  }
+rs =
+  
+  ## (referencing string) contains a general purpose name or referring string. [13.2.1.  3.5.1. ]
+  element rs {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.naming.attributes,
+    att.typed.attributes,
+    att.responsibility.attributes,
+    empty
   }
 s =
   
@@ -2140,33 +2540,53 @@ s =
       | model.global
       | formula
       | graphic
+      | code
+      | emph
       | foreign
       | gloss
+      | soCalled
       | term
       | title
       | hi
+      | caesura
       | address
       | date
+      | time
       | measure
+      | num
       | name
+      | orgName
+      | persName
+      | addName
+      | forename
+      | genName
+      | nameLink
+      | roleName
+      | surname
+      | country
+      | placeName
+      | idno
+      | rs
       | abbr
       | choice
       | expan
       | add
       | corr
       | del
+      | handShift
       | orig
       | reg
       | sic
       | supplied
       | unclear
+      | ptr
       | ref
       | c
       | pc
       | seg
       | w)*)
     >> sch:pattern [
-         id = "oddbyexample-s-noNestedS-constraint-3"
+         id = "oddbyexample-s-noNestedS-constraint-4"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2218,6 +2638,20 @@ signed =
   
   ## (signature) contains the closing salutation, etc., appended to a foreword, dedicatory epistle, or other division of a text. [4.2.2. ]
   element signed { macro.paraContent, att.global.attributes, empty }
+soCalled =
+  
+  ## contains a word or phrase for which the author or narrator indicates a disclaiming of responsibility, for example by the use of scare quotes or italics. [3.3.3. ]
+  element soCalled { macro.phraseSeq, att.global.attributes, empty }
+sourceDesc =
+  
+  ## (source description) describes the source from which an electronic text was derived or generated, typically a bibliographic description in the case of a digitized text, or a phrase such as "born digital" for a text which has no previous existence. [2.2.7. ]
+  element sourceDesc {
+    (model.pLike+
+     | (model.biblLike | model.sourceDescPart | model.listLike)+),
+    att.global.attributes,
+    att.declarable.attributes,
+    empty
+  }
 sp =
   
   ## (speech) contains an individual speech in a performance text, or a passage presented as such in a prose or verse text. [3.12.2.  3.12.  7.2.2. ]
@@ -2332,6 +2766,16 @@ supplied =
     }?,
     empty
   }
+surname =
+  
+  ## contains a family (inherited) name, as opposed to a given, baptismal, or nick name. [13.2.1. ]
+  element surname {
+    macro.phraseSeq,
+    att.global.attributes,
+    att.personal.attributes,
+    att.typed.attributes,
+    empty
+  }
 table =
   
   ## contains text displayed in tabular form, in rows and columns. [14.1.1. ]
@@ -2346,6 +2790,18 @@ table =
     
     ## (columns) indicates the number of columns in each row of the table.
     attribute cols { data.count }?,
+    empty
+  }
+teiHeader =
+  
+  ## (TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]
+  element teiHeader {
+    (fileDesc, model.teiHeaderPart*),
+    att.global.attributes,
+    
+    ## specifies the kind of document to which the header is attached, for example whether it is a corpus or individual text.
+    ## Sample values include: 1] text; 2] corpus
+    [ a:defaultValue = "text" ] attribute type { data.enumerated }?,
     empty
   }
 term =
@@ -2373,6 +2829,23 @@ term =
      (back, model.global*)?),
     att.global.attributes,
     att.declaring.attributes,
+    att.typed.attributes,
+    empty
+  }
+textClass =
+  
+  ## (text classification) groups information which describes the nature or topic of a text in terms of a standard classification scheme, thesaurus, etc. [2.4.3. ]
+  element textClass {
+    (keywords)*, att.global.attributes, att.declarable.attributes, empty
+  }
+time =
+  
+  ## contains a phrase defining a time of day in any format. [3.5.4. ]
+  element time {
+    (text | model.gLike | model.phrase | model.global)*,
+    att.global.attributes,
+    att.datable.attributes,
+    att.editLike.attributes,
     att.typed.attributes,
     empty
   }
@@ -2451,6 +2924,12 @@ titlePart =
       | xsd:Name
     }?,
     empty
+  }
+titleStmt =
+  
+  ## (title statement) groups information about the title of a work and those responsible for its content. [2.2.1.  2.2. ]
+  element titleStmt {
+    (title+, model.respLike*), att.global.attributes, empty
   }
 trailer =
   
