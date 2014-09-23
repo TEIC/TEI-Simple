@@ -2,7 +2,7 @@
 <xsl:stylesheet xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.tei-c.org/ns/1.0"
     xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="tei xs" version="2.0"
-    xpath-default-namespace="http://www.w3.org/1999/xhtml">
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0">
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
         <desc>
@@ -102,14 +102,16 @@
     </xsl:variable>
 
     <xsl:template match="/">
-        <xsl:for-each select="/*/tei:text">
-            <xsl:copy>
-                <xsl:apply-templates/>
-            </xsl:copy>
-        </xsl:for-each>
+      <xsl:apply-templates/>
     </xsl:template>
 
-    <xsl:template match="tei:teiHeader">
+    <xsl:template match="teiHeader"/>
+
+    <xsl:template match="TEI|teiCorpus">
+      <xsl:apply-templates/>
+    </xsl:template>
+
+    <xsl:template match="teiHeader" mode="old">
         <!-- cut out the teiHeader -->
 
         <teiHeader>
@@ -129,11 +131,11 @@
 
     <!-- merge into name, keep attributes and add @type with translated name of original elements -->
     <xsl:template
-        match="tei:persName | tei:orgName | tei:addName | tei:nameLink | tei:roleName | tei:forename | tei:surname | tei:genName | tei:country ">
+        match="persName | orgName | addName | nameLink | roleName | forename | surname | genName | country ">
         <xsl:variable name="lname" select="local-name()"/>
         <xsl:element name="name">
             <xsl:attribute name="type">
-                <xsl:value-of select="$transtable//tei:item[tei:in=$lname]/tei:out"/>
+                <xsl:value-of select="$transtable//item[in=$lname]/out"/>
             </xsl:attribute>
             <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
         </xsl:element>
@@ -141,10 +143,10 @@
 
 
     <!-- merge into element named according to transl table, keep attributes and add attribute with name of original elements -->
-    <xsl:template match="tei:code | tei:emph ">
+    <xsl:template match="code | emph ">
         <xsl:variable name="lname" select="local-name()"/>
-        <xsl:variable name="tname" select="$transtable//tei:item[tei:in=$lname]/tei:out"/>
-        <xsl:variable name="aname" select="$transtable//tei:item[tei:in=$lname]/tei:add"/>
+        <xsl:variable name="tname" select="$transtable//item[in=$lname]/out"/>
+        <xsl:variable name="aname" select="$transtable//item[in=$lname]/add"/>
 
         <xsl:element name="{$tname}">
             <xsl:if test="string($aname)">
@@ -158,10 +160,10 @@
 
 
     <!-- merge into empty element -->
-    <xsl:template match="tei:ptr | tei:caesura">
+    <xsl:template match="ptr | caesura">
         <xsl:variable name="lname" select="local-name()"/>
-        <xsl:variable name="tname" select="$transtable//tei:item[tei:in=$lname]/tei:out"/>
-        <xsl:variable name="aname" select="$transtable//tei:item[tei:in=$lname]/tei:add"/>
+        <xsl:variable name="tname" select="$transtable//item[in=$lname]/out"/>
+        <xsl:variable name="aname" select="$transtable//item[in=$lname]/add"/>
 
         <xsl:element name="{$tname}">
             <xsl:if test="string($aname)">
