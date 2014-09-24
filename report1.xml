@@ -50,7 +50,7 @@ Guidelines suited to the representation of early modern and modern books, and a 
 	<head>Objectives</head>
 	<list rend="ordered">
 	  <item>The highly constrained and prescriptive element subset of TEI Simple</item>
-	  <item>The processing model</item>
+	  <item>The processing model (Simple Processing Model: SPM)</item>
 	  <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM</item>
 	  <item>TEI-Performance Indicators</item>
 	  <item>Integration of TEI Simple into the TEI infrastructure </item>
@@ -58,15 +58,37 @@ Guidelines suited to the representation of early modern and modern books, and a 
       </div>
 
       <div>
+	<head>Deliverables</head>
+	<list rend="ordered">
+	  <item>A TEI ODD customization with the choices and constraints,  SPM notation, and RDF mapping</item>
+	  <item>Multi-stage tutorial documentation based on examples using page images and XML</item>
+	  <item>A revised set of TEI Stylesheets which implement the SPM</item>
+	</list>	
+	<p rend="box">These outputs will be offered to the TEI Technical Council to decide on how to best to incorporate and maintain them</p>
+      </div>
+
+      <div>
 	<head>The Simple schema: guidelines</head>
 	<list>
 	  <item><q>Simple</q> does not have to mean <q>Small</q></item>
-	  <item>The schema is based on analysis of existing usage</item>
+	  <item>The schema is based on analysis of existing usage from corpora
+	  <list>
+	    <item>EEBO TCP</item>
+	    <item>Oxford Text Archive TEI P5 files (includes ECCO)</item>
+	    <item>Deutsches Textarchiv</item>
+	    <item>Documenting the American South</item>
+	  </list>
+	  Expecting to also use French corpora</item>
 	  <item>Our biggest enemy is ambiguity for the encoder</item>
 	  <item>The target is encoding of the <gi>text</gi>; the <gi>teiHeader</gi> must simply conform to <ident>tei_all</ident></item>
 	</list>
       </div>
 
+      <div>
+	<head>Results</head>
+	<p>We isolate 104 elements which are needed in the body of a text</p>
+	<p>We divide them into </p>
+      </div>
     </body>
   </text>
 </TEI>

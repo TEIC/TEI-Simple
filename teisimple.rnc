@@ -6,7 +6,7 @@ namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-09-24T10:59:06Z. 
+# Schema generated from ODD source 2014-09-24T12:21:58Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -899,7 +899,7 @@ model.titlepagePart =
   | titlePart
 model.choicePart =
   abbr | corr | expan | orig | reg | seg | sic | unclear
-model.imprintPart = pubPlace
+model.imprintPart = publisher | pubPlace
 model.castItemPart = actor | role | roleDesc
 model.physDescPart_sequenceOptional = empty
 model.addressLike = address
@@ -1628,6 +1628,7 @@ docImprint =
      | model.phrase
      | pubPlace
      | docDate
+     | publisher
      | model.global)*,
     att.global.attributes,
     empty
@@ -2170,6 +2171,10 @@ postscript =
     att.global.attributes,
     empty
   }
+publisher =
+  
+  ## provides the name of the organization responsible for the publication or distribution of a bibliographic item. [3.11.2.4.  2.2.4. ]
+  element publisher { macro.phraseSeq, att.global.attributes, empty }
 pubPlace =
   
   ## (publication place) contains the name of the place where a bibliographic item was published. [3.11.2.4. ]

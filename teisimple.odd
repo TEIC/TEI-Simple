@@ -99,6 +99,7 @@
             <elementRef key="pc"/>
             <elementRef key="physDesc"/>
             <elementRef key="postscript"/>
+            <elementRef key="publisher"/>
             <elementRef key="pubPlace"/>
             <elementRef key="q"/>
             <elementRef key="quote"/>
