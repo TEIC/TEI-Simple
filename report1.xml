@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" 
+     xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+     xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+     xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" 
+     xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" 
+     xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple: summary</title>
+        <author>Sebastian Rahtz</author>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          <date>September 2014</date>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>University of Oxford</publisher>
+        <availability>
+          <p>Freely available for use and derivative works under a Creative Commons Attribution
+	      license.</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>born digital</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+	<head>TEI Simple</head>
+	<list>
+	  <item>Joint project between TEI Consortium, Mellon Foundation, Northeastern University, University of Nebraska-Lincoln, and the University of Oxford</item>
+	  <item>TEI Simple aims to define
+a new highly-constrained and prescriptive subset of the Text Encoding Initiative (TEI)
+Guidelines suited to the representation of early modern and modern books, and a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts</item>
+ <item>Project investigators are Martin Mueller (NW), Brian Pytlik Zillig (UNL), Sebastian Rahtz (Ox).</item>
+ <item>Project team includes Magdalena Turska (DiXiT project, Oxford), James Cummings (Oxford), Lou Burnard (Oxford)</item>
+ <item>Project runs from September 2014 to July 2015</item>
+	</list>
+      </div>
+
+      <div>
+	<head>Objectives</head>
+	<list rend="ordered">
+	  <item>The highly constrained and prescriptive element subset of TEI Simple</item>
+	  <item>The processing model</item>
+	  <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM</item>
+	  <item>TEI-Performance Indicators</item>
+	  <item>Integration of TEI Simple into the TEI infrastructure </item>
+	</list>
+      </div>
+
+      <div>
+	<head>The Simple schema: guidelines</head>
+	<list>
+	  <item><q>Simple</q> does not have to mean <q>Small</q></item>
+	  <item>The schema is based on analysis of existing usage</item>
+	  <item>Our biggest enemy is ambiguity for the encoder</item>
+	  <item>The target is encoding of the <gi>text</gi>; the <gi>teiHeader</gi> must simply conform to <ident>tei_all</ident></item>
+	</list>
+      </div>
+
+    </body>
+  </text>
+</TEI>
