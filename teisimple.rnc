@@ -6,7 +6,7 @@ namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-09-24T12:21:58Z. 
+# Schema generated from ODD source 2014-09-24T18:33:57Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -755,13 +755,15 @@ model.offsetLike_sequenceOptional = empty
 model.offsetLike_sequenceOptionalRepeatable = empty
 model.offsetLike_sequenceRepeatable = notAllowed
 model.pPart.msdesc = notAllowed
-model.pPart.editorial = abbr | choice | expan
-model.pPart.editorial_alternation = abbr | choice | expan
-model.pPart.editorial_sequence = abbr, choice, expan
-model.pPart.editorial_sequenceOptional = abbr?, choice?, expan?
+model.pPart.editorial = abbr | choice | expan | am | ex
+model.pPart.editorial_alternation = abbr | choice | expan | am | ex
+model.pPart.editorial_sequence = abbr, choice, expan, am, ex
+model.pPart.editorial_sequenceOptional =
+  abbr?, choice?, expan?, am?, ex?
 model.pPart.editorial_sequenceOptionalRepeatable =
-  abbr*, choice*, expan*
-model.pPart.editorial_sequenceRepeatable = abbr+, choice+, expan+
+  abbr*, choice*, expan*, am*, ex*
+model.pPart.editorial_sequenceRepeatable =
+  abbr+, choice+, expan+, am+, ex+
 model.pPart.transcriptional =
   add | corr | del | handShift | orig | reg | sic | supplied | unclear
 model.pPart.transcriptional_alternation =
@@ -788,12 +790,12 @@ model.oddDecl_sequenceOptionalRepeatable = empty
 model.oddDecl_sequenceRepeatable = notAllowed
 model.phrase.xml = notAllowed
 model.specDescLike = notAllowed
-model.biblLike = bibl | listBibl | msDesc
-model.biblLike_alternation = bibl | listBibl | msDesc
-model.biblLike_sequence = bibl, listBibl, msDesc
-model.biblLike_sequenceOptional = bibl?, listBibl?, msDesc?
-model.biblLike_sequenceOptionalRepeatable = bibl*, listBibl*, msDesc*
-model.biblLike_sequenceRepeatable = bibl+, listBibl+, msDesc+
+model.biblLike = bibl | listBibl
+model.biblLike_alternation = bibl | listBibl
+model.biblLike_sequence = bibl, listBibl
+model.biblLike_sequenceOptional = bibl?, listBibl?
+model.biblLike_sequenceOptionalRepeatable = bibl*, listBibl*
+model.biblLike_sequenceRepeatable = bibl+, listBibl+
 model.headLike = head
 model.headLike_alternation = head
 model.headLike_sequence = head
@@ -898,10 +900,9 @@ model.titlepagePart =
   | imprimatur
   | titlePart
 model.choicePart =
-  abbr | corr | expan | orig | reg | seg | sic | unclear
+  abbr | corr | expan | orig | reg | seg | sic | unclear | am | ex
 model.imprintPart = publisher | pubPlace
 model.castItemPart = actor | role | roleDesc
-model.physDescPart_sequenceOptional = empty
 model.addressLike = address
 model.addressLike_alternation = address
 model.addressLike_sequence = address
@@ -941,8 +942,7 @@ model.global =
   | model.noteLike
   | model.global.edit
   | figure
-model.biblPart =
-  model.respLike | model.imprintPart | bibl | msIdentifier
+model.biblPart = model.respLike | model.imprintPart | bibl
 model.frontPart = model.frontPart.drama | titlePage
 model.addrPart = model.nameLike | addrLine
 model.pPart.data =
@@ -1975,44 +1975,6 @@ milestone =
     att.breaking.attributes,
     empty
   }
-msDesc =
-  
-  ## (manuscript description) contains a description of a single identifiable manuscript or other text-bearing object. [10.1. ]
-  element msDesc {
-    (msIdentifier, model.headLike*, (model.pLike+ | physDesc?)),
-    att.global.attributes,
-    att.sortable.attributes,
-    att.typed.attributes,
-    att.declaring.attributes,
-    empty
-  }
-msIdentifier =
-  
-  ## (manuscript identifier) contains the information required to identify the manuscript being described. [10.4. ]
-  element msIdentifier {
-    (model.placeNamePart_sequenceOptional, empty*)
-    >> sch:pattern [
-         id = "oddbyexample-msIdentifier-msId_minimal-constraint-1"
-         "\x{a}" ~
-         "            "
-         sch:rule [
-           context = "tei:msIdentifier"
-           "\x{a}" ~
-           "               "
-           sch:report [
-             test =
-               "not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')"
-             "An msIdentifier must contain either a repository or location of some type, or a manuscript name"
-           ]
-           "\x{a}" ~
-           "            "
-         ]
-         "\x{a}" ~
-         "         "
-       ],
-    att.global.attributes,
-    empty
-  }
 name =
   
   ## (name, proper noun) contains a proper noun or noun phrase. [3.5.1. ]
@@ -2152,14 +2114,6 @@ pc =
     attribute pre { data.truthValue }?,
     empty
   }
-physDesc =
-  
-  ## (physical description) contains a full physical description of a manuscript or manuscript part, optionally subdivided using more specialized elements from the model.physDescPart class. [10.7. ]
-  element physDesc {
-    (model.pLike*, model.physDescPart_sequenceOptional),
-    att.global.attributes,
-    empty
-  }
 postscript =
   
   ## contains a postscript, e.g. to a letter. [4.2. ]
@@ -2240,7 +2194,7 @@ ref =
   element ref {
     macro.paraContent
     >> sch:pattern [
-         id = "oddbyexample-ref-refAtts-constraint-2"
+         id = "oddbyexample-ref-refAtts-constraint-1"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2324,7 +2278,9 @@ s =
       | name
       | rs
       | abbr
+      | am
       | choice
+      | ex
       | expan
       | add
       | corr
@@ -2341,7 +2297,7 @@ s =
       | seg
       | w)*)
     >> sch:pattern [
-         id = "oddbyexample-s-noNestedS-constraint-3"
+         id = "oddbyexample-s-noNestedS-constraint-2"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2702,5 +2658,21 @@ w =
     ## provides a pointer to a definition of the lemma for the word, for example in an online lexicon.
     attribute lemmaRef { data.pointer }?,
     empty
+  }
+am =
+  
+  ## (abbreviation marker) contains a sequence of letters or signs present in an abbreviation which are omitted or replaced in the expanded form of the abbreviation. [11.3.1.2. ]
+  element am {
+    (text | model.gLike | model.pPart.transcriptional)*,
+    att.global.attributes,
+    att.typed.attributes,
+    att.editLike.attributes,
+    empty
+  }
+ex =
+  
+  ## (editorial expansion) contains a sequence of letters added by an editor or transcriber when expanding an abbreviation. [11.3.1.2. ]
+  element ex {
+    macro.xtext, att.global.attributes, att.editLike.attributes, empty
   }
 start = TEI

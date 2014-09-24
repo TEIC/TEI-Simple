@@ -27,10 +27,24 @@
 	    <xsl:for-each-group select="//row[position()&gt;1 and
 					not(cell[1]='')]"
 				group-by="normalize-space(cell[10])">
+	      <xsl:sort select="normalize-space(cell[10])"/>
 	      <xsl:sort select="cell[1]"/>
 	      <label><xsl:value-of
 	      select="current-grouping-key()"/></label>
-	      <item><xsl:value-of  select="current-group()/cell[1]"/></item>
+	      <item>
+		<xsl:for-each select="current-group()">
+		  <xsl:choose>
+		    <xsl:when test="contains(cell[9],'header')"/>
+		    <xsl:when test="contains(cell[11],'KILL')"/>
+		    <xsl:when test="contains(cell[11],'merge')"/>
+		    <xsl:otherwise>
+		      <xsl:value-of
+			  select="normalize-space(cell[1])"/>
+		      <xsl:text> </xsl:text>
+		    </xsl:otherwise>
+		  </xsl:choose>
+		</xsl:for-each>
+	      </item>
 	    </xsl:for-each-group>
 	</list>
          <schemaSpec ident="oddbyexample" start="TEI teiCorpus">

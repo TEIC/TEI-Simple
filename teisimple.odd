@@ -16,22 +16,24 @@
    <text>
       <body>
          <list type="gloss">
-            <label>editorial</label>
-            <item>abbr  add  choice corr del desc expan gap handShift orig reg sic space supplied unclear </item>
-            <label>castlist</label>
-            <item>actor castGroup castItem castList role roleDesc</item>
-            <label>name</label>
-            <item>addName country forename genName nameLink orgName persName placeName roleName surname</item>
-            <label>wrapper</label>
-            <item>argument  byline  closer  dateline  epigraph  opener  postscript  salute  signed  trailer </item>
             <label/>
-            <item>author ab address addrLine addSpan anchor back  bibl  body  caesura cb cell  cit code date  div emph figDesc  figure  floatingText foreign formula front  fw g gloss graphic group  head  hi  item  l  label  lb lg  list  listBibl measure milestone name note  num p  pb ptr q  quote ref row  rs seg soCalled sp  speaker  spGrp stage  table  TEI term text  time title</item>
+            <item>author ab address addrLine anchor back bibl body cb cit date div figDesc figure floatingText foreign formula front fw g graphic group head hi item l label lb lg list listBibl measure milestone note num p pb q quote ref rs seg sp speaker spGrp stage TEI text time title </item>
+            <label>castlist</label>
+            <item>actor castGroup castItem castList role roleDesc </item>
+            <label>editorial</label>
+            <item>abbr add addSpan choice corr del desc expan gap handShift orig reg sic space supplied unclear am ex </item>
             <label>header</label>
-            <item>biblFull change editorialDecl encodingDesc extent fileDesc idno keywords licence listChange msDesc msIdentifier physDesc profileDesc publicationStmt publisher pubPlace sourceDesc teiHeader textClass titleStmt</item>
+            <item/>
             <label>linguistic</label>
-            <item>c pc s w</item>
+            <item>c pc s w </item>
+            <label>name</label>
+            <item>name </item>
+            <label>table</label>
+            <item>cell row table </item>
             <label>titlepage</label>
-            <item>docAuthor docDate docEdition docImprint docTitle imprimatur titlePage titlePart</item>
+            <item>docAuthor docDate docEdition docImprint docTitle imprimatur publisher pubPlace titlePage titlePart </item>
+            <label>wrapper</label>
+            <item>argument byline closer dateline epigraph opener postscript salute signed trailer </item>
          </list>
          <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
             <moduleRef key="tei"/>
@@ -105,8 +107,6 @@
             <elementRef key="listBibl"/>
             <elementRef key="measure"/>
             <elementRef key="milestone"/>
-            <elementRef key="msDesc"/>
-            <elementRef key="msIdentifier"/>
             <elementRef key="name"/>
             <elementRef key="note"/>
             <elementRef key="num"/>
@@ -115,7 +115,6 @@
             <elementRef key="p"/>
             <elementRef key="pb"/>
             <elementRef key="pc"/>
-            <elementRef key="physDesc"/>
             <elementRef key="postscript"/>
             <elementRef key="publisher"/>
             <elementRef key="pubPlace"/>
@@ -148,6 +147,8 @@
             <elementRef key="trailer"/>
             <elementRef key="unclear"/>
             <elementRef key="w"/>
+            <elementRef key="am"/>
+            <elementRef key="ex"/>
          </schemaSpec>
       </body>
    </text>

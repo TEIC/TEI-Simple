@@ -36,7 +36,7 @@
       <div>
 	<head>TEI Simple</head>
 	<list>
-	  <item>Joint project between TEI Consortium, Mellon Foundation, Northeastern University, University of Nebraska-Lincoln, and the University of Oxford</item>
+	  <item>Joint project between TEI Consortium, Mellon Foundation, Northwestern University, University of Nebraska-Lincoln, and the University of Oxford</item>
 	  <item>TEI Simple aims to define
 a new highly-constrained and prescriptive subset of the Text Encoding Initiative (TEI)
 Guidelines suited to the representation of early modern and modern books, and a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts</item>
@@ -116,14 +116,16 @@ Guidelines suited to the representation of early modern and modern books, and a 
             <label>castlist</label>
             <item>actor castGroup castItem castList role roleDesc</item>
             <label>name</label>
-            <item>addName country forename genName nameLink orgName persName placeName roleName surname</item>
+            <item>name</item>
             <label>wrapper</label>
             <item>argument  byline  closer  dateline  epigraph  opener  postscript  salute  signed  trailer </item>
             <label>header</label>
-            <item>biblFull change editorialDecl encodingDesc extent fileDesc idno keywords licence listChange msDesc msIdentifier physDesc profileDesc publicationStmt publisher pubPlace sourceDesc teiHeader textClass titleStmt</item>
+            <item>teiHeader</item>
             <label>linguistic</label>
             <item>c pc s w</item>
-	 </list>
+            <label>titlepage</label>
+            <item>docAuthor docDate docEdition docImprint docTitle imprimatur titlePage titlePart</item>
+         </list>
       </div>
 
       <div>

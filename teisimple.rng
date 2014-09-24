@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-09-24T12:21:58Z. 
+Schema generated from ODD source 2014-09-24T18:33:57Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -1345,6 +1345,8 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="abbr"/>
          <ref name="choice"/>
          <ref name="expan"/>
+         <ref name="am"/>
+         <ref name="ex"/>
       </choice>
    </define>
    <define name="model.pPart.editorial_alternation">
@@ -1352,12 +1354,16 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="abbr"/>
          <ref name="choice"/>
          <ref name="expan"/>
+         <ref name="am"/>
+         <ref name="ex"/>
       </choice>
    </define>
    <define name="model.pPart.editorial_sequence">
       <ref name="abbr"/>
       <ref name="choice"/>
       <ref name="expan"/>
+      <ref name="am"/>
+      <ref name="ex"/>
    </define>
    <define name="model.pPart.editorial_sequenceOptional">
       <optional>
@@ -1368,6 +1374,12 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </optional>
       <optional>
          <ref name="expan"/>
+      </optional>
+      <optional>
+         <ref name="am"/>
+      </optional>
+      <optional>
+         <ref name="ex"/>
       </optional>
    </define>
    <define name="model.pPart.editorial_sequenceOptionalRepeatable">
@@ -1380,6 +1392,12 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <zeroOrMore>
          <ref name="expan"/>
       </zeroOrMore>
+      <zeroOrMore>
+         <ref name="am"/>
+      </zeroOrMore>
+      <zeroOrMore>
+         <ref name="ex"/>
+      </zeroOrMore>
    </define>
    <define name="model.pPart.editorial_sequenceRepeatable">
       <oneOrMore>
@@ -1390,6 +1408,12 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </oneOrMore>
       <oneOrMore>
          <ref name="expan"/>
+      </oneOrMore>
+      <oneOrMore>
+         <ref name="am"/>
+      </oneOrMore>
+      <oneOrMore>
+         <ref name="ex"/>
       </oneOrMore>
    </define>
    <define name="model.pPart.transcriptional">
@@ -1576,20 +1600,17 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <choice>
          <ref name="bibl"/>
          <ref name="listBibl"/>
-         <ref name="msDesc"/>
       </choice>
    </define>
    <define name="model.biblLike_alternation">
       <choice>
          <ref name="bibl"/>
          <ref name="listBibl"/>
-         <ref name="msDesc"/>
       </choice>
    </define>
    <define name="model.biblLike_sequence">
       <ref name="bibl"/>
       <ref name="listBibl"/>
-      <ref name="msDesc"/>
    </define>
    <define name="model.biblLike_sequenceOptional">
       <optional>
@@ -1597,9 +1618,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </optional>
       <optional>
          <ref name="listBibl"/>
-      </optional>
-      <optional>
-         <ref name="msDesc"/>
       </optional>
    </define>
    <define name="model.biblLike_sequenceOptionalRepeatable">
@@ -1609,9 +1627,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <zeroOrMore>
          <ref name="listBibl"/>
       </zeroOrMore>
-      <zeroOrMore>
-         <ref name="msDesc"/>
-      </zeroOrMore>
    </define>
    <define name="model.biblLike_sequenceRepeatable">
       <oneOrMore>
@@ -1619,9 +1634,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </oneOrMore>
       <oneOrMore>
          <ref name="listBibl"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="msDesc"/>
       </oneOrMore>
    </define>
    <define name="model.headLike">
@@ -2085,6 +2097,8 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="seg"/>
          <ref name="sic"/>
          <ref name="unclear"/>
+         <ref name="am"/>
+         <ref name="ex"/>
       </choice>
    </define>
    <define name="model.imprintPart">
@@ -2099,9 +2113,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="role"/>
          <ref name="roleDesc"/>
       </choice>
-   </define>
-   <define name="model.physDescPart_sequenceOptional">
-      <empty/>
    </define>
    <define name="model.addressLike">
       <choice>
@@ -2209,7 +2220,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="model.respLike"/>
          <ref name="model.imprintPart"/>
          <ref name="bibl"/>
-         <ref name="msIdentifier"/>
       </choice>
    </define>
    <define name="model.frontPart">
@@ -3890,54 +3900,6 @@ Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syl
          <empty/>
       </element>
    </define>
-   <define name="msDesc">
-      <element name="msDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(manuscript description) contains a description of a single identifiable manuscript or other text-bearing object. [10.1. ]</a:documentation>
-         <group>
-            <ref name="msIdentifier"/>
-            <zeroOrMore>
-               <ref name="model.headLike"/>
-            </zeroOrMore>
-            <choice>
-               <oneOrMore>
-                  <ref name="model.pLike"/>
-               </oneOrMore>
-               <group>
-                  <optional>
-                     <ref name="physDesc"/>
-                  </optional>
-               </group>
-            </choice>
-         </group>
-         <ref name="att.global.attributes"/>
-         <ref name="att.sortable.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <ref name="att.declaring.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="msIdentifier">
-      <element name="msIdentifier">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(manuscript identifier) contains the information required to identify the manuscript being described. [10.4. ]</a:documentation>
-         <group>
-            <group>
-               <ref name="model.placeNamePart_sequenceOptional"/>
-            </group>
-            <zeroOrMore>
-               <empty/>
-            </zeroOrMore>
-         </group>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-msIdentifier-msId_minimal-constraint-1">
-            <rule context="tei:msIdentifier">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                       test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">An msIdentifier must contain either a repository or location of some type, or a manuscript name</report>
-            </rule>
-         </pattern>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
    <define name="name">
       <element name="name">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(name, proper noun) contains a proper noun or noun phrase. [3.5.1. ]</a:documentation>
@@ -4106,21 +4068,6 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</a
          <empty/>
       </element>
    </define>
-   <define name="physDesc">
-      <element name="physDesc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(physical description) contains a full physical description of a manuscript or manuscript part, optionally subdivided using more specialized elements from the model.physDescPart class. [10.7. ]</a:documentation>
-         <group>
-            <zeroOrMore>
-               <ref name="model.pLike"/>
-            </zeroOrMore>
-            <group>
-               <ref name="model.physDescPart_sequenceOptional"/>
-            </group>
-         </group>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
    <define name="postscript">
       <element name="postscript">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a postscript, e.g. to a letter. [4.2. ]</a:documentation>
@@ -4222,7 +4169,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-ref-refAtts-constraint-2">
+                  id="oddbyexample-ref-refAtts-constraint-1">
             <rule context="tei:ref">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
@@ -4307,7 +4254,9 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
                <ref name="name"/>
                <ref name="rs"/>
                <ref name="abbr"/>
+               <ref name="am"/>
                <ref name="choice"/>
+               <ref name="ex"/>
                <ref name="expan"/>
                <ref name="add"/>
                <ref name="corr"/>
@@ -4326,7 +4275,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-s-noNestedS-constraint-3">
+                  id="oddbyexample-s-noNestedS-constraint-2">
             <rule context="tei:s">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="tei:s">You may not nest one s element within
       another: use seg instead</report>
@@ -4840,6 +4789,31 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
                <ref name="data.pointer"/>
             </attribute>
          </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="am">
+      <element name="am">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(abbreviation marker) contains a sequence of letters or signs present in an abbreviation which are omitted or replaced in the expanded form of the abbreviation. [11.3.1.2. ]</a:documentation>
+         <zeroOrMore>
+            <choice>
+               <text/>
+               <ref name="model.gLike"/>
+               <ref name="model.pPart.transcriptional"/>
+            </choice>
+         </zeroOrMore>
+         <ref name="att.global.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <ref name="att.editLike.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="ex">
+      <element name="ex">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(editorial expansion) contains a sequence of letters added by an editor or transcriber when expanding an abbreviation. [11.3.1.2. ]</a:documentation>
+         <ref name="macro.xtext"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.editLike.attributes"/>
          <empty/>
       </element>
    </define>
