@@ -118,7 +118,7 @@
 
     <!-- merge into name, keep attributes and add @type with translated name of original elements -->
     <xsl:template
-        match="persName | orgName | addName | nameLink | roleName | forename | surname | genName | country ">
+        match="persName | orgName | addName | nameLink | roleName | forename | surname | genName | country | placeName">
         <xsl:variable name="lname" select="local-name()"/>
         <xsl:element name="name">
             <xsl:attribute name="type">
