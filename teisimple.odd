@@ -72,7 +72,6 @@
             <elementRef key="fw"/>
             <elementRef key="g"/>
             <elementRef key="gap"/>
-            <elementRef key="gloss"/>
             <elementRef key="graphic"/>
             <elementRef key="group"/>
             <elementRef key="handShift"/>
@@ -122,7 +121,6 @@
             <elementRef key="supplied"/>
             <elementRef key="table"/>
             <elementRef key="TEI"/>
-            <elementRef key="term"/>
             <elementRef key="text"/>
             <elementRef key="time"/>
             <elementRef key="title"/>

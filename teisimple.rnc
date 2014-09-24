@@ -6,7 +6,7 @@ namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-09-23T21:19:35Z. 
+# Schema generated from ODD source 2014-09-24T10:59:06Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -722,13 +722,12 @@ model.hiLike_sequence = hi
 model.hiLike_sequenceOptional = hi?
 model.hiLike_sequenceOptionalRepeatable = hi*
 model.hiLike_sequenceRepeatable = hi+
-model.emphLike = foreign | gloss | term | title
-model.emphLike_alternation = foreign | gloss | term | title
-model.emphLike_sequence = foreign, gloss, term, title
-model.emphLike_sequenceOptional = foreign?, gloss?, term?, title?
-model.emphLike_sequenceOptionalRepeatable =
-  foreign*, gloss*, term*, title*
-model.emphLike_sequenceRepeatable = foreign+, gloss+, term+, title+
+model.emphLike = foreign | title
+model.emphLike_alternation = foreign | title
+model.emphLike_sequence = foreign, title
+model.emphLike_sequenceOptional = foreign?, title?
+model.emphLike_sequenceOptionalRepeatable = foreign*, title*
+model.emphLike_sequenceRepeatable = foreign+, title+
 model.highlighted = model.hiLike | model.emphLike
 model.dateLike = date | time
 model.dateLike_alternation = date | time
@@ -1768,19 +1767,6 @@ gap =
     attribute agent { data.enumerated }?,
     empty
   }
-gloss =
-  
-  ## identifies a phrase or word used to provide a gloss or definition for some other word or phrase. [3.3.4.  22.4.1. ]
-  element gloss {
-    macro.phraseSeq,
-    att.global.attributes,
-    att.declaring.attributes,
-    att.translatable.attributes,
-    att.typed.attributes,
-    att.pointing.attributes,
-    att.cReferencing.attributes,
-    empty
-  }
 graphic =
   
   ## indicates the location of an inline graphic, illustration, or figure. [3.9. ]
@@ -2323,8 +2309,6 @@ s =
       | formula
       | graphic
       | foreign
-      | gloss
-      | term
       | title
       | hi
       | address
@@ -2550,20 +2534,6 @@ TEI =
     
     ## specifies the major version number of the TEI Guidelines against which this document is valid.
     attribute version { data.version }?,
-    empty
-  }
-term =
-  
-  ## contains a single-word, multi-word, or symbolic designation which is regarded as a technical term. [3.3.4. ]
-  element term {
-    macro.phraseSeq,
-    att.global.attributes,
-    att.declaring.attributes,
-    att.pointing.attributes,
-    att.typed.attributes,
-    att.canonical.attributes,
-    att.sortable.attributes,
-    att.cReferencing.attributes,
     empty
   }
 \text =

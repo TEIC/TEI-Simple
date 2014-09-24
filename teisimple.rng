@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-09-23T21:19:35Z. 
+Schema generated from ODD source 2014-09-24T10:59:06Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -1172,34 +1172,22 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
    <define name="model.emphLike">
       <choice>
          <ref name="foreign"/>
-         <ref name="gloss"/>
-         <ref name="term"/>
          <ref name="title"/>
       </choice>
    </define>
    <define name="model.emphLike_alternation">
       <choice>
          <ref name="foreign"/>
-         <ref name="gloss"/>
-         <ref name="term"/>
          <ref name="title"/>
       </choice>
    </define>
    <define name="model.emphLike_sequence">
       <ref name="foreign"/>
-      <ref name="gloss"/>
-      <ref name="term"/>
       <ref name="title"/>
    </define>
    <define name="model.emphLike_sequenceOptional">
       <optional>
          <ref name="foreign"/>
-      </optional>
-      <optional>
-         <ref name="gloss"/>
-      </optional>
-      <optional>
-         <ref name="term"/>
       </optional>
       <optional>
          <ref name="title"/>
@@ -1210,24 +1198,12 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="foreign"/>
       </zeroOrMore>
       <zeroOrMore>
-         <ref name="gloss"/>
-      </zeroOrMore>
-      <zeroOrMore>
-         <ref name="term"/>
-      </zeroOrMore>
-      <zeroOrMore>
          <ref name="title"/>
       </zeroOrMore>
    </define>
    <define name="model.emphLike_sequenceRepeatable">
       <oneOrMore>
          <ref name="foreign"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="gloss"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="term"/>
       </oneOrMore>
       <oneOrMore>
          <ref name="title"/>
@@ -3602,19 +3578,6 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
          <empty/>
       </element>
    </define>
-   <define name="gloss">
-      <element name="gloss">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">identifies a phrase or word used to provide a gloss or definition for some other word or phrase. [3.3.4.  22.4.1. ]</a:documentation>
-         <ref name="macro.phraseSeq"/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.declaring.attributes"/>
-         <ref name="att.translatable.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <ref name="att.pointing.attributes"/>
-         <ref name="att.cReferencing.attributes"/>
-         <empty/>
-      </element>
-   </define>
    <define name="graphic">
       <element name="graphic">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the location of an inline graphic, illustration, or figure. [3.9. ]</a:documentation>
@@ -4324,8 +4287,6 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
                <ref name="formula"/>
                <ref name="graphic"/>
                <ref name="foreign"/>
-               <ref name="gloss"/>
-               <ref name="term"/>
                <ref name="title"/>
                <ref name="hi"/>
                <ref name="address"/>
@@ -4642,20 +4603,6 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
                <ref name="data.version"/>
             </attribute>
          </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="term">
-      <element name="term">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a single-word, multi-word, or symbolic designation which is regarded as a technical term. [3.3.4. ]</a:documentation>
-         <ref name="macro.phraseSeq"/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.declaring.attributes"/>
-         <ref name="att.pointing.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <ref name="att.canonical.attributes"/>
-         <ref name="att.sortable.attributes"/>
-         <ref name="att.cReferencing.attributes"/>
          <empty/>
       </element>
    </define>

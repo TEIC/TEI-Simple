@@ -37,9 +37,9 @@
 	    </elementSpec>
 	    <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
 	      <xsl:choose>
-	      <xsl:when test="contains(cell[5],'header')"/>
-	      <xsl:when test="contains(cell[9],'KILL')"/>
-	      <xsl:when test="contains(cell[9],'merge')"/>
+	      <xsl:when test="contains(cell[9],'header')"/>
+	      <xsl:when test="contains(cell[11],'KILL')"/>
+	      <xsl:when test="contains(cell[11],'merge')"/>
 	      <xsl:otherwise>
 		<elementRef key="{normalize-space(cell[1])}"/>
 	      </xsl:otherwise>
