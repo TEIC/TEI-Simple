@@ -98,6 +98,11 @@
                 <in>ptr</in>
                 <out>ref</out>
             </item>
+            <item>
+                <in>term</in>
+                <out>seg</out>
+                <add>type</add>
+            </item>
         </list>
     </xsl:variable>
 
@@ -125,7 +130,7 @@
 
 
     <!-- merge into element named according to transl table, keep attributes and add attribute with name of original elements -->
-    <xsl:template match="code | emph ">
+    <xsl:template match="code | emph | term">
         <xsl:variable name="lname" select="local-name()"/>
         <xsl:variable name="tname" select="$transtable//item[in=$lname]/out"/>
         <xsl:variable name="aname" select="$transtable//item[in=$lname]/add"/>
@@ -156,6 +161,30 @@
             <xsl:apply-templates select="@*"/>
         </xsl:element>
     </xsl:template>
+
+    <xsl:template match="@rend">
+        <xsl:if test="not(../@rendition)">
+        <xsl:attribute name="rendition">
+            <xsl:text>simple:</xsl:text><xsl:value-of select="."/>
+        </xsl:attribute>
+        </xsl:if>
+    </xsl:template>
+    
+    <xsl:template match="@rendition">
+        <xsl:choose>
+            <xsl:when test="not(../@rend)">
+                <xsl:copy-of select="."/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- merge rend and rendition -->
+                <xsl:attribute name="rendition">
+                    <xsl:value-of select="."/>
+                    <xsl:text>simple:</xsl:text><xsl:value-of select="../@rend"/>
+                </xsl:attribute>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
 
     <xsl:template match="@*|text()|comment()|processing-instruction()">
         <xsl:copy-of select="."/>
