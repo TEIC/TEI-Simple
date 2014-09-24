@@ -23,6 +23,16 @@
    </teiHeader>
    <text>
       <body>
+	<list type="gloss">
+	    <xsl:for-each-group select="//row[position()&gt;1 and
+					not(cell[1]='')]"
+				group-by="normalize-space(cell[10])">
+	      <xsl:sort select="cell[1]"/>
+	      <label><xsl:value-of
+	      select="current-grouping-key()"/></label>
+	      <item><xsl:value-of  select="current-group()/cell[1]"/></item>
+	    </xsl:for-each-group>
+	</list>
          <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
             <moduleRef key="tei"/>
 	    <classRef key="att.global.facs"/>

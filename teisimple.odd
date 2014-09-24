@@ -15,6 +15,24 @@
    </teiHeader>
    <text>
       <body>
+         <list type="gloss">
+            <label>editorial</label>
+            <item>abbr  add  choice corr del desc expan gap handShift orig reg sic space supplied unclear </item>
+            <label>castlist</label>
+            <item>actor castGroup castItem castList role roleDesc</item>
+            <label>name</label>
+            <item>addName country forename genName nameLink orgName persName placeName roleName surname</item>
+            <label>wrapper</label>
+            <item>argument  byline  closer  dateline  epigraph  opener  postscript  salute  signed  trailer </item>
+            <label/>
+            <item>author ab address addrLine addSpan anchor back  bibl  body  caesura cb cell  cit code date  div emph figDesc  figure  floatingText foreign formula front  fw g gloss graphic group  head  hi  item  l  label  lb lg  list  listBibl measure milestone name note  num p  pb ptr q  quote ref row  rs seg soCalled sp  speaker  spGrp stage  table  TEI term text  time title</item>
+            <label>header</label>
+            <item>biblFull change editorialDecl encodingDesc extent fileDesc idno keywords licence listChange msDesc msIdentifier physDesc profileDesc publicationStmt publisher pubPlace sourceDesc teiHeader textClass titleStmt</item>
+            <label>linguistic</label>
+            <item>c pc s w</item>
+            <label>titlepage</label>
+            <item>docAuthor docDate docEdition docImprint docTitle imprimatur titlePage titlePart</item>
+         </list>
          <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
             <moduleRef key="tei"/>
             <classRef key="att.global.facs"/>

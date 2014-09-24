@@ -80,14 +80,60 @@ Guidelines suited to the representation of early modern and modern books, and a 
 	  </list>
 	  Expecting to also use French corpora</item>
 	  <item>Our biggest enemy is ambiguity for the encoder</item>
-	  <item>The target is encoding of the <gi>text</gi>; the <gi>teiHeader</gi> must simply conform to <ident>tei_all</ident></item>
+	  <item>The target is encoding of the <gi>text</gi>; the <gi>teiHeader</gi> and any <gi>sourceDoc</gi> or <gi>facsimile</gi> must simply conform to <ident>tei_all</ident></item>
 	</list>
       </div>
 
       <div>
 	<head>Results</head>
 	<p>We isolate 104 elements which are needed in the body of a text</p>
-	<p>We divide them into </p>
+	<p>We divide them into groups by function, mainly for documentation purposes</p>
+	<p>We start analyzing attribute usage</p>
+      </div>
+
+
+      <div>
+	<head>@rend and @type proposal</head>
+	<list>
+	  <item>We will <emph>not</emph> prescribe <att>type</att>,
+	  but instead publish a separate suggested taxonomy for
+	  possible interpretative use</item>
+	  <item>We will preclude use of <att>rend</att> and <att>style</att></item>
+	  <item>We will produce a closed list of values for <att>rendition</att> using a pseudo-protocol of "simple:"
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+	    <p rendition="simple:bold">This is quite bold, but this <hi rendition="simple:sup">is superscript</hi></p>
+	  </egXML>
+</item>
+	</list>
+	<p rend="box">Do we have a single set of values for <att>rendition</att>, or constrained per element?</p>
+      </div>
+
+      <div>
+	<head>Element groups (1)</head>
+         <list type="gloss">
+            <label>editorial</label>
+            <item>abbr  add  choice corr del desc expan gap handShift orig reg sic space supplied unclear </item>
+            <label>castlist</label>
+            <item>actor castGroup castItem castList role roleDesc</item>
+            <label>name</label>
+            <item>addName country forename genName nameLink orgName persName placeName roleName surname</item>
+            <label>wrapper</label>
+            <item>argument  byline  closer  dateline  epigraph  opener  postscript  salute  signed  trailer </item>
+            <label>header</label>
+            <item>biblFull change editorialDecl encodingDesc extent fileDesc idno keywords licence listChange msDesc msIdentifier physDesc profileDesc publicationStmt publisher pubPlace sourceDesc teiHeader textClass titleStmt</item>
+            <label>linguistic</label>
+            <item>c pc s w</item>
+	 </list>
+      </div>
+
+      <div>
+	<head>Element groups (2)</head>
+         <list type="gloss">
+            <label>titlepage</label>
+            <item>docAuthor docDate docEdition docImprint docTitle imprimatur titlePage titlePart</item>
+            <label>(general)</label>
+            <item>author ab address addrLine addSpan anchor back  bibl  body  caesura cb cell  cit code date  div emph figDesc  figure  floatingText foreign formula front  fw g gloss graphic group  head  hi  item  l  label  lb lg  list  listBibl measure milestone name note  num p  pb ptr q  quote ref row  rs seg soCalled sp  speaker  spGrp stage  table  TEI term text  time title</item>
+         </list>
       </div>
     </body>
   </text>
