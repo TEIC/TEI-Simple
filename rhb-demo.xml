@@ -1,0 +1,93 @@
+<schemaSpec ident="rhb">
+<!--
+Defaults:
+   * if no <process> for any given mode, emit textual content
+   * if no @xpath, means any use of this element
+   * <process> rules are additive, not alternates
+   * @style defaults to element name (equates to HTML @class or Word style)
+   * @mode defaults to 'render' (????)
+   * appearance overridden by @rendition and @style
+   *  <rendition> override remote CSS
+-->
+<rendition xml:id="altdate" scheme="css">
+  color: red;
+</rendition>
+
+<elementSpec ident="date">
+<process
+    xpath="not(parent::person) and (@when or @when-custom)"
+    name="makeMarginalNote(if (@when-custom) then @when-custom else @when)"
+    mode="render"
+    class="altdate"/>
+
+<process name="makeInline" content="." mode="render"/>
+
+<process name="makeInline" content="@when" mode="textextract"/>
+
+</elementSpec>
+
+<elementSpec ident="speaker">
+<process
+    name="makeInline(.)"
+    mode="render"/>
+</elementSpec>
+
+<elementSpec ident="choice">
+<process
+    xpath="not(ancestor::front) and corr and reg"
+    name="makeInline(reg)"
+    mode="render"/>
+<process
+    xpath="corr and reg"
+    name="makeMarginalNote(corr)"
+    mode="render"/>
+
+<process
+    xpath="ancestor::front and (corr and reg)"
+    name="makeLinkedMarginalNote(corr,reg)"
+    mode="render"/>
+
+<process
+    xpath="corr and reg"
+    name="makeInline(corr)"
+    mode="textextract"/>
+
+</elementSpec>
+
+<elementSpec ident="gap">
+  <process mode="textextract"/>
+</elementSpec>
+
+<elementSpec ident="note">
+  <process xpath="@type='ed'" mode="textextract"/>
+</elementSpec>
+
+<elementSpec ident="head">
+<process xpath="parent::list"
+	 name="makeBlock"
+	 mode="render"/>
+</elementSpec>
+
+<elementSpec ident="list">
+<process xpath="@rend='ordered'"
+	 name="makeOrderedList(.)"
+	 mode="render"/>
+</elementSpec>
+ 
+<elementSpec ident="gi">
+<process
+    name="makeInline(,)"
+    mode="render"
+    class="gi"/>
+</elementSpec>
+    
+<elementSpec indent="name">
+  <process name="makeInline(.)"/>
+</elementSpec>
+
+<!--
+  <process name="makeInline(.)"
+	   xpath="*[parent::p]"/>
+-->
+
+</schemaSpec>
