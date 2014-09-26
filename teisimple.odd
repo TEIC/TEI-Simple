@@ -17,7 +17,7 @@
       <body>
          <list type="gloss">
             <label/>
-            <item>author ab address addrLine anchor back bibl body cb cit date div figDesc figure floatingText foreign formula front fw g graphic group head hi item l label lb lg list listBibl measure milestone note num p pb q quote ref rs seg sp speaker spGrp stage TEI text time title </item>
+            <item>author ab address addrLine anchor back bibl body cb cit date div figDesc figure floatingText foreign formula front fw g graphic group head hi item l label lb lg list listBibl measure milestone note num p pb q quote ref rs seg sp speaker spGrp stage teiCorpus TEI text time title </item>
             <label>castlist</label>
             <item>actor castGroup castItem castList role roleDesc </item>
             <label>editorial</label>
@@ -35,18 +35,51 @@
             <label>wrapper</label>
             <item>argument byline closer dateline epigraph opener postscript salute signed trailer </item>
          </list>
-         <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
-            <moduleRef key="tei"/>
+         <specGrp xml:id="transcr">
+            <elementRef key="damage"/>
+            <elementRef key="damageSpan"/>
+            <elementRef key="facsimile"/>
+            <elementRef key="line"/>
+            <elementRef key="listTranspose"/>
+            <elementRef key="metamark"/>
+            <elementRef key="mod"/>
+            <elementRef key="redo"/>
+            <elementRef key="restore"/>
+            <elementRef key="retrace"/>
+            <elementRef key="sourceDoc"/>
+            <elementRef key="surface"/>
+            <elementRef key="surfaceGrp"/>
+            <elementRef key="surplus"/>
+            <elementRef key="transpose"/>
+            <elementRef key="undo"/>
+            <elementRef key="zone"/>
+            <classRef key="att.coordinated"/>
+            <classRef key="att.global.change"/>
+         </specGrp>
+         <specGrp xml:id="header">
+            <moduleRef key="header"/>
+            <elementRef key="teiHeader"/>
+            <elementRef key="biblStruct"/>
+            <elementRef key="charDecl"/>
+            <elementRef key="glyph"/>
+            <elementRef key="monogr"/>
+            <elementRef key="imprint"/>
+            <elementRef key="resp"/>
+            <elementRef key="relatedItem"/>
+            <elementRef key="respStmt"/>
+            <elementRef key="term"/>
+            <elementRef key="editor"/>
+            <elementRef key="email"/>
+         </specGrp>
+         <specGrp xml:id="atts">
             <classRef key="att.global.facs"/>
             <classRef key="att.citing"/>
             <classRef key="att.measurement"/>
             <classRef key="att.milestoneUnit"/>
             <classRef key="att.global.linking"/>
             <classRef key="att.typed"/>
-            <elementRef key="teiHeader"/>
-            <elementSpec ident="teiHeader" mode="change">
-               <content mode="replace"/>
-            </elementSpec>
+         </specGrp>
+         <specGrp xml:id="simple">
             <elementRef key="author"/>
             <elementRef key="ab"/>
             <elementRef key="abbr"/>
@@ -138,6 +171,7 @@
             <elementRef key="stage"/>
             <elementRef key="supplied"/>
             <elementRef key="table"/>
+            <elementRef key="teiCorpus"/>
             <elementRef key="TEI"/>
             <elementRef key="text"/>
             <elementRef key="time"/>
@@ -149,6 +183,14 @@
             <elementRef key="w"/>
             <elementRef key="am"/>
             <elementRef key="ex"/>
+         </specGrp>
+         <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
+            <moduleRef key="tei"/>
+            <specGrpRef target="#base"/>
+            <specGrpRef target="#header"/>
+            <specGrpRef target="#transcr"/>
+            <specGrpRef target="#atts"/>
+            <specGrpRef target="#simple"/>
          </schemaSpec>
       </body>
    </text>

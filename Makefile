@@ -1,5 +1,5 @@
 default: teisimple
-TEXTS=/tmp/ota
+TEXTS=/Volumes/Repo/Simple/ota
 ANT_OPTS="-Xss2m -Xmx752m" 
 docx:
 	teitodocx --profile=tei teisimple.xml teisimple.docx

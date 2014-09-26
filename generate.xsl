@@ -47,18 +47,58 @@
 	      </item>
 	    </xsl:for-each-group>
 	</list>
-         <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
-            <moduleRef key="tei"/>
+
+	    <specGrp xml:id="transcr">
+	      <!-- for sourcedoc and facsimile -->
+	    <elementRef key="damage"/>
+	    <elementRef key="damageSpan"/>
+	    <elementRef key="facsimile"/>
+	    <elementRef key="line"/>
+	    <elementRef key="listTranspose"/>
+	    <elementRef key="metamark"/>
+	    <elementRef key="mod"/>
+	    <elementRef key="redo"/>
+	    <elementRef key="restore"/>
+	    <elementRef key="retrace"/>
+	    <elementRef key="sourceDoc"/>
+	    <elementRef key="surface"/>
+	    <elementRef key="surfaceGrp"/>
+	    <elementRef key="surplus"/>
+	    <elementRef key="transpose"/>
+	    <elementRef key="undo"/>
+	    <elementRef key="zone"/>
+	    <classRef key="att.coordinated"/>
+	    <classRef key="att.global.change"/>
+	    </specGrp>
+
+	    <specGrp xml:id="header">
+            <moduleRef key="header"/>
+	    <elementRef key="teiHeader"/>
+	    <elementRef key="biblStruct"/>
+	    <elementRef key="charDecl"/>
+	    <elementRef key="glyph"/>
+	    <elementRef key="monogr"/>
+	    <elementRef key="imprint"/>
+	    <elementRef key="resp"/>
+	    <elementRef key="relatedItem"/>
+	    <elementRef key="respStmt"/>
+	    <!-- ban from text-->
+	    <elementRef key="term"/>
+	    <elementRef key="editor"/>
+	    <elementRef key="email"/>
+	    </specGrp>
+
+	    <specGrp xml:id="atts">
+	    <!-- attributes needed -->
 	    <classRef key="att.global.facs"/>
 	    <classRef key="att.citing"/>
 	    <classRef key="att.measurement"/>
 	    <classRef key="att.milestoneUnit"/>
 	    <classRef key="att.global.linking"/>
 	    <classRef key="att.typed"/>
-	    <elementRef key="teiHeader"/>
-	    <elementSpec ident="teiHeader" mode="change">
-	      <content mode="replace"/>
-	    </elementSpec>
+	    </specGrp>
+
+	    <specGrp xml:id="simple">
 	    <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
 	      <xsl:choose>
 	      <xsl:when test="contains(cell[9],'header')"/>
@@ -69,6 +109,15 @@
 	      </xsl:otherwise>
 	      </xsl:choose>
 	    </xsl:for-each>
+	    </specGrp>
+
+         <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
+           <moduleRef key="tei"/>
+	   <specGrpRef target="#base"/>
+	   <specGrpRef target="#header"/>
+	   <specGrpRef target="#transcr"/>
+	   <specGrpRef target="#atts"/>
+	   <specGrpRef target="#simple"/>
          </schemaSpec>
       </body>
    </text>
