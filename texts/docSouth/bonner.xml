@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?oxygen RNGSchema="http://segonku.unl.edu/teianalytics/TEIAnalytics.rng"
-                        type="xml"?>
+<?xml-model href="/users/martin/documents/TEI-Simple/teisimple.rng"?>
+
 <TEI xmlns="http://www.tei-c.org/ns/1.0" n="bonner.xml">
    <teiHeader type="text">
       <fileDesc>

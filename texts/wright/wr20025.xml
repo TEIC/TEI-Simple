@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?oxygen RNGSchema="http://segonku.unl.edu/teianalytics/TEIAnalytics.rng" type="xml"?><TEI xmlns="http://www.tei-c.org/ns/1.0" n="wr20025.xml">
+<?oxygen RNGSchema="/users/martin/documents/TEI-Simple/teisimple.rng" type="xml"?><TEI xmlns="http://www.tei-c.org/ns/1.0" n="wr20025.xml">
    <teiHeader type="text">
       <fileDesc>
          <titleStmt>
