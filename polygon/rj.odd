@@ -28,6 +28,8 @@
                   <attDef ident="xml:id" mode="delete"/>
                   <attDef ident="n" mode="delete"/>
                </attList>
+               <process xpath="" name="makeInline(.)" mode="render" class="italic"/>
+               
             </elementSpec>
             <elementSpec ident="desc" mode="change">
                <attList>
@@ -56,6 +58,9 @@
                   <attDef ident="n" mode="delete"/>
                   <attDef ident="rend" mode="delete"/>
                </attList>
+               <process xpath="" name="makeInline(reg)" mode="render" class="italic"/> 
+               <process xpath="" name="makeMarginalNote(orig)" mode="render" class="floating"/>
+               
             </elementSpec>
             <elementSpec ident="reg" mode="change">
                <attList>
@@ -269,6 +274,8 @@
                   <attDef ident="rend" mode="delete"/>
                   <attDef ident="type" mode="delete"/>
                </attList>
+               <process xpath="" name="makeInline(@ref)" mode="render" class="stage"/>
+               
             </elementSpec>
             <elementSpec ident="charProp" mode="change">
                <attList>

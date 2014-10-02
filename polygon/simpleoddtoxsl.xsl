@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tei="http://www.tei-c.org/ns/1.0" 
-    xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
-    exclude-result-prefixes="xs" xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-    version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tei="http://www.tei-c.org/ns/1.0"
+    xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" exclude-result-prefixes="xs"
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
 
     <xsl:import href="functions.xsl"/>
-    
+
     <xsl:namespace-alias stylesheet-prefix="xslo" result-prefix="xsl"/>
-    
+
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
         <desc>
             <p> TEI utility stylesheet for transformation from TEI P5 to TEI Simple</p>
@@ -35,182 +34,95 @@
             <p>Copyright: 2014, TEI Consortium</p>
         </desc>
     </doc>
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
     <xsl:template match="/">
         <xslo:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-            xmlns:tei="http://www.tei-c.org/ns/1.0" 
+            xmlns:tei="http://www.tei-c.org/ns/1.0"
             xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
-            xpath-default-namespace="http://www.tei-c.org/ns/1.0"
-            version="2.0">
-            
+            xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
+
             <xsl:apply-templates select="//tei:elementSpec"/>
-            
+
             <xslo:template match="/">
                 <html xmlns="http://www.w3.org/1999/xhtml">
-                    
+
                     <xsl:copy-of select="tei:makeHTMLHeader()"/>
                     <body>
                         <xslo:apply-templates/>
                     </body>
                 </html>
             </xslo:template>
-            
-            
+
+
             <xslo:template match="*">
                 <xslo:apply-templates/>
             </xslo:template>
         </xslo:stylesheet>
     </xsl:template>
 
-    
-    
+
     <xsl:template match="tei:elementSpec">
-        <xsl:for-each select="process[@mode='render' or not(@mode)]">
+        <xsl:for-each-group select="process[@mode='render' or not(@mode)]" group-by="@xpath">
+            <xsl:variable name="xpth" select="current-group()[1]"/>
+
+            <xsl:variable name="xp"
+                select="if(current-group()[1]/string(@xpath)) then concat(current-group()[1]/parent::node()/@ident, '[', @xpath, ']') else current-group()[1]/parent::node()/@ident"/>
+
+            <xslo:template match="{$xp}">
+                <xsl:for-each select="current-group()">
+                    <!--
             <xsl:variable name="xp" select="if(string(@xpath)) then concat(parent::node()/@ident, '[', @xpath, ']') else parent::node()/@ident"/>
             <xsl:variable name="content" select="substring-before(substring-after(@name, '('), ')')"/>
             <xsl:variable name="class" select="if(@class) then @class else ()"/>
-            
-            <xslo:template match="{$xp}">
-                <xsl:choose>
-                    <xsl:when test="starts-with(@name, 'makeChoice')">
-                        <xsl:copy-of select="tei:makeChoice(., $content)"></xsl:copy-of>
-                    </xsl:when>
-                    <xsl:when test="starts-with(@name, 'makeBlock')">
-                        <xsl:copy-of select="tei:makeBlock(., $content)"></xsl:copy-of>
-                    </xsl:when>
-                    <xsl:when test="starts-with(@name, 'makeHeader')">
-                        <xsl:copy-of select="tei:makeHeader(., $content)"></xsl:copy-of>
-                    </xsl:when>
-                    <xsl:when test="starts-with(@name, 'makeInline')">
-                        <xsl:copy-of select="tei:makeInline(., $content)"></xsl:copy-of>
-                    </xsl:when>
-                    <xsl:when test="starts-with(@name, 'makeNewline')">
-                        <xsl:copy-of select="tei:makeNewline(., $content)"></xsl:copy-of>
-                    </xsl:when>
-                    <xsl:when test="starts-with(@name, 'makeParagraph')">
-                        <xsl:copy-of select="tei:makeParagraph(., $content)"></xsl:copy-of>
-                    </xsl:when>
-                    <xsl:otherwise>
-                        <div>
-                            <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
-                            <xslo:apply-templates/>
-                        </div>
-                        
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xslo:template>
-        </xsl:for-each>
-    </xsl:template>
-    
-    <xsl:template match="tei:delementSpecBLA">
-        
-        <!--
-        <xsl:for-each-group select="process[@mode='render' or not(@mode)]" group-by="@xpath">
-            <xsl:variable name="xpth" select="current-group()/node()[1]/@xpath"/>
-            <xsl:variable name="xp" select="if(string($xpth)) then concat(@ident, '[', $xpth, ']') else @ident"/>
-            <xsl:variable name="class" select="if(@class) then @class else ()"/>
-            
-    <xsl:message><xsl:value-of select="$xp"></xsl:value-of></xsl:message>        
-            <xsl:message><xsl:value-of select="$xpth"></xsl:value-of></xsl:message>        
-            
-            <xslo:template match="{$xp}">
-                
-                <xsl:for-each select="current-group()">
-                    
-                    <xsl:variable name="content" select="substring-before(substring-after(@name, '('), ')')"/>
-                    
+            -->
+
+                    <xsl:variable name="content"
+                        select="substring-before(substring-after(@name, '('), ')')"/>
+                    <xsl:variable name="class" select="if(@class) then @class else ()"/>
+
+
                     <xsl:choose>
-                        <xsl:when test="starts-with(@name, 'makeChoice')">
-                            <xsl:copy-of select="tei:makeChoice(orig)"></xsl:copy-of>
-                            <xsl:copy-of select="tei:makeChoice(reg)"></xsl:copy-of>
+                        <xsl:when test="starts-with(@name, 'makeMarginalNote')">
+                            <xsl:copy-of select="tei:makeMarginalNote(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@name, 'makeBlock')">
-                            <xsl:copy-of select="tei:makeBlock(.)"></xsl:copy-of>
+                            <xsl:copy-of select="tei:makeBlock(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@name, 'makeHeader')">
-                            <xsl:copy-of select="tei:makeHeader(.)"></xsl:copy-of>
+                            <xsl:copy-of select="tei:makeHeader(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@name, 'makeInline')">
-                            <xsl:copy-of select="tei:makeInline(.)"></xsl:copy-of>
+                            <xsl:copy-of select="tei:makeInline(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@name, 'makeNewline')">
-                            <xsl:copy-of select="tei:makeNewline(.)"></xsl:copy-of>
+                            <xsl:copy-of select="tei:makeNewline(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@name, 'makeParagraph')">
-                            <xsl:copy-of select="tei:makeParagraph(.)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeMarginalNote')">
-                            <xsl:copy-of select="tei:makeMarginalNote(.)"></xsl:copy-of>
+                            <xsl:copy-of select="tei:makeParagraph(., $content)"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <div>
-                                <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
+                                <xsl:if test="string($class)">
+                                    <xsl:attribute name="class">
+                                        <xsl:value-of select="$class"/>
+                                    </xsl:attribute>
+                                </xsl:if>
                                 <xslo:apply-templates/>
                             </div>
-                            
+
                         </xsl:otherwise>
                     </xsl:choose>
-                    
+
                 </xsl:for-each>
             </xslo:template>
         </xsl:for-each-group>
-        -->
-        
-        <xsl:for-each select="process[@mode='render' or not(@mode)]">
-            <xsl:variable name="id" select="parent::*/@ident"/>
-            <xsl:variable name="xp" select="if(string(@xpath)) then concat($id, '[', @xpath, ']') else $id"/>
-            <xsl:variable name="class" select="if(@class) then @class else ()"/>
-            
-            <xslo:template match="{$xp}">
-                
-                <xsl:for-each select="current-group()">
-                    
-                    <xsl:variable name="content" select="substring-before(substring-after(@name, '('), ')')"/>
-                    
-                    <xsl:choose>
-                        <xsl:when test="starts-with(@name, 'makeChoice')">
-                            <xsl:copy-of select="tei:makeChoice(., $content)"></xsl:copy-of>
-                            <xsl:copy-of select="tei:makeChoice(., $content)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeBlock')">
-                            <xsl:copy-of select="tei:makeBlock(., $content)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeHeader')">
-                            <xsl:copy-of select="tei:makeHeader(., $content)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeInline')">
-                            <xsl:copy-of select="tei:makeInline(., $content)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeNewline')">
-                            <xsl:copy-of select="tei:makeNewline(., $content)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeParagraph')">
-                            <xsl:copy-of select="tei:makeParagraph(., $content)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeMarginalNote')">
-                            <xsl:copy-of select="tei:makeMarginalNote(., $content)"></xsl:copy-of>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <div>
-                                <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
-                                <xslo:apply-templates/>
-                            </div>
-                            
-                        </xsl:otherwise>
-                    </xsl:choose>
-                    
-                </xsl:for-each>
-            </xslo:template>
-            
-            
-        </xsl:for-each>
     </xsl:template>
-    
-    
+
+
 </xsl:stylesheet>

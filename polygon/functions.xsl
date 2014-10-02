@@ -52,11 +52,6 @@ of this software, even if advised of the possibility of such damage.
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Block level element</desc>
     </doc>
-    <xsl:function name="tei:makeChoice" as="node()*">
-        <xsl:param name="element"/>
-        <xsl:param name="content"/>
-        <xsl:copy-of select="tei:makeElement('aaa', $element/@class, $content)"/>
-    </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Block level element</desc>
@@ -128,7 +123,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="element"/>
         <xsl:param name="content"/>
         
-        <xsl:copy-of select="tei:makeElement('div', concat('side ', $element/@class), $content)"/>
+        <xsl:copy-of select="tei:makeElement('span', $element/@class, $content)"/>
     </xsl:function>
     
     <xsl:function name="tei:makeElement" as="node()*">
@@ -166,13 +161,12 @@ of this software, even if advised of the possibility of such damage.
     .chapterHeader   { display:block; font-size: 1.1em; text-align: center; margin-bottom: 1em; margin-top: 1.5em;}
     .sp   { display:block; text-align: left; margin-left: 20px; margin-bottom: 1em;}
     .ab   { display:block; text-align: left; margin-left: -20px;}
-    .side {
-    width: 200px;
-    border: 1px solid #f00;
-    min-height: 200px;
-    position: absolute;
-    top: 60px;
-    right: -300px;
+    
+    span.floating {
+    float: right;
+    display: block;
+    background-color: #C0C0C0;
+    font-size: smaller;
     }
                 </style>
             </head>
