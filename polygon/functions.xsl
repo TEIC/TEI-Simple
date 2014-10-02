@@ -46,15 +46,24 @@ of this software, even if advised of the possibility of such damage.
       <p>Copyright: 2014, TEI Consortium</p>
     </desc>
   </doc>
+
+
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Block level element</desc>
+    </doc>
+    <xsl:function name="tei:makeChoice" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:copy-of select="tei:makeElement('aaa', $element/@class, $content)"/>
+    </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Block level element</desc>
     </doc>
     <xsl:function name="tei:makeBlock" as="node()*">
         <xsl:param name="element"/>
-<!--        <xsl:variable name="class" select="if($element/@class) then $element/@class else ()"/>
--->
-        <xsl:variable name="content" select="substring-before(substring-after($element/@name, '('), ')')"/>
+        <xsl:param name="content"/>
         
         <xsl:copy-of select="tei:makeElement('div', $element/@class, $content)"/>
     </xsl:function>
@@ -64,8 +73,7 @@ of this software, even if advised of the possibility of such damage.
     </doc>
     <xsl:function name="tei:makeParagraph" as="node()*">
         <xsl:param name="element"/>
-<!--        <xsl:variable name="class" select="if($element/@class) then $element/@class else ()"/>
--->        <xsl:variable name="content" select="substring-before(substring-after($element/@name, '('), ')')"/>
+        <xsl:param name="content"/>
         
         <xsl:copy-of select="tei:makeElement('p', $element/@class, $content)"/>
     </xsl:function>
@@ -76,7 +84,8 @@ of this software, even if advised of the possibility of such damage.
     </doc>
     <xsl:function name="tei:makeNewline" as="node()*">
         <xsl:param name="element"/>
-        <xsl:copy-of select="tei:makeInline($element)"/>
+        <xsl:param name="content"/>
+        <xsl:copy-of select="tei:makeInline($element, $content)"/>
         <br/>
     </xsl:function>
     
@@ -86,11 +95,10 @@ of this software, even if advised of the possibility of such damage.
     </doc>
     <xsl:function name="tei:makeInline" as="node()*">
         <xsl:param name="element"/>
-        <xsl:variable name="class" select="if($element/@class) then $element/@class else ()"/>
-        <xsl:variable name="content" select="substring-before(substring-after($element/@name, '('), ')')"/>
+        <xsl:param name="content"/>
         
         <xsl:choose>
-            <xsl:when test="string($class)">
+            <xsl:when test="string($element/@class)">
                 <xsl:copy-of select="tei:makeElement('span', $element/@class, $content)"/>
                 
             </xsl:when>
@@ -108,20 +116,30 @@ of this software, even if advised of the possibility of such damage.
     </doc>
     <xsl:function name="tei:makeHeader" as="node()*">
         <xsl:param name="element"/>
-        <xsl:variable name="class" select="if($element/@class) then $element/@class else ()"/>
-        <xsl:variable name="content" select="substring-before(substring-after($element/@name, '('), ')')"/>
+        <xsl:param name="content"/>
 
         <xsl:copy-of select="tei:makeElement('span', $element/@class, $content)"/>
         </xsl:function>
 
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Block level element</desc>
+    </doc>
+    <xsl:function name="tei:makeMarginalNote" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        
+        <xsl:copy-of select="tei:makeElement('div', concat('side ', $element/@class), $content)"/>
+    </xsl:function>
+    
     <xsl:function name="tei:makeElement" as="node()*">
         <xsl:param name="name"/>
         <xsl:param name="class"/>
         <xsl:param name="content"/>
+        
     <xsl:element name="{$name}">
         <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
         <xslo:apply-templates>
-            <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
+            <xsl:if test="$content!='.' and string($content)"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
         </xslo:apply-templates>
     </xsl:element>
     </xsl:function>
@@ -148,6 +166,14 @@ of this software, even if advised of the possibility of such damage.
     .chapterHeader   { display:block; font-size: 1.1em; text-align: center; margin-bottom: 1em; margin-top: 1.5em;}
     .sp   { display:block; text-align: left; margin-left: 20px; margin-bottom: 1em;}
     .ab   { display:block; text-align: left; margin-left: -20px;}
+    .side {
+    width: 200px;
+    border: 1px solid #f00;
+    min-height: 200px;
+    position: absolute;
+    top: 60px;
+    right: -300px;
+    }
                 </style>
             </head>
                 
