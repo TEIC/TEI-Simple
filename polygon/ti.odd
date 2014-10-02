@@ -53,7 +53,7 @@
                   class="chapterHeader"/>
 
                <!-- part headings -->
-               <process xpath="parent::div[@type!='div3']" name="makeHeader(.)" mode="render"
+               <process xpath="parent::div[not(@type)]" name="makeHeader(.)" mode="render"
                   class="partHeader"/>
 
                <!-- verse headings -->
