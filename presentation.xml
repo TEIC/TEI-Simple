@@ -75,7 +75,7 @@
           <item>TEI-Performance Indicators</item>
           <item>Integration of TEI Simple into the TEI infrastructure </item>
         </list>
-        <p rend="small">The CIDOC Conceptual Reference Model (CRM) provides definitions and a formal
+        <p rend="tiny">The CIDOC Conceptual Reference Model (CRM) provides definitions and a formal
           structure for describing the implicit and explicit concepts and relationships used in
           cultural heritage documentation.</p>
       </div>
@@ -399,10 +399,10 @@
             functions library</item>
           <item>library of core CSS stylesheet (skins) as well as inclusion of bespoke CSSs</item>
           <item>graphic interface (Roma-like) for interactive creation of the new ODDs</item>
-          <item/>
+          
         </list>
         <p/>
-        <p rend="small">Possible withing the scope of TEI Simple, eg. something that may occur in early-modern and modern printed book.</p>
+        <p rend="tiny">*Possible within the scope of TEI Simple, eg. something that may occur in early-modern and modern printed book.</p>
       </div>
 
 
