@@ -99,7 +99,7 @@
 
       <div>
         <head>Results</head>
-        <p>We isolated 104 elements which are needed in the body of a text</p>
+        <p>We isolate 104 elements which are needed in the body of a text</p>
         <p>We divide them into groups by function, mainly for documentation purposes</p>
         <p>We start analyzing attribute usage</p>
       </div>
@@ -184,11 +184,6 @@
 
       <div>
         <head><gi>process</gi> element</head>
-        <p>
-          <gi>process</gi> instruction available for elementSpec will define a way of processing
-          this element </p>
-        <p>multiple processing instructions may occur to define expected behaviour in various
-          contexts or output formats </p>
         <p>process attributes <list>
             <label>xpath/constraint</label>
             <item>XPath expression defining a context in which this processing instruction is
@@ -207,13 +202,15 @@
       <div>
         <head>Defaults</head>
         <list>
-          <item> * if no <gi>process</gi> for any given mode, emit textual content </item>
-          <item>* if no @xpath, means any use of this element </item>
-          <item>* <gi>process</gi> rules are additive, not alternates </item>
-          <item> * @style defaults to element name (equates to HTML @class or Word style) </item>
-          <item> * @mode defaults to 'render' (????) </item>
-          <item> * appearance overridden by @rendition and @style </item>
-          <item> * <gi>rendition</gi> override remote CSS </item>
+          <item> if no <gi>process</gi> for any given mode, emit textual content </item>
+          <item> if no @xpath, means any use of this element </item>
+          <item>
+            <gi>process</gi> rules are additive, not alternates </item>
+          <item> @style defaults to element name (equates to HTML @class or Word style) </item>
+          <item> @mode defaults to 'render' (????) </item>
+          <item> appearance overridden by @rendition and @style </item>
+          <item>
+            <gi>rendition</gi> override remote CSS </item>
         </list>
       </div>
 
@@ -235,10 +232,11 @@
             <process name="makeInline(.)" mode="render"/>
           </elementSpec>
         </egXML>
-        <egXML xmlns="http://www.tei-c.org/ns/Examples">              <elementSpec indent="name">
-          <process name="makeInline(.)"/>
-          <process name="makeMarginalNote(.)"/>
-        </elementSpec>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec indent="name">
+            <process name="makeInline(.)"/>
+            <process name="makeMarginalNote(.)"/>
+          </elementSpec>
         </egXML>
       </div>
 
@@ -251,8 +249,8 @@
             <elementSpec ident="app">
               <process xpath="not(ancestor::app) and (lem)" name="makeMarginalNote(.)" mode="render"
                 class="note"/>
-              <process name="makeInline" content="lem" mode="render"/>
-              <process name="makeInline" content="lem" mode="textextract"/>
+              <process name="makeInline(.)" content="lem" mode="render"/>
+              <process name="makeInline(.)" content="lem" mode="textextract"/>
             </elementSpec>
           </egXML>
         </p>
@@ -282,7 +280,7 @@
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
           <elementSpec ident="titlePage">
             <process name="makeBlock(.)" mode="render"/>
-            <process name="oimt()" mode="textextract"/>
+            <process name="omit()" mode="textextract"/>
           </elementSpec>
         </egXML>
       </div>
@@ -382,10 +380,29 @@
         <head>How does that work?</head>
         <list type="ordered">
           <item>Processing categories define a format-independent way of expressing required output. </item>
-          <item>Function library that can handle these processing scenarios is an essential part of TEI Simple environment. </item>
+          <item>Function library that can handle these processing scenarios is an essential part of
+            TEI Simple environment. </item>
           <item>The categories are mapped to a presentation format, using HTML and CSS concepts
             where possible.</item>
         </list>
+      </div>
+
+      <div>
+        <head>Requirements for SPM architecture</head>
+        <p>SPM architecture should consist of tools for editing new ODD files based on project's
+          regular ODD customization and XSLT stylesheets suite for automated generation of (possibly
+          multiple) transform stylesheets based on processing definitions from new ODD</p>
+        <list>
+          <item>library of core functions dealing with possible* scenarios (eg. makeInline(),
+            makeNote(), etc.)</item>
+          <item>room for extensions and customizations of the output stylesheets as well as core
+            functions library</item>
+          <item>library of core CSS stylesheet (skins) as well as inclusion of bespoke CSSs</item>
+          <item>graphic interface (Roma-like) for interactive creation of the new ODDs</item>
+          <item/>
+        </list>
+        <p/>
+        <p rend="small">Possible withing the scope of TEI Simple, eg. something that may occur in early-modern and modern printed book.</p>
       </div>
 
 
