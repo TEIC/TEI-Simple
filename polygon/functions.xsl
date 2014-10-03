@@ -148,7 +148,7 @@ of this software, even if advised of the possibility of such damage.
                     TEI-Simple: transform to html generated from odd file.
                 </title>
                 <style type="text/css">
-    body { margin:5%; background:#ccc; text-align:justify; font-family: Georgia;}
+    body { margin:5%; background:#ccc; text-align:justify; }
     p { text-indent: 3em; margin-top: 0.5em; margin-bottom: .5em; }
     div { margin-top: 0.2em; margin-bottom: 0.2em; }
     .note    {background-color: #DDE; color: #000; padding: .5em; margin-left: 10%; margin-right: 10%; font-family: sans-serif; font-size: 95%;}
