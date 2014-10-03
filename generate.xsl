@@ -63,7 +63,9 @@
 	      </attList>
 	      </classSpec>
 
-	      <classSpec key="att.fragmentable" mode="delete"/>
+	      <classSpec key="att.fragmentable">
+		<attDef ident="part" mode="delete"/>
+	      </classSpec>
 
 	      <classSpec ident="att.global" mode="change">
 		<attList>
