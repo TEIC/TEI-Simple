@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-09-26T10:57:37Z. 
+Schema generated from ODD source 2014-10-03T17:46:25Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -444,9 +444,9 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.datable-calendar-calendar-constraint-1">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:*[@calendar]">
             <sch:assert test="string-length(.) gt 0">
 @calendar indicates the system or calendar to which the date represented by the content of this element
@@ -670,8 +670,6 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       <ref name="att.global.attribute.xmlid"/>
       <ref name="att.global.attribute.n"/>
       <ref name="att.global.attribute.xmllang"/>
-      <ref name="att.global.attribute.rend"/>
-      <ref name="att.global.attribute.style"/>
       <ref name="att.global.attribute.rendition"/>
       <ref name="att.global.attribute.xmlbase"/>
       <ref name="att.global.attribute.xmlspace"/>
@@ -700,38 +698,36 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
          </attribute>
       </optional>
    </define>
-   <define name="att.global.attribute.rend">
-      <optional>
-         <attribute name="rend">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(rendition) indicates how the element in question was rendered or presented in the source text.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.word"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.attribute.style">
-      <optional>
-         <attribute name="style">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains an expression in some formal style definition language which defines the rendering or presentation used for this element in the source text</a:documentation>
-            <ref name="data.text"/>
-         </attribute>
-      </optional>
-   </define>
    <define name="att.global.attribute.rendition">
       <optional>
          <attribute name="rendition">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to a description of the rendering or presentation used for this element in the source text.</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to a description of the rendering or presentation used for this element in the source text.
+Suggested values include: 1] simple:bold; 2] simple:italic</a:documentation>
             <list>
                <oneOrMore>
-                  <ref name="data.pointer"/>
+                  <choice>
+                     <value>simple:bold</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:italic</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <ref name="data.pointer"/>
+                  </choice>
                </oneOrMore>
             </list>
          </attribute>
       </optional>
    </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="oddbyexample-att.global-rendition-rendptr-constraint-2">
+      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                context="tei:*[@rendition]">
+                              <sch:assert test="starts-with(@rendition,'simple:')          or          (starts-with(@rendition,'#')          and //tei:rendition[@xml:id=substring(@rendition,2)])">
+			    rendition attributes must point to a local
+			    ID or to a token in the simple scheme</sch:assert>
+                           </sch:rule>
+   </pattern>
    <define name="att.global.attribute.xmlbase">
       <optional>
          <attribute name="xml:base">
@@ -953,55 +949,6 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
          </attribute>
       </optional>
    </define>
-   <define name="att.pointing.attributes">
-      <ref name="att.pointing.attribute.targetLang"/>
-      <ref name="att.pointing.attribute.target"/>
-      <ref name="att.pointing.attribute.evaluate"/>
-   </define>
-   <define name="att.pointing.attribute.targetLang">
-      <optional>
-         <attribute name="targetLang">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.</a:documentation>
-            <ref name="data.language"/>
-         </attribute>
-      </optional>
-   </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.pointing-targetLang-targetLang-constraint-2">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                xmlns="http://www.tei-c.org/ns/1.0"
-                context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
-            <sch:assert test="count(@target)">@targetLang can only be used if @target is specified.</sch:assert>
-          </sch:rule>
-   </pattern>
-   <define name="att.pointing.attribute.target">
-      <optional>
-         <attribute name="target">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.pointer"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.pointing.attribute.evaluate">
-      <optional>
-         <attribute name="evaluate">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the intended meaning when the target of a pointer is itself a pointer.</a:documentation>
-            <choice>
-               <value>all</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.</a:documentation>
-               <value>one</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.</a:documentation>
-               <value>none</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.</a:documentation>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
    <define name="att.segLike.attributes">
       <ref name="att.datcat.attributes"/>
       <ref name="att.fragmentable.attributes"/>
@@ -1067,9 +1014,9 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.spanning-spanTo-spanTo-2-constraint-3">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:*[@spanTo]">
             <sch:assert test="id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]">
 The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow the current element <sch:name/>
@@ -1107,9 +1054,9 @@ The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow 
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:*[@schemeVersion]">
             <sch:assert test="@scheme and not(@scheme = 'free')">
               @schemeVersion can only be used if @scheme is specified.
@@ -3147,6 +3094,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
                   id="oddbyexample-quotation-quotationContents-constraint-1">
             <rule context="tei:quotation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                        test="not(@marks) and not (tei:p)">
 On <name/>, either the @marks attribute should be used, or a paragraph of description provided</report>
             </rule>
@@ -4016,9 +3964,9 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-relatedItem-targetorcontent1-constraint-2">
             <rule context="tei:relatedItem">
-               <sch:report xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                           xmlns:rng="http://relaxng.org/ns/structure/1.0"
+               <sch:report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@target and count( child::* ) &gt; 0">
 If the @target attribute on <sch:name/> is used, the
 relatedItem element must be empty</sch:report>
@@ -4027,9 +3975,9 @@ relatedItem element must be empty</sch:report>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-relatedItem-targetorcontent1-constraint-5">
             <rule context="tei:relatedItem">
-               <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                           xmlns:rng="http://relaxng.org/ns/structure/1.0"
+               <sch:assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@target or child::*">A relatedItem element should have either a 'target' attribute
         or a child element to indicate the related bibliographic item</sch:assert>
             </rule>
@@ -4119,14 +4067,18 @@ relatedItem element must be empty</sch:report>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-damageSpan-spanTo-constraint-6">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                       test="@spanTo">
 The @spanTo attribute of <name/> is required.</assert>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-damageSpan-spanTo_fr-constraint-7">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">L'attribut spanTo est requis.</assert>
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                       test="@spanTo">L'attribut spanTo est requis.</assert>
             </rule>
          </pattern>
          <ref name="att.global.attributes"/>
@@ -4620,88 +4572,62 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
          </choice>
       </attribute>
    </define>
+   <define name="att.pointing.attributes">
+      <ref name="att.pointing.attribute.targetLang"/>
+      <ref name="att.pointing.attribute.target"/>
+      <ref name="att.pointing.attribute.evaluate"/>
+   </define>
+   <define name="att.pointing.attribute.targetLang">
+      <optional>
+         <attribute name="targetLang">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.</a:documentation>
+            <ref name="data.language"/>
+         </attribute>
+      </optional>
+   </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="oddbyexample-att.pointing-targetLang-targetLang-constraint-5">
+      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
+            <sch:assert test="count(@target)">@targetLang can only be used if @target is specified.</sch:assert>
+          </sch:rule>
+   </pattern>
+   <define name="att.pointing.attribute.target">
+      <optional>
+         <attribute name="target">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.pointer"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.pointing.attribute.evaluate">
+      <optional>
+         <attribute name="evaluate">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the intended meaning when the target of a pointer is itself a pointer.</a:documentation>
+            <choice>
+               <value>all</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.</a:documentation>
+               <value>one</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.</a:documentation>
+               <value>none</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.</a:documentation>
+            </choice>
+         </attribute>
+      </optional>
+   </define>
    <define name="att.global.linking.attributes">
       <ref name="att.global.linking.attribute.corresp"/>
-      <ref name="att.global.linking.attribute.synch"/>
-      <ref name="att.global.linking.attribute.sameAs"/>
-      <ref name="att.global.linking.attribute.copyOf"/>
-      <ref name="att.global.linking.attribute.next"/>
-      <ref name="att.global.linking.attribute.prev"/>
-      <ref name="att.global.linking.attribute.exclude"/>
-      <ref name="att.global.linking.attribute.select"/>
    </define>
    <define name="att.global.linking.attribute.corresp">
       <optional>
          <attribute name="corresp">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(corresponds) points to elements that correspond to the current element in some way.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.pointer"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.linking.attribute.synch">
-      <optional>
-         <attribute name="synch">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(synchronous) points to elements that are synchronous with the current element.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.pointer"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.linking.attribute.sameAs">
-      <optional>
-         <attribute name="sameAs">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to an element that is the same as the current element.</a:documentation>
-            <ref name="data.pointer"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.linking.attribute.copyOf">
-      <optional>
-         <attribute name="copyOf">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to an element of which the current element is a copy.</a:documentation>
-            <ref name="data.pointer"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.linking.attribute.next">
-      <optional>
-         <attribute name="next">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to the next element of a virtual aggregate of which the current element is part.</a:documentation>
-            <ref name="data.pointer"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.linking.attribute.prev">
-      <optional>
-         <attribute name="prev">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(previous) points to the previous element of a virtual aggregate of which the current element is part.</a:documentation>
-            <ref name="data.pointer"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.linking.attribute.exclude">
-      <optional>
-         <attribute name="exclude">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to elements that are in exclusive alternation with the current element.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.pointer"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.global.linking.attribute.select">
-      <optional>
-         <attribute name="select">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">selects one or more alternants; if one alternant is selected, the ambiguity or uncertainty is marked as resolved. If more than one alternant is selected, the degree of ambiguity or uncertainty is marked as reduced by the number of alternants not selected.</a:documentation>
             <list>
                <oneOrMore>
                   <ref name="data.pointer"/>
@@ -4731,10 +4657,10 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.typed-subtypeTyped-constraint-5">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            id="oddbyexample-att.typed-subtypeTyped-constraint-6">
+      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="*[@subtype]">
         <sch:assert test="@type">The <sch:name/> element should not be categorized in detail with @subtype
  unless also categorized in general with @type</sch:assert>
@@ -4828,22 +4754,22 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-addSpan-spanTo-constraint-9">
+                  id="oddbyexample-addSpan-spanTo-constraint-10">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
-                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@spanTo">The @spanTo attribute of <sch:name/> is required.</sch:assert>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-addSpan-spanTo_fr-constraint-10">
+                  id="oddbyexample-addSpan-spanTo_fr-constraint-11">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
-                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@spanTo">L'attribut spanTo est requis.</sch:assert>
             </rule>
          </pattern>
@@ -5887,11 +5813,11 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-lg-atleast1oflggapl-constraint-11">
+                  id="oddbyexample-lg-atleast1oflggapl-constraint-12">
             <rule context="tei:lg">
-               <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                           xmlns:rng="http://relaxng.org/ns/structure/1.0"
+               <sch:assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
         must contain at least one child l, lg or gap element.</sch:assert>
             </rule>
@@ -6296,7 +6222,9 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-ref-refAtts-constraint-3">
             <rule context="tei:ref">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@target and @cRef">Only one of the
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                       test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
                </report>
             </rule>
@@ -6412,7 +6340,9 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-s-noNestedS-constraint-4">
             <rule context="tei:s">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="tei:s">You may not nest one s element within
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                       test="tei:s">You may not nest one s element within
       another: use seg instead</report>
             </rule>
          </pattern>

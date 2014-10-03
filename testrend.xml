@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="teisimple.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="teisimple.rng" type="application/xml" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+    <teiHeader>
+        <fileDesc>
+            <titleStmt>
+                <title></title>
+            </titleStmt>
+            <publicationStmt></publicationStmt>
+            <sourceDesc><p></p></sourceDesc>
+            
+        </fileDesc>
+       <encodingDesc><tagsDecl><rendition xml:id="foo"></rendition></tagsDecl></encodingDesc>
+    </teiHeader>
+    <text>
+        <body>
+            <p rendition="#foo"><anchor xml:id="bad"/></p>
+            <p rendition="bar"/>
+            <p rendition="simple:foo"/>
+            <p rendition="simple:italic"/>
+             <p rendition="#bad"/>
+        </body>
+    </text>
+</TEI>
