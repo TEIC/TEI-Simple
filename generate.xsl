@@ -63,6 +63,22 @@
 	      </attList>
 	      </classSpec>
 
+	      <classSpec ident="att.pointing" mode="change">
+		<attList>
+		  <attDef ident="target" mode="change">
+		    <constraintSpec ident="validtarget" scheme="isoschematron">
+		      <constraint>
+			<sch:rule context="@target">
+			  <sch:report test="starts-with(.,'#') and not(id(substring(.,2)))">
+			    local pointer must resolve to an ID in
+			    this document</sch:report>
+			</sch:rule>
+		      </constraint>
+		    </constraintSpec>
+		  </attDef>
+		</attList>
+	      </classSpec>
+
 	      <classSpec key="att.fragmentable">
 		<attDef ident="part" mode="delete"/>
 	      </classSpec>

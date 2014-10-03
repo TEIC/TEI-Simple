@@ -6,7 +6,7 @@ namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-10-03T17:50:26Z. 
+# Schema generated from ODD source 2014-10-03T18:00:35Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -2555,6 +2555,26 @@ att.pointing.attribute.target =
   attribute target {
     list { data.pointer+ }
   }?
+sch:pattern [
+  id = "oddbyexample-att.pointing-target-validtarget-constraint-6"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "@target"
+    "\x{a}" ~
+    "                              "
+    sch:report [
+      test = "starts-with(.,'#') and not(id(substring(.,2)))"
+      "\x{a}" ~
+      "			    local pointer must resolve to an ID in\x{a}" ~
+      "			    this document"
+    ]
+    "\x{a}" ~
+    "                           "
+  ]
+  "\x{a}" ~
+  "   "
+]
 att.pointing.attribute.evaluate =
   
   ## specifies the intended meaning when the target of a pointer is itself a pointer.
@@ -2587,7 +2607,7 @@ att.typed.attribute.subtype =
   ## provides a sub-categorization of the element, if needed
   attribute subtype { data.enumerated }?
 sch:pattern [
-  id = "oddbyexample-att.typed-subtypeTyped-constraint-6"
+  id = "oddbyexample-att.typed-subtypeTyped-constraint-7"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -3563,7 +3583,7 @@ ref =
   element ref {
     macro.paraContent
     >> sch:pattern [
-         id = "oddbyexample-ref-refAtts-constraint-3"
+         id = "oddbyexample-ref-refAtts-constraint-4"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3676,7 +3696,7 @@ s =
       | seg
       | w)*)
     >> sch:pattern [
-         id = "oddbyexample-s-noNestedS-constraint-4"
+         id = "oddbyexample-s-noNestedS-constraint-5"
          "\x{a}" ~
          "            "
          sch:rule [
