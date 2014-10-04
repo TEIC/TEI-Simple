@@ -68,9 +68,9 @@
 		  <attDef ident="target" mode="change">
 		    <constraintSpec ident="validtarget" scheme="isoschematron">
 		      <constraint>
-			<sch:rule context="@target">
-			  <sch:report test="starts-with(.,'#') and not(id(substring(.,2)))">
-			    local pointer must resolve to an ID in
+			<sch:rule context="tei:*[@target]">
+			  <sch:report test="starts-with(@target,'#') and not(id(substring(@target,2)))">
+			    local pointer "<sch:value-of select="@target"/>" must resolve to an ID in
 			    this document</sch:report>
 			</sch:rule>
 		      </constraint>
@@ -78,10 +78,12 @@
 		  </attDef>
 		</attList>
 	      </classSpec>
-
-	      <classSpec key="att.fragmentable">
-		<attDef ident="part" mode="delete"/>
-	      </classSpec>
+<!--
+//*[@ref][for $val in tokenize(@ref, '\s+')
+return //*[@xml:id = substring-after($val, '#')]
+-->
+	      <classSpec key="att.fragmentable" mode="delete"/>
+	      <classSpec key="att.datcat" mode="delete"/>
 
 	      <classSpec ident="att.global" mode="change">
 		<attList>
@@ -98,8 +100,8 @@
 			  <sch:assert test="starts-with(@rendition,'simple:')
 					    or
 					    (starts-with(@rendition,'#')
-					    and //tei:rendition[@xml:id=substring(@rendition,2)])">
-			    rendition attributes must point to a local
+					    and //tei:rendition[@xml:id=substring(current()/@rendition,2)])">
+			    rendition attribute "<sch:value-of select="@rendition"/>" must point to a local
 			    ID or to a token in the simple scheme</sch:assert>
 			</sch:rule>
 		      </constraint>
