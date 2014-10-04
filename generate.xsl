@@ -82,8 +82,8 @@
 //*[@ref][for $val in tokenize(@ref, '\s+')
 return //*[@xml:id = substring-after($val, '#')]
 -->
-	      <classSpec key="att.fragmentable" mode="delete"/>
-	      <classSpec key="att.datcat" mode="delete"/>
+	      <classSpec ident="att.fragmentable" mode="delete"/>
+	      <classSpec ident="att.datcat" mode="delete"/>
 
 	      <classSpec ident="att.global" mode="change">
 		<attList>
