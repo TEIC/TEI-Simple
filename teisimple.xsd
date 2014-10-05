@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:dcr="http://www.isocat.org/ns/dcr" xmlns:ns1="http://www.tei-c.org/ns/1.0">
-  <xs:import namespace="http://www.isocat.org/ns/dcr" schemaLocation="dcr.xsd"/>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:ns1="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2014-10-05T00:11:30Z. 
+    Schema generated from ODD source 2014-10-05T23:19:01Z. 
     Edition: Version 2.7.0. Last updated on
     	16th September 2014, revision 13036
     Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -15,7 +14,7 @@
       <xs:element ref="ns1:model.gLike"/>
       <xs:group ref="ns1:model.phrase"/>
       <xs:group ref="ns1:model.inter"/>
-      <xs:group ref="ns1:model.global"/>
+      <xs:element ref="ns1:model.global"/>
       <xs:element ref="ns1:lg"/>
     </xs:choice>
   </xs:complexType>
@@ -29,13 +28,13 @@
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:element ref="ns1:model.gLike"/>
       <xs:group ref="ns1:model.phrase"/>
-      <xs:group ref="ns1:model.global"/>
+      <xs:element ref="ns1:model.global"/>
     </xs:choice>
   </xs:complexType>
   <xs:complexType name="macro.phraseSeq.limited" mixed="true">
     <xs:choice minOccurs="0" maxOccurs="unbounded">
       <xs:group ref="ns1:model.limitedPhrase"/>
-      <xs:group ref="ns1:model.global"/>
+      <xs:element ref="ns1:model.global"/>
     </xs:choice>
   </xs:complexType>
   <xs:complexType name="macro.specialPara" mixed="true">
@@ -44,7 +43,7 @@
       <xs:group ref="ns1:model.phrase"/>
       <xs:group ref="ns1:model.inter"/>
       <xs:group ref="ns1:model.divPart"/>
-      <xs:group ref="ns1:model.global"/>
+      <xs:element ref="ns1:model.global"/>
     </xs:choice>
   </xs:complexType>
   <xs:complexType name="macro.xtext" mixed="true">
@@ -450,16 +449,6 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="att.datcat.attributes">
-    <xs:attributeGroup ref="ns1:att.datcat.attribute.datcat"/>
-    <xs:attributeGroup ref="ns1:att.datcat.attribute.valueDatcat"/>
-  </xs:attributeGroup>
-  <xs:attributeGroup name="att.datcat.attribute.datcat">
-    <xs:attribute ref="dcr:datcat"/>
-  </xs:attributeGroup>
-  <xs:attributeGroup name="att.datcat.attribute.valueDatcat">
-    <xs:attribute ref="dcr:valueDatcat"/>
-  </xs:attributeGroup>
   <xs:attributeGroup name="att.declarable.attributes">
     <xs:attributeGroup ref="ns1:att.declarable.attribute.default"/>
   </xs:attributeGroup>
@@ -502,47 +491,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:attributeGroup name="att.fragmentable.attributes">
-    <xs:attributeGroup ref="ns1:att.fragmentable.attribute.part"/>
-  </xs:attributeGroup>
-  <xs:attributeGroup name="att.fragmentable.attribute.part">
-    <xs:attribute name="part" default="N">
-      <xs:annotation>
-        <xs:documentation>specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.</xs:documentation>
-      </xs:annotation>
-      <xs:simpleType>
-        <xs:restriction base="xs:token">
-          <xs:enumeration value="Y">
-            <xs:annotation>
-              <xs:documentation>(yes) the element is fragmented in some (unspecified) respect</xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="N">
-            <xs:annotation>
-              <xs:documentation>(no) either the element is not fragmented, or no claim is made as to its completeness.</xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="I">
-            <xs:annotation>
-              <xs:documentation>(initial) this is the initial part of a fragmented element</xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="M">
-            <xs:annotation>
-              <xs:documentation>(medial) this is a medial part of a fragmented element</xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-          <xs:enumeration value="F">
-            <xs:annotation>
-              <xs:documentation>(final) this is the final part of a fragmented element</xs:documentation>
-            </xs:annotation>
-          </xs:enumeration>
-        </xs:restriction>
-      </xs:simpleType>
-    </xs:attribute>
-  </xs:attributeGroup>
   <xs:attributeGroup name="att.divLike.attributes">
-    <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
     <xs:attributeGroup ref="ns1:att.divLike.attribute.org"/>
     <xs:attributeGroup ref="ns1:att.divLike.attribute.sample"/>
   </xs:attributeGroup>
@@ -740,20 +689,12 @@ Suggested values include: 1] simple:bold; 2] simple:italic</xs:documentation>
                 <xs:union memberTypes="ns1:data.pointer">
                   <xs:simpleType>
                     <xs:restriction base="xs:token">
-                      <xs:enumeration value="simple:bold">
-                        <xs:annotation>
-                          <xs:documentation/>
-                        </xs:annotation>
-                      </xs:enumeration>
+                      <xs:enumeration value="simple:bold"/>
                     </xs:restriction>
                   </xs:simpleType>
                   <xs:simpleType>
                     <xs:restriction base="xs:token">
-                      <xs:enumeration value="simple:italic">
-                        <xs:annotation>
-                          <xs:documentation/>
-                        </xs:annotation>
-                      </xs:enumeration>
+                      <xs:enumeration value="simple:italic"/>
                     </xs:restriction>
                   </xs:simpleType>
                 </xs:union>
@@ -1077,8 +1018,6 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
     </xs:attribute>
   </xs:attributeGroup>
   <xs:attributeGroup name="att.segLike.attributes">
-    <xs:attributeGroup ref="ns1:att.datcat.attributes"/>
-    <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
     <xs:attributeGroup ref="ns1:att.segLike.attribute.function"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="att.segLike.attribute.function">
@@ -1679,12 +1618,15 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  <xs:group name="model.global.meta">
-    <xs:sequence>
-      <xs:element ref="ns1:listTranspose"/>
-    </xs:sequence>
-  </xs:group>
-  <xs:element name="model.milestoneLike" abstract="true"/>
+  <xs:element name="model.global.meta" abstract="true" substitutionGroup="ns1:model.global">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element maxOccurs="unbounded" ref="ns1:transpose"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="model.milestoneLike" abstract="true" substitutionGroup="ns1:model.global"/>
   <xs:element name="model.gLike" abstract="true">
     <xs:complexType mixed="true">
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -1846,7 +1788,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element maxOccurs="unbounded" ref="ns1:table"/>
     </xs:sequence>
   </xs:group>
-  <xs:element name="model.noteLike" abstract="true">
+  <xs:element name="model.noteLike" abstract="true" substitutionGroup="ns1:model.global">
     <xs:complexType>
       <xs:complexContent>
         <xs:extension base="ns1:macro.specialPara">
@@ -1973,7 +1915,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element maxOccurs="unbounded" ref="ns1:stage"/>
     </xs:sequence>
   </xs:group>
-  <xs:element name="model.global.edit" abstract="true"/>
+  <xs:element name="model.global.edit" abstract="true" substitutionGroup="ns1:model.global"/>
   <xs:group name="model.divPart">
     <xs:choice>
       <xs:group ref="ns1:model.lLike"/>
@@ -2123,22 +2065,22 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divTop"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.common"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
         <xs:sequence maxOccurs="unbounded">
           <xs:choice>
             <xs:element ref="ns1:castItem"/>
             <xs:element ref="ns1:castGroup"/>
           </xs:choice>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.common"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -2200,6 +2142,11 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element ref="ns1:publisher"/>
       <xs:element ref="ns1:pubPlace"/>
     </xs:choice>
+  </xs:group>
+  <xs:group name="model.catDescPart">
+    <xs:sequence>
+      <xs:element ref="ns1:textDesc"/>
+    </xs:sequence>
   </xs:group>
   <xs:element name="model.castItemPart" abstract="true">
     <xs:complexType>
@@ -2281,16 +2228,14 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:rs"/>
     </xs:sequence>
   </xs:group>
-  <xs:group name="model.global">
-    <xs:choice>
-      <xs:group ref="ns1:model.global.meta"/>
-      <xs:element ref="ns1:model.milestoneLike"/>
-      <xs:element ref="ns1:model.noteLike"/>
-      <xs:element ref="ns1:model.global.edit"/>
-      <xs:element ref="ns1:metamark"/>
-      <xs:element ref="ns1:figure"/>
-    </xs:choice>
+  <xs:group name="model.nameLike_sequenceRepeatable">
+    <xs:sequence>
+      <xs:group maxOccurs="unbounded" ref="ns1:model.nameLike.agent_sequenceRepeatable"/>
+      <xs:element maxOccurs="unbounded" ref="ns1:idno"/>
+      <xs:element maxOccurs="unbounded" ref="ns1:rs"/>
+    </xs:sequence>
   </xs:group>
+  <xs:element name="model.global" abstract="true"/>
   <xs:group name="model.biblPart">
     <xs:choice>
       <xs:element ref="ns1:model.respLike"/>
@@ -2357,28 +2302,28 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divTop"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:sequence minOccurs="0">
           <xs:choice>
             <xs:sequence maxOccurs="unbounded">
               <xs:element ref="ns1:model.divLike"/>
-              <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
             </xs:sequence>
             <xs:sequence>
               <xs:sequence maxOccurs="unbounded">
                 <xs:group ref="ns1:model.common"/>
-                <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
               </xs:sequence>
               <xs:sequence minOccurs="0" maxOccurs="unbounded">
                 <xs:element ref="ns1:model.divLike"/>
-                <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+                <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
               </xs:sequence>
             </xs:sequence>
           </xs:choice>
           <xs:sequence minOccurs="0" maxOccurs="unbounded">
             <xs:group ref="ns1:model.divBottom"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
           </xs:sequence>
         </xs:sequence>
       </xs:sequence>
@@ -2422,6 +2367,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element ref="ns1:langUsage"/>
       <xs:element ref="ns1:textClass"/>
       <xs:element ref="ns1:calendarDesc"/>
+      <xs:element ref="ns1:textDesc"/>
       <xs:element ref="ns1:listTranspose"/>
     </xs:choice>
   </xs:group>
@@ -3286,7 +3232,10 @@ Sample values include: 1] first-line; 2] first-letter; 3] before; 4] after</xs:d
       <xs:documentation>(category description) describes some category within a taxonomy or text typology, either in the form of a brief prose description or in terms of the situational parameters used by the TEI formal textDesc. [2.3.7. ]</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
-      <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.limitedPhrase"/>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:group ref="ns1:model.limitedPhrase"/>
+        <xs:group ref="ns1:model.catDescPart"/>
+      </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
   </xs:element>
@@ -3583,25 +3532,6 @@ Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Gri
       </xs:attribute>
     </xs:complexType>
   </xs:element>
-  <xs:element name="teiHeader">
-    <xs:annotation>
-      <xs:documentation>(TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="ns1:fileDesc"/>
-        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.teiHeaderPart"/>
-        <xs:element minOccurs="0" ref="ns1:revisionDesc"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="ns1:att.global.attributes"/>
-      <xs:attribute name="type" default="text" type="ns1:data.enumerated">
-        <xs:annotation>
-          <xs:documentation>specifies the kind of document to which the header is attached, for example whether it is a corpus or individual text.
-Sample values include: 1] text; 2] corpus</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="biblStruct">
     <xs:annotation>
       <xs:documentation>(structured bibliographic citation) contains a structured bibliographic citation, in which only bibliographic sub-elements appear and in a specified order. [3.11.1.  2.2.7.  15.3.2. ]</xs:documentation>
@@ -3645,6 +3575,28 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:figure"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.graphicLike"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.noteLike"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="imprint">
+    <xs:annotation>
+      <xs:documentation>groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice minOccurs="0" maxOccurs="unbounded">
+          <xs:element ref="ns1:classCode"/>
+          <xs:element ref="ns1:catRef"/>
+        </xs:choice>
+        <xs:sequence maxOccurs="unbounded">
+          <xs:choice>
+            <xs:group ref="ns1:model.imprintPart"/>
+            <xs:group ref="ns1:model.dateLike"/>
+          </xs:choice>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:respStmt"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
@@ -3714,42 +3666,6 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="imprint">
-    <xs:annotation>
-      <xs:documentation>groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:element ref="ns1:classCode"/>
-          <xs:element ref="ns1:catRef"/>
-        </xs:choice>
-        <xs:sequence maxOccurs="unbounded">
-          <xs:choice>
-            <xs:group ref="ns1:model.imprintPart"/>
-            <xs:group ref="ns1:model.dateLike"/>
-          </xs:choice>
-          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:respStmt"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
-        </xs:sequence>
-      </xs:sequence>
-      <xs:attributeGroup ref="ns1:att.global.attributes"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="resp">
-    <xs:annotation>
-      <xs:documentation>(responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:complexContent>
-        <xs:extension base="ns1:macro.phraseSeq.limited">
-          <xs:attributeGroup ref="ns1:att.global.attributes"/>
-          <xs:attributeGroup ref="ns1:att.canonical.attributes"/>
-          <xs:attributeGroup ref="ns1:att.datable.attributes"/>
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="relatedItem">
     <xs:annotation>
       <xs:documentation>contains or references some other bibliographic item which is related to the present one in some specified manner, for example as a constituent or alternative version of it. [3.11.2.7. ]</xs:documentation>
@@ -3766,6 +3682,20 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
           <xs:documentation>points to the related bibliographic element by means of an absolute or relative URI reference</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="resp">
+    <xs:annotation>
+      <xs:documentation>(responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.phraseSeq.limited">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.canonical.attributes"/>
+          <xs:attributeGroup ref="ns1:att.datable.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="respStmt" substitutionGroup="ns1:model.respLike">
@@ -3785,6 +3715,34 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.canonical.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="teiHeader">
+    <xs:annotation>
+      <xs:documentation>(TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:fileDesc"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.teiHeaderPart"/>
+        <xs:element minOccurs="0" ref="ns1:revisionDesc"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attribute name="type" default="text" type="ns1:data.enumerated">
+        <xs:annotation>
+          <xs:documentation>specifies the kind of document to which the header is attached, for example whether it is a corpus or individual text.
+Sample values include: 1] text; 2] corpus</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="textDesc">
+    <xs:annotation>
+      <xs:documentation>(text description) provides a description of a text in terms of its situational parameters. [15.2.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attributeGroup ref="ns1:att.declarable.attributes"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="term">
@@ -3879,7 +3837,7 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
     </xs:annotation>
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:element ref="ns1:model.gLike"/>
         <xs:group ref="ns1:model.linePart"/>
       </xs:choice>
@@ -3888,18 +3846,12 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
       <xs:attributeGroup ref="ns1:att.coordinated.attributes"/>
     </xs:complexType>
   </xs:element>
-  <xs:element name="listTranspose">
+  <xs:element name="listTranspose" substitutionGroup="ns1:model.global.meta">
     <xs:annotation>
       <xs:documentation>supplies a list of transpositions, each of which is indicated at some point in a document typically by means of metamarks. [11.3.4.5. ]</xs:documentation>
     </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element maxOccurs="unbounded" ref="ns1:transpose"/>
-      </xs:sequence>
-      <xs:attributeGroup ref="ns1:att.global.attributes"/>
-    </xs:complexType>
   </xs:element>
-  <xs:element name="metamark">
+  <xs:element name="metamark" substitutionGroup="ns1:model.global">
     <xs:annotation>
       <xs:documentation>contains or describes any kind of graphic or written signal within a document the function of which is to determine how it should be read rather than forming part of the actual content of the document. [11.3.4.2. ]</xs:documentation>
     </xs:annotation>
@@ -4003,7 +3955,7 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:element ref="ns1:model.graphicLike"/>
         <xs:element ref="ns1:surface"/>
         <xs:element ref="ns1:surfaceGrp"/>
@@ -4019,7 +3971,7 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
     <xs:complexType>
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
           <xs:group ref="ns1:model.labelLike"/>
           <xs:element ref="ns1:model.graphicLike"/>
         </xs:choice>
@@ -4030,7 +3982,7 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
             <xs:element ref="ns1:surface"/>
             <xs:element ref="ns1:surfaceGrp"/>
           </xs:choice>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -4056,7 +4008,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</xs:documentation>
     </xs:annotation>
     <xs:complexType>
       <xs:choice maxOccurs="unbounded">
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:element ref="ns1:surface"/>
         <xs:element ref="ns1:surfaceGrp"/>
       </xs:choice>
@@ -4129,7 +4081,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</xs:documentation>
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="ns1:model.graphicLike"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:element ref="ns1:surface"/>
         <xs:group ref="ns1:model.linePart"/>
       </xs:choice>
@@ -4695,7 +4647,6 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
           <xs:attributeGroup ref="ns1:att.typed.attributes"/>
           <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
-          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -4745,10 +4696,10 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence maxOccurs="unbounded">
           <xs:group ref="ns1:model.addrPart"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -4794,12 +4745,12 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
     <xs:complexType>
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
           <xs:group ref="ns1:model.headLike"/>
         </xs:choice>
         <xs:sequence maxOccurs="unbounded">
           <xs:group ref="ns1:model.common"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -4816,21 +4767,21 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
           <xs:group ref="ns1:model.pLike.front"/>
           <xs:group ref="ns1:model.pLike"/>
           <xs:group ref="ns1:model.listLike"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:model.divLike"/>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="ns1:model.frontPart"/>
             <xs:element ref="ns1:model.divLike"/>
-            <xs:group ref="ns1:model.global"/>
+            <xs:element ref="ns1:model.global"/>
           </xs:choice>
         </xs:sequence>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:model.divBottomPart"/>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="ns1:model.divBottomPart"/>
-            <xs:group ref="ns1:model.global"/>
+            <xs:element ref="ns1:model.global"/>
           </xs:choice>
         </xs:sequence>
       </xs:sequence>
@@ -4851,7 +4802,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
         <xs:element ref="ns1:model.segLike"/>
         <xs:element ref="ns1:model.ptrLike"/>
         <xs:group ref="ns1:model.biblPart"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.declarable.attributes"/>
@@ -4866,33 +4817,33 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence minOccurs="0">
           <xs:group ref="ns1:model.divTop"/>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
-            <xs:group ref="ns1:model.global"/>
+            <xs:element ref="ns1:model.global"/>
             <xs:group ref="ns1:model.divTop"/>
           </xs:choice>
         </xs:sequence>
         <xs:choice>
           <xs:sequence maxOccurs="unbounded">
             <xs:element ref="ns1:model.divLike"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
           </xs:sequence>
           <xs:sequence>
             <xs:sequence maxOccurs="unbounded">
               <xs:group ref="ns1:model.common"/>
-              <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
             </xs:sequence>
             <xs:sequence minOccurs="0" maxOccurs="unbounded">
               <xs:element ref="ns1:model.divLike"/>
-              <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+              <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
             </xs:sequence>
           </xs:sequence>
         </xs:choice>
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divBottom"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -4908,7 +4859,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
         <xs:element ref="ns1:model.gLike"/>
         <xs:group ref="ns1:model.phrase"/>
         <xs:element ref="ns1:docAuthor"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
@@ -4934,7 +4885,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
     <xs:complexType>
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
           <xs:group ref="ns1:model.headLike"/>
         </xs:choice>
         <xs:sequence maxOccurs="unbounded">
@@ -4943,11 +4894,11 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
             <xs:element ref="ns1:castGroup"/>
             <xs:element ref="ns1:roleDesc"/>
           </xs:choice>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:trailer"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -4962,7 +4913,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
         <xs:element ref="ns1:model.gLike"/>
         <xs:element ref="ns1:model.castItemPart"/>
         <xs:group ref="ns1:model.phrase"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attribute name="type" default="role">
@@ -5037,7 +4988,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
         <xs:group ref="ns1:model.qLike"/>
         <xs:group ref="ns1:model.biblLike"/>
         <xs:element ref="ns1:model.ptrLike"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.typed.attributes"/>
@@ -5054,7 +5005,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
         <xs:element ref="ns1:dateline"/>
         <xs:element ref="ns1:salute"/>
         <xs:group ref="ns1:model.phrase"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
@@ -5081,7 +5032,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="ns1:model.gLike"/>
         <xs:group ref="ns1:model.phrase"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.datable.attributes"/>
@@ -5097,7 +5048,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="ns1:model.gLike"/>
         <xs:group ref="ns1:model.phrase"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:element ref="ns1:docDate"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -5189,7 +5140,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
         <xs:element ref="ns1:pubPlace"/>
         <xs:element ref="ns1:docDate"/>
         <xs:element ref="ns1:publisher"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
@@ -5200,10 +5151,10 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence maxOccurs="unbounded">
           <xs:element ref="ns1:titlePart"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -5217,7 +5168,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:group ref="ns1:model.common"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
@@ -5247,7 +5198,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
-  <xs:element name="figure">
+  <xs:element name="figure" substitutionGroup="ns1:model.global">
     <xs:annotation>
       <xs:documentation>groups elements representing or containing graphic information such as an illustration, formula, or figure. [14.4. ]</xs:documentation>
     </xs:annotation>
@@ -5257,7 +5208,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
         <xs:group ref="ns1:model.common"/>
         <xs:element ref="ns1:figDesc"/>
         <xs:element ref="ns1:model.graphicLike"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:group ref="ns1:model.divBottom"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -5271,19 +5222,19 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:front"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
         <xs:choice>
           <xs:element ref="ns1:body"/>
           <xs:element ref="ns1:group"/>
         </xs:choice>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:back"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -5330,7 +5281,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
           <xs:element ref="ns1:model.frontPart"/>
           <xs:group ref="ns1:model.pLike"/>
           <xs:group ref="ns1:model.pLike.front"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:sequence minOccurs="0">
           <xs:sequence>
@@ -5338,14 +5289,14 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
             <xs:choice minOccurs="0" maxOccurs="unbounded">
               <xs:element ref="ns1:model.divLike"/>
               <xs:element ref="ns1:model.frontPart"/>
-              <xs:group ref="ns1:model.global"/>
+              <xs:element ref="ns1:model.global"/>
             </xs:choice>
           </xs:sequence>
           <xs:sequence minOccurs="0">
             <xs:group ref="ns1:model.divBottom"/>
             <xs:choice minOccurs="0" maxOccurs="unbounded">
               <xs:group ref="ns1:model.divBottom"/>
-              <xs:group ref="ns1:model.global"/>
+              <xs:element ref="ns1:model.global"/>
             </xs:choice>
           </xs:sequence>
         </xs:sequence>
@@ -5432,7 +5383,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divTop"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:sequence>
           <xs:choice>
@@ -5442,7 +5393,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
           <xs:choice minOccurs="0" maxOccurs="unbounded">
             <xs:element ref="ns1:text"/>
             <xs:element ref="ns1:group"/>
-            <xs:group ref="ns1:model.global"/>
+            <xs:element ref="ns1:model.global"/>
           </xs:choice>
         </xs:sequence>
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.divBottom"/>
@@ -5478,7 +5429,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
         <xs:group ref="ns1:model.phrase"/>
         <xs:group ref="ns1:model.inter"/>
         <xs:group ref="ns1:model.lLike"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.typed.attributes"/>
@@ -5529,7 +5480,6 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       <xs:complexContent>
         <xs:extension base="ns1:macro.paraContent">
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
-          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -5568,7 +5518,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divTop"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:choice>
           <xs:group ref="ns1:model.lLike"/>
@@ -5580,12 +5530,12 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
           <xs:group ref="ns1:model.lLike"/>
           <xs:group ref="ns1:model.stageLike"/>
           <xs:group ref="ns1:model.labelLike"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
           <xs:element ref="ns1:lg"/>
         </xs:choice>
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divBottom"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -5602,23 +5552,23 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divTop"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:choice>
           <xs:sequence maxOccurs="unbounded">
             <xs:element ref="ns1:item"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
           </xs:sequence>
           <xs:sequence maxOccurs="unbounded">
             <xs:element ref="ns1:label"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
             <xs:element ref="ns1:item"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
           </xs:sequence>
         </xs:choice>
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divBottom"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -5829,7 +5779,7 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</x
         <xs:element ref="ns1:epigraph"/>
         <xs:element ref="ns1:salute"/>
         <xs:element ref="ns1:signed"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
@@ -5856,7 +5806,6 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</x
         <xs:extension base="ns1:macro.paraContent">
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
           <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
-          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -5929,17 +5878,17 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</x
     <xs:complexType>
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
           <xs:group ref="ns1:model.divTopPart"/>
         </xs:choice>
         <xs:group ref="ns1:model.common"/>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
           <xs:group ref="ns1:model.common"/>
         </xs:choice>
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:element ref="ns1:model.divBottomPart"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -6025,11 +5974,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
                 </xs:simpleType>
                 <xs:simpleType>
                   <xs:restriction base="xs:token">
-                    <xs:enumeration value="foreign">
-                      <xs:annotation>
-                        <xs:documentation/>
-                      </xs:annotation>
-                    </xs:enumeration>
+                    <xs:enumeration value="foreign"/>
                   </xs:restriction>
                 </xs:simpleType>
                 <xs:simpleType>
@@ -6152,7 +6097,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
     <xs:complexType mixed="true">
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="ns1:model.gLike"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:element ref="ns1:formula"/>
         <xs:element ref="ns1:graphic"/>
         <xs:element ref="ns1:foreign"/>
@@ -6259,10 +6204,10 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:speaker"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
         <xs:sequence maxOccurs="unbounded">
           <xs:choice>
@@ -6273,7 +6218,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
             <xs:group ref="ns1:model.stageLike"/>
             <xs:group ref="ns1:model.qLike"/>
           </xs:choice>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -6344,7 +6289,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
       <xs:sequence>
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.headLike"/>
         <xs:choice maxOccurs="unbounded">
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
           <xs:element ref="ns1:sp"/>
           <xs:group ref="ns1:model.stageLike"/>
         </xs:choice>
@@ -6493,21 +6438,21 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
       <xs:sequence>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.headLike"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
         <xs:choice>
           <xs:sequence maxOccurs="unbounded">
             <xs:element ref="ns1:row"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
           </xs:sequence>
           <xs:sequence maxOccurs="unbounded">
             <xs:element ref="ns1:model.graphicLike"/>
-            <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+            <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
           </xs:sequence>
         </xs:choice>
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.divBottom"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -6581,19 +6526,19 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:front"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
         <xs:choice>
           <xs:element ref="ns1:body"/>
           <xs:element ref="ns1:group"/>
         </xs:choice>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:sequence minOccurs="0">
           <xs:element ref="ns1:back"/>
-          <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         </xs:sequence>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -6609,7 +6554,7 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element ref="ns1:model.gLike"/>
         <xs:group ref="ns1:model.phrase"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.datable.attributes"/>
@@ -6677,11 +6622,11 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
-        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.global"/>
         <xs:group ref="ns1:model.titlepagePart"/>
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:group ref="ns1:model.titlepagePart"/>
-          <xs:group ref="ns1:model.global"/>
+          <xs:element ref="ns1:model.global"/>
         </xs:choice>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -6770,7 +6715,7 @@ Suggested values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] 
         <xs:group ref="ns1:model.phrase"/>
         <xs:group ref="ns1:model.inter"/>
         <xs:group ref="ns1:model.lLike"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.typed.attributes"/>
@@ -6824,7 +6769,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
         <xs:element ref="ns1:w"/>
         <xs:element ref="ns1:c"/>
         <xs:element ref="ns1:pc"/>
-        <xs:group ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.global"/>
         <xs:group ref="ns1:model.hiLike"/>
         <xs:group ref="ns1:model.pPart.edit"/>
       </xs:choice>

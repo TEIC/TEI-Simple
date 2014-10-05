@@ -1,6 +1,6 @@
 
 <!--
-DTD generated from ODD source 2014-10-05T00:11:23Z. 
+DTD generated from ODD source 2014-10-05T23:18:59Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -57,21 +57,6 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
 
 <!--predeclared classes -->
 
-<!ENTITY % model.entryPart ""> 
-<!ENTITY % model.entryPart_sequence ""> 
-<!ENTITY % model.entryPart_sequenceOptional ""> 
-<!ENTITY % model.entryPart_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.entryPart_sequenceRepeatable ""> 
-<!ENTITY % model.placeNamePart ""> 
-<!ENTITY % model.placeNamePart_sequence ""> 
-<!ENTITY % model.placeNamePart_sequenceOptional ""> 
-<!ENTITY % model.placeNamePart_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.placeNamePart_sequenceRepeatable ""> 
-<!ENTITY % model.placeStateLike ""> 
-<!ENTITY % model.placeStateLike_sequence ""> 
-<!ENTITY % model.placeStateLike_sequenceOptional ""> 
-<!ENTITY % model.placeStateLike_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.placeStateLike_sequenceRepeatable ""> 
 <!ENTITY % att.source.attribute.source '
 source CDATA  #IMPLIED'>
 <!ENTITY % att.source.attributes '
@@ -199,14 +184,6 @@ period %data.pointer;  #IMPLIED'>
 <!ENTITY % att.datable.attributes '%att.datable.w3c.attributes;
  %att.datable.attribute.calendar;
  %att.datable.attribute.period;'> 
-<!ENTITY % att.datcat.attribute.datcat '
-datcat CDATA  #IMPLIED'>
-
-<!ENTITY % att.datcat.attribute.valueDatcat '
-valueDatcat CDATA  #IMPLIED'>
-<!ENTITY % att.datcat.attributes '
- %att.datcat.attribute.datcat;
- %att.datcat.attribute.valueDatcat;'> 
 <!ENTITY % att.declarable.attribute.default '
 default (true|false) "false" '>
 <!ENTITY % att.declarable.attributes '
@@ -215,16 +192,12 @@ default (true|false) "false" '>
 decls CDATA  #IMPLIED'>
 <!ENTITY % att.declaring.attributes '
  %att.declaring.attribute.decls;'> 
-<!ENTITY % att.fragmentable.attribute.part '
-part (Y|N|I|M|F) "N" '>
-<!ENTITY % att.fragmentable.attributes '
- %att.fragmentable.attribute.part;'> 
 <!ENTITY % att.divLike.attribute.org '
 org (composite|uniform) "uniform" '>
 
 <!ENTITY % att.divLike.attribute.sample '
 sample (initial|medial|final|unknown|complete) "complete" '>
-<!ENTITY % att.divLike.attributes '%att.fragmentable.attributes;
+<!ENTITY % att.divLike.attributes '
  %att.divLike.attribute.org;
  %att.divLike.attribute.sample;'> 
 <!ENTITY % att.docStatus.attribute.status '
@@ -329,7 +302,7 @@ place NMTOKENS  #IMPLIED'>
  %att.placement.attribute.place;'> 
 <!ENTITY % att.segLike.attribute.function '
 function %data.enumerated;  #IMPLIED'>
-<!ENTITY % att.segLike.attributes '%att.datcat.attributes;%att.fragmentable.attributes;
+<!ENTITY % att.segLike.attributes '
  %att.segLike.attribute.function;'> 
 <!ENTITY % att.sortable.attribute.sortKey '
 sortKey %data.word;  #IMPLIED'>
@@ -422,26 +395,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.measureLike_sequenceOptional "measure?, num?"> 
 <!ENTITY % model.measureLike_sequenceOptionalRepeatable "measure*, num*"> 
 <!ENTITY % model.measureLike_sequenceRepeatable "measure+, num+"> 
-<!ENTITY % model.egLike ""> 
-<!ENTITY % model.egLike_sequence ""> 
-<!ENTITY % model.egLike_sequenceOptional ""> 
-<!ENTITY % model.egLike_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.egLike_sequenceRepeatable ""> 
 <!ENTITY % model.graphicLike "formula |graphic"> 
 <!ENTITY % model.graphicLike_sequence "formula, graphic"> 
 <!ENTITY % model.graphicLike_sequenceOptional "formula?, graphic?"> 
 <!ENTITY % model.graphicLike_sequenceOptionalRepeatable "formula*, graphic*"> 
 <!ENTITY % model.graphicLike_sequenceRepeatable "formula+, graphic+"> 
-<!ENTITY % model.offsetLike ""> 
-<!ENTITY % model.offsetLike_sequence ""> 
-<!ENTITY % model.offsetLike_sequenceOptional ""> 
-<!ENTITY % model.offsetLike_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.offsetLike_sequenceRepeatable ""> 
-<!ENTITY % model.pPart.msdesc ""> 
-<!ENTITY % model.pPart.msdesc_sequence ""> 
-<!ENTITY % model.pPart.msdesc_sequenceOptional ""> 
-<!ENTITY % model.pPart.msdesc_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.pPart.msdesc_sequenceRepeatable ""> 
 <!ENTITY % model.pPart.editorial "abbr |choice |expan |am |ex"> 
 <!ENTITY % model.pPart.editorial_sequence "abbr, choice, expan, am, ex"> 
 <!ENTITY % model.pPart.editorial_sequenceOptional "abbr?, choice?, expan?, am?, ex?"> 
@@ -487,21 +445,6 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.gLike_sequenceOptional "g?"> 
 <!ENTITY % model.gLike_sequenceOptionalRepeatable "g*"> 
 <!ENTITY % model.gLike_sequenceRepeatable "g+"> 
-<!ENTITY % model.oddDecl ""> 
-<!ENTITY % model.oddDecl_sequence ""> 
-<!ENTITY % model.oddDecl_sequenceOptional ""> 
-<!ENTITY % model.oddDecl_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.oddDecl_sequenceRepeatable ""> 
-<!ENTITY % model.phrase.xml ""> 
-<!ENTITY % model.phrase.xml_sequence ""> 
-<!ENTITY % model.phrase.xml_sequenceOptional ""> 
-<!ENTITY % model.phrase.xml_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.phrase.xml_sequenceRepeatable ""> 
-<!ENTITY % model.specDescLike ""> 
-<!ENTITY % model.specDescLike_sequence ""> 
-<!ENTITY % model.specDescLike_sequenceOptional ""> 
-<!ENTITY % model.specDescLike_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.specDescLike_sequenceRepeatable ""> 
 <!ENTITY % model.biblLike "biblFull |biblStruct |bibl |listBibl"> 
 <!ENTITY % model.biblLike_sequence "biblFull, biblStruct, bibl, listBibl"> 
 <!ENTITY % model.biblLike_sequenceOptional "biblFull?, biblStruct?, bibl?, listBibl?"> 
@@ -542,11 +485,6 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.stageLike_sequenceOptional "stage?"> 
 <!ENTITY % model.stageLike_sequenceOptionalRepeatable "stage*"> 
 <!ENTITY % model.stageLike_sequenceRepeatable "stage+"> 
-<!ENTITY % model.entryPart ""> 
-<!ENTITY % model.entryPart_sequence ""> 
-<!ENTITY % model.entryPart_sequenceOptional ""> 
-<!ENTITY % model.entryPart_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.entryPart_sequenceRepeatable ""> 
 <!ENTITY % model.global.edit "damageSpan |addSpan |gap |space"> 
 <!ENTITY % model.global.edit_sequence "damageSpan, addSpan, gap, space"> 
 <!ENTITY % model.global.edit_sequenceOptional "damageSpan?, addSpan?, gap?, space?"> 
@@ -557,16 +495,6 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.divPart_sequenceOptional "%model.lLike;?, %model.pLike;?, lg?, sp?, spGrp?"> 
 <!ENTITY % model.divPart_sequenceOptionalRepeatable "%model.lLike;*, %model.pLike;*, lg*, sp*, spGrp*"> 
 <!ENTITY % model.divPart_sequenceRepeatable "%model.lLike;+, %model.pLike;+, lg+, sp+, spGrp+"> 
-<!ENTITY % model.placeNamePart ""> 
-<!ENTITY % model.placeNamePart_sequence ""> 
-<!ENTITY % model.placeNamePart_sequenceOptional ""> 
-<!ENTITY % model.placeNamePart_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.placeNamePart_sequenceRepeatable ""> 
-<!ENTITY % model.placeStateLike ""> 
-<!ENTITY % model.placeStateLike_sequence ""> 
-<!ENTITY % model.placeStateLike_sequenceOptional ""> 
-<!ENTITY % model.placeStateLike_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.placeStateLike_sequenceRepeatable ""> 
 <!ENTITY % model.publicationStmtPart.agency "distributor |authority |publisher"> 
 <!ENTITY % model.publicationStmtPart.agency_sequence "distributor, authority, publisher"> 
 <!ENTITY % model.publicationStmtPart.agency_sequenceOptional "distributor?, authority?, publisher?"> 
@@ -582,21 +510,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.availabilityPart_sequenceOptional "licence?"> 
 <!ENTITY % model.availabilityPart_sequenceOptionalRepeatable "licence*"> 
 <!ENTITY % model.availabilityPart_sequenceRepeatable "licence+"> 
-<!ENTITY % model.certLike ""> 
-<!ENTITY % model.certLike_sequence ""> 
-<!ENTITY % model.certLike_sequenceOptional ""> 
-<!ENTITY % model.certLike_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.certLike_sequenceRepeatable ""> 
 <!ENTITY % model.descLike "desc"> 
 <!ENTITY % model.descLike_sequence "desc"> 
 <!ENTITY % model.descLike_sequenceOptional "desc?"> 
 <!ENTITY % model.descLike_sequenceOptionalRepeatable "desc*"> 
 <!ENTITY % model.descLike_sequenceRepeatable "desc+"> 
-<!ENTITY % model.glossLike ""> 
-<!ENTITY % model.glossLike_sequence ""> 
-<!ENTITY % model.glossLike_sequenceOptional ""> 
-<!ENTITY % model.glossLike_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.glossLike_sequenceRepeatable ""> 
 <!ENTITY % model.quoteLike "cit |quote"> 
 <!ENTITY % model.quoteLike_sequence "cit, quote"> 
 <!ENTITY % model.quoteLike_sequenceOptional "cit?, quote?"> 
@@ -662,11 +580,16 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.imprintPart_sequenceOptional "distributor?, publisher?, pubPlace?"> 
 <!ENTITY % model.imprintPart_sequenceOptionalRepeatable "distributor*, publisher*, pubPlace*"> 
 <!ENTITY % model.imprintPart_sequenceRepeatable "distributor+, publisher+, pubPlace+"> 
-<!ENTITY % model.catDescPart ""> 
-<!ENTITY % model.catDescPart_sequence ""> 
-<!ENTITY % model.catDescPart_sequenceOptional ""> 
-<!ENTITY % model.catDescPart_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.catDescPart_sequenceRepeatable ""> 
+<!ENTITY % model.catDescPart "textDesc"> 
+<!ENTITY % model.catDescPart_sequence "textDesc"> 
+<!ENTITY % model.catDescPart_sequenceOptional "textDesc?"> 
+<!ENTITY % model.catDescPart_sequenceOptionalRepeatable "textDesc*"> 
+<!ENTITY % model.catDescPart_sequenceRepeatable "textDesc+"> 
+<!ENTITY % model.textDescPart ""> 
+<!ENTITY % model.textDescPart_sequence ""> 
+<!ENTITY % model.textDescPart_sequenceOptional ""> 
+<!ENTITY % model.textDescPart_sequenceOptionalRepeatable ""> 
+<!ENTITY % model.textDescPart_sequenceRepeatable ""> 
 <!ENTITY % model.castItemPart "actor |role |roleDesc"> 
 <!ENTITY % model.castItemPart_sequence "actor, role, roleDesc"> 
 <!ENTITY % model.castItemPart_sequenceOptional "actor?, role?, roleDesc?"> 
@@ -767,11 +690,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.editorialDeclPart_sequenceOptional "correction?, normalization?, quotation?, hyphenation?, segmentation?, stdVals?, interpretation?, punctuation?"> 
 <!ENTITY % model.editorialDeclPart_sequenceOptionalRepeatable "correction*, normalization*, quotation*, hyphenation*, segmentation*, stdVals*, interpretation*, punctuation*"> 
 <!ENTITY % model.editorialDeclPart_sequenceRepeatable "correction+, normalization+, quotation+, hyphenation+, segmentation+, stdVals+, interpretation+, punctuation+"> 
-<!ENTITY % model.profileDescPart "abstract |creation |langUsage |textClass |calendarDesc |listTranspose"> 
-<!ENTITY % model.profileDescPart_sequence "abstract, creation, langUsage, textClass, calendarDesc, listTranspose"> 
-<!ENTITY % model.profileDescPart_sequenceOptional "abstract?, creation?, langUsage?, textClass?, calendarDesc?, listTranspose?"> 
-<!ENTITY % model.profileDescPart_sequenceOptionalRepeatable "abstract*, creation*, langUsage*, textClass*, calendarDesc*, listTranspose*"> 
-<!ENTITY % model.profileDescPart_sequenceRepeatable "abstract+, creation+, langUsage+, textClass+, calendarDesc+, listTranspose+"> 
+<!ENTITY % model.profileDescPart "abstract |creation |langUsage |textClass |calendarDesc |textDesc |listTranspose"> 
+<!ENTITY % model.profileDescPart_sequence "abstract, creation, langUsage, textClass, calendarDesc, textDesc, listTranspose"> 
+<!ENTITY % model.profileDescPart_sequenceOptional "abstract?, creation?, langUsage?, textClass?, calendarDesc?, textDesc?, listTranspose?"> 
+<!ENTITY % model.profileDescPart_sequenceOptionalRepeatable "abstract*, creation*, langUsage*, textClass*, calendarDesc*, textDesc*, listTranspose*"> 
+<!ENTITY % model.profileDescPart_sequenceRepeatable "abstract+, creation+, langUsage+, textClass+, calendarDesc+, textDesc+, listTranspose+"> 
 <!ENTITY % att.source.attribute.source '
 source CDATA  #IMPLIED'>
 <!ENTITY % att.source.attributes '
@@ -906,8 +829,7 @@ version %data.version;  #IMPLIED >
 <!ATTLIST ab
  %att.global.attributes;
  %att.typed.attributes;
- %att.declaring.attributes;
- %att.fragmentable.attributes; >
+ %att.declaring.attributes; >
 <!--doc:(abbreviation) contains an abbreviation of any sort. [3.5.5. ] -->
 <!ELEMENT abbr %macro.phraseSeq;>
 <!ATTLIST abbr xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1088,7 +1010,7 @@ type (role|list) "role"  >
 <!ATTLIST castList
  %att.global.attributes; >
 <!--doc:(category description) describes some category within a taxonomy or text typology, either in the form of a brief prose description or in terms of the situational parameters used by the TEI formal textDesc. [2.3.7. ] -->
-<!ELEMENT catDesc (#PCDATA|%model.limitedPhrase;|_DUMMY_model.catDescPart)*>
+<!ELEMENT catDesc (#PCDATA|%model.limitedPhrase;|%model.catDescPart;)*>
 <!ATTLIST catDesc xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST catDesc
  %att.global.attributes; >
@@ -1100,7 +1022,7 @@ type (role|list) "role"  >
  %att.pointing.attributes;
 scheme %data.pointer;  #IMPLIED >
 <!--doc:contains an individual descriptive category, possibly nested within a superordinate category, within a user-defined taxonomy. [2.3.7. ] -->
-<!ELEMENT category ((catDesc+|(%model.descLike;|_DUMMY_model.glossLike)*),category*)>
+<!ELEMENT category ((catDesc+|(%model.descLike;)*),category*)>
 <!ATTLIST category xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST category
  %att.global.attributes; >
@@ -1140,7 +1062,7 @@ target CDATA  #IMPLIED >
 <!ATTLIST choice
  %att.global.attributes; >
 <!--doc:(cited quotation) contains a quotation from some other document, together with a bibliographic reference to its source. In a dictionary it may contain an example text with at least one occurrence of the word form, used in the sense being described, or a translation of the headword, or an example. [3.3.3.  4.3.1.  9.3.5.1. ] -->
-<!ELEMENT cit (%model.qLike;|_DUMMY_model.egLike|%model.biblLike;|%model.ptrLike;|%model.global;|_DUMMY_model.entryPart)+>
+<!ELEMENT cit (%model.qLike;|%model.biblLike;|%model.ptrLike;|%model.global;)+>
 <!ATTLIST cit xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST cit
  %att.global.attributes;
@@ -1387,7 +1309,7 @@ type %data.enumerated;  #IMPLIED >
  %att.typed.attributes;
 ref %data.pointer;  #IMPLIED >
 <!--doc:indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible, invisible, or inaudible. [3.4.3. ] -->
-<!ELEMENT gap (%model.descLike;|_DUMMY_model.certLike)*>
+<!ELEMENT gap (%model.descLike;)*>
 <!ATTLIST gap xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST gap
  %att.global.attributes;
@@ -1493,8 +1415,7 @@ scheme %data.pointer;  #IMPLIED >
 <!ELEMENT l %macro.paraContent;>
 <!ATTLIST l xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST l
- %att.global.attributes;
- %att.fragmentable.attributes; >
+ %att.global.attributes; >
 <!--doc:contains any label or heading used to identify part of a text, typically but not exclusively in a list or glossary. [3.7. ] -->
 <!ELEMENT label %macro.phraseSeq;>
 <!ATTLIST label xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1681,8 +1602,7 @@ value %data.numeric;  #IMPLIED >
 <!ATTLIST p xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST p
  %att.global.attributes;
- %att.declaring.attributes;
- %att.fragmentable.attributes; >
+ %att.declaring.attributes; >
 <!--doc:(page break) marks the start of a new page in a paginated document. [3.10.3. ] -->
 <!ELEMENT pb EMPTY>
 <!ATTLIST pb xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1969,7 +1889,7 @@ scope %data.enumerated;  #IMPLIED >
  %att.typed.attributes;
  %att.ascribed.attributes; >
 <!--doc:indicates the location of a significant space in the copy text. [11.5.1. ] -->
-<!ELEMENT space (%model.descLike;|_DUMMY_model.certLike)*>
+<!ELEMENT space (%model.descLike;)*>
 <!ATTLIST space xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST space
  %att.global.attributes;
@@ -2063,7 +1983,7 @@ render CDATA  #IMPLIED >
 <!ATTLIST tagsDecl
  %att.global.attributes; >
 <!--doc:defines a typology either implicitly, by means of a bibliographic citation, or explicitly by a structured taxonomy. [2.3.7. ] -->
-<!ELEMENT taxonomy ((_DUMMY_model.glossLike|%model.descLike;)*|category+|((%model.biblLike;),category*))>
+<!ELEMENT taxonomy ((%model.descLike;)*|category+|((%model.biblLike;),category*))>
 <!ATTLIST taxonomy xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST taxonomy
  %att.global.attributes; >
@@ -2104,6 +2024,12 @@ type %data.enumerated;  "text"  >
 <!ELEMENT textClass (classCode|catRef|keywords)*>
 <!ATTLIST textClass xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST textClass
+ %att.global.attributes;
+ %att.declarable.attributes; >
+<!--doc:(text description) provides a description of a text in terms of its situational parameters. [15.2.1. ] -->
+<!ELEMENT textDesc (_DUMMY_model.textDescPart_sequence)>
+<!ATTLIST textDesc xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST textDesc
  %att.global.attributes;
  %att.declarable.attributes; >
 <!--doc:contains a phrase defining a time of day in any format. [3.5.4. ] -->

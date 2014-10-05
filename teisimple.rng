@@ -3,13 +3,12 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-10-05T00:11:17Z. 
+Schema generated from ODD source 2014-10-05T23:19:01Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
   
---><!---->
-   <define name="macro.paraContent">
+--><!----><define name="macro.paraContent">
       <zeroOrMore>
          <choice>
             <text/>
@@ -444,9 +443,9 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.datable-calendar-calendar-constraint-1">
-      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:*[@calendar]">
             <sch:assert test="string-length(.) gt 0">
 @calendar indicates the system or calendar to which the date represented by the content of this element
@@ -458,34 +457,6 @@ belongs, but this <sch:name/> element has no textual content.</sch:assert>
          <attribute name="period">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a pointer to some location defining a named period of time within which the datable item is understood to have occurred.</a:documentation>
             <ref name="data.pointer"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.datcat.attributes">
-      <ref name="att.datcat.attribute.datcat"/>
-      <ref name="att.datcat.attribute.valueDatcat"/>
-   </define>
-   <define name="att.datcat.attribute.datcat">
-      <optional>
-         <attribute name="datcat" ns="http://www.isocat.org/ns/dcr">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a PID (persistent identifier) that aligns the given element with the appropriate Data Category (or categories) in ISOcat.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.pointer"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.datcat.attribute.valueDatcat">
-      <optional>
-         <attribute name="valueDatcat" ns="http://www.isocat.org/ns/dcr">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a PID (persistent identifier) that aligns the content of the given element or the value of the given attribute with the appropriate simple Data Category (or categories) in ISOcat.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.pointer"/>
-               </oneOrMore>
-            </list>
          </attribute>
       </optional>
    </define>
@@ -522,32 +493,7 @@ belongs, but this <sch:name/> element has no textual content.</sch:assert>
          </attribute>
       </optional>
    </define>
-   <define name="att.fragmentable.attributes">
-      <ref name="att.fragmentable.attribute.part"/>
-   </define>
-   <define name="att.fragmentable.attribute.part">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="part"
-                    a:defaultValue="N">
-            <a:documentation>specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.</a:documentation>
-            <choice>
-               <value>Y</value>
-               <a:documentation>(yes) the element is fragmented in some (unspecified) respect</a:documentation>
-               <value>N</value>
-               <a:documentation>(no) either the element is not fragmented, or no claim is made as to its completeness.</a:documentation>
-               <value>I</value>
-               <a:documentation>(initial) this is the initial part of a fragmented element</a:documentation>
-               <value>M</value>
-               <a:documentation>(medial) this is a medial part of a fragmented element</a:documentation>
-               <value>F</value>
-               <a:documentation>(final) this is the final part of a fragmented element</a:documentation>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
    <define name="att.divLike.attributes">
-      <ref name="att.fragmentable.attributes"/>
       <ref name="att.divLike.attribute.org"/>
       <ref name="att.divLike.attribute.sample"/>
    </define>
@@ -719,14 +665,13 @@ Suggested values include: 1] simple:bold; 2] simple:italic</a:documentation>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.global-rendition-rendptr-constraint-2">
-      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                context="tei:*[@rendition]">
-                              <sch:assert test="starts-with(@rendition,'simple:')          or          (starts-with(@rendition,'#')          and //tei:rendition[@xml:id=substring(current()/@rendition,2)])">
-			    rendition attribute "<sch:value-of select="@rendition"/>" must point to a local
-			    ID or to a token in the simple scheme</sch:assert>
-                           </sch:rule>
+      <rule xmlns:rng="http://relaxng.org/ns/structure/1.0" context="tei:*[@rendition]">
+                              <let name="results"
+              value="for $val in tokenize(@rendition,'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+                              <assert test="every $x in $results satisfies $x">
+Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
+ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
+                           </rule>
    </pattern>
    <define name="att.global.attribute.xmlbase">
       <optional>
@@ -950,8 +895,6 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
       </optional>
    </define>
    <define name="att.segLike.attributes">
-      <ref name="att.datcat.attributes"/>
-      <ref name="att.fragmentable.attributes"/>
       <ref name="att.segLike.attribute.function"/>
    </define>
    <define name="att.segLike.attribute.function">
@@ -1014,9 +957,9 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.spanning-spanTo-spanTo-2-constraint-3">
-      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:*[@spanTo]">
             <sch:assert test="id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]">
 The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow the current element <sch:name/>
@@ -1054,9 +997,9 @@ The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow 
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4">
-      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:*[@schemeVersion]">
             <sch:assert test="@scheme and not(@scheme = 'free')">
               @schemeVersion can only be used if @scheme is specified.
@@ -1366,50 +1309,11 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="num"/>
       </oneOrMore>
    </define>
-   <define name="model.egLike">
-      <notAllowed/>
-   </define>
-   <define name="model.egLike_alternation">
-      <notAllowed/>
-   </define>
-   <define name="model.egLike_sequence">
-      <empty/>
-   </define>
-   <define name="model.egLike_sequenceOptional">
-      <empty/>
-   </define>
-   <define name="model.egLike_sequenceOptionalRepeatable">
-      <empty/>
-   </define>
-   <define name="model.egLike_sequenceRepeatable">
-      <notAllowed/>
-   </define>
    <define name="model.graphicLike">
       <choice>
          <ref name="formula"/>
          <ref name="graphic"/>
       </choice>
-   </define>
-   <define name="model.offsetLike">
-      <notAllowed/>
-   </define>
-   <define name="model.offsetLike_alternation">
-      <notAllowed/>
-   </define>
-   <define name="model.offsetLike_sequence">
-      <empty/>
-   </define>
-   <define name="model.offsetLike_sequenceOptional">
-      <empty/>
-   </define>
-   <define name="model.offsetLike_sequenceOptionalRepeatable">
-      <empty/>
-   </define>
-   <define name="model.offsetLike_sequenceRepeatable">
-      <notAllowed/>
-   </define>
-   <define name="model.pPart.msdesc">
-      <notAllowed/>
    </define>
    <define name="model.pPart.editorial">
       <choice>
@@ -1739,30 +1643,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="g"/>
       </choice>
    </define>
-   <define name="model.oddDecl">
-      <notAllowed/>
-   </define>
-   <define name="model.oddDecl_alternation">
-      <notAllowed/>
-   </define>
-   <define name="model.oddDecl_sequence">
-      <empty/>
-   </define>
-   <define name="model.oddDecl_sequenceOptional">
-      <empty/>
-   </define>
-   <define name="model.oddDecl_sequenceOptionalRepeatable">
-      <empty/>
-   </define>
-   <define name="model.oddDecl_sequenceRepeatable">
-      <notAllowed/>
-   </define>
-   <define name="model.phrase.xml">
-      <notAllowed/>
-   </define>
-   <define name="model.specDescLike">
-      <notAllowed/>
-   </define>
    <define name="model.biblLike">
       <choice>
          <ref name="biblFull"/>
@@ -2036,9 +1916,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="stage"/>
       </oneOrMore>
    </define>
-   <define name="model.entryPart">
-      <notAllowed/>
-   </define>
    <define name="model.global.edit">
       <choice>
          <ref name="damageSpan"/>
@@ -2055,52 +1932,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="sp"/>
          <ref name="spGrp"/>
       </choice>
-   </define>
-   <define name="model.placeNamePart">
-      <notAllowed/>
-   </define>
-   <define name="model.placeNamePart_alternation">
-      <notAllowed/>
-   </define>
-   <define name="model.placeNamePart_sequence">
-      <empty/>
-   </define>
-   <define name="model.placeNamePart_sequenceOptional">
-      <empty/>
-   </define>
-   <define name="model.placeNamePart_sequenceOptionalRepeatable">
-      <empty/>
-   </define>
-   <define name="model.placeNamePart_sequenceRepeatable">
-      <notAllowed/>
-   </define>
-   <define name="model.placeStateLike">
-      <choice>
-         <ref name="model.placeNamePart"/>
-      </choice>
-   </define>
-   <define name="model.placeStateLike_alternation">
-      <choice>
-         <ref name="model.placeNamePart_alternation"/>
-      </choice>
-   </define>
-   <define name="model.placeStateLike_sequence">
-      <ref name="model.placeNamePart_sequence"/>
-   </define>
-   <define name="model.placeStateLike_sequenceOptional">
-      <optional>
-         <ref name="model.placeNamePart_sequenceOptional"/>
-      </optional>
-   </define>
-   <define name="model.placeStateLike_sequenceOptionalRepeatable">
-      <zeroOrMore>
-         <ref name="model.placeNamePart_sequenceOptionalRepeatable"/>
-      </zeroOrMore>
-   </define>
-   <define name="model.placeStateLike_sequenceRepeatable">
-      <oneOrMore>
-         <ref name="model.placeNamePart_sequenceRepeatable"/>
-      </oneOrMore>
    </define>
    <define name="model.publicationStmtPart.agency">
       <choice>
@@ -2123,16 +1954,10 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="licence"/>
       </choice>
    </define>
-   <define name="model.certLike">
-      <notAllowed/>
-   </define>
    <define name="model.descLike">
       <choice>
          <ref name="desc"/>
       </choice>
-   </define>
-   <define name="model.glossLike">
-      <notAllowed/>
    </define>
    <define name="model.quoteLike">
       <choice>
@@ -2330,7 +2155,12 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </choice>
    </define>
    <define name="model.catDescPart">
-      <notAllowed/>
+      <choice>
+         <ref name="textDesc"/>
+      </choice>
+   </define>
+   <define name="model.textDescPart_sequence">
+      <empty/>
    </define>
    <define name="model.castItemPart">
       <choice>
@@ -2382,8 +2212,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
    <define name="model.nameLike">
       <choice>
          <ref name="model.nameLike.agent"/>
-         <ref name="model.offsetLike"/>
-         <ref name="model.placeStateLike"/>
          <ref name="idno"/>
          <ref name="rs"/>
       </choice>
@@ -2391,28 +2219,18 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
    <define name="model.nameLike_alternation">
       <choice>
          <ref name="model.nameLike.agent_alternation"/>
-         <ref name="model.offsetLike_alternation"/>
-         <ref name="model.placeStateLike_alternation"/>
          <ref name="idno"/>
          <ref name="rs"/>
       </choice>
    </define>
    <define name="model.nameLike_sequence">
       <ref name="model.nameLike.agent_sequence"/>
-      <ref name="model.offsetLike_sequence"/>
-      <ref name="model.placeStateLike_sequence"/>
       <ref name="idno"/>
       <ref name="rs"/>
    </define>
    <define name="model.nameLike_sequenceOptional">
       <optional>
          <ref name="model.nameLike.agent_sequenceOptional"/>
-      </optional>
-      <optional>
-         <ref name="model.offsetLike_sequenceOptional"/>
-      </optional>
-      <optional>
-         <ref name="model.placeStateLike_sequenceOptional"/>
       </optional>
       <optional>
          <ref name="idno"/>
@@ -2426,12 +2244,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="model.nameLike.agent_sequenceOptionalRepeatable"/>
       </zeroOrMore>
       <zeroOrMore>
-         <ref name="model.offsetLike_sequenceOptionalRepeatable"/>
-      </zeroOrMore>
-      <zeroOrMore>
-         <ref name="model.placeStateLike_sequenceOptionalRepeatable"/>
-      </zeroOrMore>
-      <zeroOrMore>
          <ref name="idno"/>
       </zeroOrMore>
       <zeroOrMore>
@@ -2441,12 +2253,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
    <define name="model.nameLike_sequenceRepeatable">
       <oneOrMore>
          <ref name="model.nameLike.agent_sequenceRepeatable"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="model.offsetLike_sequenceRepeatable"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="model.placeStateLike_sequenceRepeatable"/>
       </oneOrMore>
       <oneOrMore>
          <ref name="idno"/>
@@ -2498,8 +2304,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
    </define>
    <define name="model.inter">
       <choice>
-         <ref name="model.egLike"/>
-         <ref name="model.oddDecl"/>
          <ref name="model.biblLike"/>
          <ref name="model.labelLike"/>
          <ref name="model.listLike"/>
@@ -2519,12 +2323,9 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="model.segLike"/>
          <ref name="model.highlighted"/>
          <ref name="model.graphicLike"/>
-         <ref name="model.pPart.msdesc"/>
          <ref name="model.pPart.edit"/>
          <ref name="model.ptrLike"/>
          <ref name="model.lPart"/>
-         <ref name="model.phrase.xml"/>
-         <ref name="model.specDescLike"/>
          <ref name="model.pPart.data"/>
       </choice>
    </define>
@@ -2532,10 +2333,8 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <choice>
          <ref name="model.hiLike"/>
          <ref name="model.emphLike"/>
-         <ref name="model.pPart.msdesc"/>
          <ref name="model.pPart.editorial"/>
          <ref name="model.ptrLike"/>
-         <ref name="model.phrase.xml"/>
          <ref name="model.pPart.data"/>
       </choice>
    </define>
@@ -2598,6 +2397,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="langUsage"/>
          <ref name="textClass"/>
          <ref name="calendarDesc"/>
+         <ref name="textDesc"/>
          <ref name="listTranspose"/>
       </choice>
    </define>
@@ -3094,7 +2894,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
                   id="oddbyexample-quotation-quotationContents-constraint-1">
             <rule context="tei:quotation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                        test="not(@marks) and not (tei:p)">
 On <name/>, either the @marks attribute should be used, or a paragraph of description provided</report>
             </rule>
@@ -3402,7 +3201,6 @@ Sample values include: 1] first-line; 2] first-letter; 3] before; 4] after</a:do
          <choice>
             <zeroOrMore>
                <choice>
-                  <ref name="model.glossLike"/>
                   <ref name="model.descLike"/>
                </choice>
             </zeroOrMore>
@@ -3433,7 +3231,6 @@ Sample values include: 1] first-line; 2] first-letter; 3] before; 4] after</a:do
                <zeroOrMore>
                   <choice>
                      <ref name="model.descLike"/>
-                     <ref name="model.glossLike"/>
                   </choice>
                </zeroOrMore>
             </choice>
@@ -3740,31 +3537,6 @@ Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Gri
          <empty/>
       </element>
    </define>
-   <define name="teiHeader">
-      <element name="teiHeader">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]</a:documentation>
-         <group>
-            <ref name="fileDesc"/>
-            <zeroOrMore>
-               <ref name="model.teiHeaderPart"/>
-            </zeroOrMore>
-            <optional>
-               <ref name="revisionDesc"/>
-            </optional>
-         </group>
-         <ref name="att.global.attributes"/>
-         <optional>
-            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                       name="type"
-                       a:defaultValue="text">
-               <a:documentation>specifies the kind of document to which the header is attached, for example whether it is a corpus or individual text.
-Sample values include: 1] text; 2] corpus</a:documentation>
-               <ref name="data.enumerated"/>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
    <define name="biblStruct">
       <element name="biblStruct">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(structured bibliographic citation) contains a structured bibliographic citation, in which only bibliographic sub-elements appear and in a specified order. [3.11.1.  2.2.7.  15.3.2. ]</a:documentation>
@@ -3822,6 +3594,37 @@ Sample values include: 1] text; 2] corpus</a:documentation>
             <zeroOrMore>
                <ref name="model.noteLike"/>
             </zeroOrMore>
+         </group>
+         <ref name="att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="imprint">
+      <element name="imprint">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. ]</a:documentation>
+         <group>
+            <zeroOrMore>
+               <choice>
+                  <ref name="classCode"/>
+                  <ref name="catRef"/>
+               </choice>
+            </zeroOrMore>
+            <oneOrMore>
+               <choice>
+                  <group>
+                     <ref name="model.imprintPart"/>
+                  </group>
+                  <group>
+                     <ref name="model.dateLike"/>
+                  </group>
+               </choice>
+               <zeroOrMore>
+                  <ref name="respStmt"/>
+               </zeroOrMore>
+               <zeroOrMore>
+                  <ref name="model.global"/>
+               </zeroOrMore>
+            </oneOrMore>
          </group>
          <ref name="att.global.attributes"/>
          <empty/>
@@ -3911,47 +3714,6 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          <empty/>
       </element>
    </define>
-   <define name="imprint">
-      <element name="imprint">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. ]</a:documentation>
-         <group>
-            <zeroOrMore>
-               <choice>
-                  <ref name="classCode"/>
-                  <ref name="catRef"/>
-               </choice>
-            </zeroOrMore>
-            <oneOrMore>
-               <choice>
-                  <group>
-                     <ref name="model.imprintPart"/>
-                  </group>
-                  <group>
-                     <ref name="model.dateLike"/>
-                  </group>
-               </choice>
-               <zeroOrMore>
-                  <ref name="respStmt"/>
-               </zeroOrMore>
-               <zeroOrMore>
-                  <ref name="model.global"/>
-               </zeroOrMore>
-            </oneOrMore>
-         </group>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="resp">
-      <element name="resp">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]</a:documentation>
-         <ref name="macro.phraseSeq.limited"/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.canonical.attributes"/>
-         <ref name="att.datable.attributes"/>
-         <empty/>
-      </element>
-   </define>
    <define name="relatedItem">
       <element name="relatedItem">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains or references some other bibliographic item which is related to the present one in some specified manner, for example as a constituent or alternative version of it. [3.11.2.7. ]</a:documentation>
@@ -3964,9 +3726,9 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-relatedItem-targetorcontent1-constraint-2">
             <rule context="tei:relatedItem">
-               <sch:report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+               <sch:report xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                           xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
-                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@target and count( child::* ) &gt; 0">
 If the @target attribute on <sch:name/> is used, the
 relatedItem element must be empty</sch:report>
@@ -3975,9 +3737,9 @@ relatedItem element must be empty</sch:report>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-relatedItem-targetorcontent1-constraint-5">
             <rule context="tei:relatedItem">
-               <sch:assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+               <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                           xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
-                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@target or child::*">A relatedItem element should have either a 'target' attribute
         or a child element to indicate the related bibliographic item</sch:assert>
             </rule>
@@ -3990,6 +3752,16 @@ relatedItem element must be empty</sch:report>
                <ref name="data.pointer"/>
             </attribute>
          </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="resp">
+      <element name="resp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]</a:documentation>
+         <ref name="macro.phraseSeq.limited"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.canonical.attributes"/>
+         <ref name="att.datable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4016,6 +3788,42 @@ relatedItem element must be empty</sch:report>
          </choice>
          <ref name="att.global.attributes"/>
          <ref name="att.canonical.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="teiHeader">
+      <element name="teiHeader">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]</a:documentation>
+         <group>
+            <ref name="fileDesc"/>
+            <zeroOrMore>
+               <ref name="model.teiHeaderPart"/>
+            </zeroOrMore>
+            <optional>
+               <ref name="revisionDesc"/>
+            </optional>
+         </group>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                       name="type"
+                       a:defaultValue="text">
+               <a:documentation>specifies the kind of document to which the header is attached, for example whether it is a corpus or individual text.
+Sample values include: 1] text; 2] corpus</a:documentation>
+               <ref name="data.enumerated"/>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="textDesc">
+      <element name="textDesc">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text description) provides a description of a text in terms of its situational parameters. [15.2.1. ]</a:documentation>
+         <group>
+            <ref name="model.textDescPart_sequence"/>
+         </group>
+         <ref name="att.global.attributes"/>
+         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4067,18 +3875,14 @@ relatedItem element must be empty</sch:report>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-damageSpan-spanTo-constraint-6">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                       test="@spanTo">
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">
 The @spanTo attribute of <name/> is required.</assert>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-damageSpan-spanTo_fr-constraint-7">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                       test="@spanTo">L'attribut spanTo est requis.</assert>
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">L'attribut spanTo est requis.</assert>
             </rule>
          </pattern>
          <ref name="att.global.attributes"/>
@@ -4587,9 +4391,9 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.pointing-targetLang-targetLang-constraint-5">
-      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
             <sch:assert test="count(@target)">@targetLang can only be used if @target is specified.</sch:assert>
           </sch:rule>
@@ -4608,14 +4412,15 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.pointing-target-validtarget-constraint-6">
-      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                context="tei:*[@target]">
-                              <sch:report test="starts-with(@target,'#') and not(id(substring(@target,2)))">
-			    local pointer "<sch:value-of select="@target"/>" must resolve to an ID in
-			    this document</sch:report>
-                           </sch:rule>
+      <rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+            xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            context="tei:*[@target]">
+                              <let name="results"
+              value="for $t in        tokenize(@target,'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                              <report test="some $x in $results  satisfies $x">
+Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in
+this document (<value-of select="$results"/>)</report>
+                           </rule>
    </pattern>
    <define name="att.pointing.attribute.evaluate">
       <optional>
@@ -4669,9 +4474,9 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
             id="oddbyexample-att.typed-subtypeTyped-constraint-7">
-      <sch:rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="*[@subtype]">
         <sch:assert test="@type">The <sch:name/> element should not be categorized in detail with @subtype
  unless also categorized in general with @type</sch:assert>
@@ -4693,7 +4498,6 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
          <ref name="att.global.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.declaring.attributes"/>
-         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4768,9 +4572,9 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
                   id="oddbyexample-addSpan-spanTo-constraint-10">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
+                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
-                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@spanTo">The @spanTo attribute of <sch:name/> is required.</sch:assert>
             </rule>
          </pattern>
@@ -4778,9 +4582,9 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
                   id="oddbyexample-addSpan-spanTo_fr-constraint-11">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
+                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
-                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="@spanTo">L'attribut spanTo est requis.</sch:assert>
             </rule>
          </pattern>
@@ -5195,11 +4999,9 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
          <oneOrMore>
             <choice>
                <ref name="model.qLike"/>
-               <ref name="model.egLike"/>
                <ref name="model.biblLike"/>
                <ref name="model.ptrLike"/>
                <ref name="model.global"/>
-               <ref name="model.entryPart"/>
             </choice>
          </oneOrMore>
          <ref name="att.global.attributes"/>
@@ -5621,7 +5423,6 @@ Sample values include: 1] header; 2] footer; 3] pageNum(page number) ; 4] lineNu
          <zeroOrMore>
             <choice>
                <ref name="model.descLike"/>
-               <ref name="model.certLike"/>
             </choice>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
@@ -5763,7 +5564,6 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(verse line) contains a single, possibly incomplete, line of verse. [3.12.1.  3.12.  7.2.5. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
-         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -5826,9 +5626,9 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-lg-atleast1oflggapl-constraint-12">
             <rule context="tei:lg">
-               <sch:assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+               <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                           xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
-                           xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
         must contain at least one child l, lg or gap element.</sch:assert>
             </rule>
@@ -6072,7 +5872,6 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</a
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
          <ref name="att.declaring.attributes"/>
-         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -6233,9 +6032,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-ref-refAtts-constraint-4">
             <rule context="tei:ref">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                       test="@target and @cRef">Only one of the
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
                </report>
             </rule>
@@ -6351,9 +6148,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-s-noNestedS-constraint-5">
             <rule context="tei:s">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                       test="tei:s">You may not nest one s element within
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="tei:s">You may not nest one s element within
       another: use seg instead</report>
             </rule>
          </pattern>
@@ -6438,7 +6233,6 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <zeroOrMore>
             <choice>
                <ref name="model.descLike"/>
-               <ref name="model.certLike"/>
             </choice>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
@@ -6705,6 +6499,13 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
                </zeroOrMore>
             </optional>
          </group>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="oddbyexample-text-headeronlyelement-constraint-8">
+            <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  context="tei:term|tei:editor|tei:email">
+                        <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
+                     </rule>
+         </pattern>
          <ref name="att.global.attributes"/>
          <ref name="att.declaring.attributes"/>
          <ref name="att.typed.attributes"/>

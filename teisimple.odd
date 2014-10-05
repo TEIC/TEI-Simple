@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-     xml:lang="en">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
    <teiHeader>
       <fileDesc>
          <titleStmt>
@@ -38,6 +36,20 @@
             <item>argument byline closer dateline epigraph opener postscript salute signed trailer </item>
          </list>
          <specGrp xml:id="changes">
+            <classSpec ident="model.entryPart" mode="delete"/>
+            <classSpec ident="model.placeNamePart" mode="delete"/>
+            <classSpec ident="model.placeStateLike" mode="delete"/>
+            <classSpec ident="model.egLike" mode="delete"/>
+            <classSpec ident="model.offsetLike" mode="delete"/>
+            <classSpec ident="model.pPart.msdesc" mode="delete"/>
+            <classSpec ident="model.oddDecl" mode="delete"/>
+            <classSpec ident="model.phrase.xml" mode="delete"/>
+            <classSpec ident="model.specDescLike" mode="delete"/>
+            <classSpec ident="model.entryPart" mode="delete"/>
+            <classSpec ident="model.placeNamePart" mode="delete"/>
+            <classSpec ident="model.placeStateLike" mode="delete"/>
+            <classSpec ident="model.certLike" mode="delete"/>
+            <classSpec ident="model.glossLike" mode="delete"/>
             <classSpec ident="att.global.linking" mode="change">
                <attList>
                   <attDef ident="synch" mode="delete"/>
@@ -54,18 +66,20 @@
                   <attDef ident="target" mode="change">
                      <constraintSpec ident="validtarget" scheme="isoschematron">
                         <constraint>
-                           <sch:rule context="tei:*[@target]">
-                              <sch:report test="starts-with(@target,'#') and not(id(substring(@target,2)))">
-			    local pointer "<sch:value-of select="@target"/>" must resolve to an ID in
-			    this document</sch:report>
-                           </sch:rule>
+                           <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@target]">
+                              <let name="results"
+                                   value="for $t in        tokenize(@target,'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                              <report test="some $x in $results  satisfies $x">
+Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in
+this document (<value-of select="$results"/>)</report>
+                           </rule>
                         </constraint>
                      </constraintSpec>
                   </attDef>
                </attList>
             </classSpec>
-            <classSpec key="att.fragmentable" mode="delete"/>
-            <classSpec key="att.datcat" mode="delete"/>
+            <classSpec ident="att.fragmentable" mode="delete"/>
+            <classSpec ident="att.datcat" mode="delete"/>
             <classSpec ident="att.global" mode="change">
                <attList>
                   <attDef ident="rend" mode="delete"/>
@@ -77,11 +91,13 @@
                      </valList>
                      <constraintSpec ident="rendptr" scheme="isoschematron">
                         <constraint>
-                           <sch:rule context="tei:*[@rendition]">
-                              <sch:assert test="starts-with(@rendition,'simple:')          or          (starts-with(@rendition,'#')          and //tei:rendition[@xml:id=substring(current()/@rendition,2)])">
-			    rendition attribute "<sch:value-of select="@rendition"/>" must point to a local
-			    ID or to a token in the simple scheme</sch:assert>
-                           </sch:rule>
+                           <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
+                              <let name="results"
+                                   value="for $val in tokenize(@rendition,'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+                              <assert test="every $x in $results satisfies $x">
+Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
+ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
+                           </rule>
                         </constraint>
                      </constraintSpec>
                   </attDef>
@@ -111,18 +127,29 @@
          </specGrp>
          <specGrp xml:id="header">
             <moduleRef key="header"/>
-            <elementRef key="teiHeader"/>
             <elementRef key="biblStruct"/>
             <elementRef key="charDecl"/>
             <elementRef key="glyph"/>
-            <elementRef key="monogr"/>
             <elementRef key="imprint"/>
-            <elementRef key="resp"/>
+            <elementRef key="monogr"/>
             <elementRef key="relatedItem"/>
+            <elementRef key="resp"/>
             <elementRef key="respStmt"/>
+            <elementRef key="teiHeader"/>
+            <elementRef key="textDesc"/>
             <elementRef key="term"/>
             <elementRef key="editor"/>
             <elementRef key="email"/>
+            <elementSpec ident="text" mode="change">
+               <constraintSpec ident="headeronlyelement" scheme="isoschematron">
+                  <constraint>
+                     <rule xmlns="http://purl.oclc.org/dsdl/schematron"
+                           context="tei:term|tei:editor|tei:email">
+                        <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
+                     </rule>
+                  </constraint>
+               </constraintSpec>
+            </elementSpec>
          </specGrp>
          <specGrp xml:id="atts">
             <classRef key="att.global.facs"/>

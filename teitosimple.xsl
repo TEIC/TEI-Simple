@@ -110,6 +110,10 @@
       <xsl:apply-templates/>
     </xsl:template>
 
+    <xsl:template match="teiHeader">
+      <xsl:copy-of select="."/>
+    </xsl:template>
+
     <!-- merge into name, keep attributes and add @type with translated name of original elements -->
     <xsl:template
         match="persName | orgName | addName | nameLink | roleName | forename | surname | genName | country | placeName">

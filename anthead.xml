@@ -10,6 +10,9 @@
   </path>
 
   <taskdef name="runjing" classpath="${jing}" classname="com.thaiopensource.relaxng.util.JingTask"/>
+ <taskdef name="schematron"
+	  classname="com.schematron.ant.SchematronTask"
+	  classpath="lib/ant-schematron-2010-04-14.jar"/>
 
   <taskdef name="runjing" classpath="${jing}" classname="com.thaiopensource.relaxng.util.JingTask"/>
   <macrodef name="dojob">
@@ -24,7 +27,11 @@
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
     <echo level="info">Validate @{file} against teisimple.rng</echo>
-    <runjing rngfile="teisimple.rng" file="@{file}" failonerror="false"/>
+    <runjing rngfile="teisimple.rng" file="@{file}"
+	     failonerror="false"/>
+    <echo>Validate against Schematron</echo>
+    <schematron file="@{file}" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+
     <delete quiet="true" file="@{file}"/>
     </sequential>
  </macrodef>

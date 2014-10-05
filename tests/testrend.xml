@@ -4,7 +4,7 @@
     <teiHeader>
         <fileDesc>
             <titleStmt>
-                <title/>
+                <title>Testing the handling of rendition in Simple</title>
             </titleStmt>
             <publicationStmt>
                 <p/>
@@ -24,9 +24,10 @@
         <body>
             <p rendition="#foo"><anchor xml:id="bad"/></p>
             <p rendition="bar"/>
-            <p rendition="simple:foo"/>
+            <p rendition="simple:foo #bold italic"/>
             <p rendition="simple:italic"/>
-            <p rendition="#bad"/>
+            <p rendition="#bad #foo"/>
+	    <p><ref target="http://www.bbc.co.uk/ #bad bar #foobar #foo"/></p>
         </body>
     </text>
 </TEI>

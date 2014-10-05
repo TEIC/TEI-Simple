@@ -1,12 +1,11 @@
 default namespace = "http://www.tei-c.org/ns/1.0"
 namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
-namespace ns1 = "http://www.isocat.org/ns/dcr"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-10-05T00:11:17Z. 
+# Schema generated from ODD source 2014-10-05T23:19:01Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -247,20 +246,6 @@ att.datable.attribute.period =
   
   ## supplies a pointer to some location defining a named period of time within which the datable item is understood to have occurred.
   attribute period { data.pointer }?
-att.datcat.attributes =
-  att.datcat.attribute.datcat, att.datcat.attribute.valueDatcat
-att.datcat.attribute.datcat =
-  
-  ## contains a PID (persistent identifier) that aligns the given element with the appropriate Data Category (or categories) in ISOcat.
-  attribute ns1:datcat {
-    list { data.pointer+ }
-  }?
-att.datcat.attribute.valueDatcat =
-  
-  ## contains a PID (persistent identifier) that aligns the content of the given element or the value of the given attribute with the appropriate simple Data Category (or categories) in ISOcat.
-  attribute ns1:valueDatcat {
-    list { data.pointer+ }
-  }?
 att.declarable.attributes = att.declarable.attribute.default
 att.declarable.attribute.default =
   
@@ -281,32 +266,8 @@ att.declaring.attribute.decls =
   attribute decls {
     list { data.pointer+ }
   }?
-att.fragmentable.attributes = att.fragmentable.attribute.part
-att.fragmentable.attribute.part =
-  
-  ## specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.
-  [ a:defaultValue = "N" ]
-  attribute part {
-    
-    ## (yes) the element is fragmented in some (unspecified) respect
-    "Y"
-    | 
-      ## (no) either the element is not fragmented, or no claim is made as to its completeness.
-      "N"
-    | 
-      ## (initial) this is the initial part of a fragmented element
-      "I"
-    | 
-      ## (medial) this is a medial part of a fragmented element
-      "M"
-    | 
-      ## (final) this is the final part of a fragmented element
-      "F"
-  }?
 att.divLike.attributes =
-  att.fragmentable.attributes,
-  att.divLike.attribute.org,
-  att.divLike.attribute.sample
+  att.divLike.attribute.org, att.divLike.attribute.sample
 att.divLike.attribute.org =
   
   ## (organization) specifies how the content of the division is organized.
@@ -432,14 +393,22 @@ sch:pattern [
     context = "tei:*[@rendition]"
     "\x{a}" ~
     "                              "
+    sch:let [
+      name = "results"
+      value =
+        "for $val in tokenize(@rendition,'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"
+    ]
+    "\x{a}" ~
+    "                              "
     sch:assert [
-      test =
-        "starts-with(@rendition,'simple:')          or          (starts-with(@rendition,'#')          and //tei:rendition[@xml:id=substring(current()/@rendition,2)])"
+      test = "every $x in $results satisfies $x"
       "\x{a}" ~
-      '			    rendition attribute "'
+      'Error: Each of the rendition values in "'
       sch:value-of [ select = "@rendition" ]
       '" must point to a local\x{a}' ~
-      "			    ID or to a token in the simple scheme"
+      "ID or to a token in the Simple scheme  ("
+      sch:value-of [ select = "$results" ]
+      ")"
     ]
     "\x{a}" ~
     "                           "
@@ -596,10 +565,7 @@ att.placement.attribute.place =
        | xsd:Name)+
     }
   }?
-att.segLike.attributes =
-  att.datcat.attributes,
-  att.fragmentable.attributes,
-  att.segLike.attribute.function
+att.segLike.attributes = att.segLike.attribute.function
 att.segLike.attribute.function =
   
   ## characterizes the function of the segment.
@@ -791,20 +757,7 @@ model.measureLike_sequence = measure, num
 model.measureLike_sequenceOptional = measure?, num?
 model.measureLike_sequenceOptionalRepeatable = measure*, num*
 model.measureLike_sequenceRepeatable = measure+, num+
-model.egLike = notAllowed
-model.egLike_alternation = notAllowed
-model.egLike_sequence = empty
-model.egLike_sequenceOptional = empty
-model.egLike_sequenceOptionalRepeatable = empty
-model.egLike_sequenceRepeatable = notAllowed
 model.graphicLike = formula | graphic
-model.offsetLike = notAllowed
-model.offsetLike_alternation = notAllowed
-model.offsetLike_sequence = empty
-model.offsetLike_sequenceOptional = empty
-model.offsetLike_sequenceOptionalRepeatable = empty
-model.offsetLike_sequenceRepeatable = notAllowed
-model.pPart.msdesc = notAllowed
 model.pPart.editorial = abbr | choice | expan | am | ex
 model.pPart.editorial_alternation = abbr | choice | expan | am | ex
 model.pPart.editorial_sequence = abbr, choice, expan, am, ex
@@ -929,14 +882,6 @@ model.lPart = notAllowed
 model.global.meta = listTranspose
 model.milestoneLike = anchor | cb | fw | lb | milestone | pb
 model.gLike = g
-model.oddDecl = notAllowed
-model.oddDecl_alternation = notAllowed
-model.oddDecl_sequence = empty
-model.oddDecl_sequenceOptional = empty
-model.oddDecl_sequenceOptionalRepeatable = empty
-model.oddDecl_sequenceRepeatable = notAllowed
-model.phrase.xml = notAllowed
-model.specDescLike = notAllowed
 model.biblLike = biblFull | biblStruct | bibl | listBibl
 model.biblLike_alternation = biblFull | biblStruct | bibl | listBibl
 model.biblLike_sequence = biblFull, biblStruct, bibl, listBibl
@@ -983,31 +928,13 @@ model.stageLike_sequence = stage
 model.stageLike_sequenceOptional = stage?
 model.stageLike_sequenceOptionalRepeatable = stage*
 model.stageLike_sequenceRepeatable = stage+
-model.entryPart = notAllowed
 model.global.edit = damageSpan | addSpan | gap | space
 model.divPart = model.lLike | model.pLike | lg | sp | spGrp
-model.placeNamePart = notAllowed
-model.placeNamePart_alternation = notAllowed
-model.placeNamePart_sequence = empty
-model.placeNamePart_sequenceOptional = empty
-model.placeNamePart_sequenceOptionalRepeatable = empty
-model.placeNamePart_sequenceRepeatable = notAllowed
-model.placeStateLike = model.placeNamePart
-model.placeStateLike_alternation = model.placeNamePart_alternation
-model.placeStateLike_sequence = model.placeNamePart_sequence
-model.placeStateLike_sequenceOptional =
-  model.placeNamePart_sequenceOptional?
-model.placeStateLike_sequenceOptionalRepeatable =
-  model.placeNamePart_sequenceOptionalRepeatable*
-model.placeStateLike_sequenceRepeatable =
-  model.placeNamePart_sequenceRepeatable+
 model.publicationStmtPart.agency = distributor | authority | publisher
 model.publicationStmtPart.detail =
   idno | availability | address | date | pubPlace
 model.availabilityPart = licence
-model.certLike = notAllowed
 model.descLike = desc
-model.glossLike = notAllowed
 model.quoteLike = cit | quote
 model.quoteLike_alternation = cit | quote
 model.quoteLike_sequence = cit, quote
@@ -1058,7 +985,8 @@ model.titlepagePart =
 model.choicePart =
   abbr | corr | expan | orig | reg | seg | sic | unclear | am | ex
 model.imprintPart = distributor | publisher | pubPlace
-model.catDescPart = notAllowed
+model.catDescPart = textDesc
+model.textDescPart_sequence = empty
 model.castItemPart = actor | role | roleDesc
 model.addressLike = email | address
 model.addressLike_alternation = email | address
@@ -1066,42 +994,16 @@ model.addressLike_sequence = email, address
 model.addressLike_sequenceOptional = email?, address?
 model.addressLike_sequenceOptionalRepeatable = email*, address*
 model.addressLike_sequenceRepeatable = email+, address+
-model.nameLike =
-  model.nameLike.agent
-  | model.offsetLike
-  | model.placeStateLike
-  | idno
-  | rs
+model.nameLike = model.nameLike.agent | idno | rs
 model.nameLike_alternation =
-  model.nameLike.agent_alternation
-  | model.offsetLike_alternation
-  | model.placeStateLike_alternation
-  | idno
-  | rs
-model.nameLike_sequence =
-  model.nameLike.agent_sequence,
-  model.offsetLike_sequence,
-  model.placeStateLike_sequence,
-  idno,
-  rs
+  model.nameLike.agent_alternation | idno | rs
+model.nameLike_sequence = model.nameLike.agent_sequence, idno, rs
 model.nameLike_sequenceOptional =
-  model.nameLike.agent_sequenceOptional?,
-  model.offsetLike_sequenceOptional?,
-  model.placeStateLike_sequenceOptional?,
-  idno?,
-  rs?
+  model.nameLike.agent_sequenceOptional?, idno?, rs?
 model.nameLike_sequenceOptionalRepeatable =
-  model.nameLike.agent_sequenceOptionalRepeatable*,
-  model.offsetLike_sequenceOptionalRepeatable*,
-  model.placeStateLike_sequenceOptionalRepeatable*,
-  idno*,
-  rs*
+  model.nameLike.agent_sequenceOptionalRepeatable*, idno*, rs*
 model.nameLike_sequenceRepeatable =
-  model.nameLike.agent_sequenceRepeatable+,
-  model.offsetLike_sequenceRepeatable+,
-  model.placeStateLike_sequenceRepeatable+,
-  idno+,
-  rs+
+  model.nameLike.agent_sequenceRepeatable+, idno+, rs+
 model.global =
   model.global.meta
   | model.milestoneLike
@@ -1125,9 +1027,7 @@ model.pPart.data =
   | model.addressLike
   | model.nameLike
 model.inter =
-  model.egLike
-  | model.oddDecl
-  | model.biblLike
+  model.biblLike
   | model.labelLike
   | model.listLike
   | model.stageLike
@@ -1138,20 +1038,15 @@ model.phrase =
   model.segLike
   | model.highlighted
   | model.graphicLike
-  | model.pPart.msdesc
   | model.pPart.edit
   | model.ptrLike
   | model.lPart
-  | model.phrase.xml
-  | model.specDescLike
   | model.pPart.data
 model.limitedPhrase =
   model.hiLike
   | model.emphLike
-  | model.pPart.msdesc
   | model.pPart.editorial
   | model.ptrLike
-  | model.phrase.xml
   | model.pPart.data
 model.divLike = \div
 model.divGenLike = notAllowed
@@ -1186,6 +1081,7 @@ model.profileDescPart =
   | langUsage
   | textClass
   | calendarDesc
+  | textDesc
   | listTranspose
 att.source.attributes = att.source.attribute.source
 att.source.attribute.source =
@@ -1744,9 +1640,7 @@ taxonomy =
   
   ## defines a typology either implicitly, by means of a bibliographic citation, or explicitly by a structured taxonomy. [2.3.7. ]
   element taxonomy {
-    ((model.glossLike | model.descLike)*
-     | category+
-     | (model.biblLike, category*)),
+    ((model.descLike)* | category+ | (model.biblLike, category*)),
     att.global.attributes,
     empty
   }
@@ -1754,7 +1648,7 @@ category =
   
   ## contains an individual descriptive category, possibly nested within a superordinate category, within a user-defined taxonomy. [2.3.7. ]
   element category {
-    ((catDesc+ | (model.descLike | model.glossLike)*),
+    ((catDesc+ | (model.descLike)*),
      category*),
     att.global.attributes,
     empty
@@ -1954,18 +1848,6 @@ listChange =
     [ a:defaultValue = "true" ] attribute ordered { data.truthValue }?,
     empty
   }
-teiHeader =
-  
-  ## (TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]
-  element teiHeader {
-    (fileDesc, model.teiHeaderPart*, revisionDesc?),
-    att.global.attributes,
-    
-    ## specifies the kind of document to which the header is attached, for example whether it is a corpus or individual text.
-    ## Sample values include: 1] text; 2] corpus
-    [ a:defaultValue = "text" ] attribute type { data.enumerated }?,
-    empty
-  }
 biblStruct =
   
   ## (structured bibliographic citation) contains a structured bibliographic citation, in which only bibliographic sub-elements appear and in a specified order. [3.11.1.  2.2.7.  15.3.2. ]
@@ -1994,6 +1876,15 @@ glyph =
     att.global.attributes,
     empty
   }
+imprint =
+  
+  ## groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. ]
+  element imprint {
+    ((classCode | catRef)*,
+     ((model.imprintPart | model.dateLike), respStmt*, model.global*)+),
+    att.global.attributes,
+    empty
+  }
 monogr =
   
   ## (monographic level) contains bibliographic elements describing an item (e.g. a book or journal) published as an independent item (i.e. as a separate physical object). [3.11.2.1. ]
@@ -2011,25 +1902,6 @@ monogr =
      imprint,
      (imprint | extent)*),
     att.global.attributes,
-    empty
-  }
-imprint =
-  
-  ## groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. ]
-  element imprint {
-    ((classCode | catRef)*,
-     ((model.imprintPart | model.dateLike), respStmt*, model.global*)+),
-    att.global.attributes,
-    empty
-  }
-resp =
-  
-  ## (responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]
-  element resp {
-    macro.phraseSeq.limited,
-    att.global.attributes,
-    att.canonical.attributes,
-    att.datable.attributes,
     empty
   }
 relatedItem =
@@ -2085,6 +1957,16 @@ relatedItem =
     attribute target { data.pointer }?,
     empty
   }
+resp =
+  
+  ## (responsibility) contains a phrase describing the nature of a person's intellectual responsibility, or an organization's role in the production or distribution of a work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]
+  element resp {
+    macro.phraseSeq.limited,
+    att.global.attributes,
+    att.canonical.attributes,
+    att.datable.attributes,
+    empty
+  }
 respStmt =
   
   ## (statement of responsibility) supplies a statement of responsibility for the intellectual content of a text, edition, recording, or series, where the specialized elements for authors, editors, etc. do not suffice or do not apply. May also be used to encode information about individuals or organizations which have played a role in the production or distribution of a bibliographic work. [3.11.2.2.  2.2.1.  2.2.2.  2.2.5. ]
@@ -2092,6 +1974,27 @@ respStmt =
     ((resp+, model.nameLike.agent+) | (model.nameLike.agent+, resp+)),
     att.global.attributes,
     att.canonical.attributes,
+    empty
+  }
+teiHeader =
+  
+  ## (TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1.  15.1. ]
+  element teiHeader {
+    (fileDesc, model.teiHeaderPart*, revisionDesc?),
+    att.global.attributes,
+    
+    ## specifies the kind of document to which the header is attached, for example whether it is a corpus or individual text.
+    ## Sample values include: 1] text; 2] corpus
+    [ a:defaultValue = "text" ] attribute type { data.enumerated }?,
+    empty
+  }
+textDesc =
+  
+  ## (text description) provides a description of a text in terms of its situational parameters. [15.2.1. ]
+  element textDesc {
+    model.textDescPart_sequence,
+    att.global.attributes,
+    att.declarable.attributes,
     empty
   }
 term =
@@ -2565,14 +2468,22 @@ sch:pattern [
     context = "tei:*[@target]"
     "\x{a}" ~
     "                              "
+    sch:let [
+      name = "results"
+      value =
+        "for $t in        tokenize(@target,'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"
+    ]
+    "\x{a}" ~
+    "                              "
     sch:report [
-      test =
-        "starts-with(@target,'#') and not(id(substring(@target,2)))"
+      test = "some $x in $results  satisfies $x"
       "\x{a}" ~
-      '			    local pointer "'
+      'Error: Every local pointer in "'
       sch:value-of [ select = "@target" ]
-      '" must resolve to an ID in\x{a}' ~
-      "			    this document"
+      '" must point to an ID in\x{a}' ~
+      "this document ("
+      sch:value-of [ select = "$results" ]
+      ")"
     ]
     "\x{a}" ~
     "                           "
@@ -2646,7 +2557,6 @@ ab =
     att.global.attributes,
     att.typed.attributes,
     att.declaring.attributes,
-    att.fragmentable.attributes,
     empty
   }
 abbr =
@@ -2901,12 +2811,7 @@ cit =
   
   ## (cited quotation) contains a quotation from some other document, together with a bibliographic reference to its source. In a dictionary it may contain an example text with at least one occurrence of the word form, used in the sense being described, or a translation of the headword, or an example. [3.3.3.  4.3.1.  9.3.5.1. ]
   element cit {
-    (model.qLike
-     | model.egLike
-     | model.biblLike
-     | model.ptrLike
-     | model.global
-     | model.entryPart)+,
+    (model.qLike | model.biblLike | model.ptrLike | model.global)+,
     att.global.attributes,
     att.typed.attributes,
     empty
@@ -3145,7 +3050,7 @@ gap =
   
   ## indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible, invisible, or inaudible. [3.4.3. ]
   element gap {
-    (model.descLike | model.certLike)*,
+    (model.descLike)*,
     att.global.attributes,
     att.editLike.attributes,
     
@@ -3233,12 +3138,7 @@ item =
 l =
   
   ## (verse line) contains a single, possibly incomplete, line of verse. [3.12.1.  3.12.  7.2.5. ]
-  element l {
-    macro.paraContent,
-    att.global.attributes,
-    att.fragmentable.attributes,
-    empty
-  }
+  element l { macro.paraContent, att.global.attributes, empty }
 label =
   
   ## contains any label or heading used to identify part of a text, typically but not exclusively in a list or glossary. [3.7. ]
@@ -3464,7 +3364,6 @@ p =
     macro.paraContent,
     att.global.attributes,
     att.declaring.attributes,
-    att.fragmentable.attributes,
     empty
   }
 pb =
@@ -3774,7 +3673,7 @@ space =
   
   ## indicates the location of a significant space in the copy text. [11.5.1. ]
   element space {
-    (model.descLike | model.certLike)*,
+    (model.descLike)*,
     att.global.attributes,
     att.dimensions.attributes,
     att.responsibility.attribute.cert,
@@ -3922,7 +3821,27 @@ TEI =
      (front, model.global*)?,
      (body | group),
      model.global*,
-     (back, model.global*)?),
+     (back, model.global*)?)
+    >> sch:pattern [
+         id = "oddbyexample-text-headeronlyelement-constraint-8"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:term|tei:editor|tei:email"
+           "\x{a}" ~
+           "                        "
+           sch:report [
+             test = "ancestor::tei:text"
+             "Error: The element "
+             sch:name [ ]
+             " is not permitted outside the header"
+           ]
+           "\x{a}" ~
+           "                     "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
     att.global.attributes,
     att.declaring.attributes,
     att.typed.attributes,
