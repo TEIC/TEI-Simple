@@ -1,6 +1,6 @@
 
 <!--
-DTD generated from ODD source 2014-10-05T23:18:59Z. 
+DTD generated from ODD source 2014-10-06T11:09:46Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -192,12 +192,16 @@ default (true|false) "false" '>
 decls CDATA  #IMPLIED'>
 <!ENTITY % att.declaring.attributes '
  %att.declaring.attribute.decls;'> 
+<!ENTITY % att.fragmentable.attribute.part '
+part (Y|N|I|M|F) "N" '>
+<!ENTITY % att.fragmentable.attributes '
+ %att.fragmentable.attribute.part;'> 
 <!ENTITY % att.divLike.attribute.org '
 org (composite|uniform) "uniform" '>
 
 <!ENTITY % att.divLike.attribute.sample '
 sample (initial|medial|final|unknown|complete) "complete" '>
-<!ENTITY % att.divLike.attributes '
+<!ENTITY % att.divLike.attributes '%att.fragmentable.attributes;
  %att.divLike.attribute.org;
  %att.divLike.attribute.sample;'> 
 <!ENTITY % att.docStatus.attribute.status '
@@ -302,7 +306,7 @@ place NMTOKENS  #IMPLIED'>
  %att.placement.attribute.place;'> 
 <!ENTITY % att.segLike.attribute.function '
 function %data.enumerated;  #IMPLIED'>
-<!ENTITY % att.segLike.attributes '
+<!ENTITY % att.segLike.attributes '%att.fragmentable.attributes;
  %att.segLike.attribute.function;'> 
 <!ENTITY % att.sortable.attribute.sortKey '
 sortKey %data.word;  #IMPLIED'>
@@ -445,6 +449,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.gLike_sequenceOptional "g?"> 
 <!ENTITY % model.gLike_sequenceOptionalRepeatable "g*"> 
 <!ENTITY % model.gLike_sequenceRepeatable "g+"> 
+<!ENTITY % model.phrase.xml "att |gi"> 
+<!ENTITY % model.phrase.xml_sequence "att, gi"> 
+<!ENTITY % model.phrase.xml_sequenceOptional "att?, gi?"> 
+<!ENTITY % model.phrase.xml_sequenceOptionalRepeatable "att*, gi*"> 
+<!ENTITY % model.phrase.xml_sequenceRepeatable "att+, gi+"> 
 <!ENTITY % model.biblLike "biblFull |biblStruct |bibl |listBibl"> 
 <!ENTITY % model.biblLike_sequence "biblFull, biblStruct, bibl, listBibl"> 
 <!ENTITY % model.biblLike_sequenceOptional "biblFull?, biblStruct?, bibl?, listBibl?"> 
@@ -640,16 +649,16 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.common_sequenceOptional "%model.divPart;?, %model.inter;?"> 
 <!ENTITY % model.common_sequenceOptionalRepeatable "%model.divPart;*, %model.inter;*"> 
 <!ENTITY % model.common_sequenceRepeatable "%model.divPart;+, %model.inter;+"> 
-<!ENTITY % model.phrase "%model.segLike; |%model.highlighted; |%model.graphicLike; |%model.pPart.edit; |%model.ptrLike; |%model.pPart.data;"> 
-<!ENTITY % model.phrase_sequence "%model.segLike;, %model.highlighted;, %model.graphicLike;, %model.pPart.edit;, %model.ptrLike;, %model.pPart.data;"> 
-<!ENTITY % model.phrase_sequenceOptional "%model.segLike;?, %model.highlighted;?, %model.graphicLike;?, %model.pPart.edit;?, %model.ptrLike;?, %model.pPart.data;?"> 
-<!ENTITY % model.phrase_sequenceOptionalRepeatable "%model.segLike;*, %model.highlighted;*, %model.graphicLike;*, %model.pPart.edit;*, %model.ptrLike;*, %model.pPart.data;*"> 
-<!ENTITY % model.phrase_sequenceRepeatable "%model.segLike;+, %model.highlighted;+, %model.graphicLike;+, %model.pPart.edit;+, %model.ptrLike;+, %model.pPart.data;+"> 
-<!ENTITY % model.limitedPhrase "%model.hiLike; |%model.emphLike; |%model.pPart.editorial; |%model.ptrLike; |%model.pPart.data;"> 
-<!ENTITY % model.limitedPhrase_sequence "%model.hiLike;, %model.emphLike;, %model.pPart.editorial;, %model.ptrLike;, %model.pPart.data;"> 
-<!ENTITY % model.limitedPhrase_sequenceOptional "%model.hiLike;?, %model.emphLike;?, %model.pPart.editorial;?, %model.ptrLike;?, %model.pPart.data;?"> 
-<!ENTITY % model.limitedPhrase_sequenceOptionalRepeatable "%model.hiLike;*, %model.emphLike;*, %model.pPart.editorial;*, %model.ptrLike;*, %model.pPart.data;*"> 
-<!ENTITY % model.limitedPhrase_sequenceRepeatable "%model.hiLike;+, %model.emphLike;+, %model.pPart.editorial;+, %model.ptrLike;+, %model.pPart.data;+"> 
+<!ENTITY % model.phrase "%model.segLike; |%model.highlighted; |%model.graphicLike; |%model.pPart.edit; |%model.ptrLike; |%model.phrase.xml; |%model.pPart.data;"> 
+<!ENTITY % model.phrase_sequence "%model.segLike;, %model.highlighted;, %model.graphicLike;, %model.pPart.edit;, %model.ptrLike;, %model.phrase.xml;, %model.pPart.data;"> 
+<!ENTITY % model.phrase_sequenceOptional "%model.segLike;?, %model.highlighted;?, %model.graphicLike;?, %model.pPart.edit;?, %model.ptrLike;?, %model.phrase.xml;?, %model.pPart.data;?"> 
+<!ENTITY % model.phrase_sequenceOptionalRepeatable "%model.segLike;*, %model.highlighted;*, %model.graphicLike;*, %model.pPart.edit;*, %model.ptrLike;*, %model.phrase.xml;*, %model.pPart.data;*"> 
+<!ENTITY % model.phrase_sequenceRepeatable "%model.segLike;+, %model.highlighted;+, %model.graphicLike;+, %model.pPart.edit;+, %model.ptrLike;+, %model.phrase.xml;+, %model.pPart.data;+"> 
+<!ENTITY % model.limitedPhrase "%model.hiLike; |%model.emphLike; |%model.pPart.editorial; |%model.ptrLike; |%model.phrase.xml; |%model.pPart.data;"> 
+<!ENTITY % model.limitedPhrase_sequence "%model.hiLike;, %model.emphLike;, %model.pPart.editorial;, %model.ptrLike;, %model.phrase.xml;, %model.pPart.data;"> 
+<!ENTITY % model.limitedPhrase_sequenceOptional "%model.hiLike;?, %model.emphLike;?, %model.pPart.editorial;?, %model.ptrLike;?, %model.phrase.xml;?, %model.pPart.data;?"> 
+<!ENTITY % model.limitedPhrase_sequenceOptionalRepeatable "%model.hiLike;*, %model.emphLike;*, %model.pPart.editorial;*, %model.ptrLike;*, %model.phrase.xml;*, %model.pPart.data;*"> 
+<!ENTITY % model.limitedPhrase_sequenceRepeatable "%model.hiLike;+, %model.emphLike;+, %model.pPart.editorial;+, %model.ptrLike;+, %model.phrase.xml;+, %model.pPart.data;+"> 
 <!ENTITY % model.divLike "div"> 
 <!ENTITY % model.divLike_sequence "div"> 
 <!ENTITY % model.divLike_sequenceOptional "div?"> 
@@ -829,7 +838,8 @@ version %data.version;  #IMPLIED >
 <!ATTLIST ab
  %att.global.attributes;
  %att.typed.attributes;
- %att.declaring.attributes; >
+ %att.declaring.attributes;
+ %att.fragmentable.attributes; >
 <!--doc:(abbreviation) contains an abbreviation of any sort. [3.5.5. ] -->
 <!ELEMENT abbr %macro.phraseSeq;>
 <!ATTLIST abbr xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -908,6 +918,12 @@ version %data.versionNumber;  #REQUIRED >
 <!ATTLIST argument xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST argument
  %att.global.attributes; >
+<!--doc:(attribute) contains the name of an attribute appearing within running text. [22. ] -->
+<!ELEMENT att  (#PCDATA)>
+<!ATTLIST att xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST att
+ %att.global.attributes;
+scheme %data.enumerated;  "TEI"  >
 <!--doc:in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ] -->
 <!ELEMENT author %macro.phraseSeq;>
 <!ATTLIST author xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1056,6 +1072,12 @@ target CDATA  #IMPLIED >
 <!ATTLIST charDecl xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST charDecl
  %att.global.attributes; >
+<!--doc:(character property) provides a name and value for some property of the parent character or glyph. [5.2. ] -->
+<!ELEMENT charProp (localName,value)>
+<!ATTLIST charProp xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST charProp
+ %att.global.attributes;
+ %att.typed.attributes; >
 <!--doc:groups a number of alternative encodings for the same point in a text. [3.4. ] -->
 <!ELEMENT choice (%model.choicePart;|choice)*>
 <!ATTLIST choice xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1324,10 +1346,21 @@ agent %data.enumerated;  #IMPLIED >
  %att.global.attributes;
  %att.declarable.attributes;
 datum %data.enumerated;  "WGS84"  >
+<!--doc:(element name) contains the name (generic identifier) of an element. [22.  22.4.4. ] -->
+<!ELEMENT gi  (#PCDATA)>
+<!ATTLIST gi xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST gi
+ %att.global.attributes;
+scheme %data.enumerated;  "TEI"  >
 <!--doc:(character glyph) provides descriptive information about a character glyph. [5.2. ] -->
-<!ELEMENT glyph ((%model.descLike;)*,figure*,(%model.graphicLike;)*,(%model.noteLike;)*)>
+<!ELEMENT glyph (glyphName?,(%model.descLike;)*,charProp*,figure*,(%model.graphicLike;)*,(%model.noteLike;)*)>
 <!ATTLIST glyph xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST glyph
+ %att.global.attributes; >
+<!--doc:(character glyph name) contains the name of a glyph, expressed following Unicode conventions for character names. [5.2. ] -->
+<!ELEMENT glyphName  (#PCDATA)>
+<!ATTLIST glyphName xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST glyphName
  %att.global.attributes; >
 <!--doc:indicates the location of an inline graphic, illustration, or figure. [3.9. ] -->
 <!ELEMENT graphic (%model.descLike;)*>
@@ -1415,7 +1448,8 @@ scheme %data.pointer;  #IMPLIED >
 <!ELEMENT l %macro.paraContent;>
 <!ATTLIST l xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST l
- %att.global.attributes; >
+ %att.global.attributes;
+ %att.fragmentable.attributes; >
 <!--doc:contains any label or heading used to identify part of a text, typically but not exclusively in a list or glossary. [3.7. ] -->
 <!ELEMENT label %macro.phraseSeq;>
 <!ATTLIST label xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1499,6 +1533,11 @@ ordered %data.truthValue;  "true"  >
 <!ELEMENT listTranspose (transpose)+>
 <!ATTLIST listTranspose xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST listTranspose
+ %att.global.attributes; >
+<!--doc:(locally-defined property name) contains a locally defined name for some property. [5.2.1. ] -->
+<!ELEMENT localName  (#PCDATA)>
+<!ATTLIST localName xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST localName
  %att.global.attributes; >
 <!--doc:contains a word or phrase referring to some quantity of an object or commodity, usually comprising a number, a unit, and a commodity name. [3.5.3. ] -->
 <!ELEMENT measure %macro.phraseSeq;>
@@ -1602,7 +1641,8 @@ value %data.numeric;  #IMPLIED >
 <!ATTLIST p xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST p
  %att.global.attributes;
- %att.declaring.attributes; >
+ %att.declaring.attributes;
+ %att.fragmentable.attributes; >
 <!--doc:(page break) marks the start of a new page in a paginated document. [3.10.3. ] -->
 <!ELEMENT pb EMPTY>
 <!ATTLIST pb xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1809,7 +1849,7 @@ scope %data.enumerated;  #IMPLIED >
  %att.typed.attributes;
  %att.responsibility.attributes; >
 <!--doc:(s-unit) contains a sentence-like division of a text. [17.1.  8.4.1. ] -->
-<!ELEMENT s (#PCDATA|%model.gLike;|%model.global;|formula|graphic|foreign|term|title|hi|address|email|date|time|measure|num|name|idno|rs|abbr|am|choice|ex|expan|add|corr|damage|del|handShift|mod|orig|redo|reg|restore|retrace|sic|supplied|surplus|unclear|undo|ref|c|pc|seg|w)*>
+<!ELEMENT s (#PCDATA|%model.gLike;|%model.global;|formula|graphic|foreign|term|title|hi|address|email|date|time|measure|num|name|idno|rs|abbr|am|choice|ex|expan|add|corr|damage|del|handShift|mod|orig|redo|reg|restore|retrace|sic|supplied|surplus|unclear|undo|att|gi|ref|c|pc|seg|w)*>
 <!ATTLIST s xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST s
  %att.global.attributes;
@@ -2100,6 +2140,11 @@ agent %data.enumerated;  #IMPLIED >
  %att.spanning.attributes;
  %att.transcriptional.attributes;
 target CDATA  #IMPLIED >
+<!--doc:contains a single value for some property, attribute, or other analysis. [5.2.1. ] -->
+<!ELEMENT value %macro.xtext;>
+<!ATTLIST value xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST value
+ %att.global.attributes; >
 <!--doc:(word) represents a grammatical (not necessarily orthographic) word. [17.1. ] -->
 <!ELEMENT w (#PCDATA|%model.gLike;|seg|w|c|pc|%model.global;|_DUMMY_model.lPart|%model.hiLike;|%model.pPart.edit;)*>
 <!ATTLIST w xmlns CDATA "http://www.tei-c.org/ns/1.0">

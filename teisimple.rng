@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-10-05T23:19:01Z. 
+Schema generated from ODD source 2014-10-06T11:09:47Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -493,7 +493,32 @@ belongs, but this <sch:name/> element has no textual content.</sch:assert>
          </attribute>
       </optional>
    </define>
+   <define name="att.fragmentable.attributes">
+      <ref name="att.fragmentable.attribute.part"/>
+   </define>
+   <define name="att.fragmentable.attribute.part">
+      <optional>
+         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                    name="part"
+                    a:defaultValue="N">
+            <a:documentation>specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.</a:documentation>
+            <choice>
+               <value>Y</value>
+               <a:documentation>(yes) the element is fragmented in some (unspecified) respect</a:documentation>
+               <value>N</value>
+               <a:documentation>(no) either the element is not fragmented, or no claim is made as to its completeness.</a:documentation>
+               <value>I</value>
+               <a:documentation>(initial) this is the initial part of a fragmented element</a:documentation>
+               <value>M</value>
+               <a:documentation>(medial) this is a medial part of a fragmented element</a:documentation>
+               <value>F</value>
+               <a:documentation>(final) this is the final part of a fragmented element</a:documentation>
+            </choice>
+         </attribute>
+      </optional>
+   </define>
    <define name="att.divLike.attributes">
+      <ref name="att.fragmentable.attributes"/>
       <ref name="att.divLike.attribute.org"/>
       <ref name="att.divLike.attribute.sample"/>
    </define>
@@ -648,13 +673,37 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       <optional>
          <attribute name="rendition">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:bold; 2] simple:italic</a:documentation>
+Suggested values include: 1] simple:bold; 2] simple:bold; 3] simple:allcapl; 4] simple:italic; 5] simple:normalweight; 6] simple:smallcaps; 7] simple:doublestrikethrough; 8] simple:strikethrough; 9] simple:subscript; 10] simple:superscript; 11] simple:typewriter; 12] simple:doubleunderline; 13] simple:underline; 14] simple:wavyunderlline</a:documentation>
             <list>
                <oneOrMore>
                   <choice>
                      <value>simple:bold</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:bold</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:allcapl</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                      <value>simple:italic</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:normalweight</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:smallcaps</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:doublestrikethrough</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:strikethrough</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:subscript</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:superscript</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:typewriter</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:doubleunderline</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:underline</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:wavyunderlline</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                      <ref name="data.pointer"/>
                   </choice>
@@ -667,7 +716,7 @@ Suggested values include: 1] simple:bold; 2] simple:italic</a:documentation>
             id="oddbyexample-att.global-rendition-rendptr-constraint-2">
       <rule xmlns:rng="http://relaxng.org/ns/structure/1.0" context="tei:*[@rendition]">
                               <let name="results"
-              value="for $val in tokenize(@rendition,'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+              value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
                               <assert test="every $x in $results satisfies $x">
 Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
 ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
@@ -895,6 +944,7 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
       </optional>
    </define>
    <define name="att.segLike.attributes">
+      <ref name="att.fragmentable.attributes"/>
       <ref name="att.segLike.attribute.function"/>
    </define>
    <define name="att.segLike.attribute.function">
@@ -1643,6 +1693,12 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="g"/>
       </choice>
    </define>
+   <define name="model.phrase.xml">
+      <choice>
+         <ref name="att"/>
+         <ref name="gi"/>
+      </choice>
+   </define>
    <define name="model.biblLike">
       <choice>
          <ref name="biblFull"/>
@@ -2326,6 +2382,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="model.pPart.edit"/>
          <ref name="model.ptrLike"/>
          <ref name="model.lPart"/>
+         <ref name="model.phrase.xml"/>
          <ref name="model.pPart.data"/>
       </choice>
    </define>
@@ -2335,6 +2392,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
          <ref name="model.emphLike"/>
          <ref name="model.pPart.editorial"/>
          <ref name="model.ptrLike"/>
+         <ref name="model.phrase.xml"/>
          <ref name="model.pPart.data"/>
       </choice>
    </define>
@@ -3582,8 +3640,14 @@ Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Gri
       <element name="glyph">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character glyph) provides descriptive information about a character glyph. [5.2. ]</a:documentation>
          <group>
+            <optional>
+               <ref name="glyphName"/>
+            </optional>
             <zeroOrMore>
                <ref name="model.descLike"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="charProp"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="figure"/>
@@ -3824,6 +3888,78 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          </group>
          <ref name="att.global.attributes"/>
          <ref name="att.declarable.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="glyphName">
+      <element name="glyphName">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character glyph name) contains the name of a glyph, expressed following Unicode conventions for character names. [5.2. ]</a:documentation>
+         <text/>
+         <ref name="att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="localName">
+      <element name="localName">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(locally-defined property name) contains a locally defined name for some property. [5.2.1. ]</a:documentation>
+         <text/>
+         <ref name="att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="value">
+      <element name="value">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a single value for some property, attribute, or other analysis. [5.2.1. ]</a:documentation>
+         <ref name="macro.xtext"/>
+         <ref name="att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="charProp">
+      <element name="charProp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character property) provides a name and value for some property of the parent character or glyph. [5.2. ]</a:documentation>
+         <group>
+            <choice>
+               <ref name="localName"/>
+            </choice>
+            <ref name="value"/>
+         </group>
+         <ref name="att.global.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="att">
+      <element name="att">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(attribute) contains the name of an attribute appearing within running text. [22. ]</a:documentation>
+         <ref name="data.name"/>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                       name="scheme"
+                       a:defaultValue="TEI">
+               <a:documentation>supplies an identifier for the scheme in which this name is defined.
+Sample values include: 1] TEI(text encoding initiative) ; 2] DBK(docbook) ; 3] XX(unknown) ; 4] imaginary; 5] XHTML; 6] XML; 7] XI</a:documentation>
+               <ref name="data.enumerated"/>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="gi">
+      <element name="gi">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(element name) contains the name (generic identifier) of an element. [22.  22.4.4. ]</a:documentation>
+         <ref name="data.name"/>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                       name="scheme"
+                       a:defaultValue="TEI">
+               <a:documentation>supplies the name of the scheme in which this name is defined.
+Sample values include: 1] TEI; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron; 5] HTML</a:documentation>
+               <ref name="data.enumerated"/>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
@@ -4416,7 +4552,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
             xmlns:rng="http://relaxng.org/ns/structure/1.0"
             context="tei:*[@target]">
                               <let name="results"
-              value="for $t in        tokenize(@target,'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+              value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                               <report test="some $x in $results  satisfies $x">
 Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in
 this document (<value-of select="$results"/>)</report>
@@ -4498,6 +4634,7 @@ this document (<value-of select="$results"/>)</report>
          <ref name="att.global.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.declaring.attributes"/>
+         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -5564,6 +5701,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(verse line) contains a single, possibly incomplete, line of verse. [3.12.1.  3.12.  7.2.5. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
+         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -5872,6 +6010,7 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</a
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
          <ref name="att.declaring.attributes"/>
+         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -6138,6 +6277,8 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
                <ref name="surplus"/>
                <ref name="unclear"/>
                <ref name="undo"/>
+               <ref name="att"/>
+               <ref name="gi"/>
                <ref name="ref"/>
                <ref name="c"/>
                <ref name="pc"/>
@@ -6502,7 +6643,7 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="oddbyexample-text-headeronlyelement-constraint-8">
             <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                  context="tei:term|tei:editor|tei:email">
+                  context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
                         <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
                      </rule>
          </pattern>

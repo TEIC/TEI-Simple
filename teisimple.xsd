@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:ns1="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2014-10-05T23:19:01Z. 
+    Schema generated from ODD source 2014-10-06T11:09:47Z. 
     Edition: Version 2.7.0. Last updated on
     	16th September 2014, revision 13036
     Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -491,7 +491,47 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
+  <xs:attributeGroup name="att.fragmentable.attributes">
+    <xs:attributeGroup ref="ns1:att.fragmentable.attribute.part"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.fragmentable.attribute.part">
+    <xs:attribute name="part" default="N">
+      <xs:annotation>
+        <xs:documentation>specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Y">
+            <xs:annotation>
+              <xs:documentation>(yes) the element is fragmented in some (unspecified) respect</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="N">
+            <xs:annotation>
+              <xs:documentation>(no) either the element is not fragmented, or no claim is made as to its completeness.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="I">
+            <xs:annotation>
+              <xs:documentation>(initial) this is the initial part of a fragmented element</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="M">
+            <xs:annotation>
+              <xs:documentation>(medial) this is a medial part of a fragmented element</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="F">
+            <xs:annotation>
+              <xs:documentation>(final) this is the final part of a fragmented element</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:attributeGroup name="att.divLike.attributes">
+    <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
     <xs:attributeGroup ref="ns1:att.divLike.attribute.org"/>
     <xs:attributeGroup ref="ns1:att.divLike.attribute.sample"/>
   </xs:attributeGroup>
@@ -679,7 +719,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</xs:documentat
     <xs:attribute name="rendition">
       <xs:annotation>
         <xs:documentation>points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:bold; 2] simple:italic</xs:documentation>
+Suggested values include: 1] simple:bold; 2] simple:bold; 3] simple:allcapl; 4] simple:italic; 5] simple:normalweight; 6] simple:smallcaps; 7] simple:doublestrikethrough; 8] simple:strikethrough; 9] simple:subscript; 10] simple:superscript; 11] simple:typewriter; 12] simple:doubleunderline; 13] simple:underline; 14] simple:wavyunderlline</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction>
@@ -694,7 +734,67 @@ Suggested values include: 1] simple:bold; 2] simple:italic</xs:documentation>
                   </xs:simpleType>
                   <xs:simpleType>
                     <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:bold"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:allcapl"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
                       <xs:enumeration value="simple:italic"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:normalweight"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:smallcaps"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:doublestrikethrough"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:strikethrough"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:subscript"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:superscript"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:typewriter"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:doubleunderline"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:underline"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:wavyunderlline"/>
                     </xs:restriction>
                   </xs:simpleType>
                 </xs:union>
@@ -1018,6 +1118,7 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
     </xs:attribute>
   </xs:attributeGroup>
   <xs:attributeGroup name="att.segLike.attributes">
+    <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
     <xs:attributeGroup ref="ns1:att.segLike.attribute.function"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="att.segLike.attribute.function">
@@ -1638,6 +1739,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </xs:attribute>
     </xs:complexType>
   </xs:element>
+  <xs:element name="model.phrase.xml" abstract="true"/>
   <xs:group name="model.biblLike">
     <xs:choice>
       <xs:element ref="ns1:biblFull"/>
@@ -2285,6 +2387,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element ref="ns1:model.graphicLike"/>
       <xs:group ref="ns1:model.pPart.edit"/>
       <xs:element ref="ns1:model.ptrLike"/>
+      <xs:element ref="ns1:model.phrase.xml"/>
       <xs:group ref="ns1:model.pPart.data"/>
     </xs:choice>
   </xs:group>
@@ -2294,6 +2397,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:group ref="ns1:model.emphLike"/>
       <xs:group ref="ns1:model.pPart.editorial"/>
       <xs:element ref="ns1:model.ptrLike"/>
+      <xs:element ref="ns1:model.phrase.xml"/>
       <xs:group ref="ns1:model.pPart.data"/>
     </xs:choice>
   </xs:group>
@@ -3571,7 +3675,9 @@ Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Gri
     </xs:annotation>
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" ref="ns1:glyphName"/>
         <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.descLike"/>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:charProp"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:figure"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.graphicLike"/>
         <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:model.noteLike"/>
@@ -3743,6 +3849,83 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
     <xs:complexType>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.declarable.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="glyphName">
+    <xs:annotation>
+      <xs:documentation>(character glyph name) contains the name of a glyph, expressed following Unicode conventions for character names. [5.2. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="localName">
+    <xs:annotation>
+      <xs:documentation>(locally-defined property name) contains a locally defined name for some property. [5.2.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="value">
+    <xs:annotation>
+      <xs:documentation>contains a single value for some property, attribute, or other analysis. [5.2.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.xtext">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="charProp">
+    <xs:annotation>
+      <xs:documentation>(character property) provides a name and value for some property of the parent character or glyph. [5.2. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:localName"/>
+        <xs:element ref="ns1:value"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attributeGroup ref="ns1:att.typed.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="att" substitutionGroup="ns1:model.phrase.xml">
+    <xs:annotation>
+      <xs:documentation>(attribute) contains the name of an attribute appearing within running text. [22. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="ns1:data.name">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attribute name="scheme" default="TEI" type="ns1:data.enumerated">
+            <xs:annotation>
+              <xs:documentation>supplies an identifier for the scheme in which this name is defined.
+Sample values include: 1] TEI(text encoding initiative) ; 2] DBK(docbook) ; 3] XX(unknown) ; 4] imaginary; 5] XHTML; 6] XML; 7] XI</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gi" substitutionGroup="ns1:model.phrase.xml">
+    <xs:annotation>
+      <xs:documentation>(element name) contains the name (generic identifier) of an element. [22.  22.4.4. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:simpleContent>
+        <xs:extension base="ns1:data.name">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attribute name="scheme" default="TEI" type="ns1:data.enumerated">
+            <xs:annotation>
+              <xs:documentation>supplies the name of the scheme in which this name is defined.
+Sample values include: 1] TEI; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron; 5] HTML</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:simpleContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="term">
@@ -4647,6 +4830,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
           <xs:attributeGroup ref="ns1:att.typed.attributes"/>
           <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
+          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -5480,6 +5664,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       <xs:complexContent>
         <xs:extension base="ns1:macro.paraContent">
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -5806,6 +5991,7 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</x
         <xs:extension base="ns1:macro.paraContent">
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
           <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
+          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -6134,6 +6320,8 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
         <xs:element ref="ns1:surplus"/>
         <xs:element ref="ns1:unclear"/>
         <xs:element ref="ns1:undo"/>
+        <xs:element ref="ns1:att"/>
+        <xs:element ref="ns1:gi"/>
         <xs:element ref="ns1:ref"/>
         <xs:element ref="ns1:c"/>
         <xs:element ref="ns1:pc"/>

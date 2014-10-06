@@ -82,12 +82,12 @@
             <item>
                 <in>code</in>
                 <out>hi</out>
-                <add>rend</add>
+                <add>rendition</add>
             </item>
             <item>
                 <in>emph</in>
                 <out>hi</out>
-                <add>rend</add>
+                <add>rendition</add>
             </item>
             <item>
                 <in>soCalled</in>
@@ -98,20 +98,18 @@
                 <in>ptr</in>
                 <out>ref</out>
             </item>
+
             <item>
                 <in>term</in>
                 <out>seg</out>
                 <add>type</add>
             </item>
+
         </list>
     </xsl:variable>
 
     <xsl:template match="/">
       <xsl:apply-templates/>
-    </xsl:template>
-
-    <xsl:template match="teiHeader">
-      <xsl:copy-of select="."/>
     </xsl:template>
 
     <!-- merge into name, keep attributes and add @type with translated name of original elements -->
@@ -128,7 +126,7 @@
 
 
     <!-- merge into element named according to transl table, keep attributes and add attribute with name of original elements -->
-    <xsl:template match="code | emph | term">
+    <xsl:template match="soCalled | code | emph | term[ancestor::text]">
         <xsl:variable name="lname" select="local-name()"/>
         <xsl:variable name="tname" select="$transtable//item[in=$lname]/out"/>
         <xsl:variable name="aname" select="$transtable//item[in=$lname]/add"/>
@@ -136,6 +134,7 @@
         <xsl:element name="{$tname}">
             <xsl:if test="string($aname)">
                 <xsl:attribute name="{$aname}">
+		  <xsl:if test="$aname='rendition'">simple:</xsl:if>
                     <xsl:value-of select="$lname"/>
                 </xsl:attribute>
             </xsl:if>
@@ -163,7 +162,11 @@
     <xsl:template match="@rend">
         <xsl:if test="not(../@rendition)">
         <xsl:attribute name="rendition">
-            <xsl:text>simple:</xsl:text><xsl:value-of select="."/>
+	  <xsl:for-each select="tokenize(.,' ')">
+            <xsl:text>simple:</xsl:text>
+	    <xsl:value-of select="."/>
+            <xsl:text> </xsl:text>
+	  </xsl:for-each>
         </xsl:attribute>
         </xsl:if>
     </xsl:template>
@@ -177,7 +180,12 @@
                 <!-- merge rend and rendition -->
                 <xsl:attribute name="rendition">
                     <xsl:value-of select="."/>
-                    <xsl:text>simple:</xsl:text><xsl:value-of select="../@rend"/>
+		    <xsl:text> </xsl:text>
+		    <xsl:for-each select="tokenize(.,' ')">
+		      <xsl:text>simple:</xsl:text>
+		      <xsl:value-of select="."/>
+		      <xsl:text> </xsl:text>
+		    </xsl:for-each>
                 </xsl:attribute>
             </xsl:otherwise>
         </xsl:choose>

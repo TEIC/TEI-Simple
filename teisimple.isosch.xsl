@@ -210,7 +210,7 @@ belongs, but this <xsl:text/>
 	<!--RULE -->
 <xsl:template match="tei:*[@rendition]" priority="1000" mode="M6">
       <xsl:variable name="results"
-                    select="for $val in tokenize(@rendition,'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+                    select="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
 
 		    <!--ASSERT -->
 <xsl:choose>
@@ -381,7 +381,7 @@ The @spanTo attribute of <xsl:text/>
 	<!--RULE -->
 <xsl:template match="tei:*[@target]" priority="1000" mode="M13">
       <xsl:variable name="results"
-                    select="for $t in        tokenize(@target,'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                    select="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
 
 		    <!--REPORT -->
 <xsl:if test="some $x in $results  satisfies $x">
@@ -509,7 +509,9 @@ this document (<xsl:text/>
 
 
 	<!--RULE -->
-<xsl:template match="tei:term|tei:editor|tei:email" priority="1000" mode="M19">
+<xsl:template match="tei:term|tei:editor|tei:email|tei:att|tei:gi"
+                 priority="1000"
+                 mode="M19">
 
 		<!--REPORT -->
 <xsl:if test="ancestor::tei:text">

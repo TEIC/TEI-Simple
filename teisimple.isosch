@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
    <title>ISO Schematron rules</title>
-   <!-- This file generated 2014-10-05T23:19:02.414+01:00 by 'extract-isosch.xsl'. -->
+   <!-- This file generated 2014-10-06T11:09:48.512+01:00 by 'extract-isosch.xsl'. -->
 
 <!-- ********************* -->
 <!-- namespaces, declared: -->
@@ -28,7 +28,7 @@ belongs, but this <name/> element has no textual content.</assert>
    <pattern id="oddbyexample-att.global-rendition-constraint-rendptr-2">
                            <rule context="tei:*[@rendition]">
                               <let name="results"
-              value="for $val in tokenize(@rendition,'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+              value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
                               <assert test="every $x in $results satisfies $x">
 Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
 ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
@@ -77,7 +77,7 @@ The @spanTo attribute of <name/> is required.</assert>
    <pattern id="oddbyexample-att.pointing-target-constraint-validtarget-10">
                            <rule context="tei:*[@target]">
                               <let name="results"
-              value="for $t in        tokenize(@target,'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+              value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                               <report test="some $x in $results  satisfies $x">
 Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in
 this document (<value-of select="$results"/>)</report>
@@ -114,7 +114,7 @@ this document (<value-of select="$results"/>)</report>
       </rule>
    </pattern>
    <pattern id="oddbyexample-text-constraint-headeronlyelement-19">
-                     <rule context="tei:term|tei:editor|tei:email">
+                     <rule context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
                         <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
                      </rule>
                   </pattern>
