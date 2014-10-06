@@ -68,8 +68,6 @@
 		  <attDef ident="synch" mode="delete"/>
 		  <attDef ident="sameAs" mode="delete"/>
 		  <attDef ident="copyOf" mode="delete"/>
-		  <attDef ident="next" mode="delete"/>
-		  <attDef ident="prev" mode="delete"/>
 		  <attDef ident="exclude" mode="delete"/>
 		  <attDef ident="select" mode="delete"/>
 	      </attList>
@@ -196,6 +194,9 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
 	    </specGrp>
 
 	    <specGrp xml:id="atts">
+
+	    <classRef key="att.global.analytic"/>
+
 	    <!-- attributes needed -->
 	    <classRef key="att.global.facs"/>
 	    <classRef key="att.citing"/>

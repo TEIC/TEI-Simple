@@ -1,6 +1,6 @@
 
 <!--
-DTD generated from ODD source 2014-10-06T11:09:46Z. 
+DTD generated from ODD source 2014-10-06T16:44:25Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -70,14 +70,26 @@ source CDATA  #IMPLIED'>
 change CDATA  #IMPLIED'>
 <!ENTITY % att.global.change.attributes '
  %att.global.change.attribute.change;'> 
+<!ENTITY % att.global.analytic.attribute.ana '
+ana CDATA  #IMPLIED'>
+<!ENTITY % att.global.analytic.attributes '
+ %att.global.analytic.attribute.ana;'> 
 <!ENTITY % att.global.facs.attribute.facs '
 facs CDATA  #IMPLIED'>
 <!ENTITY % att.global.facs.attributes '
  %att.global.facs.attribute.facs;'> 
 <!ENTITY % att.global.linking.attribute.corresp '
 corresp CDATA  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.next '
+next %data.pointer;  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.prev '
+prev %data.pointer;  #IMPLIED'>
 <!ENTITY % att.global.linking.attributes '
- %att.global.linking.attribute.corresp;'> 
+ %att.global.linking.attribute.corresp;
+ %att.global.linking.attribute.next;
+ %att.global.linking.attribute.prev;'> 
 <!--end of predeclared classes -->
 
 <!ENTITY % att.ascribed.attribute.who '
@@ -241,7 +253,7 @@ xml:base %data.pointer;  #IMPLIED'>
 
 <!ENTITY % att.global.attribute.xmlspace '
 xml:space (default|preserve) #IMPLIED'>
-<!ENTITY % att.global.attributes '%att.global.linking.attributes;%att.global.facs.attributes;%att.global.change.attributes;
+<!ENTITY % att.global.attributes '%att.global.linking.attributes;%att.global.analytic.attributes;%att.global.facs.attributes;%att.global.change.attributes;
  %att.global.attribute.xmlid;
  %att.global.attribute.n;
  %att.global.attribute.xmllang;
@@ -757,6 +769,10 @@ points CDATA  #IMPLIED'>
 change CDATA  #IMPLIED'>
 <!ENTITY % att.global.change.attributes '
  %att.global.change.attribute.change;'> 
+<!ENTITY % att.global.analytic.attribute.ana '
+ana CDATA  #IMPLIED'>
+<!ENTITY % att.global.analytic.attributes '
+ %att.global.analytic.attribute.ana;'> 
 <!ENTITY % att.global.facs.attribute.facs '
 facs CDATA  #IMPLIED'>
 <!ENTITY % att.global.facs.attributes '
@@ -791,8 +807,16 @@ evaluate (all|one|none) #IMPLIED'>
  %att.pointing.attribute.evaluate;'> 
 <!ENTITY % att.global.linking.attribute.corresp '
 corresp CDATA  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.next '
+next %data.pointer;  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.prev '
+prev %data.pointer;  #IMPLIED'>
 <!ENTITY % att.global.linking.attributes '
- %att.global.linking.attribute.corresp;'> 
+ %att.global.linking.attribute.corresp;
+ %att.global.linking.attribute.next;
+ %att.global.linking.attribute.prev;'> 
 <!ENTITY % att.typed.attribute.type '
 type %data.enumerated;  #IMPLIED'>
 
