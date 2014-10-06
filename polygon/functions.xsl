@@ -81,8 +81,8 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeNewline" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
-        <xsl:copy-of select="tei:makeInline($element, $content)"/>
-        <br/>
+        <xsl:copy-of select="tei:makeInline($element, '')"/>
+        <br />
     </xsl:function>
     
     
@@ -99,9 +99,11 @@ of this software, even if advised of the possibility of such damage.
                 
             </xsl:when>
             <xsl:otherwise>
+                <xsl:if test="string($content)">
                 <xslo:apply-templates>
                     <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
                 </xslo:apply-templates>
+                </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
         
@@ -118,7 +120,7 @@ of this software, even if advised of the possibility of such damage.
         </xsl:function>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Block level element</desc>
+        <desc>Marginal note</desc>
     </doc>
     <xsl:function name="tei:makeMarginalNote" as="node()*">
         <xsl:param name="element"/>
@@ -126,7 +128,34 @@ of this software, even if advised of the possibility of such damage.
         
         <xsl:copy-of select="tei:makeElement('span', $element/@class, $content)"/>
     </xsl:function>
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Title Page</desc>
+    </doc>
     
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Figure</desc>
+    </doc>
+    <xsl:function name="tei:makeFigure" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        
+                <xslo:choose>
+                    <!-- if @facs use it to display figure, else display placeholder -->
+                    <xslo:when test="string(@facs)">
+                            <xsl:element name="img">
+                                
+                        <xslo:attribute name="src"><xslo:value-of select="@facs"/></xslo:attribute>
+                            </xsl:element>
+                    </xslo:when>
+                    <xslo:otherwise>                <span class="verybig">�</span>
+                    </xslo:otherwise>
+                </xslo:choose>
+                
+    </xsl:function>
+    
+
     <xsl:function name="tei:makeElement" as="node()*">
         <xsl:param name="name"/>
         <xsl:param name="class"/>
@@ -145,6 +174,7 @@ of this software, even if advised of the possibility of such damage.
     </doc>
     <xsl:function name="tei:makeHTMLHeader" as="node()*">
             <head>
+                <meta charset="UTF-8" />
                 <title>
                     TEI-Simple: transform to html generated from odd file.
                 </title>

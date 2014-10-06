@@ -10,7 +10,15 @@
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
         <desc>
-            <p> TEI utility stylesheet for transformation from TEI P5 to TEI Simple</p>
+            <p>Prototype TEI utility stylesheet for transformation from TEI P5 to TEI Simple</p>
+            <p>To do:
+                <list>
+                    <item>when @context not present assume default context</item>
+                    <item>when @mode not present assume default mode = render</item>
+                    <item>deal with @follow_rendition attribute</item>
+                    <item>deal with styling instructions from simple namespace (eg. simple:bold)</item>
+                </list>
+            </p>
             <p>This software is dual-licensed: 1. Distributed under a Creative Commons
                 Attribution-ShareAlike 3.0 Unported License
                 http://creativecommons.org/licenses/by-sa/3.0/ 2.
@@ -36,11 +44,6 @@
     </doc>
 
 
-
-
-
-
-
     <xsl:template match="/">
         <xslo:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
             xmlns:tei="http://www.tei-c.org/ns/1.0"
@@ -50,7 +53,7 @@
             <xsl:apply-templates select="//tei:elementSpec"/>
 
             <xslo:template match="/">
-                <html xmlns="http://www.w3.org/1999/xhtml">
+                <html>
 
                     <xsl:copy-of select="tei:makeHTMLHeader()"/>
                     <body>
@@ -68,19 +71,14 @@
 
 
     <xsl:template match="tei:elementSpec">
-        <xsl:for-each-group select="process[@mode='render' or not(@mode)]" group-by="@xpath">
+        <xsl:for-each-group select="process[@mode='render' or not(@mode)]" group-by="@context">
             <xsl:variable name="xpth" select="current-group()[1]"/>
 
             <xsl:variable name="xp"
-                select="if(current-group()[1]/string(@xpath)) then concat(current-group()[1]/parent::node()/@ident, '[', @xpath, ']') else current-group()[1]/parent::node()/@ident"/>
+                select="if(current-group()[1]/string(@context)) then concat(current-group()[1]/parent::node()/@ident, '[', @context, ']') else current-group()[1]/parent::node()/@ident"/>
 
             <xslo:template match="{$xp}">
                 <xsl:for-each select="current-group()">
-                    <!--
-            <xsl:variable name="xp" select="if(string(@xpath)) then concat(parent::node()/@ident, '[', @xpath, ']') else parent::node()/@ident"/>
-            <xsl:variable name="content" select="substring-before(substring-after(@name, '('), ')')"/>
-            <xsl:variable name="class" select="if(@class) then @class else ()"/>
-            -->
 
                     <xsl:variable name="content"
                         select="substring-before(substring-after(@name, '('), ')')"/>
@@ -106,6 +104,14 @@
                         <xsl:when test="starts-with(@name, 'makeParagraph')">
                             <xsl:copy-of select="tei:makeParagraph(., $content)"/>
                         </xsl:when>
+                        <xsl:when test="starts-with(@name, 'makeFigure')">
+                            <xsl:copy-of select="tei:makeFigure(., $content)"/>
+                        </xsl:when>
+                        
+                        <!-- when omit() generate empty template -->
+                        <xsl:when test="starts-with(@name, 'omit')"/>
+                        
+                        
                         <xsl:otherwise>
                             <div>
                                 <xsl:if test="string($class)">
