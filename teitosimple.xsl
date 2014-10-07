@@ -216,6 +216,9 @@
     <xsl:template match="publicationStmt">
       <publicationStmt>
 	<xsl:choose>
+	<xsl:when test="p">
+	    <xsl:apply-templates/>
+	</xsl:when>
 	  <xsl:when test="publisher or authority or distributor">
 	  <xsl:apply-templates select="publisher|authority|distributor" />
 	  <xsl:apply-templates select="*[not(self::publisher or
