@@ -175,6 +175,7 @@
       <xsl:apply-templates select="/" mode="M17"/>
       <xsl:apply-templates select="/" mode="M18"/>
       <xsl:apply-templates select="/" mode="M19"/>
+      <xsl:apply-templates select="/" mode="M20"/>
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
@@ -204,7 +205,7 @@ belongs, but this <xsl:text/>
       <xsl:apply-templates select="*" mode="M5"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.global-rendition-constraint-rendptr-2-->
+   <!--PATTERN oddbyexample-att.global-rendition-constraint-renditionpointer-2-->
 
 
 	<!--RULE -->
@@ -388,8 +389,7 @@ The @spanTo attribute of <xsl:text/>
          <xsl:message>
 Error: Every local pointer in "<xsl:text/>
             <xsl:value-of select="@target"/>
-            <xsl:text/>" must point to an ID in
-this document (<xsl:text/>
+            <xsl:text/>" must point to an ID in this document (<xsl:text/>
             <xsl:value-of select="$results"/>
             <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
       </xsl:if>
@@ -423,7 +423,7 @@ this document (<xsl:text/>
       <xsl:apply-templates select="*" mode="M14"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-addSpan-constraint-spanTo-12-->
+   <!--PATTERN oddbyexample-addSpan-constraint-spanTo-14-->
 
 
 	<!--RULE -->
@@ -445,7 +445,7 @@ this document (<xsl:text/>
       <xsl:apply-templates select="*" mode="M15"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-lg-constraint-atleast1oflggapl-14-->
+   <!--PATTERN oddbyexample-lg-constraint-atleast1oflggapl-16-->
 
 
 	<!--RULE -->
@@ -466,7 +466,7 @@ this document (<xsl:text/>
       <xsl:apply-templates select="*" mode="M16"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-ref-constraint-refAtts-15-->
+   <!--PATTERN oddbyexample-ref-constraint-refAtts-17-->
 
 
 	<!--RULE -->
@@ -487,7 +487,7 @@ this document (<xsl:text/>
       <xsl:apply-templates select="*" mode="M17"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-s-constraint-noNestedS-16-->
+   <!--PATTERN oddbyexample-s-constraint-noNestedS-18-->
 
 
 	<!--RULE -->
@@ -505,13 +505,36 @@ this document (<xsl:text/>
       <xsl:apply-templates select="*" mode="M18"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-text-constraint-headeronlyelement-19-->
+   <!--PATTERN oddbyexample-subst-constraint-substContents1-19-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:subst" priority="1000" mode="M19">
+
+		<!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="child::tei:add and child::tei:del"/>
+         <xsl:otherwise>
+            <xsl:message>
+               <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/> must have at least one child add and at least one child del (child::tei:add and child::tei:del)</xsl:message>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M19"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M19"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M19">
+      <xsl:apply-templates select="*" mode="M19"/>
+   </xsl:template>
+
+   <!--PATTERN oddbyexample-text-constraint-headeronlyelement-20-->
 
 
 	<!--RULE -->
 <xsl:template match="tei:term|tei:editor|tei:email|tei:att|tei:gi"
                  priority="1000"
-                 mode="M19">
+                 mode="M20">
 
 		<!--REPORT -->
 <xsl:if test="ancestor::tei:text">
@@ -519,10 +542,10 @@ this document (<xsl:text/>
             <xsl:value-of select="name(.)"/>
             <xsl:text/> is not permitted outside the header (ancestor::tei:text)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M19"/>
+      <xsl:apply-templates select="*" mode="M20"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M19"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M19">
-      <xsl:apply-templates select="*" mode="M19"/>
+   <xsl:template match="text()" priority="-1" mode="M20"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M20">
+      <xsl:apply-templates select="*" mode="M20"/>
    </xsl:template>
 </xsl:stylesheet>

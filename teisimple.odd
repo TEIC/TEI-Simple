@@ -15,27 +15,146 @@
    </teiHeader>
    <text>
       <body>
+         <p>A total of 104 elements are selected for use in
+	the <gi>text</gi> part of a document.</p>
          <list type="gloss">
-            <label/>
-            <item>author ab address addrLine anchor back bibl body cb cit date div figDesc figure floatingText foreign formula front fw g graphic group head hi item l label lb lg list listBibl measure milestone note num p pb q quote ref rs seg sp speaker spGrp stage teiCorpus TEI text time title </item>
             <label>castlist</label>
-            <item>actor castGroup castItem castList role roleDesc </item>
+            <item>
+               <gi>actor</gi> 
+               <gi>castGroup</gi> 
+               <gi>castItem</gi> 
+               <gi>castList</gi> 
+               <gi>role</gi> 
+               <gi>roleDesc</gi> 
+            </item>
+            <label>character</label>
+            <item>
+               <gi>g</gi> 
+            </item>
             <label>editorial</label>
-            <item>abbr add addSpan choice corr del desc expan gap handShift orig reg sic space supplied unclear am ex </item>
-            <label>header</label>
-            <item/>
+            <item>
+               <gi>abbr</gi> 
+               <gi>add</gi> 
+               <gi>addSpan</gi> 
+               <gi>am</gi> 
+               <gi>choice</gi> 
+               <gi>corr</gi> 
+               <gi>del</gi> 
+               <gi>desc</gi> 
+               <gi>ex</gi> 
+               <gi>expan</gi> 
+               <gi>gap</gi> 
+               <gi>handShift</gi> 
+               <gi>orig</gi> 
+               <gi>reg</gi> 
+               <gi>sic</gi> 
+               <gi>space</gi> 
+               <gi>subst</gi> 
+               <gi>supplied</gi> 
+               <gi>unclear</gi> 
+            </item>
+            <label>interpretation</label>
+            <item>
+               <gi>author</gi> 
+               <gi>date</gi> 
+               <gi>foreign</gi> 
+               <gi>hi</gi> 
+               <gi>measure</gi> 
+               <gi>name</gi> 
+               <gi>num</gi> 
+               <gi>q</gi> 
+               <gi>quote</gi> 
+               <gi>ref</gi> 
+               <gi>rs</gi> 
+               <gi>seg</gi> 
+               <gi>time</gi> 
+            </item>
             <label>linguistic</label>
-            <item>c pc s w </item>
-            <label>name</label>
-            <item>name </item>
+            <item>
+               <gi>c</gi> 
+               <gi>pc</gi> 
+               <gi>s</gi> 
+               <gi>w</gi> 
+            </item>
+            <label>pictures</label>
+            <item>
+               <gi>figDesc</gi> 
+               <gi>figure</gi> 
+               <gi>graphic</gi> 
+            </item>
+            <label>structure</label>
+            <item>
+               <gi>bibl</gi> 
+               <gi>title</gi> 
+               <gi>TEI</gi> 
+               <gi>teiCorpus</gi> 
+               <gi>ab</gi> 
+               <gi>address</gi> 
+               <gi>addrLine</gi> 
+               <gi>anchor</gi> 
+               <gi>back</gi> 
+               <gi>body</gi> 
+               <gi>cb</gi> 
+               <gi>cit</gi> 
+               <gi>div</gi> 
+               <gi>floatingText</gi> 
+               <gi>formula</gi> 
+               <gi>front</gi> 
+               <gi>fw</gi> 
+               <gi>group</gi> 
+               <gi>head</gi> 
+               <gi>item</gi> 
+               <gi>l</gi> 
+               <gi>label</gi> 
+               <gi>lb</gi> 
+               <gi>lg</gi> 
+               <gi>list</gi> 
+               <gi>listBibl</gi> 
+               <gi>milestone</gi> 
+               <gi>note</gi> 
+               <gi>p</gi> 
+               <gi>pb</gi> 
+               <gi>sp</gi> 
+               <gi>speaker</gi> 
+               <gi>spGrp</gi> 
+               <gi>stage</gi> 
+               <gi>text</gi> 
+            </item>
             <label>table</label>
-            <item>cell row table </item>
+            <item>
+               <gi>cell</gi> 
+               <gi>row</gi> 
+               <gi>table</gi> 
+            </item>
             <label>titlepage</label>
-            <item>docAuthor docDate docEdition docImprint docTitle imprimatur publisher pubPlace titlePage titlePart </item>
+            <item>
+               <gi>publisher</gi> 
+               <gi>pubPlace</gi> 
+               <gi>docAuthor</gi> 
+               <gi>docDate</gi> 
+               <gi>docEdition</gi> 
+               <gi>docImprint</gi> 
+               <gi>docTitle</gi> 
+               <gi>imprimatur</gi> 
+               <gi>titlePage</gi> 
+               <gi>titlePart</gi> 
+            </item>
             <label>wrapper</label>
-            <item>argument byline closer dateline epigraph opener postscript salute signed trailer </item>
+            <item>
+               <gi>argument</gi> 
+               <gi>byline</gi> 
+               <gi>closer</gi> 
+               <gi>dateline</gi> 
+               <gi>epigraph</gi> 
+               <gi>opener</gi> 
+               <gi>postscript</gi> 
+               <gi>salute</gi> 
+               <gi>signed</gi> 
+               <gi>trailer</gi> 
+            </item>
          </list>
          <specGrp xml:id="changes">
+            <p>A set of unused model classes are removed.</p>
             <classSpec ident="model.entryPart" mode="delete"/>
             <classSpec ident="model.placeNamePart" mode="delete"/>
             <classSpec ident="model.placeStateLike" mode="delete"/>
@@ -49,6 +168,7 @@
             <classSpec ident="model.placeStateLike" mode="delete"/>
             <classSpec ident="model.certLike" mode="delete"/>
             <classSpec ident="model.glossLike" mode="delete"/>
+            <p>Some uncommon attributes are removed from global linking.</p>
             <classSpec ident="att.global.linking" mode="change">
                <attList>
                   <attDef ident="synch" mode="delete"/>
@@ -67,8 +187,7 @@
                               <let name="results"
                                    value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                               <report test="some $x in $results  satisfies $x">
-Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in
-this document (<value-of select="$results"/>)</report>
+Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
                            </rule>
                         </constraint>
                      </constraintSpec>
@@ -76,6 +195,25 @@ this document (<value-of select="$results"/>)</report>
                </attList>
             </classSpec>
             <classSpec ident="att.datcat" mode="delete"/>
+            <elementSpec ident="name" mode="change">
+               <attList>
+                  <attDef ident="type" mode="change">
+                     <valList mode="add" type="closed">
+                        <valItem ident="person"/>
+                        <valItem ident="forename"/>
+                        <valItem ident="surname"/>
+                        <valItem ident="personGenName"/>
+                        <valItem ident="personRoleName"/>
+                        <valItem ident="personAddName"/>
+                        <valItem ident="nameLink"/>
+                        <valItem ident="organisation"/>
+                        <valItem ident="country"/>
+                        <valItem ident="placeGeog"/>
+                        <valItem ident="place"/>
+                     </valList>
+                  </attDef>
+               </attList>
+            </elementSpec>
             <classSpec ident="att.global" mode="change">
                <attList>
                   <attDef ident="rend" mode="delete"/>
@@ -83,8 +221,7 @@ this document (<value-of select="$results"/>)</report>
                   <attDef ident="rendition" mode="change">
                      <valList mode="add" type="semi">
                         <valItem ident="simple:bold"/>
-                        <valItem ident="simple:bold"/>
-                        <valItem ident="simple:allcapl"/>
+                        <valItem ident="simple:allcaps"/>
                         <valItem ident="simple:italic"/>
                         <valItem ident="simple:normalweight"/>
                         <valItem ident="simple:smallcaps"/>
@@ -97,7 +234,7 @@ this document (<value-of select="$results"/>)</report>
                         <valItem ident="simple:underline"/>
                         <valItem ident="simple:wavyunderlline"/>
                      </valList>
-                     <constraintSpec ident="rendptr" scheme="isoschematron">
+                     <constraintSpec ident="renditionpointer" scheme="isoschematron">
                         <constraint>
                            <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
                               <let name="results"
@@ -135,25 +272,25 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
          </specGrp>
          <specGrp xml:id="header">
             <moduleRef key="header"/>
+            <elementRef key="att"/>
             <elementRef key="biblStruct"/>
             <elementRef key="charDecl"/>
+            <elementRef key="charProp"/>
+            <elementRef key="editor"/>
+            <elementRef key="email"/>
+            <elementRef key="gi"/>
             <elementRef key="glyph"/>
+            <elementRef key="glyphName"/>
             <elementRef key="imprint"/>
+            <elementRef key="localName"/>
             <elementRef key="monogr"/>
             <elementRef key="relatedItem"/>
             <elementRef key="resp"/>
             <elementRef key="respStmt"/>
             <elementRef key="teiHeader"/>
-            <elementRef key="textDesc"/>
-            <elementRef key="glyphName"/>
-            <elementRef key="localName"/>
-            <elementRef key="value"/>
-            <elementRef key="charProp"/>
-            <elementRef key="att"/>
-            <elementRef key="gi"/>
             <elementRef key="term"/>
-            <elementRef key="editor"/>
-            <elementRef key="email"/>
+            <elementRef key="textDesc"/>
+            <elementRef key="value"/>
             <elementSpec ident="text" mode="change">
                <constraintSpec ident="headeronlyelement" scheme="isoschematron">
                   <constraint>
@@ -177,6 +314,13 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
          </specGrp>
          <specGrp xml:id="simple">
             <elementRef key="author"/>
+            <elementRef key="bibl"/>
+            <elementRef key="date"/>
+            <elementRef key="publisher"/>
+            <elementRef key="pubPlace"/>
+            <elementRef key="title"/>
+            <elementRef key="TEI"/>
+            <elementRef key="teiCorpus"/>
             <elementRef key="ab"/>
             <elementRef key="abbr"/>
             <elementRef key="actor"/>
@@ -184,10 +328,10 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
             <elementRef key="address"/>
             <elementRef key="addrLine"/>
             <elementRef key="addSpan"/>
+            <elementRef key="am"/>
             <elementRef key="anchor"/>
             <elementRef key="argument"/>
             <elementRef key="back"/>
-            <elementRef key="bibl"/>
             <elementRef key="body"/>
             <elementRef key="byline"/>
             <elementRef key="c"/>
@@ -200,7 +344,6 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
             <elementRef key="cit"/>
             <elementRef key="closer"/>
             <elementRef key="corr"/>
-            <elementRef key="date"/>
             <elementRef key="dateline"/>
             <elementRef key="del"/>
             <elementRef key="desc"/>
@@ -211,6 +354,7 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
             <elementRef key="docImprint"/>
             <elementRef key="docTitle"/>
             <elementRef key="epigraph"/>
+            <elementRef key="ex"/>
             <elementRef key="expan"/>
             <elementRef key="figDesc"/>
             <elementRef key="figure"/>
@@ -245,8 +389,6 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
             <elementRef key="pb"/>
             <elementRef key="pc"/>
             <elementRef key="postscript"/>
-            <elementRef key="publisher"/>
-            <elementRef key="pubPlace"/>
             <elementRef key="q"/>
             <elementRef key="quote"/>
             <elementRef key="ref"/>
@@ -265,20 +407,16 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
             <elementRef key="speaker"/>
             <elementRef key="spGrp"/>
             <elementRef key="stage"/>
+            <elementRef key="subst"/>
             <elementRef key="supplied"/>
             <elementRef key="table"/>
-            <elementRef key="teiCorpus"/>
-            <elementRef key="TEI"/>
             <elementRef key="text"/>
             <elementRef key="time"/>
-            <elementRef key="title"/>
             <elementRef key="titlePage"/>
             <elementRef key="titlePart"/>
             <elementRef key="trailer"/>
             <elementRef key="unclear"/>
             <elementRef key="w"/>
-            <elementRef key="am"/>
-            <elementRef key="ex"/>
          </specGrp>
          <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
             <moduleRef key="tei"/>

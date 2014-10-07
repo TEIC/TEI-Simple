@@ -176,7 +176,9 @@
 	  <xsl:for-each select="tokenize(.,' ')">
             <xsl:text>simple:</xsl:text>
 	    <xsl:value-of select="."/>
-            <xsl:text> </xsl:text>
+	    <xsl:if test="position()!=last()">
+              <xsl:text> </xsl:text>
+	    </xsl:if>
 	  </xsl:for-each>
         </xsl:attribute>
         </xsl:if>

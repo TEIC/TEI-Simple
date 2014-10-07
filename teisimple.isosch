@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
    <title>ISO Schematron rules</title>
-   <!-- This file generated 2014-10-06T16:44:27.255+01:00 by 'extract-isosch.xsl'. -->
+   <!-- This file generated 2014-10-07T12:48:42.42+01:00 by 'extract-isosch.xsl'. -->
 
 <!-- ********************* -->
 <!-- namespaces, declared: -->
@@ -25,7 +25,7 @@
 belongs, but this <name/> element has no textual content.</assert>
           </rule>
         </pattern>
-   <pattern id="oddbyexample-att.global-rendition-constraint-rendptr-2">
+   <pattern id="oddbyexample-att.global-rendition-constraint-renditionpointer-2">
                            <rule context="tei:*[@rendition]">
                               <let name="results"
               value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
@@ -79,8 +79,7 @@ The @spanTo attribute of <name/> is required.</assert>
                               <let name="results"
               value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                               <report test="some $x in $results  satisfies $x">
-Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in
-this document (<value-of select="$results"/>)</report>
+Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
                            </rule>
                         </pattern>
    <pattern id="oddbyexample-att.typed-constraint-subtypeTyped-11">
@@ -89,31 +88,37 @@ this document (<value-of select="$results"/>)</report>
  unless also categorized in general with @type</assert>
       </rule>
     </pattern>
-   <pattern id="oddbyexample-addSpan-constraint-spanTo-12">
+   <pattern id="oddbyexample-addSpan-constraint-spanTo-14">
       <rule context="tei:addSpan">
          <assert test="@spanTo">The @spanTo attribute of <name/> is required.</assert>
       </rule>
    </pattern>
-   <pattern id="oddbyexample-lg-constraint-atleast1oflggapl-14">
+   <pattern id="oddbyexample-lg-constraint-atleast1oflggapl-16">
       <rule context="tei:lg">
          <assert test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
         must contain at least one child l, lg or gap element.</assert>
       </rule>
    </pattern>
-   <pattern id="oddbyexample-ref-constraint-refAtts-15">
+   <pattern id="oddbyexample-ref-constraint-refAtts-17">
       <rule context="tei:ref">
          <report test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
          </report>
       </rule>
    </pattern>
-   <pattern id="oddbyexample-s-constraint-noNestedS-16">
+   <pattern id="oddbyexample-s-constraint-noNestedS-18">
       <rule context="tei:s">
          <report test="tei:s">You may not nest one s element within
       another: use seg instead</report>
       </rule>
    </pattern>
-   <pattern id="oddbyexample-text-constraint-headeronlyelement-19">
+   <pattern id="oddbyexample-subst-constraint-substContents1-19">
+      <rule context="tei:subst">
+         <assert test="child::tei:add and child::tei:del">
+            <name/> must have at least one child add and at least one child del</assert>
+      </rule>
+   </pattern>
+   <pattern id="oddbyexample-text-constraint-headeronlyelement-20">
                      <rule context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
                         <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
                      </rule>
