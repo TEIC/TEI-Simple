@@ -213,6 +213,17 @@
     </xsl:template>
     
 
+    <xsl:template match="sup">
+      <hi rendition="simple:superscript">
+	    <xsl:apply-templates/>
+      </hi>
+    </xsl:template>
+    <xsl:template match="sub">
+      <hi rendition="simple:subscript">
+	    <xsl:apply-templates/>
+      </hi>
+    </xsl:template>
+
     <xsl:template match="publicationStmt">
       <publicationStmt>
 	<xsl:choose>
