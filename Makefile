@@ -10,6 +10,7 @@ teisimple:
 	saxon TEISimplespreadsheet.xml generate.xsl> teisimple.odd 
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar 	
 	jing teisimple.xsd tests/testsimple.xml
+	teitohtml --odd --summaryDoc --profile=tei teisimple.odd teisimple.odd.html
 
 validate:
 	cat anthead.xml> v.xml 
