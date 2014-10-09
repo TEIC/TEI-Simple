@@ -236,7 +236,7 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
 	    </xsl:for-each>
 	    </specGrp>
 
-         <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
+         <schemaSpec ident="teisimple" start="TEI teiCorpus">
            <moduleRef key="tei"/>
 	   <specGrpRef target="#base"/>
 	   <specGrpRef target="#header"/>
