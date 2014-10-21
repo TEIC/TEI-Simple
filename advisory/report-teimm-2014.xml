@@ -33,6 +33,27 @@
   </teiHeader>
   <text>
     <body>
+<div>
+   <head>Simple Partners</head>
+<p>
+Joint Project between:
+<list>
+<item>Northwestern University</item>
+<item>University of Nebraska-Lincoln</item>
+<item>University of Oxford</item>
+<item>TEI Consortium</item>
+<item>Mellon Foundation</item>
+</list>
+</p>
+<cb/>
+<p>
+<graphic height="50px" url="NU.png"/>      <graphic width="50px" url="UNL.png"/>
+<lb/><graphic height="50px" url="ox.png"/>   <graphic width="50px" url="TEI.png"/>
+<lb/><graphic height="50px" rend="center" url="mellon.png"/>
+</p>
+</div>
+
+
       <div>
 	<head>TEI Simple</head>
 	<list>
@@ -40,24 +61,35 @@
 	  <item>TEI Simple aims to <q>define
 	  a new highly-constrained and prescriptive subset of the Text Encoding Initiative (TEI)
 	  Guidelines suited to the representation of early modern and modern books, and a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts</q></item>
-	  <item>Project investigators are Martin Mueller (NW), Brian Pytlik Zillig (UNL), Sebastian Rahtz (Oxford.</item>
 	  <item>Project runs from September 2014 to July 2015</item>
-	  <item>All outputs are open source, all working is in the open</item>
+	  <item>All outputs are open source, all working is in the open on github and trello</item>
 	</list>
 
 	<p rend="box"><ptr target="https://github.com/TEIC/TEI-Simple"/></p>
       </div>
 
       <div>
-	<head>Simple advisory committee</head>
+	<head>Simple Staff</head>
+         <list>
+            <head>Project Investigators</head>
+            <item>Martin Mueller, Northwestern University</item>
+            <item>Brian Pytlik Zillig, University of Nebraska-Lincoln</item>
+            <item>Sebastian Rahtz, University of Oxford</item>
+            </list>
+         <list>
+            <head>Additional Project Members</head>
+            <item>Magdalena Turska, DiXiT Project / University of Oxford</item>
+            <item>Lou Burnard, Consultant</item>
+            <item>James Cummings, DiXiT Project / University of Oxford</item>
+         </list>
 	<list>
+	   <head>Advisory Committee</head>
 	  <item>Pip Willcox, Bodleian Library, Oxford</item>
 	  <item>Suzanne Haaf, Deutsches Textarchiv, Berlin</item>
 	  <item>Matthias Goebel, University of Gottingen</item>
-	  <item>James Cummings, Oxford</item>
+	  <item>James Cummings, University of Oxford</item>
 	</list>
-	  <p>Project team also includes Magdalena Turska (DiXiT project, Oxford) and Lou Burnard (Oxford)</p>
-      </div>
+</div>
 
       <div>
 	<head>Objectives</head>
@@ -266,12 +298,12 @@
 
       <div>
 	<head>How does usage of those elements stack up?</head>
-	<p><graphic url="elements.png"/></p>
+	<p><graphic url="elements.png" height="95%"/></p>
       </div>
 
       <div>
-	<head>Element usage</head>
-         <table>
+	<head>Element usage (raw count)</head>
+         <table rend="tiny">
             <row n="1" role="label">
 	      <cell></cell>
                <cell>obvil</cell>
