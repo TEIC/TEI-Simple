@@ -965,7 +965,9 @@ Error: Each of the rendition values in "<value-of select="@rendition"/>" must po
 	 <head>TEI Simple FAQ</head>
 	 <list type="gloss">
 	   <label>Are you competing with DTA basisformat or TAPAS?</label>
-	   <item>So far as we can, no at all! We expect to share Schematron constraints with DTA, for example</item>
+	   <item>So far as we can, not at all! We expect to share Schematron constraints with DTA, for example</item>
+	<label>Does Simple apply mostly to relatively modern printed books</label>
+	<item>Yes. </item>
 	   <label>Have you finished that list of elements and attributes?</label>
 	   <item>No, we expect to keep on refining that in light of feedback.</item>
 	   <label>How can I tell you what I think and what I want?</label>
