@@ -12,7 +12,7 @@
     <fileDesc>
       <titleStmt>
         <title>TEI Simple: state of the nation</title>
-        <author>James Cummings</author>
+        <author>James Cummings<lb/>(and TEI-Simple Team)</author>
       </titleStmt>
       <editionStmt>
         <edition>
@@ -61,7 +61,7 @@ Joint Project between:
 	  <item>TEI Simple aims to <q>define
 	  a new highly-constrained and prescriptive subset of the Text Encoding Initiative (TEI)
 	  Guidelines suited to the representation of early modern and modern books, and a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts</q></item>
-	  <item>Project runs from September 2014 to July 2015</item>
+	  <item>Initial project runs from September 2014 to July 2015</item>
 	  <item>All outputs are open source, all working is in the open on github and trello</item>
 	</list>
 
@@ -120,21 +120,22 @@ Joint Project between:
 	<head>The Simple schema: guidelines</head>
 	<list>
 	  <item><q>Simple</q> does not have to mean <q>Small</q></item>
-	  <item>The schema is based on analysis of existing usage from corpora
+	  <item>The schema is based on analysis of existing usage from corpora: 
 	  <list>
-	    <item>EEBO TCP (including Evans, EEBO, and unreleased phase 2)</item>
-	    <item>Oxford Text Archive TEI P5 files</item>
+	    <item>Text Creation Partnership (including Evans, ECCO, EEBO, and unreleased phase 2)</item>
+	    <item>Oxford Text Archive: All TEI P5 files</item>
 	    <item>Deutsches Textarchiv</item>
 	    <item>Documenting the American South</item>
 	    <item>CESR</item>
 	    <item>OBVIL: corpus critique</item>
 	  </list>
 	  </item>
-	  <item>Our biggest enemy is ambiguity for the encoder</item>
+	  <item>Our biggest enemy is ambiguity for the encoders and developers</item>
 	  <item>The target is encoding of the <gi>text</gi>; the
 	  <gi>teiHeader</gi> and any <gi>sourceDoc</gi> or
 	  <gi>facsimile</gi> are much less constrained</item>
 	</list>
+         <p rend="box"><q>Simple</q> is not necessary <q>Small</q> and certainly not <q>Simplistic</q>. <lb/>In this case it is <q>Simple</q> as Powerful and Processable.</p>
       </div>
 
       <div>
@@ -717,7 +718,7 @@ Joint Project between:
 	  but instead publish a separate suggested taxonomy for
 	  possible interpretative use</item>
 	  <item>We will preclude use of <att>rend</att> and <att>style</att></item>
-	  <item>We will produce a closed list of values for <att>rendition</att> using a pseudo-protocol of "simple:"
+	  <item>We will produce a closed list of values for <att>rendition</att> using a private URI of "simple:"
 	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
 	    <p rendition="simple:bold">This is quite bold, but this <hi rendition="simple:sup">is superscript</hi></p>
 	  </egXML>
@@ -800,6 +801,7 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                         <valItem ident="simple:doubleunderline"/>
                         <valItem ident="simple:underline"/>
                         <valItem ident="simple:wavyunderlline"/>
+                        <!-- Among others -->
                      </valList>
 		  </attDef>
 	       </attList>
@@ -808,7 +810,7 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
        </div>
 
        <div>
-	 <head>One for the nerds - checking <att>rendition</att></head>
+	 <head>One for the geeks -- checking <att>rendition</att></head>
 	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
                      <constraintSpec ident="renditionpointer" scheme="isoschematron">
                         <constraint>
@@ -816,8 +818,7 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                               <let name="results"
                                    value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
                               <assert test="every $x in $results satisfies $x">
-Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
-ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
+Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
                            </rule>
                         </constraint>
                      </constraintSpec>
@@ -846,8 +847,8 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
 	<p>We expect to support a tool (currently an XSL stylesheet called <code>teitosimple.xsl</code>) which
 	<list>
 	  <item>performs a <q>pre-flight</q> check on a typical TEI file to see if it can conform</item>
-	  <item>converts some elements to simpler forms (losslessly), eg <gi>foreName</gi> to <tag>name type="foreName"</tag></item>
-	  <item>maps @rend values to know @rendition where possible</item>
+	  <item>converts <hi>some</hi> elements to simpler forms (losslessly), eg <gi>foreName</gi> to <tag>name type="foreName"</tag></item>
+	  <item>maps @rend values to known @rendition where possible</item>
 	</list>
 	allowing a wider variety of texts to be exposed in Simple mode.
 	</p>
@@ -857,11 +858,11 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
       <div>
         <head>The SPM: Prerequisites</head>
         <list>
-          <item>choices about rendering preserved in the <hi>ODD</hi> file</item>
-	  <item>project-specific rendering tools generated from the ODD</item>
+          <item>choices about intended rendering preserved in the <hi>ODD</hi> file</item>
+	       <item>project-specific rendering tools generated from the ODD</item>
           <item>support multiple uses of markup <list>
               <item>appear in rendering</item>
-              <item>contribute to an index</item>
+              <item>contribute to an index or data-table</item>
               <item>subscribe to a facet</item>
               <item>appear on a map</item>
             </list>
@@ -885,18 +886,18 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
       <div>
         <head>The <gi>process</gi> element attributes</head>
 	<list>
-            <label>context</label>
+            <label><att>context</att></label>
             <item>XPath expression defining a context in which this processing instruction is
               applicable</item>
-            <label>name</label>
+            <label><att>name</att></label>
             <item>name of the function from TEI Simple function library to be applied; input for the
               function supplied as function parameter</item>
-            <label>mode</label>
+            <label><att>mode</att></label>
             <item>output mode for which this processing instruction is applicable</item>
-            <label>class</label>
+            <label><att>class</att></label>
             <item>css class or simple:class name of formatting instruction to be applied to the
               output</item>
-	      <label>followRendition</label>
+	      <label><att>followRendition</att></label>
 	      <item>rendition attributes are looked at</item>
           </list>
       </div>
@@ -904,8 +905,8 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
       <div>
         <head>Defaults: to be discussed....</head>
         <list>
-          <item> if no <gi>process</gi> for any given mode, emit textual content </item>
-          <item> if no @context, means any use of this element </item>
+          <item> if no <gi>process</gi> for any given mode, emit textual content</item>
+          <item> if no @context, means applies to any instance of this element</item>
           <item><gi>process</gi> rules are additive, not alternates </item>
           <item>@style defaults to element name (equates to HTML @class or Word style) </item>
           <item>@rendition is usually ignored</item>
@@ -917,7 +918,7 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
         <head>SPM: first trials</head>
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
           <elementSpec ident="choice">
-            <process context="not(ancestor::front) and corr and sic" name="makeInline(reg)"
+            <process context="not(ancestor::front) and corr and sic" name="makeInline(sic)"
               mode="render"/>
             <process context="corr and sic" name="makeMarginalNote(corr)" mode="render"/>
             <process context="ancestor::front and (corr and sic)"
@@ -941,7 +942,7 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
       <div>
 	<head>Is SPM just reinventing the XSLT wheel?</head>
 	<list>
-	  <item>sort of, in the same way that Schematron does</item>
+	  <item>sort of, in the same way that Schematron does being based on XSLT and XPath</item>
 	  <item>able to be implemented in simpler languages</item>
 	  <item>potential to add features we cannot implement yet (cf Pure ODD)</item>
 	  <item>possibility of validating it in ODD context</item>
