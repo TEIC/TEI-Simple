@@ -69,7 +69,10 @@ of this software, even if advised of the possibility of such damage.
 \usepackage{framed}
 \definecolor{shadecolor}{gray}{0.95}
 \setmonofont[Scale=0.8]{DejaVu Sans Mono}
-\setsansfont{Lucida Sans}
+\setromanfont[Scale=0.8]{DejaVuSerif}
+\setsansfont[Scale=0.8]{DejaVuSans}
+%\setmonofont[Scale=0.8]{DejaVu Sans Mono}
+%\setsansfont{Lucida Sans}
 \usetheme{Singapore}
 \useinnertheme[shadow=true]{rounded}
 \usecolortheme{rose}  

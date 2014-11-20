@@ -23,33 +23,42 @@
    </teiHeader>
    <text>
       <body>
+	<p>A total of <xsl:value-of
+	select="count(//row[
+	position()&gt;1 
+	and not(cell[1]='') 
+	and not(cell[10] = 'header')
+	and not(cell[10] = 'headeronly')
+	and not(cell[10] = 'no')
+])"/> elements are selected for use in
+	the <gi>text</gi> part of a document.</p>
 	<list type="gloss">
 	    <xsl:for-each-group select="//row[position()&gt;1 and
 					not(cell[1]='')]"
 				group-by="normalize-space(cell[10])">
 	      <xsl:sort select="normalize-space(cell[10])"/>
 	      <xsl:sort select="cell[1]"/>
-	      <label><xsl:value-of
-	      select="current-grouping-key()"/></label>
-	      <item>
-		<xsl:for-each select="current-group()">
-		  <xsl:choose>
-		    <xsl:when test="contains(cell[9],'header')"/>
-		    <xsl:when test="contains(cell[11],'KILL')"/>
-		    <xsl:when test="contains(cell[11],'merge')"/>
-		    <xsl:otherwise>
-		      <xsl:value-of
-			  select="normalize-space(cell[1])"/>
-		      <xsl:text> </xsl:text>
-		    </xsl:otherwise>
-		  </xsl:choose>
-		</xsl:for-each>
-	      </item>
+	      <xsl:choose>
+		<xsl:when test="current-grouping-key()='header'"/>
+		<xsl:when test="current-grouping-key()='headeronly'"/>
+		<xsl:when test="current-grouping-key()='no'"/>
+		<xsl:otherwise>
+		  <label><xsl:value-of
+		  select="current-grouping-key()"/></label>
+		  <item>
+		    <xsl:for-each select="current-group()">
+			  <gi><xsl:value-of
+			  select="normalize-space(cell[1])"/></gi>
+			  <xsl:text> </xsl:text>
+		    </xsl:for-each>
+		  </item>
+		</xsl:otherwise>
+	      </xsl:choose>
 	    </xsl:for-each-group>
 	</list>
 
 	    <specGrp xml:id="changes">
-
+	      <p>A set of unused model classes are removed.</p>
 	      <classSpec ident="model.entryPart" mode="delete"/>
 	      <classSpec ident="model.placeNamePart" mode="delete"/>
 	      <classSpec ident="model.placeStateLike" mode="delete"/>
@@ -63,13 +72,13 @@
 	      <classSpec ident="model.placeStateLike" mode="delete"/>
 	      <classSpec ident="model.certLike" mode="delete"/>
 	      <classSpec ident="model.glossLike" mode="delete"/>
+
+	      <p>Some uncommon attributes are removed from global linking.</p>
 	      <classSpec ident="att.global.linking" mode="change">
 		<attList>
 		  <attDef ident="synch" mode="delete"/>
 		  <attDef ident="sameAs" mode="delete"/>
 		  <attDef ident="copyOf" mode="delete"/>
-		  <attDef ident="next" mode="delete"/>
-		  <attDef ident="prev" mode="delete"/>
 		  <attDef ident="exclude" mode="delete"/>
 		  <attDef ident="select" mode="delete"/>
 	      </attList>
@@ -84,8 +93,7 @@
 			  <let name="results" value="for $t in
 			    tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
   <report test="some $x in $results  satisfies $x">
-Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in
-this document (<value-of select="$results"/>)</report>
+Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
 			</rule>
 		      </constraint>
 		    </constraintSpec>
@@ -95,6 +103,26 @@ this document (<value-of select="$results"/>)</report>
 
 	      <classSpec ident="att.datcat" mode="delete"/>
 
+	      <elementSpec ident="name" mode="change">
+		<attList>
+		  <attDef ident="type" mode="change">
+		    <valList mode="add" type="closed">
+                      <valItem ident="person"/>
+                      <valItem ident="forename"/>
+                      <valItem ident="surname"/>
+                      <valItem ident="personGenName"/>
+                      <valItem ident="personRoleName"/>
+                      <valItem ident="personAddName"/>
+                      <valItem ident="nameLink"/>
+                      <valItem ident="organisation"/>
+                      <valItem ident="country"/>
+                      <valItem ident="placeGeog"/>
+                      <valItem ident="place"/>
+		    </valList>
+		  </attDef>
+		</attList>
+	      </elementSpec>
+
 	      <classSpec ident="att.global" mode="change">
 		<attList>
 		  <attDef ident="rend" mode="delete"/>
@@ -102,8 +130,7 @@ this document (<value-of select="$results"/>)</report>
 		  <attDef ident="rendition" mode="change">
 		    <valList mode="add" type="semi">
 		      <valItem ident="simple:bold"/>
-		      <valItem ident="simple:bold"/>
-		      <valItem ident="simple:allcapl"/>
+		      <valItem ident="simple:allcaps"/>
 		      <valItem ident="simple:italic"/>
 		      <valItem ident="simple:normalweight"/>
 		      <valItem ident="simple:smallcaps"/>
@@ -116,7 +143,7 @@ this document (<value-of select="$results"/>)</report>
 		      <valItem ident="simple:underline"/>
 		      <valItem ident="simple:wavyunderlline"/>
 		    </valList>
-		    <constraintSpec ident="rendptr" scheme="isoschematron">
+		    <constraintSpec ident="renditionpointer" scheme="isoschematron">
 		      <constraint>
 			<rule context="tei:*[@rendition]" xmlns="http://purl.oclc.org/dsdl/schematron">
 			  <let name="results" value="for $val in tokenize(normalize-space(@rendition),'\s+') return
@@ -161,27 +188,14 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
 
 	    <specGrp xml:id="header">
             <moduleRef key="header"/>
-	    <elementRef key="biblStruct"/>
-	    <elementRef key="charDecl"/>
-	    <elementRef key="glyph"/>
-	    <elementRef key="imprint"/>
-	    <elementRef key="monogr"/>
-	    <elementRef key="relatedItem"/>
-	    <elementRef key="resp"/>
-	    <elementRef key="respStmt"/>
-	    <elementRef key="teiHeader"/>
-	    <elementRef key="textDesc"/>
-	    <elementRef key="glyphName"/>
-	    <elementRef key="localName"/>
-	    <elementRef key="value"/>
-	    <elementRef key="charProp"/>
-	    <elementRef key="att"/>
-	    <elementRef key="gi"/>
-
+	    <xsl:for-each select="//row[position()&gt;1 and
+				  not(cell[1]='')]">
+	      <xsl:sort select="cell[1]"/>
+	      <xsl:if test="cell[10]='headeronly'">
+		<elementRef key="{normalize-space(cell[1])}"/>
+	      </xsl:if>
+	    </xsl:for-each>
 	    <!-- ban from text-->
-	    <elementRef key="term"/>
-	    <elementRef key="editor"/>
-	    <elementRef key="email"/>
 	    <elementSpec ident="text" mode="change">
 	      <constraintSpec ident="headeronlyelement" scheme="isoschematron">
 		<constraint>
@@ -196,6 +210,9 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
 	    </specGrp>
 
 	    <specGrp xml:id="atts">
+
+	    <classRef key="att.global.analytic"/>
+
 	    <!-- attributes needed -->
 	    <classRef key="att.global.facs"/>
 	    <classRef key="att.citing"/>
@@ -219,7 +236,7 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
 	    </xsl:for-each>
 	    </specGrp>
 
-         <schemaSpec ident="oddbyexample" start="TEI teiCorpus">
+         <schemaSpec ident="teisimple" start="TEI teiCorpus">
            <moduleRef key="tei"/>
 	   <specGrpRef target="#base"/>
 	   <specGrpRef target="#header"/>

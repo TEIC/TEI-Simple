@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" 
+     xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+     xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+     xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" 
+     xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" 
+     xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple: state of the nation</title>
+        <author>James Cummings<lb/>(and TEI-Simple Team)</author>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          <date>October 2014</date>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>University of Oxford</publisher>
+        <availability>
+          <p>Freely available for use and derivative works under a Creative Commons Attribution
+	      license.</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>born digital</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+<div>
+   <head>Simple Partners</head>
+<p>
+Joint Project between:
+<list>
+<item>Northwestern University</item>
+<item>University of Nebraska-Lincoln</item>
+<item>University of Oxford</item>
+<item>TEI Consortium</item>
+<item>Mellon Foundation</item>
+</list>
+</p>
+<cb/>
+<p>
+<graphic height="50px" url="NU.png"/>      <graphic width="50px" url="UNL.png"/>
+<lb/><graphic height="50px" url="ox.png"/>   <graphic width="50px" url="TEI.png"/>
+<lb/><graphic height="50px" rend="center" url="mellon.png"/>
+</p>
+</div>
+
+
+      <div>
+	<head>TEI Simple</head>
+	<list>
+	  <item>Joint project between TEI Consortium, Mellon Foundation, Northwestern University, University of Nebraska-Lincoln, and the University of Oxford</item>
+	  <item>TEI Simple aims to <q>define
+	  a new highly-constrained and prescriptive subset of the Text Encoding Initiative (TEI)
+	  Guidelines suited to the representation of early modern and modern books, and a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts</q></item>
+	  <item>Initial project runs from September 2014 to July 2015</item>
+	  <item>All outputs are open source, all working is in the open on github and trello</item>
+	</list>
+
+	<p rend="box"><ptr target="https://github.com/TEIC/TEI-Simple"/></p>
+      </div>
+
+      <div>
+	<head>Simple Staff</head>
+         <list>
+            <head>Project Investigators</head>
+            <item>Martin Mueller, Northwestern University</item>
+            <item>Brian Pytlik Zillig, University of Nebraska-Lincoln</item>
+            <item>Sebastian Rahtz, University of Oxford</item>
+            </list>
+         <list>
+            <head>Additional Project Members</head>
+            <item>Magdalena Turska, DiXiT Project / University of Oxford</item>
+            <item>Lou Burnard, Consultant</item>
+            <item>James Cummings, DiXiT Project / University of Oxford</item>
+         </list>
+	<list>
+	   <head>Advisory Committee</head>
+	  <item>Pip Willcox, Bodleian Library, Oxford</item>
+	  <item>Suzanne Haaf, Deutsches Textarchiv, Berlin</item>
+	  <item>Matthias Goebel, University of Gottingen</item>
+	  <item>James Cummings, University of Oxford</item>
+	</list>
+</div>
+
+      <div>
+	<head>Objectives</head>
+	<list rend="ordered">
+	  <item>The highly constrained and prescriptive element subset of TEI Simple</item>
+	  <item>The processing model (Simple Processing Model: SPM)</item>
+	  <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM</item>
+	  <item>TEI-Performance Indicators</item>
+	  <item>Integration of TEI Simple into the TEI infrastructure </item>
+	</list>
+        <p rend="box">The CIDOC Conceptual Reference Model (CRM) provides definitions and a formal
+          structure for describing the implicit and explicit concepts and relationships used in
+          cultural heritage documentation.</p>
+
+      </div>
+
+      <div>
+	<head>Deliverables</head>
+	<list rend="ordered">
+	  <item>A TEI ODD customization with the choices and constraints,  SPM notation, and RDF mapping</item>
+	  <item>Multi-stage tutorial documentation based on examples using page images and XML</item>
+	  <item>A revised set of TEI Stylesheets which implement the SPM</item>
+	</list>	
+	<p rend="box">These outputs will be offered to the TEI Technical Council to decide on how to best to incorporate and maintain them</p>
+      </div>
+
+      <div>
+	<head>The Simple schema: guidelines</head>
+	<list>
+	  <item><q>Simple</q> does not have to mean <q>Small</q></item>
+	  <item>The schema is based on analysis of existing usage from corpora: 
+	  <list>
+	    <item>Text Creation Partnership (including Evans, ECCO, EEBO, and unreleased phase 2)</item>
+	    <item>Oxford Text Archive: All TEI P5 files</item>
+	    <item>Deutsches Textarchiv</item>
+	    <item>Documenting the American South</item>
+	    <item>CESR</item>
+	    <item>OBVIL: corpus critique</item>
+	  </list>
+	  </item>
+	  <item>Our biggest enemy is ambiguity for the encoders and developers</item>
+	  <item>The target is encoding of the <gi>text</gi>; the
+	  <gi>teiHeader</gi> and any <gi>sourceDoc</gi> or
+	  <gi>facsimile</gi> are much less constrained</item>
+	</list>
+         <p rend="box"><q>Simple</q> is not necessary <q>Small</q> and certainly not <q>Simplistic</q>. <lb/>In this case it is <q>Simple</q> as Powerful and Processable.</p>
+      </div>
+
+      <div>
+	<head>The customizaton</head>
+	<list>
+	<item>We isolate 104 elements which are needed in the body of a text</item>
+	<item>The choice is fairly obvious, comparable to DTA, Lite, Tite etc</item>
+	<item>We divide them into groups by function, mainly for documentation purposes</item>
+	<item>We have started analyzing attribute usage</item>
+	</list>
+	<p rend="box">Texts from all the source corpora representable in Simple</p>
+      </div>
+
+      <div>
+	<head>Element groups (1)</head>
+         <list type="gloss">
+            <label>castlist</label>
+            <item>
+               <gi>actor</gi> 
+               <gi>castGroup</gi> 
+               <gi>castItem</gi> 
+               <gi>castList</gi> 
+               <gi>role</gi> 
+               <gi>roleDesc</gi> 
+            </item>
+            <label>character</label>
+            <item>
+               <gi>g</gi> 
+            </item>
+            <label>editorial</label>
+            <item>
+               <gi>abbr</gi> 
+               <gi>add</gi> 
+               <gi>addSpan</gi> 
+               <gi>am</gi> 
+               <gi>choice</gi> 
+               <gi>corr</gi> 
+               <gi>del</gi> 
+               <gi>desc</gi> 
+               <gi>ex</gi> 
+               <gi>expan</gi> 
+               <gi>gap</gi> 
+               <gi>handShift</gi> 
+               <gi>orig</gi> 
+               <gi>reg</gi> 
+               <gi>sic</gi> 
+               <gi>space</gi> 
+               <gi>subst</gi> 
+               <gi>supplied</gi> 
+               <gi>unclear</gi> 
+            </item>
+            <label>interpretation</label>
+            <item>
+               <gi>author</gi> 
+               <gi>date</gi> 
+               <gi>foreign</gi> 
+               <gi>hi</gi> 
+               <gi>measure</gi> 
+               <gi>name</gi> 
+               <gi>num</gi> 
+               <gi>q</gi> 
+               <gi>quote</gi> 
+               <gi>ref</gi> 
+               <gi>rs</gi> 
+               <gi>seg</gi> 
+               <gi>time</gi> 
+            </item>
+            <label>linguistic</label>
+            <item>
+               <gi>c</gi> 
+               <gi>pc</gi> 
+               <gi>s</gi> 
+               <gi>w</gi> 
+            </item>
+            <label>pictures</label>
+            <item>
+               <gi>figDesc</gi> 
+               <gi>figure</gi> 
+               <gi>graphic</gi> 
+            </item>
+	 </list>
+
+      </div>
+
+      <div>
+	<head>Element groups (2)</head>
+	<list type="gloss">
+            <label>structure</label>
+            <item>
+               <gi>bibl</gi> 
+               <gi>title</gi> 
+               <gi>TEI</gi> 
+               <gi>teiCorpus</gi> 
+               <gi>ab</gi> 
+               <gi>address</gi> 
+               <gi>addrLine</gi> 
+               <gi>anchor</gi> 
+               <gi>back</gi> 
+               <gi>body</gi> 
+               <gi>cb</gi> 
+               <gi>cit</gi> 
+               <gi>div</gi> 
+               <gi>floatingText</gi> 
+               <gi>formula</gi> 
+               <gi>front</gi> 
+               <gi>fw</gi> 
+               <gi>group</gi> 
+               <gi>head</gi> 
+               <gi>item</gi> 
+               <gi>l</gi> 
+               <gi>label</gi> 
+               <gi>lb</gi> 
+               <gi>lg</gi> 
+               <gi>list</gi> 
+               <gi>listBibl</gi> 
+               <gi>milestone</gi> 
+               <gi>note</gi> 
+               <gi>p</gi> 
+               <gi>pb</gi> 
+               <gi>sp</gi> 
+               <gi>speaker</gi> 
+               <gi>spGrp</gi> 
+               <gi>stage</gi> 
+               <gi>text</gi> 
+            </item>
+            <label>table</label>
+            <item>
+               <gi>cell</gi> 
+               <gi>row</gi> 
+               <gi>table</gi> 
+            </item>
+            <label>titlepage</label>
+            <item>
+               <gi>publisher</gi> 
+               <gi>pubPlace</gi> 
+               <gi>docAuthor</gi> 
+               <gi>docDate</gi> 
+               <gi>docEdition</gi> 
+               <gi>docImprint</gi> 
+               <gi>docTitle</gi> 
+               <gi>imprimatur</gi> 
+               <gi>titlePage</gi> 
+               <gi>titlePart</gi> 
+            </item>
+            <label>wrapper</label>
+            <item>
+               <gi>argument</gi> 
+               <gi>byline</gi> 
+               <gi>closer</gi> 
+               <gi>dateline</gi> 
+               <gi>epigraph</gi> 
+               <gi>opener</gi> 
+               <gi>postscript</gi> 
+               <gi>salute</gi> 
+               <gi>signed</gi> 
+               <gi>trailer</gi> 
+            </item>
+         </list>
+	 <p rend="box">The <q>wrapper</q> elements remain a major concern</p>
+       </div>
+
+      <div>
+	<head>How does usage of those elements stack up?</head>
+	<p><graphic url="elements.png" height="95%"/></p>
+      </div>
+
+      <div>
+	<head>Element usage (raw count)</head>
+         <table rend="tiny">
+            <row n="1" role="label">
+	      <cell></cell>
+               <cell>obvil</cell>
+               <cell>cesr</cell>
+               <cell>ota</cell>
+               <cell>dta</cell>
+               <cell>TCP</cell>
+               <cell>Total</cell>
+            </row>
+            <row n="2">
+               <cell>TEI</cell>
+               <cell>126</cell>
+               <cell>50</cell>
+               <cell>2844</cell>
+               <cell>848</cell>
+               <cell>55820</cell>
+               <cell>59688</cell>
+            </row>
+            <row n="3">
+               <cell>ab</cell>
+               <cell>290</cell>
+               <cell>1022</cell>
+               <cell>60496</cell>
+               <cell>0</cell>
+               <cell>59</cell>
+               <cell>61867</cell>
+            </row>
+            <row n="4">
+               <cell>abbr</cell>
+               <cell>0</cell>
+               <cell>1482</cell>
+               <cell>7015</cell>
+               <cell>69</cell>
+               <cell>531348</cell>
+               <cell>539914</cell>
+            </row>
+            <row n="5">
+               <cell>actor</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>12</cell>
+               <cell>0</cell>
+               <cell>12</cell>
+            </row>
+            <row n="6">
+               <cell>add</cell>
+               <cell>0</cell>
+               <cell>71</cell>
+               <cell>137</cell>
+               <cell>0</cell>
+               <cell>2124</cell>
+               <cell>2332</cell>
+            </row>
+            <row n="7">
+               <cell>addName</cell>
+               <cell>0</cell>
+               <cell>7</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>7</cell>
+            </row>
+            <row n="8">
+               <cell>addSpan</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>2</cell>
+               <cell>0</cell>
+               <cell>4</cell>
+               <cell>6</cell>
+            </row>
+            <row n="9">
+               <cell>addrLine</cell>
+               <cell>0</cell>
+               <cell>10</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>10</cell>
+            </row>
+            <row n="10">
+               <cell>address</cell>
+               <cell>0</cell>
+               <cell>5</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>5</cell>
+            </row>
+            <row n="11">
+               <cell>anchor</cell>
+               <cell>233</cell>
+               <cell>0</cell>
+               <cell>29</cell>
+               <cell>0</cell>
+               <cell>4</cell>
+               <cell>266</cell>
+            </row>
+            <row n="12">
+               <cell>app</cell>
+               <cell>0</cell>
+               <cell>6</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>6</cell>
+            </row>
+            <row n="13">
+               <cell>argument</cell>
+               <cell>151</cell>
+               <cell>0</cell>
+               <cell>1795</cell>
+               <cell>2268</cell>
+               <cell>66327</cell>
+               <cell>70541</cell>
+            </row>
+            <row n="14">
+               <cell>author</cell>
+               <cell>34</cell>
+               <cell>83</cell>
+               <cell>1</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>118</cell>
+            </row>
+            <row n="15">
+               <cell>back</cell>
+               <cell>1</cell>
+               <cell>29</cell>
+               <cell>1007</cell>
+               <cell>608</cell>
+               <cell>22462</cell>
+               <cell>24107</cell>
+            </row>
+            <row n="16">
+               <cell>bibl</cell>
+               <cell>274</cell>
+               <cell>155</cell>
+               <cell>16180</cell>
+               <cell>4362</cell>
+               <cell>279493</cell>
+               <cell>300464</cell>
+            </row>
+            <row n="17">
+               <cell>biblScope</cell>
+               <cell>0</cell>
+               <cell>4</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>4</cell>
+            </row>
+            <row n="18">
+               <cell>body</cell>
+               <cell>126</cell>
+               <cell>50</cell>
+               <cell>9246</cell>
+               <cell>1155</cell>
+               <cell>98314</cell>
+               <cell>108891</cell>
+            </row>
+            <row n="19">
+               <cell>byline</cell>
+               <cell>17</cell>
+               <cell>8</cell>
+               <cell>3549</cell>
+               <cell>1028</cell>
+               <cell>11945</cell>
+               <cell>16547</cell>
+            </row>
+            <row n="20">
+               <cell>caesura</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>30299</cell>
+               <cell>0</cell>
+               <cell>0</cell>
+               <cell>30299</cell>
+            </row>
+            <row n="21">
+               <cell>castGroup</cell>
+               <cell>0</cell>
+               <cell>29</cell>
+               <cell>0</cell>
+               <cell>51</cell>
+               <cell>0</cell>
+               <cell>80</cell>
+            </row>
+            <row n="22">
+               <cell>castItem</cell>
+               <cell>0</cell>
+               <cell>63</cell>
+               <cell>90</cell>
+               <cell>744</cell>
+               <cell>0</cell>
+               <cell>897</cell>
+            </row>
+            <row n="23">
+               <cell>castList</cell>
+               <cell>0</cell>
+               <cell>28</cell>
+               <cell>4</cell>
+               <cell>74</cell>
+               <cell>0</cell>
+               <cell>106</cell>
+            </row>
+         </table>
+	 <p> etc etc </p>
+      </div>
+
+      <div>
+	<head>Top 20: does it mean anything?</head>
+	<table>
+          <row n="110">
+            <cell>fw</cell>
+               <cell>0</cell>
+               <cell>20554</cell>
+               <cell>15</cell>
+               <cell>336239</cell>
+               <cell>561</cell>
+               <cell>357369</cell>
+            </row>
+            <row n="111">
+               <cell>list</cell>
+               <cell>621</cell>
+               <cell>115</cell>
+               <cell>17848</cell>
+               <cell>24877</cell>
+               <cell>370296</cell>
+               <cell>413757</cell>
+            </row>
+            <row n="112">
+               <cell>abbr</cell>
+               <cell>0</cell>
+               <cell>1482</cell>
+               <cell>7015</cell>
+               <cell>69</cell>
+               <cell>531348</cell>
+               <cell>539914</cell>
+            </row>
+            <row n="113">
+               <cell>label</cell>
+               <cell>621</cell>
+               <cell>469</cell>
+               <cell>19570</cell>
+               <cell>0</cell>
+               <cell>577272</cell>
+               <cell>597932</cell>
+            </row>
+            <row n="114">
+               <cell>q</cell>
+               <cell>4270</cell>
+               <cell>29</cell>
+               <cell>110383</cell>
+               <cell>0</cell>
+               <cell>645279</cell>
+               <cell>759961</cell>
+            </row>
+            <row n="115">
+               <cell>row</cell>
+               <cell>70</cell>
+               <cell>1311</cell>
+               <cell>30035</cell>
+               <cell>12571</cell>
+               <cell>738494</cell>
+               <cell>782481</cell>
+            </row>
+            <row n="116">
+               <cell>lg</cell>
+               <cell>316</cell>
+               <cell>4481</cell>
+               <cell>86396</cell>
+               <cell>84157</cell>
+               <cell>761815</cell>
+               <cell>937165</cell>
+            </row>
+            <row n="117">
+               <cell>div</cell>
+               <cell>4584</cell>
+               <cell>2128</cell>
+               <cell>85352</cell>
+               <cell>104832</cell>
+               <cell>1425044</cell>
+               <cell>1621940</cell>
+            </row>
+            <row n="118">
+               <cell>head</cell>
+               <cell>4961</cell>
+               <cell>2526</cell>
+               <cell>115775</cell>
+               <cell>117506</cell>
+               <cell>1670818</cell>
+               <cell>1911586</cell>
+            </row>
+            <row n="119">
+               <cell>speaker</cell>
+               <cell>12</cell>
+               <cell>1978</cell>
+               <cell>310490</cell>
+               <cell>42021</cell>
+               <cell>1575243</cell>
+               <cell>1929744</cell>
+            </row>
+            <row n="120">
+               <cell>sp</cell>
+               <cell>12</cell>
+               <cell>1997</cell>
+               <cell>312812</cell>
+               <cell>42050</cell>
+               <cell>1583715</cell>
+               <cell>1940586</cell>
+            </row>
+            <row n="121">
+               <cell>cell</cell>
+               <cell>242</cell>
+               <cell>3218</cell>
+               <cell>138105</cell>
+               <cell>34153</cell>
+               <cell>3235963</cell>
+               <cell>3411681</cell>
+            </row>
+            <row n="122">
+               <cell>item</cell>
+               <cell>2023</cell>
+               <cell>1806</cell>
+               <cell>188278</cell>
+               <cell>187951</cell>
+               <cell>3496780</cell>
+               <cell>3876838</cell>
+            </row>
+            <row n="123">
+               <cell>note</cell>
+               <cell>9451</cell>
+               <cell>2874</cell>
+               <cell>113910</cell>
+               <cell>187675</cell>
+               <cell>5122160</cell>
+               <cell>5436070</cell>
+            </row>
+            <row n="124">
+               <cell>pb</cell>
+               <cell>6156</cell>
+               <cell>9497</cell>
+               <cell>362846</cell>
+               <cell>311001</cell>
+               <cell>4909429</cell>
+               <cell>5598929</cell>
+            </row>
+            <row n="125">
+               <cell>desc</cell>
+               <cell>186</cell>
+               <cell>0</cell>
+               <cell>125150</cell>
+               <cell>0</cell>
+               <cell>6352117</cell>
+               <cell>6477453</cell>
+            </row>
+            <row n="126">
+               <cell>gap</cell>
+               <cell>0</cell>
+               <cell>18</cell>
+               <cell>125202</cell>
+               <cell>5731</cell>
+               <cell>6352257</cell>
+               <cell>6483208</cell>
+            </row>
+            <row n="127">
+               <cell>p</cell>
+               <cell>68273</cell>
+               <cell>4855</cell>
+               <cell>1099529</cell>
+               <cell>607881</cell>
+               <cell>10786471</cell>
+               <cell>12567009</cell>
+            </row>
+            <row n="128">
+               <cell>l</cell>
+               <cell>21004</cell>
+               <cell>39828</cell>
+               <cell>1428379</cell>
+               <cell>557846</cell>
+               <cell>10842122</cell>
+               <cell>12889179</cell>
+            </row>
+            <row n="129">
+               <cell>lb</cell>
+               <cell>3008</cell>
+               <cell>237202</cell>
+               <cell>1508235</cell>
+               <cell>9689271</cell>
+               <cell>29293798</cell>
+               <cell>40731514</cell>
+            </row>
+            <row n="130">
+               <cell>hi</cell>
+               <cell>56953</cell>
+               <cell>9424</cell>
+               <cell>1419289</cell>
+               <cell>2367314</cell>
+               <cell>52066396</cell>
+               <cell>55919376</cell>
+            </row>
+         </table>
+       </div>
+
+      <div>
+	<head>@rend and @type proposal</head>
+	<list>
+	  <item>We will <emph>not</emph> usually prescribe <att>type</att>,
+	  but instead publish a separate suggested taxonomy for
+	  possible interpretative use</item>
+	  <item>We will preclude use of <att>rend</att> and <att>style</att></item>
+	  <item>We will produce a closed list of values for <att>rendition</att> using a private URI of "simple:"
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+	    <p rendition="simple:bold">This is quite bold, but this <hi rendition="simple:sup">is superscript</hi></p>
+	  </egXML>
+	  </item>
+	</list>
+	<p rend="box">Do we have a single set of values for <att>rendition</att>, or constrained per element?</p>
+      </div>
+
+      <div>
+	<head>@type on <gi>div</gi> samples</head>
+	<p>...case_concerning_exports case_concerning_printing_privileges case_history case_law case_proper case_reports case_restated case_studies case_study case_summary cases casestudies casestudy cast castle castlist casualties casulaties catalogue catalogue_entry catalogue_of_Calvins_works catalogue_of_Chancellors catalogue_of_English_martyrs catalogue_of_English_public_schools_and_European_universities catalogue_of_Hindu_gods catalogue_of_Lord_Treasurers catalogue_of_Oxford_University_Press catalogue_of_apocryphal_biblical_books catalogue_of_archbishops catalogue_of_army catalogue_of_authors_works catalogue_of_birds catalogue_of_bishops catalogue_of_books catalogue_of_books_for_auction catalogue_of_cathedrals catalogue_of_colleges catalogue_of_compounds catalogue_of_coronets_colors_and_ensigns ...</p>
+      </div>
+
+       <div>
+	 <head>A constraint example</head>
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <classSpec ident="att.pointing" mode="change">
+               <attList>
+                  <attDef ident="target" mode="change">
+                     <constraintSpec ident="validtarget" scheme="isoschematron">
+                        <constraint>
+                           <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@target]">
+                              <let name="results"
+                                   value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                              <report test="some $x in $results  satisfies $x">
+Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
+                           </rule>
+                        </constraint>
+                     </constraintSpec>
+                  </attDef>
+               </attList>
+            </classSpec>
+	  </egXML>
+       </div>
+
+       <div>
+	 <head>Attribute limiting <att>type</att> on <gi>name</gi></head>
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <elementSpec ident="name" mode="change">
+               <attList>
+                  <attDef ident="type" mode="change">
+                     <valList mode="add" type="closed">
+                        <valItem ident="person"/>
+                        <valItem ident="forename"/>
+                        <valItem ident="surname"/>
+                        <valItem ident="personGenName"/>
+                        <valItem ident="personRoleName"/>
+                        <valItem ident="personAddName"/>
+                        <valItem ident="nameLink"/>
+                        <valItem ident="organisation"/>
+                        <valItem ident="country"/>
+                        <valItem ident="placeGeog"/>
+                        <valItem ident="place"/>
+                     </valList>
+                  </attDef>
+               </attList>
+            </elementSpec>
+	  </egXML>
+       </div>
+
+       <div>
+	 <head>Starting to limit rendition</head>
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <classSpec ident="att.global" mode="change">
+               <attList>
+                  <attDef ident="rend" mode="delete"/>
+                  <attDef ident="style" mode="delete"/>
+                  <attDef ident="rendition" mode="change">
+                     <valList mode="add" type="semi">
+                        <valItem ident="simple:bold"/>
+                        <valItem ident="simple:allcaps"/>
+                        <valItem ident="simple:italic"/>
+                        <valItem ident="simple:normalweight"/>
+                        <valItem ident="simple:smallcaps"/>
+                        <valItem ident="simple:doublestrikethrough"/>
+                        <valItem ident="simple:strikethrough"/>
+                        <valItem ident="simple:subscript"/>
+                        <valItem ident="simple:superscript"/>
+                        <valItem ident="simple:typewriter"/>
+                        <valItem ident="simple:doubleunderline"/>
+                        <valItem ident="simple:underline"/>
+                        <valItem ident="simple:wavyunderlline"/>
+                        <!-- Among others -->
+                     </valList>
+		  </attDef>
+	       </attList>
+	    </classSpec>
+	  </egXML>
+       </div>
+
+       <div>
+	 <head>One for the geeks -- checking <att>rendition</att></head>
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                     <constraintSpec ident="renditionpointer" scheme="isoschematron">
+                        <constraint>
+                           <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
+                              <let name="results"
+                                   value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+                              <assert test="every $x in $results satisfies $x">
+Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
+                           </rule>
+                        </constraint>
+                     </constraintSpec>
+	  </egXML>
+       </div>
+
+       <div>
+	 <head>Limiting elements to the <gi>text</gi></head>
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <elementSpec ident="text" mode="change">
+               <constraintSpec ident="headeronlyelement" scheme="isoschematron">
+                  <constraint>
+                     <rule xmlns="http://purl.oclc.org/dsdl/schematron"
+                           context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
+                        <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
+                     </rule>
+                  </constraint>
+               </constraintSpec>
+            </elementSpec>
+	  </egXML>
+      </div>
+
+
+      <div>
+        <head>A key tool: lossless transform to Simple</head>
+	<p>We expect to support a tool (currently an XSL stylesheet called <code>teitosimple.xsl</code>) which
+	<list>
+	  <item>performs a <q>pre-flight</q> check on a typical TEI file to see if it can conform</item>
+	  <item>converts <hi>some</hi> elements to simpler forms (losslessly), eg <gi>foreName</gi> to <tag>name type="foreName"</tag></item>
+	  <item>maps @rend values to known @rendition where possible</item>
+	</list>
+	allowing a wider variety of texts to be exposed in Simple mode.
+	</p>
+      </div>
+
+
+      <div>
+        <head>The SPM: Prerequisites</head>
+        <list>
+          <item>choices about intended rendering preserved in the <hi>ODD</hi> file</item>
+	       <item>project-specific rendering tools generated from the ODD</item>
+          <item>support multiple uses of markup <list>
+              <item>appear in rendering</item>
+              <item>contribute to an index or data-table</item>
+              <item>subscribe to a facet</item>
+              <item>appear on a map</item>
+            </list>
+          </item>
+          <item>cf <gi>equiv</gi> to map to RDF</item>
+          <item>cf <gi>constraint</gi> for providing rules about validity</item>
+        </list>
+      </div>
+
+      <div>
+        <head>Implemented as an ODD extension</head>
+	<list>
+        <item>We add a
+          <gi>process</gi> instruction  for <gi>elementSpec</gi> which will define a way of
+          processing this element </item>
+        <item>multiple processing instructions may occur to define expected behaviour in various
+          contexts or output formats </item>
+	</list>
+      </div>
+
+      <div>
+        <head>The <gi>process</gi> element attributes</head>
+	<list>
+            <label><att>context</att></label>
+            <item>XPath expression defining a context in which this processing instruction is
+              applicable</item>
+            <label><att>name</att></label>
+            <item>name of the function from TEI Simple function library to be applied; input for the
+              function supplied as function parameter</item>
+            <label><att>mode</att></label>
+            <item>output mode for which this processing instruction is applicable</item>
+            <label><att>class</att></label>
+            <item>css class or simple:class name of formatting instruction to be applied to the
+              output</item>
+	      <label><att>followRendition</att></label>
+	      <item>rendition attributes are looked at</item>
+          </list>
+      </div>
+
+      <div>
+        <head>Defaults: to be discussed....</head>
+        <list>
+          <item> if no <gi>process</gi> for any given mode, emit textual content</item>
+          <item> if no @context, means applies to any instance of this element</item>
+          <item><gi>process</gi> rules are additive, not alternates </item>
+          <item>@style defaults to element name (equates to HTML @class or Word style) </item>
+          <item>@rendition is usually ignored</item>
+        </list>
+      </div>
+
+
+      <div>
+        <head>SPM: first trials</head>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec ident="choice">
+            <process context="not(ancestor::front) and corr and sic" name="makeInline(sic)"
+              mode="render"/>
+            <process context="corr and sic" name="makeMarginalNote(corr)" mode="render"/>
+            <process context="ancestor::front and (corr and sic)"
+              name="makeLinkedMarginalNote(corr,sic)" mode="render"/>
+            <process context="corr and sic" name="makeInline(corr)" mode="textextract"/>
+          </elementSpec>
+        </egXML>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec ident="speaker">
+            <process name="makeInline(.)" mode="render"/>
+          </elementSpec>
+        </egXML>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec indent="name">
+            <process name="makeInline(.)"/>
+            <process name="makeMarginalNote(.)"/>
+          </elementSpec>
+        </egXML>
+      </div>
+
+      <div>
+	<head>Is SPM just reinventing the XSLT wheel?</head>
+	<list>
+	  <item>sort of, in the same way that Schematron does being based on XSLT and XPath</item>
+	  <item>able to be implemented in simpler languages</item>
+	  <item>potential to add features we cannot implement yet (cf Pure ODD)</item>
+	  <item>possibility of validating it in ODD context</item>
+	</list>
+      </div>
+
+      <div>
+	<head>TEI Simple: upcoming work</head>
+	<list rend="ordered">
+	  <item>Complete customization with closed value lists for attributes</item>
+	  <item>(November/December) Complete definition of the SPM</item>
+	  <item>(December/January/February) Implementation of the SPM</item>
+	  <item>(January/February) Documentation and examples</item>
+	  <item>March) TEI Performance indicators</item>
+	  <item>(April) Mapping to RDF</item>
+	</list>
+      </div>
+
+       <div>
+	 <head>TEI Simple FAQ</head>
+	 <list type="gloss">
+	   <label>Are you competing with DTA basisformat or TAPAS?</label>
+	   <item>So far as we can, not at all! We expect to share Schematron constraints with DTA, for example</item>
+	<label>Does Simple apply mostly to relatively modern printed books</label>
+	<item>Yes. </item>
+	   <label>Have you finished that list of elements and attributes?</label>
+	   <item>No, we expect to keep on refining that in light of feedback.</item>
+	   <label>How can I tell you what I think and what I want?</label>
+	   <item>Raise an issue on Github, or join the Simple maillist (<ptr target="https://web.maillist.ox.ac.uk/ox/info/teisimple"/>).</item>
+	   <label>Does TEI Simple work on my phone?</label>
+	   <item>Only with the iPhone 6 Plus, sorry.</item>
+	 </list>
+       </div>
+
+
+    </body>
+  </text>
+</TEI>

@@ -1,6 +1,6 @@
 
 <!--
-DTD generated from ODD source 2014-10-06T11:09:46Z. 
+DTD generated from ODD source 2014-10-07T12:48:40Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -70,14 +70,26 @@ source CDATA  #IMPLIED'>
 change CDATA  #IMPLIED'>
 <!ENTITY % att.global.change.attributes '
  %att.global.change.attribute.change;'> 
+<!ENTITY % att.global.analytic.attribute.ana '
+ana CDATA  #IMPLIED'>
+<!ENTITY % att.global.analytic.attributes '
+ %att.global.analytic.attribute.ana;'> 
 <!ENTITY % att.global.facs.attribute.facs '
 facs CDATA  #IMPLIED'>
 <!ENTITY % att.global.facs.attributes '
  %att.global.facs.attribute.facs;'> 
 <!ENTITY % att.global.linking.attribute.corresp '
 corresp CDATA  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.next '
+next %data.pointer;  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.prev '
+prev %data.pointer;  #IMPLIED'>
 <!ENTITY % att.global.linking.attributes '
- %att.global.linking.attribute.corresp;'> 
+ %att.global.linking.attribute.corresp;
+ %att.global.linking.attribute.next;
+ %att.global.linking.attribute.prev;'> 
 <!--end of predeclared classes -->
 
 <!ENTITY % att.ascribed.attribute.who '
@@ -241,7 +253,7 @@ xml:base %data.pointer;  #IMPLIED'>
 
 <!ENTITY % att.global.attribute.xmlspace '
 xml:space (default|preserve) #IMPLIED'>
-<!ENTITY % att.global.attributes '%att.global.linking.attributes;%att.global.facs.attributes;%att.global.change.attributes;
+<!ENTITY % att.global.attributes '%att.global.linking.attributes;%att.global.analytic.attributes;%att.global.facs.attributes;%att.global.change.attributes;
  %att.global.attribute.xmlid;
  %att.global.attribute.n;
  %att.global.attribute.xmllang;
@@ -379,11 +391,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.hiLike_sequenceOptional "hi?"> 
 <!ENTITY % model.hiLike_sequenceOptionalRepeatable "hi*"> 
 <!ENTITY % model.hiLike_sequenceRepeatable "hi+"> 
-<!ENTITY % model.emphLike "term |foreign |title"> 
-<!ENTITY % model.emphLike_sequence "term, foreign, title"> 
-<!ENTITY % model.emphLike_sequenceOptional "term?, foreign?, title?"> 
-<!ENTITY % model.emphLike_sequenceOptionalRepeatable "term*, foreign*, title*"> 
-<!ENTITY % model.emphLike_sequenceRepeatable "term+, foreign+, title+"> 
+<!ENTITY % model.emphLike "term |title |foreign"> 
+<!ENTITY % model.emphLike_sequence "term, title, foreign"> 
+<!ENTITY % model.emphLike_sequenceOptional "term?, title?, foreign?"> 
+<!ENTITY % model.emphLike_sequenceOptionalRepeatable "term*, title*, foreign*"> 
+<!ENTITY % model.emphLike_sequenceRepeatable "term+, title+, foreign+"> 
 <!ENTITY % model.highlighted "%model.hiLike; |%model.emphLike;"> 
 <!ENTITY % model.highlighted_sequence "%model.hiLike;, %model.emphLike;"> 
 <!ENTITY % model.highlighted_sequenceOptional "%model.hiLike;?, %model.emphLike;?"> 
@@ -404,11 +416,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.graphicLike_sequenceOptional "formula?, graphic?"> 
 <!ENTITY % model.graphicLike_sequenceOptionalRepeatable "formula*, graphic*"> 
 <!ENTITY % model.graphicLike_sequenceRepeatable "formula+, graphic+"> 
-<!ENTITY % model.pPart.editorial "abbr |choice |expan |am |ex"> 
-<!ENTITY % model.pPart.editorial_sequence "abbr, choice, expan, am, ex"> 
-<!ENTITY % model.pPart.editorial_sequenceOptional "abbr?, choice?, expan?, am?, ex?"> 
-<!ENTITY % model.pPart.editorial_sequenceOptionalRepeatable "abbr*, choice*, expan*, am*, ex*"> 
-<!ENTITY % model.pPart.editorial_sequenceRepeatable "abbr+, choice+, expan+, am+, ex+"> 
+<!ENTITY % model.pPart.editorial "abbr |am |choice |ex |expan |subst"> 
+<!ENTITY % model.pPart.editorial_sequence "abbr, am, choice, ex, expan, subst"> 
+<!ENTITY % model.pPart.editorial_sequenceOptional "abbr?, am?, choice?, ex?, expan?, subst?"> 
+<!ENTITY % model.pPart.editorial_sequenceOptionalRepeatable "abbr*, am*, choice*, ex*, expan*, subst*"> 
+<!ENTITY % model.pPart.editorial_sequenceRepeatable "abbr+, am+, choice+, ex+, expan+, subst+"> 
 <!ENTITY % model.pPart.transcriptional "damage |mod |redo |restore |retrace |surplus |undo |add |corr |del |handShift |orig |reg |sic |supplied |unclear"> 
 <!ENTITY % model.pPart.transcriptional_sequence "damage, mod, redo, restore, retrace, surplus, undo, add, corr, del, handShift, orig, reg, sic, supplied, unclear"> 
 <!ENTITY % model.pPart.transcriptional_sequenceOptional "damage?, mod?, redo?, restore?, retrace?, surplus?, undo?, add?, corr?, del?, handShift?, orig?, reg?, sic?, supplied?, unclear?"> 
@@ -509,11 +521,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.publicationStmtPart.agency_sequenceOptional "distributor?, authority?, publisher?"> 
 <!ENTITY % model.publicationStmtPart.agency_sequenceOptionalRepeatable "distributor*, authority*, publisher*"> 
 <!ENTITY % model.publicationStmtPart.agency_sequenceRepeatable "distributor+, authority+, publisher+"> 
-<!ENTITY % model.publicationStmtPart.detail "idno |availability |address |date |pubPlace"> 
-<!ENTITY % model.publicationStmtPart.detail_sequence "idno, availability, address, date, pubPlace"> 
-<!ENTITY % model.publicationStmtPart.detail_sequenceOptional "idno?, availability?, address?, date?, pubPlace?"> 
-<!ENTITY % model.publicationStmtPart.detail_sequenceOptionalRepeatable "idno*, availability*, address*, date*, pubPlace*"> 
-<!ENTITY % model.publicationStmtPart.detail_sequenceRepeatable "idno+, availability+, address+, date+, pubPlace+"> 
+<!ENTITY % model.publicationStmtPart.detail "idno |availability |date |pubPlace |address"> 
+<!ENTITY % model.publicationStmtPart.detail_sequence "idno, availability, date, pubPlace, address"> 
+<!ENTITY % model.publicationStmtPart.detail_sequenceOptional "idno?, availability?, date?, pubPlace?, address?"> 
+<!ENTITY % model.publicationStmtPart.detail_sequenceOptionalRepeatable "idno*, availability*, date*, pubPlace*, address*"> 
+<!ENTITY % model.publicationStmtPart.detail_sequenceRepeatable "idno+, availability+, date+, pubPlace+, address+"> 
 <!ENTITY % model.availabilityPart "licence"> 
 <!ENTITY % model.availabilityPart_sequence "licence"> 
 <!ENTITY % model.availabilityPart_sequenceOptional "licence?"> 
@@ -534,11 +546,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.qLike_sequenceOptional "%model.quoteLike;?, floatingText?, q?"> 
 <!ENTITY % model.qLike_sequenceOptionalRepeatable "%model.quoteLike;*, floatingText*, q*"> 
 <!ENTITY % model.qLike_sequenceRepeatable "%model.quoteLike;+, floatingText+, q+"> 
-<!ENTITY % model.respLike "sponsor |funder |principal |respStmt |editor |author"> 
-<!ENTITY % model.respLike_sequence "sponsor, funder, principal, respStmt, editor, author"> 
-<!ENTITY % model.respLike_sequenceOptional "sponsor?, funder?, principal?, respStmt?, editor?, author?"> 
-<!ENTITY % model.respLike_sequenceOptionalRepeatable "sponsor*, funder*, principal*, respStmt*, editor*, author*"> 
-<!ENTITY % model.respLike_sequenceRepeatable "sponsor+, funder+, principal+, respStmt+, editor+, author+"> 
+<!ENTITY % model.respLike "sponsor |funder |principal |editor |respStmt |author"> 
+<!ENTITY % model.respLike_sequence "sponsor, funder, principal, editor, respStmt, author"> 
+<!ENTITY % model.respLike_sequenceOptional "sponsor?, funder?, principal?, editor?, respStmt?, author?"> 
+<!ENTITY % model.respLike_sequenceOptionalRepeatable "sponsor*, funder*, principal*, editor*, respStmt*, author*"> 
+<!ENTITY % model.respLike_sequenceRepeatable "sponsor+, funder+, principal+, editor+, respStmt+, author+"> 
 <!ENTITY % model.divWrapper "argument |byline |dateline |docAuthor |docDate |epigraph |salute"> 
 <!ENTITY % model.divWrapper_sequence "argument, byline, dateline, docAuthor, docDate, epigraph, salute"> 
 <!ENTITY % model.divWrapper_sequenceOptional "argument?, byline?, dateline?, docAuthor?, docDate?, epigraph?, salute?"> 
@@ -579,11 +591,11 @@ versionDate %data.temporal.w3c;  #IMPLIED'>
 <!ENTITY % model.titlepagePart_sequenceOptional "argument?, byline?, docAuthor?, docDate?, docEdition?, docImprint?, docTitle?, epigraph?, graphic?, imprimatur?, titlePart?"> 
 <!ENTITY % model.titlepagePart_sequenceOptionalRepeatable "argument*, byline*, docAuthor*, docDate*, docEdition*, docImprint*, docTitle*, epigraph*, graphic*, imprimatur*, titlePart*"> 
 <!ENTITY % model.titlepagePart_sequenceRepeatable "argument+, byline+, docAuthor+, docDate+, docEdition+, docImprint+, docTitle+, epigraph+, graphic+, imprimatur+, titlePart+"> 
-<!ENTITY % model.choicePart "abbr |corr |expan |orig |reg |seg |sic |unclear |am |ex"> 
-<!ENTITY % model.choicePart_sequence "abbr, corr, expan, orig, reg, seg, sic, unclear, am, ex"> 
-<!ENTITY % model.choicePart_sequenceOptional "abbr?, corr?, expan?, orig?, reg?, seg?, sic?, unclear?, am?, ex?"> 
-<!ENTITY % model.choicePart_sequenceOptionalRepeatable "abbr*, corr*, expan*, orig*, reg*, seg*, sic*, unclear*, am*, ex*"> 
-<!ENTITY % model.choicePart_sequenceRepeatable "abbr+, corr+, expan+, orig+, reg+, seg+, sic+, unclear+, am+, ex+"> 
+<!ENTITY % model.choicePart "abbr |am |corr |ex |expan |orig |reg |seg |sic |unclear"> 
+<!ENTITY % model.choicePart_sequence "abbr, am, corr, ex, expan, orig, reg, seg, sic, unclear"> 
+<!ENTITY % model.choicePart_sequenceOptional "abbr?, am?, corr?, ex?, expan?, orig?, reg?, seg?, sic?, unclear?"> 
+<!ENTITY % model.choicePart_sequenceOptionalRepeatable "abbr*, am*, corr*, ex*, expan*, orig*, reg*, seg*, sic*, unclear*"> 
+<!ENTITY % model.choicePart_sequenceRepeatable "abbr+, am+, corr+, ex+, expan+, orig+, reg+, seg+, sic+, unclear+"> 
 <!ENTITY % model.imprintPart "distributor |publisher |pubPlace"> 
 <!ENTITY % model.imprintPart_sequence "distributor, publisher, pubPlace"> 
 <!ENTITY % model.imprintPart_sequenceOptional "distributor?, publisher?, pubPlace?"> 
@@ -757,6 +769,10 @@ points CDATA  #IMPLIED'>
 change CDATA  #IMPLIED'>
 <!ENTITY % att.global.change.attributes '
  %att.global.change.attribute.change;'> 
+<!ENTITY % att.global.analytic.attribute.ana '
+ana CDATA  #IMPLIED'>
+<!ENTITY % att.global.analytic.attributes '
+ %att.global.analytic.attribute.ana;'> 
 <!ENTITY % att.global.facs.attribute.facs '
 facs CDATA  #IMPLIED'>
 <!ENTITY % att.global.facs.attributes '
@@ -791,8 +807,16 @@ evaluate (all|one|none) #IMPLIED'>
  %att.pointing.attribute.evaluate;'> 
 <!ENTITY % att.global.linking.attribute.corresp '
 corresp CDATA  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.next '
+next %data.pointer;  #IMPLIED'>
+
+<!ENTITY % att.global.linking.attribute.prev '
+prev %data.pointer;  #IMPLIED'>
 <!ENTITY % att.global.linking.attributes '
- %att.global.linking.attribute.corresp;'> 
+ %att.global.linking.attribute.corresp;
+ %att.global.linking.attribute.next;
+ %att.global.linking.attribute.prev;'> 
 <!ENTITY % att.typed.attribute.type '
 type %data.enumerated;  #IMPLIED'>
 
@@ -1586,7 +1610,8 @@ target CDATA  #IMPLIED >
  %att.personal.attributes;
  %att.datable.attributes;
  %att.editLike.attributes;
- %att.typed.attributes; >
+ %att.typed.attribute.subtype;
+type (person|forename|surname|personGenName|personRoleName|personAddName|nameLink|organisation|country|placeGeog|place) #IMPLIED >
 <!--doc:supplies the formal name of the namespace to which the elements documented by its children belong. [2.3.4. ] -->
 <!ELEMENT namespace (tagUsage)+>
 <!ATTLIST namespace xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1849,7 +1874,7 @@ scope %data.enumerated;  #IMPLIED >
  %att.typed.attributes;
  %att.responsibility.attributes; >
 <!--doc:(s-unit) contains a sentence-like division of a text. [17.1.  8.4.1. ] -->
-<!ELEMENT s (#PCDATA|%model.gLike;|%model.global;|formula|graphic|foreign|term|title|hi|address|email|date|time|measure|num|name|idno|rs|abbr|am|choice|ex|expan|add|corr|damage|del|handShift|mod|orig|redo|reg|restore|retrace|sic|supplied|surplus|unclear|undo|att|gi|ref|c|pc|seg|w)*>
+<!ELEMENT s (#PCDATA|%model.gLike;|%model.global;|formula|graphic|foreign|term|title|hi|address|email|date|time|measure|num|name|idno|rs|abbr|am|choice|ex|expan|subst|add|corr|damage|del|handShift|mod|orig|redo|reg|restore|retrace|sic|supplied|surplus|unclear|undo|att|gi|ref|c|pc|seg|w)*>
 <!ATTLIST s xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST s
  %att.global.attributes;
@@ -1970,6 +1995,12 @@ type %data.enumerated;  #IMPLIED >
  %att.global.attributes;
  %att.declarable.attributes;
  %att.styleDef.attributes; >
+<!--doc:(substitution) groups one or more deletions with one or more additions when the combination is to be regarded as a single intervention in the text. [11.3.1.5. ] -->
+<!ELEMENT subst (add|del|%model.milestoneLike;)+>
+<!ATTLIST subst xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST subst
+ %att.global.attributes;
+ %att.transcriptional.attributes; >
 <!--doc:signifies text supplied by the transcriber or editor for any reason, typically because the original cannot be read because of physical damage or loss to the original. [11.3.3.1. ] -->
 <!ELEMENT supplied %macro.paraContent;>
 <!ATTLIST supplied xmlns CDATA "http://www.tei-c.org/ns/1.0">

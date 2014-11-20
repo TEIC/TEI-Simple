@@ -71,6 +71,10 @@
                 <out>country</out>
             </item>
             <item>
+                <in>geogName</in>
+                <out>placeGeog</out>
+            </item>
+            <item>
                 <in>placeName</in>
                 <out>place</out>
             </item>
@@ -105,6 +109,12 @@
                 <add>type</add>
             </item>
 
+            <item>
+                <in>said</in>
+                <out>q</out>
+                <add>type</add>
+            </item>
+
         </list>
     </xsl:variable>
 
@@ -114,7 +124,8 @@
 
     <!-- merge into name, keep attributes and add @type with translated name of original elements -->
     <xsl:template
-        match="persName | orgName | addName | nameLink | roleName | forename | surname | genName | country | placeName">
+        match="persName | orgName | addName | nameLink | roleName |
+	       forename | surname | genName | country | placeName | geogName">
         <xsl:variable name="lname" select="local-name()"/>
         <xsl:element name="name">
             <xsl:attribute name="type">
@@ -126,7 +137,7 @@
 
 
     <!-- merge into element named according to transl table, keep attributes and add attribute with name of original elements -->
-    <xsl:template match="soCalled | code | emph | term[ancestor::text]">
+    <xsl:template match="soCalled | code | emph | said | term[ancestor::text]">
         <xsl:variable name="lname" select="local-name()"/>
         <xsl:variable name="tname" select="$transtable//item[in=$lname]/out"/>
         <xsl:variable name="aname" select="$transtable//item[in=$lname]/add"/>
@@ -165,7 +176,9 @@
 	  <xsl:for-each select="tokenize(.,' ')">
             <xsl:text>simple:</xsl:text>
 	    <xsl:value-of select="."/>
-            <xsl:text> </xsl:text>
+	    <xsl:if test="position()!=last()">
+              <xsl:text> </xsl:text>
+	    </xsl:if>
 	  </xsl:for-each>
         </xsl:attribute>
         </xsl:if>
@@ -173,6 +186,14 @@
     
     <xsl:template match="@rendition">
         <xsl:choose>
+	  <xsl:when test="starts-with(.,'#') and not
+			  (id(substring(.,2)))">
+            <xsl:attribute name="rendition">
+	      <xsl:text>simple:</xsl:text>
+	      <xsl:value-of select="substring(.,2)"/>
+	    </xsl:attribute>
+	  </xsl:when>
+
             <xsl:when test="not(../@rend)">
                 <xsl:copy-of select="."/>
             </xsl:when>
@@ -192,9 +213,42 @@
     </xsl:template>
     
 
+    <xsl:template match="sup">
+      <hi rendition="simple:superscript">
+	    <xsl:apply-templates/>
+      </hi>
+    </xsl:template>
+    <xsl:template match="sub">
+      <hi rendition="simple:subscript">
+	    <xsl:apply-templates/>
+      </hi>
+    </xsl:template>
+
+    <xsl:template match="publicationStmt">
+      <publicationStmt>
+	<xsl:choose>
+	<xsl:when test="p">
+	    <xsl:apply-templates/>
+	</xsl:when>
+	  <xsl:when test="publisher or authority or distributor">
+	  <xsl:apply-templates select="publisher|authority|distributor" />
+	  <xsl:apply-templates select="*[not(self::publisher or
+				       self::distributor or
+				       self::authority)]" />
+	</xsl:when>
+	<xsl:otherwise>
+	  <p>
+	    <xsl:apply-templates/>
+	  </p>
+	</xsl:otherwise>
+      </xsl:choose>
+      </publicationStmt>
+    </xsl:template>
+
     <xsl:template match="@*|text()|comment()|processing-instruction()">
         <xsl:copy-of select="."/>
     </xsl:template>
+
     <xsl:template match="*">
         <xsl:copy>
             <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
