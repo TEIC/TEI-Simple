@@ -1,4 +1,5 @@
 echo "<foo>"
+saxon -it:main simple-oddbyexample.xsl corpus=/Volumes/Repo/Simple/dbnl name=dbnl
 saxon -it:main simple-oddbyexample.xsl corpus=/Volumes/Repo/Simple/obvil name=obvil
 saxon -it:main simple-oddbyexample.xsl corpus=/Volumes/Repo/Simple/cesr name=cesr
 saxon -it:main simple-oddbyexample.xsl corpus=/Volumes/Repo/Simple/ota name=ota

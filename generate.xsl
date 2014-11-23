@@ -22,6 +22,19 @@
       </fileDesc>
    </teiHeader>
    <text>
+<!--
+1. element	
+2. eebo	
+3. Tite	
+4. TEI Lite	
+5 .OTAnrs	
+6. OTA	
+7. DTAnrs	
+8. dta	
+9. use	
+10. group	
+11. action
+-->
       <body>
 	<p>A total of <xsl:value-of
 	select="count(//row[
@@ -31,8 +44,36 @@
 	and not(cell[10] = 'headeronly')
 	and not(cell[10] = 'no')
 ])"/> elements are selected for use in
-	the <gi>text</gi> part of a document.</p>
-	<list type="gloss">
+	the <gi>text</gi> part of a document.</p>	
+	<xsl:variable name="corpses" select="distinct-values(doc('count.xml')//elementRef/@corpus)"/>
+	<table>
+	  <row role="label">
+	    <cell>Element</cell>
+	    <xsl:for-each select="$corpses">
+	      <cell><xsl:value-of select="."/></cell>
+	    </xsl:for-each>
+	    <cell>Use</cell>
+	    <cell>Action></cell>
+	  </row>
+	  <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
+	    <xsl:sort select="cell[1]"/>
+	    <row>
+	    <xsl:variable name="e" select="cell[1]"/>
+	    <cell><xsl:value-of select="$e"/></cell>
+	    <xsl:for-each select="$corpses">
+	      <xsl:variable name="c" select="."/>
+	      <cell>
+		<xsl:value-of
+		    select="sum(doc('count.xml')//elementRef[@key=$e
+		  and @corpus=$c]/@count)"/>
+	      </cell>
+	    </xsl:for-each>
+	      <xsl:copy-of select="cell[9]"/>
+	      <xsl:copy-of select="cell[10]"/>
+	    </row>
+	  </xsl:for-each>
+	</table>
+<list type="gloss">
 	    <xsl:for-each-group select="//row[position()&gt;1 and
 					not(cell[1]='')]"
 				group-by="normalize-space(cell[10])">
