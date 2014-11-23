@@ -49,7 +49,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:n="www.example.com" xmlns
             <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
               <xsl:sort select="cell[1]"/>
               <row>
-                <xsl:variable name="e" select="cell[1]"/>
+                <xsl:variable name="e" select="normalize-space(cell[1])"/>
                 <cell>
                   <xsl:value-of select="$e"/>
                 </cell>
