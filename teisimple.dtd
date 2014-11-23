@@ -1,6 +1,6 @@
 
 <!--
-DTD generated from ODD source 2014-10-07T12:48:40Z. 
+DTD generated from ODD source 2014-11-23T23:45:42Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -55,7 +55,7 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
 
 <!-- end datatypes -->
 
-<!--predeclared classes -->
+<!-- predeclared classes -->
 
 <!ENTITY % att.source.attribute.source '
 source CDATA  #IMPLIED'>
@@ -90,7 +90,7 @@ prev %data.pointer;  #IMPLIED'>
  %att.global.linking.attribute.corresp;
  %att.global.linking.attribute.next;
  %att.global.linking.attribute.prev;'> 
-<!--end of predeclared classes -->
+<!-- end of predeclared classes -->
 
 <!ENTITY % att.ascribed.attribute.who '
 who CDATA  #IMPLIED'>
@@ -825,10 +825,6 @@ subtype %data.enumerated;  #IMPLIED'>
 <!ENTITY % att.typed.attributes '
  %att.typed.attribute.type;
  %att.typed.attribute.subtype;'> 
-<!-- start predeclared patterns -->
-
-<!-- end predeclared patterns -->
-
 <!-- start rest of patterns -->
 
 <!ENTITY % macro.paraContent '(#PCDATA|%model.gLike;|%model.phrase;|%model.inter;|%model.global;|lg)*' >

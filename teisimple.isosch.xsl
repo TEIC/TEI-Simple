@@ -181,7 +181,7 @@
    <!--SCHEMATRON PATTERNS-->
 
 
-<!--PATTERN oddbyexample-att.datable-calendar-constraint-calendar-1-->
+<!--PATTERN teisimple-att.datable-calendar-constraint-calendar-1-->
 
 
 	<!--RULE -->
@@ -205,7 +205,7 @@ belongs, but this <xsl:text/>
       <xsl:apply-templates select="*" mode="M5"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.global-rendition-constraint-renditionpointer-2-->
+   <!--PATTERN teisimple-att.global-rendition-constraint-renditionpointer-2-->
 
 
 	<!--RULE -->
@@ -233,7 +233,7 @@ ID or to a token in the Simple scheme  (<xsl:text/>
       <xsl:apply-templates select="*" mode="M6"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.spanning-spanTo-constraint-spanTo-2-3-->
+   <!--PATTERN teisimple-att.spanning-spanTo-constraint-spanTo-2-3-->
 
 
 	<!--RULE -->
@@ -259,7 +259,7 @@ The element indicated by @spanTo (<xsl:text/>
       <xsl:apply-templates select="*" mode="M7"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-4-->
+   <!--PATTERN teisimple-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-4-->
 
 
 	<!--RULE -->
@@ -281,7 +281,7 @@ The element indicated by @spanTo (<xsl:text/>
       <xsl:apply-templates select="*" mode="M8"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-quotation-constraint-quotationContents-5-->
+   <!--PATTERN teisimple-quotation-constraint-quotationContents-5-->
 
 
 	<!--RULE -->
@@ -301,7 +301,7 @@ On <xsl:text/>
       <xsl:apply-templates select="*" mode="M9"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-relatedItem-constraint-targetorcontent1-6-->
+   <!--PATTERN teisimple-relatedItem-constraint-targetorcontent1-6-->
 
 
 	<!--RULE -->
@@ -331,7 +331,7 @@ relatedItem element must be empty (@target and count( child::* ) &gt; 0)</xsl:me
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-damageSpan-constraint-spanTo-7-->
+   <!--PATTERN teisimple-damageSpan-constraint-spanTo-7-->
 
 
 	<!--RULE -->
@@ -354,7 +354,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.pointing-targetLang-constraint-targetLang-9-->
+   <!--PATTERN teisimple-att.pointing-targetLang-constraint-targetLang-9-->
 
 
 	<!--RULE -->
@@ -376,7 +376,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.pointing-target-constraint-validtarget-10-->
+   <!--PATTERN teisimple-att.pointing-target-constraint-validtarget-10-->
 
 
 	<!--RULE -->
@@ -400,7 +400,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M13"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.typed-constraint-subtypeTyped-11-->
+   <!--PATTERN teisimple-att.typed-constraint-subtypeTyped-11-->
 
 
 	<!--RULE -->
@@ -423,7 +423,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M14"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-addSpan-constraint-spanTo-14-->
+   <!--PATTERN teisimple-addSpan-constraint-spanTo-14-->
 
 
 	<!--RULE -->
@@ -445,7 +445,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M15"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-lg-constraint-atleast1oflggapl-16-->
+   <!--PATTERN teisimple-lg-constraint-atleast1oflggapl-16-->
 
 
 	<!--RULE -->
@@ -466,7 +466,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M16"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-ref-constraint-refAtts-17-->
+   <!--PATTERN teisimple-ref-constraint-refAtts-17-->
 
 
 	<!--RULE -->
@@ -487,7 +487,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M17"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-s-constraint-noNestedS-18-->
+   <!--PATTERN teisimple-s-constraint-noNestedS-18-->
 
 
 	<!--RULE -->
@@ -505,7 +505,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M18"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-subst-constraint-substContents1-19-->
+   <!--PATTERN teisimple-subst-constraint-substContents1-19-->
 
 
 	<!--RULE -->
@@ -528,7 +528,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-text-constraint-headeronlyelement-20-->
+   <!--PATTERN teisimple-text-constraint-headeronlyelement-20-->
 
 
 	<!--RULE -->

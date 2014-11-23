@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:ns1="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2014-10-07T12:48:41Z. 
+    Schema generated from ODD source 2014-11-23T23:45:44Z. 
     Edition: Version 2.7.0. Last updated on
     	16th September 2014, revision 13036
     Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -720,7 +720,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</xs:documentat
     <xs:attribute name="rendition">
       <xs:annotation>
         <xs:documentation>points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4] simple:normalweight; 5] simple:smallcaps; 6] simple:doublestrikethrough; 7] simple:strikethrough; 8] simple:subscript; 9] simple:superscript; 10] simple:typewriter; 11] simple:doubleunderline; 12] simple:underline; 13] simple:wavyunderlline</xs:documentation>
+Suggested values include: 1] simple:blackletter; 2] simple:cursive; 3] simple:bold; 4] simple:allcaps; 5] simple:italic; 6] simple:normalweight; 7] simple:smallcaps; 8] simple:doublestrikethrough; 9] simple:strikethrough; 10] simple:subscript; 11] simple:superscript; 12] simple:typewriter; 13] simple:doubleunderline; 14] simple:underline; 15] simple:wavyunderline; 16] simple:rotateright; 17] simple:rotateleft; 18] simple:centre; 19] simple:braced ; 20] simple:boxed ; 21] simple:letterspace; 22] simple:dropcap  ; 23] simple:larger; 24] simple:smaller</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction>
@@ -728,6 +728,16 @@ Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4
             <xs:list>
               <xs:simpleType>
                 <xs:union memberTypes="ns1:data.pointer">
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:blackletter"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:cursive"/>
+                    </xs:restriction>
+                  </xs:simpleType>
                   <xs:simpleType>
                     <xs:restriction base="xs:token">
                       <xs:enumeration value="simple:bold"/>
@@ -790,7 +800,52 @@ Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4
                   </xs:simpleType>
                   <xs:simpleType>
                     <xs:restriction base="xs:token">
-                      <xs:enumeration value="simple:wavyunderlline"/>
+                      <xs:enumeration value="simple:wavyunderline"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:rotateright"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:rotateleft"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:centre"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:braced "/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:boxed "/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:letterspace"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:dropcap  "/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:larger"/>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:smaller"/>
                     </xs:restriction>
                   </xs:simpleType>
                 </xs:union>
@@ -1005,106 +1060,36 @@ Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4
   <xs:attributeGroup name="att.placement.attribute.place">
     <xs:attribute name="place">
       <xs:annotation>
-        <xs:documentation>specifies where this item is placed
-Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6] overleaf; 7] above; 8] end; 9] inline; 10] inspace</xs:documentation>
+        <xs:documentation>specifies where this item is placed</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction>
           <xs:simpleType>
             <xs:list>
               <xs:simpleType>
-                <xs:union memberTypes="xs:Name">
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="below">
-                        <xs:annotation>
-                          <xs:documentation>below the line</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="bottom">
-                        <xs:annotation>
-                          <xs:documentation>at the foot of the page</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="margin">
-                        <xs:annotation>
-                          <xs:documentation>in the margin (left, right, or both)</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="top">
-                        <xs:annotation>
-                          <xs:documentation>at the top of the page</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="opposite">
-                        <xs:annotation>
-                          <xs:documentation>on the opposite, i.e. facing, page</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="overleaf">
-                        <xs:annotation>
-                          <xs:documentation>on the other side of the leaf</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="above">
-                        <xs:annotation>
-                          <xs:documentation>above the line</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="end">
-                        <xs:annotation>
-                          <xs:documentation>at the end of e.g. chapter or volume.</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="inline">
-                        <xs:annotation>
-                          <xs:documentation>within the body of the text.</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                  <xs:simpleType>
-                    <xs:restriction base="xs:token">
-                      <xs:enumeration value="inspace">
-                        <xs:annotation>
-                          <xs:documentation>in a predefined space, for example left by an earlier scribe.</xs:documentation>
-                        </xs:annotation>
-                      </xs:enumeration>
-                    </xs:restriction>
-                  </xs:simpleType>
-                </xs:union>
+                <xs:restriction base="xs:token">
+                  <xs:enumeration value="above">
+                    <xs:annotation>
+                      <xs:documentation>above the line</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="below">
+                    <xs:annotation>
+                      <xs:documentation>below the line</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="top">
+                    <xs:annotation>
+                      <xs:documentation>at the top of the page</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="bottom">
+                    <xs:annotation>
+                      <xs:documentation>at the foot of the page</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="tablebottom"/>
+                </xs:restriction>
               </xs:simpleType>
             </xs:list>
           </xs:simpleType>

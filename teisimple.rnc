@@ -3,9 +3,10 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
+namespace skos = "http://www.w3.org/2004/02/skos/core#"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-10-07T12:48:41Z. 
+# Schema generated from ODD source 2014-11-23T23:45:44Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -221,7 +222,7 @@ att.datable.attribute.calendar =
   ## indicates the system or calendar to which the date represented by the content of this element belongs.
   attribute calendar { data.pointer }?
 sch:pattern [
-  id = "oddbyexample-att.datable-calendar-calendar-constraint-1"
+  id = "teisimple-att.datable-calendar-calendar-constraint-1"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -398,12 +399,18 @@ att.global.attribute.xmllang =
 att.global.attribute.rendition =
   
   ## points to a description of the rendering or presentation used for this element in the source text.
-  ## Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4] simple:normalweight; 5] simple:smallcaps; 6] simple:doublestrikethrough; 7] simple:strikethrough; 8] simple:subscript; 9] simple:superscript; 10] simple:typewriter; 11] simple:doubleunderline; 12] simple:underline; 13] simple:wavyunderlline
+  ## Suggested values include: 1] simple:blackletter; 2] simple:cursive; 3] simple:bold; 4] simple:allcaps; 5] simple:italic; 6] simple:normalweight; 7] simple:smallcaps; 8] simple:doublestrikethrough; 9] simple:strikethrough; 10] simple:subscript; 11] simple:superscript; 12] simple:typewriter; 13] simple:doubleunderline; 14] simple:underline; 15] simple:wavyunderline; 16] simple:rotateright; 17] simple:rotateleft; 18] simple:centre; 19] simple:braced ; 20] simple:boxed ; 21] simple:letterspace; 22] simple:dropcap  ; 23] simple:larger; 24] simple:smaller
   attribute rendition {
     list {
       (
        ##
-       "simple:bold"
+       "simple:blackletter"
+       | 
+         ##
+         "simple:cursive"
+       | 
+         ##
+         "simple:bold"
        | 
          ##
          "simple:allcaps"
@@ -439,12 +446,39 @@ att.global.attribute.rendition =
          "simple:underline"
        | 
          ##
-         "simple:wavyunderlline"
+         "simple:wavyunderline"
+       | 
+         ##
+         "simple:rotateright"
+       | 
+         ##
+         "simple:rotateleft"
+       | 
+         ##
+         "simple:centre"
+       | 
+         ##
+         "simple:braced "
+       | 
+         ##
+         "simple:boxed "
+       | 
+         ##
+         "simple:letterspace"
+       | 
+         ##
+         "simple:dropcap  "
+       | 
+         ##
+         "simple:larger"
+       | 
+         ##
+         "simple:smaller"
        | data.pointer)+
     }
   }?
 sch:pattern [
-  id = "oddbyexample-att.global-rendition-renditionpointer-constraint-2"
+  id = "teisimple-att.global-rendition-renditionpointer-constraint-2"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -587,40 +621,23 @@ att.placement.attributes = att.placement.attribute.place
 att.placement.attribute.place =
   
   ## specifies where this item is placed
-  ## Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6] overleaf; 7] above; 8] end; 9] inline; 10] inspace
   attribute place {
     list {
       (
-       ## below the line
-       "below"
+       ## above the line
+       "above"
        | 
-         ## at the foot of the page
-         "bottom"
-       | 
-         ## in the margin (left, right, or both)
-         "margin"
+         ## below the line
+         "below"
        | 
          ## at the top of the page
          "top"
        | 
-         ## on the opposite, i.e. facing, page
-         "opposite"
+         ## at the foot of the page
+         "bottom"
        | 
-         ## on the other side of the leaf
-         "overleaf"
-       | 
-         ## above the line
-         "above"
-       | 
-         ## at the end of e.g. chapter or volume.
-         "end"
-       | 
-         ## within the body of the text.
-         "inline"
-       | 
-         ## in a predefined space, for example left by an earlier scribe.
-         "inspace"
-       | xsd:Name)+
+         ##
+         "tablebottom")+
     }
   }?
 att.segLike.attributes =
@@ -654,7 +671,7 @@ att.spanning.attribute.spanTo =
   ## indicates the end of a span initiated by the element bearing this attribute.
   attribute spanTo { data.pointer }?
 sch:pattern [
-  id = "oddbyexample-att.spanning-spanTo-spanTo-2-constraint-3"
+  id = "teisimple-att.spanning-spanTo-spanTo-2-constraint-3"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -703,7 +720,7 @@ att.styleDef.attribute.schemeVersion =
   attribute schemeVersion { data.versionNumber }?
 sch:pattern [
   id =
-    "oddbyexample-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4"
+    "teisimple-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -1459,7 +1476,7 @@ quotation =
   element quotation {
     (model.pLike*)
     >> sch:pattern [
-         id = "oddbyexample-quotation-quotationContents-constraint-1"
+         id = "teisimple-quotation-quotationContents-constraint-1"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2029,7 +2046,7 @@ relatedItem =
   element relatedItem {
     ((model.biblLike | model.ptrLike)?)
     >> sch:pattern [
-         id = "oddbyexample-relatedItem-targetorcontent1-constraint-2"
+         id = "teisimple-relatedItem-targetorcontent1-constraint-2"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2051,7 +2068,7 @@ relatedItem =
          "         "
        ]
     >> sch:pattern [
-         id = "oddbyexample-relatedItem-targetorcontent1-constraint-5"
+         id = "teisimple-relatedItem-targetorcontent1-constraint-5"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2150,7 +2167,7 @@ damageSpan =
   element damageSpan {
     empty
     >> sch:pattern [
-         id = "oddbyexample-damageSpan-spanTo-constraint-6"
+         id = "teisimple-damageSpan-spanTo-constraint-6"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2171,7 +2188,7 @@ damageSpan =
          "         "
        ]
     >> sch:pattern [
-         id = "oddbyexample-damageSpan-spanTo_fr-constraint-7"
+         id = "teisimple-damageSpan-spanTo_fr-constraint-7"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2557,7 +2574,7 @@ att.pointing.attribute.targetLang =
   ## specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.
   attribute targetLang { data.language }?
 sch:pattern [
-  id = "oddbyexample-att.pointing-targetLang-targetLang-constraint-5"
+  id = "teisimple-att.pointing-targetLang-targetLang-constraint-5"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -2581,7 +2598,7 @@ att.pointing.attribute.target =
     list { data.pointer+ }
   }?
 sch:pattern [
-  id = "oddbyexample-att.pointing-target-validtarget-constraint-6"
+  id = "teisimple-att.pointing-target-validtarget-constraint-6"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -2653,7 +2670,7 @@ att.typed.attribute.subtype =
   ## provides a sub-categorization of the element, if needed
   attribute subtype { data.enumerated }?
 sch:pattern [
-  id = "oddbyexample-att.typed-subtypeTyped-constraint-7"
+  id = "teisimple-att.typed-subtypeTyped-constraint-7"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -2841,7 +2858,7 @@ addSpan =
   element addSpan {
     empty
     >> sch:pattern [
-         id = "oddbyexample-addSpan-spanTo-constraint-10"
+         id = "teisimple-addSpan-spanTo-constraint-10"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2861,7 +2878,7 @@ addSpan =
          "         "
        ]
     >> sch:pattern [
-         id = "oddbyexample-addSpan-spanTo_fr-constraint-11"
+         id = "teisimple-addSpan-spanTo_fr-constraint-11"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3400,7 +3417,7 @@ lg =
       | lg)*,
      (model.divBottom, model.global*)*)
     >> sch:pattern [
-         id = "oddbyexample-lg-atleast1oflggapl-constraint-12"
+         id = "teisimple-lg-atleast1oflggapl-constraint-12"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3741,7 +3758,7 @@ ref =
   element ref {
     macro.paraContent
     >> sch:pattern [
-         id = "oddbyexample-ref-refAtts-constraint-4"
+         id = "teisimple-ref-refAtts-constraint-4"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3857,7 +3874,7 @@ s =
       | seg
       | w)*)
     >> sch:pattern [
-         id = "oddbyexample-s-noNestedS-constraint-5"
+         id = "teisimple-s-noNestedS-constraint-5"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -4015,7 +4032,7 @@ subst =
   element subst {
     ((add | del | model.milestoneLike)+)
     >> sch:pattern [
-         id = "oddbyexample-subst-substContents1-constraint-13"
+         id = "teisimple-subst-substContents1-constraint-13"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -4079,7 +4096,7 @@ table =
      model.global*,
      (back, model.global*)?)
     >> sch:pattern [
-         id = "oddbyexample-text-headeronlyelement-constraint-8"
+         id = "teisimple-text-headeronlyelement-constraint-8"
          "\x{a}" ~
          "            "
          sch:rule [

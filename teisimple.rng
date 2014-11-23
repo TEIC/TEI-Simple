@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-10-07T12:48:41Z. 
+Schema generated from ODD source 2014-11-23T23:45:44Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -442,10 +442,11 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.datable-calendar-calendar-constraint-1">
+            id="teisimple-att.datable-calendar-calendar-constraint-1">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="tei:*[@calendar]">
             <sch:assert test="string-length(.) gt 0">
 @calendar indicates the system or calendar to which the date represented by the content of this element
@@ -674,10 +675,14 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       <optional>
          <attribute name="rendition">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4] simple:normalweight; 5] simple:smallcaps; 6] simple:doublestrikethrough; 7] simple:strikethrough; 8] simple:subscript; 9] simple:superscript; 10] simple:typewriter; 11] simple:doubleunderline; 12] simple:underline; 13] simple:wavyunderlline</a:documentation>
+Suggested values include: 1] simple:blackletter; 2] simple:cursive; 3] simple:bold; 4] simple:allcaps; 5] simple:italic; 6] simple:normalweight; 7] simple:smallcaps; 8] simple:doublestrikethrough; 9] simple:strikethrough; 10] simple:subscript; 11] simple:superscript; 12] simple:typewriter; 13] simple:doubleunderline; 14] simple:underline; 15] simple:wavyunderline; 16] simple:rotateright; 17] simple:rotateleft; 18] simple:centre; 19] simple:braced ; 20] simple:boxed ; 21] simple:letterspace; 22] simple:dropcap  ; 23] simple:larger; 24] simple:smaller</a:documentation>
             <list>
                <oneOrMore>
                   <choice>
+                     <value>simple:blackletter</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:cursive</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                      <value>simple:bold</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                      <value>simple:allcaps</value>
@@ -702,7 +707,25 @@ Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                      <value>simple:underline</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:wavyunderlline</value>
+                     <value>simple:wavyunderline</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:rotateright</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:rotateleft</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:centre</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:braced </value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:boxed </value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:letterspace</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:dropcap  </value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:larger</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>simple:smaller</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                      <ref name="data.pointer"/>
                   </choice>
@@ -712,8 +735,10 @@ Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.global-rendition-renditionpointer-constraint-2">
-      <rule xmlns:rng="http://relaxng.org/ns/structure/1.0" context="tei:*[@rendition]">
+            id="teisimple-att.global-rendition-renditionpointer-constraint-2">
+      <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+            context="tei:*[@rendition]">
                               <let name="results"
               value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
                               <assert test="every $x in $results satisfies $x">
@@ -910,32 +935,20 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
    <define name="att.placement.attribute.place">
       <optional>
          <attribute name="place">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies where this item is placed
-Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6] overleaf; 7] above; 8] end; 9] inline; 10] inspace</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies where this item is placed</a:documentation>
             <list>
                <oneOrMore>
                   <choice>
-                     <value>below</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">below the line</a:documentation>
-                     <value>bottom</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the foot of the page</a:documentation>
-                     <value>margin</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in the margin (left, right, or both)</a:documentation>
-                     <value>top</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the top of the page</a:documentation>
-                     <value>opposite</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">on the opposite, i.e. facing, page</a:documentation>
-                     <value>overleaf</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">on the other side of the leaf</a:documentation>
                      <value>above</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">above the line</a:documentation>
-                     <value>end</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the end of e.g. chapter or volume.</a:documentation>
-                     <value>inline</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">within the body of the text.</a:documentation>
-                     <value>inspace</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in a predefined space, for example left by an earlier scribe.</a:documentation>
-                     <data type="Name"/>
+                     <value>below</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">below the line</a:documentation>
+                     <value>top</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the top of the page</a:documentation>
+                     <value>bottom</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the foot of the page</a:documentation>
+                     <value>tablebottom</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                   </choice>
                </oneOrMore>
             </list>
@@ -1005,10 +1018,11 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.spanning-spanTo-spanTo-2-constraint-3">
+            id="teisimple-att.spanning-spanTo-spanTo-2-constraint-3">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="tei:*[@spanTo]">
             <sch:assert test="id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]">
 The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow the current element <sch:name/>
@@ -1045,10 +1059,11 @@ The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow 
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4">
+            id="teisimple-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="tei:*[@schemeVersion]">
             <sch:assert test="@scheme and not(@scheme = 'free')">
               @schemeVersion can only be used if @scheme is specified.
@@ -2960,9 +2975,10 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <ref name="model.pLike"/>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-quotation-quotationContents-constraint-1">
+                  id="teisimple-quotation-quotationContents-constraint-1">
             <rule context="tei:quotation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                        test="not(@marks) and not (tei:p)">
 On <name/>, either the @marks attribute should be used, or a paragraph of description provided</report>
             </rule>
@@ -3880,22 +3896,24 @@ Sample values include: 1] TEI; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron;
             </choice>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-relatedItem-targetorcontent1-constraint-2">
+                  id="teisimple-relatedItem-targetorcontent1-constraint-2">
             <rule context="tei:relatedItem">
                <sch:report xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@target and count( child::* ) &gt; 0">
 If the @target attribute on <sch:name/> is used, the
 relatedItem element must be empty</sch:report>
             </rule>
-         </pattern> 
+         </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-relatedItem-targetorcontent1-constraint-5">
+                  id="teisimple-relatedItem-targetorcontent1-constraint-5">
             <rule context="tei:relatedItem">
                <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@target or child::*">A relatedItem element should have either a 'target' attribute
         or a child element to indicate the related bibliographic item</sch:assert>
             </rule>
@@ -4020,16 +4038,20 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(damaged span of text) marks the beginning of a longer sequence of text which is damaged in some way but still legible. [11.3.3.1. ]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-damageSpan-spanTo-constraint-6">
+                  id="teisimple-damageSpan-spanTo-constraint-6">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="@spanTo">
 The @spanTo attribute of <name/> is required.</assert>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-damageSpan-spanTo_fr-constraint-7">
+                  id="teisimple-damageSpan-spanTo_fr-constraint-7">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">L'attribut spanTo est requis.</assert>
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="@spanTo">L'attribut spanTo est requis.</assert>
             </rule>
          </pattern>
          <ref name="att.global.attributes"/>
@@ -4552,10 +4574,11 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.pointing-targetLang-targetLang-constraint-5">
+            id="teisimple-att.pointing-targetLang-targetLang-constraint-5">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
             <sch:assert test="count(@target)">@targetLang can only be used if @target is specified.</sch:assert>
           </sch:rule>
@@ -4573,9 +4596,10 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.pointing-target-validtarget-constraint-6">
+            id="teisimple-att.pointing-target-validtarget-constraint-6">
       <rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
             xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#"
             context="tei:*[@target]">
                               <let name="results"
               value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
@@ -4652,10 +4676,11 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.typed-subtypeTyped-constraint-7">
+            id="teisimple-att.typed-subtypeTyped-constraint-7">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="*[@subtype]">
         <sch:assert test="@type">The <sch:name/> element should not be categorized in detail with @subtype
  unless also categorized in general with @type</sch:assert>
@@ -4782,7 +4807,7 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          </group>
          <ns xmlns="http://purl.oclc.org/dsdl/schematron"
              prefix="tei"
-             uri="http://www.tei-c.org/ns/1.0"/> 
+             uri="http://www.tei-c.org/ns/1.0"/>
          <ns xmlns="http://purl.oclc.org/dsdl/schematron"
              prefix="xs"
              uri="http://www.w3.org/2001/XMLSchema"/>
@@ -4915,22 +4940,24 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-addSpan-spanTo-constraint-10">
+                  id="teisimple-addSpan-spanTo-constraint-10">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
                            xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@spanTo">The @spanTo attribute of <sch:name/> is required.</sch:assert>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-addSpan-spanTo_fr-constraint-11">
+                  id="teisimple-addSpan-spanTo_fr-constraint-11">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
                            xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@spanTo">L'attribut spanTo est requis.</sch:assert>
             </rule>
          </pattern>
@@ -5954,11 +5981,12 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-lg-atleast1oflggapl-constraint-12">
+                  id="teisimple-lg-atleast1oflggapl-constraint-12">
             <rule context="tei:lg">
                <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
         must contain at least one child l, lg or gap element.</sch:assert>
             </rule>
@@ -6373,9 +6401,11 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-ref-refAtts-constraint-4">
+                  id="teisimple-ref-refAtts-constraint-4">
             <rule context="tei:ref">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@target and @cRef">Only one of the
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
                </report>
             </rule>
@@ -6492,9 +6522,11 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-s-noNestedS-constraint-5">
+                  id="teisimple-s-noNestedS-constraint-5">
             <rule context="tei:s">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="tei:s">You may not nest one s element within
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="tei:s">You may not nest one s element within
       another: use seg instead</report>
             </rule>
          </pattern>
@@ -6686,9 +6718,10 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
             </choice>
          </oneOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-subst-substContents1-constraint-13">
+                  id="teisimple-subst-substContents1-constraint-13">
             <rule context="tei:subst">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                        test="child::tei:add and child::tei:del">
                   <name/> must have at least one child add and at least one child del</assert>
             </rule>
@@ -6796,8 +6829,9 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
             </optional>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-text-headeronlyelement-constraint-8">
+                  id="teisimple-text-headeronlyelement-constraint-8">
             <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                   context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
                         <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
                      </rule>
