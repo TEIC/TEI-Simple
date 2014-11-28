@@ -194,6 +194,16 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
               </attList>
             </classSpec>
             <classSpec ident="att.datcat" mode="delete"/>
+            <classSpec ident="att.declarable" mode="delete"/>
+
+	    <elementSpec ident="formula">
+	      <attDef ident="notation">
+		<valList mode="add" type="semi">
+		  <valItem ident="TeX"/>
+		</valList>
+	      </attDef>
+	    </elementSpec>
+
             <elementSpec ident="name" mode="change">
               <attList>
                 <attDef ident="type" mode="change">
@@ -213,6 +223,62 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                 </attDef>
               </attList>
             </elementSpec>
+   <elementSpec ident="cell" mode="change">
+              <attList>
+
+      <attDef ident="role">
+         <valList mode="add" type="closed">
+            <valItem ident="data"/>
+            <valItem ident="label"/>
+            <valItem ident="sum"/>
+            <valItem ident="total"/>
+         </valList>
+      </attDef>
+	      </attList>
+   </elementSpec>
+
+   <elementSpec ident="title" mode="change">
+              <attList>
+
+      <attDef ident="level">
+         <valList mode="add" type="closed">
+            <valItem ident="a"/>
+            <valItem ident="j"/>
+            <valItem ident="m"/>
+            <valItem ident="s"/>
+         </valList>
+      </attDef>
+	      </attList>
+   </elementSpec>
+
+   <elementSpec ident="att.dimensions" mode="change">
+     <attList>
+      <attDef ident="unit">
+         <valList mode="add" type="closed">
+            <valItem ident="chars">
+                      <skos:exactMatch>char</skos:exactMatch>
+
+                      <skos:exactMatch>characters</skos:exactMatch>
+
+	    </valItem>
+            <valItem ident="lines">
+                      <skos:exactMatch>line</skos:exactMatch>
+
+	    </valItem>
+            <valItem ident="pages">
+                      <skos:exactMatch>page</skos:exactMatch>
+</valItem>
+            <valItem ident="words">                      <skos:exactMatch>word</skos:exactMatch>
+</valItem>
+            <valItem ident="cm"></valItem>
+            <valItem ident="mm"></valItem>
+            <valItem ident="in"></valItem>
+
+         </valList>
+      </attDef>
+     </attList>
+   </elementSpec>
+
             <classSpec ident="att.global" mode="change">
               <attList>
                 <attDef ident="rend" mode="delete"/>
@@ -223,16 +289,18 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                       <skos:exactMatch>blackLetter</skos:exactMatch>
                       <skos:exactMatch>blackletterType</skos:exactMatch>
                       <skos:exactMatch>FrakturType</skos:exactMatch>
+                      <skos:exactMatch>gothic</skos:exactMatch>
                     </valItem>
                     <valItem ident="simple:cursive">
 		      </valItem>
                     <valItem ident="simple:bold">
                       <skos:exactMatch>b</skos:exactMatch>
+                      <skos:exactMatch>bo</skos:exactMatch>
                       <skos:exactMatch>bol</skos:exactMatch>
                       <skos:exactMatch>strong</skos:exactMatch>
                     </valItem>
                     <valItem ident="simple:allcaps">
-                      <skos:exactMatch>upper-roma</skos:exactMatch>
+                      <skos:exactMatch>upper-roman</skos:exactMatch>
                     </valItem>
                     <valItem ident="simple:italic">
                       <skos:exactMatch/>
@@ -242,6 +310,9 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                       <skos:exactMatch>ital</skos:exactMatch>
                     </valItem>
                     <valItem ident="simple:normalweight">
+                      <skos:exactMatch>roman</skos:exactMatch>
+		      </valItem>
+                    <valItem ident="simple:normalstyle">
 		      </valItem>
                     <valItem ident="simple:smallcaps">
                       <skos:exactMatch>sc</skos:exactMatch>
@@ -263,6 +334,7 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                     <valItem ident="simple:doubleunderline">
 		      </valItem>
                     <valItem ident="simple:underline">
+                      <skos:exactMatch>i</skos:exactMatch>
 		      </valItem>
                     <valItem ident="simple:wavyunderline">
 		      </valItem>
@@ -275,14 +347,18 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                     <valItem ident="simple:centre">
                       <skos:exactMatch>center</skos:exactMatch>
                     </valItem>
-                    <valItem ident="simple:braced ">
+                    <valItem ident="simple:rightbraced "/>
+                    <valItem ident="simple:topbraced "/>
+                    <valItem ident="simple:bottombraced "/>
+                    <valItem ident="simple:leftbraced ">
+                      <skos:exactMatch>braced</skos:exactMatch>
 		      </valItem>
                     <valItem ident="simple:boxed ">
 		      </valItem>
                     <valItem ident="simple:letterspace">
                       <skos:exactMatch>spaceletter</skos:exactMatch>
                     </valItem>
-                    <valItem ident="simple:dropcap  ">
+                    <valItem ident="simple:dropcap">
                       <skos:exactMatch>decorInit</skos:exactMatch>
                     </valItem>
                     <valItem ident="simple:larger">
