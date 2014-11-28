@@ -150,12 +150,16 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                       <valItem ident="tablefoot">
                         <desc>at the foot of the table</desc>
                       </valItem>
-                      <valItem ident="margin-left">
-                        <skos:exactMatch>margin</skos:exactMatch>
+                      <valItem ident="margin">
+                        <skos:exactMatch>margin-outer</skos:exactMatch>
                         <skos:exactMatch>marg1</skos:exactMatch>
                         <skos:exactMatch>marg2</skos:exactMatch>
                         <skos:exactMatch>marg4</skos:exactMatch>
                         <skos:exactMatch>margin</skos:exactMatch>
+                        <skos:exactMatch>left</skos:exactMatch>
+                        <desc>in the outer margin</desc>
+                      </valItem>
+                      <valItem ident="margin-left">
                         <skos:exactMatch>left</skos:exactMatch>
                         <desc>in the left margin</desc>
                       </valItem>
