@@ -27,6 +27,8 @@
   <property name="doclang" value="en"/>
   <property name="verbose" value=""/>
   <property name="inputDir" location="."/>
+  <dirname property="outputDir" file="TEISimplespreadsheet.xlsx"/>
+  <property name="tempDir" value="${outputDir}/temp-dir-for-ant"/>
   <path id="classpath">
     <pathelement path="${java.class.path}"/>
   </path>
@@ -36,7 +38,27 @@
 	  classpath="lib/ant-schematron-2010-04-14.jar"/>
   <taskdef name="runjing" classpath="${jing}" classname="com.thaiopensource.relaxng.util.JingTask"/>
 
-  <target name="all" depends="schemas,tests"/>
+  <target name="all" depends="convert,schemas,tests,doc,cleanup"/>
+
+
+  <target name="convert">
+    <!-- Recreate temporary output directory -->
+    <delete dir="${tempDir}"/>
+    <mkdir dir="${tempDir}"/>
+    <echo>Unpack spreadsheet to ${tempDir}</echo>
+    <unzip src="TEISimplespreadsheet.xlsx" dest="${tempDir}"/>
+    <echo>Convert XSLX to TEI</echo>
+    <xslt force="yes" style="${XSL}/profiles/default/xlsx/from.xsl" in="${tempDir}/_rels/.rels" out="TEISimplespreadsheet.xml">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="workDir" expression="file:///${tempDir}"/>
+      <param name="inputDir" expression="${inputDir}"/>
+    </xslt>
+        <xslt force="yes" style="generate.xsl" in="TEISimplespreadsheet.xml" out="teisimple.odd">
+          <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+          <param name="lang" expression="${lang}" if="lang"/>
+          <param name="verbose" expression="${verbose}" if="verbose"/>
+        </xslt>
+  </target>
 
   <target name="schemas">
         <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="teisimple.odd" out="teisimple.odd.compiled">
@@ -66,7 +88,6 @@
 	<xslt processor="trax" force="yes" style="isoschematron/iso_schematron_message_xslt2.xsl" in="teisimple.isosch" out="teisimple.isosch.xsl">
 	  <factory name="net.sf.saxon.TransformerFactoryImpl"/>
 	</xslt>
-	<delete file="teisimple.odd.compiled"/>
       <sequential>      
 	<java jar="${trang}" failonerror="true" fork="true">
 	<arg value="teisimple.rng"/>
@@ -80,6 +101,18 @@
       </java>
       </sequential>
   </target>
+  
+  <target name="doc">
+    <echo>XSLT generate HTML files</echo>
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd" out="teisimple.odd.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="inputDir" expression="${inputDir}/"/>
+      <param name="summaryDoc" expression="true"/>
+      <param name="displayMode" expression="rnc"/>
+    </xslt>
+</target>
 
   <target name="tests">
     <echo>Validate against RELAX NG</echo>
@@ -88,6 +121,12 @@
     <xmlvalidate failonerror="yes" file="tests/testsimple.xml"/>
     <echo>Validate against Schematron</echo>
     <schematron file="tests/testsimple.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <echo>Validate against XSD</echo>
+    <schemavalidate noNamespaceFile="teisimple.xsd" file="tests/testsimple.xml"/>
   </target>
 
+  <target name="cleanup">
+    <delete dir="${tempDir}"/>
+    <delete file="teisimple.odd.compiled"/>
+  </target>
 </project>
