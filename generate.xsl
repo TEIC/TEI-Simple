@@ -7,6 +7,7 @@
 xmlns:tei="http://www.tei-c.org/ns/1.0"
 xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng tei n" xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
   <XSL:output indent="yes"/>
+<XSL:namespace-alias stylesheet-prefix="xsl" result-prefix="XSL"/>
   <XSL:template match="/">
     <XSL:result-document href="elementsummary.xml">
       <div>

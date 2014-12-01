@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<div xmlns="http://www.tei-c.org/ns/1.0">
+<div xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:XSL="http://www.w3.org/1999/XSL/Transform">
    <head>Summary of Simple</head>
    <p>A total of 104 elements are selected for use in
 	the <gi>text</gi> part of a document.</p>
