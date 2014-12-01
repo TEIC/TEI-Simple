@@ -1,5 +1,5 @@
 default: teisimple
-TEXTS=/Volumes/Repo/Simple/ota
+TEXTS=/Volumes/Repo/Simple
 XSL=../Stylesheets
 ANT_OPTS="-Xss2m -Xmx752m" 
 docx:

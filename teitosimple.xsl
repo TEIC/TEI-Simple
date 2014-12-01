@@ -4,6 +4,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="tei xs" version="2.0"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0">
 
+  <xsl:import href="mapatts.xsl"/>
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
         <desc>
             <p> TEI utility stylesheet for transformation from TEI P5 to TEI Simple</p>
@@ -170,20 +171,6 @@
         </xsl:element>
     </xsl:template>
 
-    <xsl:template match="@rend">
-        <xsl:if test="not(../@rendition)">
-        <xsl:attribute name="rendition">
-	  <xsl:for-each select="tokenize(.,' ')">
-            <xsl:text>simple:</xsl:text>
-	    <xsl:value-of select="."/>
-	    <xsl:if test="position()!=last()">
-              <xsl:text> </xsl:text>
-	    </xsl:if>
-	  </xsl:for-each>
-        </xsl:attribute>
-        </xsl:if>
-    </xsl:template>
-    
     <xsl:template match="@rendition">
         <xsl:choose>
 	  <xsl:when test="starts-with(.,'#') and not
