@@ -53,7 +53,8 @@
       <param name="workDir" expression="file:///${tempDir}"/>
       <param name="inputDir" expression="${inputDir}"/>
     </xslt>
-        <xslt force="yes" style="generate.xsl" in="TEISimplespreadsheet.xml" out="teisimple.odd">
+        <xslt force="yes" style="generate.xsl" out="null.xml"
+	      in="TEISimplespreadsheet.xml" destdir="." >
           <factory name="net.sf.saxon.TransformerFactoryImpl"/>
           <param name="lang" expression="${lang}" if="lang"/>
           <param name="verbose" expression="${verbose}" if="verbose"/>
@@ -62,31 +63,47 @@
 
   <target name="schemas">
         <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="teisimple.odd" out="teisimple.odd.compiled">
-          <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+          <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/xinclude-aware"
+		     value="true"/>
+	  </factory>
           <param name="lang" expression="${lang}" if="lang"/>
           <param name="verbose" expression="${verbose}" if="verbose"/>
         </xslt>
       <xslt processor="trax" force="yes" style="${XSL}/odds/odd2dtd.xsl" in="teisimple.odd.compiled" out="teisimple.dtd">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+	</factory>
         <param name="lang" expression="${lang}"/>
         <param name="documentationLanguage" expression="${docLang}"/>
       </xslt>
       <xslt processor="trax" force="yes" style="${XSL}/odds/odd2relax.xsl" in="teisimple.odd.compiled" out="teisimple.rng">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+	</factory>
         <param name="lang" expression="${lang}"/>
         <param name="documentationLanguage" expression="${docLang}"/>
       </xslt>
       <xslt processor="trax" force="yes" style="${XSL}/odds/extract-isosch.xsl" in="teisimple.odd.compiled" out="teisimple.isosch">
-        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/xinclude-aware"
+		     value="true"/>
+	</factory>
       </xslt>
       <xslt processor="trax" force="yes" style="isoschematron/iso_schematron_message_xslt2.xsl" in="teisimple.isosch" out="teisimple.isosch.xsl">
-	<factory name="net.sf.saxon.TransformerFactoryImpl"/>
+	<factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+	</factory>
       </xslt>
 	<xslt processor="trax" force="yes" style="${XSL}/odds/extract-isosch.xsl" in="teisimple.odd.compiled" out="teisimple.isosch">
-	  <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+	  <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+	  </factory>
 	</xslt>
 	<xslt processor="trax" force="yes" style="isoschematron/iso_schematron_message_xslt2.xsl" in="teisimple.isosch" out="teisimple.isosch.xsl">
-	  <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+	  <factory name="net.sf.saxon.TransformerFactoryImpl">
+          <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+	  </factory>
 	</xslt>
       <sequential>      
 	<java jar="${trang}" failonerror="true" fork="true">
