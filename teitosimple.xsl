@@ -4,7 +4,7 @@
     xmlns:tei="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="tei xs" version="2.0"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0">
 
-  <xsl:import href="mapatts.xsl"/>
+  <xsl:include href="mapatts.xsl"/>
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
         <desc>
             <p> TEI utility stylesheet for transformation from TEI P5 to TEI Simple</p>

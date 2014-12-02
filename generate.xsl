@@ -100,34 +100,45 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
 
     <XSL:result-document href="mapatts.xsl">
       
-      <xsl:stylesheet version="2.0">
-	<xsl:template match="@rend">
-          <xsl:if test="not(../@rendition)">
-            <xsl:attribute name="rendition">
+      <xsl:stylesheet version="2.0">	
+	<XSL:for-each-group
+	    select="doc('teisimple.odd')//attDef[.//skos:exactMatch]"
+	    group-by="@ident">
+	  <XSL:variable name="att" select="current-grouping-key()"/>
+	  <xsl:template match="@{if ($att='rendition') then 'rend' else $att}">
+	    <xsl:attribute name="{$att}">
 	      <xsl:choose>
-		<XSL:for-each
-		    select="doc('teisimple.odd')//skos:exactMatch">
+		<XSL:for-each select=".//skos:exactMatch">
+		  <XSL:variable name="val" select="parent::valItem/@ident"/>
 		  <xsl:when>
 		    <XSL:attribute name="test">
 		      <XSL:text>.='</XSL:text>
 		      <XSL:value-of select="."/>
 		      <XSL:text>'</XSL:text>
 		    </XSL:attribute>
-		      <XSL:text>simple:</XSL:text>
-		    <XSL:value-of select="parent::valItem/@ident"/>
+		      <XSL:value-of select="$val"/>
 		  </xsl:when>
 		</XSL:for-each>
+		<xsl:otherwise>
+		    <XSL:choose>
+		      <XSL:when test="$att='rendition'">
+			<xsl:for-each select="tokenize(.,' ')">
+			  <xsl:text>simple:</xsl:text>
+			  <xsl:value-of select="."/>
+			  <xsl:if test="position()!=last()">
+			    <xsl:text> </xsl:text>
+			  </xsl:if>
+			</xsl:for-each>
+		      </XSL:when>
+		      <XSL:otherwise>
+			<xsl:value-of select="."/>
+		      </XSL:otherwise>
+		    </XSL:choose>
+		</xsl:otherwise>
 	      </xsl:choose>
-	      <xsl:for-each select="tokenize(.,' ')">
-		<xsl:text>simple:</xsl:text>
-		<xsl:value-of select="."/>
-		<xsl:if test="position()!=last()">
-		  <xsl:text> </xsl:text>
-		</xsl:if>
-	      </xsl:for-each>
-            </xsl:attribute>
-          </xsl:if>
-	</xsl:template>
+	    </xsl:attribute>
+	  </xsl:template>
+	</XSL:for-each-group>
       </xsl:stylesheet>
     </XSL:result-document>
 

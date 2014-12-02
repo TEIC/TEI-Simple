@@ -219,15 +219,13 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                               <desc>at the foot of the page</desc>
                            </valItem>
                            <valItem ident="tablebottom">
-                              <valItem ident="tablefoot">
-                                 <desc>at the foot of the table</desc>
+                              <skos:exactMatch>tablefoot</skos:exactMatch>
                               </valItem>
                               <valItem ident="margin">
                                  <skos:exactMatch>margin-outer</skos:exactMatch>
                                  <skos:exactMatch>marg1</skos:exactMatch>
                                  <skos:exactMatch>marg2</skos:exactMatch>
                                  <skos:exactMatch>marg4</skos:exactMatch>
-                                 <skos:exactMatch>margin</skos:exactMatch>
                                  <desc>in the outer margin</desc>
                               </valItem>
                               <valItem ident="margin-left">
@@ -263,7 +261,6 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                               <valItem ident="display">
                                  <desc>formatted like a quotation</desc>
                               </valItem>
-                           </valItem>
                         </valList>
                      </attDef>
                   </attList>
@@ -346,7 +343,6 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                               <desc>floated out of main flow</desc>
                            </valItem>
                            <valItem ident="simple:italic">
-                              <skos:exactMatch/>
                               <skos:exactMatch>italics</skos:exactMatch>
                               <skos:exactMatch>ITALIC</skos:exactMatch>
                               <skos:exactMatch>i</skos:exactMatch>
@@ -506,7 +502,9 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
                      <attDef ident="role" mode="change">
                         <valList mode="add" type="closed">
                            <valItem ident="data"/>
-                           <valItem ident="label"/>
+                           <valItem ident="label">
+                              <skos:exactMatch>LABEL</skos:exactMatch>
+			   </valItem>
                            <valItem ident="sum"/>
                            <valItem ident="total"/>
                         </valList>
