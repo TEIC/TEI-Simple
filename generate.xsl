@@ -1,253 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:n="www.example.com"
-		xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0"
-		xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="rng tei n"
-		xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
-
-<xsl:output indent="yes"/>
-
-<xsl:template match="/">
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xml:lang="en">
-   <teiHeader>
-      <fileDesc>
-         <titleStmt>
-            <title>TEI Simple</title>
-         </titleStmt>
-         <publicationStmt>
-            <p/>
-         </publicationStmt>
-         <sourceDesc>
-            <p></p>
-         </sourceDesc>
-      </fileDesc>
-   </teiHeader>
-   <text>
-      <body>
-	<p>A total of <xsl:value-of
-	select="count(//row[
-	position()&gt;1 
-	and not(cell[1]='') 
-	and not(cell[10] = 'header')
-	and not(cell[10] = 'headeronly')
-	and not(cell[10] = 'no')
-])"/> elements are selected for use in
+<XSL:stylesheet xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+		xmlns:xsl="http://www.w3.org/1999/XSL/TransformAlias"
+		xmlns:n="www.example.com"
+		xmlns:rng="http://relaxng.org/ns/structure/1.0"
+		xmlns:XSL="http://www.w3.org/1999/XSL/Transform"
+xmlns:tei="http://www.tei-c.org/ns/1.0"
+xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng tei n" xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
+  <XSL:output indent="yes"/>
+<XSL:namespace-alias stylesheet-prefix="xsl" result-prefix="XSL"/>
+  <XSL:template match="/">
+    <XSL:result-document href="elementsummary.xml">
+      <div>
+        <head>Summary of Simple</head>
+        <!--
+1. element	
+2. eebo	
+3. Tite	
+4. TEI Lite	
+5 .OTAnrs	
+6. OTA	
+7. DTAnrs	
+8. dta	
+9. use	
+10. group	
+11. action
+-->
+        <p>A total of <XSL:value-of select="count(//row[  position()&gt;1   and not(cell[1]='')   and not(cell[10] = 'header')  and not(cell[10] = 'headeronly')  and not(cell[10] = 'no') ])"/> elements are selected for use in
 	the <gi>text</gi> part of a document.</p>
-	<list type="gloss">
-	    <xsl:for-each-group select="//row[position()&gt;1 and
-					not(cell[1]='')]"
-				group-by="normalize-space(cell[10])">
-	      <xsl:sort select="normalize-space(cell[10])"/>
-	      <xsl:sort select="cell[1]"/>
+        <XSL:variable name="corpses" select="distinct-values(doc('count.xml')//elementRef/@corpus)"/>
+        <table>
+          <row role="label">
+            <cell>Element</cell>
+            <XSL:for-each select="$corpses">
+              <cell>
+                <XSL:value-of select="."/>
+              </cell>
+            </XSL:for-each>
+            <cell>Use</cell>
+            <cell>Action</cell>
+          </row>
+          <XSL:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
+            <XSL:sort select="cell[1]"/>
+            <row>
+              <XSL:variable name="e" select="normalize-space(cell[1])"/>
+              <cell>
+                <XSL:value-of select="$e"/>
+              </cell>
+              <XSL:for-each select="$corpses">
+                <XSL:variable name="c" select="."/>
+                <cell>
+                  <XSL:value-of select="sum(doc('count.xml')//elementRef[@key=$e     and @corpus=$c]/@count)"/>
+                </cell>
+              </XSL:for-each>
+              <XSL:copy-of select="cell[9]"/>
+              <XSL:copy-of select="cell[10]"/>
+            </row>
+          </XSL:for-each>
+        </table>
+        <list type="gloss">
+          <XSL:for-each-group select="//row[position()&gt;1 and      not(cell[1]='')]" group-by="normalize-space(cell[10])">
+            <XSL:sort select="normalize-space(cell[10])"/>
+            <XSL:sort select="cell[1]"/>
+            <XSL:choose>
+              <XSL:when test="current-grouping-key()='header'"/>
+              <XSL:when test="current-grouping-key()='headeronly'"/>
+              <XSL:when test="current-grouping-key()='no'"/>
+              <XSL:otherwise>
+                <label>
+                  <XSL:value-of select="current-grouping-key()"/>
+                </label>
+                <item>
+                  <XSL:for-each select="current-group()">
+                    <gi>
+                      <XSL:value-of select="normalize-space(cell[1])"/>
+                    </gi>
+                    <XSL:text> </XSL:text>
+                  </XSL:for-each>
+                </item>
+              </XSL:otherwise>
+            </XSL:choose>
+          </XSL:for-each-group>
+        </list>
+      </div>
+    </XSL:result-document>
+    <XSL:result-document href="simpleelements.xml">
+      <specGrp xml:id="simpleelements">
+	<XSL:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
+        <XSL:choose>
+          <XSL:when test="contains(cell[9],'header')"/>
+          <XSL:when test="contains(cell[11],'KILL')"/>
+          <XSL:when test="contains(cell[11],'merge')"/>
+          <XSL:otherwise>
+            <elementRef key="{normalize-space(cell[1])}"/>
+          </XSL:otherwise>
+        </XSL:choose>
+	</XSL:for-each>
+      </specGrp>
+    </XSL:result-document>
+
+    <XSL:result-document href="mapatts.xsl">
+      
+      <xsl:stylesheet version="2.0">	
+	<XSL:for-each-group
+	    select="doc('teisimple.odd')//attDef[.//skos:exactMatch]"
+	    group-by="@ident">
+	  <XSL:variable name="att" select="current-grouping-key()"/>
+	  <xsl:template match="@{if ($att='rendition') then 'rend' else $att}">
+	    <xsl:attribute name="{$att}">
 	      <xsl:choose>
-		<xsl:when test="current-grouping-key()='header'"/>
-		<xsl:when test="current-grouping-key()='headeronly'"/>
-		<xsl:when test="current-grouping-key()='no'"/>
+		<XSL:for-each select=".//skos:exactMatch">
+		  <XSL:variable name="val" select="parent::valItem/@ident"/>
+		  <xsl:when>
+		    <XSL:attribute name="test">
+		      <XSL:text>.='</XSL:text>
+		      <XSL:value-of select="."/>
+		      <XSL:text>'</XSL:text>
+		    </XSL:attribute>
+		      <XSL:value-of select="$val"/>
+		  </xsl:when>
+		</XSL:for-each>
 		<xsl:otherwise>
-		  <label><xsl:value-of
-		  select="current-grouping-key()"/></label>
-		  <item>
-		    <xsl:for-each select="current-group()">
-			  <gi><xsl:value-of
-			  select="normalize-space(cell[1])"/></gi>
-			  <xsl:text> </xsl:text>
-		    </xsl:for-each>
-		  </item>
+		    <XSL:choose>
+		      <XSL:when test="$att='rendition'">
+			<xsl:for-each select="tokenize(.,' ')">
+			  <xsl:text>simple:</xsl:text>
+			  <xsl:value-of select="."/>
+			  <xsl:if test="position()!=last()">
+			    <xsl:text> </xsl:text>
+			  </xsl:if>
+			</xsl:for-each>
+		      </XSL:when>
+		      <XSL:otherwise>
+			<xsl:value-of select="."/>
+		      </XSL:otherwise>
+		    </XSL:choose>
 		</xsl:otherwise>
 	      </xsl:choose>
-	    </xsl:for-each-group>
-	</list>
+	    </xsl:attribute>
+	  </xsl:template>
+	</XSL:for-each-group>
+      </xsl:stylesheet>
+    </XSL:result-document>
 
-	    <specGrp xml:id="changes">
-	      <p>A set of unused model classes are removed.</p>
-	      <classSpec ident="model.entryPart" mode="delete"/>
-	      <classSpec ident="model.placeNamePart" mode="delete"/>
-	      <classSpec ident="model.placeStateLike" mode="delete"/>
-	      <classSpec ident="model.egLike" mode="delete"/>
-	      <classSpec ident="model.offsetLike" mode="delete"/>
-	      <classSpec ident="model.pPart.msdesc" mode="delete"/>
-	      <classSpec ident="model.oddDecl" mode="delete"/>
-	      <classSpec ident="model.specDescLike" mode="delete"/>
-	      <classSpec ident="model.entryPart" mode="delete"/>
-	      <classSpec ident="model.placeNamePart" mode="delete"/>
-	      <classSpec ident="model.placeStateLike" mode="delete"/>
-	      <classSpec ident="model.certLike" mode="delete"/>
-	      <classSpec ident="model.glossLike" mode="delete"/>
+  </XSL:template>
+</XSL:stylesheet>
 
-	      <p>Some uncommon attributes are removed from global linking.</p>
-	      <classSpec ident="att.global.linking" mode="change">
-		<attList>
-		  <attDef ident="synch" mode="delete"/>
-		  <attDef ident="sameAs" mode="delete"/>
-		  <attDef ident="copyOf" mode="delete"/>
-		  <attDef ident="exclude" mode="delete"/>
-		  <attDef ident="select" mode="delete"/>
-	      </attList>
-	      </classSpec>
-
-	      <classSpec ident="att.pointing" mode="change">
-		<attList>
-		  <attDef ident="target" mode="change">
-		    <constraintSpec ident="validtarget" scheme="isoschematron">
-		      <constraint>
-			<rule context="tei:*[@target]"  xmlns="http://purl.oclc.org/dsdl/schematron" >
-			  <let name="results" value="for $t in
-			    tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-  <report test="some $x in $results  satisfies $x">
-Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
-			</rule>
-		      </constraint>
-		    </constraintSpec>
-		  </attDef>
-		</attList>
-	      </classSpec>
-
-	      <classSpec ident="att.datcat" mode="delete"/>
-
-	      <elementSpec ident="name" mode="change">
-		<attList>
-		  <attDef ident="type" mode="change">
-		    <valList mode="add" type="closed">
-                      <valItem ident="person"/>
-                      <valItem ident="forename"/>
-                      <valItem ident="surname"/>
-                      <valItem ident="personGenName"/>
-                      <valItem ident="personRoleName"/>
-                      <valItem ident="personAddName"/>
-                      <valItem ident="nameLink"/>
-                      <valItem ident="organisation"/>
-                      <valItem ident="country"/>
-                      <valItem ident="placeGeog"/>
-                      <valItem ident="place"/>
-		    </valList>
-		  </attDef>
-		</attList>
-	      </elementSpec>
-
-	      <classSpec ident="att.global" mode="change">
-		<attList>
-		  <attDef ident="rend" mode="delete"/>
-		  <attDef ident="style" mode="delete"/>
-		  <attDef ident="rendition" mode="change">
-		    <valList mode="add" type="semi">
-		      <valItem ident="simple:bold"/>
-		      <valItem ident="simple:allcaps"/>
-		      <valItem ident="simple:italic"/>
-		      <valItem ident="simple:normalweight"/>
-		      <valItem ident="simple:smallcaps"/>
-		      <valItem ident="simple:doublestrikethrough"/>
-		      <valItem ident="simple:strikethrough"/>
-		      <valItem ident="simple:subscript"/>
-		      <valItem ident="simple:superscript"/>
-		      <valItem ident="simple:typewriter"/>
-		      <valItem ident="simple:doubleunderline"/>
-		      <valItem ident="simple:underline"/>
-		      <valItem ident="simple:wavyunderlline"/>
-		    </valList>
-		    <constraintSpec ident="renditionpointer" scheme="isoschematron">
-		      <constraint>
-			<rule context="tei:*[@rendition]" xmlns="http://purl.oclc.org/dsdl/schematron">
-			  <let name="results" value="for $val in tokenize(normalize-space(@rendition),'\s+') return
-							starts-with($val,'simple:')
-							or
-							(starts-with($val,'#')
-							and
-							//tei:rendition[@xml:id=substring($val,2)])"/>
-			       <assert test="every $x in $results satisfies $x">
-Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
-ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
-			</rule>
-		      </constraint>
-		    </constraintSpec>
-		  </attDef>
-		</attList>
-	      </classSpec>
-	    </specGrp>
-
-	    <specGrp xml:id="transcr">
-	      <!-- for sourcedoc and facsimile -->
-	    <elementRef key="damage"/>
-	    <elementRef key="damageSpan"/>
-	    <elementRef key="facsimile"/>
-	    <elementRef key="line"/>
-	    <elementRef key="listTranspose"/>
-	    <elementRef key="metamark"/>
-	    <elementRef key="mod"/>
-	    <elementRef key="redo"/>
-	    <elementRef key="restore"/>
-	    <elementRef key="retrace"/>
-	    <elementRef key="sourceDoc"/>
-	    <elementRef key="surface"/>
-	    <elementRef key="surfaceGrp"/>
-	    <elementRef key="surplus"/>
-	    <elementRef key="transpose"/>
-	    <elementRef key="undo"/>
-	    <elementRef key="zone"/>
-	    <classRef key="att.coordinated"/>
-	    <classRef key="att.global.change"/>
-	    </specGrp>
-
-	    <specGrp xml:id="header">
-            <moduleRef key="header"/>
-	    <xsl:for-each select="//row[position()&gt;1 and
-				  not(cell[1]='')]">
-	      <xsl:sort select="cell[1]"/>
-	      <xsl:if test="cell[10]='headeronly'">
-		<elementRef key="{normalize-space(cell[1])}"/>
-	      </xsl:if>
-	    </xsl:for-each>
-	    <!-- ban from text-->
-	    <elementSpec ident="text" mode="change">
-	      <constraintSpec ident="headeronlyelement" scheme="isoschematron">
-		<constraint>
-		  <rule
-		      context="tei:term|tei:editor|tei:email|tei:att|tei:gi"
-		      xmlns="http://purl.oclc.org/dsdl/schematron" >
-		    <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
-		  </rule>
-		</constraint>
-	      </constraintSpec>
-	    </elementSpec>
-	    </specGrp>
-
-	    <specGrp xml:id="atts">
-
-	    <classRef key="att.global.analytic"/>
-
-	    <!-- attributes needed -->
-	    <classRef key="att.global.facs"/>
-	    <classRef key="att.citing"/>
-	    <classRef key="att.measurement"/>
-	    <classRef key="att.milestoneUnit"/>
-	    <classRef key="att.pointing"/>
-	    <classRef key="att.global.linking"/>
-	    <classRef key="att.typed"/>
-	    </specGrp>
-
-	    <specGrp xml:id="simple">
-	    <xsl:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
-	      <xsl:choose>
-	      <xsl:when test="contains(cell[9],'header')"/>
-	      <xsl:when test="contains(cell[11],'KILL')"/>
-	      <xsl:when test="contains(cell[11],'merge')"/>
-	      <xsl:otherwise>
-		<elementRef key="{normalize-space(cell[1])}"/>
-	      </xsl:otherwise>
-	      </xsl:choose>
-	    </xsl:for-each>
-	    </specGrp>
-
-         <schemaSpec ident="teisimple" start="TEI teiCorpus">
-           <moduleRef key="tei"/>
-	   <specGrpRef target="#base"/>
-	   <specGrpRef target="#header"/>
-	   <specGrpRef target="#transcr"/>
-	   <specGrpRef target="#atts"/>
-	   <specGrpRef target="#simple"/>
-	   <specGrpRef target="#changes"/>
-         </schemaSpec>
-      </body>
-   </text>
-</TEI>
-
-</xsl:template>
-</xsl:stylesheet>

@@ -3,15 +3,17 @@ namespace a = "http://relaxng.org/ns/compatibility/annotations/1.0"
 namespace rng = "http://relaxng.org/ns/structure/1.0"
 namespace s = "http://www.ascc.net/xml/schematron"
 namespace sch = "http://purl.oclc.org/dsdl/schematron"
+namespace skos = "http://www.w3.org/2004/02/skos/core#"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2014-10-07T12:48:41Z. 
+# Schema generated from ODD source 2014-12-01T23:30:53Z. 
 # Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
 #
 
-#
+# This material is dual-licensed.
+# [http://creativecommons.org/licenses/by-sa/3.0/] Distributed under a Creative Commons Attribution-ShareAlike 3.0 Unported License  [http://www.opensource.org/licenses/BSD-2-Clause] Copyright 2014 TEI Consortium. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage. TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of TEI content in a software environment. For further information or clarification, please contact the TEI Consortium.
 macro.paraContent =
   (text | model.gLike | model.phrase | model.inter | model.global | lg)*
 macro.limitedContent = (text | model.limitedPhrase | model.inter)*
@@ -117,24 +119,28 @@ att.dimensions.attributes =
 att.dimensions.attribute.unit =
   
   ## names the unit used for the measurement
-  ## Suggested values include: 1] cm(centimetres) ; 2] mm(millimetres) ; 3] in(inches) ; 4] lines; 5] chars(characters) 
   attribute unit {
     
-    ## (centimetres) 
-    "cm"
+    ##
+    "chars"
     | 
-      ## (millimetres) 
-      "mm"
-    | 
-      ## (inches) 
-      "in"
-    | 
-      ## lines of text
+      ##
       "lines"
     | 
-      ## (characters) characters of text
-      "chars"
-    | xsd:Name
+      ##
+      "pages"
+    | 
+      ##
+      "words"
+    | 
+      ##
+      "cm"
+    | 
+      ##
+      "mm"
+    | 
+      ##
+      "in"
   }?
 att.dimensions.attribute.quantity =
   
@@ -221,7 +227,7 @@ att.datable.attribute.calendar =
   ## indicates the system or calendar to which the date represented by the content of this element belongs.
   attribute calendar { data.pointer }?
 sch:pattern [
-  id = "oddbyexample-att.datable-calendar-calendar-constraint-1"
+  id = "teisimple-att.datable-calendar-calendar-constraint-1"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -246,84 +252,12 @@ att.datable.attribute.period =
   
   ## supplies a pointer to some location defining a named period of time within which the datable item is understood to have occurred.
   attribute period { data.pointer }?
-att.declarable.attributes = att.declarable.attribute.default
-att.declarable.attribute.default =
-  
-  ## indicates whether or not this element is selected by default when its parent is selected.
-  [ a:defaultValue = "false" ]
-  attribute default {
-    
-    ## This element is selected if its parent is selected
-    "true"
-    | 
-      ## This element can only be selected explicitly, unless it is the only one of its kind, in which case it is selected if its parent is selected.
-      "false"
-  }?
 att.declaring.attributes = att.declaring.attribute.decls
 att.declaring.attribute.decls =
   
   ## identifies one or more declarable elements within the header, which are understood to apply to the element bearing this attribute and its content.
   attribute decls {
     list { data.pointer+ }
-  }?
-att.fragmentable.attributes = att.fragmentable.attribute.part
-att.fragmentable.attribute.part =
-  
-  ## specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.
-  [ a:defaultValue = "N" ]
-  attribute part {
-    
-    ## (yes) the element is fragmented in some (unspecified) respect
-    "Y"
-    | 
-      ## (no) either the element is not fragmented, or no claim is made as to its completeness.
-      "N"
-    | 
-      ## (initial) this is the initial part of a fragmented element
-      "I"
-    | 
-      ## (medial) this is a medial part of a fragmented element
-      "M"
-    | 
-      ## (final) this is the final part of a fragmented element
-      "F"
-  }?
-att.divLike.attributes =
-  att.fragmentable.attributes,
-  att.divLike.attribute.org,
-  att.divLike.attribute.sample
-att.divLike.attribute.org =
-  
-  ## (organization) specifies how the content of the division is organized.
-  [ a:defaultValue = "uniform" ]
-  attribute org {
-    
-    ## no claim is made about the sequence in which the immediate contents of this division are to be processed, or their inter-relationships.
-    "composite"
-    | 
-      ## the immediate contents of this element are regarded as forming a logical unit, to be processed in sequence.
-      "uniform"
-  }?
-att.divLike.attribute.sample =
-  
-  ## indicates whether this division is a sample of the original source and if so, from which part.
-  [ a:defaultValue = "complete" ]
-  attribute sample {
-    
-    ## division lacks material present at end in source.
-    "initial"
-    | 
-      ## division lacks material at start and end.
-      "medial"
-    | 
-      ## division lacks material at start.
-      "final"
-    | 
-      ## position of sampled material within original unknown.
-      "unknown"
-    | 
-      ## division is not a sample.
-      "complete"
   }?
 att.docStatus.attributes = att.docStatus.attribute.status
 att.docStatus.attribute.status =
@@ -398,66 +332,120 @@ att.global.attribute.xmllang =
 att.global.attribute.rendition =
   
   ## points to a description of the rendering or presentation used for this element in the source text.
-  ## Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4] simple:normalweight; 5] simple:smallcaps; 6] simple:doublestrikethrough; 7] simple:strikethrough; 8] simple:subscript; 9] simple:superscript; 10] simple:typewriter; 11] simple:doubleunderline; 12] simple:underline; 13] simple:wavyunderlline
+  ## Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:doublestrikethrough; 9] simple:doubleunderline; 10] simple:dropcap; 11] simple:float; 12] simple:italic; 13] simple:larger; 14] simple:left; 15] simple:leftbraced; 16] simple:letterspace; 17] simple:normalstyle; 18] simple:normalweight; 19] simple:right; 20] simple:rightbraced; 21] simple:rotateleft; 22] simple:rotateright; 23] simple:smallcaps; 24] simple:smaller; 25] simple:strikethrough; 26] simple:subscript; 27] simple:superscript; 28] simple:topbraced; 29] simple:typewriter; 30] simple:underline; 31] simple:wavyunderline
   attribute rendition {
     list {
       (
-       ##
-       "simple:bold"
+       ## all capitals
+       "simple:allcaps"
        | 
-         ##
-         "simple:allcaps"
+         ## black letter or gothic typeface
+         "simple:blackletter"
        | 
-         ##
-         "simple:italic"
+         ## bold typeface
+         "simple:bold"
        | 
-         ##
-         "simple:normalweight"
+         ## marked with a brace under the bottom of the text
+         "simple:bottombraced"
        | 
-         ##
-         "simple:smallcaps"
+         ## border around the text
+         "simple:boxed"
        | 
-         ##
+         ## centred
+         "simple:centre"
+       | 
+         ## cursive typeface
+         "simple:cursive"
+       | 
+         ## strikethrough with double line
          "simple:doublestrikethrough"
        | 
-         ##
-         "simple:strikethrough"
-       | 
-         ##
-         "simple:subscript"
-       | 
-         ##
-         "simple:superscript"
-       | 
-         ##
-         "simple:typewriter"
-       | 
-         ##
+         ## underlined with double line
          "simple:doubleunderline"
        | 
-         ##
+         ## initial letter larger or decorated
+         "simple:dropcap"
+       | 
+         ## floated out of main flow
+         "simple:float"
+       | 
+         ## italic typeface
+         "simple:italic"
+       | 
+         ## larger type
+         "simple:larger"
+       | 
+         ## aligned to the left or left-justified
+         "simple:left"
+       | 
+         ## marked with a brace on the left side of the text
+         "simple:leftbraced"
+       | 
+         ## letter-spaced
+         "simple:letterspace"
+       | 
+         ## upright shape and default weight of typeface
+         "simple:normalstyle"
+       | 
+         ## normal typeface weight
+         "simple:normalweight"
+       | 
+         ## aligned to the right or right-justified
+         "simple:right"
+       | 
+         ## marked with a brace to the right of the text
+         "simple:rightbraced"
+       | 
+         ## rotated to the left
+         "simple:rotateleft"
+       | 
+         ## rotated to the right
+         "simple:rotateright"
+       | 
+         ## small caps
+         "simple:smallcaps"
+       | 
+         ## smaller type
+         "simple:smaller"
+       | 
+         ## strike through
+         "simple:strikethrough"
+       | 
+         ## subscript
+         "simple:subscript"
+       | 
+         ## superscript
+         "simple:superscript"
+       | 
+         ## marked with a brace above the text
+         "simple:topbraced"
+       | 
+         ## fixed-width typeface, like typewriter
+         "simple:typewriter"
+       | 
+         ## underlined with single line
          "simple:underline"
        | 
-         ##
-         "simple:wavyunderlline"
+         ## underlined with wavy line
+         "simple:wavyunderline"
        | data.pointer)+
     }
   }?
 sch:pattern [
-  id = "oddbyexample-att.global-rendition-renditionpointer-constraint-2"
+  id = "teisimple-att.global-rendition-renditionpointer-constraint-2"
   "\x{a}" ~
   "      "
   sch:rule [
     context = "tei:*[@rendition]"
     "\x{a}" ~
-    "                              "
+    "                                 "
     sch:let [
       name = "results"
       value =
         "for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"
     ]
     "\x{a}" ~
-    "                              "
+    "                                 "
     sch:assert [
       test = "every $x in $results satisfies $x"
       "\x{a}" ~
@@ -469,7 +457,7 @@ sch:pattern [
       ")"
     ]
     "\x{a}" ~
-    "                           "
+    "                              "
   ]
   "\x{a}" ~
   "   "
@@ -567,6 +555,84 @@ att.resourced.attribute.url =
   
   ## (uniform resource locator) specifies the URL from which the media concerned may be obtained.
   attribute url { data.pointer }
+att.measurement.attributes =
+  att.measurement.attribute.unit,
+  att.measurement.attribute.quantity,
+  att.measurement.attribute.commodity
+att.measurement.attribute.unit =
+  
+  ## indicates the units used for the measurement, usually using the standard symbol for the desired units.
+  ## Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(hertz) ; 5] Pa(pascal) ; 6] Ω(ohm) ; 7] L(litre) ; 8] t(tonne) ; 9] ha(hectare) ; 10] Å(ångström) ; 11] mL(millilitre) ; 12] cm(centimetre) ; 13] dB(decibel) ; 14] kbit(kilobit) ; 15] Kibit(kibibit) ; 16] kB(kilobyte) ; 17] KiB(kibibyte) ; 18] MB(megabyte) ; 19] MiB(mebibyte) 
+  attribute unit {
+    
+    ## (metre) SI base unit of length
+    "m"
+    | 
+      ## (kilogram) SI base unit of mass
+      "kg"
+    | 
+      ## (second) SI base unit of time
+      "s"
+    | 
+      ## (hertz) SI unit of frequency
+      "Hz"
+    | 
+      ## (pascal) SI unit of pressure or stress
+      "Pa"
+    | 
+      ## (ohm) SI unit of electric resistance
+      "Ω"
+    | 
+      ## (litre) 1 dm³
+      "L"
+    | 
+      ## (tonne) 10³ kg
+      "t"
+    | 
+      ## (hectare) 1 hm²
+      "ha"
+    | 
+      ## (ångström) 10⁻¹⁰ m
+      "Å"
+    | 
+      ## (millilitre) 
+      "mL"
+    | 
+      ## (centimetre) 
+      "cm"
+    | 
+      ## (decibel) see remarks, below
+      "dB"
+    | 
+      ## (kilobit) 10³ or 1000 bits
+      "kbit"
+    | 
+      ## (kibibit) 2¹⁰ or 1024 bits
+      "Kibit"
+    | 
+      ## (kilobyte) 10³ or 1000 bytes
+      "kB"
+    | 
+      ## (kibibyte) 2¹⁰ or 1024 bytes
+      "KiB"
+    | 
+      ## (megabyte) 10⁶ or 1 000 000 bytes
+      "MB"
+    | 
+      ## (mebibyte) 2²⁰ or 1 048 576 bytes
+      "MiB"
+    | xsd:Name
+  }?
+att.measurement.attribute.quantity =
+  
+  ## specifies the number of the specified units that comprise the measurement
+  attribute quantity { data.numeric }?
+att.measurement.attribute.commodity =
+  
+  ## indicates the substance that is being measured
+  attribute commodity {
+    list { data.word+ }
+  }?
 att.naming.attributes =
   att.canonical.attributes,
   att.naming.attribute.role,
@@ -587,44 +653,184 @@ att.placement.attributes = att.placement.attribute.place
 att.placement.attribute.place =
   
   ## specifies where this item is placed
-  ## Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6] overleaf; 7] above; 8] end; 9] inline; 10] inspace
   attribute place {
     list {
       (
-       ## below the line
-       "below"
+       ## above the line
+       "above"
        | 
-         ## at the foot of the page
-         "bottom"
-       | 
-         ## in the margin (left, right, or both)
-         "margin"
+         ## below the line
+         "below"
        | 
          ## at the top of the page
          "top"
        | 
-         ## on the opposite, i.e. facing, page
+         ## at the top right of the page
+         "top-right"
+       | 
+         ## at the top left of the page
+         "top-left"
+       | 
+         ## at the top center of the page
+         "top-center"
+       | 
+         ## at the bottom right of the page
+         "bottom-right"
+       | 
+         ## at the bottom left of the page
+         "bottom-left"
+       | 
+         ## at the bottom center of the page
+         "bottom-center"
+       | 
+         ## at the foot of the page
+         "bottom"
+       | 
+         ##
+         "tablebottom"
+       | 
+         ## in the outer margin
+         "margin"
+       | 
+         ## in the left margin
+         "margin-left"
+       | 
+         ## in the right margin
+         "margin-right"
+       | 
+         ## on the opposite, i.e. facing, page.
          "opposite"
        | 
-         ## on the other side of the leaf
+         ## on the other side of the leaf.
          "overleaf"
        | 
-         ## above the line
-         "above"
-       | 
-         ## at the end of e.g. chapter or volume.
+         ## at the end of the volume.
          "end"
+       | 
+         ## at the end the current division.
+         "divend"
+       | 
+         ## at the end the current paragraph.
+         "parend"
        | 
          ## within the body of the text.
          "inline"
        | 
          ## in a predefined space, for example left by an earlier scribe.
          "inspace"
-       | xsd:Name)+
+       | 
+         ## formatted like a quotation
+         "display")+
     }
   }?
-att.segLike.attributes =
-  att.fragmentable.attributes, att.segLike.attribute.function
+att.typed.attributes =
+  att.typed.attribute.type, att.typed.attribute.subtype
+att.typed.attribute.type =
+  
+  ## characterizes the element in some sense, using any convenient classification scheme or typology.
+  attribute type { data.enumerated }?
+att.typed.attribute.subtype =
+  
+  ## provides a sub-categorization of the element, if needed
+  attribute subtype { data.enumerated }?
+sch:pattern [
+  id = "teisimple-att.typed-subtypeTyped-constraint-3"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "*[@subtype]"
+    "\x{a}" ~
+    "        "
+    sch:assert [
+      test = "@type"
+      "The "
+      sch:name [ ]
+      " element should not be categorized in detail with @subtype\x{a}" ~
+      " unless also categorized in general with @type"
+    ]
+    "\x{a}" ~
+    "      "
+  ]
+  "\x{a}" ~
+  "   "
+]
+att.pointing.attributes =
+  att.pointing.attribute.targetLang,
+  att.pointing.attribute.target,
+  att.pointing.attribute.evaluate
+att.pointing.attribute.targetLang =
+  
+  ## specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.
+  attribute targetLang { data.language }?
+sch:pattern [
+  id = "teisimple-att.pointing-targetLang-targetLang-constraint-4"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "tei:*[not(self::tei:schemaSpec)][@targetLang]"
+    "\x{a}" ~
+    "            "
+    sch:assert [
+      test = "count(@target)"
+      "@targetLang can only be used if @target is specified."
+    ]
+    "\x{a}" ~
+    "          "
+  ]
+  "\x{a}" ~
+  "   "
+]
+att.pointing.attribute.target =
+  
+  ## specifies the destination of the reference by supplying one or more URI References
+  attribute target {
+    list { data.pointer+ }
+  }?
+sch:pattern [
+  id = "teisimple-att.pointing-target-validtarget-constraint-5"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "tei:*[@target]"
+    "\x{a}" ~
+    "                                 "
+    sch:let [
+      name = "results"
+      value =
+        "for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"
+    ]
+    "\x{a}" ~
+    "                                 "
+    sch:report [
+      test = "some $x in $results  satisfies $x"
+      "\x{a}" ~
+      'Error: Every local pointer in "'
+      sch:value-of [ select = "@target" ]
+      '" must point to an ID in this document ('
+      sch:value-of [ select = "$results" ]
+      ")"
+    ]
+    "\x{a}" ~
+    "                              "
+  ]
+  "\x{a}" ~
+  "   "
+]
+att.pointing.attribute.evaluate =
+  
+  ## specifies the intended meaning when the target of a pointer is itself a pointer.
+  attribute evaluate {
+    
+    ## if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.
+    "all"
+    | 
+      ## if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.
+      "one"
+    | 
+      ## no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.
+      "none"
+  }?
+att.segLike.attributes = att.segLike.attribute.function
 att.segLike.attribute.function =
   
   ## characterizes the function of the segment.
@@ -654,7 +860,7 @@ att.spanning.attribute.spanTo =
   ## indicates the end of a span initiated by the element bearing this attribute.
   attribute spanTo { data.pointer }?
 sch:pattern [
-  id = "oddbyexample-att.spanning-spanTo-spanTo-2-constraint-3"
+  id = "teisimple-att.spanning-spanTo-spanTo-2-constraint-6"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -703,7 +909,7 @@ att.styleDef.attribute.schemeVersion =
   attribute schemeVersion { data.versionNumber }?
 sch:pattern [
   id =
-    "oddbyexample-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4"
+    "teisimple-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-7"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -722,24 +928,6 @@ sch:pattern [
   "\x{a}" ~
   "   "
 ]
-att.tableDecoration.attributes =
-  att.tableDecoration.attribute.role,
-  att.tableDecoration.attribute.rows,
-  att.tableDecoration.attribute.cols
-att.tableDecoration.attribute.role =
-  
-  ## indicates the kind of information held in this cell or in each cell of this row.
-  ## Suggested values include: 1] label; 2] data
-  [ a:defaultValue = "data" ]
-  attribute role {
-    
-    ## labelling or descriptive information only.
-    "label"
-    | 
-      ## data values.
-      "data"
-    | xsd:Name
-  }?
 att.tableDecoration.attribute.rows =
   
   ## indicates the number of rows occupied by this cell or row.
@@ -1289,7 +1477,6 @@ availability =
   element availability {
     (model.availabilityPart | model.pLike)+,
     att.global.attributes,
-    att.declarable.attributes,
     
     ## supplies a code identifying the current availability of the text.
     [ a:defaultValue = "unknown" ]
@@ -1338,7 +1525,6 @@ sourceDesc =
     (model.pLike+
      | (model.biblLike | model.sourceDescPart | model.listLike)+),
     att.global.attributes,
-    att.declarable.attributes,
     empty
   }
 biblFull =
@@ -1353,7 +1539,6 @@ biblFull =
       notesStmt?),
      sourceDesc*),
     att.global.attributes,
-    att.declarable.attributes,
     att.sortable.attributes,
     att.docStatus.attributes,
     empty
@@ -1369,28 +1554,17 @@ encodingDesc =
 projectDesc =
   
   ## (project description) describes in detail the aim or purpose for which an electronic file was encoded, together with any other relevant information concerning the process by which it was assembled or collected. [2.3.1.  2.3.  15.3.2. ]
-  element projectDesc {
-    model.pLike+,
-    att.global.attributes,
-    att.declarable.attributes,
-    empty
-  }
+  element projectDesc { model.pLike+, att.global.attributes, empty }
 samplingDecl =
   
   ## (sampling declaration) contains a prose description of the rationale and methods used in sampling texts in the creation of a corpus or collection. [2.3.2.  2.3.  15.3.2. ]
-  element samplingDecl {
-    model.pLike+,
-    att.global.attributes,
-    att.declarable.attributes,
-    empty
-  }
+  element samplingDecl { model.pLike+, att.global.attributes, empty }
 editorialDecl =
   
   ## (editorial practice declaration) provides details of editorial principles and practices applied during the encoding of a text. [2.3.3.  2.3.  15.3.2. ]
   element editorialDecl {
     (model.pLike | model.editorialDeclPart)+,
     att.global.attributes,
-    att.declarable.attributes,
     empty
   }
 correction =
@@ -1399,7 +1573,6 @@ correction =
   element correction {
     model.pLike+,
     att.global.attributes,
-    att.declarable.attributes,
     
     ## indicates the degree of correction applied to the text.
     [ a:defaultValue = "unknown" ]
@@ -1436,7 +1609,6 @@ normalization =
   element normalization {
     model.pLike+,
     att.global.attributes,
-    att.declarable.attributes,
     
     ## indicates a bibliographic description or other resource documenting the principles underlying the normalization carried out.
     attribute source { data.pointer }?,
@@ -1459,7 +1631,7 @@ quotation =
   element quotation {
     (model.pLike*)
     >> sch:pattern [
-         id = "oddbyexample-quotation-quotationContents-constraint-1"
+         id = "teisimple-quotation-quotationContents-constraint-2"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -1480,7 +1652,6 @@ quotation =
          "         "
        ],
     att.global.attributes,
-    att.declarable.attributes,
     
     ## (quotation marks) indicates whether or not quotation marks have been retained as content within the text.
     attribute marks {
@@ -1502,7 +1673,6 @@ hyphenation =
   element hyphenation {
     model.pLike+,
     att.global.attributes,
-    att.declarable.attributes,
     
     ## (end-of-line) indicates whether or not end-of-line hyphenation has been retained in a text.
     [ a:defaultValue = "some" ]
@@ -1525,36 +1695,20 @@ hyphenation =
 segmentation =
   
   ## describes the principles according to which the text has been segmented, for example into sentences, tone-units, graphemic strata, etc. [2.3.3.  15.3.2. ]
-  element segmentation {
-    model.pLike+,
-    att.global.attributes,
-    att.declarable.attributes,
-    empty
-  }
+  element segmentation { model.pLike+, att.global.attributes, empty }
 stdVals =
   
   ## (standard values) specifies the format used when standardized date or number values are supplied. [2.3.3.  15.3.2. ]
-  element stdVals {
-    model.pLike+,
-    att.global.attributes,
-    att.declarable.attributes,
-    empty
-  }
+  element stdVals { model.pLike+, att.global.attributes, empty }
 interpretation =
   
   ## describes the scope of any analytic or interpretive information added to the text in addition to the transcription. [2.3.3. ]
-  element interpretation {
-    model.pLike+,
-    att.global.attributes,
-    att.declarable.attributes,
-    empty
-  }
+  element interpretation { model.pLike+, att.global.attributes, empty }
 punctuation =
   
   ## specifies editorial practice adopted with respect to punctuation marks in the original. [2.3.3.  3.2. ]
   element punctuation {
     model.pLike*,
-    att.declarable.attributes,
     att.global.attributes,
     
     ## indicates whether or not punctation marks have been retained as content within the text.
@@ -1637,11 +1791,7 @@ styleDefDecl =
   
   ## (style definition language declaration) specifies the name of the formal language in which style or renditional information is supplied elsewhere in the document. The specific version of the scheme may also be supplied. [2.3.5. ]
   element styleDefDecl {
-    model.pLike*,
-    att.global.attributes,
-    att.declarable.attributes,
-    att.styleDef.attributes,
-    empty
+    model.pLike*, att.global.attributes, att.styleDef.attributes, empty
   }
 refsDecl =
   
@@ -1649,7 +1799,6 @@ refsDecl =
   element refsDecl {
     (model.pLike+ | cRefPattern+ | refState+),
     att.global.attributes,
-    att.declarable.attributes,
     empty
   }
 cRefPattern =
@@ -1730,7 +1879,6 @@ geoDecl =
   element geoDecl {
     macro.phraseSeq,
     att.global.attributes,
-    att.declarable.attributes,
     
     ## supplies a commonly used code name for the datum employed.
     ## Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Grid Reference System) ; 3] OSGB36(ordnance survey great britain) ; 4] ED50(European Datum coordinate system) 
@@ -1801,9 +1949,7 @@ creation =
 langUsage =
   
   ## (language usage) describes the languages, sublanguages, registers, dialects, etc. represented within a text. [2.4.2.  2.4.  15.3.2. ]
-  element langUsage {
-    language+, att.global.attributes, att.declarable.attributes, empty
-  }
+  element langUsage { language+, att.global.attributes, empty }
 language =
   
   ## characterizes a single language or sublanguage used within a text. [2.4.2. ]
@@ -1824,10 +1970,7 @@ textClass =
   
   ## (text classification) groups information which describes the nature or topic of a text in terms of a standard classification scheme, thesaurus, etc. [2.4.3. ]
   element textClass {
-    (classCode | catRef | keywords)*,
-    att.global.attributes,
-    att.declarable.attributes,
-    empty
+    (classCode | catRef | keywords)*, att.global.attributes, empty
   }
 keywords =
   
@@ -1929,7 +2072,6 @@ biblStruct =
   element biblStruct {
     (monogr+, (model.noteLike | idno | model.ptrLike | relatedItem)*),
     att.global.attributes,
-    att.declarable.attributes,
     att.typed.attributes,
     att.sortable.attributes,
     att.docStatus.attributes,
@@ -2029,7 +2171,7 @@ relatedItem =
   element relatedItem {
     ((model.biblLike | model.ptrLike)?)
     >> sch:pattern [
-         id = "oddbyexample-relatedItem-targetorcontent1-constraint-2"
+         id = "teisimple-relatedItem-targetorcontent1-constraint-3"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2051,7 +2193,7 @@ relatedItem =
          "         "
        ]
     >> sch:pattern [
-         id = "oddbyexample-relatedItem-targetorcontent1-constraint-5"
+         id = "teisimple-relatedItem-targetorcontent1-constraint-7"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2125,10 +2267,7 @@ textDesc =
   
   ## (text description) provides a description of a text in terms of its situational parameters. [15.2.1. ]
   element textDesc {
-    model.textDescPart_sequence,
-    att.global.attributes,
-    att.declarable.attributes,
-    empty
+    model.textDescPart_sequence, att.global.attributes, empty
   }
 value =
   
@@ -2150,7 +2289,7 @@ damageSpan =
   element damageSpan {
     empty
     >> sch:pattern [
-         id = "oddbyexample-damageSpan-spanTo-constraint-6"
+         id = "teisimple-damageSpan-spanTo-constraint-8"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2171,7 +2310,7 @@ damageSpan =
          "         "
        ]
     >> sch:pattern [
-         id = "oddbyexample-damageSpan-spanTo_fr-constraint-7"
+         id = "teisimple-damageSpan-spanTo_fr-constraint-9"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2423,84 +2562,6 @@ att.global.facs.attribute.facs =
   attribute facs {
     list { data.pointer+ }
   }?
-att.measurement.attributes =
-  att.measurement.attribute.unit,
-  att.measurement.attribute.quantity,
-  att.measurement.attribute.commodity
-att.measurement.attribute.unit =
-  
-  ## indicates the units used for the measurement, usually using the standard symbol for the desired units.
-  ## Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(hertz) ; 5] Pa(pascal) ; 6] Ω(ohm) ; 7] L(litre) ; 8] t(tonne) ; 9] ha(hectare) ; 10] Å(ångström) ; 11] mL(millilitre) ; 12] cm(centimetre) ; 13] dB(decibel) ; 14] kbit(kilobit) ; 15] Kibit(kibibit) ; 16] kB(kilobyte) ; 17] KiB(kibibyte) ; 18] MB(megabyte) ; 19] MiB(mebibyte) 
-  attribute unit {
-    
-    ## (metre) SI base unit of length
-    "m"
-    | 
-      ## (kilogram) SI base unit of mass
-      "kg"
-    | 
-      ## (second) SI base unit of time
-      "s"
-    | 
-      ## (hertz) SI unit of frequency
-      "Hz"
-    | 
-      ## (pascal) SI unit of pressure or stress
-      "Pa"
-    | 
-      ## (ohm) SI unit of electric resistance
-      "Ω"
-    | 
-      ## (litre) 1 dm³
-      "L"
-    | 
-      ## (tonne) 10³ kg
-      "t"
-    | 
-      ## (hectare) 1 hm²
-      "ha"
-    | 
-      ## (ångström) 10⁻¹⁰ m
-      "Å"
-    | 
-      ## (millilitre) 
-      "mL"
-    | 
-      ## (centimetre) 
-      "cm"
-    | 
-      ## (decibel) see remarks, below
-      "dB"
-    | 
-      ## (kilobit) 10³ or 1000 bits
-      "kbit"
-    | 
-      ## (kibibit) 2¹⁰ or 1024 bits
-      "Kibit"
-    | 
-      ## (kilobyte) 10³ or 1000 bytes
-      "kB"
-    | 
-      ## (kibibyte) 2¹⁰ or 1024 bytes
-      "KiB"
-    | 
-      ## (megabyte) 10⁶ or 1 000 000 bytes
-      "MB"
-    | 
-      ## (mebibyte) 2²⁰ or 1 048 576 bytes
-      "MiB"
-    | xsd:Name
-  }?
-att.measurement.attribute.quantity =
-  
-  ## specifies the number of the specified units that comprise the measurement
-  attribute quantity { data.numeric }?
-att.measurement.attribute.commodity =
-  
-  ## indicates the substance that is being measured
-  attribute commodity {
-    list { data.word+ }
-  }?
 att.milestoneUnit.attributes = att.milestoneUnit.attribute.unit
 att.milestoneUnit.attribute.unit =
   
@@ -2548,82 +2609,6 @@ att.milestoneUnit.attribute.unit =
       "unnumbered"
     | xsd:Name
   }
-att.pointing.attributes =
-  att.pointing.attribute.targetLang,
-  att.pointing.attribute.target,
-  att.pointing.attribute.evaluate
-att.pointing.attribute.targetLang =
-  
-  ## specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.
-  attribute targetLang { data.language }?
-sch:pattern [
-  id = "oddbyexample-att.pointing-targetLang-targetLang-constraint-5"
-  "\x{a}" ~
-  "      "
-  sch:rule [
-    context = "tei:*[not(self::tei:schemaSpec)][@targetLang]"
-    "\x{a}" ~
-    "            "
-    sch:assert [
-      test = "count(@target)"
-      "@targetLang can only be used if @target is specified."
-    ]
-    "\x{a}" ~
-    "          "
-  ]
-  "\x{a}" ~
-  "   "
-]
-att.pointing.attribute.target =
-  
-  ## specifies the destination of the reference by supplying one or more URI References
-  attribute target {
-    list { data.pointer+ }
-  }?
-sch:pattern [
-  id = "oddbyexample-att.pointing-target-validtarget-constraint-6"
-  "\x{a}" ~
-  "      "
-  sch:rule [
-    context = "tei:*[@target]"
-    "\x{a}" ~
-    "                              "
-    sch:let [
-      name = "results"
-      value =
-        "for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"
-    ]
-    "\x{a}" ~
-    "                              "
-    sch:report [
-      test = "some $x in $results  satisfies $x"
-      "\x{a}" ~
-      'Error: Every local pointer in "'
-      sch:value-of [ select = "@target" ]
-      '" must point to an ID in this document ('
-      sch:value-of [ select = "$results" ]
-      ")"
-    ]
-    "\x{a}" ~
-    "                           "
-  ]
-  "\x{a}" ~
-  "   "
-]
-att.pointing.attribute.evaluate =
-  
-  ## specifies the intended meaning when the target of a pointer is itself a pointer.
-  attribute evaluate {
-    
-    ## if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.
-    "all"
-    | 
-      ## if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.
-      "one"
-    | 
-      ## no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.
-      "none"
-  }?
 att.global.linking.attributes =
   att.global.linking.attribute.corresp,
   att.global.linking.attribute.next,
@@ -2642,37 +2627,6 @@ att.global.linking.attribute.prev =
   
   ## (previous) points to the previous element of a virtual aggregate of which the current element is part.
   attribute prev { data.pointer }?
-att.typed.attributes =
-  att.typed.attribute.type, att.typed.attribute.subtype
-att.typed.attribute.type =
-  
-  ## characterizes the element in some sense, using any convenient classification scheme or typology.
-  attribute type { data.enumerated }?
-att.typed.attribute.subtype =
-  
-  ## provides a sub-categorization of the element, if needed
-  attribute subtype { data.enumerated }?
-sch:pattern [
-  id = "oddbyexample-att.typed-subtypeTyped-constraint-7"
-  "\x{a}" ~
-  "      "
-  sch:rule [
-    context = "*[@subtype]"
-    "\x{a}" ~
-    "        "
-    sch:assert [
-      test = "@type"
-      "The "
-      sch:name [ ]
-      " element should not be categorized in detail with @subtype\x{a}" ~
-      " unless also categorized in general with @type"
-    ]
-    "\x{a}" ~
-    "      "
-  ]
-  "\x{a}" ~
-  "   "
-]
 author =
   
   ## in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ]
@@ -2693,7 +2647,6 @@ bibl =
      | model.biblPart
      | model.global)*,
     att.global.attributes,
-    att.declarable.attributes,
     att.typed.attributes,
     att.sortable.attributes,
     att.docStatus.attributes,
@@ -2736,20 +2689,17 @@ title =
     ## indicates the bibliographic level for a title, that is, whether it identifies an article, book, journal, series, or unpublished material.
     attribute level {
       
-      ## (analytic) the title applies to an analytic item, such as an article, poem, or other work published as part of a larger item.
+      ##
       "a"
       | 
-        ## (monographic) the title applies to a monograph such as a book or other item considered to be a distinct publication, including single volumes of multi-volume works
-        "m"
-      | 
-        ## (journal) the title applies to any serial or periodical publication such as a journal, magazine, or newspaper
+        ##
         "j"
       | 
-        ## (series) the title applies to a series of otherwise distinct publications such as a collection
-        "s"
+        ##
+        "m"
       | 
-        ## (unpublished) the title applies to any unpublished material (including theses and dissertations unless published by a commercial press)
-        "u"
+        ##
+        "s"
     }?,
     empty
   }
@@ -2792,7 +2742,6 @@ ab =
     att.global.attributes,
     att.typed.attributes,
     att.declaring.attributes,
-    att.fragmentable.attributes,
     empty
   }
 abbr =
@@ -2841,7 +2790,7 @@ addSpan =
   element addSpan {
     empty
     >> sch:pattern [
-         id = "oddbyexample-addSpan-spanTo-constraint-10"
+         id = "teisimple-addSpan-spanTo-constraint-10"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2861,7 +2810,7 @@ addSpan =
          "         "
        ]
     >> sch:pattern [
-         id = "oddbyexample-addSpan-spanTo_fr-constraint-11"
+         id = "teisimple-addSpan-spanTo_fr-constraint-11"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3024,7 +2973,25 @@ cell =
   element cell {
     macro.specialPara,
     att.global.attributes,
-    att.tableDecoration.attributes,
+    att.tableDecoration.attribute.rows,
+    att.tableDecoration.attribute.cols,
+    
+    ## indicates the kind of information held in this cell or in each cell of this row.
+    [ a:defaultValue = "data" ]
+    attribute role {
+      
+      ##
+      "data"
+      | 
+        ##
+        "label"
+      | 
+        ##
+        "sum"
+      | 
+        ##
+        "total"
+    }?,
     empty
   }
 choice =
@@ -3104,7 +3071,6 @@ desc =
           ((model.divLike | model.divGenLike), model.global*)*)),
       (model.divBottom, model.global*)*)?),
     att.global.attributes,
-    att.divLike.attributes,
     att.typed.attributes,
     att.declaring.attributes,
     empty
@@ -3222,7 +3188,13 @@ formula =
     att.global.attributes,
     
     ## names the notation used for the content of the element.
-    attribute notation { data.enumerated }?,
+    ## Suggested values include: 1] TeX
+    attribute notation {
+      
+      ## Using TeX or LaTeX notation
+      "TeX"
+      | xsd:Name
+    }?,
     empty
   }
 front =
@@ -3359,12 +3331,7 @@ item =
 l =
   
   ## (verse line) contains a single, possibly incomplete, line of verse. [3.12.1.  3.12.  7.2.5. ]
-  element l {
-    macro.paraContent,
-    att.global.attributes,
-    att.fragmentable.attributes,
-    empty
-  }
+  element l { macro.paraContent, att.global.attributes, empty }
 label =
   
   ## contains any label or heading used to identify part of a text, typically but not exclusively in a list or glossary. [3.7. ]
@@ -3400,7 +3367,7 @@ lg =
       | lg)*,
      (model.divBottom, model.global*)*)
     >> sch:pattern [
-         id = "oddbyexample-lg-atleast1oflggapl-constraint-12"
+         id = "teisimple-lg-atleast1oflggapl-constraint-12"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3420,7 +3387,6 @@ lg =
          "         "
        ],
     att.global.attributes,
-    att.divLike.attributes,
     att.typed.attributes,
     att.declaring.attributes,
     empty
@@ -3466,7 +3432,6 @@ listBibl =
     (model.headLike*, (model.biblLike | model.milestoneLike)+, empty*),
     att.global.attributes,
     att.sortable.attributes,
-    att.declarable.attributes,
     att.typed.attributes,
     empty
   }
@@ -3627,7 +3592,6 @@ p =
     macro.paraContent,
     att.global.attributes,
     att.declaring.attributes,
-    att.fragmentable.attributes,
     empty
   }
 pb =
@@ -3741,7 +3705,7 @@ ref =
   element ref {
     macro.paraContent
     >> sch:pattern [
-         id = "oddbyexample-ref-refAtts-constraint-4"
+         id = "teisimple-ref-refAtts-constraint-4"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3792,7 +3756,28 @@ row =
   
   ## contains one row of a table. [14.1.1. ]
   element row {
-    cell+, att.global.attributes, att.tableDecoration.attributes, empty
+    cell+,
+    att.global.attributes,
+    att.tableDecoration.attribute.rows,
+    att.tableDecoration.attribute.cols,
+    
+    ## indicates the kind of information held in this cell or in each cell of this row.
+    [ a:defaultValue = "data" ]
+    attribute role {
+      
+      ##
+      "data"
+      | 
+        ##
+        "label"
+      | 
+        ##
+        "sum"
+      | 
+        ##
+        "total"
+    }?,
+    empty
   }
 rs =
   
@@ -3857,7 +3842,7 @@ s =
       | seg
       | w)*)
     >> sch:pattern [
-         id = "oddbyexample-s-noNestedS-constraint-5"
+         id = "teisimple-s-noNestedS-constraint-5"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -4015,7 +4000,7 @@ subst =
   element subst {
     ((add | del | model.milestoneLike)+)
     >> sch:pattern [
-         id = "oddbyexample-subst-substContents1-constraint-13"
+         id = "teisimple-subst-substContents1-constraint-13"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -4079,13 +4064,13 @@ table =
      model.global*,
      (back, model.global*)?)
     >> sch:pattern [
-         id = "oddbyexample-text-headeronlyelement-constraint-8"
+         id = "teisimple-text-headeronlyelement-constraint-8"
          "\x{a}" ~
          "            "
          sch:rule [
            context = "tei:term|tei:editor|tei:email|tei:att|tei:gi"
            "\x{a}" ~
-           "                        "
+           "                           "
            sch:report [
              test = "ancestor::tei:text"
              "Error: The element "
@@ -4093,7 +4078,7 @@ table =
              " is not permitted outside the header"
            ]
            "\x{a}" ~
-           "                     "
+           "                        "
          ]
          "\x{a}" ~
          "         "

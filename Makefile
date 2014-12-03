@@ -1,16 +1,12 @@
 default: teisimple
-TEXTS=/Volumes/Repo/Simple/ota
+TEXTS=/Volumes/Repo/Simple
 XSL=../Stylesheets
 ANT_OPTS="-Xss2m -Xmx752m" 
 docx:
 	teitodocx --profile=tei teisimple.xml teisimple.docx
 
 teisimple:
-	xlsxtotei TEISimplespreadsheet.xlsx TEISimplespreadsheet.xml
-	saxon TEISimplespreadsheet.xml generate.xsl> teisimple.odd 
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar 	
-	jing teisimple.xsd tests/testsimple.xml
-	teitohtml --odd --summaryDoc --profile=tei teisimple.odd teisimple.odd.html
 
 validate:
 	cat anthead.xml> v.xml 

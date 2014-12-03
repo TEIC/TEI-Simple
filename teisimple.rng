@@ -3,12 +3,13 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-10-07T12:48:41Z. 
+Schema generated from ODD source 2014-12-01T23:30:53Z. 
 Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
   
---><!----><define name="macro.paraContent">
+--><!--This material is dual-licensed.
+[http://creativecommons.org/licenses/by-sa/3.0/] Distributed under a Creative Commons Attribution-ShareAlike 3.0 Unported License  [http://www.opensource.org/licenses/BSD-2-Clause] Copyright 2014 TEI Consortium. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage. TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of TEI content in a software environment. For further information or clarification, please contact the TEI Consortium.--><define name="macro.paraContent">
       <zeroOrMore>
          <choice>
             <text/>
@@ -265,20 +266,22 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
    <define name="att.dimensions.attribute.unit">
       <optional>
          <attribute name="unit">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">names the unit used for the measurement
-Suggested values include: 1] cm(centimetres) ; 2] mm(millimetres) ; 3] in(inches) ; 4] lines; 5] chars(characters) </a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">names the unit used for the measurement</a:documentation>
             <choice>
-               <value>cm</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(centimetres) </a:documentation>
-               <value>mm</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(millimetres) </a:documentation>
-               <value>in</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(inches) </a:documentation>
-               <value>lines</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">lines of text</a:documentation>
                <value>chars</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(characters) characters of text</a:documentation>
-               <data type="Name"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>lines</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>pages</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>words</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>cm</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>mm</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>in</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
             </choice>
          </attribute>
       </optional>
@@ -442,10 +445,11 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.datable-calendar-calendar-constraint-1">
+            id="teisimple-att.datable-calendar-calendar-constraint-1">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="tei:*[@calendar]">
             <sch:assert test="string-length(.) gt 0">
 @calendar indicates the system or calendar to which the date represented by the content of this element
@@ -457,24 +461,6 @@ belongs, but this <sch:name/> element has no textual content.</sch:assert>
          <attribute name="period">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a pointer to some location defining a named period of time within which the datable item is understood to have occurred.</a:documentation>
             <ref name="data.pointer"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.declarable.attributes">
-      <ref name="att.declarable.attribute.default"/>
-   </define>
-   <define name="att.declarable.attribute.default">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="default"
-                    a:defaultValue="false">
-            <a:documentation>indicates whether or not this element is selected by default when its parent is selected.</a:documentation>
-            <choice>
-               <value>true</value>
-               <a:documentation>This element is selected if its parent is selected</a:documentation>
-               <value>false</value>
-               <a:documentation>This element can only be selected explicitly, unless it is the only one of its kind, in which case it is selected if its parent is selected.</a:documentation>
-            </choice>
          </attribute>
       </optional>
    </define>
@@ -490,71 +476,6 @@ belongs, but this <sch:name/> element has no textual content.</sch:assert>
                   <ref name="data.pointer"/>
                </oneOrMore>
             </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.fragmentable.attributes">
-      <ref name="att.fragmentable.attribute.part"/>
-   </define>
-   <define name="att.fragmentable.attribute.part">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="part"
-                    a:defaultValue="N">
-            <a:documentation>specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.</a:documentation>
-            <choice>
-               <value>Y</value>
-               <a:documentation>(yes) the element is fragmented in some (unspecified) respect</a:documentation>
-               <value>N</value>
-               <a:documentation>(no) either the element is not fragmented, or no claim is made as to its completeness.</a:documentation>
-               <value>I</value>
-               <a:documentation>(initial) this is the initial part of a fragmented element</a:documentation>
-               <value>M</value>
-               <a:documentation>(medial) this is a medial part of a fragmented element</a:documentation>
-               <value>F</value>
-               <a:documentation>(final) this is the final part of a fragmented element</a:documentation>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.divLike.attributes">
-      <ref name="att.fragmentable.attributes"/>
-      <ref name="att.divLike.attribute.org"/>
-      <ref name="att.divLike.attribute.sample"/>
-   </define>
-   <define name="att.divLike.attribute.org">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="org"
-                    a:defaultValue="uniform">
-            <a:documentation>(organization) specifies how the content of the division is organized.</a:documentation>
-            <choice>
-               <value>composite</value>
-               <a:documentation>no claim is made about the sequence in which the immediate contents of this division are to be processed, or their inter-relationships.</a:documentation>
-               <value>uniform</value>
-               <a:documentation>the immediate contents of this element are regarded as forming a logical unit, to be processed in sequence.</a:documentation>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.divLike.attribute.sample">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="sample"
-                    a:defaultValue="complete">
-            <a:documentation>indicates whether this division is a sample of the original source and if so, from which part.</a:documentation>
-            <choice>
-               <value>initial</value>
-               <a:documentation>division lacks material present at end in source.</a:documentation>
-               <value>medial</value>
-               <a:documentation>division lacks material at start and end.</a:documentation>
-               <value>final</value>
-               <a:documentation>division lacks material at start.</a:documentation>
-               <value>unknown</value>
-               <a:documentation>position of sampled material within original unknown.</a:documentation>
-               <value>complete</value>
-               <a:documentation>division is not a sample.</a:documentation>
-            </choice>
          </attribute>
       </optional>
    </define>
@@ -674,36 +595,72 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       <optional>
          <attribute name="rendition">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4] simple:normalweight; 5] simple:smallcaps; 6] simple:doublestrikethrough; 7] simple:strikethrough; 8] simple:subscript; 9] simple:superscript; 10] simple:typewriter; 11] simple:doubleunderline; 12] simple:underline; 13] simple:wavyunderlline</a:documentation>
+Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:doublestrikethrough; 9] simple:doubleunderline; 10] simple:dropcap; 11] simple:float; 12] simple:italic; 13] simple:larger; 14] simple:left; 15] simple:leftbraced; 16] simple:letterspace; 17] simple:normalstyle; 18] simple:normalweight; 19] simple:right; 20] simple:rightbraced; 21] simple:rotateleft; 22] simple:rotateright; 23] simple:smallcaps; 24] simple:smaller; 25] simple:strikethrough; 26] simple:subscript; 27] simple:superscript; 28] simple:topbraced; 29] simple:typewriter; 30] simple:underline; 31] simple:wavyunderline</a:documentation>
             <list>
                <oneOrMore>
                   <choice>
-                     <value>simple:bold</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                      <value>simple:allcaps</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:italic</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:normalweight</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:smallcaps</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">all capitals</a:documentation>
+                     <value>simple:blackletter</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">black letter or gothic typeface</a:documentation>
+                     <value>simple:bold</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">bold typeface</a:documentation>
+                     <value>simple:bottombraced</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">marked with a brace under the bottom of the text</a:documentation>
+                     <value>simple:boxed</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">border around the text</a:documentation>
+                     <value>simple:centre</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">centred</a:documentation>
+                     <value>simple:cursive</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">cursive typeface</a:documentation>
                      <value>simple:doublestrikethrough</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:strikethrough</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:subscript</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:superscript</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:typewriter</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">strikethrough with double line</a:documentation>
                      <value>simple:doubleunderline</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">underlined with double line</a:documentation>
+                     <value>simple:dropcap</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">initial letter larger or decorated</a:documentation>
+                     <value>simple:float</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">floated out of main flow</a:documentation>
+                     <value>simple:italic</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">italic typeface</a:documentation>
+                     <value>simple:larger</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">larger type</a:documentation>
+                     <value>simple:left</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">aligned to the left or left-justified</a:documentation>
+                     <value>simple:leftbraced</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">marked with a brace on the left side of the text</a:documentation>
+                     <value>simple:letterspace</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">letter-spaced</a:documentation>
+                     <value>simple:normalstyle</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">upright shape and default weight of typeface</a:documentation>
+                     <value>simple:normalweight</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">normal typeface weight</a:documentation>
+                     <value>simple:right</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">aligned to the right or right-justified</a:documentation>
+                     <value>simple:rightbraced</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">marked with a brace to the right of the text</a:documentation>
+                     <value>simple:rotateleft</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">rotated to the left</a:documentation>
+                     <value>simple:rotateright</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">rotated to the right</a:documentation>
+                     <value>simple:smallcaps</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">small caps</a:documentation>
+                     <value>simple:smaller</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">smaller type</a:documentation>
+                     <value>simple:strikethrough</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">strike through</a:documentation>
+                     <value>simple:subscript</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">subscript</a:documentation>
+                     <value>simple:superscript</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">superscript</a:documentation>
+                     <value>simple:topbraced</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">marked with a brace above the text</a:documentation>
+                     <value>simple:typewriter</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">fixed-width typeface, like typewriter</a:documentation>
                      <value>simple:underline</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     <value>simple:wavyunderlline</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">underlined with single line</a:documentation>
+                     <value>simple:wavyunderline</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">underlined with wavy line</a:documentation>
                      <ref name="data.pointer"/>
                   </choice>
                </oneOrMore>
@@ -712,14 +669,16 @@ Suggested values include: 1] simple:bold; 2] simple:allcaps; 3] simple:italic; 4
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.global-rendition-renditionpointer-constraint-2">
-      <rule xmlns:rng="http://relaxng.org/ns/structure/1.0" context="tei:*[@rendition]">
-                              <let name="results"
+            id="teisimple-att.global-rendition-renditionpointer-constraint-2">
+      <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+            context="tei:*[@rendition]">
+                                 <let name="results"
               value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
-                              <assert test="every $x in $results satisfies $x">
+                                 <assert test="every $x in $results satisfies $x">
 Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
 ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
-                           </rule>
+                              </rule>
    </pattern>
    <define name="att.global.attribute.xmlbase">
       <optional>
@@ -875,6 +834,80 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
          <ref name="data.pointer"/>
       </attribute>
    </define>
+   <define name="att.measurement.attributes">
+      <ref name="att.measurement.attribute.unit"/>
+      <ref name="att.measurement.attribute.quantity"/>
+      <ref name="att.measurement.attribute.commodity"/>
+   </define>
+   <define name="att.measurement.attribute.unit">
+      <optional>
+         <attribute name="unit">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the units used for the measurement, usually using the standard symbol for the desired units.
+Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(hertz) ; 5] Pa(pascal) ; 6] Ω(ohm) ; 7] L(litre) ; 8] t(tonne) ; 9] ha(hectare) ; 10] Å(ångström) ; 11] mL(millilitre) ; 12] cm(centimetre) ; 13] dB(decibel) ; 14] kbit(kilobit) ; 15] Kibit(kibibit) ; 16] kB(kilobyte) ; 17] KiB(kibibyte) ; 18] MB(megabyte) ; 19] MiB(mebibyte) </a:documentation>
+            <choice>
+               <value>m</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(metre) SI base unit of length</a:documentation>
+               <value>kg</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kilogram) SI base unit of mass</a:documentation>
+               <value>s</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(second) SI base unit of time</a:documentation>
+               <value>Hz</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(hertz) SI unit of frequency</a:documentation>
+               <value>Pa</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(pascal) SI unit of pressure or stress</a:documentation>
+               <value>Ω</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(ohm) SI unit of electric resistance</a:documentation>
+               <value>L</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(litre) 1 dm³</a:documentation>
+               <value>t</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(tonne) 10³ kg</a:documentation>
+               <value>ha</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(hectare) 1 hm²</a:documentation>
+               <value>Å</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(ångström) 10⁻¹⁰ m</a:documentation>
+               <value>mL</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(millilitre) </a:documentation>
+               <value>cm</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(centimetre) </a:documentation>
+               <value>dB</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(decibel) see remarks, below</a:documentation>
+               <value>kbit</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kilobit) 10³ or 1000 bits</a:documentation>
+               <value>Kibit</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kibibit) 2¹⁰ or 1024 bits</a:documentation>
+               <value>kB</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kilobyte) 10³ or 1000 bytes</a:documentation>
+               <value>KiB</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kibibyte) 2¹⁰ or 1024 bytes</a:documentation>
+               <value>MB</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(megabyte) 10⁶ or 1 000 000 bytes</a:documentation>
+               <value>MiB</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(mebibyte) 2²⁰ or 1 048 576 bytes</a:documentation>
+               <data type="Name"/>
+            </choice>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.measurement.attribute.quantity">
+      <optional>
+         <attribute name="quantity">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the number of the specified units that comprise the measurement</a:documentation>
+            <ref name="data.numeric"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.measurement.attribute.commodity">
+      <optional>
+         <attribute name="commodity">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the substance that is being measured</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.word"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
    <define name="att.naming.attributes">
       <ref name="att.canonical.attributes"/>
       <ref name="att.naming.attribute.role"/>
@@ -910,40 +943,154 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
    <define name="att.placement.attribute.place">
       <optional>
          <attribute name="place">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies where this item is placed
-Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6] overleaf; 7] above; 8] end; 9] inline; 10] inspace</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies where this item is placed</a:documentation>
             <list>
                <oneOrMore>
                   <choice>
-                     <value>below</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">below the line</a:documentation>
-                     <value>bottom</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the foot of the page</a:documentation>
-                     <value>margin</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in the margin (left, right, or both)</a:documentation>
-                     <value>top</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the top of the page</a:documentation>
-                     <value>opposite</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">on the opposite, i.e. facing, page</a:documentation>
-                     <value>overleaf</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">on the other side of the leaf</a:documentation>
                      <value>above</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">above the line</a:documentation>
+                     <value>below</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">below the line</a:documentation>
+                     <value>top</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the top of the page</a:documentation>
+                     <value>top-right</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the top right of the page</a:documentation>
+                     <value>top-left</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the top left of the page</a:documentation>
+                     <value>top-center</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the top center of the page</a:documentation>
+                     <value>bottom-right</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the bottom right of the page</a:documentation>
+                     <value>bottom-left</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the bottom left of the page</a:documentation>
+                     <value>bottom-center</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the bottom center of the page</a:documentation>
+                     <value>bottom</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the foot of the page</a:documentation>
+                     <value>tablebottom</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <value>margin</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in the outer margin</a:documentation>
+                     <value>margin-left</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in the left margin</a:documentation>
+                     <value>margin-right</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in the right margin</a:documentation>
+                     <value>opposite</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">on the opposite, i.e. facing, page.</a:documentation>
+                     <value>overleaf</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">on the other side of the leaf.</a:documentation>
                      <value>end</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the end of e.g. chapter or volume.</a:documentation>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the end of the volume.</a:documentation>
+                     <value>divend</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the end the current division.</a:documentation>
+                     <value>parend</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the end the current paragraph.</a:documentation>
                      <value>inline</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">within the body of the text.</a:documentation>
                      <value>inspace</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in a predefined space, for example left by an earlier scribe.</a:documentation>
-                     <data type="Name"/>
+                     <value>display</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">formatted like a quotation</a:documentation>
                   </choice>
                </oneOrMore>
             </list>
          </attribute>
       </optional>
    </define>
+   <define name="att.typed.attributes">
+      <ref name="att.typed.attribute.type"/>
+      <ref name="att.typed.attribute.subtype"/>
+   </define>
+   <define name="att.typed.attribute.type">
+      <optional>
+         <attribute name="type">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.</a:documentation>
+            <ref name="data.enumerated"/>
+         </attribute>
+      </optional>
+   </define>
+   <define name="att.typed.attribute.subtype">
+      <optional>
+         <attribute name="subtype">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">provides a sub-categorization of the element, if needed</a:documentation>
+            <ref name="data.enumerated"/>
+         </attribute>
+      </optional>
+   </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="teisimple-att.typed-subtypeTyped-constraint-3">
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                context="*[@subtype]">
+        <sch:assert test="@type">The <sch:name/> element should not be categorized in detail with @subtype
+ unless also categorized in general with @type</sch:assert>
+      </sch:rule>
+   </pattern>
+   <define name="att.pointing.attributes">
+      <ref name="att.pointing.attribute.targetLang"/>
+      <ref name="att.pointing.attribute.target"/>
+      <ref name="att.pointing.attribute.evaluate"/>
+   </define>
+   <define name="att.pointing.attribute.targetLang">
+      <optional>
+         <attribute name="targetLang">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.</a:documentation>
+            <ref name="data.language"/>
+         </attribute>
+      </optional>
+   </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="teisimple-att.pointing-targetLang-targetLang-constraint-4">
+      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
+            <sch:assert test="count(@target)">@targetLang can only be used if @target is specified.</sch:assert>
+          </sch:rule>
+   </pattern>
+   <define name="att.pointing.attribute.target">
+      <optional>
+         <attribute name="target">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References</a:documentation>
+            <list>
+               <oneOrMore>
+                  <ref name="data.pointer"/>
+               </oneOrMore>
+            </list>
+         </attribute>
+      </optional>
+   </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="teisimple-att.pointing-target-validtarget-constraint-5">
+      <rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+            xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+            context="tei:*[@target]">
+                                 <let name="results"
+              value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                                 <report test="some $x in $results  satisfies $x">
+Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
+                              </rule>
+   </pattern>
+   <define name="att.pointing.attribute.evaluate">
+      <optional>
+         <attribute name="evaluate">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the intended meaning when the target of a pointer is itself a pointer.</a:documentation>
+            <choice>
+               <value>all</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.</a:documentation>
+               <value>one</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.</a:documentation>
+               <value>none</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.</a:documentation>
+            </choice>
+         </attribute>
+      </optional>
+   </define>
    <define name="att.segLike.attributes">
-      <ref name="att.fragmentable.attributes"/>
       <ref name="att.segLike.attribute.function"/>
    </define>
    <define name="att.segLike.attribute.function">
@@ -1005,10 +1152,11 @@ Suggested values include: 1] below; 2] bottom; 3] margin; 4] top; 5] opposite; 6
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.spanning-spanTo-spanTo-2-constraint-3">
+            id="teisimple-att.spanning-spanTo-spanTo-2-constraint-6">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="tei:*[@spanTo]">
             <sch:assert test="id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]">
 The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow the current element <sch:name/>
@@ -1045,38 +1193,17 @@ The element indicated by @spanTo (<sch:value-of select="@spanTo"/>) must follow 
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-4">
+            id="teisimple-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-7">
       <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                 context="tei:*[@schemeVersion]">
             <sch:assert test="@scheme and not(@scheme = 'free')">
               @schemeVersion can only be used if @scheme is specified.
             </sch:assert>
           </sch:rule>
    </pattern>
-   <define name="att.tableDecoration.attributes">
-      <ref name="att.tableDecoration.attribute.role"/>
-      <ref name="att.tableDecoration.attribute.rows"/>
-      <ref name="att.tableDecoration.attribute.cols"/>
-   </define>
-   <define name="att.tableDecoration.attribute.role">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="role"
-                    a:defaultValue="data">
-            <a:documentation>indicates the kind of information held in this cell or in each cell of this row.
-Suggested values include: 1] label; 2] data</a:documentation>
-            <choice>
-               <value>label</value>
-               <a:documentation>labelling or descriptive information only.</a:documentation>
-               <value>data</value>
-               <a:documentation>data values.</a:documentation>
-               <data type="Name"/>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
    <define name="att.tableDecoration.attribute.rows">
       <optional>
          <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
@@ -2710,7 +2837,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </choice>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <optional>
             <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
                        name="status"
@@ -2796,7 +2922,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </oneOrMore>
          </choice>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -2825,7 +2950,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </zeroOrMore>
          </group>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <ref name="att.sortable.attributes"/>
          <ref name="att.docStatus.attributes"/>
          <empty/>
@@ -2853,7 +2977,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -2864,7 +2987,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -2878,7 +3000,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </choice>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -2889,7 +3010,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <optional>
             <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
                        name="status"
@@ -2930,7 +3050,6 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <optional>
             <attribute name="source">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates a bibliographic description or other resource documenting the principles underlying the normalization carried out.</a:documentation>
@@ -2960,15 +3079,15 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <ref name="model.pLike"/>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-quotation-quotationContents-constraint-1">
+                  id="teisimple-quotation-quotationContents-constraint-2">
             <rule context="tei:quotation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                        test="not(@marks) and not (tei:p)">
 On <name/>, either the @marks attribute should be used, or a paragraph of description provided</report>
             </rule>
          </pattern>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <optional>
             <attribute name="marks">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(quotation marks) indicates whether or not quotation marks have been retained as content within the text.</a:documentation>
@@ -2992,7 +3111,6 @@ On <name/>, either the @marks attribute should be used, or a paragraph of descri
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <optional>
             <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
                        name="eol"
@@ -3020,7 +3138,6 @@ On <name/>, either the @marks attribute should be used, or a paragraph of descri
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3031,7 +3148,6 @@ On <name/>, either the @marks attribute should be used, or a paragraph of descri
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3042,7 +3158,6 @@ On <name/>, either the @marks attribute should be used, or a paragraph of descri
             <ref name="model.pLike"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3052,7 +3167,6 @@ On <name/>, either the @marks attribute should be used, or a paragraph of descri
          <zeroOrMore>
             <ref name="model.pLike"/>
          </zeroOrMore>
-         <ref name="att.declarable.attributes"/>
          <ref name="att.global.attributes"/>
          <optional>
             <attribute name="marks">
@@ -3167,7 +3281,6 @@ Sample values include: 1] first-line; 2] first-letter; 3] before; 4] after</a:do
             <ref name="model.pLike"/>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <ref name="att.styleDef.attributes"/>
          <empty/>
       </element>
@@ -3187,7 +3300,6 @@ Sample values include: 1] first-line; 2] first-letter; 3] before; 4] after</a:do
             </oneOrMore>
          </choice>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3330,7 +3442,6 @@ Sample values include: 1] first-line; 2] first-letter; 3] before; 4] after</a:do
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(geographic coordinates declaration) documents the notation and the datum used for geographic coordinates expressed as content of the geo element elsewhere within the document. [2.3.8. ]</a:documentation>
          <ref name="macro.phraseSeq"/>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <optional>
             <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
                        name="datum"
@@ -3441,7 +3552,6 @@ Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Gri
             <ref name="language"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3476,7 +3586,6 @@ Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Gri
             </choice>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3640,7 +3749,6 @@ Sample values include: 1] TEI(text encoding initiative) ; 2] DBK(docbook) ; 3] X
             </zeroOrMore>
          </group>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.sortable.attributes"/>
          <ref name="att.docStatus.attributes"/>
@@ -3880,22 +3988,24 @@ Sample values include: 1] TEI; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron;
             </choice>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-relatedItem-targetorcontent1-constraint-2">
+                  id="teisimple-relatedItem-targetorcontent1-constraint-3">
             <rule context="tei:relatedItem">
                <sch:report xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@target and count( child::* ) &gt; 0">
 If the @target attribute on <sch:name/> is used, the
 relatedItem element must be empty</sch:report>
             </rule>
-         </pattern> 
+         </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-relatedItem-targetorcontent1-constraint-5">
+                  id="teisimple-relatedItem-targetorcontent1-constraint-7">
             <rule context="tei:relatedItem">
                <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@target or child::*">A relatedItem element should have either a 'target' attribute
         or a child element to indicate the related bibliographic item</sch:assert>
             </rule>
@@ -3993,7 +4103,6 @@ Sample values include: 1] text; 2] corpus</a:documentation>
             <ref name="model.textDescPart_sequence"/>
          </group>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4020,16 +4129,20 @@ Sample values include: 1] text; 2] corpus</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(damaged span of text) marks the beginning of a longer sequence of text which is damaged in some way but still legible. [11.3.3.1. ]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-damageSpan-spanTo-constraint-6">
+                  id="teisimple-damageSpan-spanTo-constraint-8">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="@spanTo">
 The @spanTo attribute of <name/> is required.</assert>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-damageSpan-spanTo_fr-constraint-7">
+                  id="teisimple-damageSpan-spanTo_fr-constraint-9">
             <rule context="tei:damageSpan">
-               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@spanTo">L'attribut spanTo est requis.</assert>
+               <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="@spanTo">L'attribut spanTo est requis.</assert>
             </rule>
          </pattern>
          <ref name="att.global.attributes"/>
@@ -4426,80 +4539,6 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
          </attribute>
       </optional>
    </define>
-   <define name="att.measurement.attributes">
-      <ref name="att.measurement.attribute.unit"/>
-      <ref name="att.measurement.attribute.quantity"/>
-      <ref name="att.measurement.attribute.commodity"/>
-   </define>
-   <define name="att.measurement.attribute.unit">
-      <optional>
-         <attribute name="unit">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the units used for the measurement, usually using the standard symbol for the desired units.
-Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(hertz) ; 5] Pa(pascal) ; 6] Ω(ohm) ; 7] L(litre) ; 8] t(tonne) ; 9] ha(hectare) ; 10] Å(ångström) ; 11] mL(millilitre) ; 12] cm(centimetre) ; 13] dB(decibel) ; 14] kbit(kilobit) ; 15] Kibit(kibibit) ; 16] kB(kilobyte) ; 17] KiB(kibibyte) ; 18] MB(megabyte) ; 19] MiB(mebibyte) </a:documentation>
-            <choice>
-               <value>m</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(metre) SI base unit of length</a:documentation>
-               <value>kg</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kilogram) SI base unit of mass</a:documentation>
-               <value>s</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(second) SI base unit of time</a:documentation>
-               <value>Hz</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(hertz) SI unit of frequency</a:documentation>
-               <value>Pa</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(pascal) SI unit of pressure or stress</a:documentation>
-               <value>Ω</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(ohm) SI unit of electric resistance</a:documentation>
-               <value>L</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(litre) 1 dm³</a:documentation>
-               <value>t</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(tonne) 10³ kg</a:documentation>
-               <value>ha</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(hectare) 1 hm²</a:documentation>
-               <value>Å</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(ångström) 10⁻¹⁰ m</a:documentation>
-               <value>mL</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(millilitre) </a:documentation>
-               <value>cm</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(centimetre) </a:documentation>
-               <value>dB</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(decibel) see remarks, below</a:documentation>
-               <value>kbit</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kilobit) 10³ or 1000 bits</a:documentation>
-               <value>Kibit</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kibibit) 2¹⁰ or 1024 bits</a:documentation>
-               <value>kB</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kilobyte) 10³ or 1000 bytes</a:documentation>
-               <value>KiB</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(kibibyte) 2¹⁰ or 1024 bytes</a:documentation>
-               <value>MB</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(megabyte) 10⁶ or 1 000 000 bytes</a:documentation>
-               <value>MiB</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(mebibyte) 2²⁰ or 1 048 576 bytes</a:documentation>
-               <data type="Name"/>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.measurement.attribute.quantity">
-      <optional>
-         <attribute name="quantity">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the number of the specified units that comprise the measurement</a:documentation>
-            <ref name="data.numeric"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.measurement.attribute.commodity">
-      <optional>
-         <attribute name="commodity">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the substance that is being measured</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.word"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
    <define name="att.milestoneUnit.attributes">
       <ref name="att.milestoneUnit.attribute.unit"/>
    </define>
@@ -4538,66 +4577,6 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
          </choice>
       </attribute>
    </define>
-   <define name="att.pointing.attributes">
-      <ref name="att.pointing.attribute.targetLang"/>
-      <ref name="att.pointing.attribute.target"/>
-      <ref name="att.pointing.attribute.evaluate"/>
-   </define>
-   <define name="att.pointing.attribute.targetLang">
-      <optional>
-         <attribute name="targetLang">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.</a:documentation>
-            <ref name="data.language"/>
-         </attribute>
-      </optional>
-   </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.pointing-targetLang-targetLang-constraint-5">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                xmlns="http://www.tei-c.org/ns/1.0"
-                context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
-            <sch:assert test="count(@target)">@targetLang can only be used if @target is specified.</sch:assert>
-          </sch:rule>
-   </pattern>
-   <define name="att.pointing.attribute.target">
-      <optional>
-         <attribute name="target">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References</a:documentation>
-            <list>
-               <oneOrMore>
-                  <ref name="data.pointer"/>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.pointing-target-validtarget-constraint-6">
-      <rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-            xmlns:rng="http://relaxng.org/ns/structure/1.0"
-            context="tei:*[@target]">
-                              <let name="results"
-              value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-                              <report test="some $x in $results  satisfies $x">
-Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
-                           </rule>
-   </pattern>
-   <define name="att.pointing.attribute.evaluate">
-      <optional>
-         <attribute name="evaluate">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the intended meaning when the target of a pointer is itself a pointer.</a:documentation>
-            <choice>
-               <value>all</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.</a:documentation>
-               <value>one</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.</a:documentation>
-               <value>none</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.</a:documentation>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
    <define name="att.global.linking.attributes">
       <ref name="att.global.linking.attribute.corresp"/>
       <ref name="att.global.linking.attribute.next"/>
@@ -4631,36 +4610,6 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
          </attribute>
       </optional>
    </define>
-   <define name="att.typed.attributes">
-      <ref name="att.typed.attribute.type"/>
-      <ref name="att.typed.attribute.subtype"/>
-   </define>
-   <define name="att.typed.attribute.type">
-      <optional>
-         <attribute name="type">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.</a:documentation>
-            <ref name="data.enumerated"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="att.typed.attribute.subtype">
-      <optional>
-         <attribute name="subtype">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">provides a sub-categorization of the element, if needed</a:documentation>
-            <ref name="data.enumerated"/>
-         </attribute>
-      </optional>
-   </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="oddbyexample-att.typed-subtypeTyped-constraint-7">
-      <sch:rule xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                xmlns="http://www.tei-c.org/ns/1.0"
-                context="*[@subtype]">
-        <sch:assert test="@type">The <sch:name/> element should not be categorized in detail with @subtype
- unless also categorized in general with @type</sch:assert>
-      </sch:rule>
-   </pattern>
    <define name="author">
       <element name="author">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ]</a:documentation>
@@ -4687,7 +4636,6 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
             </choice>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.sortable.attributes"/>
          <ref name="att.docStatus.attributes"/>
@@ -4748,15 +4696,13 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the bibliographic level for a title, that is, whether it identifies an article, book, journal, series, or unpublished material.</a:documentation>
                <choice>
                   <value>a</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(analytic) the title applies to an analytic item, such as an article, poem, or other work published as part of a larger item.</a:documentation>
-                  <value>m</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(monographic) the title applies to a monograph such as a book or other item considered to be a distinct publication, including single volumes of multi-volume works</a:documentation>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                   <value>j</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(journal) the title applies to any serial or periodical publication such as a journal, magazine, or newspaper</a:documentation>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <value>m</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                   <value>s</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(series) the title applies to a series of otherwise distinct publications such as a collection</a:documentation>
-                  <value>u</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(unpublished) the title applies to any unpublished material (including theses and dissertations unless published by a commercial press)</a:documentation>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                </choice>
             </attribute>
          </optional>
@@ -4782,7 +4728,7 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          </group>
          <ns xmlns="http://purl.oclc.org/dsdl/schematron"
              prefix="tei"
-             uri="http://www.tei-c.org/ns/1.0"/> 
+             uri="http://www.tei-c.org/ns/1.0"/>
          <ns xmlns="http://purl.oclc.org/dsdl/schematron"
              prefix="xs"
              uri="http://www.w3.org/2001/XMLSchema"/>
@@ -4843,7 +4789,6 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          <ref name="att.global.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.declaring.attributes"/>
-         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4915,22 +4860,24 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-addSpan-spanTo-constraint-10">
+                  id="teisimple-addSpan-spanTo-constraint-10">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
                            xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@spanTo">The @spanTo attribute of <sch:name/> is required.</sch:assert>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-addSpan-spanTo_fr-constraint-11">
+                  id="teisimple-addSpan-spanTo_fr-constraint-11">
             <rule context="tei:addSpan">
                <sch:assert xmlns:s="http://www.ascc.net/xml/schematron"
                            xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="@spanTo">L'attribut spanTo est requis.</sch:assert>
             </rule>
          </pattern>
@@ -5314,7 +5261,25 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains one cell of a table. [14.1.1. ]</a:documentation>
          <ref name="macro.specialPara"/>
          <ref name="att.global.attributes"/>
-         <ref name="att.tableDecoration.attributes"/>
+         <ref name="att.tableDecoration.attribute.rows"/>
+         <ref name="att.tableDecoration.attribute.cols"/>
+         <optional>
+            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                       name="role"
+                       a:defaultValue="data">
+               <a:documentation>indicates the kind of information held in this cell or in each cell of this row.</a:documentation>
+               <choice>
+                  <value>data</value>
+                  <a:documentation/>
+                  <value>label</value>
+                  <a:documentation/>
+                  <value>sum</value>
+                  <a:documentation/>
+                  <value>total</value>
+                  <a:documentation/>
+               </choice>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
@@ -5465,7 +5430,6 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
             </optional>
          </group>
          <ref name="att.global.attributes"/>
-         <ref name="att.divLike.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.declaring.attributes"/>
          <empty/>
@@ -5651,8 +5615,13 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          <ref name="att.global.attributes"/>
          <optional>
             <attribute name="notation">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">names the notation used for the content of the element.</a:documentation>
-               <ref name="data.enumerated"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">names the notation used for the content of the element.
+Suggested values include: 1] TeX</a:documentation>
+               <choice>
+                  <value>TeX</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Using TeX or LaTeX notation</a:documentation>
+                  <data type="Name"/>
+               </choice>
             </attribute>
          </optional>
          <empty/>
@@ -5893,7 +5862,6 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(verse line) contains a single, possibly incomplete, line of verse. [3.12.1.  3.12.  7.2.5. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
-         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -5954,17 +5922,17 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</a:documentation>
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-lg-atleast1oflggapl-constraint-12">
+                  id="teisimple-lg-atleast1oflggapl-constraint-12">
             <rule context="tei:lg">
                <sch:assert xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
                            xmlns="http://www.tei-c.org/ns/1.0"
+                           xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                            test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
         must contain at least one child l, lg or gap element.</sch:assert>
             </rule>
          </pattern>
          <ref name="att.global.attributes"/>
-         <ref name="att.divLike.attributes"/>
          <ref name="att.typed.attributes"/>
          <ref name="att.declaring.attributes"/>
          <empty/>
@@ -6059,7 +6027,6 @@ Suggested values include: 1] gloss; 2] index; 3] instructions; 4] litany; 5] syl
          </group>
          <ref name="att.global.attributes"/>
          <ref name="att.sortable.attributes"/>
-         <ref name="att.declarable.attributes"/>
          <ref name="att.typed.attributes"/>
          <empty/>
       </element>
@@ -6231,7 +6198,6 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</a
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
          <ref name="att.declaring.attributes"/>
-         <ref name="att.fragmentable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -6373,9 +6339,11 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-ref-refAtts-constraint-4">
+                  id="teisimple-ref-refAtts-constraint-4">
             <rule context="tei:ref">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="@target and @cRef">Only one of the
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
                </report>
             </rule>
@@ -6422,7 +6390,25 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
             <ref name="cell"/>
          </oneOrMore>
          <ref name="att.global.attributes"/>
-         <ref name="att.tableDecoration.attributes"/>
+         <ref name="att.tableDecoration.attribute.rows"/>
+         <ref name="att.tableDecoration.attribute.cols"/>
+         <optional>
+            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                       name="role"
+                       a:defaultValue="data">
+               <a:documentation>indicates the kind of information held in this cell or in each cell of this row.</a:documentation>
+               <choice>
+                  <value>data</value>
+                  <a:documentation/>
+                  <value>label</value>
+                  <a:documentation/>
+                  <value>sum</value>
+                  <a:documentation/>
+                  <value>total</value>
+                  <a:documentation/>
+               </choice>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>
@@ -6492,9 +6478,11 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-s-noNestedS-constraint-5">
+                  id="teisimple-s-noNestedS-constraint-5">
             <rule context="tei:s">
-               <report xmlns:rng="http://relaxng.org/ns/structure/1.0" test="tei:s">You may not nest one s element within
+               <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+                       test="tei:s">You may not nest one s element within
       another: use seg instead</report>
             </rule>
          </pattern>
@@ -6686,9 +6674,10 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
             </choice>
          </oneOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-subst-substContents1-constraint-13">
+                  id="teisimple-subst-substContents1-constraint-13">
             <rule context="tei:subst">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                       xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                        test="child::tei:add and child::tei:del">
                   <name/> must have at least one child add and at least one child del</assert>
             </rule>
@@ -6796,11 +6785,12 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
             </optional>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="oddbyexample-text-headeronlyelement-constraint-8">
+                  id="teisimple-text-headeronlyelement-constraint-8">
             <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
                   context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
-                        <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
-                     </rule>
+                           <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
+                        </rule>
          </pattern>
          <ref name="att.global.attributes"/>
          <ref name="att.declaring.attributes"/>

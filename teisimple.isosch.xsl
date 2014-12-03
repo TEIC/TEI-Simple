@@ -181,7 +181,7 @@
    <!--SCHEMATRON PATTERNS-->
 
 
-<!--PATTERN oddbyexample-att.datable-calendar-constraint-calendar-1-->
+<!--PATTERN teisimple-att.datable-calendar-constraint-calendar-1-->
 
 
 	<!--RULE -->
@@ -205,7 +205,7 @@ belongs, but this <xsl:text/>
       <xsl:apply-templates select="*" mode="M5"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.global-rendition-constraint-renditionpointer-2-->
+   <!--PATTERN teisimple-att.global-rendition-constraint-renditionpointer-2-->
 
 
 	<!--RULE -->
@@ -233,11 +233,80 @@ ID or to a token in the Simple scheme  (<xsl:text/>
       <xsl:apply-templates select="*" mode="M6"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.spanning-spanTo-constraint-spanTo-2-3-->
+   <!--PATTERN teisimple-att.typed-constraint-subtypeTyped-3-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:*[@spanTo]" priority="1000" mode="M7">
+<xsl:template match="*[@subtype]" priority="1000" mode="M7">
+
+		<!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="@type"/>
+         <xsl:otherwise>
+            <xsl:message>The <xsl:text/>
+               <xsl:value-of select="name(.)"/>
+               <xsl:text/> element should not be categorized in detail with @subtype
+ unless also categorized in general with @type (@type)</xsl:message>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M7"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M7"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M7">
+      <xsl:apply-templates select="*" mode="M7"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-att.pointing-targetLang-constraint-targetLang-4-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:*[not(self::tei:schemaSpec)][@targetLang]"
+                 priority="1000"
+                 mode="M8">
+
+		<!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="count(@target)"/>
+         <xsl:otherwise>
+            <xsl:message>@targetLang can only be used if @target is specified. (count(@target))</xsl:message>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M8"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M8"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M8">
+      <xsl:apply-templates select="*" mode="M8"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-att.pointing-target-constraint-validtarget-5-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:*[@target]" priority="1000" mode="M9">
+      <xsl:variable name="results"
+                    select="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+
+		    <!--REPORT -->
+<xsl:if test="some $x in $results  satisfies $x">
+         <xsl:message>
+Error: Every local pointer in "<xsl:text/>
+            <xsl:value-of select="@target"/>
+            <xsl:text/>" must point to an ID in this document (<xsl:text/>
+            <xsl:value-of select="$results"/>
+            <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
+      </xsl:if>
+      <xsl:apply-templates select="*" mode="M9"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M9"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M9">
+      <xsl:apply-templates select="*" mode="M9"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-att.spanning-spanTo-constraint-spanTo-2-6-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:*[@spanTo]" priority="1000" mode="M10">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -252,18 +321,18 @@ The element indicated by @spanTo (<xsl:text/>
                    (id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)])</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M7"/>
+      <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M7"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M7">
-      <xsl:apply-templates select="*" mode="M7"/>
+   <xsl:template match="text()" priority="-1" mode="M10"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M10">
+      <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-4-->
+   <!--PATTERN teisimple-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-7-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:*[@schemeVersion]" priority="1000" mode="M8">
+<xsl:template match="tei:*[@schemeVersion]" priority="1000" mode="M11">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -274,18 +343,18 @@ The element indicated by @spanTo (<xsl:text/>
              (@scheme and not(@scheme = 'free'))</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M8"/>
+      <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M8"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M8">
-      <xsl:apply-templates select="*" mode="M8"/>
+   <xsl:template match="text()" priority="-1" mode="M11"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M11">
+      <xsl:apply-templates select="*" mode="M11"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-quotation-constraint-quotationContents-5-->
+   <!--PATTERN teisimple-quotation-constraint-quotationContents-8-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:quotation" priority="1000" mode="M9">
+<xsl:template match="tei:quotation" priority="1000" mode="M12">
 
 		<!--REPORT -->
 <xsl:if test="not(@marks) and not (tei:p)">
@@ -294,18 +363,18 @@ On <xsl:text/>
             <xsl:value-of select="name(.)"/>
             <xsl:text/>, either the @marks attribute should be used, or a paragraph of description provided (not(@marks) and not (tei:p))</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M9"/>
+      <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M9"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M9">
-      <xsl:apply-templates select="*" mode="M9"/>
+   <xsl:template match="text()" priority="-1" mode="M12"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M12">
+      <xsl:apply-templates select="*" mode="M12"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-relatedItem-constraint-targetorcontent1-6-->
+   <!--PATTERN teisimple-relatedItem-constraint-targetorcontent1-9-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:relatedItem" priority="1000" mode="M10">
+<xsl:template match="tei:relatedItem" priority="1000" mode="M13">
 
 		<!--REPORT -->
 <xsl:if test="@target and count( child::* ) &gt; 0">
@@ -324,18 +393,18 @@ relatedItem element must be empty (@target and count( child::* ) &gt; 0)</xsl:me
         or a child element to indicate the related bibliographic item (@target or child::*)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M10"/>
+      <xsl:apply-templates select="*" mode="M13"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M10"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M10">
-      <xsl:apply-templates select="*" mode="M10"/>
+   <xsl:template match="text()" priority="-1" mode="M13"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M13">
+      <xsl:apply-templates select="*" mode="M13"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-damageSpan-constraint-spanTo-7-->
+   <!--PATTERN teisimple-damageSpan-constraint-spanTo-10-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:damageSpan" priority="1000" mode="M11">
+<xsl:template match="tei:damageSpan" priority="1000" mode="M14">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -347,75 +416,6 @@ The @spanTo attribute of <xsl:text/>
                <xsl:text/> is required. (@spanTo)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M11"/>
-   </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M11"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M11">
-      <xsl:apply-templates select="*" mode="M11"/>
-   </xsl:template>
-
-   <!--PATTERN oddbyexample-att.pointing-targetLang-constraint-targetLang-9-->
-
-
-	<!--RULE -->
-<xsl:template match="tei:*[not(self::tei:schemaSpec)][@targetLang]"
-                 priority="1000"
-                 mode="M12">
-
-		<!--ASSERT -->
-<xsl:choose>
-         <xsl:when test="count(@target)"/>
-         <xsl:otherwise>
-            <xsl:message>@targetLang can only be used if @target is specified. (count(@target))</xsl:message>
-         </xsl:otherwise>
-      </xsl:choose>
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M12"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M12">
-      <xsl:apply-templates select="*" mode="M12"/>
-   </xsl:template>
-
-   <!--PATTERN oddbyexample-att.pointing-target-constraint-validtarget-10-->
-
-
-	<!--RULE -->
-<xsl:template match="tei:*[@target]" priority="1000" mode="M13">
-      <xsl:variable name="results"
-                    select="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-
-		    <!--REPORT -->
-<xsl:if test="some $x in $results  satisfies $x">
-         <xsl:message>
-Error: Every local pointer in "<xsl:text/>
-            <xsl:value-of select="@target"/>
-            <xsl:text/>" must point to an ID in this document (<xsl:text/>
-            <xsl:value-of select="$results"/>
-            <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
-      </xsl:if>
-      <xsl:apply-templates select="*" mode="M13"/>
-   </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M13"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M13">
-      <xsl:apply-templates select="*" mode="M13"/>
-   </xsl:template>
-
-   <!--PATTERN oddbyexample-att.typed-constraint-subtypeTyped-11-->
-
-
-	<!--RULE -->
-<xsl:template match="*[@subtype]" priority="1000" mode="M14">
-
-		<!--ASSERT -->
-<xsl:choose>
-         <xsl:when test="@type"/>
-         <xsl:otherwise>
-            <xsl:message>The <xsl:text/>
-               <xsl:value-of select="name(.)"/>
-               <xsl:text/> element should not be categorized in detail with @subtype
- unless also categorized in general with @type (@type)</xsl:message>
-         </xsl:otherwise>
-      </xsl:choose>
       <xsl:apply-templates select="*" mode="M14"/>
    </xsl:template>
    <xsl:template match="text()" priority="-1" mode="M14"/>
@@ -423,7 +423,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M14"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-addSpan-constraint-spanTo-14-->
+   <!--PATTERN teisimple-addSpan-constraint-spanTo-14-->
 
 
 	<!--RULE -->
@@ -445,7 +445,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M15"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-lg-constraint-atleast1oflggapl-16-->
+   <!--PATTERN teisimple-lg-constraint-atleast1oflggapl-16-->
 
 
 	<!--RULE -->
@@ -466,7 +466,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M16"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-ref-constraint-refAtts-17-->
+   <!--PATTERN teisimple-ref-constraint-refAtts-17-->
 
 
 	<!--RULE -->
@@ -487,7 +487,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M17"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-s-constraint-noNestedS-18-->
+   <!--PATTERN teisimple-s-constraint-noNestedS-18-->
 
 
 	<!--RULE -->
@@ -505,7 +505,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M18"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-subst-constraint-substContents1-19-->
+   <!--PATTERN teisimple-subst-constraint-substContents1-19-->
 
 
 	<!--RULE -->
@@ -528,7 +528,7 @@ Error: Every local pointer in "<xsl:text/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
 
-   <!--PATTERN oddbyexample-text-constraint-headeronlyelement-20-->
+   <!--PATTERN teisimple-text-constraint-headeronlyelement-20-->
 
 
 	<!--RULE -->

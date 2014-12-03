@@ -349,15 +349,15 @@
         </xsl:if>
       </stage2>
     </xsl:variable>
-    <!-- start writing the final ODD document -->
-            <xsl:for-each select="$stage2/stage2/*[@mode='keep']" >
-              <xsl:sort select="@ident"/>
-	      <xsl:choose>
-		<xsl:when
-		    test="self::tei:elementSpec"><elementRef  corpus="{$name}" key="{@ident}" count="{@count}"/></xsl:when>
-		<!--		<xsl:when test="self::tei:classSpec"><classRef key="{@ident}"/></xsl:when>-->
-	      </xsl:choose>
-	      </xsl:for-each>
+    <!-- start writing the final result -->
+
+      <xsl:for-each select="$stage2/stage2/*[@mode='keep']" >
+        <xsl:sort select="@ident"/>
+	<xsl:choose>
+	  <xsl:when
+	      test="self::tei:elementSpec"><elementRef  corpus="{$name}" key="{@ident}" count="{@count}"/></xsl:when>
+	</xsl:choose>
+      </xsl:for-each>
 
 
   </xsl:template>
