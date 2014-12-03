@@ -25,10 +25,10 @@ Defaults:
     <process name="makeInline(.)" mode="render"/>
   </elementSpec>
   <elementSpec ident="choice">
-    <process context="not(ancestor::front) and corr and reg" name="makeInline(reg)" mode="render"/>
-    <process context="corr and reg" name="makeMarginalNote(corr)" mode="render"/>
-    <process context="ancestor::front and (corr and reg)" name="makeLinkedMarginalNote(corr,reg)" mode="render"/>
-    <process context="corr and reg" name="makeInline(corr)" mode="textextract"/>
+    <process context="not(ancestor::front) and corr and sic" name="makeInline(sic)" mode="render"/>
+    <process context="corr and sic" name="makeMarginalNote(corr)" mode="render"/>
+    <process context="ancestor::front and (corr and sic)" name="makeLinkedMarginalNote(corr,sic)" mode="render"/>
+    <process context="corr and sic" name="makeInline(corr)" mode="textextract"/>
   </elementSpec>
   <elementSpec ident="gap">
     <process mode="textextract"/>
