@@ -21,3 +21,11 @@
     background-color: #C0C0C0;
     font-size: smaller;
     }
+
+
+    span.floatingBottom {
+    float: right;
+    display: block;
+    background-color: #C0C0C0;
+    font-size: smaller;
+    }

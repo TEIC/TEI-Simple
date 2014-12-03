@@ -32,7 +32,7 @@
 
                <!-- 
                   <process
-                     xpath="not(parent::person) and (@when or @when-custom)"
+                     context="not(parent::person) and (@when or @when-custom)"
                      name="makeMarginalNote(if (@when-custom) then @when-custom else @when)"
                      mode="render"
                      class="altdate"/>
@@ -40,7 +40,7 @@
 
             </elementSpec>
             <elementSpec ident="p">
-               <process xpath="" name="makeParagraph(.)" mode="render"/>
+               <process context="" name="makeParagraph(.)" mode="render"/>
             </elementSpec>
 
             <elementSpec ident="head" mode="change">
@@ -49,15 +49,15 @@
                </attList>
 
                <!-- chapter headings -->
-               <process xpath="parent::div[@type='div3']" name="makeHeader(.)" mode="render"
+               <process context="parent::div[@type='div3']" name="makeHeader(.)" mode="render"
                   class="chapterHeader"/>
 
                <!-- part headings -->
-               <process xpath="parent::div[not(@type)]" name="makeHeader(.)" mode="render"
+               <process context="parent::div[not(@type)]" name="makeHeader(.)" mode="render"
                   class="partHeader"/>
 
                <!-- verse headings -->
-               <process xpath="parent::lg" name="makeHeader(.)" mode="render" class="verseHeader"/>
+               <process context="parent::lg" name="makeHeader(.)" mode="render" class="verseHeader"/>
             </elementSpec>
 
             <elementSpec ident="lg" mode="change">
@@ -65,13 +65,13 @@
                   <attDef ident="type" mode="delete"/>
                </attList>
                <!-- line groups to be processed as block divisions -->
-               <process xpath="" name="makeBlock(.)" mode="render" class="verse"/>
+               <process context="" name="makeBlock(.)" mode="render" class="verse"/>
 
             </elementSpec>
 
             <elementSpec ident="l">
                <!-- verse lines to be processed as newlines -->
-               <process xpath="" name="makeNewline(.)" mode="render" class="verse"/>
+               <process context="" name="makeNewline(.)" mode="render" class="verse"/>
             </elementSpec>
 
             <moduleRef key="header"
@@ -82,16 +82,16 @@
                   <attDef ident="type" mode="delete"/>
                </attList>
                <!-- floatingText to be processed as block division -->
-               <process xpath="" name="makeBlock(.)" mode="render" class="border"/>
+               <process context="" name="makeBlock(.)" mode="render" class="border"/>
             </elementSpec>
 
             <elementSpec ident="front">
                <!-- front to be processed as block division -->
-               <process xpath="" name="makeBlock(.)" mode="render"/>
+               <process context="" name="makeBlock(.)" mode="render"/>
             </elementSpec>
             <elementSpec ident="body">
                <!-- body to be processed as block division -->
-               <process xpath="" name="makeBlock(.)" mode="render"/>
+               <process context="" name="makeBlock(.)" mode="render"/>
             </elementSpec>
 
             <elementSpec ident="div" mode="change">

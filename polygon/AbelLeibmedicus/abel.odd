@@ -32,7 +32,7 @@
                   <attDef ident="prev" mode="delete"/>
                   <attDef ident="facs" mode="delete"/>
                </attList>
-               <process xpath="" name="makeParagraph(.)" mode="render"/>
+               <process context="" name="makeParagraph(.)" mode="render"/>
                
             </elementSpec>
             <elementSpec ident="hi" mode="change">
@@ -43,7 +43,7 @@
                   <attDef ident="prev" mode="delete"/>
                   <attDef ident="facs" mode="delete"/>
                </attList>
-               <process xpath="" name="makeInline(.)" mode="render" class="italic"/>
+               <process context="" name="makeInline(.)" mode="render" class="italic"/>
                
             </elementSpec>
             
@@ -103,7 +103,7 @@
                   <attDef ident="facs" mode="delete"/>
                   <attDef ident="type" mode="delete"/>
                </attList>
-               <process xpath="" name="makeInline(@ref)" mode="render" class="italic"/>
+               <process context="" name="makeInline(@ref)" mode="render" class="italic"/>
                
             </elementSpec>
             <elementSpec ident="list" mode="change">
@@ -143,6 +143,9 @@
                
             </elementSpec>
             <elementSpec ident="note" mode="change">
+               <process context="" name="makeNoteAnchor()" mode="render" class="note"/>
+               <process context="" name="makeMarginalNote()" mode="render" class="floating"/>
+               
                <attList>
                   <attDef ident="anchored" mode="delete"/>
                   <attDef ident="targetEnd" mode="delete"/>
@@ -191,7 +194,8 @@
                   <attDef ident="type" mode="delete"/>
                </attList>
                <!-- line breaks to be processed as newlines -->
-               <process context="" name="makeNewline(.)" mode="render"/>
+               <!--<process context="" name="makeNewline(.)" mode="render"/>-->
+               <process context="" name="omit()" mode="render"/>
                
             </elementSpec>
             <elementSpec ident="cb" mode="change">
@@ -628,8 +632,12 @@
                   <attDef ident="facs" mode="delete"/>
                   <attDef ident="type" mode="delete"/>
                </attList>
+               <process context="" name="makeBlock(.)" mode="render"/>
+               <process context="" name="makeEndnotes(.//note)" mode="render"/>
+               
             </elementSpec>
             <elementSpec ident="body" mode="change">
+               
                <attList>
                   <attDef ident="xml:id" mode="delete"/>
                   <attDef ident="n" mode="delete"/>

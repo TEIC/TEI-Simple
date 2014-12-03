@@ -61,7 +61,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="element"/>
         <xsl:param name="content"/>
         
-        <xsl:copy-of select="tei:makeElement('div', $element/@class, $content)"/>
+        <xsl:copy-of select="tei:makeElement('div', $element/@class, $content, '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -71,7 +71,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="element"/>
         <xsl:param name="content"/>
         
-        <xsl:copy-of select="tei:makeElement('p', $element/@class, $content)"/>
+        <xsl:copy-of select="tei:makeElement('p', $element/@class, $content, '')"/>
     </xsl:function>
     
     
@@ -95,7 +95,7 @@ of this software, even if advised of the possibility of such damage.
         
         <xsl:choose>
             <xsl:when test="string($element/@class)">
-                <xsl:copy-of select="tei:makeElement('span', $element/@class, $content)"/>
+                <xsl:copy-of select="tei:makeElement('span', $element/@class, $content, '')"/>
                 
             </xsl:when>
             <xsl:otherwise>
@@ -116,8 +116,32 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="element"/>
         <xsl:param name="content"/>
 
-        <xsl:copy-of select="tei:makeElement('span', $element/@class, $content)"/>
+        <xsl:copy-of select="tei:makeElement('span', $element/@class, $content, '')"/>
         </xsl:function>
+
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Anchor</desc>
+    </doc>
+    <xsl:function name="tei:makeNoteAnchor" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        
+        <xslo:variable name="cId">
+            <xslo:value-of select="generate-id(.)"></xslo:value-of>
+        </xslo:variable>
+        
+        <sup>
+        <xslo:element name="a">
+            <xslo:attribute name="name">A<xslo:value-of select="$cId"/></xslo:attribute>
+            <xslo:attribute name="href">#N<xslo:value-of select="$cId"/></xslo:attribute>
+            <xslo:number level="any"/>
+        </xslo:element>
+        </sup>
+        
+    </xsl:function>
+    
+    
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Marginal note</desc>
@@ -126,9 +150,37 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="element"/>
         <xsl:param name="content"/>
         
-        <xsl:copy-of select="tei:makeElement('span', $element/@class, $content)"/>
+        <!-- relies on css for the positioning and formatting of the note block -->
+        <xsl:copy-of select="tei:makeElement('span', $element/@class, $content, '')"/>
     </xsl:function>
 
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>End note</desc>
+    </doc>
+    <xsl:function name="tei:makeEndnotes" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        
+        <hr/>
+        <ul>
+            <xslo:for-each>
+                    <xsl:if test="$content!='.' and string($content)"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
+                <xslo:variable name="cId">
+                    <xslo:value-of select="generate-id(.)"></xslo:value-of>
+                </xslo:variable>
+                <li>
+                    <xslo:element name="a">
+                        <xslo:attribute name="name">N<xslo:value-of select="$cId"/></xslo:attribute>
+                        <xslo:attribute name="href">#A<xslo:value-of select="$cId"/></xslo:attribute>
+                        &#8629; <xslo:number level="any"/>
+                    </xslo:element>
+                <xslo:text> </xslo:text><xslo:apply-templates/>
+                </li>
+            </xslo:for-each>
+        </ul>
+    </xsl:function>
+    
+    
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Title Page</desc>
     </doc>
@@ -160,9 +212,11 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="name"/>
         <xsl:param name="class"/>
         <xsl:param name="content"/>
+        <xsl:param name="nameA"/>
         
     <xsl:element name="{$name}">
         <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
+        <xsl:if test="string($nameA)"><xsl:attribute name="name"><xsl:value-of select="$nameA"/></xsl:attribute></xsl:if>
         <xslo:apply-templates>
             <xsl:if test="$content!='.' and string($content)"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
         </xslo:apply-templates>

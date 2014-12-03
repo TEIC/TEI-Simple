@@ -6,6 +6,7 @@
 
     <xsl:import href="functions.xsl"/>
 
+    
     <xsl:namespace-alias stylesheet-prefix="xslo" result-prefix="xsl"/>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
@@ -50,6 +51,8 @@
             xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
             xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
 
+            <xslo:output method="html"/>
+            
             <xsl:apply-templates select="//tei:elementSpec"/>
 
             <xslo:template match="/">
@@ -86,8 +89,14 @@
 
 
                     <xsl:choose>
+                        <xsl:when test="starts-with(@name, 'makeNoteAnchor')">
+                            <xsl:copy-of select="tei:makeNoteAnchor(., $content)"/>
+                        </xsl:when>
                         <xsl:when test="starts-with(@name, 'makeMarginalNote')">
                             <xsl:copy-of select="tei:makeMarginalNote(., $content)"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with(@name, 'makeEndnotes')">
+                            <xsl:copy-of select="tei:makeEndnotes(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@name, 'makeBlock')">
                             <xsl:copy-of select="tei:makeBlock(., $content)"/>
