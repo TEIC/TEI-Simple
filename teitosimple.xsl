@@ -170,15 +170,17 @@
             <xsl:apply-templates select="@*"/>
         </xsl:element>
     </xsl:template>
-
     <xsl:template match="@rendition">
         <xsl:choose>
 	  <xsl:when test="starts-with(.,'#') and not
 			  (id(substring(.,2)))">
-            <xsl:attribute name="rendition">
-	      <xsl:text>simple:</xsl:text>
-	      <xsl:value-of select="substring(.,2)"/>
-	    </xsl:attribute>
+	      <xsl:attribute name="rendition">
+		<xsl:for-each select="tokenize(.,' ')">
+		  <xsl:text>simple:</xsl:text>
+		  <xsl:value-of select="substring(.,2)"/>
+		  <xsl:text> </xsl:text>
+		</xsl:for-each>
+	      </xsl:attribute>
 	  </xsl:when>
 
             <xsl:when test="not(../@rend)">
@@ -199,17 +201,6 @@
         </xsl:choose>
     </xsl:template>
     
-
-    <xsl:template match="sup">
-      <hi rendition="simple:superscript">
-	    <xsl:apply-templates/>
-      </hi>
-    </xsl:template>
-    <xsl:template match="sub">
-      <hi rendition="simple:subscript">
-	    <xsl:apply-templates/>
-      </hi>
-    </xsl:template>
 
     <xsl:template match="publicationStmt">
       <publicationStmt>
@@ -241,5 +232,55 @@
             <xsl:apply-templates select="*|@*|processing-instruction()|comment()|text()"/>
         </xsl:copy>
     </xsl:template>
+
+
+ <!-- meaningless or default attributes -->
+  <xsl:template match="@anchored">
+    <xsl:if test="not(. = 'true')">
+      <xsl:attribute name="anchored">
+        <xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:if>
+  </xsl:template>
+  <xsl:template match="@sample">
+    <xsl:if test="not(. = 'complete')">
+      <xsl:attribute name="sample">
+        <xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:if>
+  </xsl:template>
+  <xsl:template match="@org">
+    <xsl:if test="not(. = 'uniform')">
+      <xsl:attribute name="org">
+        <xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:if>
+  </xsl:template>
+  <xsl:template match="@part">
+    <xsl:if test="not(. = 'N')">
+      <xsl:attribute name="part">
+        <xsl:value-of select="."/>
+      </xsl:attribute>
+    </xsl:if>
+  </xsl:template>
+    <xsl:template match="note/@place[.='unspecified']"/>
+    <xsl:template match="sourceDesc/@default"/>
+    <xsl:template match="biblFull/@default"/>
+    <xsl:template match="bibl/@default"/>
+    <xsl:template match="projectDesc/@default"/>
+    <xsl:template match="editorialDecl/@default"/>
+
+<!-- common, but illegal, shorthands -->
+    <xsl:template match="sup">
+      <hi rendition="simple:superscript">
+	    <xsl:apply-templates/>
+      </hi>
+    </xsl:template>
+    <xsl:template match="sub">
+      <hi rendition="simple:subscript">
+	    <xsl:apply-templates/>
+      </hi>
+    </xsl:template>
+
 
 </xsl:stylesheet>

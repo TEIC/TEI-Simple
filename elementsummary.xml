@@ -204,6 +204,17 @@
          <cell>header</cell>
       </row>
       <row>
+         <cell>biblScope</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>4</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>header</cell>
+         <cell>headeronly</cell>
+      </row>
+      <row>
          <cell>biblStruct</cell>
          <cell>0</cell>
          <cell>0</cell>
@@ -996,6 +1007,17 @@
          <cell>header</cell>
       </row>
       <row>
+         <cell>listPerson</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>0</cell>
+         <cell>header</cell>
+         <cell>headeronly</cell>
+      </row>
+      <row>
          <cell>localName</cell>
          <cell>0</cell>
          <cell>0</cell>
@@ -1048,7 +1070,7 @@
          <cell>0</cell>
          <cell>0</cell>
          <cell>header</cell>
-         <cell>header</cell>
+         <cell>headeronly</cell>
       </row>
       <row>
          <cell>msIdentifier</cell>

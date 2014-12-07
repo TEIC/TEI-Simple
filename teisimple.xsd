@@ -2,7 +2,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:ns1="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2014-12-01T23:30:53Z. 
+    Schema generated from ODD source 2014-12-07T22:26:17Z. 
     Edition: Version 2.7.0. Last updated on
     	16th September 2014, revision 13036
     Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -431,6 +431,45 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       </xs:simpleType>
     </xs:attribute>
   </xs:attributeGroup>
+  <xs:attributeGroup name="att.fragmentable.attributes">
+    <xs:attributeGroup ref="ns1:att.fragmentable.attribute.part"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.fragmentable.attribute.part">
+    <xs:attribute name="part" default="N">
+      <xs:annotation>
+        <xs:documentation>specifies whether or not its parent element is fragmented in some way, typically by some other overlapping structure: for example a speech which is divided between two or more verse stanzas, a paragraph which is split across a page division, a verse line which is divided between two speakers.</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="Y">
+            <xs:annotation>
+              <xs:documentation>(yes) the element is fragmented in some (unspecified) respect</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="N">
+            <xs:annotation>
+              <xs:documentation>(no) either the element is not fragmented, or no claim is made as to its completeness.</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="I">
+            <xs:annotation>
+              <xs:documentation>(initial) this is the initial part of a fragmented element</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="M">
+            <xs:annotation>
+              <xs:documentation>(medial) this is a medial part of a fragmented element</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="F">
+            <xs:annotation>
+              <xs:documentation>(final) this is the final part of a fragmented element</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
   <xs:attributeGroup name="att.docStatus.attributes">
     <xs:attributeGroup ref="ns1:att.docStatus.attribute.status"/>
   </xs:attributeGroup>
@@ -559,7 +598,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</xs:documentat
     <xs:attribute name="rendition">
       <xs:annotation>
         <xs:documentation>points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:doublestrikethrough; 9] simple:doubleunderline; 10] simple:dropcap; 11] simple:float; 12] simple:italic; 13] simple:larger; 14] simple:left; 15] simple:leftbraced; 16] simple:letterspace; 17] simple:normalstyle; 18] simple:normalweight; 19] simple:right; 20] simple:rightbraced; 21] simple:rotateleft; 22] simple:rotateright; 23] simple:smallcaps; 24] simple:smaller; 25] simple:strikethrough; 26] simple:subscript; 27] simple:superscript; 28] simple:topbraced; 29] simple:typewriter; 30] simple:underline; 31] simple:wavyunderline</xs:documentation>
+Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:doublestrikethrough; 9] simple:doubleunderline; 10] simple:dropcap; 11] simple:float; 12] simple:hyphen; 13] simple:italic; 14] simple:larger; 15] simple:left; 16] simple:leftbraced; 17] simple:letterspace; 18] simple:normalstyle; 19] simple:normalweight; 20] simple:right; 21] simple:rightbraced; 22] simple:rotateleft; 23] simple:rotateright; 24] simple:smallcaps; 25] simple:smaller; 26] simple:strikethrough; 27] simple:subscript; 28] simple:superscript; 29] simple:topbraced; 30] simple:typewriter; 31] simple:underline; 32] simple:wavyunderline</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction>
@@ -662,6 +701,15 @@ Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bo
                       <xs:enumeration value="simple:float">
                         <xs:annotation>
                           <xs:documentation>floated out of main flow</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:hyphen">
+                        <xs:annotation>
+                          <xs:documentation>with a hyphen here (eg in line break)</xs:documentation>
                         </xs:annotation>
                       </xs:enumeration>
                     </xs:restriction>
@@ -1463,6 +1511,7 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
     </xs:attribute>
   </xs:attributeGroup>
   <xs:attributeGroup name="att.segLike.attributes">
+    <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
     <xs:attributeGroup ref="ns1:att.segLike.attribute.function"/>
   </xs:attributeGroup>
   <xs:attributeGroup name="att.segLike.attribute.function">
@@ -1639,6 +1688,100 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
     <xs:attribute name="versionDate" type="ns1:data.temporal.w3c">
       <xs:annotation>
         <xs:documentation>specifies the date on which the source text was extracted and sent to the translator</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.citing.attributes">
+    <xs:attributeGroup ref="ns1:att.citing.attribute.unit"/>
+    <xs:attributeGroup ref="ns1:att.citing.attribute.from"/>
+    <xs:attributeGroup ref="ns1:att.citing.attribute.to"/>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.citing.attribute.unit">
+    <xs:attribute name="unit">
+      <xs:annotation>
+        <xs:documentation>identifies the unit of information conveyed by the element, e.g. columns, pages, volume.
+Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] part; 7] column</xs:documentation>
+      </xs:annotation>
+      <xs:simpleType>
+        <xs:union memberTypes="xs:Name">
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="volume">
+                <xs:annotation>
+                  <xs:documentation>the element contains a volume number.</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="issue">
+                <xs:annotation>
+                  <xs:documentation>the element contains an issue number, or volume and issue numbers.</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="page">
+                <xs:annotation>
+                  <xs:documentation>the element contains a page number or page range.</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="line">
+                <xs:annotation>
+                  <xs:documentation>the element contains a line number or line range.</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="chapter">
+                <xs:annotation>
+                  <xs:documentation>the element contains a chapter indication (number and/or title)</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="part">
+                <xs:annotation>
+                  <xs:documentation>the element identifies a part of a book or collection.</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+          <xs:simpleType>
+            <xs:restriction base="xs:token">
+              <xs:enumeration value="column">
+                <xs:annotation>
+                  <xs:documentation>the element identifies a column.</xs:documentation>
+                </xs:annotation>
+              </xs:enumeration>
+            </xs:restriction>
+          </xs:simpleType>
+        </xs:union>
+      </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.citing.attribute.from">
+    <xs:attribute name="from" type="ns1:data.word">
+      <xs:annotation>
+        <xs:documentation>specifies the starting point of the range of units indicated by the unit attribute.</xs:documentation>
+      </xs:annotation>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.citing.attribute.to">
+    <xs:attribute name="to" type="ns1:data.word">
+      <xs:annotation>
+        <xs:documentation>specifies the end-point of the range of units indicated by the unit attribute.</xs:documentation>
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
@@ -2059,6 +2202,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
     <xs:choice>
       <xs:element ref="ns1:biblFull"/>
       <xs:element ref="ns1:biblStruct"/>
+      <xs:element ref="ns1:msDesc"/>
       <xs:element ref="ns1:bibl"/>
       <xs:element ref="ns1:listBibl"/>
     </xs:choice>
@@ -2067,6 +2211,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
     <xs:choice>
       <xs:element ref="ns1:biblFull"/>
       <xs:element ref="ns1:biblStruct"/>
+      <xs:element ref="ns1:msDesc"/>
       <xs:element ref="ns1:bibl"/>
       <xs:element ref="ns1:listBibl"/>
     </xs:choice>
@@ -2075,6 +2220,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
     <xs:sequence>
       <xs:element ref="ns1:biblFull"/>
       <xs:element ref="ns1:biblStruct"/>
+      <xs:element ref="ns1:msDesc"/>
       <xs:element ref="ns1:bibl"/>
       <xs:element ref="ns1:listBibl"/>
     </xs:sequence>
@@ -2083,6 +2229,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
     <xs:sequence>
       <xs:element minOccurs="0" ref="ns1:biblFull"/>
       <xs:element minOccurs="0" ref="ns1:biblStruct"/>
+      <xs:element minOccurs="0" ref="ns1:msDesc"/>
       <xs:element minOccurs="0" ref="ns1:bibl"/>
       <xs:element minOccurs="0" ref="ns1:listBibl"/>
     </xs:sequence>
@@ -2091,6 +2238,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:biblFull"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:biblStruct"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:msDesc"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:bibl"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:listBibl"/>
     </xs:sequence>
@@ -2099,6 +2247,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
     <xs:sequence>
       <xs:element maxOccurs="unbounded" ref="ns1:biblFull"/>
       <xs:element maxOccurs="unbounded" ref="ns1:biblStruct"/>
+      <xs:element maxOccurs="unbounded" ref="ns1:msDesc"/>
       <xs:element maxOccurs="unbounded" ref="ns1:bibl"/>
       <xs:element maxOccurs="unbounded" ref="ns1:listBibl"/>
     </xs:sequence>
@@ -2171,36 +2320,42 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   </xs:group>
   <xs:group name="model.listLike">
     <xs:choice>
+      <xs:element ref="ns1:listPerson"/>
       <xs:element ref="ns1:list"/>
       <xs:element ref="ns1:table"/>
     </xs:choice>
   </xs:group>
   <xs:group name="model.listLike_alternation">
     <xs:choice>
+      <xs:element ref="ns1:listPerson"/>
       <xs:element ref="ns1:list"/>
       <xs:element ref="ns1:table"/>
     </xs:choice>
   </xs:group>
   <xs:group name="model.listLike_sequence">
     <xs:sequence>
+      <xs:element ref="ns1:listPerson"/>
       <xs:element ref="ns1:list"/>
       <xs:element ref="ns1:table"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="model.listLike_sequenceOptional">
     <xs:sequence>
+      <xs:element minOccurs="0" ref="ns1:listPerson"/>
       <xs:element minOccurs="0" ref="ns1:list"/>
       <xs:element minOccurs="0" ref="ns1:table"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="model.listLike_sequenceOptionalRepeatable">
     <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:listPerson"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:list"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:table"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="model.listLike_sequenceRepeatable">
     <xs:sequence>
+      <xs:element maxOccurs="unbounded" ref="ns1:listPerson"/>
       <xs:element maxOccurs="unbounded" ref="ns1:list"/>
       <xs:element maxOccurs="unbounded" ref="ns1:table"/>
     </xs:sequence>
@@ -2556,6 +2711,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
   <xs:group name="model.imprintPart">
     <xs:choice>
       <xs:element ref="ns1:distributor"/>
+      <xs:element ref="ns1:biblScope"/>
       <xs:element ref="ns1:publisher"/>
       <xs:element ref="ns1:pubPlace"/>
     </xs:choice>
@@ -2574,6 +2730,11 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:group name="model.physDescPart_sequenceOptional">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="ns1:typeDesc"/>
+    </xs:sequence>
+  </xs:group>
   <xs:group name="model.addressLike">
     <xs:choice>
       <xs:element ref="ns1:email"/>
@@ -2660,6 +2821,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
       <xs:element ref="ns1:edition"/>
       <xs:element ref="ns1:extent"/>
       <xs:element ref="ns1:availability"/>
+      <xs:element ref="ns1:msIdentifier"/>
       <xs:element ref="ns1:relatedItem"/>
       <xs:element ref="ns1:bibl"/>
     </xs:choice>
@@ -3084,7 +3246,10 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <xs:element ref="ns1:editor"/>
             <xs:element ref="ns1:respStmt"/>
           </xs:choice>
-          <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:idno"/>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element ref="ns1:idno"/>
+            <xs:element ref="ns1:biblScope"/>
+          </xs:choice>
         </xs:sequence>
       </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
@@ -3913,6 +4078,19 @@ Suggested values include: 1] WGS84(World Geodetic System) ; 2] MGRS(Military Gri
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:element name="typeNote">
+    <xs:annotation>
+      <xs:documentation>describes a particular font or other significant typographic feature distinguished within the description of a printed resource. [10.7.2. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.specialPara">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.handFeatures.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="listChange">
     <xs:annotation>
       <xs:documentation>groups a number of change descriptions associated with either the creation of a source text or the revision of an encoded text. [2.5.  11.7. ]</xs:documentation>
@@ -3967,6 +4145,83 @@ Sample values include: 1] TEI(text encoding initiative) ; 2] DBK(docbook) ; 3] X
       <xs:attributeGroup ref="ns1:att.typed.attributes"/>
       <xs:attributeGroup ref="ns1:att.sortable.attributes"/>
       <xs:attributeGroup ref="ns1:att.docStatus.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="biblScope">
+    <xs:annotation>
+      <xs:documentation>(scope of bibliographic reference) defines the scope of a bibliographic reference, for example as a list of page numbers, or a named subdivision of a larger work. [3.11.2.5. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.phraseSeq">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.citing.attributes"/>
+          <xs:attribute name="type">
+            <xs:annotation>
+              <xs:documentation>identifies the type of information conveyed by the element, e.g. columns, pages, volume.
+Suggested values include: 1] vol(volume) ; 2] issue; 3] pp(pages) ; 4] ll(lines) ; 5] chap(chapter) ; 6] part</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:union memberTypes="xs:Name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                    <xs:enumeration value="vol">
+                      <xs:annotation>
+                        <xs:documentation>(volume) the element contains a volume number.</xs:documentation>
+                      </xs:annotation>
+                    </xs:enumeration>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                    <xs:enumeration value="issue">
+                      <xs:annotation>
+                        <xs:documentation>the element contains an issue number, or volume and issue numbers.</xs:documentation>
+                      </xs:annotation>
+                    </xs:enumeration>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                    <xs:enumeration value="pp">
+                      <xs:annotation>
+                        <xs:documentation>(pages) the element contains a page number or page range.</xs:documentation>
+                      </xs:annotation>
+                    </xs:enumeration>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                    <xs:enumeration value="ll">
+                      <xs:annotation>
+                        <xs:documentation>(lines) the element contains a line number or line range.</xs:documentation>
+                      </xs:annotation>
+                    </xs:enumeration>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                    <xs:enumeration value="chap">
+                      <xs:annotation>
+                        <xs:documentation>(chapter) the element contains a chapter indication (number and/or title)</xs:documentation>
+                      </xs:annotation>
+                    </xs:enumeration>
+                  </xs:restriction>
+                </xs:simpleType>
+                <xs:simpleType>
+                  <xs:restriction base="xs:token">
+                    <xs:enumeration value="part">
+                      <xs:annotation>
+                        <xs:documentation>the element identifies a part of a book or collection.</xs:documentation>
+                      </xs:annotation>
+                    </xs:enumeration>
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:union>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="charDecl" substitutionGroup="ns1:model.encodingDescPart">
@@ -4091,6 +4346,20 @@ Sample values include: 1] TEI; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron;
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="listPerson">
+    <xs:annotation>
+      <xs:documentation>(list of persons) contains a list of descriptions, each of which provides information about an identifiable person or a group of people, for example the participants in a language interaction, or the people referred to in a historical source. [13.3.2.  15.2.  2.4.  15.3.2. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.headLike"/>
+        <xs:element maxOccurs="unbounded" ref="ns1:listPerson"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attributeGroup ref="ns1:att.typed.attributes"/>
+      <xs:attributeGroup ref="ns1:att.sortable.attributes"/>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="monogr">
     <xs:annotation>
       <xs:documentation>(monographic level) contains bibliographic elements describing an item (e.g. a book or journal) published as an independent item (i.e. as a separate physical object). [3.11.2.1. ]</xs:documentation>
@@ -4151,7 +4420,51 @@ Sample values include: 1] TEI; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron;
         <xs:choice minOccurs="0" maxOccurs="unbounded">
           <xs:element ref="ns1:imprint"/>
           <xs:element ref="ns1:extent"/>
+          <xs:element ref="ns1:biblScope"/>
         </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="msDesc">
+    <xs:annotation>
+      <xs:documentation>(manuscript description) contains a description of a single identifiable manuscript or other text-bearing object. [10.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:msIdentifier"/>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.headLike"/>
+        <xs:choice>
+          <xs:group maxOccurs="unbounded" ref="ns1:model.pLike"/>
+          <xs:element minOccurs="0" ref="ns1:physDesc"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attributeGroup ref="ns1:att.sortable.attributes"/>
+      <xs:attributeGroup ref="ns1:att.typed.attributes"/>
+      <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="msIdentifier">
+    <xs:annotation>
+      <xs:documentation>(manuscript identifier) contains the information required to identify the manuscript being described. [10.4. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" ref="ns1:repository"/>
+        <xs:element minOccurs="0" ref="ns1:idno"/>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="physDesc">
+    <xs:annotation>
+      <xs:documentation>(physical description) contains a full physical description of a manuscript or manuscript part, optionally subdivided using more specialized elements from the model.physDescPart class. [10.7. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group minOccurs="0" maxOccurs="unbounded" ref="ns1:model.pLike"/>
+        <xs:group ref="ns1:model.physDescPart_sequenceOptional"/>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
@@ -4172,6 +4485,19 @@ Sample values include: 1] TEI; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron;
           <xs:documentation>points to the related bibliographic element by means of an absolute or relative URI reference</xs:documentation>
         </xs:annotation>
       </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="repository">
+    <xs:annotation>
+      <xs:documentation>contains the name of a repository within which manuscripts are stored, possibly forming part of an institution. [10.4. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.xtext">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.naming.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="resp">
@@ -4249,6 +4575,18 @@ Sample values include: 1] text; 2] corpus</xs:documentation>
       <xs:documentation>(text description) provides a description of a text in terms of its situational parameters. [15.2.1. ]</xs:documentation>
     </xs:annotation>
     <xs:complexType>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="typeDesc">
+    <xs:annotation>
+      <xs:documentation>contains a description of the typefaces or other aspects of the printing of an incunable or other printed source. [10.7.2.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice>
+        <xs:group maxOccurs="unbounded" ref="ns1:model.pLike"/>
+        <xs:element maxOccurs="unbounded" ref="ns1:typeNote"/>
+      </xs:choice>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
   </xs:element>
@@ -4821,6 +5159,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
   </xs:attributeGroup>
   <xs:attributeGroup name="att.global.linking.attributes">
     <xs:attributeGroup ref="ns1:att.global.linking.attribute.corresp"/>
+    <xs:attributeGroup ref="ns1:att.global.linking.attribute.sameAs"/>
     <xs:attributeGroup ref="ns1:att.global.linking.attribute.next"/>
     <xs:attributeGroup ref="ns1:att.global.linking.attribute.prev"/>
   </xs:attributeGroup>
@@ -4837,6 +5176,13 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
           <xs:minLength value="1"/>
         </xs:restriction>
       </xs:simpleType>
+    </xs:attribute>
+  </xs:attributeGroup>
+  <xs:attributeGroup name="att.global.linking.attribute.sameAs">
+    <xs:attribute name="sameAs" type="ns1:data.pointer">
+      <xs:annotation>
+        <xs:documentation>points to an element that is the same as the current element.</xs:documentation>
+      </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
   <xs:attributeGroup name="att.global.linking.attribute.next">
@@ -5023,6 +5369,7 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
           <xs:attributeGroup ref="ns1:att.typed.attributes"/>
           <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
+          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -5873,6 +6220,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
       <xs:complexContent>
         <xs:extension base="ns1:macro.paraContent">
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
@@ -6217,6 +6565,7 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</x
         <xs:extension base="ns1:macro.paraContent">
           <xs:attributeGroup ref="ns1:att.global.attributes"/>
           <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
+          <xs:attributeGroup ref="ns1:att.fragmentable.attributes"/>
         </xs:extension>
       </xs:complexContent>
     </xs:complexType>
