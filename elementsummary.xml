@@ -315,12 +315,12 @@
       </row>
       <row>
          <cell>cell</cell>
-         <cell>5.895818E6</cell>
+         <cell>5895818</cell>
          <cell>242</cell>
          <cell>3218</cell>
          <cell>1282</cell>
          <cell>34153</cell>
-         <cell>3.45522E6</cell>
+         <cell>3455220</cell>
          <cell>text</cell>
          <cell>table</cell>
       </row>
@@ -463,18 +463,18 @@
          <cell>0</cell>
          <cell>241</cell>
          <cell>0</cell>
-         <cell>6.87805E6</cell>
+         <cell>6878050</cell>
          <cell>text</cell>
          <cell>editorial</cell>
       </row>
       <row>
          <cell>div</cell>
-         <cell>1.856262E6</cell>
+         <cell>1856262</cell>
          <cell>4584</cell>
          <cell>2128</cell>
          <cell>16744</cell>
          <cell>104832</cell>
-         <cell>1.564908E6</cell>
+         <cell>1564908</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
@@ -749,7 +749,7 @@
          <cell>18</cell>
          <cell>293</cell>
          <cell>5731</cell>
-         <cell>6.878505E6</cell>
+         <cell>6878505</cell>
          <cell>text</cell>
          <cell>editorial</cell>
       </row>
@@ -843,23 +843,23 @@
       </row>
       <row>
          <cell>head</cell>
-         <cell>1.958142E6</cell>
+         <cell>1958142</cell>
          <cell>4961</cell>
          <cell>2526</cell>
          <cell>14508</cell>
          <cell>117506</cell>
-         <cell>1.811315E6</cell>
+         <cell>1811315</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
       <row>
          <cell>hi</cell>
-         <cell>2.117913E7</cell>
+         <cell>21179130</cell>
          <cell>56953</cell>
          <cell>9424</cell>
          <cell>134872</cell>
-         <cell>2.367314E6</cell>
-         <cell>5.7472111E7</cell>
+         <cell>2367314</cell>
+         <cell>57472111</cell>
          <cell>text</cell>
          <cell>interpretation</cell>
       </row>
@@ -898,12 +898,12 @@
       </row>
       <row>
          <cell>item</cell>
-         <cell>3.125926E6</cell>
+         <cell>3125926</cell>
          <cell>2023</cell>
          <cell>1806</cell>
          <cell>12400</cell>
          <cell>187951</cell>
-         <cell>3.77902E6</cell>
+         <cell>3779020</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
@@ -920,12 +920,12 @@
       </row>
       <row>
          <cell>l</cell>
-         <cell>1.1532201E7</cell>
+         <cell>11532201</cell>
          <cell>21004</cell>
          <cell>39828</cell>
          <cell>268768</cell>
          <cell>557846</cell>
-         <cell>1.1307818E7</cell>
+         <cell>11307818</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
@@ -942,11 +942,11 @@
       </row>
       <row>
          <cell>lb</cell>
-         <cell>1.35272E6</cell>
+         <cell>1352720</cell>
          <cell>3008</cell>
          <cell>237202</cell>
          <cell>233546</cell>
-         <cell>9.689271E6</cell>
+         <cell>9689271</cell>
          <cell>24097</cell>
          <cell>text</cell>
          <cell>structure</cell>
@@ -1107,12 +1107,12 @@
       </row>
       <row>
          <cell>note</cell>
-         <cell>2.705214E6</cell>
+         <cell>2705214</cell>
          <cell>9451</cell>
          <cell>2874</cell>
          <cell>4965</cell>
          <cell>187675</cell>
-         <cell>5.710304E6</cell>
+         <cell>5710304</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
@@ -1162,23 +1162,23 @@
       </row>
       <row>
          <cell>p</cell>
-         <cell>1.2413479E7</cell>
+         <cell>12413479</cell>
          <cell>68273</cell>
          <cell>4855</cell>
          <cell>391507</cell>
          <cell>607881</cell>
-         <cell>1.1892546E7</cell>
+         <cell>11892546</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
       <row>
          <cell>pb</cell>
-         <cell>2.814727E6</cell>
+         <cell>2814727</cell>
          <cell>6156</cell>
          <cell>9497</cell>
          <cell>22352</cell>
          <cell>311001</cell>
-         <cell>5.424219E6</cell>
+         <cell>5424219</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
@@ -1404,7 +1404,7 @@
       </row>
       <row>
          <cell>row</cell>
-         <cell>2.064752E6</cell>
+         <cell>2064752</cell>
          <cell>70</cell>
          <cell>1311</cell>
          <cell>327</cell>
@@ -1508,7 +1508,7 @@
          <cell>1997</cell>
          <cell>76237</cell>
          <cell>42050</cell>
-         <cell>1.661335E6</cell>
+         <cell>1661335</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>
@@ -1541,7 +1541,7 @@
          <cell>1978</cell>
          <cell>76198</cell>
          <cell>42021</cell>
-         <cell>1.652394E6</cell>
+         <cell>1652394</cell>
          <cell>text</cell>
          <cell>structure</cell>
       </row>

@@ -49,7 +49,9 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
               <XSL:for-each select="$corpses">
                 <XSL:variable name="c" select="."/>
                 <cell>
-                  <XSL:value-of select="sum(doc('count.xml')//elementRef[@key=$e     and @corpus=$c]/@count)"/>
+                  <XSL:value-of
+		      select="format-number(number(sum(doc('count.xml')//elementRef[@key=$e
+			      and @corpus=$c]/@count)),'########')"/>
                 </cell>
               </XSL:for-each>
               <XSL:copy-of select="cell[9]"/>
