@@ -9,9 +9,24 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
   <XSL:output indent="yes"/>
 <XSL:namespace-alias stylesheet-prefix="xsl" result-prefix="XSL"/>
   <XSL:template match="/">
+    <XSL:result-document href="headeronly.xml">
+                  <constraintSpec ident="headeronlyelement" scheme="isoschematron">
+                     <constraint>
+                        <rule
+			    xmlns="http://purl.oclc.org/dsdl/schematron">
+			  <XSL:attribute name="context">
+			    <XSL:value-of select="(//row[  position()&gt;1   and
+						  not(cell[1]='')   and cell[10] = 'header']/cell[1])" separator="|&#10;"/>
+			  </XSL:attribute>
+                           <report test="ancestor::tei:text">Error:  The element <name/>
+is not permitted outside the header</report>
+                        </rule>
+                     </constraint>
+                  </constraintSpec>
+    </XSL:result-document>
     <XSL:result-document href="elementsummary.xml">
       <div>
-        <head>Summary of Simple</head>
+        <head>Summary</head>
         <!--
 1. element	
 2. eebo	
@@ -25,8 +40,17 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
 10. group	
 11. action
 -->
-        <p>A total of <XSL:value-of select="count(//row[  position()&gt;1   and not(cell[1]='')   and not(cell[10] = 'header')  and not(cell[10] = 'headeronly')  and not(cell[10] = 'no') ])"/> elements are selected for use in
-	the <gi>text</gi> part of a document.</p>
+        <p>A total of <XSL:value-of select="count(//row[  position()&gt;1   and not(cell[1]='')   and not(cell[10] = 'header')  and not(normalize-space(cell[10]) = '') ])"/> elements are selected for use in
+	the <gi>text</gi> part of a document; an additional
+<XSL:value-of select="count(//row[  position()&gt;1   and
+		      not(cell[1]='')   and cell[10] = 'header'])"/>
+elements are allowed for in the header. The following table
+	shows the usage of all elements in six existing corpora, and
+	classifies them 11 usage groups. There are
+<XSL:value-of select="count(//row[  position()&gt;1 and
+		      normalize-space(cell[10]) = ''])"/> elements 
+listed which are <emph>not</emph> allowed in TEI SImple, but should be transformed
+to another element.</p>
         <XSL:variable name="corpses" select="distinct-values(doc('count.xml')//elementRef/@corpus)"/>
         <table>
           <row role="label">
@@ -36,8 +60,8 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
                 <XSL:value-of select="."/>
               </cell>
             </XSL:for-each>
-            <cell>Use</cell>
-            <cell>Action</cell>
+            <cell>Group</cell>
+            <cell>Use instead</cell>
           </row>
           <XSL:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
             <XSL:sort select="cell[1]"/>
@@ -48,14 +72,17 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
               </cell>
               <XSL:for-each select="$corpses">
                 <XSL:variable name="c" select="."/>
-                <cell>
+                <cell rend="right">
                   <XSL:value-of
 		      select="format-number(number(sum(doc('count.xml')//elementRef[@key=$e
 			      and @corpus=$c]/@count)),'########')"/>
                 </cell>
               </XSL:for-each>
-              <XSL:copy-of select="cell[9]"/>
               <XSL:copy-of select="cell[10]"/>
+              <cell><XSL:if test="normalize-space(cell[11]) !=''">
+		<gi><XSL:value-of select="normalize-space(cell[11])"/></gi>
+		</XSL:if>
+	      </cell>
             </row>
           </XSL:for-each>
         </table>
@@ -64,9 +91,7 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
             <XSL:sort select="normalize-space(cell[10])"/>
             <XSL:sort select="cell[1]"/>
             <XSL:choose>
-              <XSL:when test="current-grouping-key()='header'"/>
-              <XSL:when test="current-grouping-key()='headeronly'"/>
-              <XSL:when test="current-grouping-key()='no'"/>
+              <XSL:when test="current-grouping-key()=''"/>
               <XSL:otherwise>
                 <label>
                   <XSL:value-of select="current-grouping-key()"/>
@@ -89,9 +114,8 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
       <specGrp xml:id="simpleelements">
 	<XSL:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
         <XSL:choose>
-          <XSL:when test="contains(cell[9],'header')"/>
-          <XSL:when test="contains(cell[11],'KILL')"/>
-          <XSL:when test="contains(cell[11],'merge')"/>
+          <XSL:when test="contains(cell[10],'header')"/>
+          <XSL:when test="normalize-space(cell[10])=''"/>
           <XSL:otherwise>
             <elementRef key="{normalize-space(cell[1])}"/>
           </XSL:otherwise>

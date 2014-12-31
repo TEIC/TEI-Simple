@@ -442,7 +442,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M15"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-addSpan-constraint-spanTo-15-->
+   <!--PATTERN teisimple-addSpan-constraint-spanTo-13-->
 
 
 	<!--RULE -->
@@ -464,7 +464,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M16"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-lg-constraint-atleast1oflggapl-17-->
+   <!--PATTERN teisimple-lg-constraint-atleast1oflggapl-15-->
 
 
 	<!--RULE -->
@@ -485,7 +485,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M17"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-ref-constraint-refAtts-18-->
+   <!--PATTERN teisimple-ref-constraint-refAtts-16-->
 
 
 	<!--RULE -->
@@ -506,7 +506,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M18"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-s-constraint-noNestedS-19-->
+   <!--PATTERN teisimple-s-constraint-noNestedS-17-->
 
 
 	<!--RULE -->
@@ -524,7 +524,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-subst-constraint-substContents1-20-->
+   <!--PATTERN teisimple-subst-constraint-substContents1-18-->
 
 
 	<!--RULE -->
@@ -551,15 +551,16 @@ The @spanTo attribute of <xsl:text/>
 
 
 	<!--RULE -->
-<xsl:template match="tei:term|tei:editor|tei:email|tei:att|tei:gi"
+<xsl:template match="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value"
                  priority="1000"
                  mode="M21">
 
 		<!--REPORT -->
 <xsl:if test="ancestor::tei:text">
-         <xsl:message>Error: The element <xsl:text/>
+         <xsl:message>Error:  The element <xsl:text/>
             <xsl:value-of select="name(.)"/>
-            <xsl:text/> is not permitted outside the header (ancestor::tei:text)</xsl:message>
+            <xsl:text/>
+is not permitted outside the header (ancestor::tei:text)</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M21"/>
    </xsl:template>

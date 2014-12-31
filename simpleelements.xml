@@ -2,14 +2,6 @@
 <specGrp xmlns="http://www.tei-c.org/ns/1.0"
          xmlns:XSL="http://www.w3.org/1999/XSL/Transform"
          xml:id="simpleelements">
-   <elementRef key="author"/>
-   <elementRef key="bibl"/>
-   <elementRef key="date"/>
-   <elementRef key="publisher"/>
-   <elementRef key="pubPlace"/>
-   <elementRef key="title"/>
-   <elementRef key="TEI"/>
-   <elementRef key="teiCorpus"/>
    <elementRef key="ab"/>
    <elementRef key="abbr"/>
    <elementRef key="actor"/>
@@ -20,7 +12,9 @@
    <elementRef key="am"/>
    <elementRef key="anchor"/>
    <elementRef key="argument"/>
+   <elementRef key="author"/>
    <elementRef key="back"/>
+   <elementRef key="bibl"/>
    <elementRef key="body"/>
    <elementRef key="byline"/>
    <elementRef key="c"/>
@@ -33,6 +27,7 @@
    <elementRef key="cit"/>
    <elementRef key="closer"/>
    <elementRef key="corr"/>
+   <elementRef key="date"/>
    <elementRef key="dateline"/>
    <elementRef key="del"/>
    <elementRef key="desc"/>
@@ -78,6 +73,8 @@
    <elementRef key="pb"/>
    <elementRef key="pc"/>
    <elementRef key="postscript"/>
+   <elementRef key="publisher"/>
+   <elementRef key="pubPlace"/>
    <elementRef key="q"/>
    <elementRef key="quote"/>
    <elementRef key="ref"/>
@@ -99,8 +96,11 @@
    <elementRef key="subst"/>
    <elementRef key="supplied"/>
    <elementRef key="table"/>
+   <elementRef key="TEI"/>
+   <elementRef key="teiCorpus"/>
    <elementRef key="text"/>
    <elementRef key="time"/>
+   <elementRef key="title"/>
    <elementRef key="titlePage"/>
    <elementRef key="titlePart"/>
    <elementRef key="trailer"/>

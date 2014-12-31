@@ -6,7 +6,7 @@ docx:
 	teitodocx --profile=tei teisimple.xml teisimple.docx
 
 teisimple:
-	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar 	
+	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) 	
 
 validate:
 	cat anthead.xml> v.xml 

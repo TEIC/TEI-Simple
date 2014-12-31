@@ -2,10 +2,10 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://www.tei-c.org/ns/1.0" xmlns:ns1="http://www.tei-c.org/ns/1.0">
   <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
   <!--
-    Schema generated from ODD source 2014-12-07T22:26:17Z. 
-    Edition: Version 2.7.0. Last updated on
+    Schema generated from ODD source 2014-12-31T19:07:17Z. Version 0.1: 30th November 2014.
+    TEI Edition: Version 2.7.0. Last updated on
     	16th September 2014, revision 13036
-    Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
+    TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
     
   -->
   <!--
@@ -253,13 +253,41 @@
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction base="xs:token">
-          <xs:enumeration value="chars"/>
-          <xs:enumeration value="lines"/>
-          <xs:enumeration value="pages"/>
-          <xs:enumeration value="words"/>
-          <xs:enumeration value="cm"/>
-          <xs:enumeration value="mm"/>
-          <xs:enumeration value="in"/>
+          <xs:enumeration value="chars">
+            <xs:annotation>
+              <xs:documentation>characters</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="lines">
+            <xs:annotation>
+              <xs:documentation>lines</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="pages">
+            <xs:annotation>
+              <xs:documentation>pages</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="words">
+            <xs:annotation>
+              <xs:documentation>words</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="cm">
+            <xs:annotation>
+              <xs:documentation>centimetres</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="mm">
+            <xs:annotation>
+              <xs:documentation>millimetre</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="in">
+            <xs:annotation>
+              <xs:documentation>inches</xs:documentation>
+            </xs:annotation>
+          </xs:enumeration>
         </xs:restriction>
       </xs:simpleType>
     </xs:attribute>
@@ -1374,7 +1402,11 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                       <xs:documentation>at the foot of the page</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
-                  <xs:enumeration value="tablebottom"/>
+                  <xs:enumeration value="tablebottom">
+                    <xs:annotation>
+                      <xs:documentation>underneath a table</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
                   <xs:enumeration value="margin">
                     <xs:annotation>
                       <xs:documentation>in the outer margin</xs:documentation>
@@ -1849,43 +1881,43 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
   <xs:group name="model.emphLike">
     <xs:choice>
       <xs:element ref="ns1:term"/>
-      <xs:element ref="ns1:title"/>
       <xs:element ref="ns1:foreign"/>
+      <xs:element ref="ns1:title"/>
     </xs:choice>
   </xs:group>
   <xs:group name="model.emphLike_alternation">
     <xs:choice>
       <xs:element ref="ns1:term"/>
-      <xs:element ref="ns1:title"/>
       <xs:element ref="ns1:foreign"/>
+      <xs:element ref="ns1:title"/>
     </xs:choice>
   </xs:group>
   <xs:group name="model.emphLike_sequence">
     <xs:sequence>
       <xs:element ref="ns1:term"/>
-      <xs:element ref="ns1:title"/>
       <xs:element ref="ns1:foreign"/>
+      <xs:element ref="ns1:title"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="model.emphLike_sequenceOptional">
     <xs:sequence>
       <xs:element minOccurs="0" ref="ns1:term"/>
-      <xs:element minOccurs="0" ref="ns1:title"/>
       <xs:element minOccurs="0" ref="ns1:foreign"/>
+      <xs:element minOccurs="0" ref="ns1:title"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="model.emphLike_sequenceOptionalRepeatable">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:term"/>
-      <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:title"/>
       <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:foreign"/>
+      <xs:element minOccurs="0" maxOccurs="unbounded" ref="ns1:title"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="model.emphLike_sequenceRepeatable">
     <xs:sequence>
       <xs:element maxOccurs="unbounded" ref="ns1:term"/>
-      <xs:element maxOccurs="unbounded" ref="ns1:title"/>
       <xs:element maxOccurs="unbounded" ref="ns1:foreign"/>
+      <xs:element maxOccurs="unbounded" ref="ns1:title"/>
     </xs:sequence>
   </xs:group>
   <xs:group name="model.highlighted">
@@ -2508,9 +2540,9 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
     <xs:choice>
       <xs:element ref="ns1:idno"/>
       <xs:element ref="ns1:availability"/>
+      <xs:element ref="ns1:address"/>
       <xs:element ref="ns1:date"/>
       <xs:element ref="ns1:pubPlace"/>
-      <xs:element ref="ns1:address"/>
     </xs:choice>
   </xs:group>
   <xs:element name="model.availabilityPart" abstract="true">
@@ -5199,166 +5231,6 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
       </xs:annotation>
     </xs:attribute>
   </xs:attributeGroup>
-  <xs:element name="author" substitutionGroup="ns1:model.respLike">
-    <xs:annotation>
-      <xs:documentation>in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:complexContent>
-        <xs:extension base="ns1:macro.phraseSeq">
-          <xs:attributeGroup ref="ns1:att.global.attributes"/>
-          <xs:attributeGroup ref="ns1:att.naming.attributes"/>
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="bibl">
-    <xs:annotation>
-      <xs:documentation>(bibliographic citation) contains a loosely-structured bibliographic citation of which the sub-components may or may not be explicitly tagged. [3.11.1.  2.2.7.  15.3.2. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:model.gLike"/>
-        <xs:group ref="ns1:model.highlighted"/>
-        <xs:group ref="ns1:model.pPart.data"/>
-        <xs:group ref="ns1:model.pPart.edit"/>
-        <xs:element ref="ns1:model.segLike"/>
-        <xs:element ref="ns1:model.ptrLike"/>
-        <xs:group ref="ns1:model.biblPart"/>
-        <xs:element ref="ns1:model.global"/>
-      </xs:choice>
-      <xs:attributeGroup ref="ns1:att.global.attributes"/>
-      <xs:attributeGroup ref="ns1:att.typed.attributes"/>
-      <xs:attributeGroup ref="ns1:att.sortable.attributes"/>
-      <xs:attributeGroup ref="ns1:att.docStatus.attributes"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="date">
-    <xs:annotation>
-      <xs:documentation>contains a date in any format. [3.5.4.  2.2.4.  2.5.  3.11.2.4.  15.2.3.  13.3.6. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType mixed="true">
-      <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element ref="ns1:model.gLike"/>
-        <xs:group ref="ns1:model.phrase"/>
-        <xs:element ref="ns1:model.global"/>
-      </xs:choice>
-      <xs:attributeGroup ref="ns1:att.global.attributes"/>
-      <xs:attributeGroup ref="ns1:att.datable.attributes"/>
-      <xs:attributeGroup ref="ns1:att.editLike.attributes"/>
-      <xs:attributeGroup ref="ns1:att.typed.attributes"/>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="publisher">
-    <xs:annotation>
-      <xs:documentation>provides the name of the organization responsible for the publication or distribution of a bibliographic item. [3.11.2.4.  2.2.4. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:complexContent>
-        <xs:extension base="ns1:macro.phraseSeq">
-          <xs:attributeGroup ref="ns1:att.global.attributes"/>
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="pubPlace">
-    <xs:annotation>
-      <xs:documentation>(publication place) contains the name of the place where a bibliographic item was published. [3.11.2.4. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:complexContent>
-        <xs:extension base="ns1:macro.phraseSeq">
-          <xs:attributeGroup ref="ns1:att.global.attributes"/>
-          <xs:attributeGroup ref="ns1:att.naming.attributes"/>
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="title">
-    <xs:annotation>
-      <xs:documentation>contains a title for any kind of work. [3.11.2.2.  2.2.1.  2.2.5. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:complexContent>
-        <xs:extension base="ns1:macro.paraContent">
-          <xs:attributeGroup ref="ns1:att.global.attributes"/>
-          <xs:attributeGroup ref="ns1:att.canonical.attributes"/>
-          <xs:attributeGroup ref="ns1:att.typed.attribute.subtype"/>
-          <xs:attribute name="type" type="ns1:data.enumerated">
-            <xs:annotation>
-              <xs:documentation>classifies the title according to some convenient typology.
-Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] short; 5] desc(descriptive) </xs:documentation>
-            </xs:annotation>
-          </xs:attribute>
-          <xs:attribute name="level">
-            <xs:annotation>
-              <xs:documentation>indicates the bibliographic level for a title, that is, whether it identifies an article, book, journal, series, or unpublished material.</xs:documentation>
-            </xs:annotation>
-            <xs:simpleType>
-              <xs:restriction base="xs:token">
-                <xs:enumeration value="a"/>
-                <xs:enumeration value="j"/>
-                <xs:enumeration value="m"/>
-                <xs:enumeration value="s"/>
-              </xs:restriction>
-            </xs:simpleType>
-          </xs:attribute>
-        </xs:extension>
-      </xs:complexContent>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="TEI">
-    <xs:annotation>
-      <xs:documentation>(TEI document) contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a teiCorpus element. [4.  15.1. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="ns1:teiHeader"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="ns1:model.resourceLike"/>
-            <xs:element minOccurs="0" ref="ns1:text"/>
-          </xs:sequence>
-          <xs:element ref="ns1:text"/>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="ns1:att.global.attributes"/>
-      <xs:attribute name="version" type="ns1:data.version">
-        <xs:annotation>
-          <xs:documentation>specifies the major version number of the TEI Guidelines against which this document is valid.</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="teiCorpus">
-    <xs:annotation>
-      <xs:documentation>contains the whole of a TEI encoded corpus, comprising a single corpus header and one or more TEI elements, each containing a single text header and a text. [4.  15.1. ]</xs:documentation>
-    </xs:annotation>
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element ref="ns1:teiHeader"/>
-        <xs:choice>
-          <xs:sequence>
-            <xs:element maxOccurs="unbounded" ref="ns1:model.resourceLike"/>
-            <xs:choice minOccurs="0" maxOccurs="unbounded">
-              <xs:element ref="ns1:TEI"/>
-              <xs:element ref="ns1:teiCorpus"/>
-            </xs:choice>
-          </xs:sequence>
-          <xs:choice maxOccurs="unbounded">
-            <xs:element ref="ns1:TEI"/>
-            <xs:element ref="ns1:teiCorpus"/>
-          </xs:choice>
-        </xs:choice>
-      </xs:sequence>
-      <xs:attributeGroup ref="ns1:att.global.attributes"/>
-      <xs:attribute name="version" default="5.0" type="ns1:data.version">
-        <xs:annotation>
-          <xs:documentation>The version of the TEI scheme</xs:documentation>
-        </xs:annotation>
-      </xs:attribute>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="ab">
     <xs:annotation>
       <xs:documentation>(anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. ]</xs:documentation>
@@ -5493,6 +5365,19 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="author" substitutionGroup="ns1:model.respLike">
+    <xs:annotation>
+      <xs:documentation>in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.phraseSeq">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.naming.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="back">
     <xs:annotation>
       <xs:documentation>(back matter) contains any appendixes, etc. following the main part of a text. [4.7.  4. ]</xs:documentation>
@@ -5524,6 +5409,27 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
       <xs:attributeGroup ref="ns1:att.declaring.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="bibl">
+    <xs:annotation>
+      <xs:documentation>(bibliographic citation) contains a loosely-structured bibliographic citation of which the sub-components may or may not be explicitly tagged. [3.11.1.  2.2.7.  15.3.2. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:model.gLike"/>
+        <xs:group ref="ns1:model.highlighted"/>
+        <xs:group ref="ns1:model.pPart.data"/>
+        <xs:group ref="ns1:model.pPart.edit"/>
+        <xs:element ref="ns1:model.segLike"/>
+        <xs:element ref="ns1:model.ptrLike"/>
+        <xs:group ref="ns1:model.biblPart"/>
+        <xs:element ref="ns1:model.global"/>
+      </xs:choice>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attributeGroup ref="ns1:att.typed.attributes"/>
+      <xs:attributeGroup ref="ns1:att.sortable.attributes"/>
+      <xs:attributeGroup ref="ns1:att.docStatus.attributes"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="body">
@@ -5685,10 +5591,26 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
             </xs:annotation>
             <xs:simpleType>
               <xs:restriction base="xs:token">
-                <xs:enumeration value="data"/>
-                <xs:enumeration value="label"/>
-                <xs:enumeration value="sum"/>
-                <xs:enumeration value="total"/>
+                <xs:enumeration value="data">
+                  <xs:annotation>
+                    <xs:documentation>data cell</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="label">
+                  <xs:annotation>
+                    <xs:documentation>label cell</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="sum">
+                  <xs:annotation>
+                    <xs:documentation>row or column sum data</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="total">
+                  <xs:annotation>
+                    <xs:documentation>table total data</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
               </xs:restriction>
             </xs:simpleType>
           </xs:attribute>
@@ -5751,6 +5673,22 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
           <xs:attributeGroup ref="ns1:att.typed.attributes"/>
         </xs:extension>
       </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="date">
+    <xs:annotation>
+      <xs:documentation>contains a date in any format. [3.5.4.  2.2.4.  2.5.  3.11.2.4.  15.2.3.  13.3.6. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="ns1:model.gLike"/>
+        <xs:group ref="ns1:model.phrase"/>
+        <xs:element ref="ns1:model.global"/>
+      </xs:choice>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attributeGroup ref="ns1:att.datable.attributes"/>
+      <xs:attributeGroup ref="ns1:att.editLike.attributes"/>
+      <xs:attributeGroup ref="ns1:att.typed.attributes"/>
     </xs:complexType>
   </xs:element>
   <xs:element name="dateline">
@@ -6654,6 +6592,31 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</x
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
     </xs:complexType>
   </xs:element>
+  <xs:element name="publisher">
+    <xs:annotation>
+      <xs:documentation>provides the name of the organization responsible for the publication or distribution of a bibliographic item. [3.11.2.4.  2.2.4. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.phraseSeq">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pubPlace">
+    <xs:annotation>
+      <xs:documentation>(publication place) contains the name of the place where a bibliographic item was published. [3.11.2.4. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.phraseSeq">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.naming.attributes"/>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="q">
     <xs:annotation>
       <xs:documentation>(quoted) contains material which is distinguished from the surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and passages that are mentioned but not used. [3.3.3. ]</xs:documentation>
@@ -6815,10 +6778,26 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
         </xs:annotation>
         <xs:simpleType>
           <xs:restriction base="xs:token">
-            <xs:enumeration value="data"/>
-            <xs:enumeration value="label"/>
-            <xs:enumeration value="sum"/>
-            <xs:enumeration value="total"/>
+            <xs:enumeration value="data">
+              <xs:annotation>
+                <xs:documentation>data cell</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="label">
+              <xs:annotation>
+                <xs:documentation>label cell</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="sum">
+              <xs:annotation>
+                <xs:documentation>row or column sum data</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="total">
+              <xs:annotation>
+                <xs:documentation>table total data</xs:documentation>
+              </xs:annotation>
+            </xs:enumeration>
           </xs:restriction>
         </xs:simpleType>
       </xs:attribute>
@@ -7234,6 +7213,58 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
       </xs:attribute>
     </xs:complexType>
   </xs:element>
+  <xs:element name="TEI">
+    <xs:annotation>
+      <xs:documentation>(TEI document) contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a teiCorpus element. [4.  15.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:teiHeader"/>
+        <xs:choice>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns1:model.resourceLike"/>
+            <xs:element minOccurs="0" ref="ns1:text"/>
+          </xs:sequence>
+          <xs:element ref="ns1:text"/>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attribute name="version" type="ns1:data.version">
+        <xs:annotation>
+          <xs:documentation>specifies the major version number of the TEI Guidelines against which this document is valid.</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="teiCorpus">
+    <xs:annotation>
+      <xs:documentation>contains the whole of a TEI encoded corpus, comprising a single corpus header and one or more TEI elements, each containing a single text header and a text. [4.  15.1. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ns1:teiHeader"/>
+        <xs:choice>
+          <xs:sequence>
+            <xs:element maxOccurs="unbounded" ref="ns1:model.resourceLike"/>
+            <xs:choice minOccurs="0" maxOccurs="unbounded">
+              <xs:element ref="ns1:TEI"/>
+              <xs:element ref="ns1:teiCorpus"/>
+            </xs:choice>
+          </xs:sequence>
+          <xs:choice maxOccurs="unbounded">
+            <xs:element ref="ns1:TEI"/>
+            <xs:element ref="ns1:teiCorpus"/>
+          </xs:choice>
+        </xs:choice>
+      </xs:sequence>
+      <xs:attributeGroup ref="ns1:att.global.attributes"/>
+      <xs:attribute name="version" default="5.0" type="ns1:data.version">
+        <xs:annotation>
+          <xs:documentation>The version of the TEI scheme</xs:documentation>
+        </xs:annotation>
+      </xs:attribute>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="text">
     <xs:annotation>
       <xs:documentation>contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4.  15.1. ]</xs:documentation>
@@ -7274,6 +7305,60 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
       <xs:attributeGroup ref="ns1:att.datable.attributes"/>
       <xs:attributeGroup ref="ns1:att.editLike.attributes"/>
       <xs:attributeGroup ref="ns1:att.typed.attributes"/>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="title">
+    <xs:annotation>
+      <xs:documentation>contains a title for any kind of work. [3.11.2.2.  2.2.1.  2.2.5. ]</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.paraContent">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.canonical.attributes"/>
+          <xs:attributeGroup ref="ns1:att.typed.attribute.subtype"/>
+          <xs:attribute name="type" type="ns1:data.enumerated">
+            <xs:annotation>
+              <xs:documentation>classifies the title according to some convenient typology.
+Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] short; 5] desc(descriptive) </xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+          <xs:attribute name="level">
+            <xs:annotation>
+              <xs:documentation>indicates the bibliographic level for a title, that is, whether it identifies an article, book, journal, series, or unpublished material.</xs:documentation>
+            </xs:annotation>
+            <xs:simpleType>
+              <xs:restriction base="xs:token">
+                <xs:enumeration value="a">
+                  <xs:annotation>
+                    <xs:documentation>(analytic) the title applies to an analytic item, such as an article, poem, or other work published as part of a larger item.</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="m">
+                  <xs:annotation>
+                    <xs:documentation>(monographic) the title applies to a monograph such as a book or other item considered to be a distinct publication, including single volumes of multi-volume works</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="j">
+                  <xs:annotation>
+                    <xs:documentation>(journal) the title applies to any serial or periodical publication such as a journal, magazine, or newspaper</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="s">
+                  <xs:annotation>
+                    <xs:documentation>(series) the title applies to a series of otherwise distinct publications such as a collection</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+                <xs:enumeration value="u">
+                  <xs:annotation>
+                    <xs:documentation>(unpublished) the title applies to any unpublished material (including theses and dissertations unless published by a commercial press)</xs:documentation>
+                  </xs:annotation>
+                </xs:enumeration>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
     </xs:complexType>
   </xs:element>
   <xs:element name="titlePage" substitutionGroup="ns1:model.frontPart">

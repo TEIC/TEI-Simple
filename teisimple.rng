@@ -3,10 +3,10 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2014-12-07T22:26:17Z. 
-Edition: Version 2.7.0. Last updated on
+Schema generated from ODD source 2014-12-31T19:07:17Z. Version 0.1: 30th November 2014.
+TEI Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
-Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
+TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
   
 --><!--This material is dual-licensed.
 [http://creativecommons.org/licenses/by-sa/3.0/] Distributed under a Creative Commons Attribution-ShareAlike 3.0 Unported License  [http://www.opensource.org/licenses/BSD-2-Clause] Copyright 2014 TEI Consortium. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage. TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of TEI content in a software environment. For further information or clarification, please contact the TEI Consortium.--><define name="macro.paraContent">
@@ -269,19 +269,19 @@ Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">names the unit used for the measurement</a:documentation>
             <choice>
                <value>chars</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characters</a:documentation>
                <value>lines</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">lines</a:documentation>
                <value>pages</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">pages</a:documentation>
                <value>words</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">words</a:documentation>
                <value>cm</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">centimetres</a:documentation>
                <value>mm</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">millimetre</a:documentation>
                <value>in</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">inches</a:documentation>
             </choice>
          </attribute>
       </optional>
@@ -994,7 +994,7 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                      <value>bottom</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">at the foot of the page</a:documentation>
                      <value>tablebottom</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">underneath a table</a:documentation>
                      <value>margin</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in the outer margin</a:documentation>
                      <value>margin-left</value>
@@ -1423,31 +1423,31 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
    <define name="model.emphLike">
       <choice>
          <ref name="term"/>
-         <ref name="title"/>
          <ref name="foreign"/>
+         <ref name="title"/>
       </choice>
    </define>
    <define name="model.emphLike_alternation">
       <choice>
          <ref name="term"/>
-         <ref name="title"/>
          <ref name="foreign"/>
+         <ref name="title"/>
       </choice>
    </define>
    <define name="model.emphLike_sequence">
       <ref name="term"/>
-      <ref name="title"/>
       <ref name="foreign"/>
+      <ref name="title"/>
    </define>
    <define name="model.emphLike_sequenceOptional">
       <optional>
          <ref name="term"/>
       </optional>
       <optional>
-         <ref name="title"/>
+         <ref name="foreign"/>
       </optional>
       <optional>
-         <ref name="foreign"/>
+         <ref name="title"/>
       </optional>
    </define>
    <define name="model.emphLike_sequenceOptionalRepeatable">
@@ -1455,10 +1455,10 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
          <ref name="term"/>
       </zeroOrMore>
       <zeroOrMore>
-         <ref name="title"/>
+         <ref name="foreign"/>
       </zeroOrMore>
       <zeroOrMore>
-         <ref name="foreign"/>
+         <ref name="title"/>
       </zeroOrMore>
    </define>
    <define name="model.emphLike_sequenceRepeatable">
@@ -1466,10 +1466,10 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
          <ref name="term"/>
       </oneOrMore>
       <oneOrMore>
-         <ref name="title"/>
+         <ref name="foreign"/>
       </oneOrMore>
       <oneOrMore>
-         <ref name="foreign"/>
+         <ref name="title"/>
       </oneOrMore>
    </define>
    <define name="model.highlighted">
@@ -2238,9 +2238,9 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       <choice>
          <ref name="idno"/>
          <ref name="availability"/>
+         <ref name="address"/>
          <ref name="date"/>
          <ref name="pubPlace"/>
-         <ref name="address"/>
       </choice>
    </define>
    <define name="model.availabilityPart">
@@ -4885,178 +4885,6 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
          </attribute>
       </optional>
    </define>
-   <define name="author">
-      <element name="author">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ]</a:documentation>
-         <ref name="macro.phraseSeq"/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.naming.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="bibl">
-      <element name="bibl">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(bibliographic citation) contains a loosely-structured bibliographic citation of which the sub-components may or may not be explicitly tagged. [3.11.1.  2.2.7.  15.3.2. ]</a:documentation>
-         <zeroOrMore>
-            <choice>
-               <text/>
-               <ref name="model.gLike"/>
-               <ref name="model.highlighted"/>
-               <ref name="model.pPart.data"/>
-               <ref name="model.pPart.edit"/>
-               <ref name="model.segLike"/>
-               <ref name="model.ptrLike"/>
-               <ref name="model.biblPart"/>
-               <ref name="model.global"/>
-            </choice>
-         </zeroOrMore>
-         <ref name="att.global.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <ref name="att.sortable.attributes"/>
-         <ref name="att.docStatus.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="date">
-      <element name="date">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a date in any format. [3.5.4.  2.2.4.  2.5.  3.11.2.4.  15.2.3.  13.3.6. ]</a:documentation>
-         <zeroOrMore>
-            <choice>
-               <text/>
-               <ref name="model.gLike"/>
-               <ref name="model.phrase"/>
-               <ref name="model.global"/>
-            </choice>
-         </zeroOrMore>
-         <ref name="att.global.attributes"/>
-         <ref name="att.datable.attributes"/>
-         <ref name="att.editLike.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="publisher">
-      <element name="publisher">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">provides the name of the organization responsible for the publication or distribution of a bibliographic item. [3.11.2.4.  2.2.4. ]</a:documentation>
-         <ref name="macro.phraseSeq"/>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="pubPlace">
-      <element name="pubPlace">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(publication place) contains the name of the place where a bibliographic item was published. [3.11.2.4. ]</a:documentation>
-         <ref name="macro.phraseSeq"/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.naming.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="title">
-      <element name="title">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a title for any kind of work. [3.11.2.2.  2.2.1.  2.2.5. ]</a:documentation>
-         <ref name="macro.paraContent"/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.canonical.attributes"/>
-         <ref name="att.typed.attribute.subtype"/>
-         <optional>
-            <attribute name="type">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">classifies the title according to some convenient typology.
-Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] short; 5] desc(descriptive) </a:documentation>
-               <ref name="data.enumerated"/>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="level">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the bibliographic level for a title, that is, whether it identifies an article, book, journal, series, or unpublished material.</a:documentation>
-               <choice>
-                  <value>a</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>j</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>m</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>s</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               </choice>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="TEI">
-      <element name="TEI">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(TEI document) contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a teiCorpus element. [4.  15.1. ]</a:documentation>
-         <group>
-            <ref name="teiHeader"/>
-            <choice>
-               <group>
-                  <oneOrMore>
-                     <ref name="model.resourceLike"/>
-                  </oneOrMore>
-                  <optional>
-                     <ref name="text"/>
-                  </optional>
-               </group>
-               <ref name="text"/>
-            </choice>
-         </group>
-         <ns xmlns="http://purl.oclc.org/dsdl/schematron"
-             prefix="tei"
-             uri="http://www.tei-c.org/ns/1.0"/>
-         <ns xmlns="http://purl.oclc.org/dsdl/schematron"
-             prefix="xs"
-             uri="http://www.w3.org/2001/XMLSchema"/>
-         <ns xmlns="http://purl.oclc.org/dsdl/schematron"
-             prefix="rng"
-             uri="http://relaxng.org/ns/structure/1.0"/>
-         <ref name="att.global.attributes"/>
-         <optional>
-            <attribute name="version">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the major version number of the TEI Guidelines against which this document is valid.</a:documentation>
-               <ref name="data.version"/>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="teiCorpus">
-      <element name="teiCorpus">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains the whole of a TEI encoded corpus, comprising a single corpus header and one or more TEI elements, each containing a single text header and a text. [4.  15.1. ]</a:documentation>
-         <group>
-            <ref name="teiHeader"/>
-            <choice>
-               <group>
-                  <oneOrMore>
-                     <ref name="model.resourceLike"/>
-                  </oneOrMore>
-                  <zeroOrMore>
-                     <choice>
-                        <ref name="TEI"/>
-                        <ref name="teiCorpus"/>
-                     </choice>
-                  </zeroOrMore>
-               </group>
-               <oneOrMore>
-                  <choice>
-                     <ref name="TEI"/>
-                     <ref name="teiCorpus"/>
-                  </choice>
-               </oneOrMore>
-            </choice>
-         </group>
-         <ref name="att.global.attributes"/>
-         <optional>
-            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                       name="version"
-                       a:defaultValue="5.0">
-               <a:documentation>The version of the TEI scheme</a:documentation>
-               <ref name="data.version"/>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
    <define name="ab">
       <element name="ab">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. ]</a:documentation>
@@ -5213,6 +5041,15 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          <empty/>
       </element>
    </define>
+   <define name="author">
+      <element name="author">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">in a bibliographic reference, contains the name(s) of an author, personal or corporate, of a work; for example in the same form as that provided by a recognized bibliographic name authority. [3.11.2.2.  2.2.1. ]</a:documentation>
+         <ref name="macro.phraseSeq"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.naming.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="back">
       <element name="back">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(back matter) contains any appendixes, etc. following the main part of a text. [4.7.  4. ]</a:documentation>
@@ -5272,6 +5109,29 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          </group>
          <ref name="att.global.attributes"/>
          <ref name="att.declaring.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="bibl">
+      <element name="bibl">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(bibliographic citation) contains a loosely-structured bibliographic citation of which the sub-components may or may not be explicitly tagged. [3.11.1.  2.2.7.  15.3.2. ]</a:documentation>
+         <zeroOrMore>
+            <choice>
+               <text/>
+               <ref name="model.gLike"/>
+               <ref name="model.highlighted"/>
+               <ref name="model.pPart.data"/>
+               <ref name="model.pPart.edit"/>
+               <ref name="model.segLike"/>
+               <ref name="model.ptrLike"/>
+               <ref name="model.biblPart"/>
+               <ref name="model.global"/>
+            </choice>
+         </zeroOrMore>
+         <ref name="att.global.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <ref name="att.sortable.attributes"/>
+         <ref name="att.docStatus.attributes"/>
          <empty/>
       </element>
    </define>
@@ -5546,13 +5406,13 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
                <a:documentation>indicates the kind of information held in this cell or in each cell of this row.</a:documentation>
                <choice>
                   <value>data</value>
-                  <a:documentation/>
+                  <a:documentation>data cell</a:documentation>
                   <value>label</value>
-                  <a:documentation/>
+                  <a:documentation>label cell</a:documentation>
                   <value>sum</value>
-                  <a:documentation/>
+                  <a:documentation>row or column sum data</a:documentation>
                   <value>total</value>
-                  <a:documentation/>
+                  <a:documentation>table total data</a:documentation>
                </choice>
             </attribute>
          </optional>
@@ -5611,6 +5471,24 @@ Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] sho
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(correction) contains the correct form of a passage apparently erroneous in the copy text. [3.4.1. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
+         <ref name="att.editLike.attributes"/>
+         <ref name="att.typed.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="date">
+      <element name="date">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a date in any format. [3.5.4.  2.2.4.  2.5.  3.11.2.4.  15.2.3.  13.3.6. ]</a:documentation>
+         <zeroOrMore>
+            <choice>
+               <text/>
+               <ref name="model.gLike"/>
+               <ref name="model.phrase"/>
+               <ref name="model.global"/>
+            </choice>
+         </zeroOrMore>
+         <ref name="att.global.attributes"/>
+         <ref name="att.datable.attributes"/>
          <ref name="att.editLike.attributes"/>
          <ref name="att.typed.attributes"/>
          <empty/>
@@ -6565,6 +6443,23 @@ Suggested values include: 1] cardinal; 2] ordinal; 3] fraction; 4] percentage</a
          <empty/>
       </element>
    </define>
+   <define name="publisher">
+      <element name="publisher">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">provides the name of the organization responsible for the publication or distribution of a bibliographic item. [3.11.2.4.  2.2.4. ]</a:documentation>
+         <ref name="macro.phraseSeq"/>
+         <ref name="att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="pubPlace">
+      <element name="pubPlace">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(publication place) contains the name of the place where a bibliographic item was published. [3.11.2.4. ]</a:documentation>
+         <ref name="macro.phraseSeq"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.naming.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="q">
       <element name="q">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(quoted) contains material which is distinguished from the surrounding text using quotation marks or a similar method, for any one of a variety of reasons including, but not limited to: direct speech or thought, technical terms or jargon, authorial distance, quotations from elsewhere, and passages that are mentioned but not used. [3.3.3. ]</a:documentation>
@@ -6677,13 +6572,13 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
                <a:documentation>indicates the kind of information held in this cell or in each cell of this row.</a:documentation>
                <choice>
                   <value>data</value>
-                  <a:documentation/>
+                  <a:documentation>data cell</a:documentation>
                   <value>label</value>
-                  <a:documentation/>
+                  <a:documentation>label cell</a:documentation>
                   <value>sum</value>
-                  <a:documentation/>
+                  <a:documentation>row or column sum data</a:documentation>
                   <value>total</value>
-                  <a:documentation/>
+                  <a:documentation>table total data</a:documentation>
                </choice>
             </attribute>
          </optional>
@@ -7035,6 +6930,79 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
          <empty/>
       </element>
    </define>
+   <define name="TEI">
+      <element name="TEI">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(TEI document) contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a teiCorpus element. [4.  15.1. ]</a:documentation>
+         <group>
+            <ref name="teiHeader"/>
+            <choice>
+               <group>
+                  <oneOrMore>
+                     <ref name="model.resourceLike"/>
+                  </oneOrMore>
+                  <optional>
+                     <ref name="text"/>
+                  </optional>
+               </group>
+               <ref name="text"/>
+            </choice>
+         </group>
+         <ns xmlns="http://purl.oclc.org/dsdl/schematron"
+             prefix="tei"
+             uri="http://www.tei-c.org/ns/1.0"/>
+         <ns xmlns="http://purl.oclc.org/dsdl/schematron"
+             prefix="xs"
+             uri="http://www.w3.org/2001/XMLSchema"/>
+         <ns xmlns="http://purl.oclc.org/dsdl/schematron"
+             prefix="rng"
+             uri="http://relaxng.org/ns/structure/1.0"/>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute name="version">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the major version number of the TEI Guidelines against which this document is valid.</a:documentation>
+               <ref name="data.version"/>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="teiCorpus">
+      <element name="teiCorpus">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains the whole of a TEI encoded corpus, comprising a single corpus header and one or more TEI elements, each containing a single text header and a text. [4.  15.1. ]</a:documentation>
+         <group>
+            <ref name="teiHeader"/>
+            <choice>
+               <group>
+                  <oneOrMore>
+                     <ref name="model.resourceLike"/>
+                  </oneOrMore>
+                  <zeroOrMore>
+                     <choice>
+                        <ref name="TEI"/>
+                        <ref name="teiCorpus"/>
+                     </choice>
+                  </zeroOrMore>
+               </group>
+               <oneOrMore>
+                  <choice>
+                     <ref name="TEI"/>
+                     <ref name="teiCorpus"/>
+                  </choice>
+               </oneOrMore>
+            </choice>
+         </group>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
+                       name="version"
+                       a:defaultValue="5.0">
+               <a:documentation>The version of the TEI scheme</a:documentation>
+               <ref name="data.version"/>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
    <define name="text">
       <element name="text">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4.  15.1. ]</a:documentation>
@@ -7064,11 +7032,13 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="teisimple-text-headeronlyelement-constraint-8">
-            <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            <rule xmlns:XSL="http://www.w3.org/1999/XSL/Transform"
+                  xmlns:rng="http://relaxng.org/ns/structure/1.0"
                   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-                  context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
-                           <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
-                        </rule>
+                  context="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value">
+               <report test="ancestor::tei:text">Error:  The element <name/>
+is not permitted outside the header</report>
+            </rule>
          </pattern>
          <ref name="att.global.attributes"/>
          <ref name="att.declaring.attributes"/>
@@ -7091,6 +7061,40 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
          <ref name="att.datable.attributes"/>
          <ref name="att.editLike.attributes"/>
          <ref name="att.typed.attributes"/>
+         <empty/>
+      </element>
+   </define>
+   <define name="title">
+      <element name="title">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a title for any kind of work. [3.11.2.2.  2.2.1.  2.2.5. ]</a:documentation>
+         <ref name="macro.paraContent"/>
+         <ref name="att.global.attributes"/>
+         <ref name="att.canonical.attributes"/>
+         <ref name="att.typed.attribute.subtype"/>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">classifies the title according to some convenient typology.
+Sample values include: 1] main; 2] sub(subordinate) ; 3] alt(alternate) ; 4] short; 5] desc(descriptive) </a:documentation>
+               <ref name="data.enumerated"/>
+            </attribute>
+         </optional>
+         <optional>
+            <attribute name="level">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the bibliographic level for a title, that is, whether it identifies an article, book, journal, series, or unpublished material.</a:documentation>
+               <choice>
+                  <value>a</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(analytic) the title applies to an analytic item, such as an article, poem, or other work published as part of a larger item.</a:documentation>
+                  <value>m</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(monographic) the title applies to a monograph such as a book or other item considered to be a distinct publication, including single volumes of multi-volume works</a:documentation>
+                  <value>j</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(journal) the title applies to any serial or periodical publication such as a journal, magazine, or newspaper</a:documentation>
+                  <value>s</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(series) the title applies to a series of otherwise distinct publications such as a collection</a:documentation>
+                  <value>u</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(unpublished) the title applies to any unpublished material (including theses and dissertations unless published by a commercial press)</a:documentation>
+               </choice>
+            </attribute>
+         </optional>
          <empty/>
       </element>
    </define>

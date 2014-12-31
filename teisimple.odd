@@ -59,9 +59,21 @@
          </titlePage>
       </front>
       <body>
-	<include xmlns="http://www.w3.org/2001/XInclude" href="elementsummary.xml"/>
          <div>
-            <head>The base TEI infrastructure</head>
+            <head>The TEI Simple schema</head>
+            <schemaSpec ident="teisimple" start="TEI teiCorpus">
+              <specGrpRef target="#base"/>
+              <specGrpRef target="#header"/>
+              <specGrpRef target="#transcr"/>
+              <specGrpRef target="#attclasses"/>
+              <specGrpRef target="#modelclasses"/>
+              <specGrpRef target="#simpleelements"/>
+              <specGrpRef target="#simplechanges"/>
+            </schemaSpec>
+	    <include xmlns="http://www.w3.org/2001/XInclude"
+		 href="elementsummary.xml"/>
+	<div>
+	  <head>The TEI infrastructure</head>
             <specGrp xml:id="base">
                <moduleRef key="tei"/>
             </specGrp>
@@ -104,14 +116,7 @@
 	    header are banned from the <gi>text</gi>, using a
 	    Schematron rule.</p>
                <elementSpec ident="text" mode="change">
-                  <constraintSpec ident="headeronlyelement" scheme="isoschematron">
-                     <constraint>
-                        <rule xmlns="http://purl.oclc.org/dsdl/schematron"
-                              context="tei:term|tei:editor|tei:email|tei:att|tei:gi">
-                           <report test="ancestor::tei:text">Error: The element <name/> is not permitted outside the header</report>
-                        </rule>
-                     </constraint>
-                  </constraintSpec>
+		 <include xmlns="http://www.w3.org/2001/XInclude" href="headeronly.xml"/>
                </elementSpec>
             </specGrp>
          </div>
@@ -165,8 +170,8 @@
                      <attDef ident="select" mode="delete"/>
                   </attList>
                </classSpec>
-               <p>Constrained value lists are added to attribute classes
-	    where possible.</p>
+               <p>URLs have a constraint that a local pointer must
+	       have a corresponding ID.</p>
                <classSpec ident="att.pointing" mode="change">
                   <attList>
                      <attDef ident="target" mode="change">
@@ -183,6 +188,8 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                      </attDef>
                   </attList>
                </classSpec>
+               <p>Constrained value lists are added to attribute classes
+	    where possible.</p>
                <classSpec mode="change" ident="att.placement">
                   <attList>
                      <attDef ident="place" mode="change">
@@ -224,6 +231,7 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                               <desc>at the foot of the page</desc>
                            </valItem>
                            <valItem ident="tablebottom">
+			     <desc>underneath a table</desc>
                               <skos:exactMatch>tablefoot</skos:exactMatch>
                               </valItem>
                               <valItem ident="margin">
@@ -275,21 +283,31 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                      <attDef ident="unit" mode="change">
                         <valList mode="add" type="closed">
                            <valItem ident="chars">
+			     <desc>characters</desc>
                               <skos:exactMatch>char</skos:exactMatch>
                               <skos:exactMatch>characters</skos:exactMatch>
                            </valItem>
                            <valItem ident="lines">
+			     <desc>lines</desc>
                               <skos:exactMatch>line</skos:exactMatch>
                            </valItem>
                            <valItem ident="pages">
+			     <desc>pages</desc>
                               <skos:exactMatch>page</skos:exactMatch>
                            </valItem>
                            <valItem ident="words">
+			     <desc>words</desc>
                               <skos:exactMatch>word</skos:exactMatch>
                            </valItem>
-                           <valItem ident="cm"/>
-                           <valItem ident="mm"/>
-                           <valItem ident="in"/>
+                           <valItem ident="cm">
+			     <desc>centimetres</desc>
+			   </valItem>
+                           <valItem ident="mm">
+			     <desc>millimetre</desc>
+			   </valItem>
+                           <valItem ident="in">
+			     <desc>inches</desc>
+			   </valItem>
                         </valList>
                      </attDef>
                   </attList>
@@ -509,12 +527,13 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
                   <attList>
                      <attDef ident="role" mode="change">
                         <valList mode="add" type="closed">
-                           <valItem ident="data"/>
-                           <valItem ident="label">
+                           <valItem ident="data"><desc>data cell</desc></valItem>
+                           <valItem ident="label"><desc>label cell</desc>
                               <skos:exactMatch>LABEL</skos:exactMatch>
 			   </valItem>
-                           <valItem ident="sum"/>
-                           <valItem ident="total"/>
+                           <valItem ident="sum"><desc>row or column
+			   sum data</desc></valItem>
+                           <valItem ident="total"><desc>table total data</desc></valItem>
                         </valList>
                      </attDef>
                   </attList>
@@ -523,37 +542,18 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
                   <attList>
                      <attDef ident="role" mode="change">
                         <valList mode="add" type="closed">
-                           <valItem ident="data"/>
-                           <valItem ident="label"/>
-                           <valItem ident="sum"/>
-                           <valItem ident="total"/>
-                        </valList>
-                     </attDef>
-                  </attList>
-               </elementSpec>
-               <elementSpec ident="title" mode="change">
-                  <attList>
-                     <attDef ident="level" mode="change">
-                        <valList mode="add" type="closed">
-                           <valItem ident="a"/>
-                           <valItem ident="j"/>
-                           <valItem ident="m"/>
-                           <valItem ident="s"/>
+                           <valItem ident="data"><desc>data cell</desc></valItem>
+                           <valItem ident="label"><desc>label cell</desc>  </valItem>
+                           <valItem ident="sum"><desc>row or column sum data</desc></valItem>
+                           <valItem ident="total"><desc>table total data</desc></valItem>
                         </valList>
                      </attDef>
                   </attList>
                </elementSpec>
             </specGrp>
          </div>
-         <schemaSpec ident="teisimple" start="TEI teiCorpus">
-            <specGrpRef target="#base"/>
-            <specGrpRef target="#header"/>
-            <specGrpRef target="#transcr"/>
-            <specGrpRef target="#attclasses"/>
-            <specGrpRef target="#modelclasses"/>
-            <specGrpRef target="#simpleelements"/>
-            <specGrpRef target="#simplechanges"/>
-         </schemaSpec>
+
+       </div>
       </body>
    </text>
 </TEI>
