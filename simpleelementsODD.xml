@@ -1,166 +1,262 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <specGrp xmlns="http://www.tei-c.org/ns/1.0" xmlns:XSL="http://www.w3.org/1999/XSL/Transform"
-      xml:id="simpleelements">
-      <elementSpec mode="change" ident="ab">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="abbr"/>
-      <elementSpec mode="change" ident="actor"/>
-      <elementSpec mode="change" ident="add"/>
-      <elementSpec mode="change" ident="address"/>
-      <elementSpec mode="change" ident="addrLine"/>
-      <elementSpec mode="change" ident="addSpan"/>
-      <elementSpec mode="change" ident="am"/>
-      <elementSpec mode="change" ident="anchor"/>
-      <elementSpec mode="change" ident="argument"/>
-      <elementSpec mode="change" ident="author"/>
-      <elementSpec mode="change" ident="back">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="bibl"/>
-      <elementSpec mode="change" ident="body">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="byline"/>
-      <elementSpec mode="change" ident="c"/>
-      <elementSpec mode="change" ident="castGroup"/>
-      <elementSpec mode="change" ident="castItem"/>
-      <elementSpec mode="change" ident="castList"/>
-      <elementSpec mode="change" ident="cb"/>
-      <elementSpec mode="change" ident="cell"/>
-      <elementSpec mode="change" ident="choice"/>
-      <elementSpec mode="change" ident="cit"/>
-      <elementSpec mode="change" ident="closer"/>
-      <elementSpec mode="change" ident="corr"/>
-      <elementSpec mode="change" ident="date"/>
-      <elementSpec mode="change" ident="dateline"/>
-      <elementSpec mode="change" ident="del"/>
-      <elementSpec mode="change" ident="desc"/>
-      <elementSpec mode="change" ident="div">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="docAuthor"/>
-      <elementSpec mode="change" ident="docDate"/>
-      <elementSpec mode="change" ident="docEdition"/>
-      <elementSpec mode="change" ident="docImprint"/>
-      <elementSpec mode="change" ident="docTitle"/>
-      <elementSpec mode="change" ident="epigraph"/>
-      <elementSpec mode="change" ident="ex"/>
-      <elementSpec mode="change" ident="expan"/>
-      <elementSpec mode="change" ident="figDesc"/>
-      <elementSpec mode="change" ident="figure"/>
-      <elementSpec mode="change" ident="floatingText">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="foreign"/>
-      <elementSpec mode="change" ident="formula"/>
-      <elementSpec mode="change" ident="front">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="fw"/>
-      <elementSpec mode="change" ident="g"/>
-      <elementSpec mode="change" ident="gap"/>
-      <elementSpec mode="change" ident="graphic"/>
-      <elementSpec mode="change" ident="group"/>
-      <elementSpec mode="change" ident="handShift"/>
-      <elementSpec mode="change" ident="head">
-            <desc>@Type on a parent div should carry the information about what kind of header is
-                  this and makeHeader() should use it to determine how to behave</desc>
-            <process context="parent::div[not(@type)]" name="makeHeader(.)" mode="render"/>
-            <process context="parent::div[@type]" name="makeHeader(., @type)" mode="render"/>
-            <process context="parent::lg" name="makeHeader(., 'verse')" mode="render"/>
-            <process context="parent::list" name="makeHeader(., 'list')" mode="render"/>
-            <process context="" name="makeHeader(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="hi">
-            <process context="@rendition" name="makeInline(.)" mode="render" class="italic"/>
-            <process context="not(@rendition)" name="makeInline(.)" mode="render" class="italic"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="imprimatur"/>
-      <elementSpec mode="change" ident="item">
-            <process context="parent::list[@rendition]" name="makeListItem(., parent::list[@rendition])" mode="render"/>
-            <process context="not(parent::list[@rendition])" name="makeListItem(., 'simple:bulleted')" mode="render"/>
-            
-      </elementSpec>
-      <elementSpec mode="change" ident="l"/>
-      <elementSpec mode="change" ident="label"/>
-      <elementSpec mode="change" ident="lb"/>
-      <elementSpec mode="change" ident="lg"/>
-      <elementSpec mode="change" ident="list">
-            <ruleDef predicate="@rendition" behaviour="makeList(., @rendition)" output="default"/>
-            <process context="not(@rendition)" name="makeList(., 'simple:bulleted')" mode="render"/>
-<!--
+   xml:id="simpleelements">
+   <elementSpec mode="change" ident="ab">
+      <desc>Insert as a block element. </desc>
+      <model name="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="abbr">
+      <desc>Insert as a block element. </desc>
+      <model behaviour="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="actor">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="add">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="address">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="addrLine">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="addSpan">
+      <desc>Insert as span. </desc>
+      <model behaviour="makeSpan(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="am">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="anchor">
+      <desc>Pithy description of unknown behaviour. </desc>
+      <model behaviour="unknown(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="argument">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="author">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="back">
+      <desc>Insert as a block element. </desc>
+      <model behaviour="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="bibl">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="body">
+      <desc>Insert as a block element. </desc>
+      <model name="makeBody(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="byline">
+      <desc>Insert as a block element. </desc>
+      <model behaviour="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="c">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="castGroup">
+      <desc>Insert list. </desc>
+      <model predicate="child::*" name="makeList(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="castItem">
+      <desc>Insert item, rendered as described in parent list @rendition, or as default bulleted. </desc>
+      <model predicate="parent::list[@rendition]" name="makeListItem(., parent::list[@rendition])"/>
+      <model predicate="not(parent::list[@rendition])" name="makeListItem(., 'simple:bulleted')"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="castList">
+      <desc>Insert list. </desc>
+      <model predicate="child::*" name="makeList(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="cb">
+      <desc>Insert as an inline element. </desc>
+      <model behaviour="makeInline(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="cell">
+      <desc>Insert cell. </desc>
+      <model behaviour="makeCell(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="choice">
+      <desc>Insert choice. </desc>
+      <model predicate="count(child::*) gt 1" behaviour="makeChoice(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="cit">
+      <desc>Insert cit. </desc>
+      <model predicate="child::quote and child::bibl" behaviour="makeCit(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="closer">
+      <desc>Pithy description. </desc>
+      <model predicate="child::*" behaviour="makeCloser(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="corr">
+      <desc>Omit, because handled in parent choice. </desc>
+      <model behaviour="omit(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="date">
+      <desc>Insert cit. </desc>
+      <model behaviour="makeDate(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="dateline"/>
+   <elementSpec mode="change" ident="del"/>
+   <elementSpec mode="change" ident="desc"/>
+   <elementSpec mode="change" ident="div">
+      <desc>Pithy description. </desc>
+      <model name="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="docAuthor"/>
+   <elementSpec mode="change" ident="docDate"/>
+   <elementSpec mode="change" ident="docEdition"/>
+   <elementSpec mode="change" ident="docImprint"/>
+   <elementSpec mode="change" ident="docTitle"/>
+   <elementSpec mode="change" ident="epigraph"/>
+   <elementSpec mode="change" ident="ex"/>
+   <elementSpec mode="change" ident="expan"/>
+   <elementSpec mode="change" ident="figDesc"/>
+   <elementSpec mode="change" ident="figure"/>
+   <elementSpec mode="change" ident="floatingText">
+      <desc>Pithy description. </desc>
+      <model name="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="foreign"/>
+   <elementSpec mode="change" ident="formula"/>
+   <elementSpec mode="change" ident="front">
+      <desc>Pithy description. </desc>
+      <model name="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="fw"/>
+   <elementSpec mode="change" ident="g"/>
+   <elementSpec mode="change" ident="gap"/>
+   <elementSpec mode="change" ident="graphic"/>
+   <elementSpec mode="change" ident="group"/>
+   <elementSpec mode="change" ident="handShift"/>
+   <elementSpec mode="change" ident="head">
+      <desc>@Type on a parent div should carry the information about what kind of header is this and
+         makeHeader() should use it to determine how to behave</desc>
+      <desc>Pithy description. </desc>
+      <model predicate="parent::div[not(@type)]" name="makeHeader(.)"/>
+      <desc>Pithy description. </desc>
+      <model predicate="parent::div[@type]" name="makeHeader(., @type)"/>
+      <desc>Pithy description. </desc>
+      <model predicate="parent::lg" name="makeHeader(., 'verse')"/>
+      <desc>Pithy description. </desc>
+      <model predicate="parent::list" name="makeHeader(., 'list')"/>
+      <desc>Pithy description. </desc>
+      <model name="makeHeader(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="hi">
+      <desc>Pithy description. </desc>
+      <model predicate="@rendition" name="makeInline(.)" class="italic"/>
+      <desc>Pithy description. </desc>
+      <model predicate="not(@rendition)" name="makeInline(.)" class="italic"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="imprimatur"/>
+   <elementSpec mode="change" ident="item">
+      <desc>Pithy description. </desc>
+      <model predicate="parent::list[@rendition]" name="makeListItem(., parent::list[@rendition])"/>
+      <desc>Pithy description. </desc>
+      <model predicate="not(parent::list[@rendition])" name="makeListItem(., 'simple:bulleted')"/>
+
+   </elementSpec>
+   <elementSpec mode="change" ident="l"/>
+   <elementSpec mode="change" ident="label"/>
+   <elementSpec mode="change" ident="lb"/>
+   <elementSpec mode="change" ident="lg"/>
+   <elementSpec mode="change" ident="list">
+      <ruleDef predicate="@rendition" behaviour="makeList(., @rendition)" output="default"/>
+      <desc>Pithy description. </desc>
+      <model predicate="not(@rendition)" name="makeList(., 'simple:bulleted')"/>
+      <!--
                   we are thinking! customization a user might make
-                  <process context="@type='blah'" name="makeList(., 'simple:bulleted')" mode="render" class="blahList"/>
--->            
-            <!--
+                  <desc>Pithy description. </desc><model predicate="@type='blah'" name="makeList(., 'simple:bulleted')" class="blahList"/>
+-->
+      <!--
                   we might be more concise like this, but this would probably lead to confusion
-                  <process context="@rendition" name="makeList(.)" mode="render"/>
-            <process context="not(@rendition)" name="makeList(.)" mode="render"/>
--->      </elementSpec>
-      <elementSpec mode="change" ident="listBibl"/>
-      <elementSpec mode="change" ident="measure"/>
-      <elementSpec mode="change" ident="milestone"/>
-      <elementSpec mode="change" ident="name"/>
-      <elementSpec mode="change" ident="note"/>
-      <elementSpec mode="change" ident="num"/>
-      <elementSpec mode="change" ident="opener"/>
-      <elementSpec mode="change" ident="orig"/>
-      <elementSpec mode="change" ident="p">
-            <process context="" name="makeParagraph(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="pb">
-            <process mode="render" context="@n" name="showPageBreak(@n)"/>
-            <process mode="render" context="not(@n)" name="showPageBreak()"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="pc"/>
-      <elementSpec mode="change" ident="postscript"/>
-      <elementSpec mode="change" ident="publisher"/>
-      <elementSpec mode="change" ident="pubPlace"/>
-      <elementSpec mode="change" ident="q"/>
-      <elementSpec mode="change" ident="quote">
-            <process context="ancestor::p" name="makeInline(.)" mode="render">
-                  <desc>If it's inside a paragraph then it's inline, otherwise it's block
-                        level</desc>
-            </process>
-            <process context="not(ancestor::p)" name="makeBlock(.)" mode="render">
-                  <desc>If it's inside a paragraph then it's inline, otherwise it's block
-                        level</desc>
-            </process>
-      </elementSpec>
-      <elementSpec mode="change" ident="ref"/>
-      <elementSpec mode="change" ident="reg"/>
-      <elementSpec mode="change" ident="role"/>
-      <elementSpec mode="change" ident="roleDesc"/>
-      <elementSpec mode="change" ident="row"/>
-      <elementSpec mode="change" ident="rs"/>
-      <elementSpec mode="change" ident="s"/>
-      <elementSpec mode="change" ident="salute"/>
-      <elementSpec mode="change" ident="seg"/>
-      <elementSpec mode="change" ident="sic"/>
-      <elementSpec mode="change" ident="signed"/>
-      <elementSpec mode="change" ident="sp">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="space"/>
-      <elementSpec mode="change" ident="speaker"/>
-      <elementSpec mode="change" ident="spGrp">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="stage"/>
-      <elementSpec mode="change" ident="subst"/>
-      <elementSpec mode="change" ident="supplied"/>
-      <elementSpec mode="change" ident="table"/>
-      <elementSpec mode="change" ident="TEI"/>
-      <elementSpec mode="change" ident="teiCorpus"/>
-      <elementSpec mode="change" ident="text"/>
-      <elementSpec mode="change" ident="time"/>
-      <elementSpec mode="change" ident="title"/>
-      <elementSpec mode="change" ident="titlePage">
-            <process context="" name="makeBlock(.)" mode="render"/>
-      </elementSpec>
-      <elementSpec mode="change" ident="titlePart"/>
-      <elementSpec mode="change" ident="trailer"/>
-      <elementSpec mode="change" ident="unclear"/>
-      <elementSpec mode="change" ident="w"/>
+                  <desc>Pithy description. </desc><model predicate="@rendition" name="makeList(.)"/>
+            <desc>Pithy description. </desc><model predicate="not(@rendition)" name="makeList(.)"/>
+-->
+   </elementSpec>
+   <elementSpec mode="change" ident="listBibl"/>
+   <elementSpec mode="change" ident="measure"/>
+   <elementSpec mode="change" ident="milestone"/>
+   <elementSpec mode="change" ident="name"/>
+   <elementSpec mode="change" ident="note"/>
+   <elementSpec mode="change" ident="num"/>
+   <elementSpec mode="change" ident="opener"/>
+   <elementSpec mode="change" ident="orig"/>
+   <elementSpec mode="change" ident="p">
+      <desc>Pithy description. </desc>
+      <model name="makeParagraph(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="pb">
+      <desc>Pithy description. </desc>
+      <model predicate="@n" name="showPageBreak(@n)"/>
+      <desc>Pithy description. </desc>
+      <model predicate="not(@n)" name="showPageBreak()"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="pc"/>
+   <elementSpec mode="change" ident="postscript"/>
+   <elementSpec mode="change" ident="publisher"/>
+   <elementSpec mode="change" ident="pubPlace"/>
+   <elementSpec mode="change" ident="q"/>
+   <elementSpec mode="change" ident="quote">
+      <desc>Pithy description. </desc>
+      <model predicate="ancestor::p" name="makeInline(.)">
+         <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+      </model>
+      <desc>Pithy description. </desc>
+      <model predicate="not(ancestor::p)" name="makeBlock(.)">
+         <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+      </model>
+   </elementSpec>
+   <elementSpec mode="change" ident="ref"/>
+   <elementSpec mode="change" ident="reg"/>
+   <elementSpec mode="change" ident="role"/>
+   <elementSpec mode="change" ident="roleDesc"/>
+   <elementSpec mode="change" ident="row"/>
+   <elementSpec mode="change" ident="rs"/>
+   <elementSpec mode="change" ident="s"/>
+   <elementSpec mode="change" ident="salute"/>
+   <elementSpec mode="change" ident="seg"/>
+   <elementSpec mode="change" ident="sic">
+      <desc>Omit, because handled in parent choice. </desc>
+      <model behaviour="omit(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="signed"/>
+   <elementSpec mode="change" ident="sp">
+      <desc>Pithy description. </desc>
+      <model name="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="space"/>
+   <elementSpec mode="change" ident="speaker"/>
+   <elementSpec mode="change" ident="spGrp">
+      <desc>Pithy description. </desc>
+      <model name="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="stage"/>
+   <elementSpec mode="change" ident="subst"/>
+   <elementSpec mode="change" ident="supplied"/>
+   <elementSpec mode="change" ident="table"/>
+   <elementSpec mode="change" ident="TEI"/>
+   <elementSpec mode="change" ident="teiCorpus"/>
+   <elementSpec mode="change" ident="text"/>
+   <elementSpec mode="change" ident="time"/>
+   <elementSpec mode="change" ident="title"/>
+   <elementSpec mode="change" ident="titlePage">
+      <desc>Pithy description. </desc>
+      <model name="makeBlock(.)"/>
+   </elementSpec>
+   <elementSpec mode="change" ident="titlePart"/>
+   <elementSpec mode="change" ident="trailer"/>
+   <elementSpec mode="change" ident="unclear"/>
+   <elementSpec mode="change" ident="w"/>
 </specGrp>
