@@ -103,7 +103,7 @@
       <model behaviour="omit(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="date">
-      <desc>Insert cit. </desc>
+      <desc>Insert date. </desc>
       <model behaviour="makeDate(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="dateline"/>

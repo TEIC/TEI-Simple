@@ -488,7 +488,7 @@
                <head>Elements</head>
                <p>The main part of Simple is the set of selected elements.</p>
 
-               <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements.xml"/>
+               <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelementsODD.xml"/>
                <specGrp xml:id="simplechanges">
                   <p>A small number of elements have constrained value lists added.</p>
                   <elementSpec ident="formula" mode="change">
@@ -541,19 +541,6 @@
                            </valList>
                         </attDef>
                      </attList>
-                     <model context="//xpath" behaviour="makeCell(.)" mode="print" class="cells">
-                        <desc>ghfh</desc>
-                     </model>
-
-                     <modelGrp mode="print">
-                        <model context="ancestor::back" behaviour="makeInline(.)"
-                           class="simple-magic"/>
-                        <model context="ancestor::back" behaviour="makeMarginalNote(.)"
-                           class="simple-magic"/>
-                        <model behaviour="makeMarginalNote(.)" class="margNote"/>
-                     </modelGrp>
-
-
                   </elementSpec>
                   <elementSpec ident="row" mode="change">
                      <attList>
