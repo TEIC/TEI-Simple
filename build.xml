@@ -121,13 +121,29 @@
   
   <target name="doc">
     <echo>XSLT generate HTML files</echo>
-    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd" out="teisimple.odd.html">
+      <xslt force="yes" style="${XSL}/odds/odd2lite.xsl" in="teisimple.odd.compiled" out="teisimple.odd.tmp">
+        <xmlcatalog>
+          <catalogpath>
+            <pathelement location="$catalogfile"/>
+          </catalogpath>
+        </xmlcatalog>
+        <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+        <param name="lang" expression="${lang}" if="lang"/>
+        <param name="doclang" expression="${lang}" if="lang"/>
+        <param name="documentationLanguage" expression="${lang}" if="lang"/>
+      </xslt>
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd.tmp" out="teisimple.odd.html">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
       <param name="inputDir" expression="${inputDir}/"/>
-      <param name="summaryDoc" expression="true"/>
       <param name="displayMode" expression="rnc"/>
+    </xslt>
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd" out="teisimple.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="inputDir" expression="${inputDir}/"/>
     </xslt>
 </target>
 
@@ -145,5 +161,6 @@
   <target name="cleanup">
     <delete dir="${tempDir}"/>
     <delete file="teisimple.odd.compiled"/>
+    <delete file="teisimple.odd.tmp"/>
   </target>
 </project>

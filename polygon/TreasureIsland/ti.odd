@@ -28,11 +28,11 @@
                <attList>
                   <attDef ident="type" mode="delete"/>
                </attList>
-               <process name="makeBlock(.)" mode="render" class="italic"/>
+               <model behaviour="makeBlock(.)" class="italic"/>
 
                <!-- 
-                  <process
-                     context="not(parent::person) and (@when or @when-custom)"
+                  <model
+                     predicate="not(parent::person) and (@when or @when-custom)"
                      name="makeMarginalNote(if (@when-custom) then @when-custom else @when)"
                      mode="render"
                      class="altdate"/>
@@ -40,7 +40,7 @@
 
             </elementSpec>
             <elementSpec ident="p">
-               <process context="" name="makeParagraph(.)" mode="render"/>
+               <model behaviour="makeParagraph(.)"/>
             </elementSpec>
 
             <elementSpec ident="head" mode="change">
@@ -49,29 +49,29 @@
                </attList>
 
                <!-- chapter headings -->
-               <process context="parent::div[@type='div3']" name="makeHeader(.)" mode="render"
+               <model predicate="parent::div[@type='div3']" behaviour="makeHeader(.)"
                   class="chapterHeader"/>
 
                <!-- part headings -->
-               <process context="parent::div[not(@type)]" name="makeHeader(.)" mode="render"
+               <model predicate="parent::div[not(@type)]" behaviour="makeHeader(.)"
                   class="partHeader"/>
 
                <!-- verse headings -->
-               <process context="parent::lg" name="makeHeader(.)" mode="render" class="verseHeader"/>
+               <model predicate="parent::lg" behaviour="makeHeader(.)" class="verseHeader"/>
             </elementSpec>
 
             <elementSpec ident="lg" mode="change">
                <attList>
                   <attDef ident="type" mode="delete"/>
                </attList>
-               <!-- line groups to be processed as block divisions -->
-               <process context="" name="makeBlock(.)" mode="render" class="verse"/>
+               <!-- line groups to be modeled as block divisions -->
+               <model behaviour="makeBlock(.)" class="verse"/>
 
             </elementSpec>
 
             <elementSpec ident="l">
-               <!-- verse lines to be processed as newlines -->
-               <process context="" name="makeNewline(.)" mode="render" class="verse"/>
+               <!-- verse lines to be modeled as newlines -->
+               <model behaviour="makeNewline(.)" class="verse"/>
             </elementSpec>
 
             <moduleRef key="header"
@@ -81,17 +81,17 @@
                <attList>
                   <attDef ident="type" mode="delete"/>
                </attList>
-               <!-- floatingText to be processed as block division -->
-               <process context="" name="makeBlock(.)" mode="render" class="border"/>
+               <!-- floatingText to be modeled as block division -->
+               <model behaviour="makeBlock(.)" class="border"/>
             </elementSpec>
 
             <elementSpec ident="front">
-               <!-- front to be processed as block division -->
-               <process context="" name="makeBlock(.)" mode="render"/>
+               <!-- front to be modeled as block division -->
+               <model behaviour="makeBlock(.)"/>
             </elementSpec>
             <elementSpec ident="body">
-               <!-- body to be processed as block division -->
-               <process context="" name="makeBlock(.)" mode="render"/>
+               <!-- body to be modeled as block division -->
+               <model behaviour="makeBlock(.)"/>
             </elementSpec>
 
             <elementSpec ident="div" mode="change">
@@ -109,7 +109,7 @@
             <classSpec ident="att.milestoneUnit" module="core" type="atts" mode="delete"/>
 
 
-            <!-- further on header or general TEI elements only; no processing model necessary -->
+            <!-- further on header or general TEI elements only; no modeling model necessary -->
             <elementSpec ident="term" mode="change">
                <attList>
                   <attDef ident="target" mode="delete"/>
