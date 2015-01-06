@@ -85,7 +85,16 @@ of this software, even if advised of the possibility of such damage.
         <br />
     </xsl:function>
     
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Page break. Only a placeholder. Needs adding to.</desc>
+    </doc>
+    <xsl:function name="tei:makePageBreak" as="node()*">
+        <xsl:param name="element"/>
+        <xslo:text>[Page]</xslo:text>
+    </xsl:function>
     
+
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Inline element. If there's something going on re class or rendition keep span and attributes, otherwise make it just text of selected content</desc>
     </doc>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml" schematypens="http://relaxng.org/ns/structure/1.0"?>
+<?xml-model href="http://www.tei-c.org/release/xml/tei/custom/schema/relaxng/tei_all.rng" type="application/xml"
+	schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>Documentation of the TEI Simple function library</title>
+         </titleStmt>
+         <publicationStmt>
+            <p>Publication Information</p>
+         </publicationStmt>
+         <sourceDesc>
+            <p>In labour</p>
+         </sourceDesc>
+      </fileDesc>
+   </teiHeader>
+   <text>
+      <body>
+         <p>TEI Simple functions</p>
+
+         <table>
+            <row>
+               <cell>Function name</cell>
+               <cell>Parameters</cell>
+               <cell>Description</cell>
+               <cell>HMTL container</cell>
+            </row>
+            <row>
+               <cell>tei:makeBlock</cell>
+               <cell>content</cell>
+               <cell>Creates a block out of the content parameter. Can be formatted with
+                  <code>class</code>.</cell>
+               <cell>div</cell>
+            </row>
+            <row>
+               <cell>tei:makeElement</cell>
+               <cell>content, element name</cell>
+               <cell>Creates new element called <gi>name</gi> out of the <gi>content</gi></cell>
+               <cell>element name</cell>
+            </row>
+            <row>
+               <cell>tei:makeEndnotes</cell>
+            </row>
+            <row>
+               <cell>tei:makeFigure</cell>
+               <cell>content</cell>
+               <cell>Deals with <gi>figure</gi>s. If @facs is present, uses it to display figure,
+                  else displays placeholder image. Can be formatted with
+                  <code>class</code>.</cell>
+               <cell>img</cell>
+            </row>
+            <row>
+               <cell>tei:makeHeading</cell>
+               <cell>content</cell>
+               <cell>Creates a heading. Can be decorated with <code>class</code></cell>
+               <cell>span</cell>
+            </row>
+            <row>
+               <cell>tei:makeHTMLHeader</cell>
+               <cell>css stylesheet name</cell>
+               <cell>Creates the basic structure of html document and links to the css
+                  stylesheet.</cell>
+               <cell>html</cell>
+            </row>
+            <row>
+               <cell>tei:makeInline</cell>
+               <cell>content</cell>
+               <cell>Creates inline element out of <code>content</code> if there's something going
+                  on re <code>class</code> or <code>rendition</code> keeping these attributes,
+                  otherwise it just text of selected content. Can be decorated with
+                     <code>class</code></cell>
+               <cell>span</cell>
+            </row>
+            <row>
+               <cell>tei:makeMarginalNote</cell>
+               <cell>content</cell>
+               <cell>Creates a note block out of <code>content</code>, relies on css
+                     <code>class</code> for the positioning and formatting</cell>
+               <cell>span?</cell>
+            </row>
+            <row>
+               <cell>tei:makeNewline</cell>
+               <cell/>
+               <cell>Adds a line break</cell>
+               <cell>br</cell>
+            </row>
+            <row>
+               <cell>tei:makeNoteAnchor</cell>
+            </row>
+            <row>
+               <cell>tei:makePageBreak</cell>
+               <cell/>
+               <cell>Adds a page break</cell>
+               <cell>br</cell>
+            </row>
+            <row>
+               <cell>tei:makeParagraph</cell>
+               <cell>content</cell>
+               <cell>Creates a paragraph out of <code>content</code>. Can be decorated with
+                     <code>class</code></cell>
+               <cell>p</cell>
+            </row>
+            <row>
+               <cell>tei:makeChoice (makeToggle)</cell>
+               <cell>preferred element, alternate element</cell>
+               <cell>Creates a specialized display of alternating elements for displaying the
+                  preferred version, both at once or toggling between the two.</cell>
+               <cell>span</cell>
+            </row>
+         </table>
+      </body>
+   </text>
+</TEI>

@@ -14,8 +14,8 @@
             <p>Prototype TEI utility stylesheet for transformation from TEI P5 to TEI Simple</p>
             <p>To do:
                 <list>
-                    <item>when @context not present assume default context</item>
-                    <item>when @mode not present assume default mode = render</item>
+                    <item>when @predicate not present assume default context</item>
+                    <item>when @output not present assume default mode = render</item>
                     <item>deal with @follow_rendition attribute</item>
                     <item>deal with styling instructions from simple namespace (eg. simple:bold)</item>
                 </list>
@@ -74,11 +74,11 @@
 
 
     <xsl:template match="tei:elementSpec">
-        <xsl:for-each-group select="process[@mode='render' or not(@mode)]" group-by="@context">
+        <xsl:for-each-group select="model[@output='render' or not(@output)]" group-by="@predicate">
             <xsl:variable name="xpth" select="current-group()[1]"/>
 
             <xsl:variable name="xp"
-                select="if(current-group()[1]/string(@context)) then concat(current-group()[1]/parent::node()/@ident, '[', @context, ']') else current-group()[1]/parent::node()/@ident"/>
+                select="if(current-group()[1]/string(@predicate)) then concat(current-group()[1]/parent::node()/@ident, '[', @predicate, ']') else current-group()[1]/parent::node()/@ident"/>
 
             <xslo:template match="{$xp}">
                 <xsl:for-each select="current-group()">
