@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?xml-model
+  href="tei-pm.nvdl"
+  type="application/xml"
+  schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
    xml:lang="en">
    <teiHeader>
@@ -69,6 +73,7 @@
                <specGrpRef target="#attclasses"/>
                <specGrpRef target="#modelclasses"/>
                <specGrpRef target="#simpleelements"/>
+               <specGrpRef target="#simpleelementspm"/>
                <specGrpRef target="#simplechanges"/>
             </schemaSpec>
             <include xmlns="http://www.w3.org/2001/XInclude" href="elementsummary.xml"/>
@@ -155,11 +160,11 @@
                   <classRef key="att.global.facs"/>
                   <classRef key="att.milestoneUnit"/>
                   <classRef key="att.global.linking"/>
-                  <classSpec ident="att.datcat" mode="delete"/>
-                  <classSpec ident="att.declarable" mode="delete"/>
-                  <classSpec ident="att.divLike" mode="delete"/>
+                  <classSpec type="atts"  ident="att.datcat" mode="delete"/>
+                  <classSpec type="atts"  ident="att.declarable" mode="delete"/>
+                  <classSpec type="atts"  ident="att.divLike" mode="delete"/>
                   <p>Some uncommon attributes are removed from global linking.</p>
-                  <classSpec ident="att.global.linking" mode="change">
+                  <classSpec type="atts"  ident="att.global.linking" mode="change">
                      <attList>
                         <attDef ident="synch" mode="delete"/>
                         <attDef ident="copyOf" mode="delete"/>
@@ -168,7 +173,7 @@
                      </attList>
                   </classSpec>
                   <p>URLs have a constraint that a local pointer must have a corresponding ID.</p>
-                  <classSpec ident="att.pointing" mode="change">
+                  <classSpec type="atts"  ident="att.pointing" mode="change">
                      <attList>
                         <attDef ident="target" mode="change">
                            <constraintSpec ident="validtarget" scheme="isoschematron">
@@ -188,19 +193,19 @@
                      </attList>
                   </classSpec>
                   <p>Constrained value lists are added to attribute classes where possible.</p>
-                  <classSpec mode="change" ident="att.placement">
+                  <classSpec type="atts"  mode="change" ident="att.placement">
                      <attList>
                         <attDef ident="place" mode="change">
                            <valList type="closed" mode="replace">
                               <valItem ident="above">
-                                 <skos:exactMatch>supralinear</skos:exactMatch>
+                                 <?exactMatch supralinear?>
                                  <desc>above the line</desc>
                               </valItem>
                               <valItem ident="below">
                                  <desc>below the line</desc>
                               </valItem>
                               <valItem ident="top">
-                                 <skos:exactMatch>pageTop</skos:exactMatch>
+                                 <?exactMatch pageTop?>
                                  <desc>at the top of the page</desc>
                               </valItem>
                               <valItem ident="top-right">
@@ -213,38 +218,38 @@
                                  <desc>at the top center of the page</desc>
                               </valItem>
                               <valItem ident="bottom-right">
-                                 <skos:exactMatch>bot-right</skos:exactMatch>
+                                 <?exactMatch bot-right?>
                                  <desc>at the bottom right of the page</desc>
                               </valItem>
                               <valItem ident="bottom-left">
-                                 <skos:exactMatch>bot-left</skos:exactMatch>
+                                 <?exactMatch bot-left?>
                                  <desc>at the bottom left of the page</desc>
                               </valItem>
                               <valItem ident="bottom-center">
-                                 <skos:exactMatch>bot-center</skos:exactMatch>
+                                 <?exactMatch bot-center?>
                                  <desc>at the bottom center of the page</desc>
                               </valItem>
                               <valItem ident="bottom">
-                                 <skos:exactMatch>foot</skos:exactMatch>
+                                 <?exactMatch foot?>
                                  <desc>at the foot of the page</desc>
                               </valItem>
                               <valItem ident="tablebottom">
                                  <desc>underneath a table</desc>
-                                 <skos:exactMatch>tablefoot</skos:exactMatch>
+                                 <?exactMatch tablefoot?>
                               </valItem>
                               <valItem ident="margin">
-                                 <skos:exactMatch>margin-outer</skos:exactMatch>
-                                 <skos:exactMatch>marg1</skos:exactMatch>
-                                 <skos:exactMatch>marg2</skos:exactMatch>
-                                 <skos:exactMatch>marg4</skos:exactMatch>
+                                 <?exactMatch margin-outer?>
+                                 <?exactMatch marg1?>
+                                 <?exactMatch marg2?>
+                                 <?exactMatch marg4?>
                                  <desc>in the outer margin</desc>
                               </valItem>
                               <valItem ident="margin-left">
-                                 <skos:exactMatch>left</skos:exactMatch>
+                                 <?exactMatch left?>
                                  <desc>in the left margin</desc>
                               </valItem>
                               <valItem ident="margin-right">
-                                 <skos:exactMatch>right</skos:exactMatch>
+                                 <?exactMatch right?>
                                  <desc>in the right margin</desc>
                               </valItem>
                               <valItem ident="opposite">
@@ -263,7 +268,7 @@
                                  <desc>at the end the current paragraph.</desc>
                               </valItem>
                               <valItem ident="inline">
-                                 <skos:exactMatch>in</skos:exactMatch>
+                                 <?exactMatch in?>
                                  <desc>within the body of the text.</desc>
                               </valItem>
                               <valItem ident="inspace">
@@ -277,26 +282,26 @@
                         </attDef>
                      </attList>
                   </classSpec>
-                  <classSpec ident="att.dimensions" mode="change">
+                  <classSpec type="atts"  ident="att.dimensions" mode="change">
                      <attList>
                         <attDef ident="unit" mode="change">
                            <valList mode="add" type="closed">
                               <valItem ident="chars">
                                  <desc>characters</desc>
-                                 <skos:exactMatch>char</skos:exactMatch>
-                                 <skos:exactMatch>characters</skos:exactMatch>
+                                 <?exactMatch char?>
+                                 <?exactMatch characters?>
                               </valItem>
                               <valItem ident="lines">
                                  <desc>lines</desc>
-                                 <skos:exactMatch>line</skos:exactMatch>
+                                 <?exactMatch line?>
                               </valItem>
                               <valItem ident="pages">
                                  <desc>pages</desc>
-                                 <skos:exactMatch>page</skos:exactMatch>
+                                 <?exactMatch page?>
                               </valItem>
                               <valItem ident="words">
                                  <desc>words</desc>
-                                 <skos:exactMatch>word</skos:exactMatch>
+                                 <?exactMatch word?>
                               </valItem>
                               <valItem ident="cm">
                                  <desc>centimetres</desc>
@@ -311,142 +316,8 @@
                         </attDef>
                      </attList>
                   </classSpec>
-                  <classSpec ident="att.global" mode="change">
-                     <attList>
-                        <attDef ident="rend" mode="delete"/>
-                        <attDef ident="style" mode="delete"/>
-                        <attDef ident="rendition" mode="change">
-                           <valList mode="add" type="semi">
-                              <valItem ident="simple:allcaps">
-                                 <skos:exactMatch>upper-roman</skos:exactMatch>
-                                 <skos:exactMatch>uc</skos:exactMatch>
-                                 <desc>all capitals</desc>
-                              </valItem>
-                              <valItem ident="simple:blackletter">
-                                 <skos:exactMatch>blackLetter</skos:exactMatch>
-                                 <skos:exactMatch>blackletterType</skos:exactMatch>
-                                 <skos:exactMatch>FrakturType</skos:exactMatch>
-                                 <skos:exactMatch>gothic</skos:exactMatch>
-                                 <desc>black letter or gothic typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:bold">
-                                 <skos:exactMatch>b</skos:exactMatch>
-                                 <skos:exactMatch>bo</skos:exactMatch>
-                                 <skos:exactMatch>bol</skos:exactMatch>
-                                 <skos:exactMatch>strong</skos:exactMatch>
-                                 <desc>bold typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:bottombraced">
-                                 <desc>marked with a brace under the bottom of the text</desc>
-                              </valItem>
-                              <valItem ident="simple:boxed">
-                                 <skos:exactMatch>border</skos:exactMatch>
-                                 <desc>border around the text</desc>
-                              </valItem>
-                              <valItem ident="simple:centre">
-                                 <skos:exactMatch>center</skos:exactMatch>
-                                 <desc>centred</desc>
-                              </valItem>
-                              <valItem ident="simple:cursive">
-                                 <desc>cursive typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:doublestrikethrough">
-                                 <desc>strikethrough with double line</desc>
-                              </valItem>
-                              <valItem ident="simple:doubleunderline">
-                                 <desc>underlined with double line</desc>
-                              </valItem>
-                              <valItem ident="simple:dropcap">
-                                 <skos:exactMatch>decorInit</skos:exactMatch>
-                                 <desc>initial letter larger or decorated</desc>
-                              </valItem>
-                              <valItem ident="simple:float">
-                                 <desc>floated out of main flow</desc>
-                              </valItem>
-                              <valItem ident="simple:hyphen">
-                                 <desc>with a hyphen here (eg in line break)</desc>
-                              </valItem>
-                              <valItem ident="simple:italic">
-                                 <skos:exactMatch>italics</skos:exactMatch>
-                                 <skos:exactMatch>ITALIC</skos:exactMatch>
-                                 <skos:exactMatch>i</skos:exactMatch>
-                                 <skos:exactMatch>it</skos:exactMatch>
-                                 <skos:exactMatch>ital</skos:exactMatch>
-                                 <desc>italic typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:larger">
-                                 <skos:exactMatch>large</skos:exactMatch>
-                                 <desc>larger type</desc>
-                              </valItem>
-                              <valItem ident="simple:left">
-                                 <skos:exactMatch>left</skos:exactMatch>
-                                 <desc>aligned to the left or left-justified</desc>
-                              </valItem>
-                              <valItem ident="simple:leftbraced">
-                                 <skos:exactMatch>braced</skos:exactMatch>
-                                 <desc>marked with a brace on the left side of the text</desc>
-                              </valItem>
-                              <valItem ident="simple:letterspace">
-                                 <skos:exactMatch>spaceletter</skos:exactMatch>
-                                 <desc>letter-spaced</desc>
-                              </valItem>
-                              <valItem ident="simple:normalstyle">
-                                 <desc>upright shape and default weight of typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:normalweight">
-                                 <skos:exactMatch>roman</skos:exactMatch>
-                                 <desc>normal typeface weight</desc>
-                              </valItem>
-                              <valItem ident="simple:right">
-                                 <skos:exactMatch>right-aligned</skos:exactMatch>
-                                 <desc>aligned to the right or right-justified</desc>
-                              </valItem>
-                              <valItem ident="simple:rightbraced">
-                                 <desc>marked with a brace to the right of the text</desc>
-                              </valItem>
-                              <valItem ident="simple:rotateleft">
-                                 <skos:exactMatch>rotateCounterclockwise</skos:exactMatch>
-                                 <desc>rotated to the left</desc>
-                              </valItem>
-                              <valItem ident="simple:rotateright">
-                                 <skos:exactMatch>rotateClockwise</skos:exactMatch>
-                                 <desc>rotated to the right</desc>
-                              </valItem>
-                              <valItem ident="simple:smallcaps">
-                                 <skos:exactMatch>sc</skos:exactMatch>
-                                 <skos:exactMatch>smallCap</skos:exactMatch>
-                                 <desc>small caps</desc>
-                              </valItem>
-                              <valItem ident="simple:smaller">
-                                 <skos:exactMatch>small</skos:exactMatch>
-                                 <desc>smaller type</desc>
-                              </valItem>
-                              <valItem ident="simple:strikethrough">
-                                 <desc>strike through</desc>
-                              </valItem>
-                              <valItem ident="simple:subscript">
-                                 <skos:exactMatch>sub</skos:exactMatch>
-                                 <desc>subscript</desc>
-                              </valItem>
-                              <valItem ident="simple:superscript">
-                                 <skos:exactMatch>sup</skos:exactMatch>
-                                 <skos:exactMatch>super</skos:exactMatch>
-                                 <desc>superscript</desc>
-                              </valItem>
-                              <valItem ident="simple:topbraced">
-                                 <desc>marked with a brace above the text</desc>
-                              </valItem>
-                              <valItem ident="simple:typewriter">
-                                 <desc>fixed-width typeface, like typewriter</desc>
-                              </valItem>
-                              <valItem ident="simple:underline">
-                                 <skos:exactMatch>u</skos:exactMatch>
-                                 <desc>underlined with single line</desc>
-                              </valItem>
-                              <valItem ident="simple:wavyunderline">
-                                 <desc>underlined with wavy line</desc>
-                              </valItem>
-                           </valList>
+                  <classSpec type="atts"  ident="att.global"
+			     mode="change">
                            <constraintSpec ident="renditionpointer" scheme="isoschematron">
                               <constraint>
                                  <rule xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -460,6 +331,142 @@
                                  </rule>
                               </constraint>
                            </constraintSpec>
+
+                     <attList>
+                        <attDef ident="rend" mode="delete"/>
+                        <attDef ident="style" mode="delete"/>
+                        <attDef ident="rendition" mode="change">
+                           <valList mode="add" type="semi">
+                              <valItem ident="simple:allcaps">
+                                 <?exactMatch upper-roman?>
+                                 <?exactMatch uc?>
+                                 <desc>all capitals</desc>
+                              </valItem>
+                              <valItem ident="simple:blackletter">
+                                 <?exactMatch blackLetter?>
+                                 <?exactMatch blackletterType?>
+                                 <?exactMatch FrakturType?>
+                                 <?exactMatch gothic?>
+                                 <desc>black letter or gothic typeface</desc>
+                              </valItem>
+                              <valItem ident="simple:bold">
+                                 <?exactMatch b?>
+                                 <?exactMatch bo?>
+                                 <?exactMatch bol?>
+                                 <?exactMatch strong?>
+                                 <desc>bold typeface</desc>
+                              </valItem>
+                              <valItem ident="simple:bottombraced">
+                                 <desc>marked with a brace under the bottom of the text</desc>
+                              </valItem>
+                              <valItem ident="simple:boxed">
+                                 <?exactMatch border?>
+                                 <desc>border around the text</desc>
+                              </valItem>
+                              <valItem ident="simple:centre">
+                                 <?exactMatch center?>
+                                 <desc>centred</desc>
+                              </valItem>
+                              <valItem ident="simple:cursive">
+                                 <desc>cursive typeface</desc>
+                              </valItem>
+                              <valItem ident="simple:doublestrikethrough">
+                                 <desc>strikethrough with double line</desc>
+                              </valItem>
+                              <valItem ident="simple:doubleunderline">
+                                 <desc>underlined with double line</desc>
+                              </valItem>
+                              <valItem ident="simple:dropcap">
+                                 <?exactMatch decorInit?>
+                                 <desc>initial letter larger or decorated</desc>
+                              </valItem>
+                              <valItem ident="simple:float">
+                                 <desc>floated out of main flow</desc>
+                              </valItem>
+                              <valItem ident="simple:hyphen">
+                                 <desc>with a hyphen here (eg in line break)</desc>
+                              </valItem>
+                              <valItem ident="simple:italic">
+                                 <?exactMatch italics?>
+                                 <?exactMatch ITALIC?>
+                                 <?exactMatch i?>
+                                 <?exactMatch it?>
+                                 <?exactMatch ital?>
+                                 <desc>italic typeface</desc>
+                              </valItem>
+                              <valItem ident="simple:larger">
+                                 <?exactMatch large?>
+                                 <desc>larger type</desc>
+                              </valItem>
+                              <valItem ident="simple:left">
+                                 <?exactMatch left?>
+                                 <desc>aligned to the left or left-justified</desc>
+                              </valItem>
+                              <valItem ident="simple:leftbraced">
+                                 <?exactMatch braced?>
+                                 <desc>marked with a brace on the left side of the text</desc>
+                              </valItem>
+                              <valItem ident="simple:letterspace">
+                                 <?exactMatch spaceletter?>
+                                 <desc>letter-spaced</desc>
+                              </valItem>
+                              <valItem ident="simple:normalstyle">
+                                 <desc>upright shape and default weight of typeface</desc>
+                              </valItem>
+                              <valItem ident="simple:normalweight">
+                                 <?exactMatch roman?>
+                                 <desc>normal typeface weight</desc>
+                              </valItem>
+                              <valItem ident="simple:right">
+                                 <?exactMatch right-aligned?>
+                                 <desc>aligned to the right or right-justified</desc>
+                              </valItem>
+                              <valItem ident="simple:rightbraced">
+                                 <desc>marked with a brace to the right of the text</desc>
+                              </valItem>
+                              <valItem ident="simple:rotateleft">
+                                 <?exactMatch rotateCounterclockwise?>
+                                 <desc>rotated to the left</desc>
+                              </valItem>
+                              <valItem ident="simple:rotateright">
+                                 <?exactMatch rotateClockwise?>
+                                 <desc>rotated to the right</desc>
+                              </valItem>
+                              <valItem ident="simple:smallcaps">
+                                 <?exactMatch sc?>
+                                 <?exactMatch smallCap?>
+                                 <desc>small caps</desc>
+                              </valItem>
+                              <valItem ident="simple:smaller">
+                                 <?exactMatch small?>
+                                 <desc>smaller type</desc>
+                              </valItem>
+                              <valItem ident="simple:strikethrough">
+                                 <desc>strike through</desc>
+                              </valItem>
+                              <valItem ident="simple:subscript">
+                                 <?exactMatch sub?>
+                                 <desc>subscript</desc>
+                              </valItem>
+                              <valItem ident="simple:superscript">
+                                 <?exactMatch sup?>
+                                 <?exactMatch super?>
+                                 <desc>superscript</desc>
+                              </valItem>
+                              <valItem ident="simple:topbraced">
+                                 <desc>marked with a brace above the text</desc>
+                              </valItem>
+                              <valItem ident="simple:typewriter">
+                                 <desc>fixed-width typeface, like typewriter</desc>
+                              </valItem>
+                              <valItem ident="simple:underline">
+                                 <?exactMatch u?>
+                                 <desc>underlined with single line</desc>
+                              </valItem>
+                              <valItem ident="simple:wavyunderline">
+                                 <desc>underlined with wavy line</desc>
+                              </valItem>
+                           </valList>
                         </attDef>
                      </attList>
                   </classSpec>
@@ -469,26 +476,26 @@
                <head>Model classes</head>
                <specGrp xml:id="modelclasses">
                   <p>A set of unused model classes are removed.</p>
-                  <classSpec ident="model.entryPart" mode="delete"/>
-                  <classSpec ident="model.placeNamePart" mode="delete"/>
-                  <classSpec ident="model.placeStateLike" mode="delete"/>
-                  <classSpec ident="model.egLike" mode="delete"/>
-                  <classSpec ident="model.offsetLike" mode="delete"/>
-                  <classSpec ident="model.pPart.msdesc" mode="delete"/>
-                  <classSpec ident="model.oddDecl" mode="delete"/>
-                  <classSpec ident="model.specDescLike" mode="delete"/>
-                  <classSpec ident="model.entryPart" mode="delete"/>
-                  <classSpec ident="model.placeNamePart" mode="delete"/>
-                  <classSpec ident="model.placeStateLike" mode="delete"/>
-                  <classSpec ident="model.certLike" mode="delete"/>
-                  <classSpec ident="model.glossLike" mode="delete"/>
+                  <classSpec type="model"  ident="model.entryPart" mode="delete"/>
+                  <classSpec type="model"  ident="model.placeNamePart" mode="delete"/>
+                  <classSpec type="model"  ident="model.placeStateLike" mode="delete"/>
+                  <classSpec type="model"  ident="model.egLike" mode="delete"/>
+                  <classSpec type="model"  ident="model.offsetLike" mode="delete"/>
+                  <classSpec type="model"  ident="model.pPart.msdesc" mode="delete"/>
+                  <classSpec type="model"  ident="model.oddDecl" mode="delete"/>
+                  <classSpec type="model"  ident="model.specDescLike" mode="delete"/>
+                  <classSpec type="model"  ident="model.entryPart" mode="delete"/>
+                  <classSpec type="model"  ident="model.placeNamePart" mode="delete"/>
+                  <classSpec type="model"  ident="model.placeStateLike" mode="delete"/>
+                  <classSpec type="model"  ident="model.certLike" mode="delete"/>
+                  <classSpec type="model"  ident="model.glossLike" mode="delete"/>
                </specGrp>
             </div>
             <div>
                <head>Elements</head>
                <p>The main part of Simple is the set of selected elements.</p>
-
-               <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelementsODD.xml"/>
+               <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements.xml"/>
+               <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements-pm.xml"/>
                <specGrp xml:id="simplechanges">
                   <p>A small number of elements have constrained value lists added.</p>
                   <elementSpec ident="formula" mode="change">
@@ -530,7 +537,7 @@
                               </valItem>
                               <valItem ident="label">
                                  <desc>label cell</desc>
-                                 <skos:exactMatch>LABEL</skos:exactMatch>
+                                 <?exactMatch LABEL?>
                               </valItem>
                               <valItem ident="sum">
                                  <desc>row or column sum data</desc>

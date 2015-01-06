@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2015-01-06T10:34:30Z. Version 0.1: 30th November 2014.
+Schema generated from ODD source 2015-01-06T22:52:44Z. Version 0.1: 30th November 2014.
 TEI Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -619,14 +619,12 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</a:documentati
       <optional>
          <attribute name="rendition">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:allcaps; 2] simple:additions; 3] simple:blackletter; 4] simple:bold; 5] simple:bottombraced; 6] simple:boxed; 7] simple:centre; 8] simple:cursive; 9] simple:doublestrikethrough; 10] simple:doubleunderline; 11] simple:dropcap; 12] simple:float; 13] simple:hyphen; 14] simple:italic; 15] simple:larger; 16] simple:left; 17] simple:leftbraced; 18] simple:letterspace; 19] simple:normalstyle; 20] simple:normalweight; 21] simple:right; 22] simple:rightbraced; 23] simple:rotateleft; 24] simple:rotateright; 25] simple:smallcaps; 26] simple:smaller; 27] simple:strikethrough; 28] simple:subscript; 29] simple:superscript; 30] simple:topbraced; 31] simple:typewriter; 32] simple:underline; 33] simple:wavyunderline</a:documentation>
+Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:doublestrikethrough; 9] simple:doubleunderline; 10] simple:dropcap; 11] simple:float; 12] simple:hyphen; 13] simple:italic; 14] simple:larger; 15] simple:left; 16] simple:leftbraced; 17] simple:letterspace; 18] simple:normalstyle; 19] simple:normalweight; 20] simple:right; 21] simple:rightbraced; 22] simple:rotateleft; 23] simple:rotateright; 24] simple:smallcaps; 25] simple:smaller; 26] simple:strikethrough; 27] simple:subscript; 28] simple:superscript; 29] simple:topbraced; 30] simple:typewriter; 31] simple:underline; 32] simple:wavyunderline</a:documentation>
             <list>
                <oneOrMore>
                   <choice>
                      <value>simple:allcaps</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">all capitals</a:documentation>
-                     <value>simple:additions</value>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">additional hand-writing</a:documentation>
                      <value>simple:blackletter</value>
                      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">black letter or gothic typeface</a:documentation>
                      <value>simple:bold</value>
@@ -696,18 +694,6 @@ Suggested values include: 1] simple:allcaps; 2] simple:additions; 3] simple:blac
          </attribute>
       </optional>
    </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="teisimple-att.global-rendition-renditionpointer-constraint-2">
-      <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
-            xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-            context="tei:*[@rendition]">
-                                 <let name="results"
-              value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
-                                 <assert test="every $x in $results satisfies $x">
-Error: Each of the rendition values in "<value-of select="@rendition"/>" must point to a local
-ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
-                              </rule>
-   </pattern>
    <define name="att.global.attribute.xmlbase">
       <optional>
          <attribute name="xml:base">
@@ -729,6 +715,19 @@ ID or to a token in the Simple scheme  (<value-of select="$results"/>)</assert>
          </attribute>
       </optional>
    </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="teisimple-att.global-renditionpointer-constraint-2">
+      <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
+            xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+            context="tei:*[@rendition]">
+                                    <let name="results"
+              value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+                                    <assert test="every $x in $results satisfies $x"> Error: Each of
+                                       the rendition values in "<value-of select="@rendition"/>"
+                                       must point to a local ID or to a token in the Simple scheme
+                                          (<value-of select="$results"/>)</assert>
+                                 </rule>
+   </pattern>
    <define name="att.handFeatures.attributes">
       <ref name="att.handFeatures.attribute.scribe"/>
       <ref name="att.handFeatures.attribute.scribeRef"/>
@@ -1097,11 +1096,12 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
             xmlns:rng="http://relaxng.org/ns/structure/1.0"
             xmlns:skos="http://www.w3.org/2004/02/skos/core#"
             context="tei:*[@target]">
-                                 <let name="results"
+                                    <let name="results"
               value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-                                 <report test="some $x in $results  satisfies $x">
-Error: Every local pointer in "<value-of select="@target"/>" must point to an ID in this document (<value-of select="$results"/>)</report>
-                              </rule>
+                                    <report test="some $x in $results  satisfies $x"> Error: Every
+                                       local pointer in "<value-of select="@target"/>" must point to
+                                       an ID in this document (<value-of select="$results"/>)</report>
+                                 </rule>
    </pattern>
    <define name="att.pointing.attribute.evaluate">
       <optional>
@@ -4889,7 +4889,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <define name="ab">
       <element name="ab">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(anonymous block) Insert as a block element.  [16.3. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
          <ref name="att.typed.attributes"/>
@@ -4916,7 +4916,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <define name="actor">
       <element name="actor">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains the name of an actor appearing within a cast list. [7.1.4. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Insert as an inline element.  [7.1.4. ]</a:documentation>
          <ref name="macro.phraseSeq"/>
          <ref name="att.global.attributes"/>
          <empty/>
@@ -4924,7 +4924,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <define name="add">
       <element name="add">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(addition) contains letters, words, or phrases inserted in the source text by an author, scribe, or a previous annotator or corrector. [3.4.3. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(addition) Insert as an inline element.  [3.4.3. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <ref name="att.global.attributes"/>
          <ref name="att.transcriptional.attributes"/>
@@ -4935,7 +4935,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <define name="address">
       <element name="address">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a postal address, for example of a publisher, an organization, or an individual. [3.5.2.  2.2.4.  3.11.2.4. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ]</a:documentation>
          <group>
             <zeroOrMore>
                <ref name="model.global"/>
@@ -4955,7 +4955,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <define name="addrLine">
       <element name="addrLine">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(address line) contains one line of a postal address. [3.5.2.  2.2.4.  3.11.2.4. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(address line) Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ]</a:documentation>
          <ref name="macro.phraseSeq"/>
          <ref name="att.global.attributes"/>
          <empty/>
@@ -4963,7 +4963,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <define name="addSpan">
       <element name="addSpan">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(added span of text) Insert as span.  [11.3.1.4. ]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="teisimple-addSpan-spanTo-constraint-10">
@@ -4997,7 +4997,7 @@ Suggested values include: 1] page; 2] column; 3] line; 4] book; 5] poem; 6] cant
    </define>
    <define name="am">
       <element name="am">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(abbreviation marker) contains a sequence of letters or signs present in an abbreviation which are omitted or replaced in the expanded form of the abbreviation. [11.3.1.2. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(abbreviation marker) Insert as an inline element.  [11.3.1.2. ]</a:documentation>
          <zeroOrMore>
             <choice>
                <text/>
@@ -5875,9 +5875,7 @@ Sample values include: 1] header; 2] footer; 3] pageNum(page number) ; 4] lineNu
       <element name="gap">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible, invisible, or inaudible. [3.4.3. ]</a:documentation>
          <zeroOrMore>
-            <choice>
-               <ref name="model.descLike"/>
-            </choice>
+            <ref name="model.descLike"/>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
          <ref name="att.editLike.attributes"/>
@@ -6511,7 +6509,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
    </define>
    <define name="ref">
       <element name="ref">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) Pithy description.  [3.6.  16.1. ]</a:documentation>
          <ref name="macro.paraContent"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="teisimple-ref-refAtts-constraint-5">
@@ -6740,9 +6738,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
       <element name="space">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the location of a significant space in the copy text. [11.5.1. ]</a:documentation>
          <zeroOrMore>
-            <choice>
-               <ref name="model.descLike"/>
-            </choice>
+            <ref name="model.descLike"/>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
          <ref name="att.dimensions.attributes"/>

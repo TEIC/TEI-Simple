@@ -128,13 +128,13 @@ to another element.</p>
       
       <xsl:stylesheet version="2.0">	
 	<XSL:for-each-group
-	    select="doc('teisimple.odd')//attDef[.//skos:exactMatch]"
+	    select="doc('teisimple.odd')//attDef[.//processing-instruction()[name()='exactMatch']]"
 	    group-by="@ident">
 	  <XSL:variable name="att" select="current-grouping-key()"/>
 	  <xsl:template match="@{if ($att='rendition') then 'rend' else $att}">
 	    <xsl:attribute name="{$att}">
 	      <xsl:choose>
-		<XSL:for-each select=".//skos:exactMatch">
+		<XSL:for-each select=".//processing-instruction()[name()='exactMatch']">
 		  <XSL:variable name="val" select="parent::valItem/@ident"/>
 		  <xsl:when>
 		    <XSL:attribute name="test">

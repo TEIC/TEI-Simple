@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<schema xmlns="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+   <title>ISO Schematron rules</title>
+   <!-- This file generated 2015-01-06T22:52:51.024Z by 'extract-isosch.xsl'. -->
+
+<!-- ********************* -->
+<!-- namespaces, declared: -->
+<!-- ********************* -->
+<ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+   <ns prefix="xs" uri="http://www.w3.org/2001/XMLSchema"/>
+   <ns prefix="rng" uri="http://relaxng.org/ns/structure/1.0"/>
+   <ns prefix="s" uri="http://www.ascc.net/xml/schematron"/>
+   <ns prefix="sch" uri="http://purl.oclc.org/dsdl/schematron"/>
+   <ns prefix="sch" uri="http://purl.oclc.org/dsdl/schematron"/>
+   <ns prefix="teix" uri="http://www.tei-c.org/ns/Examples"/>
+
+   <!-- ********************* -->
+<!-- namespaces, implicit: -->
+<!-- ********************* -->
+<ns prefix="dcr" uri="http://www.isocat.org/ns/dcr"/>
+   <ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+   <ns prefix="teix" uri="http://www.tei-c.org/ns/Examples"/>
+
+   <!-- ************ -->
+<!-- constraints: -->
+<!-- ************ -->
+<pattern id="teipm-att.datable-calendar-constraint-calendar-1">
+          <rule context="tei:*[@calendar]">
+            <assert test="string-length(.) gt 0">
+@calendar indicates the system or calendar to which the date represented by the content of this element
+belongs, but this <name/> element has no textual content.</assert>
+          </rule>
+        </pattern>
+   <pattern id="teipm-att.typed-constraint-subtypeTyped-2">
+      <rule context="*[@subtype]">
+        <assert test="@type">The <name/> element should not be categorized in detail with @subtype
+ unless also categorized in general with @type</assert>
+      </rule>
+    </pattern>
+   <pattern id="teipm-att.pointing-targetLang-constraint-targetLang-3">
+          <rule context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
+            <assert test="count(@target)">@targetLang can only be used if @target is specified.</assert>
+          </rule>
+        </pattern>
+   <pattern id="teipm-att.spanning-spanTo-constraint-spanTo-2-4">
+          <rule context="tei:*[@spanTo]">
+            <assert test="id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]">
+The element indicated by @spanTo (<value-of select="@spanTo"/>) must follow the current element <name/>
+                  </assert>
+          </rule>
+        </pattern>
+   <pattern id="teipm-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-5">
+          <rule context="tei:*[@schemeVersion]">
+            <assert test="@scheme and not(@scheme = 'free')">
+              @schemeVersion can only be used if @scheme is specified.
+            </assert>
+          </rule>
+        </pattern>
+   <pattern id="teipm-ptr-constraint-ptrAtts-6">
+      <rule context="tei:ptr">
+         <report test="@target and @cRef">Only one of the
+attributes @target and @cRef may be supplied on <name/>.</report>
+      </rule>
+   </pattern>
+   <pattern id="teipm-ref-constraint-refAtts-7">
+      <rule context="tei:ref">
+         <report test="@target and @cRef">Only one of the
+	attributes @target' and @cRef' may be supplied on <name/>
+         </report>
+      </rule>
+   </pattern>
+   <pattern id="teipm-relatedItem-constraint-targetorcontent1-8">
+      <rule context="tei:relatedItem">
+         <report test="@target and count( child::* ) &gt; 0">
+If the @target attribute on <name/> is used, the
+relatedItem element must be empty</report>
+         <assert test="@target or child::*">A relatedItem element should have either a 'target' attribute
+        or a child element to indicate the related bibliographic item</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-lg-constraint-atleast1oflggapl-9">
+      <rule context="tei:lg">
+         <assert test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
+        must contain at least one child l, lg or gap element.</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-quotation-constraint-quotationContents-10">
+      <rule context="tei:quotation">
+         <report test="not(@marks) and not (tei:p)">
+On <name/>, either the @marks attribute should be used, or a paragraph of description provided</report>
+      </rule>
+   </pattern>
+   <pattern id="teipm-att.identified-constraint-spec-in-module-13">
+      <rule context="tei:elementSpec[@module]|tei:classSpec[@module]|tei:macroSpec[@module]">
+        <assert test="         (not(ancestor::tei:schemaSpec | ancestor::tei:TEI | ancestor::tei:teiCorpus)) or         (not(@module) or          (not(//tei:moduleSpec) and not(//tei:moduleRef))  or         (//tei:moduleSpec[@ident = current()/@module]) or          (//tei:moduleRef[@key = current()/@module]))         ">
+        Specification <value-of select="@ident"/>: the value of the module attribute ("<value-of select="@module"/>") 
+should correspond to an existing module, via a moduleSpec or
+      moduleRef</assert>
+      </rule>
+    </pattern>
+   <pattern id="teipm-att.deprecated-validUntil-constraint-deprecated-14">
+          <rule context="tei:*[@validUntil]">
+            <assert test="@validUntil cast as xs:date ge          current-date()">
+            <value-of select="if          (@ident) then concat('The ',@ident) else          concat('This ',local-name(.),' of          ',ancestor::tei:*[@ident][1]/@ident)"/>
+	    construct is outdated (as of <value-of select="@validUntil"/>); ODD processors may ignore it, and its use is no longer supported</assert>
+            <assert role="nonfatal"
+                 test="@validUntil cast as xs:date ge          (current-date() + (60*xs:dayTimeDuration('P1D')))">
+            <value-of select="if (@ident) then concat('The ',@ident) else concat('This ',local-name(.),' of ',ancestor::tei:*[@ident][1]/@ident)"/>  construct becomes outdated on <value-of select="@validUntil"/>
+         </assert>
+          </rule>
+        </pattern>
+   <pattern id="teipm-moduleRef-constraint-modref-15">
+      <rule context="tei:moduleRef">
+        <report test="* and @key">
+Child elements of <name/> are only allowed when an external module is being loaded
+        </report>
+      </rule>
+    </pattern>
+   <pattern id="teipm-moduleRef-prefix-constraint-not-same-prefix-16">
+          <rule context="tei:moduleRef">
+            <report test="//*[ not( generate-id(.) eq generate-id(      current() ) ) ]/@prefix = @prefix">The prefix attribute
+	    of <name/> should not match that of any other
+	    element (it would defeat the purpose)</report>
+          </rule>
+        </pattern>
+   <pattern id="teipm-constraintSpec-constraint-sch-17">
+      <rule context="tei:constraintSpec">
+      
+         <report test="tei:constraint/s:* and    not(@scheme='schematron')">
+	Rules in the Schematron 1.* language must be inside
+	a constraintSpec with a value of 'schematron' on the scheme attribute
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teipm-constraintSpec-constraint-isosch-18">
+      <rule context="tei:constraintSpec">
+      
+         <report test="tei:constraint/sch:* and    not(@scheme='isoschematron')">
+	Rules in the ISO Schematron language must be inside
+	a constraintSpec with a value of 'isoschematron' on the scheme attribute
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teipm-constraintSpec-constraint-needrules-19">
+      
+      <rule context="tei:macroSpec/tei:constraintSpec[@scheme='isoschematron']/tei:constraint">
+	        <report test="sch:assert|sch:report">An ISO Schematron constraint specification for a macro should not have an 'assert' or 'report' element without a parent 'rule' element</report>
+      </rule>
+    </pattern>
+   <pattern id="teipm-attDef-constraint-attDefContents-20">
+      <rule context="tei:attDef">
+      
+         <assert test="ancestor::teix:egXML[@valid='feasible'] or @mode eq 'change' or @mode eq 'delete' or tei:datatype or tei:valList[@type='closed']">Attribute: the definition of the @<value-of select="@ident"/> attribute in the <value-of select="ancestor::*[@ident][1]/@ident"/>
+            <value-of select="' '"/>
+            <value-of select="local-name(ancestor::*[@ident][1])"/> should have a closed valList or a datatype</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-link-constraint-linkTargets3-21">
+      <rule context="tei:link">
+         <assert test="contains(normalize-space(@target),' ')">You must supply at least two values for @target or  on <name/>
+         </assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-join-constraint-joinTargets3-22">
+      <rule context="tei:join">
+         <assert test="contains(@target,' ')">
+You must supply at least two values for @target on <name/>
+         </assert>
+      </rule>
+   </pattern>
+
+   <!-- *********** -->
+<!-- deprecated: -->
+<!-- *********** -->
+<pattern>
+      <rule context="tei:biblScope">
+         <report test="@type" role="nonfatal">WARNING: use of deprecated attribute — @type of the biblScope element will be removed from the TEI on 2014-12-17.
+                </report>
+      </rule>
+   </pattern>
+   <pattern>
+      <rule context="tei:moduleSpec|tei:schemaSpec|tei:elementSpec|tei:classSpec|tei:macroSpec|tei:constraintSpec|tei:attDef">
+         <report test="@status" role="nonfatal">WARNING: use of deprecated attribute — @status of the <name/> element will be removed from the TEI on 2015-06-19.
+                </report>
+      </rule>
+   </pattern>
+</schema>

@@ -7,7 +7,7 @@ namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace skos = "http://www.w3.org/2004/02/skos/core#"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2015-01-06T10:34:30Z. Version 0.1: 30th November 2014.
+# Schema generated from ODD source 2015-01-06T22:52:44Z. Version 0.1: 30th November 2014.
 # TEI Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -355,15 +355,12 @@ att.global.attribute.xmllang =
 att.global.attribute.rendition =
   
   ## points to a description of the rendering or presentation used for this element in the source text.
-  ## Suggested values include: 1] simple:allcaps; 2] simple:additions; 3] simple:blackletter; 4] simple:bold; 5] simple:bottombraced; 6] simple:boxed; 7] simple:centre; 8] simple:cursive; 9] simple:doublestrikethrough; 10] simple:doubleunderline; 11] simple:dropcap; 12] simple:float; 13] simple:hyphen; 14] simple:italic; 15] simple:larger; 16] simple:left; 17] simple:leftbraced; 18] simple:letterspace; 19] simple:normalstyle; 20] simple:normalweight; 21] simple:right; 22] simple:rightbraced; 23] simple:rotateleft; 24] simple:rotateright; 25] simple:smallcaps; 26] simple:smaller; 27] simple:strikethrough; 28] simple:subscript; 29] simple:superscript; 30] simple:topbraced; 31] simple:typewriter; 32] simple:underline; 33] simple:wavyunderline
+  ## Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:doublestrikethrough; 9] simple:doubleunderline; 10] simple:dropcap; 11] simple:float; 12] simple:hyphen; 13] simple:italic; 14] simple:larger; 15] simple:left; 16] simple:leftbraced; 17] simple:letterspace; 18] simple:normalstyle; 19] simple:normalweight; 20] simple:right; 21] simple:rightbraced; 22] simple:rotateleft; 23] simple:rotateright; 24] simple:smallcaps; 25] simple:smaller; 26] simple:strikethrough; 27] simple:subscript; 28] simple:superscript; 29] simple:topbraced; 30] simple:typewriter; 31] simple:underline; 32] simple:wavyunderline
   attribute rendition {
     list {
       (
        ## all capitals
        "simple:allcaps"
-       | 
-         ## additional hand-writing
-         "simple:additions"
        | 
          ## black letter or gothic typeface
          "simple:blackletter"
@@ -460,37 +457,6 @@ att.global.attribute.rendition =
        | data.pointer)+
     }
   }?
-sch:pattern [
-  id = "teisimple-att.global-rendition-renditionpointer-constraint-2"
-  "\x{a}" ~
-  "      "
-  sch:rule [
-    context = "tei:*[@rendition]"
-    "\x{a}" ~
-    "                                 "
-    sch:let [
-      name = "results"
-      value =
-        "for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"
-    ]
-    "\x{a}" ~
-    "                                 "
-    sch:assert [
-      test = "every $x in $results satisfies $x"
-      "\x{a}" ~
-      'Error: Each of the rendition values in "'
-      sch:value-of [ select = "@rendition" ]
-      '" must point to a local\x{a}' ~
-      "ID or to a token in the Simple scheme  ("
-      sch:value-of [ select = "$results" ]
-      ")"
-    ]
-    "\x{a}" ~
-    "                              "
-  ]
-  "\x{a}" ~
-  "   "
-]
 att.global.attribute.xmlbase =
   
   ## provides a base URI reference with which applications can resolve relative URI references into absolute URI references.
@@ -506,6 +472,38 @@ att.global.attribute.xmlspace =
       ## indicates the intent that applications preserve all white space
       "preserve"
   }?
+sch:pattern [
+  id = "teisimple-att.global-renditionpointer-constraint-2"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "tei:*[@rendition]"
+    "\x{a}" ~
+    "                                    "
+    sch:let [
+      name = "results"
+      value =
+        "for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"
+    ]
+    "\x{a}" ~
+    "                                    "
+    sch:assert [
+      test = "every $x in $results satisfies $x"
+      " Error: Each of\x{a}" ~
+      '                                       the rendition values in "'
+      sch:value-of [ select = "@rendition" ]
+      '"\x{a}' ~
+      "                                       must point to a local ID or to a token in the Simple scheme\x{a}" ~
+      "                                          ("
+      sch:value-of [ select = "$results" ]
+      ")"
+    ]
+    "\x{a}" ~
+    "                                 "
+  ]
+  "\x{a}" ~
+  "   "
+]
 att.handFeatures.attributes =
   att.handFeatures.attribute.scribe,
   att.handFeatures.attribute.scribeRef,
@@ -822,25 +820,26 @@ sch:pattern [
   sch:rule [
     context = "tei:*[@target]"
     "\x{a}" ~
-    "                                 "
+    "                                    "
     sch:let [
       name = "results"
       value =
         "for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"
     ]
     "\x{a}" ~
-    "                                 "
+    "                                    "
     sch:report [
       test = "some $x in $results  satisfies $x"
-      "\x{a}" ~
-      'Error: Every local pointer in "'
+      " Error: Every\x{a}" ~
+      '                                       local pointer in "'
       sch:value-of [ select = "@target" ]
-      '" must point to an ID in this document ('
+      '" must point to\x{a}' ~
+      "                                       an ID in this document ("
       sch:value-of [ select = "$results" ]
       ")"
     ]
     "\x{a}" ~
-    "                              "
+    "                                 "
   ]
   "\x{a}" ~
   "   "
@@ -2818,7 +2817,7 @@ att.global.linking.attribute.prev =
   attribute prev { data.pointer }?
 ab =
   
-  ## (anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. ]
+  ## (anonymous block) Insert as a block element.  [16.3. ]
   element ab {
     macro.paraContent,
     att.global.attributes,
@@ -2842,11 +2841,11 @@ abbr =
   }
 actor =
   
-  ## contains the name of an actor appearing within a cast list. [7.1.4. ]
+  ## Insert as an inline element.  [7.1.4. ]
   element actor { macro.phraseSeq, att.global.attributes, empty }
 add =
   
-  ## (addition) contains letters, words, or phrases inserted in the source text by an author, scribe, or a previous annotator or corrector. [3.4.3. ]
+  ## (addition) Insert as an inline element.  [3.4.3. ]
   element add {
     macro.paraContent,
     att.global.attributes,
@@ -2857,7 +2856,7 @@ add =
   }
 address =
   
-  ## contains a postal address, for example of a publisher, an organization, or an individual. [3.5.2.  2.2.4.  3.11.2.4. ]
+  ## Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ]
   element address {
     (model.global*, (model.addrPart, model.global*)+),
     att.global.attributes,
@@ -2865,11 +2864,11 @@ address =
   }
 addrLine =
   
-  ## (address line) contains one line of a postal address. [3.5.2.  2.2.4.  3.11.2.4. ]
+  ## (address line) Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ]
   element addrLine { macro.phraseSeq, att.global.attributes, empty }
 addSpan =
   
-  ## (added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ]
+  ## (added span of text) Insert as span.  [11.3.1.4. ]
   element addSpan {
     empty
     >> sch:pattern [
@@ -2919,7 +2918,7 @@ addSpan =
   }
 am =
   
-  ## (abbreviation marker) contains a sequence of letters or signs present in an abbreviation which are omitted or replaced in the expanded form of the abbreviation. [11.3.1.2. ]
+  ## (abbreviation marker) Insert as an inline element.  [11.3.1.2. ]
   element am {
     (text | model.gLike | model.pPart.transcriptional)*,
     att.global.attributes,
@@ -3362,7 +3361,7 @@ gap =
   
   ## indicates a point where material has been omitted in a transcription, whether for editorial reasons described in the TEI header, as part of sampling practice, or because the material is illegible, invisible, or inaudible. [3.4.3. ]
   element gap {
-    (model.descLike)*,
+    model.descLike*,
     att.global.attributes,
     att.editLike.attributes,
     
@@ -3836,7 +3835,7 @@ quote =
   }
 ref =
   
-  ## (reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]
+  ## (reference) Pithy description.  [3.6.  16.1. ]
   element ref {
     macro.paraContent
     >> sch:pattern [
@@ -4050,7 +4049,7 @@ space =
   
   ## indicates the location of a significant space in the copy text. [11.5.1. ]
   element space {
-    (model.descLike)*,
+    model.descLike*,
     att.global.attributes,
     att.dimensions.attributes,
     att.responsibility.attribute.cert,

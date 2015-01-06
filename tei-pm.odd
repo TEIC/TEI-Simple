@@ -5,7 +5,7 @@
    <teiHeader>
       <fileDesc>
          <titleStmt>
-            <title>TEI Simple ODD extensions</title>
+            <title>TEI ODD extensions for processing models</title>
          </titleStmt>
          <publicationStmt>
             <publisher>TEI Consortium</publisher>
@@ -13,7 +13,7 @@
                <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed under a Creative
       Commons Attribution-ShareAlike 3.0 Unported License </licence>
                <licence target="http://www.opensource.org/licenses/BSD-2-Clause">
-                  <p>Copyright 2014 TEI Consortium.</p>
+                  <p>Copyright 2015 TEI Consortium.</p>
                   <p>All rights reserved.</p>
                   <p>Redistribution and use in source and binary forms, with or without modification, are
        permitted provided that the following conditions are met:</p>
@@ -50,7 +50,8 @@
       <front>
          <titlePage>
             <docTitle>
-               <titlePart type="main">TEI Simple ODD extensions</titlePart>
+               <titlePart type="main">TEI ODD extensions for
+	       processing models</titlePart>
             </docTitle>
             <docAuthor>Sebastian Rahtz</docAuthor>
             <docAuthor>Brian Pytlik Zillig</docAuthor>
@@ -59,16 +60,29 @@
          </titlePage>
       </front>
       <body>
-            <schemaSpec ident="teisimpleodd" start="TEI teiCorpus">
+            <schemaSpec ident="teipm" start="TEI teiCorpus specGrp">
+              <moduleRef key="header"/>
+              <moduleRef key="core"/>
+              <moduleRef key="tei"/>
+              <moduleRef key="textstructure"/>
+              <moduleRef key="tagdocs"/>
+              <moduleRef key="figures"/>
+              <moduleRef key="linking"/>
 	      <elementSpec ident="model" mode="add">
 		<gloss versionDate="2015-01-06"
 		       xml:lang="en">processing model</gloss>
 		<desc versionDate="2015-01-06" xml:lang="en">the processing model for this element</desc>
 		<classes>
 		  <memberOf key="att.global"/>
-		  <memberOf key="model.oddDecl"/>
 		</classes>
-		<content/>
+		<content>
+		  <zeroOrMore  xmlns="http://relaxng.org/ns/structure/1.0">
+		    <choice>
+		      <ref name="model.glossLike"/>
+		      <ref name="model.descLike"/>
+		    </choice>
+		  </zeroOrMore>
+		</content>
 		<attList>
 		  <attDef ident="behaviour" usage="req">
 		    <desc>which processing function should be  used to
@@ -112,6 +126,45 @@
 		  </egXML>
 		</exemplum>
 	      </elementSpec>
+<elementSpec ident="elementSpec" mode="change">
+  <content>
+    <group xmlns="http://relaxng.org/ns/structure/1.0">
+      <zeroOrMore>
+        <choice>
+          <ref name="model.glossLike"/>
+          <ref name="model.descLike"/>
+        </choice>
+      </zeroOrMore>
+      <optional>
+        <ref name="classes"/>
+      </optional>
+      <optional>
+        <ref name="content"/>
+      </optional>
+      <optional>
+        <ref name="valList"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="constraintSpec"/>
+      </zeroOrMore>
+      <optional>
+        <ref name="attList"/>
+      </optional>
+      <zeroOrMore>
+        <ref name="model"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="exemplum"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="remarks"/>
+      </zeroOrMore>
+      <zeroOrMore>
+        <ref name="listRef"/>
+      </zeroOrMore>
+    </group>
+  </content>
+</elementSpec>
 	    </schemaSpec>
       </body>
    </text>

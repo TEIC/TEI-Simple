@@ -207,7 +207,7 @@ belongs, but this <xsl:text/>
       <xsl:apply-templates select="*" mode="M5"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-att.global-rendition-constraint-renditionpointer-2-->
+   <!--PATTERN teisimple-att.global-constraint-renditionpointer-2-->
 
 
 	<!--RULE -->
@@ -219,11 +219,12 @@ belongs, but this <xsl:text/>
 <xsl:choose>
          <xsl:when test="every $x in $results satisfies $x"/>
          <xsl:otherwise>
-            <xsl:message>
-Error: Each of the rendition values in "<xsl:text/>
+            <xsl:message> Error: Each of
+                                       the rendition values in "<xsl:text/>
                <xsl:value-of select="@rendition"/>
-               <xsl:text/>" must point to a local
-ID or to a token in the Simple scheme  (<xsl:text/>
+               <xsl:text/>"
+                                       must point to a local ID or to a token in the Simple scheme
+                                          (<xsl:text/>
                <xsl:value-of select="$results"/>
                <xsl:text/>) (every $x in $results satisfies $x)</xsl:message>
          </xsl:otherwise>
@@ -290,10 +291,11 @@ ID or to a token in the Simple scheme  (<xsl:text/>
 
 		    <!--REPORT -->
 <xsl:if test="some $x in $results  satisfies $x">
-         <xsl:message>
-Error: Every local pointer in "<xsl:text/>
+         <xsl:message> Error: Every
+                                       local pointer in "<xsl:text/>
             <xsl:value-of select="@target"/>
-            <xsl:text/>" must point to an ID in this document (<xsl:text/>
+            <xsl:text/>" must point to
+                                       an ID in this document (<xsl:text/>
             <xsl:value-of select="$results"/>
             <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
       </xsl:if>
