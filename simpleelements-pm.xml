@@ -6,35 +6,42 @@
 <specGrp xmlns="http://www.tei-c.org/ns/1.0" xmlns:XSL="http://www.w3.org/1999/XSL/Transform"
    xml:id="simpleelementspm">
    <elementSpec mode="change" ident="ab">
+      <model behaviour="makeParagraph(.)">
       <desc>Insert as a block element. </desc>
-      <model behaviour="makeParagraph(.)"/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="abbr">
       <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="actor">
+      <model behaviour="makeInline(.)">
       <desc>Insert as an inline element. </desc>
-      <model behaviour="makeInline(.)"/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="add">
+      <model behaviour="makeInline(.)">
       <desc>Insert as an inline element. </desc>
-      <model behaviour="makeInline(.)"/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="address">
+      <model behaviour="makeInline(.)">
       <desc>Insert as an inline element. </desc>
-      <model behaviour="makeInline(.)"/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="addrLine">
+      <model behaviour="makeInline(.)">
       <desc>Insert as an inline element. </desc>
-      <model behaviour="makeInline(.)"/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="addSpan">
+      <model behaviour="makeSpan(.)">
       <desc>Insert as span. </desc>
-      <model behaviour="makeSpan(.)"/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="am">
+      <model behaviour="makeInline(.)">
       <desc>Insert as an inline element. </desc>
-      <model behaviour="makeInline(.)"/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="anchor">
       <model behaviour="unknown(.)">
