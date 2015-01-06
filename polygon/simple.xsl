@@ -4,15 +4,11 @@
                     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
                     <xsl:output method="html"/>
                     <xsl:template match="ab">
-                                        <div>
+                                        <p>
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </p>
                     </xsl:template>
-                    <xsl:template match="abbr">
-                                        <div>
-                                                  <xsl:apply-templates/>
-                                        </div>
-                    </xsl:template>
+                    <xsl:template match="abbr[parent::choice and count(parent::*/*) gt 1]"/>
                     <xsl:template match="actor">
                                         <xsl:apply-templates/>
                     </xsl:template>
@@ -66,24 +62,24 @@
                                         <xsl:apply-templates/>
                     </xsl:template>
                     <xsl:template match="castGroup[child::*]">
-                                        <div>
+                                        <span class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </span>
                     </xsl:template>
                     <xsl:template match="castItem[parent::list[@rendition]]">
-                                        <div>
+                                        <li class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </li>
                     </xsl:template>
                     <xsl:template match="castItem[not(parent::list[@rendition])]">
-                                        <div>
+                                        <li class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </li>
                     </xsl:template>
                     <xsl:template match="castList[child::*]">
-                                        <div>
+                                        <span class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </span>
                     </xsl:template>
                     <xsl:template match="cb">
                                         <xsl:apply-templates/>
@@ -94,9 +90,9 @@
                                         </div>
                     </xsl:template>
                     <xsl:template match="choice[count(child::*) gt 1]">
-                                        <div>
+                                        <span class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </span>
                     </xsl:template>
                     <xsl:template match="cit[child::quote and child::bibl]">
                                         <div>
@@ -108,17 +104,18 @@
                                                   <xsl:apply-templates/>
                                         </div>
                     </xsl:template>
-                    <xsl:template match="corr"/>
+                    <xsl:template match="corr[parent::choice and count(parent::*/*) gt 1]"/>
                     <xsl:template match="date">
-                                        <div>
+                                        <span class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </span>
                     </xsl:template>
                     <xsl:template match="div">
                                         <div>
                                                   <xsl:apply-templates/>
                                         </div>
                     </xsl:template>
+                    <xsl:template match="expan[parent::choice and count(parent::*/*) gt 1]"/>
                     <xsl:template match="floatingText">
                                         <div>
                                                   <xsl:apply-templates/>
@@ -155,56 +152,53 @@
                                         </div>
                     </xsl:template>
                     <xsl:template match="hi[@rendition]">
-                                        <div class="italic">
+                                        <span class="italic">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </span>
                     </xsl:template>
                     <xsl:template match="hi[not(@rendition)]">
-                                        <div class="italic">
+                                        <span class="italic">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </span>
                     </xsl:template>
                     <xsl:template match="item[parent::list[@rendition]]">
-                                        <div>
+                                        <li class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </li>
                     </xsl:template>
                     <xsl:template match="item[not(parent::list[@rendition])]">
-                                        <div>
+                                        <li class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </li>
+                    </xsl:template>
+                    <xsl:template match="list[@rendition]">
+                                        <span class=" red">
+                                                  <xsl:apply-templates/>
+                                        </span>
                     </xsl:template>
                     <xsl:template match="list[not(@rendition)]">
-                                        <div>
+                                        <span class=" red">
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </span>
                     </xsl:template>
+                    <xsl:template match="orig[parent::choice and count(parent::*/*) gt 1]"/>
                     <xsl:template match="p">
-                                        <div>
+                                        <p>
                                                   <xsl:apply-templates/>
-                                        </div>
+                                        </p>
                     </xsl:template>
-                    <xsl:template match="pb[@n]">
-                                        <div>
-                                                  <xsl:apply-templates/>
-                                        </div>
-                    </xsl:template>
-                    <xsl:template match="pb[not(@n)]">
-                                        <div>
-                                                  <xsl:apply-templates/>
-                                        </div>
-                    </xsl:template>
+                    <xsl:template match="pb[@n]"/>
+                    <xsl:template match="pb[not(@n)]"/>
                     <xsl:template match="quote[ancestor::p]">
-                                        <div>
-                                                  <xsl:apply-templates/>
-                                        </div>
+                                        <xsl:apply-templates/>
                     </xsl:template>
                     <xsl:template match="quote[not(ancestor::p)]">
                                         <div>
                                                   <xsl:apply-templates/>
                                         </div>
                     </xsl:template>
-                    <xsl:template match="sic"/>
+                    <xsl:template match="reg[parent::choice and count(parent::*/*) gt 1]"/>
+                    <xsl:template match="sic[parent::choice and count(parent::*/*) gt 1]"/>
                     <xsl:template match="sp">
                                         <div>
                                                   <xsl:apply-templates/>

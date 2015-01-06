@@ -3,11 +3,10 @@
    xml:id="simpleelements">
    <elementSpec mode="change" ident="ab">
       <desc>Insert as a block element. </desc>
-      <model name="makeBlock(.)"/>
+      <model behaviour="makeParagraph(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="abbr">
-      <desc>Insert as a block element. </desc>
-      <model behaviour="makeBlock(.)"/>
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="actor">
       <desc>Insert as an inline element. </desc>
@@ -55,7 +54,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="body">
       <desc>Insert as a block element. </desc>
-      <model name="makeBody(.)"/>
+      <model behaviour="makeBody(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="byline">
       <desc>Insert as a block element. </desc>
@@ -67,16 +66,16 @@
    </elementSpec>
    <elementSpec mode="change" ident="castGroup">
       <desc>Insert list. </desc>
-      <model predicate="child::*" name="makeList(.)"/>
+      <model predicate="child::*" behaviour="makeList(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="castItem">
       <desc>Insert item, rendered as described in parent list @rendition, or as default bulleted. </desc>
-      <model predicate="parent::list[@rendition]" name="makeListItem(., parent::list[@rendition])"/>
-      <model predicate="not(parent::list[@rendition])" name="makeListItem(., 'simple:bulleted')"/>
+      <model predicate="parent::list[@rendition]" behaviour="makeListItem(., parent::list[@rendition])"/>
+      <model predicate="not(parent::list[@rendition])" behaviour="makeListItem(., 'simple:bulleted')"/>
    </elementSpec>
    <elementSpec mode="change" ident="castList">
       <desc>Insert list. </desc>
-      <model predicate="child::*" name="makeList(.)"/>
+      <model predicate="child::*" behaviour="makeList(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="cb">
       <desc>Insert as an inline element. </desc>
@@ -99,8 +98,8 @@
       <model predicate="child::*" behaviour="makeCloser(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="corr">
-      <desc>Omit, because handled in parent choice. </desc>
-      <model behaviour="omit(.)"/>
+      <desc>Omit, iff handled in parent choice. </desc>
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="date">
       <desc>Insert date. </desc>
@@ -111,7 +110,7 @@
    <elementSpec mode="change" ident="desc"/>
    <elementSpec mode="change" ident="div">
       <desc>Pithy description. </desc>
-      <model name="makeBlock(.)"/>
+      <model behaviour="makeBlock(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="docAuthor"/>
    <elementSpec mode="change" ident="docDate"/>
@@ -120,18 +119,20 @@
    <elementSpec mode="change" ident="docTitle"/>
    <elementSpec mode="change" ident="epigraph"/>
    <elementSpec mode="change" ident="ex"/>
-   <elementSpec mode="change" ident="expan"/>
+   <elementSpec mode="change" ident="expan">
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+   </elementSpec>
    <elementSpec mode="change" ident="figDesc"/>
    <elementSpec mode="change" ident="figure"/>
    <elementSpec mode="change" ident="floatingText">
       <desc>Pithy description. </desc>
-      <model name="makeBlock(.)"/>
+      <model behaviour="makeBlock(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="foreign"/>
    <elementSpec mode="change" ident="formula"/>
    <elementSpec mode="change" ident="front">
       <desc>Pithy description. </desc>
-      <model name="makeBlock(.)"/>
+      <model behaviour="makeBlock(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="fw"/>
    <elementSpec mode="change" ident="g"/>
@@ -143,28 +144,28 @@
       <desc>@Type on a parent div should carry the information about what kind of header is this and
          makeHeader() should use it to determine how to behave</desc>
       <desc>Pithy description. </desc>
-      <model predicate="parent::div[not(@type)]" name="makeHeader(.)"/>
+      <model predicate="parent::div[not(@type)]" behaviour="makeHeader(.)"/>
       <desc>Pithy description. </desc>
-      <model predicate="parent::div[@type]" name="makeHeader(., @type)"/>
+      <model predicate="parent::div[@type]" behaviour="makeHeader(., @type)"/>
       <desc>Pithy description. </desc>
-      <model predicate="parent::lg" name="makeHeader(., 'verse')"/>
+      <model predicate="parent::lg" behaviour="makeHeader(., 'verse')"/>
       <desc>Pithy description. </desc>
-      <model predicate="parent::list" name="makeHeader(., 'list')"/>
+      <model predicate="parent::list" behaviour="makeHeader(., 'list')"/>
       <desc>Pithy description. </desc>
-      <model name="makeHeader(.)"/>
+      <model behaviour="makeHeader(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="hi">
       <desc>Pithy description. </desc>
-      <model predicate="@rendition" name="makeInline(.)" class="italic"/>
+      <model predicate="@rendition" behaviour="makeInline(.)" class="italic"/>
       <desc>Pithy description. </desc>
-      <model predicate="not(@rendition)" name="makeInline(.)" class="italic"/>
+      <model predicate="not(@rendition)" behaviour="makeInline(.)" class="italic"/>
    </elementSpec>
    <elementSpec mode="change" ident="imprimatur"/>
    <elementSpec mode="change" ident="item">
       <desc>Pithy description. </desc>
-      <model predicate="parent::list[@rendition]" name="makeListItem(., parent::list[@rendition])"/>
+      <model predicate="parent::list[@rendition]" behaviour="makeListItem(., parent::list[@rendition])"/>
       <desc>Pithy description. </desc>
-      <model predicate="not(parent::list[@rendition])" name="makeListItem(., 'simple:bulleted')"/>
+      <model predicate="not(parent::list[@rendition])" behaviour="makeListItem(., 'simple:bulleted')"/>
 
    </elementSpec>
    <elementSpec mode="change" ident="l"/>
@@ -172,9 +173,9 @@
    <elementSpec mode="change" ident="lb"/>
    <elementSpec mode="change" ident="lg"/>
    <elementSpec mode="change" ident="list">
-      <ruleDef predicate="@rendition" behaviour="makeList(., @rendition)" output="default"/>
+      <model predicate="@rendition" behaviour="makeList(., @rendition)"/>
       <desc>Pithy description. </desc>
-      <model predicate="not(@rendition)" name="makeList(., 'simple:bulleted')"/>
+      <model predicate="not(@rendition)" behaviour="makeList(., 'simple:bulleted')"/>
       <!--
                   we are thinking! customization a user might make
                   <desc>Pithy description. </desc><model predicate="@type='blah'" name="makeList(., 'simple:bulleted')" class="blahList"/>
@@ -192,16 +193,18 @@
    <elementSpec mode="change" ident="note"/>
    <elementSpec mode="change" ident="num"/>
    <elementSpec mode="change" ident="opener"/>
-   <elementSpec mode="change" ident="orig"/>
+   <elementSpec mode="change" ident="orig">
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+   </elementSpec>
    <elementSpec mode="change" ident="p">
       <desc>Pithy description. </desc>
-      <model name="makeParagraph(.)"/>
+      <model behaviour="makeParagraph(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="pb">
       <desc>Pithy description. </desc>
-      <model predicate="@n" name="showPageBreak(@n)"/>
+      <model predicate="@n" behaviour="showPageBreak(.,@n)"/>
       <desc>Pithy description. </desc>
-      <model predicate="not(@n)" name="showPageBreak()"/>
+      <model predicate="not(@n)" behaviour="showPageBreak(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="pc"/>
    <elementSpec mode="change" ident="postscript"/>
@@ -210,16 +213,18 @@
    <elementSpec mode="change" ident="q"/>
    <elementSpec mode="change" ident="quote">
       <desc>Pithy description. </desc>
-      <model predicate="ancestor::p" name="makeInline(.)">
+      <model predicate="ancestor::p" behaviour="makeInline(.)">
          <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
       </model>
       <desc>Pithy description. </desc>
-      <model predicate="not(ancestor::p)" name="makeBlock(.)">
+      <model predicate="not(ancestor::p)" behaviour="makeBlock(.)">
          <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="ref"/>
-   <elementSpec mode="change" ident="reg"/>
+   <elementSpec mode="change" ident="reg">
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+   </elementSpec>
    <elementSpec mode="change" ident="role"/>
    <elementSpec mode="change" ident="roleDesc"/>
    <elementSpec mode="change" ident="row"/>
@@ -228,19 +233,19 @@
    <elementSpec mode="change" ident="salute"/>
    <elementSpec mode="change" ident="seg"/>
    <elementSpec mode="change" ident="sic">
-      <desc>Omit, because handled in parent choice. </desc>
-      <model behaviour="omit(.)"/>
+      <desc>Omit, iff handled in parent choice.</desc>
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="signed"/>
    <elementSpec mode="change" ident="sp">
       <desc>Pithy description. </desc>
-      <model name="makeBlock(.)"/>
+      <model behaviour="makeBlock(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="space"/>
    <elementSpec mode="change" ident="speaker"/>
    <elementSpec mode="change" ident="spGrp">
       <desc>Pithy description. </desc>
-      <model name="makeBlock(.)"/>
+      <model behaviour="makeBlock(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="stage"/>
    <elementSpec mode="change" ident="subst"/>
@@ -253,7 +258,7 @@
    <elementSpec mode="change" ident="title"/>
    <elementSpec mode="change" ident="titlePage">
       <desc>Pithy description. </desc>
-      <model name="makeBlock(.)"/>
+      <model behaviour="makeBlock(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="titlePart"/>
    <elementSpec mode="change" ident="trailer"/>

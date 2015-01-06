@@ -107,14 +107,29 @@
                         <xsl:when test="starts-with(@behaviour, 'makeBlock')">
                             <xsl:copy-of select="tei:makeBlock(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@behaviour, 'makeHeader')">
-                            <xsl:copy-of select="tei:makeHeader(., $content)"/>
+                        <xsl:when test="starts-with(@behaviour, 'makeHeading')">
+                            <xsl:copy-of select="tei:makeHeading(., $content)"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with(@behaviour, 'makeChoice')">
+                            <xsl:copy-of select="tei:makeChoice(., $content)"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with(@behaviour, 'makeDate')">
+                            <xsl:copy-of select="tei:makeDate(., $content)"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with(@behaviour, 'makeList(')">
+                            <xsl:copy-of select="tei:makeList(., $content)"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with(@behaviour, 'makeListItem(')">
+                            <xsl:copy-of select="tei:makeListItem(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeInline')">
                             <xsl:copy-of select="tei:makeInline(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeNewline')">
                             <xsl:copy-of select="tei:makeNewline(., $content)"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with(@behaviour, 'showPageBreak')">
+                            <xsl:copy-of select="tei:showPageBreak(., $content)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeParagraph')">
                             <xsl:copy-of select="tei:makeParagraph(., $content)"/>

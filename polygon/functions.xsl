@@ -91,9 +91,11 @@ of this software, even if advised of the possibility of such damage.
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Page break. Only a placeholder. Needs adding to.</desc>
     </doc>
-    <xsl:function name="tei:makePageBreak" as="node()*">
+    <xsl:function name="tei:showPageBreak" as="node()*">
         <xsl:param name="element"/>
-        <xslo:text>[Page]</xslo:text>
+        <xsl:param name="content"/>
+        
+        
     </xsl:function>
     
 
@@ -123,7 +125,7 @@ of this software, even if advised of the possibility of such damage.
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Block level element</desc>
     </doc>
-    <xsl:function name="tei:makeHeader" as="node()*">
+    <xsl:function name="tei:makeHeading" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
 
@@ -131,6 +133,46 @@ of this software, even if advised of the possibility of such damage.
         </xsl:function>
 
 
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Choice element</desc>
+    </doc>
+    <xsl:function name="tei:makeChoice" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        
+        <xsl:copy-of select="tei:makeElement('span', concat($element/@class, ' red'), $content, '')"/>
+    </xsl:function>
+    
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Date element</desc>
+    </doc>
+    <xsl:function name="tei:makeDate" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        
+        <xsl:copy-of select="tei:makeElement('span', concat($element/@class, ' red'), $content, '')"/>
+    </xsl:function>
+    
+    
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Placeholder for doing something sensible with lists</desc>
+    </doc>
+    <xsl:function name="tei:makeList" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:copy-of select="tei:makeElement('span', concat($element/@class, ' red'), substring-before($content, ','), '')"/>
+    </xsl:function>
+    
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Placeholder for doing something sensible with list items</desc>
+    </doc>
+    <xsl:function name="tei:makeListItem" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        
+        <xsl:copy-of select="tei:makeElement('li', concat($element/@class, ' red'), substring-before($content, ','), '')"/>
+    </xsl:function>
+    
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Anchor</desc>
     </doc>
