@@ -20,6 +20,7 @@
       <body>
          <p>TEI Simple functions</p>
 
+
          <table>
             <row>
                <cell>Function name</cell>
@@ -103,13 +104,59 @@
                <cell>p</cell>
             </row>
             <row>
-               <cell>tei:makeChoice (makeToggle)</cell>
+               <cell>tei:makeChoice (makeAlternatives)</cell>
                <cell>preferred element, alternate element</cell>
                <cell>Creates a specialized display of alternating elements for displaying the
                   preferred version, both at once or toggling between the two.</cell>
                <cell>span</cell>
             </row>
+            <row>
+               <cell>tei:makeCell</cell>
+               <cell>content</cell>
+               <cell>Creates a table cell</cell>
+               <cell>td</cell>
+            </row>
+            <row>
+               <cell>tei:makeCit</cell>
+               <cell>content</cell>
+               <cell>Creates a citation</cell>
+               <cell>span?</cell>
+            </row>
+            <row>
+               <cell>tei:makeCell</cell>
+               <cell>content</cell>
+               <cell>Creates a table cell</cell>
+               <cell>td</cell>
+            </row>
+            <row>
+               <cell>tei:makeDate</cell>
+               <cell>content</cell>
+               <cell>Do something with a date</cell>
+               <cell>span</cell>
+            </row>
+            <row>
+               <cell>tei:makeList</cell>
+               <cell>content, rendition</cell>
+               <cell>Create a list</cell>
+               <cell>ol, ul or span</cell>
+            </row>
+            <row>
+               <cell>tei:makeSpan</cell>
+               <cell>content</cell>
+               <cell>do something sensible with addSpan etc</cell>
+               <cell></cell>
+            </row>
+            <row>
+               <cell>tei:unknown</cell>
+               <cell>content</cell>
+               <cell>Placeholder</cell>
+               <cell></cell>
+            </row>
+            
          </table>
+         
+<!--         makeCloser(.)
+-->         
       </body>
    </text>
 </TEI>

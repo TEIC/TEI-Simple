@@ -14,6 +14,7 @@
     .chapterHeader   { display:block; font-size: 1.1em; text-align: center; margin-bottom: 1em; margin-top: 1.5em;}
     .sp   { display:block; text-align: left; margin-left: 20px; margin-bottom: 1em;}
     .ab   { display:block; text-align: left; margin-left: -20px;}
+    .red   {color: red; font-size: 1.1em;}
     
     span.floating {
     float: right;

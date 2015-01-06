@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title type="main">Tricky Tests for TEI SIMPLE Processing</title>
+         </titleStmt>
+         <publicationStmt>
+            <availability status="free">
+               <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed by the
+                  University of Oxford under a Creative Commons Attribution-ShareAlike 3.0 Unported
+                  License </licence>
+            </availability>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Contains bits and pieces from all over the place</p>
+         </sourceDesc>
+      </fileDesc>
+      <revisionDesc>
+         <change when="2015-01-06"/>
+      </revisionDesc>
+   </teiHeader>
+   <text>
+      <front>
+         <div>
+            <head>TREASURE ISLAND</head>
+            <quote>
+               <p>To S.L.O., an American gentleman in accordance with whose classic taste the
+                  following narrative has been designed, it is now, in return for numerous
+                  delightful hours, and with the kindest wishes, dedicated by his affectionate
+                  friend, the author.</p>
+            </quote>
+
+
+            <lg>
+               <head>TO THE HESITATING PURCHASER</head>
+               <l>If sailor tales to sailor tunes,</l>
+               <l>  Storm and adventure, heat and cold,</l>
+               <l>If schooners, islands, and maroons,</l>
+               <l>  And buccaneers, and buried gold,</l>
+               <l>And all the old romance, retold</l>
+               <l>  Exactly in the ancient way,</l>
+               <l>Can please, as me they pleased of old,</l>
+               <l>  The wiser youngsters of today:</l>
+               <l>—So be it, and fall on! If not,</l>
+               <l> If studious youth no longer crave,</l>
+               <l> His ancient appetites forgot,</l>
+               <l> Kingston, or Ballantyne the brave,</l>
+               <l> Or Cooper of the wood and wave:</l>
+               <l> So be it, also! And may I</l>
+               <l> And all my pirates share the grave</l>
+               <l> Where these and their creations lie!</l>
+            </lg>
+         </div>
+      </front>
+      <body>
+         <div>
+            <head>PART ONE—The Old Buccaneer</head>
+            <div type="div3">
+               <head>The Old Sea-dog at the Admiral Benbow</head>
+               <p>SQUIRE TRELAWNEY, Dr. Livesey, and the rest of these gentlemen having asked me to
+                  write down the whole particulars about Treasure Island, from the beginning to the
+                  end, keeping nothing back but the bearings of the island, and that only because
+                  there is still treasure not yet lifted, I take up my pen in the year of grace <date>17__</date>
+                  and go back to the time when my father kept the <name>Admiral Benbow</name> inn and the brown
+                  old seaman with the sabre cut first took up his lodging under our roof.</p>
+               <p>I remember him as if it were yesterday, as he came plodding to the inn door, his
+                  sea-chest following behind him in a hand-barrow—a <list type="simple"><item>tall, </item><item>strong, </item><item>heavy, </item><item>nut-brown</item></list>
+                  man, his tarry pigtail falling over the shoulder of his soiled blue coat, his
+                  hands ragged and scarred, with black, broken nails, and the sabre cut across one
+                  cheek, a dirty, livid white. I remember him looking round the cover and whistling
+                  to himself as he did so, and then breaking out in that old sea-song that he sang
+                  so often afterwards:</p>
+               <lg>
+                  <l>"Fifteen men on the dead man's chest--</l>
+                  <l>Yo-ho-ho, and a bottle of rum!"</l>
+               </lg>
+               <p>in the high, old tottering voice that seemed to have been tuned and broken at the
+                  capstan bars. Then he rapped on the door with a bit of stick like a handspike that
+                  he carried, and when my father appeared, called roughly for a <choice><corr>glass</corr><sic>barrell</sic></choice> of rum. This,
+                  when it was brought to him, he drank slowly, like a <corr>connoisseur</corr>, <corr>lingering</corr> on the
+                  taste and still looking about him at the <choice><corr>cliffs</corr></choice> and up at our signboard.</p>
+               <p>"This is a handy cove," says he at length; "and a pleasant <sic>sittyated</sic> grog-shop<anchor xml:id="A1"/>.
+                  Much company, mate?"</p>
+               <p>My father told him no, very little company, the more was the pity.</p>
+               <p>"Well, then," said he, "this is the berth for me. Here you, matey," he cried<note xml:id="N1">fdslkjfd</note> to
+                  the man who trundled the barrow; "bring up alongside and help up my chest. I'll
+                  stay here a bit," he continued. "I'm a plain man; rum and bacon and eggs is what I
+                  want, and that head up there for to watch ships off. What you mought call me? You
+                  mought call me captain. Oh, I see what you're at—there"; and he threw down three
+                  or four gold pieces on the threshold. "You can tell me when I've worked through
+                  that," says he, looking as fierce as a commander.</p>
+            </div>
+         </div>
+      </body>
+   </text>
+</TEI>
