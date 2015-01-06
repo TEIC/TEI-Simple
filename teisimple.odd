@@ -323,6 +323,9 @@ Error: Every local pointer in "<value-of select="@target"/>" must point to an ID
                               <skos:exactMatch>uc</skos:exactMatch>
                               <desc>all capitals</desc>
                            </valItem>
+                           <valItem ident="simple:additions">
+                              <desc>additional hand-writing</desc>
+                           </valItem>
                            <valItem ident="simple:blackletter">
                               <skos:exactMatch>blackLetter</skos:exactMatch>
                               <skos:exactMatch>blackletterType</skos:exactMatch>
