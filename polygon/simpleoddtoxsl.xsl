@@ -80,7 +80,7 @@
     </xsl:template>
 
     <xsl:template match="tei:elementSpec">
-        <xsl:for-each-group select="model[@output='render' or not(@output)]" group-by="@predicate">
+        <xsl:for-each-group select="model[@output='render' or not(@output)]" group-by="if(@predicate) then @predicate else ''">
             <xsl:variable name="xpth" select="current-group()[1]"/>
 
             <xsl:variable name="xp"
@@ -91,7 +91,6 @@
 
                     <xsl:variable name="content"
                         select="substring-before(substring-after(@behaviour, '('), ')')"/>
-                    <xsl:message>blah<xsl:value-of select="$content"/></xsl:message>
                     
                     <xsl:variable name="class" select="if(@class) then @class else ()"/>
 

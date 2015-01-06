@@ -28,7 +28,7 @@
                <attList>
                   <attDef ident="type" mode="delete"/>
                </attList>
-               <model behaviour="makeBlock(.)" output="render" class="italic"/>
+               <model behaviour="makeBlock(.)" class="italic"/>
 
                <!-- 
                   <model
@@ -40,7 +40,7 @@
 
             </elementSpec>
             <elementSpec ident="p">
-               <model predicate="" behaviour="makeParagraph(.)" output="render"/>
+               <model behaviour="makeParagraph(.)"/>
             </elementSpec>
 
             <elementSpec ident="head" mode="change">
@@ -49,15 +49,15 @@
                </attList>
 
                <!-- chapter headings -->
-               <model predicate="parent::div[@type='div3']" behaviour="makeHeader(.)" output="render"
+               <model predicate="parent::div[@type='div3']" behaviour="makeHeader(.)"
                   class="chapterHeader"/>
 
                <!-- part headings -->
-               <model predicate="parent::div[not(@type)]" behaviour="makeHeader(.)" output="render"
+               <model predicate="parent::div[not(@type)]" behaviour="makeHeader(.)"
                   class="partHeader"/>
 
                <!-- verse headings -->
-               <model predicate="parent::lg" behaviour="makeHeader(.)" output="render" class="verseHeader"/>
+               <model predicate="parent::lg" behaviour="makeHeader(.)" class="verseHeader"/>
             </elementSpec>
 
             <elementSpec ident="lg" mode="change">
@@ -65,13 +65,13 @@
                   <attDef ident="type" mode="delete"/>
                </attList>
                <!-- line groups to be modeled as block divisions -->
-               <model predicate="" behaviour="makeBlock(.)" output="render" class="verse"/>
+               <model behaviour="makeBlock(.)" class="verse"/>
 
             </elementSpec>
 
             <elementSpec ident="l">
                <!-- verse lines to be modeled as newlines -->
-               <model predicate="" behaviour="makeNewline(.)" output="render" class="verse"/>
+               <model behaviour="makeNewline(.)" class="verse"/>
             </elementSpec>
 
             <moduleRef key="header"
@@ -82,16 +82,16 @@
                   <attDef ident="type" mode="delete"/>
                </attList>
                <!-- floatingText to be modeled as block division -->
-               <model predicate="" behaviour="makeBlock(.)" output="render" class="border"/>
+               <model behaviour="makeBlock(.)" class="border"/>
             </elementSpec>
 
             <elementSpec ident="front">
                <!-- front to be modeled as block division -->
-               <model predicate="" behaviour="makeBlock(.)" output="render"/>
+               <model behaviour="makeBlock(.)"/>
             </elementSpec>
             <elementSpec ident="body">
                <!-- body to be modeled as block division -->
-               <model predicate="" behaviour="makeBlock(.)" output="render"/>
+               <model behaviour="makeBlock(.)"/>
             </elementSpec>
 
             <elementSpec ident="div" mode="change">
