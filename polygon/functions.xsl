@@ -62,6 +62,8 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="content"/>
         
         <xsl:copy-of select="tei:makeElement('div', $element/@class, $content, '')"/>
+         
+        
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">

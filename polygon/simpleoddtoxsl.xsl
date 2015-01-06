@@ -5,21 +5,29 @@
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
 
     <xsl:import href="functions.xsl"/>
-
     
     <xsl:namespace-alias stylesheet-prefix="xslo" result-prefix="xsl"/>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
         <desc>
             <p>Prototype TEI utility stylesheet for transformation from TEI P5 to TEI Simple</p>
+            <p>Default behaviour:
+                <list>
+                    <item>if no @predicate, assume it means self</item>
+                    <item>if no @output, means model valid for all outputs</item>
+                    <item>if no @class, use default css rendition for a given element</item>
+                </list>
+            </p>
+            
             <p>To do:
                 <list>
                     <item>when @predicate not present assume default context</item>
-                    <item>when @output not present assume default mode = render</item>
-                    <item>deal with @follow_rendition attribute</item>
+                    <item>when @output not present assume valid for all outputs</item>
+                    <item>deal with @follow_rendition attribute?</item>
                     <item>deal with styling instructions from simple namespace (eg. simple:bold)</item>
                 </list>
             </p>
+            
             <p>This software is dual-licensed: 1. Distributed under a Creative Commons
                 Attribution-ShareAlike 3.0 Unported License
                 http://creativecommons.org/licenses/by-sa/3.0/ 2.
@@ -57,7 +65,6 @@
 
             <xslo:template match="/">
                 <html>
-
                     <xsl:copy-of select="tei:makeHTMLHeader()"/>
                     <body>
                         <xslo:apply-templates/>
@@ -72,7 +79,6 @@
         </xslo:stylesheet>
     </xsl:template>
 
-
     <xsl:template match="tei:elementSpec">
         <xsl:for-each-group select="model[@output='render' or not(@output)]" group-by="@predicate">
             <xsl:variable name="xpth" select="current-group()[1]"/>
@@ -84,42 +90,42 @@
                 <xsl:for-each select="current-group()">
 
                     <xsl:variable name="content"
-                        select="substring-before(substring-after(@name, '('), ')')"/>
+                        select="substring-before(substring-after(@behaviour, '('), ')')"/>
+                    <xsl:message>blah<xsl:value-of select="$content"/></xsl:message>
+                    
                     <xsl:variable name="class" select="if(@class) then @class else ()"/>
 
-
                     <xsl:choose>
-                        <xsl:when test="starts-with(@name, 'makeNoteAnchor')">
+                        <xsl:when test="starts-with(@behaviour, 'makeNoteAnchor')">
                             <xsl:copy-of select="tei:makeNoteAnchor(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeMarginalNote')">
+                        <xsl:when test="starts-with(@behaviour, 'makeMarginalNote')">
                             <xsl:copy-of select="tei:makeMarginalNote(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeEndnotes')">
+                        <xsl:when test="starts-with(@behaviour, 'makeEndnotes')">
                             <xsl:copy-of select="tei:makeEndnotes(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeBlock')">
+                        <xsl:when test="starts-with(@behaviour, 'makeBlock')">
                             <xsl:copy-of select="tei:makeBlock(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeHeader')">
+                        <xsl:when test="starts-with(@behaviour, 'makeHeader')">
                             <xsl:copy-of select="tei:makeHeader(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeInline')">
+                        <xsl:when test="starts-with(@behaviour, 'makeInline')">
                             <xsl:copy-of select="tei:makeInline(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeNewline')">
+                        <xsl:when test="starts-with(@behaviour, 'makeNewline')">
                             <xsl:copy-of select="tei:makeNewline(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeParagraph')">
+                        <xsl:when test="starts-with(@behaviour, 'makeParagraph')">
                             <xsl:copy-of select="tei:makeParagraph(., $content)"/>
                         </xsl:when>
-                        <xsl:when test="starts-with(@name, 'makeFigure')">
+                        <xsl:when test="starts-with(@behaviour, 'makeFigure')">
                             <xsl:copy-of select="tei:makeFigure(., $content)"/>
                         </xsl:when>
                         
                         <!-- when omit() generate empty template -->
-                        <xsl:when test="starts-with(@name, 'omit')"/>
-                        
+                        <xsl:when test="starts-with(@behaviour, 'omit')"/>
                         
                         <xsl:otherwise>
                             <div>
@@ -138,6 +144,5 @@
             </xslo:template>
         </xsl:for-each-group>
     </xsl:template>
-
 
 </xsl:stylesheet>
