@@ -94,10 +94,10 @@
                 <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
               </datatype>
             </attDef>
-            <attDef ident="class" usage="opt">
-              <desc>the name of the appearance of the presentation</desc>
+            <attDef ident="useRenditionAttribute" usage="opt">
+              <desc>whether to obey any rendition attribute which is present</desc>
               <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
               </datatype>
             </attDef>
             <attDef ident="output" usage="opt">
