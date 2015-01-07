@@ -1,171 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0"
-     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-     xml:lang="en">
-   <teiHeader>
-      <fileDesc>
-         <titleStmt>
-            <title>TEI ODD extensions for processing models</title>
-         </titleStmt>
-         <publicationStmt>
-            <publisher>TEI Consortium</publisher>
-            <availability>
-               <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed under a Creative
-      Commons Attribution-ShareAlike 3.0 Unported License </licence>
-               <licence target="http://www.opensource.org/licenses/BSD-2-Clause">
-                  <p>Copyright 2015 TEI Consortium.</p>
-                  <p>All rights reserved.</p>
-                  <p>Redistribution and use in source and binary forms, with or without modification, are
-       permitted provided that the following conditions are met:</p>
-                  <list>
-                     <item>Redistributions of source code must retain the above copyright notice, this list of
-        conditions and the following disclaimer.</item>
-                     <item>Redistributions in binary form must reproduce the above copyright notice, this list of
-        conditions and the following disclaimer in the documentation and/or other materials provided
-        with the distribution.</item>
-                  </list>
-                  <p>This software is provided by the copyright holders and contributors "as is" and any express
-       or implied warranties, including, but not limited to, the implied warranties of
-       merchantability and fitness for a particular purpose are disclaimed. In no event shall the
-       copyright holder or contributors be liable for any direct, indirect, incidental, special,
-       exemplary, or consequential damages (including, but not limited to, procurement of substitute
-       goods or services; loss of use, data, or profits; or business interruption) however caused
-       and on any theory of liability, whether in contract, strict liability, or tort (including
-       negligence or otherwise) arising in any way out of the use of this software, even if advised
-       of the possibility of such damage.</p>
-               </licence>
-               <p>TEI material can be licensed differently depending on the use you intend to make of it.
-      Hence it is made available under both the CC+BY and BSD-2 licences. The CC+BY licence is
-      generally appropriate for usages which treat TEI content as data or documentation. The BSD-2
-      licence is generally appropriate for usage of TEI content in a software environment. For
-      further information or clarification, please contact the <ref target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
-            </availability>
-         </publicationStmt>
-         <sourceDesc>
-            <p>created ab initio during a meeting in Oxford</p>
-         </sourceDesc>
-      </fileDesc>
-   </teiHeader>
-   <text>
-      <front>
-         <titlePage>
-            <docTitle>
-               <titlePart type="main">TEI ODD extensions for
-	       processing models</titlePart>
-            </docTitle>
-            <docAuthor>Sebastian Rahtz</docAuthor>
-            <docAuthor>Brian Pytlik Zillig</docAuthor>
-            <docAuthor>Martin Mueller</docAuthor>
-            <docDate>Version 0.1: 6th January 2014</docDate>
-         </titlePage>
-      </front>
-      <body>
-            <schemaSpec ident="teipm" start="TEI teiCorpus specGrp">
-              <moduleRef key="header"/>
-              <moduleRef key="core"/>
-              <moduleRef key="tei"/>
-              <moduleRef key="textstructure"/>
-              <moduleRef key="tagdocs"/>
-              <moduleRef key="figures"/>
-              <moduleRef key="linking"/>
-	      <elementSpec ident="model" mode="add">
-		<gloss versionDate="2015-01-06"
-		       xml:lang="en">processing model</gloss>
-		<desc versionDate="2015-01-06" xml:lang="en">the processing model for this element</desc>
-		<classes>
-		  <memberOf key="att.global"/>
-		</classes>
-		<content>
-		  <zeroOrMore  xmlns="http://relaxng.org/ns/structure/1.0">
-		    <choice>
-		      <ref name="model.glossLike"/>
-		      <ref name="model.descLike"/>
-		    </choice>
-		  </zeroOrMore>
-		</content>
-		<attList>
-		  <attDef ident="behaviour" usage="req">
-		    <desc>which processing function should be  used to
-		    present this element in output</desc>
-		    <datatype>
-		    </datatype>
-		  </attDef>
-		  <attDef ident="predicate" usage="opt">
-		    <desc>the condition under which this model
-		    applies</desc>
-		    <datatype>
-		      <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
-		    </datatype>
-		  </attDef>
-		  <attDef ident="class" usage="opt">
-		    <desc>the name of the appearance of the
-		    presentation</desc>
-		    <datatype>
-		      <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
-		    </datatype>
-		  </attDef>
-		  <attDef ident="output" usage="opt">
-		    <desc>the intended output method</desc>
-		    <datatype>
-		      <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
-		    </datatype>
-		    <valList type="closed">
-		      <valItem ident="web"><desc></desc></valItem>
-		      <valItem ident="print"><desc></desc></valItem>
-		      <valItem ident="plaintext"><desc></desc></valItem>
-		    </valList>
-		  </attDef>
-		</attList>
-		<exemplum xml:lang="en">
-		  <egXML xmlns="http://www.tei-c.org/ns/Examples">
-		    <model behaviour="makeInline(.)"/>
-		    <model predicate="parent::person" behaviour="makeInline()"/>
-		    <model behaviour="makeInline(.)" class="bold"/>
-		    <model behaviour="makeInline(.)" output="print"/>
-		    <model behaviour="makeInline(@n)" />
-		  </egXML>
-		</exemplum>
-	      </elementSpec>
-<elementSpec ident="elementSpec" mode="change">
-  <content>
-    <group xmlns="http://relaxng.org/ns/structure/1.0">
-      <zeroOrMore>
-        <choice>
-          <ref name="model.glossLike"/>
-          <ref name="model.descLike"/>
-        </choice>
-      </zeroOrMore>
-      <optional>
-        <ref name="classes"/>
-      </optional>
-      <optional>
-        <ref name="content"/>
-      </optional>
-      <optional>
-        <ref name="valList"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="constraintSpec"/>
-      </zeroOrMore>
-      <optional>
-        <ref name="attList"/>
-      </optional>
-      <zeroOrMore>
-        <ref name="model"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="exemplum"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="remarks"/>
-      </zeroOrMore>
-      <zeroOrMore>
-        <ref name="listRef"/>
-      </zeroOrMore>
-    </group>
-  </content>
-</elementSpec>
-	    </schemaSpec>
-      </body>
-   </text>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI ODD extensions for processing models</title>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>TEI Consortium</publisher>
+        <availability>
+          <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed under a Creative Commons
+            Attribution-ShareAlike 3.0 Unported License </licence>
+          <licence target="http://www.opensource.org/licenses/BSD-2-Clause">
+            <p>Copyright 2015 TEI Consortium.</p>
+            <p>All rights reserved.</p>
+            <p>Redistribution and use in source and binary forms, with or without modification, are permitted provided
+              that the following conditions are met:</p>
+            <list>
+              <item>Redistributions of source code must retain the above copyright notice, this list of conditions and
+                the following disclaimer.</item>
+              <item>Redistributions in binary form must reproduce the above copyright notice, this list of conditions
+                and the following disclaimer in the documentation and/or other materials provided with the
+                distribution.</item>
+            </list>
+            <p>This software is provided by the copyright holders and contributors "as is" and any express or implied
+              warranties, including, but not limited to, the implied warranties of merchantability and fitness for a
+              particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for
+              any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited
+              to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption)
+              however caused and on any theory of liability, whether in contract, strict liability, or tort (including
+              negligence or otherwise) arising in any way out of the use of this software, even if advised of the
+              possibility of such damage.</p>
+          </licence>
+          <p>TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made
+            available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages
+            which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of
+            TEI content in a software environment. For further information or clarification, please contact the <ref
+              target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>created ab initio during a meeting in Oxford</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <front>
+      <titlePage>
+        <docTitle>
+          <titlePart type="main">TEI ODD extensions for processing models</titlePart>
+        </docTitle>
+        <docAuthor>Sebastian Rahtz</docAuthor>
+        <docAuthor>Brian Pytlik Zillig</docAuthor>
+        <docAuthor>Martin Mueller</docAuthor>
+        <docDate>Version 0.1: 6th January 2014</docDate>
+      </titlePage>
+    </front>
+    <body>
+      <schemaSpec ident="teipm" start="TEI teiCorpus specGrp">
+        <moduleRef key="header"/>
+        <moduleRef key="core"/>
+        <moduleRef key="tei"/>
+        <moduleRef key="textstructure"/>
+        <moduleRef key="tagdocs"/>
+        <moduleRef key="figures"/>
+        <moduleRef key="linking"/>
+
+        <!-- elementSpec for added model element -->
+        <elementSpec ident="model" mode="add">
+          <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
+          <desc versionDate="2015-01-06" xml:lang="en">documentation of an intended processing model for this
+            element</desc>
+          <classes>
+            <memberOf key="att.global"/>
+          </classes>
+          <content>
+            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+              <choice>
+                <ref name="model.glossLike"/>
+                <ref name="model.descLike"/>
+              </choice>
+            </zeroOrMore>
+          </content>
+          <attList>
+            <attDef ident="behaviour" usage="req">
+              <desc>which processing function, optionally containing parameters, should be used to present this element
+                in output</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.text"/>
+              </datatype>
+            </attDef>
+            <attDef ident="predicate" usage="opt">
+              <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
+              </datatype>
+            </attDef>
+            <attDef ident="class" usage="opt">
+              <desc>the name of the appearance of the presentation</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+              </datatype>
+            </attDef>
+            <attDef ident="output" usage="opt">
+              <desc>the intended output method</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+              </datatype>
+              <valList type="closed">
+                <valItem ident="web">
+                  <desc>the output is intended for presentation in a web format</desc>
+                </valItem>
+                <valItem ident="print">
+                  <desc>the output is intended for presentation in a print format</desc>
+                </valItem>
+                <valItem ident="plaintext">
+                  <desc>the output is intended for presentation in a plain text format</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)"/></egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <elementSpec mode="change" ident="quote">
+              <model predicate="ancestor::p" behaviour="makeInline(.)">
+                <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+              </model>
+              <model predicate="not(ancestor::p)" behaviour="makeBlock(.)">
+                <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+              </model>
+              </elementSpec>
+            </egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="parent::person" behaviour="makeInline()"/></egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)" class="bold"/></egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)" output="print"/></egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="makeInline(@n)"/></egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/></egXML>
+          </exemplum>
+        </elementSpec>
+
+
+
+
+
+        <!-- elementSpec for added model element -->
+        <elementSpec ident="modelGrp" mode="add">
+          <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
+          <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+            for this element</desc>
+          <classes>
+            <memberOf key="att.global"/>
+          </classes>
+          <content>
+            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+              <choice>
+                <ref name="model.glossLike"/>
+                <ref name="model.descLike"/>
+              </choice>
+            </zeroOrMore>
+            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+              <ref name="model"/>
+            </zeroOrMore>
+          </content>
+          <attList>
+            <attDef ident="class" usage="opt">
+              <desc>the name of the appearance of the presentation</desc>
+              <datatype maxOccurs="unbounded">
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+              </datatype>
+            </attDef>
+            <attDef ident="output" usage="opt">
+              <desc>the intended output method</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+              </datatype>
+              <valList type="closed">
+                <valItem ident="web">
+                  <desc>the output is intended for presentation in a web format</desc>
+                </valItem>
+                <valItem ident="print">
+                  <desc>the output is intended for presentation in a print format</desc>
+                </valItem>
+                <valItem ident="plaintext">
+                  <desc>the output is intended for presentation in a plain text format</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
+          <!-- Need better example here -JC -->
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <modelGrp output="print">
+              <model behaviour="makeInline(.)"/>
+              <model behaviour="makeFootnote(.)"/>
+            </modelGrp>  
+            </egXML>
+          </exemplum>
+        </elementSpec>
+
+
+
+        <!-- adding model/modelGrp to elementSpec element -->
+        <elementSpec ident="elementSpec" mode="change">
+          <content>
+            <group xmlns="http://relaxng.org/ns/structure/1.0">
+              <zeroOrMore>
+                <choice>
+                  <ref name="model.glossLike"/>
+                  <ref name="model.descLike"/>
+                </choice>
+              </zeroOrMore>
+              <optional>
+                <ref name="classes"/>
+              </optional>
+              <optional>
+                <ref name="content"/>
+              </optional>
+              <optional>
+                <ref name="valList"/>
+              </optional>
+              <zeroOrMore>
+                <ref name="constraintSpec"/>
+              </zeroOrMore>
+              <optional>
+                <ref name="attList"/>
+              </optional>
+              <zeroOrMore>
+                <ref name="model"/>
+              </zeroOrMore>
+              <zeroOrMore>
+                <ref name="modelGrp"/>
+              </zeroOrMore>
+              <zeroOrMore>
+                <ref name="exemplum"/>
+              </zeroOrMore>
+              <zeroOrMore>
+                <ref name="remarks"/>
+              </zeroOrMore>
+              <zeroOrMore>
+                <ref name="listRef"/>
+              </zeroOrMore>
+            </group>
+          </content>
+        </elementSpec>
+      </schemaSpec>
+    </body>
+  </text>
 </TEI>
