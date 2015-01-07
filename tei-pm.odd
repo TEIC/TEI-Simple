@@ -244,6 +244,9 @@
                 <ref name="modelGrp"/>
               </zeroOrMore>
               <zeroOrMore>
+                <ref name="rendition"/>
+              </zeroOrMore>
+              <zeroOrMore>
                 <ref name="exemplum"/>
               </zeroOrMore>
               <zeroOrMore>
