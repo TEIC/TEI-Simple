@@ -3835,7 +3835,7 @@ quote =
   }
 ref =
   
-  ## (reference) Pithy description.  [3.6.  16.1. ]
+  ## (reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]
   element ref {
     macro.paraContent
     >> sch:pattern [

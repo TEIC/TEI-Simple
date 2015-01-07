@@ -6734,7 +6734,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
   </xs:element>
   <xs:element name="ref" substitutionGroup="ns1:model.ptrLike">
     <xs:annotation>
-      <xs:documentation>(reference) Pithy description.  [3.6.  16.1. ]</xs:documentation>
+      <xs:documentation>(reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ]</xs:documentation>
     </xs:annotation>
   </xs:element>
   <xs:element name="reg">
