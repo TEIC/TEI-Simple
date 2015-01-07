@@ -60,8 +60,9 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeBlock" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
-        <xsl:copy-of select="tei:makeElement('div', $element/@class, $content, '')"/>
+        <xsl:copy-of select="tei:makeElement('div', $class, $content, '')"/>
          
         
     </xsl:function>
@@ -72,8 +73,9 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeParagraph" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
-        <xsl:copy-of select="tei:makeElement('p', $element/@class, $content, '')"/>
+        <xsl:copy-of select="tei:makeElement('p', $class, $content, '')"/>
     </xsl:function>
     
     
@@ -83,7 +85,8 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeNewline" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
-        <xsl:copy-of select="tei:makeInline($element, '')"/>
+        <xsl:param name="class"/>
+        <xsl:copy-of select="tei:makeInline($element, '', $class)"/>
         <br />
     </xsl:function>
     
@@ -94,6 +97,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:showPageBreak" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
         
     </xsl:function>
@@ -105,10 +109,11 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeInline" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
         <xsl:choose>
-            <xsl:when test="string($element/@class)">
-                <xsl:copy-of select="tei:makeElement('span', $element/@class, $content, '')"/>
+            <xsl:when test="string($class)">
+                <xsl:copy-of select="tei:makeElement('span', $class, $content, '')"/>
                 
             </xsl:when>
             <xsl:otherwise>
@@ -128,8 +133,9 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeHeading" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
-
-        <xsl:copy-of select="tei:makeElement('span', $element/@class, $content, '')"/>
+        <xsl:param name="class"/>
+        
+        <xsl:copy-of select="tei:makeElement('span', $class, $content, '')"/>
         </xsl:function>
 
 
@@ -139,8 +145,9 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeChoice" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
-        <xsl:copy-of select="tei:makeElement('span', concat($element/@class, ' red'), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement('span', concat($class, ' red'), $content, '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -149,8 +156,9 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeDate" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
-        <xsl:copy-of select="tei:makeElement('span', concat($element/@class, ' red'), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement('span', concat($class, ' red'), $content, '')"/>
     </xsl:function>
     
     
@@ -160,7 +168,9 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeList" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
-        <xsl:copy-of select="tei:makeElement('span', concat($element/@class, ' red'), substring-before($content, ','), '')"/>
+        <xsl:param name="class"/>
+        
+        <xsl:copy-of select="tei:makeElement('span', concat($class, ' red'), substring-before($content, ','), '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -169,8 +179,9 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeListItem" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
-        <xsl:copy-of select="tei:makeElement('li', concat($element/@class, ' red'), substring-before($content, ','), '')"/>
+        <xsl:copy-of select="tei:makeElement('li', concat($class, ' red'), substring-before($content, ','), '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -179,6 +190,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeNoteAnchor" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
         <xslo:variable name="cId">
             <xslo:value-of select="generate-id(.)"></xslo:value-of>
@@ -186,6 +198,7 @@ of this software, even if advised of the possibility of such damage.
         
         <sup>
         <xslo:element name="a">
+            <xsl:if test="string($class)"><xslo:attribute name="class"><xsl:value-of select="$class"/></xslo:attribute></xsl:if>
             <xslo:attribute name="name">A<xslo:value-of select="$cId"/></xslo:attribute>
             <xslo:attribute name="href">#N<xslo:value-of select="$cId"/></xslo:attribute>
             <xslo:number level="any"/>
@@ -202,9 +215,10 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeMarginalNote" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
         <!-- relies on css for the positioning and formatting of the note block -->
-        <xsl:copy-of select="tei:makeElement('span', $element/@class, $content, '')"/>
+        <xsl:copy-of select="tei:makeElement('span', $class, $content, '')"/>
     </xsl:function>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -213,11 +227,15 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeEndnotes" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
         <hr/>
         <ul>
+            <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
+            
             <xslo:for-each>
                     <xsl:if test="$content!='.' and string($content)"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
+                
                 <xslo:variable name="cId">
                     <xslo:value-of select="generate-id(.)"></xslo:value-of>
                 </xslo:variable>
@@ -245,13 +263,14 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:makeFigure" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="class"/>
         
                 <xslo:choose>
                     <!-- if @facs use it to display figure, else display placeholder -->
                     <xslo:when test="string(@facs)">
                             <xsl:element name="img">
-                                
-                        <xslo:attribute name="src"><xslo:value-of select="@facs"/></xslo:attribute>
+                                <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
+                                <xslo:attribute name="src"><xslo:value-of select="@facs"/></xslo:attribute>
                             </xsl:element>
                     </xslo:when>
                     <xslo:otherwise>                <span class="verybig">�</span>

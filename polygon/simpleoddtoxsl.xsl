@@ -21,8 +21,6 @@
             
             <p>To do:
                 <list>
-                    <item>when @predicate not present assume default context</item>
-                    <item>when @output not present assume valid for all outputs</item>
                     <item>deal with @follow_rendition attribute?</item>
                     <item>deal with styling instructions from simple namespace (eg. simple:bold)</item>
                 </list>
@@ -92,50 +90,50 @@
                     <xsl:variable name="content"
                         select="substring-before(substring-after(@behaviour, '('), ')')"/>
                     
-                    <xsl:variable name="class" select="if(@class) then @class else ()"/>
-
+                    <xsl:variable name="class" select="if(@class) then @class else parent::node()/@ident"/>
+                    
                     <xsl:choose>
                         <xsl:when test="starts-with(@behaviour, 'makeNoteAnchor')">
-                            <xsl:copy-of select="tei:makeNoteAnchor(., $content)"/>
+                            <xsl:copy-of select="tei:makeNoteAnchor(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeMarginalNote')">
-                            <xsl:copy-of select="tei:makeMarginalNote(., $content)"/>
+                            <xsl:copy-of select="tei:makeMarginalNote(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeEndnotes')">
-                            <xsl:copy-of select="tei:makeEndnotes(., $content)"/>
+                            <xsl:copy-of select="tei:makeEndnotes(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeBlock')">
-                            <xsl:copy-of select="tei:makeBlock(., $content)"/>
+                            <xsl:copy-of select="tei:makeBlock(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeHeading')">
-                            <xsl:copy-of select="tei:makeHeading(., $content)"/>
+                            <xsl:copy-of select="tei:makeHeading(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeChoice')">
-                            <xsl:copy-of select="tei:makeChoice(., $content)"/>
+                            <xsl:copy-of select="tei:makeChoice(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeDate')">
-                            <xsl:copy-of select="tei:makeDate(., $content)"/>
+                            <xsl:copy-of select="tei:makeDate(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeList(')">
-                            <xsl:copy-of select="tei:makeList(., $content)"/>
+                            <xsl:copy-of select="tei:makeList(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeListItem(')">
-                            <xsl:copy-of select="tei:makeListItem(., $content)"/>
+                            <xsl:copy-of select="tei:makeListItem(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeInline')">
-                            <xsl:copy-of select="tei:makeInline(., $content)"/>
+                            <xsl:copy-of select="tei:makeInline(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeNewline')">
-                            <xsl:copy-of select="tei:makeNewline(., $content)"/>
+                            <xsl:copy-of select="tei:makeNewline(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'showPageBreak')">
-                            <xsl:copy-of select="tei:showPageBreak(., $content)"/>
+                            <xsl:copy-of select="tei:showPageBreak(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeParagraph')">
-                            <xsl:copy-of select="tei:makeParagraph(., $content)"/>
+                            <xsl:copy-of select="tei:makeParagraph(., $content, $class)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeFigure')">
-                            <xsl:copy-of select="tei:makeFigure(., $content)"/>
+                            <xsl:copy-of select="tei:makeFigure(., $content, $class)"/>
                         </xsl:when>
                         
                         <!-- when omit() generate empty template -->
@@ -143,6 +141,7 @@
                         
                         <xsl:otherwise>
                             <div>
+
                                 <xsl:if test="string($class)">
                                     <xsl:attribute name="class">
                                         <xsl:value-of select="$class"/>

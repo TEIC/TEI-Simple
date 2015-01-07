@@ -440,6 +440,7 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="sic">
+<<<<<<< HEAD
       <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
          <desc>Omit, if handled in parent choice.</desc>
       </model>
@@ -447,6 +448,11 @@
    <elementSpec mode="change" ident="signed">
       <model behaviour="makeBlock(.)">
          <desc>Insert as a block element. </desc>
+=======
+      <model predicate="parent::choice and count(parent::*/*) gt 1"
+	     behaviour="omit(.)">
+      <desc>Omit, if handled in parent choice.</desc>
+>>>>>>> FETCH_HEAD
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="sp">

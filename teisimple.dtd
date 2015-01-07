@@ -1,6 +1,6 @@
 
 <!--
-DTD generated from ODD source 2015-01-06T22:52:43Z. Version 0.1: 30th November 2014.This material is dual-licensed.
+DTD generated from ODD source 1970-01-01. Version 0.1: 30th November 2014.This material is dual-licensed.
 [http://creativecommons.org/licenses/by-sa/3.0/] Distributed under a Creative Commons Attribution-ShareAlike 3.0 Unported License  [http://www.opensource.org/licenses/BSD-2-Clause] Copyright 2014 TEI Consortium. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage. TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of TEI content in a software environment. For further information or clarification, please contact the TEI Consortium.
 TEI Edition: Version 2.7.0. Last updated on
 	16th September 2014, revision 13036
@@ -871,7 +871,7 @@ version %data.version;  #IMPLIED >
 <!ATTLIST TEI xsi:schemaLocation CDATA #IMPLIED
  xmlns:xsi CDATA #FIXED 'http://www.w3.org/2001/XMLSchema-instance'
  >
-<!--doc:(anonymous block) Insert as a block element.  [16.3. ] -->
+<!--doc:(anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. ] -->
 <!ELEMENT ab %macro.paraContent;>
 <!ATTLIST ab xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST ab
@@ -893,12 +893,12 @@ type %data.enumerated;  #IMPLIED >
 <!ATTLIST abstract
  %att.global.attributes;
  %att.responsibility.attributes; >
-<!--doc:Insert as an inline element.  [7.1.4. ] -->
+<!--doc:contains the name of an actor appearing within a cast list. [7.1.4. ] -->
 <!ELEMENT actor %macro.phraseSeq;>
 <!ATTLIST actor xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST actor
  %att.global.attributes; >
-<!--doc:(addition) Insert as an inline element.  [3.4.3. ] -->
+<!--doc:(addition) contains letters, words, or phrases inserted in the source text by an author, scribe, or a previous annotator or corrector. [3.4.3. ] -->
 <!ELEMENT add %macro.paraContent;>
 <!ATTLIST add xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST add
@@ -906,7 +906,7 @@ type %data.enumerated;  #IMPLIED >
  %att.transcriptional.attributes;
  %att.placement.attributes;
  %att.typed.attributes; >
-<!--doc:(added span of text) Insert as span.  [11.3.1.4. ] -->
+<!--doc:(added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ] -->
 <!ELEMENT addSpan EMPTY>
 <!ATTLIST addSpan xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST addSpan
@@ -915,17 +915,17 @@ type %data.enumerated;  #IMPLIED >
  %att.placement.attributes;
  %att.typed.attributes;
  %att.spanning.attributes; >
-<!--doc:(address line) Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ] -->
+<!--doc:(address line) contains one line of a postal address. [3.5.2.  2.2.4.  3.11.2.4. ] -->
 <!ELEMENT addrLine %macro.phraseSeq;>
 <!ATTLIST addrLine xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST addrLine
  %att.global.attributes; >
-<!--doc:Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ] -->
+<!--doc:contains a postal address, for example of a publisher, an organization, or an individual. [3.5.2.  2.2.4.  3.11.2.4. ] -->
 <!ELEMENT address ((%model.global;)*,((%model.addrPart;),(%model.global;)*)+)>
 <!ATTLIST address xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST address
  %att.global.attributes; >
-<!--doc:(abbreviation marker) Insert as an inline element.  [11.3.1.2. ] -->
+<!--doc:(abbreviation marker) contains a sequence of letters or signs present in an abbreviation which are omitted or replaced in the expanded form of the abbreviation. [11.3.1.2. ] -->
 <!ELEMENT am (#PCDATA|%model.gLike;|%model.pPart.transcriptional;)*>
 <!ATTLIST am xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST am
