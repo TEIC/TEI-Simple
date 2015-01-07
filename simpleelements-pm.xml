@@ -397,7 +397,11 @@
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
-   <elementSpec mode="change" ident="q"/>
+   <elementSpec mode="change" ident="q">
+      <model behaviour="makeInline(.)">
+         <desc>Insert as an inline element. </desc>
+      </model>
+   </elementSpec>
    <elementSpec mode="change" ident="quote">
       <model predicate="ancestor::p" behaviour="makeInline(.)">
          <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
