@@ -75,6 +75,7 @@
           <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
 	</factory>
         <param name="lang" expression="${lang}"/>
+	<param name="useFixedDate" expression="true"/>
         <param name="documentationLanguage" expression="${docLang}"/>
       </xslt>
       <xslt processor="trax" force="yes" style="${XSL}/odds/odd2relax.xsl" in="teisimple.odd.compiled" out="teisimple.rng">
@@ -82,6 +83,7 @@
           <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
 	</factory>
         <param name="lang" expression="${lang}"/>
+	<param name="useFixedDate" expression="true"/>
         <param name="documentationLanguage" expression="${docLang}"/>
       </xslt>
       <xslt processor="trax" force="yes" style="${XSL}/odds/extract-isosch.xsl" in="teisimple.odd.compiled" out="teisimple.isosch">
@@ -89,6 +91,7 @@
           <attribute name="http://saxon.sf.net/feature/xinclude-aware"
 		     value="true"/>
 	</factory>
+	<param name="useFixedDate" expression="true"/>
       </xslt>
       <xslt processor="trax" force="yes" style="isoschematron/iso_schematron_message_xslt2.xsl" in="teisimple.isosch" out="teisimple.isosch.xsl">
 	<factory name="net.sf.saxon.TransformerFactoryImpl">
@@ -130,6 +133,7 @@
           <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
 	</factory>
         <param name="lang" expression="${lang}"/>
+	<param name="useFixedDate" expression="true"/>
         <param name="documentationLanguage" expression="${docLang}"/>
       </xslt>
       <xslt processor="trax" force="yes" style="${XSL}/odds/extract-isosch.xsl" in="tei-pm.odd.compiled" out="tei-pm.isosch">
@@ -137,6 +141,7 @@
           <attribute name="http://saxon.sf.net/feature/xinclude-aware"
 		     value="true"/>
 	</factory>
+	<param name="useFixedDate" expression="true"/>
       </xslt>
   </target>
   
@@ -158,6 +163,7 @@
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
       <param name="inputDir" expression="${inputDir}/"/>
+	<param name="useFixedDate" expression="true"/>
       <param name="displayMode" expression="rnc"/>
     </xslt>
     <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd" out="teisimple.html">
@@ -165,6 +171,8 @@
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
       <param name="inputDir" expression="${inputDir}/"/>
+	<param name="useFixedDate" expression="true"/>
+
     </xslt>
 </target>
 

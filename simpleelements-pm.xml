@@ -297,7 +297,7 @@
    <elementSpec mode="change" ident="sic">
       <model predicate="parent::choice and count(parent::*/*) gt 1"
 	     behaviour="omit(.)">
-      <desc>Omit, iff handled in parent choice.</desc>
+      <desc>Omit, if handled in parent choice.</desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="signed"/>

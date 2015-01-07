@@ -7,7 +7,7 @@ namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace skos = "http://www.w3.org/2004/02/skos/core#"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2015-01-07T09:23:22Z. Version 0.1: 30th November 2014.
+# Schema generated from ODD source 1970-01-01. Version 0.1: 30th November 2014.
 # TEI Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
