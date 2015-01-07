@@ -7,30 +7,37 @@
    xml:id="simpleelementspm">
    <elementSpec mode="change" ident="ab">
       <model behaviour="makeParagraph(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="abbr">
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
+         <rendition>display: none;</rendition>
+         <desc/>
+      </model>
    </elementSpec>
    <elementSpec mode="change" ident="actor">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="add">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <rendition>color: green; text-decoration: underline;</rendition>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="address">
-      <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+      <model behaviour="makeBlock(.)">
+         <rendition>margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom:
+            2em;</rendition>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="addrLine">
-      <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+      <model behaviour="makeBlock(.)">
+         <rendition>white-space: nowrap;</rendition>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="addSpan">
@@ -40,47 +47,49 @@
    </elementSpec>
    <elementSpec mode="change" ident="am">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="anchor">
       <model behaviour="unknown(.)">
+         <rendition>display: none;</rendition>
          <desc>Pithy description of unknown behaviour. </desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="argument">
-      <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+      <model behaviour="makeBlock(.)">
+         <rendition>margin-bottom: 0.5em;</rendition>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="author">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="back">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="bibl">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="body">
       <model behaviour="makeBody(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="byline">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="c">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="castGroup">
@@ -104,7 +113,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="cb">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="cell">
@@ -137,9 +146,21 @@
          <desc>Insert date. </desc>
       </model>
    </elementSpec>
-   <elementSpec mode="change" ident="dateline"/>
-   <elementSpec mode="change" ident="del"/>
-   <elementSpec mode="change" ident="desc"/>
+   <elementSpec mode="change" ident="dateline">
+      <model behaviour="makeBlock(.)">
+         <desc/>
+      </model>
+   </elementSpec>
+   <elementSpec mode="change" ident="del">
+      <model behaviour="makeInline(.)">
+         <desc/>
+      </model>
+   </elementSpec>
+   <elementSpec mode="change" ident="desc">
+      <model behaviour="makeInline(.)">
+         <desc/>
+      </model>
+   </elementSpec>
    <elementSpec mode="change" ident="div">
       <model behaviour="makeBlock(.)">
          <desc>Insert div as a block. </desc>
@@ -172,12 +193,12 @@
    </elementSpec>
    <elementSpec mode="change" ident="epigraph">
       <model behaviour="makeBlock(.)">
-         <desc>Pithy description. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="ex">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="expan">
@@ -185,65 +206,65 @@
    </elementSpec>
    <elementSpec mode="change" ident="figDesc">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="figure">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="floatingText">
       <model behaviour="makeBlock(.)">
-         <desc>Pithy description. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="foreign">
       <model behaviour="makeInline(.)" class="italic">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="formula">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="front">
       <model behaviour="makeBlock(.)">
-         <desc>Pithy description. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="fw">
       <model predicate="descendant::p or descendant::ab" behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
       <model behaviour="makeBlock(.)">
-         <desc>Pithy description. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="g">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="gap">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="graphic">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="group">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="handShift">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="head">
@@ -274,7 +295,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="imprimatur">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="item">
@@ -289,22 +310,22 @@
    </elementSpec>
    <elementSpec mode="change" ident="l">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="label">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="lb">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="lg">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="list">
@@ -322,32 +343,32 @@
    </elementSpec>
    <elementSpec mode="change" ident="measure">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="milestone">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="name">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="note">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="num">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="opener">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="orig">
@@ -357,22 +378,22 @@
    </elementSpec>
    <elementSpec mode="change" ident="p">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="pb">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="pc">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="postscript">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="publisher">
@@ -385,7 +406,11 @@
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
-   <elementSpec mode="change" ident="q"/>
+   <elementSpec mode="change" ident="q">
+      <model behaviour="makeInline(.)">
+         <desc/>
+      </model>
+   </elementSpec>
    <elementSpec mode="change" ident="quote">
       <model predicate="ancestor::p" behaviour="makeInline(.)">
          <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
@@ -396,7 +421,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="ref">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="reg">
@@ -406,12 +431,12 @@
    </elementSpec>
    <elementSpec mode="change" ident="role">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="roleDesc">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="row">
@@ -421,126 +446,135 @@
    </elementSpec>
    <elementSpec mode="change" ident="rs">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="s">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="salute">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="seg">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
-      </model>
-   </elementSpec>
-   <elementSpec mode="change" ident="sic">
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
-         <desc>Omit, if handled in parent choice.</desc>
-      </model>
-   </elementSpec>
-   <elementSpec mode="change" ident="signed">
-      <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
-      </model>
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
-         <desc>Omit, if handled in parent choice.</desc>
+         <desc/>
       </model>
    </elementSpec>
 
+   <elementSpec ident="sic" mode="change">
+      <modelGrp>
+         <rendition>font-size: large</rendition>
+         <model behaviour="makeInline(.)">
+            <rendition>font-weight: normal</rendition>
+            <desc/>
+         </model>
+         <model predicate="parent::div" behaviour="makeBlock(.)">
+            <rendition>font-size: small</rendition>
+            <desc/>
+         </model>
+      </modelGrp>
+   </elementSpec>
+
+   <elementSpec mode="change" ident="signed">
+      <model behaviour="makeBlock(.)">
+         <desc/>
+      </model>
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
+         <desc>Omit, if handled in parent choice.</desc>
+      </model>
+   </elementSpec>
    <elementSpec mode="change" ident="sp">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="space">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="speaker">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="spGrp">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="stage">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="subst">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="supplied">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="table">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="TEI">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="teiCorpus">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="text">
       <model behaviour="makeBlock(.)">
-         <desc>Insert as a block element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="time">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="title">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="titlePage">
       <model behaviour="makeBlock(.)">
-         <desc>Pithy description. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="titlePart">
       <model behaviour="makeBlock(.)">
-         <desc>Pithy description. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="trailer">
       <model behaviour="makeBlock(.)">
-         <desc>Pithy description. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="unclear">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="w">
       <model behaviour="makeInline(.)">
-         <desc>Insert as an inline element. </desc>
+         <desc/>
       </model>
    </elementSpec>
 </specGrp>
