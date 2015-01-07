@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en">
   <teiHeader>
     <fileDesc>
@@ -34,8 +34,7 @@
           <p>TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made
             available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages
             which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of
-            TEI content in a software environment. For further information or clarification, please contact the <ref
-              target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
+            TEI content in a software environment. For further information or clarification, please contact the <ref target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
         </availability>
       </publicationStmt>
       <sourceDesc>
@@ -64,7 +63,6 @@
         <moduleRef key="tagdocs"/>
         <moduleRef key="figures"/>
         <moduleRef key="linking"/>
-
         <!-- elementSpec for added model element -->
         <elementSpec ident="model" mode="add">
           <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
@@ -78,6 +76,7 @@
               <choice>
                 <ref name="model.glossLike"/>
                 <ref name="model.descLike"/>
+                <ref name="rendition"/>
               </choice>
             </zeroOrMore>
           </content>
@@ -120,41 +119,68 @@
             </attDef>
           </attList>
           <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)"/></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model behaviour="makeInline(.)"/>
+            </egXML>
           </exemplum>
           <exemplum xml:lang="en">
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <elementSpec mode="change" ident="quote">
-              <model predicate="ancestor::p" behaviour="makeInline(.)">
-                <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
-              </model>
-              <model predicate="not(ancestor::p)" behaviour="makeBlock(.)">
-                <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
-              </model>
+                <model predicate="ancestor::p" behaviour="makeInline(.)">
+                  <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+                </model>
+                <model predicate="not(ancestor::p)" behaviour="makeBlock(.)">
+                  <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+                </model>
               </elementSpec>
             </egXML>
           </exemplum>
           <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="parent::person" behaviour="makeInline()"/></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model predicate="parent::person" behaviour="makeInline()"/>
+            </egXML>
           </exemplum>
           <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)" class="bold"/></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model behaviour="makeInline(.)">
+                <rendition>font-weight:bold</rendition>
+              </model>
+            </egXML>
           </exemplum>
           <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)" output="print"/></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model behaviour="makeInline(.)" output="print"/>
+            </egXML>
           </exemplum>
           <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="makeInline(@n)"/></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model predicate="ancestor::p" behaviour="makeInline(@n)"/>
+            </egXML>
           </exemplum>
           <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+            </egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <elementSpec mode="change" ident="date">
+                <model output="print" predicate="text()" behaviour="makeInline(.)"/>
+                <model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/>
+                <model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/>
+              </elementSpec>
+            </egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <elementSpec mode="change" ident="choice">
+                <model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/>
+                <model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/>
+                <model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/>
+              </elementSpec>
+            </egXML>
           </exemplum>
         </elementSpec>
-
-
-
-
-
         <!-- elementSpec for added model element -->
         <elementSpec ident="modelGrp" mode="add">
           <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
@@ -168,6 +194,7 @@
               <choice>
                 <ref name="model.glossLike"/>
                 <ref name="model.descLike"/>
+                <ref name="rendition"/>
               </choice>
             </zeroOrMore>
             <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
@@ -202,16 +229,33 @@
           <!-- Need better example here -JC -->
           <exemplum xml:lang="en">
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
-            <modelGrp output="print">
-              <model behaviour="makeInline(.)"/>
-              <model behaviour="makeFootnote(.)"/>
-            </modelGrp>  
+              <elementSpec mode="change" ident="abbr">
+                <modelGrp output="web">
+                  <model predicate="parent::choice" behaviour="omit()"/>
+                  <model predicate="ancestor::front" behaviour="makeInline">
+                    <rendition>font-style:italic; </rendition>
+                  </model>
+                  <model predicate="not(parent::choice)" behaviour="makeInline">
+                    <rendition scope="before">content: ' ('</rendition>
+                    <rendition scope="after">content: ')'</rendition>
+                  </model>
+                </modelGrp>
+                <modelGrp output="print">
+                  <model predicate="parent::choice" behaviour="omit()"/>
+                  <model predicate="not(parent::choice)" behaviour="makeNote(.,'foot')"/>
+                </modelGrp>
+              </elementSpec>
+            </egXML>
+          </exemplum>
+          <exemplum xml:lang="en">
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <modelGrp output="print">
+                <model behaviour="makeInline(.)"/>
+                <model behaviour="makeFootnote(.)"/>
+              </modelGrp>
             </egXML>
           </exemplum>
         </elementSpec>
-
-
-
         <!-- adding model/modelGrp to elementSpec element -->
         <elementSpec ident="elementSpec" mode="change">
           <content>
@@ -242,9 +286,6 @@
               </zeroOrMore>
               <zeroOrMore>
                 <ref name="modelGrp"/>
-              </zeroOrMore>
-              <zeroOrMore>
-                <ref name="rendition"/>
               </zeroOrMore>
               <zeroOrMore>
                 <ref name="exemplum"/>

@@ -1802,7 +1802,7 @@ marks (none|some|all) #IMPLIED >
  %att.spanning.attributes;
  %att.transcriptional.attributes;
 target CDATA  #IMPLIED >
-<!--doc:(reference) Pithy description.  [3.6.  16.1. ] -->
+<!--doc:(reference) defines a reference to another location, possibly modified by additional text or comment. [3.6.  16.1. ] -->
 <!ELEMENT ref %macro.paraContent;>
 <!ATTLIST ref xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST ref
