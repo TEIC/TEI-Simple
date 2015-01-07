@@ -98,16 +98,6 @@
           <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
 	</factory>
       </xslt>
-	<xslt processor="trax" force="yes" style="${XSL}/odds/extract-isosch.xsl" in="teisimple.odd.compiled" out="teisimple.isosch">
-	  <factory name="net.sf.saxon.TransformerFactoryImpl">
-          <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
-	  </factory>
-	</xslt>
-	<xslt processor="trax" force="yes" style="isoschematron/iso_schematron_message_xslt2.xsl" in="teisimple.isosch" out="teisimple.isosch.xsl">
-	  <factory name="net.sf.saxon.TransformerFactoryImpl">
-          <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
-	  </factory>
-	</xslt>
       <sequential>      
 	<java jar="${trang}" failonerror="true" fork="true">
 	<arg value="teisimple.rng"/>

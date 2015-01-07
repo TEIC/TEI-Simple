@@ -7529,6 +7529,9 @@ Child elements of <name/> are only allowed when an external module is being load
                <ref name="model"/>
             </zeroOrMore>
             <zeroOrMore>
+               <ref name="modelGrp"/>
+            </zeroOrMore>
+            <zeroOrMore>
                <ref name="exemplum"/>
             </zeroOrMore>
             <zeroOrMore>
@@ -8752,7 +8755,7 @@ You must supply at least two values for @target on <name/>
    </define>
    <define name="model">
       <element name="model">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(processing model) the processing model for this element</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(processing model) documentation of an intended processing model for this element</a:documentation>
          <zeroOrMore>
             <choice>
                <ref name="model.glossLike"/>
@@ -8761,12 +8764,12 @@ You must supply at least two values for @target on <name/>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
          <attribute name="behaviour">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">which processing function should be used to present this element in output</a:documentation>
-            <text/>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">which processing function, optionally containing parameters, should be used to present this element in output</a:documentation>
+            <ref name="data.text"/>
          </attribute>
          <optional>
             <attribute name="predicate">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the condition under which this model applies</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the condition under which this model applies given as an XPath Predicate Expression</a:documentation>
                <ref name="data.xpath"/>
             </attribute>
          </optional>
@@ -8781,11 +8784,50 @@ You must supply at least two values for @target on <name/>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the intended output method</a:documentation>
                <choice>
                   <value>web</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a web format</a:documentation>
                   <value>print</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a print format</a:documentation>
                   <value>plaintext</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a plain text format</a:documentation>
+               </choice>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="modelGrp">
+      <element name="modelGrp">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(processing model group) a group of model elements documenting intended processing models for this element</a:documentation>
+         <zeroOrMore>
+            <choice>
+               <ref name="model.glossLike"/>
+               <ref name="model.descLike"/>
+            </choice>
+         </zeroOrMore>
+         <zeroOrMore>
+            <ref name="model"/>
+         </zeroOrMore>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute name="class">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the name of the appearance of the presentation</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <ref name="data.enumerated"/>
+                  </oneOrMore>
+               </list>
+            </attribute>
+         </optional>
+         <optional>
+            <attribute name="output">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the intended output method</a:documentation>
+               <choice>
+                  <value>web</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a web format</a:documentation>
+                  <value>print</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a print format</a:documentation>
+                  <value>plaintext</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a plain text format</a:documentation>
                </choice>
             </attribute>
          </optional>
