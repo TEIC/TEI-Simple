@@ -7,7 +7,7 @@ namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace skos = "http://www.w3.org/2004/02/skos/core#"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 2015-01-06T22:52:44Z. Version 0.1: 30th November 2014.
+# Schema generated from ODD source 2015-01-07T09:23:22Z. Version 0.1: 30th November 2014.
 # TEI Edition: Version 2.7.0. Last updated on
 #	16th September 2014, revision 13036
 # TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
@@ -2817,7 +2817,7 @@ att.global.linking.attribute.prev =
   attribute prev { data.pointer }?
 ab =
   
-  ## (anonymous block) Insert as a block element.  [16.3. ]
+  ## (anonymous block) contains any arbitrary component-level unit of text, acting as an anonymous container for phrase or inter level elements analogous to, but without the semantic baggage of, a paragraph. [16.3. ]
   element ab {
     macro.paraContent,
     att.global.attributes,
@@ -2841,11 +2841,11 @@ abbr =
   }
 actor =
   
-  ## Insert as an inline element.  [7.1.4. ]
+  ## contains the name of an actor appearing within a cast list. [7.1.4. ]
   element actor { macro.phraseSeq, att.global.attributes, empty }
 add =
   
-  ## (addition) Insert as an inline element.  [3.4.3. ]
+  ## (addition) contains letters, words, or phrases inserted in the source text by an author, scribe, or a previous annotator or corrector. [3.4.3. ]
   element add {
     macro.paraContent,
     att.global.attributes,
@@ -2856,7 +2856,7 @@ add =
   }
 address =
   
-  ## Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ]
+  ## contains a postal address, for example of a publisher, an organization, or an individual. [3.5.2.  2.2.4.  3.11.2.4. ]
   element address {
     (model.global*, (model.addrPart, model.global*)+),
     att.global.attributes,
@@ -2864,11 +2864,11 @@ address =
   }
 addrLine =
   
-  ## (address line) Insert as an inline element.  [3.5.2.  2.2.4.  3.11.2.4. ]
+  ## (address line) contains one line of a postal address. [3.5.2.  2.2.4.  3.11.2.4. ]
   element addrLine { macro.phraseSeq, att.global.attributes, empty }
 addSpan =
   
-  ## (added span of text) Insert as span.  [11.3.1.4. ]
+  ## (added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also add). [11.3.1.4. ]
   element addSpan {
     empty
     >> sch:pattern [
@@ -2918,7 +2918,7 @@ addSpan =
   }
 am =
   
-  ## (abbreviation marker) Insert as an inline element.  [11.3.1.2. ]
+  ## (abbreviation marker) contains a sequence of letters or signs present in an abbreviation which are omitted or replaced in the expanded form of the abbreviation. [11.3.1.2. ]
   element am {
     (text | model.gLike | model.pPart.transcriptional)*,
     att.global.attributes,
