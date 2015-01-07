@@ -63,7 +63,7 @@
 
             <xslo:template match="/">
                 <html>
-                    <xsl:copy-of select="tei:makeHTMLHeader()"/>
+                    <xsl:copy-of select="tei:makeHTMLHeader(., //elementSpec, '')"/>
                     <body>
                         <xslo:apply-templates/>
                     </body>

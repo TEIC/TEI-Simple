@@ -251,7 +251,6 @@ of this software, even if advised of the possibility of such damage.
         </ul>
     </xsl:function>
     
-    
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Title Page</desc>
     </doc>
@@ -296,36 +295,76 @@ of this software, even if advised of the possibility of such damage.
     </xsl:function>
     
     <xsl:function name="tei:makeDefault" as="node()*">
-        <xsl:param name="name"/>
+        <xsl:param name="element"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         
-        
         <div>
-            <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/>
-                </xsl:attribute>
+            <xsl:if test="string($class)">
+                <xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>
             </xsl:if>
             <xslo:apply-templates/>
         </div>
         
     </xsl:function>
     
-    
-    
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Block level element</desc>
     </doc>
     <xsl:function name="tei:makeHTMLHeader" as="node()*">
-            <head>
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        
+        <head>
                 <meta charset="UTF-8" />
                 <title>
                     TEI-Simple: transform to html generated from odd file.
                 </title>
                 <link rel="StyleSheet" href="{$css}" type="text/css"/>
- 
-            </head>
+            <style>
+                <xsl:for-each select="$content">
+                    <xsl:variable name="rendition">
+                        <xsl:value-of select=".//tei:rendition"/>
+                    </xsl:variable>
+                    <xsl:if test="string($rendition)">
+                        <!-- this is very wrong; maybe container element for the model/behaviour should be passed as a parameter? -->
+                    <xsl:value-of select="tei:simpleContainer(.//tei:model[1]/@behaviour)"/>
+                    <xsl:text>.</xsl:text><xsl:value-of select="@ident"/><xsl:text> {</xsl:text>
+                    <xsl:value-of select="$rendition"/>
+                    <xsl:text>}</xsl:text>
+                    <xsl:text>&#xa;</xsl:text>
+                    </xsl:if>
+                </xsl:for-each>
                 
+            </style>
+            </head>
     </xsl:function>
     
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Determine the container for the function</desc>
+    </doc>
+    <xsl:function name="tei:simpleContainer" as="xs:string">
+        <xsl:param name="name"/>
 
+<xsl:choose>
+    <xsl:when test="starts-with($name, 'makeNoteAnchor')">a</xsl:when>
+    <xsl:when test="starts-with($name, 'makeMarginalNote')">div</xsl:when>
+    <xsl:when test="starts-with($name, 'makeEndnotes')">div</xsl:when>
+    <xsl:when test="starts-with($name, 'makeBlock')">div</xsl:when>
+    <xsl:when test="starts-with($name, 'makeHeading')">div</xsl:when>
+    <xsl:when test="starts-with($name, 'makeChoice')">span</xsl:when>
+    <xsl:when test="starts-with($name, 'makeDate')">span</xsl:when>
+    <xsl:when test="starts-with($name, 'makeList(')">ol</xsl:when>
+    <xsl:when test="starts-with($name, 'makeListItem')">li</xsl:when>
+    <xsl:when test="starts-with($name, 'makeInline')">span</xsl:when>
+    <xsl:when test="starts-with($name, 'makeNewline')">br</xsl:when>
+    <xsl:when test="starts-with($name, 'showPageBreak')">span</xsl:when>
+    <xsl:when test="starts-with($name, 'showParagraph')">p</xsl:when>
+    <xsl:when test="starts-with($name, 'makeFigure')">img</xsl:when>
+    <xsl:otherwise>div</xsl:otherwise>
+</xsl:choose>
+    </xsl:function>
+    
+    
 </xsl:stylesheet>
