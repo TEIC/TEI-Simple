@@ -193,7 +193,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         
         <xslo:variable name="cId">
-            <xslo:value-of select="generate-id(.)"></xslo:value-of>
+            <xslo:value-of select="generate-id(.)"/>
         </xslo:variable>
         
         <sup>
@@ -294,6 +294,23 @@ of this software, even if advised of the possibility of such damage.
         </xslo:apply-templates>
     </xsl:element>
     </xsl:function>
+    
+    <xsl:function name="tei:makeDefault" as="node()*">
+        <xsl:param name="name"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        
+        
+        <div>
+            <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/>
+                </xsl:attribute>
+            </xsl:if>
+            <xslo:apply-templates/>
+        </div>
+        
+    </xsl:function>
+    
+    
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Block level element</desc>

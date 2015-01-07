@@ -140,16 +140,7 @@
                         <xsl:when test="starts-with(@behaviour, 'omit')"/>
                         
                         <xsl:otherwise>
-                            <div>
-
-                                <xsl:if test="string($class)">
-                                    <xsl:attribute name="class">
-                                        <xsl:value-of select="$class"/>
-                                    </xsl:attribute>
-                                </xsl:if>
-                                <xslo:apply-templates/>
-                            </div>
-
+                            <xsl:copy-of select="tei:makeDefault(., $content, $class)"/>
                         </xsl:otherwise>
                     </xsl:choose>
 
