@@ -98,19 +98,17 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="castItem">
-      <model predicate="parent::list[@rendition]"
-         behaviour="makeListItem(., parent::list[@rendition])">
-         <desc>Insert item, rendered as described in parent list @rendition, or as default bulleted.
-         </desc>
+      <model behaviour="makeListItem(.)">
+         <desc>Insert item, rendered as described in parent list @rendition. </desc>
       </model>
-      <model predicate="not(parent::list[@rendition])"
-         behaviour="makeListItem(., 'simple:bulleted')"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="castList">
-      <model predicate="child::*" behaviour="makeList(.)">
-         <desc>Insert list. </desc>
+      <model predicate="child::*" behaviour="makeList(.)"   useRenditionAttribute="true">
+	<rendition>list-style: ordered</rendition>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="cb">
       <model behaviour="makeInline(.)">
          <desc/>
