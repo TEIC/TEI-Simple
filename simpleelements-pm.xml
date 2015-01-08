@@ -77,11 +77,12 @@
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="body">
-      <model behaviour="makeBody(.)">
-         <desc/>
-      </model>
+      <model behaviour="makeTOC(.)"/>
+      <model behaviour="makeBody(.)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="byline">
       <model behaviour="makeBlock(.)">
          <desc/>
@@ -159,11 +160,11 @@
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="div">
-      <model behaviour="makeBlock(.)">
-         <desc>Insert div as a block. </desc>
-      </model>
+       <model behaviour="makeSection(.)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="docAuthor">
       <model predicate="ancestor::teiHeader" behaviour="omit(.)">
          <desc>Omit if located in teiHeader. </desc>
@@ -184,11 +185,20 @@
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="docTitle">
       <model predicate="ancestor::teiHeader" behaviour="omit(.)">
          <desc>Omit if located in teiHeader. </desc>
       </model>
+
+      <model     predicate="not(ancestor::teiHeader)"
+		 behaviour="makeBlock(.)">
+	<rendition>font-size: large;</rendition>
+      </model>
+
    </elementSpec>
+
+
    <elementSpec mode="change" ident="epigraph">
       <model behaviour="makeBlock(.)">
          <desc/>
@@ -266,9 +276,8 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="head">
-      <model predicate="parent::div[not(@type)]" behaviour="makeHeader(.)">
-         <desc>@Type on a parent div should carry the information about what kind of header is this
-            and </desc>
+      <model predicate="parent::div/parent::body and parent::div[not(@type)]" behaviour="makeHeader(.)">
+         <desc>@type on a parent div maycarry the information about what kind of header is this</desc>
       </model>
       <model predicate="parent::div[@type]" behaviour="makeHeader(.,@type)">
          <desc>Insert as header.</desc>
