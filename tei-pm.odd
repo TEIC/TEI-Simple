@@ -50,7 +50,8 @@
         </docTitle>
         <docAuthor>Sebastian Rahtz</docAuthor>
         <docAuthor>Brian Pytlik Zillig</docAuthor>
-        <docAuthor>Martin Mueller</docAuthor>
+        <docAuthor>James Cummings</docAuthor>
+        <docAuthor>Magdalena Turska</docAuthor>
         <docDate>Version 0.1: 6th January 2014</docDate>
       </titlePage>
     </front>
@@ -104,22 +105,30 @@
 	TEI elements, or the structure of a TEI document. The
 	programmer, particularly, can use the processing model rules
 	to extract material from the TEI text in a relatively simple
-	way.</p>
+	way. The method works for a variety of output formats, as the
+	programmer simply has to provide implementations for a small
+	number of functions, and understand the well-documented
+	features of CSS. The concepts addressed by the functions
+	(eg <q>block</q> and <q>inline</q>)are
+	in line with XSL FO, and HTML. An important precondition for an
+	implementation is that it must include an XPath interpreter,
+	as this is used in several places in the processing notation.	</p>
 
 	<p>There are two key elements for specifying the structural
 	and appearance components of a processing model:
 	  <specList>
-	    <specDesc key="model" atts="predicate behaviour"/>
+	    <specDesc key="model" atts="predicate behaviour
+					useRenditionAttribute output"/>
 	    <specDesc key="rendition" atts="scope"/>
 	  </specList>
 	  For a given <gi>elementSpec</gi>, there can be as many
 	  <gi>model</gi> statements as required, each of which can
-	  have multiple <gi>rendition</gi> children. A set  of mutiple
+	  have multiple <gi>rendition</gi> children. A set  of multiple
 	  <gi>model</gi> statements is regarded as an
 	  <hi>alternation</hi>, i.e. only one of them will be
-	  applied.<note place="foot">This is comparable to a
+	  applied; this is comparable to a
 	  <q>case statement</q> in some programming
-	  languages.</note>. If the intention is for several
+	  languages. If the intention is for several
 	  <gi>model</gi> statements to be active at the same time,
 	  they must be enclosed inside a <gi>modelSequence</gi>.
 	</p>
@@ -172,7 +181,87 @@
 	    Here the <gi>model</gi>s are <emph>alternatives</emph>;
 	    only if the test (the <att>predicate</att>) on the first
 	    fails will the second be activated.</p>
+	    <p>So far we have mapped TEI elements to simple block and
+	    inline concepts. A more complex example is provided by
+	    processing the <gi>choice</gi> element; this is commonly
+	    used to provide a pair of alternates (eg <gi>sic</gi> and
+	    <gi>corr</gi>), and our processing model has decided to
+	    show
+	    the corrected version by default, but allow for  the
+	    implementation to switch to, or display (perhaps as a
+	    tooltip), the alternate; this service is provided by a
+	    function <term>makeAlternate</term>. We have three models, for
+	    different cases of input:
+           <egXML xmlns="http://www.tei-c.org/ns/Examples">
+	     <model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/>
+	     <model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/>
+	     <model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/>
+	   </egXML>
+	   Note the use of XPath notation to choose the first of
+	   several possible sibling elements.</p>
 
+	   <p>Sometimes we want different behaviour for different
+	   output formats, specified using <att>output</att>; the
+	   following example is designed to handle <gi>date</gi>,
+	   which has an optional <att>when</att> containing a
+	   regularized data. We  allow for three situations: a) when there is text inside
+	   the element, and we are making print; b) when there is no
+	   text but there is a <att>when</att> attribute; and c) when
+	   we are making web pages. In the latter case, we use the
+	   same <term>makeAlternate</term> function as in the previous example,
+	   but for print we force use of <att>when</att> when it is present.
+           <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model output="print" predicate="text()" behaviour="makeInline(.)"/>
+                <model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/>
+                <model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/>
+	   </egXML>
+	   </p>
+	   <p>Elements which have attributes can access the values
+	   using the usual XPath notation. For example, the
+	   <gi>ref</gi> element has an important attribute,
+	   <att>target</att>, to which is a link should be
+	   created. Sometimes the <gi>ref</gi> has text content, but
+	   sometimes just the <att>target</att>. Our rule caters for
+	   these two situations:
+           <egXML xmlns="http://www.tei-c.org/ns/Examples">
+	     <model predicate="not(text())" behaviour="makeLink(@target,@target)"/>
+	     <model behaviour="makeLink(.,@target)"/>
+	   </egXML>
+	   Here the <term>makeLink</term> function takes two parameters, the text
+	   to be shown, and the URL to which it should be linked.</p>
+	 </div>
+	 <div>
+	   <head>Implementing the TEI processing model</head>
+	   <p>A program which implements this processing model should
+	   proceed as follows:
+	   <list rend="ordered">
+	     <item>When meeting a new element in the instance
+	     document, see if any
+	     <gi>model</gi> or <gi>modelSequences</gi> are available
+	     for the current output format. Process them in order
+	     until a match with the <att>predicate</att> is found, or
+	     a <gi>model</gi> with no <att>predicate</att> is
+	     available.</item>
+	     <item>Follow the function provided by the
+	     <att>behaviour</att> attribute. Where the value passed to
+	     that function is <q>.</q>, follow this process for
+	     all child elements of the current element, within the
+	     context of the named function. Thus a
+	     <term>makeBlock(.)</term> should create a block-type
+	     object in the output containing this element and all its
+	     children.</item>
+	     <item>If there are <gi>model</gi>s, but no has a
+	     <att>predicate</att>
+	     which matches the current element, do nothing.</item>
+	     <item>If there is no <gi>model</gi> provided for the
+	     element, proceed to its children and see if there are
+	     models for them.</item>
+	     <item>The special function <term>omit()</term> means that
+	     processing should stop for this element, and move to the
+	     next sibling.</item>	     
+	   </list>
+	   This is broadly similar to the processing model for XSLT.
+	   </p>
       </div>
       <div>
 	<head>Extensions to the TEI</head>

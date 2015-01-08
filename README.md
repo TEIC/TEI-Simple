@@ -8,7 +8,9 @@ Documented full ODD: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-S
 
 Documented extensions for processing: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tei-pm.html 
 
-Documented full ODD extensions for processing: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tei-pm.odd.html 
+Documented full ODD extensions for processing: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tei-pm.odd.html
+
+TEI Simple schema (RELAX NG): https://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple.rng
 
 # Background
 

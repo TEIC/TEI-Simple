@@ -355,7 +355,7 @@ att.global.attribute.xmllang =
 att.global.attribute.rendition =
   
   ## points to a description of the rendering or presentation used for this element in the source text.
-  ## Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:doublestrikethrough; 9] simple:doubleunderline; 10] simple:dropcap; 11] simple:float; 12] simple:hyphen; 13] simple:italic; 14] simple:larger; 15] simple:left; 16] simple:leftbraced; 17] simple:letterspace; 18] simple:normalstyle; 19] simple:normalweight; 20] simple:right; 21] simple:rightbraced; 22] simple:rotateleft; 23] simple:rotateright; 24] simple:smallcaps; 25] simple:smaller; 26] simple:strikethrough; 27] simple:subscript; 28] simple:superscript; 29] simple:topbraced; 30] simple:typewriter; 31] simple:underline; 32] simple:wavyunderline
+  ## Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:display; 9] simple:doublestrikethrough; 10] simple:doubleunderline; 11] simple:dropcap; 12] simple:float; 13] simple:hyphen; 14] simple:inline; 15] simple:italic; 16] simple:larger; 17] simple:left; 18] simple:leftbraced; 19] simple:letterspace; 20] simple:normalstyle; 21] simple:normalweight; 22] simple:right; 23] simple:rightbraced; 24] simple:rotateleft; 25] simple:rotateright; 26] simple:smallcaps; 27] simple:smaller; 28] simple:strikethrough; 29] simple:subscript; 30] simple:superscript; 31] simple:topbraced; 32] simple:typewriter; 33] simple:underline; 34] simple:wavyunderline
   attribute rendition {
     list {
       (
@@ -380,6 +380,9 @@ att.global.attribute.rendition =
          ## cursive typeface
          "simple:cursive"
        | 
+         ## block display
+         "simple:display"
+       | 
          ## strikethrough with double line
          "simple:doublestrikethrough"
        | 
@@ -394,6 +397,9 @@ att.global.attribute.rendition =
        | 
          ## with a hyphen here (eg in line break)
          "simple:hyphen"
+       | 
+         ## inline rendering
+         "simple:inline"
        | 
          ## italic typeface
          "simple:italic"

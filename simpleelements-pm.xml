@@ -11,10 +11,8 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="abbr">
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
-         <rendition>display: none;</rendition>
-         <desc/>
-      </model>
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+      <model behaviour="makeInline(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="actor">
       <model behaviour="makeInline(.)">
@@ -41,27 +39,26 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="addSpan">
-      <model behaviour="makeSpan(.)">
-         <desc>Insert as span. </desc>
-      </model>
+      <model behaviour="makeAnchor(@xml:id)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="am">
       <model behaviour="makeInline(.)">
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="anchor">
-      <model behaviour="unknown(.)">
-         <rendition>display: none;</rendition>
-         <desc>Pithy description of unknown behaviour. </desc>
-      </model>
+      <model behaviour="makeAnchor(@xml:id)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="argument">
       <model behaviour="makeBlock(.)">
          <rendition>margin-bottom: 0.5em;</rendition>
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="author">
       <model behaviour="makeInline(.)">
          <desc/>
@@ -111,9 +108,7 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="cb">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+      <model behaviour="showBreak('column')"/>
    </elementSpec>
    <elementSpec mode="change" ident="cell">
       <model behaviour="makeCell(.)">
@@ -121,9 +116,9 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="choice">
-      <model predicate="count(child::*) gt 1" behaviour="makeChoice(.)">
-         <desc>Insert choice. </desc>
-      </model>
+     <model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/>
+     <model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/>
+     <model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/>
    </elementSpec>
    <elementSpec mode="change" ident="cit">
       <model predicate="child::quote and child::bibl" behaviour="makeCit(.)">
@@ -131,19 +126,21 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="closer">
-      <model predicate="child::*" behaviour="makeCloser(.)">
-         <desc>Insert closer. </desc>
+      <model predicate="child::*" behaviour="makeBlock(.)">
+	<rendition>margin-top: 1em; margin-left: 1em; margin-left: 1em;</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="corr">
       <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
          <desc>Omit, if handled in parent choice. </desc>
       </model>
+      <model behaviour="makeInline(.)"/>
+
    </elementSpec>
    <elementSpec mode="change" ident="date">
-      <model behaviour="makeDate(.)">
-         <desc>Insert date. </desc>
-      </model>
+     <model output="print" predicate="text()" behaviour="makeInline(.)"/>
+     <model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/>
+     <model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/>
    </elementSpec>
    <elementSpec mode="change" ident="dateline">
       <model behaviour="makeBlock(.)">
@@ -152,7 +149,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="del">
       <model behaviour="makeInline(.)">
-         <desc/>
+	<rendition>   text-decoration: line-through;</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="desc">
@@ -209,7 +206,10 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="expan">
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+      <model predicate="parent::choice and count(parent::*/*) gt 1"
+	     behaviour="omit(.)"/>
+      <model behaviour="makeInline(.)"/>
+
    </elementSpec>
    <elementSpec mode="change" ident="figDesc">
       <model behaviour="makeInline(.)">
@@ -217,53 +217,58 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="figure">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+      <model predicate="head or @rendition='simple:display'" behaviour="makeBlock(.)"/>
+      <model behaviour="makeInline(.)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="floatingText">
       <model behaviour="makeBlock(.)">
-         <desc/>
+	<rendition>
+	  margin: 6pt;
+	  border: solid black 1pt;
+	</rendition>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="foreign">
       <model behaviour="makeInline(.)" class="italic">
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="formula">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+      <model predicate="@rendition='simple:display'" behaviour="makeBlock(.)"/>
+      <model behaviour="makeInline(.)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="front">
       <model behaviour="makeBlock(.)">
          <rendition>border: 1px solid red;</rendition>
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="fw">
-      <model predicate="descendant::p or descendant::ab" behaviour="makeInline(.)">
+      <model predicate="ancestor::p or ancestor::ab" behaviour="makeInline(.)">
          <desc/>
       </model>
       <model behaviour="makeBlock(.)">
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="g">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+      <model predicate="not(text())" behaviour="makeGlyph(@ref)"/>
+      <model behaviour="makeInline(.)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="gap">
       <model behaviour="makeInline(.)">
          <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="graphic">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+      <model behaviour="makeGraphic(@url)"/>
    </elementSpec>
    <elementSpec mode="change" ident="group">
       <model behaviour="makeBlock(.)">
@@ -284,6 +289,12 @@
       <model predicate="parent::div[@type]" behaviour="makeHeading(.,@type)">
          <desc>Insert as header.</desc>
       </model>
+      <model predicate="parent::figure" behaviour="makeHeading(.,'figure')">
+         <desc>Insert as header.</desc>
+      </model>
+      <model predicate="parent::table" behaviour="makeHeading(.,'table')">
+         <desc>Insert as header.</desc>
+      </model>
       <model predicate="parent::lg" behaviour="makeHeading(.,'verse')">
          <desc>Insert as header.</desc>
       </model>
@@ -295,11 +306,11 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="hi">
-      <model predicate="@rendition" behaviour="makeInline(.)" class="italic">
-         <desc>Pithy description. </desc>
+      <model predicate="@rendition" behaviour="makeInline(.)"  useRenditionAttribute="true">
+	<rendition>font-style: italic;</rendition>
       </model>
-      <model predicate="not(@rendition)" behaviour="makeInline(.)" class="italic">
-         <desc>Pithy description. </desc>
+      <model predicate="not(@rendition)" behaviour="makeInline(.)">
+	<rendition>font-style: italic;</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="imprimatur">
@@ -330,9 +341,7 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="lb">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+      <model behaviour="showBreak('line')"/>
    </elementSpec>
    <elementSpec mode="change" ident="lg">
       <model behaviour="makeInline(.)">
@@ -398,18 +407,23 @@
       <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
          <desc>Omit, if handled in parent choice. </desc>
       </model>
+      <model behaviour="makeInline(.)"/>
    </elementSpec>
-   <elementSpec mode="change" ident="p">
-      <model behaviour="makeBlock(.)">
-         <rendition>margin-bottom: 0.5em;</rendition>
-         <desc/>
-      </model>
+
+   <elementSpec mode="change" ident="p" >
+      <model behaviour="makeParagraph(.)"  useRenditionAttribute="true"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="pb">
-      <model behaviour="makeInline(.)">
-         <desc/>
+      <model behaviour="makeInline(@n)">
+	<rendition>
+	  display: block;
+	  color: grey;
+	  float: right;
+	</rendition>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="pc">
       <model behaviour="makeInline(.)">
          <desc/>
@@ -456,6 +470,8 @@
       <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
          <desc>Omit, if handled in parent choice.</desc>
       </model>
+      <model behaviour="makeInline(.)"/>
+
    </elementSpec>
    <elementSpec mode="change" ident="rhyme">
       <model behaviour="makeInline(.)">
@@ -519,6 +535,8 @@
       <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
          <desc>Omit, if handled in parent choice.</desc>
       </model>
+      <model behaviour="makeInline(.)"/>
+
    </elementSpec>
    <elementSpec mode="change" ident="sp">
       <model behaviour="makeBlock(.)">

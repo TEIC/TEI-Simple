@@ -180,13 +180,17 @@
     </xslt>
   </target>
   <target name="tests">
-    <echo>Validate against RELAX NG</echo>
+    <!--
+	<echo>Validate Simple schema against tei-pm</echo>
+	<runjing rngfile="tei-pm.rng" file="teisimple.odd"/>
+	-->
+    <echo>Validate instance against RELAX NG</echo>
     <runjing rngfile="teisimple.rng" file="tests/testsimple.xml"/>
-    <echo>Validate against DTD</echo>
+    <echo>Validate instance against DTD</echo>
     <xmlvalidate failonerror="yes" file="tests/testsimple.xml"/>
-    <echo>Validate against Schematron</echo>
+    <echo>Validate instance against Schematron</echo>
     <schematron file="tests/testsimple.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
-    <echo>Validate against XSD</echo>
+    <echo>Validate instance against XSD</echo>
     <schemavalidate noNamespaceFile="teisimple.xsd" file="tests/testsimple.xml"/>
   </target>
   <target name="cleanup">
