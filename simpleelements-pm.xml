@@ -231,8 +231,8 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="foreign">
-      <model behaviour="makeInline(.)" class="italic">
-         <desc/>
+      <model behaviour="makeInline(.)" >
+         <rendition>font-style:italic;</rendition>
       </model>
    </elementSpec>
 
