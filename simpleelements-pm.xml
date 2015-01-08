@@ -105,8 +105,8 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="castList">
-      <model predicate="child::*" behaviour="makeList(.)"   useRenditionAttribute="true">
-	<rendition>list-style: ordered;</rendition>
+      <model predicate="child::*" behaviour="makeList(.)" useRenditionAttribute="true">
+         <rendition>list-style: ordered;</rendition>
       </model>
    </elementSpec>
 
@@ -162,7 +162,7 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="div">
-       <model behaviour="makeSection(.)"/>
+      <model behaviour="makeSection(.)"/>
    </elementSpec>
 
    <elementSpec mode="change" ident="docAuthor">
@@ -191,9 +191,8 @@
          <desc>Omit if located in teiHeader. </desc>
       </model>
 
-      <model     predicate="not(ancestor::teiHeader)"
-		 behaviour="makeBlock(.)">
-	<rendition>font-size: large;</rendition>
+      <model predicate="not(ancestor::teiHeader)" behaviour="makeBlock(.)">
+         <rendition>font-size: large;</rendition>
       </model>
 
    </elementSpec>
@@ -277,8 +276,10 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="head">
-      <model predicate="parent::div/parent::body and parent::div[not(@type)]" behaviour="makeHeading(.)">
-         <desc>@type on a parent div maycarry the information about what kind of header is this</desc>
+      <model predicate="parent::div/parent::body and parent::div[not(@type)]"
+         behaviour="makeHeading(.)">
+         <desc>@type on a parent div maycarry the information about what kind of header is
+            this</desc>
       </model>
       <model predicate="parent::div[@type]" behaviour="makeHeading(.,@type)">
          <desc>Insert as header.</desc>
@@ -318,10 +319,8 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="l">
-      <model behaviour="makeBlock(.)"  useRenditionAttribute="true">
-	<rendition>
-	  margin-left: 1em;
-	</rendition>
+      <model behaviour="makeBlock(.)" useRenditionAttribute="true">
+         <rendition> margin-left: 1em; </rendition>
       </model>
    </elementSpec>
 
@@ -371,18 +370,17 @@
 
    <elementSpec mode="change" ident="note">
 
-     <model predicate="@place" behaviour="makeNote(.,@place)"/>
+      <model predicate="@place" behaviour="makeNote(.,@place)"/>
 
-     <model predicate="parent::div and not(@place)"
-	    behaviour="makeBlock(.)">
-       <rendition>margin-left: 10px;margin-right: 10px; font-size:smaller;</rendition>
-     </model>
+      <model predicate="parent::div and not(@place)" behaviour="makeBlock(.)">
+         <rendition>margin-left: 10px;margin-right: 10px; font-size:smaller;</rendition>
+      </model>
 
-     <model predicate="not(@place)" behaviour="makeInline(.)">
-       <rendition scope="before">content:' [';</rendition>
-       <rendition scope="after">content:'] ';</rendition>
-       <rendition>font-size:small;</rendition>
-     </model>
+      <model predicate="not(@place)" behaviour="makeInline(.)">
+         <rendition scope="before">content:' [';</rendition>
+         <rendition scope="after">content:'] ';</rendition>
+         <rendition>font-size:small;</rendition>
+      </model>
 
    </elementSpec>
 
@@ -403,6 +401,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="p">
       <model behaviour="makeBlock(.)">
+         <rendition>margin-bottom: 0.5em;</rendition>
          <desc/>
       </model>
    </elementSpec>
@@ -447,9 +446,9 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="ref">
-     <model behaviour="makeInline(.)" predicate="not(@target)"/>
-     <model predicate="not(text())" behaviour="makeLink(@target,@target)"/>
-     <model behaviour="makeLink(.,@target)"/>
+      <model behaviour="makeInline(.)" predicate="not(@target)"/>
+      <model predicate="not(text())" behaviour="makeLink(@target,@target)"/>
+      <model behaviour="makeLink(.,@target)"/>
    </elementSpec>
 
    <elementSpec mode="change" ident="reg">
@@ -528,9 +527,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="speaker">
       <model behaviour="makeBlock(.)">
-	<rendition>
-	  font-style:italic;
-	</rendition>
+         <rendition> font-style:italic; </rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="spGrp">
@@ -596,6 +593,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="trailer">
       <model behaviour="makeBlock(.)">
+         <rendition>color: green;</rendition>
          <desc/>
       </model>
    </elementSpec>
