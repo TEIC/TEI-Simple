@@ -65,7 +65,7 @@
                 <html>
                     <xsl:copy-of select="tei:makeHTMLHeader(., //elementSpec, '')"/>
                     <body>
-                        <xslo:apply-templates/>
+                        <xslo:apply-templates select="descendant::text"/>
                     </body>
                 </html>
             </xslo:template>
