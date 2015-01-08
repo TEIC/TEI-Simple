@@ -10,6 +10,7 @@ div.argument {margin-bottom: 0.5em;}
 ol.castList {list-style: ordered;}
 div.docTitle {font-size: large;}
 div.docTitle {font-size: large;}
+div.front {border: 1px solid red;}
 div.l {
 	  margin-left: 1em;
 	}
@@ -22,5 +23,4 @@ div.speaker {
 	  font-style:italic;
 	}
 span.title {color: red; font-size: 2em;}
-div.titlePage {border: 1px solid red;}
 </style></head><body><xsl:apply-templates/></body></html></xsl:template><xsl:template match="*"><xsl:apply-templates/></xsl:template></xsl:stylesheet>

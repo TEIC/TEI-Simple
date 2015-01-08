@@ -239,6 +239,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="front">
       <model behaviour="makeBlock(.)">
+         <rendition>border: 1px solid red;</rendition>
          <desc/>
       </model>
    </elementSpec>
@@ -585,7 +586,6 @@
    </elementSpec>
    <elementSpec mode="change" ident="titlePage">
       <model behaviour="makeBlock(.)">
-         <rendition>border: 1px solid red;</rendition>
          <desc/>
       </model>
    </elementSpec>
