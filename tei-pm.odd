@@ -57,12 +57,127 @@
     <body>
       <div>
 	<head>The TEI Processing Model</head>
-	<p></p>
+	<p>TEI elements are generally
+	<emph>descriptive</emph> of the interpreted semantics of the
+	source text (<q>this is a title</q>, <q>this is a
+	quotation</q>), where the interpretation is often based on a
+	human interpretation of layout. The <att>rend</att> attribute
+	is sometimes, but not necessarily, used to describe that
+	layout. The resulting encoded text is very amenable to
+	analysis, but for the common case of re-presenting the text on
+	the web, the TEI model is incomplete.</p>
+
+        <p>The processing model notation allows each element to be
+        assigned to a structural category (<gi>model</gi>, and given
+        an outline rendition description (<gi>rendition</gi>). This
+        allows a processor to know whether to handle the element or
+        not, and broadly speaking how to display or otherwise process
+        it. The model and rendition instructions are embedded in a
+        TEI ODD customization.</p>
+
+	<p>This model assumes a workflow of three parts, and three
+	distinct sets of expertise, to create a digital edition from a
+	TEI text:
+	<list rend="ordered">
+	  <item>an <emph>editor</emph> manages the text integrity,
+	  makes the high-level output decisions. These 	fall into two parts
+	<list rend="ordered">
+	  <item><emph>Structural</emph> descriptions, eg  <q>should the
+	  original or corrected version be displayed by default</q>,
+	  or <q>is this a block level or inline component</q></item>
+	  <item>Indications of <emph>appearance</emph> (<q>titles are in
+	  italics</q>).</item>
+	</list>
+	  </item>
+	  <item>a <emph>designer</emph> creates the output envelope (for
+	  example, and book layout using InDesign, or a web site using
+	  Drupal), making decisions in conjunction with the editor
+	  (<q>use Garamond font throughout</q> or <q>every page must
+	  show the departmental logo</q>)</item>
+	  <item>a <emph>programmer</emph> takes the
+	  <emph>editor</emph>'s specification, and the TEI text(s),
+	  and creates the input for the <emph>designer</emph> to make
+	  the output.</item>
+	</list>
+	It is crucial to understand here that neither the designer nor
+	the programmer need have any understanding of the semantics of
+	TEI elements, or the structure of a TEI document. The
+	programmer, particularly, can use the processing model rules
+	to extract material from the TEI text in a relatively simple
+	way.</p>
+
+	<p>There are two key elements for specifying the structural
+	and appearance components of a processing model:
+	  <specList>
+	    <specDesc key="model" atts="predicate behaviour"/>
+	    <specDesc key="rendition" atts="scope"/>
+	  </specList>
+	  For a given <gi>elementSpec</gi>, there can be as many
+	  <gi>model</gi> statements as required, each of which can
+	  have multiple <gi>rendition</gi> children. A set  of mutiple
+	  <gi>model</gi> statements is regarded as an
+	  <hi>alternation</hi>, i.e. only one of them will be
+	  applied.<note place="foot">This is comparable to a
+	  <q>case statement</q> in some programming
+	  languages.</note>. If the intention is for several
+	  <gi>model</gi> statements to be active at the same time,
+	  they must be enclosed inside a <gi>modelSequence</gi>.
+	</p>
+
+	<p>Let us consider a simple case, the handling of the
+	<gi>hi</gi> element. We decide that it is an inline element,
+	normally rendered in italics:
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model behaviour="makeInline(.)">
+		<rendition>font-style: italic;</rendition>
+	      </model>
+            </egXML>
+	    The <att>behaviour</att> attribute has a value of a call
+	    to the function <term>makeInline</term>, with a parameter
+	    of the content of the element. The notation here uses
+	    XPath, in which <q>.</q> means <q>the current context</q>;
+	    separately, the <gi>rendition</gi> element uses CSS
+	    syntax to specific the appearance.  It would have been
+	    possible here to simply add <code>display: inline</code>
+	    to the rendition, to indicate that it is inline, but the
+	    intention is to separate the structural decision from the
+	    appearance decision.</p>
+	    <p>It is common for <gi>hi</gi> to use a
+	    <att>rendition</att> attribute to indicate appearance. By
+	    default, this is ignored, but 
+	    <att>useRenditionAttribute</att> can be used to indicate
+	    that it should be taken account of:
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model behaviour="makeInline(.)" useRenditionAttribute="true">
+		<rendition>font-style: italic;</rendition>
+	      </model>
+            </egXML>
+	    in this case the <gi>rendition</gi> is only a fallback and
+	    may be overridden by the <att>rendition</att>. This uses
+	    the same behaviour as CSS; ie if <att>rendition</att>
+	    involves a change to a different property than
+	    <q>font-style</q>, then this remains active.</p>
+
+	    <p>If the processing model is context-dependent, we can
+	    use <att>predicate</att> (an XPath expression) to show
+	    when different models apply:
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <model predicate="ancestor::p" behaviour="makeInline(.)" >
+		<rendition>font-style: italic;</rendition>
+	      </model>
+              <model behaviour="makeBlock(.)" >
+		<rendition>left-margin: 2em;</rendition>
+	      </model>
+            </egXML>
+	    Here the <gi>model</gi>s are <emph>alternatives</emph>;
+	    only if the test (the <att>predicate</att>) on the first
+	    fails will the second be activated.</p>
+
       </div>
       <div>
 	<head>Extensions to the TEI</head>
-	<specGrp xml:id="extensions">
-        <elementSpec ident="model" mode="add">
+	<specGrp xml:id="additions">
+        <elementSpec ident="model" mode="add" module="tagdocs">
           <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
           <desc versionDate="2015-01-06" xml:lang="en">documentation of an intended processing model for this
             element</desc>
@@ -181,7 +296,7 @@
         </elementSpec>
 
         <!-- elementSpec for added model element -->
-        <elementSpec ident="modelSequence" mode="add">
+        <elementSpec ident="modelSequence" mode="add"  module="tagdocs">
           <gloss versionDate="2015-01-06" xml:lang="en">sequence of processing model </gloss>
           <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
             for this element, to be acted upon in sequence</desc>
@@ -232,7 +347,7 @@
           </attList>
 	</elementSpec>
 
-        <elementSpec ident="modelGrp" mode="add">
+        <elementSpec ident="modelGrp" mode="add"  module="tagdocs">
           <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
           <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
             for this element</desc>
