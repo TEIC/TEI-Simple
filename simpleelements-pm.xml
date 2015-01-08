@@ -106,7 +106,7 @@
 
    <elementSpec mode="change" ident="castList">
       <model predicate="child::*" behaviour="makeList(.)"   useRenditionAttribute="true">
-	<rendition>list-style: ordered</rendition>
+	<rendition>list-style: ordered;</rendition>
       </model>
    </elementSpec>
 
@@ -276,19 +276,19 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="head">
-      <model predicate="parent::div/parent::body and parent::div[not(@type)]" behaviour="makeHeader(.)">
+      <model predicate="parent::div/parent::body and parent::div[not(@type)]" behaviour="makeHeading(.)">
          <desc>@type on a parent div maycarry the information about what kind of header is this</desc>
       </model>
-      <model predicate="parent::div[@type]" behaviour="makeHeader(.,@type)">
+      <model predicate="parent::div[@type]" behaviour="makeHeading(.,@type)">
          <desc>Insert as header.</desc>
       </model>
-      <model predicate="parent::lg" behaviour="makeHeader(.,'verse')">
+      <model predicate="parent::lg" behaviour="makeHeading(.,'verse')">
          <desc>Insert as header.</desc>
       </model>
-      <model predicate="parent::list" behaviour="makeHeader(.,'list')">
+      <model predicate="parent::list" behaviour="makeHeading(.,'list')">
          <desc>Insert as header.</desc>
       </model>
-      <model behaviour="makeHeader(.)">
+      <model behaviour="makeHeading(.)">
          <desc>Insert as header.</desc>
       </model>
    </elementSpec>
@@ -497,11 +497,11 @@
       <modelGrp>
          <rendition>font-size: large</rendition>
          <model behaviour="makeInline(.)">
-            <rendition>font-weight: normal</rendition>
+            <rendition>font-weight: normal;</rendition>
             <desc/>
          </model>
          <model predicate="parent::div" behaviour="makeBlock(.)">
-            <rendition>font-size: small</rendition>
+            <rendition>font-size: small;</rendition>
             <desc/>
          </model>
       </modelGrp>

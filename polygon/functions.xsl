@@ -63,8 +63,6 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         
         <xsl:copy-of select="tei:makeElement('div', $class, $content, '')"/>
-         
-        
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -135,7 +133,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         
-        <xsl:copy-of select="tei:makeElement('span', $class, $content, '')"/>
+        <xsl:copy-of select="tei:makeElement('h1', $class, $content, '')"/>
         </xsl:function>
 
 
@@ -252,11 +250,6 @@ of this software, even if advised of the possibility of such damage.
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Title Page</desc>
-    </doc>
-    
-
-    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Figure</desc>
     </doc>
     <xsl:function name="tei:makeFigure" as="node()*">
@@ -328,12 +321,14 @@ of this software, even if advised of the possibility of such damage.
                         <xsl:value-of select=".//tei:rendition"/>
                     </xsl:variable>
                     <xsl:if test="string($rendition)">
-                        <!-- this is very wrong; maybe container element for the model/behaviour should be passed as a parameter? -->
-                    <xsl:value-of select="tei:simpleContainer(.//tei:model[1]/@behaviour)"/>
-                    <xsl:text>.</xsl:text><xsl:value-of select="@ident"/><xsl:text> {</xsl:text>
-                    <xsl:value-of select="$rendition"/>
-                    <xsl:text>}</xsl:text>
-                    <xsl:text>&#xa;</xsl:text>
+                        <!-- this may be wrong to do it that way -->
+                        <xsl:for-each select=".//tei:model">
+                            <xsl:value-of select="tei:simpleContainer(@behaviour)"/>
+                            <xsl:text>.</xsl:text><xsl:value-of select="ancestor::tei:elementSpec/@ident"/><xsl:text> {</xsl:text>
+                            <xsl:value-of select="$rendition"/>
+                            <xsl:text>}</xsl:text>
+                            <xsl:text>&#xa;</xsl:text>
+                        </xsl:for-each>
                     </xsl:if>
                 </xsl:for-each>
                 
@@ -352,7 +347,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:when test="starts-with($name, 'makeMarginalNote')">div</xsl:when>
     <xsl:when test="starts-with($name, 'makeEndnotes')">div</xsl:when>
     <xsl:when test="starts-with($name, 'makeBlock')">div</xsl:when>
-    <xsl:when test="starts-with($name, 'makeHeading')">div</xsl:when>
+    <xsl:when test="starts-with($name, 'makeHeading')">h1</xsl:when>
     <xsl:when test="starts-with($name, 'makeChoice')">span</xsl:when>
     <xsl:when test="starts-with($name, 'makeDate')">span</xsl:when>
     <xsl:when test="starts-with($name, 'makeList(')">ol</xsl:when>

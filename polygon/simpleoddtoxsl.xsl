@@ -88,7 +88,8 @@
                 <xsl:for-each select="current-group()">
 
                     <xsl:variable name="content"
-                        select="substring-before(substring-after(@behaviour, '('), ')')"/>
+                        select="substring-before(concat(substring-before(substring-after(@behaviour, '('), ')'), ','), ',')"/>
+
                     
                     <xsl:variable name="class" select="if(@class) then @class else parent::node()/@ident"/>
                     
