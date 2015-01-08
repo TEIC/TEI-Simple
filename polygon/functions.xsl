@@ -208,6 +208,21 @@ of this software, even if advised of the possibility of such damage.
     
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Note</desc>
+    </doc>
+    <xsl:function name="tei:makeNote" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        
+        <!-- relies on css for the positioning and formatting of the note block -->
+        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
+    </xsl:function>
+    
+    
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Marginal note</desc>
     </doc>
     <xsl:function name="tei:makeMarginalNote" as="node()*">
@@ -324,7 +339,8 @@ of this software, even if advised of the possibility of such damage.
                         <!-- this may be wrong to do it that way -->
                         <xsl:for-each select=".//tei:model">
                             <xsl:value-of select="tei:simpleContainer(@behaviour)"/>
-                            <xsl:text>.</xsl:text><xsl:value-of select="ancestor::tei:elementSpec/@ident"/><xsl:text> {</xsl:text>
+                            <!-- use position of a model to distinguish between classes for differing behaviours -->
+                            <xsl:text>.</xsl:text><xsl:value-of select="ancestor::tei:elementSpec/@ident"/><!--<xsl:value-of select="position()"/>--><xsl:text> {</xsl:text>
                             <xsl:value-of select="$rendition"/>
                             <xsl:text>}</xsl:text>
                             <xsl:text>&#xa;</xsl:text>
@@ -344,7 +360,8 @@ of this software, even if advised of the possibility of such damage.
 
 <xsl:choose>
     <xsl:when test="starts-with($name, 'makeNoteAnchor')">a</xsl:when>
-    <xsl:when test="starts-with($name, 'makeMarginalNote')">div</xsl:when>
+    <xsl:when test="starts-with($name, 'makeNote')">span</xsl:when>
+    <xsl:when test="starts-with($name, 'makeMarginalNote')">span</xsl:when>
     <xsl:when test="starts-with($name, 'makeEndnotes')">div</xsl:when>
     <xsl:when test="starts-with($name, 'makeBlock')">div</xsl:when>
     <xsl:when test="starts-with($name, 'makeHeading')">h1</xsl:when>

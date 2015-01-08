@@ -90,7 +90,7 @@
                     <xsl:variable name="content"
                         select="substring-before(concat(substring-before(substring-after(@behaviour, '('), ')'), ','), ',')"/>
 
-                    
+                    <xsl:variable name="number"><xsl:number/></xsl:variable>
                     <xsl:variable name="class" select="if(@class) then @class else parent::node()/@ident"/>
                     
                     <xsl:choose>
@@ -99,6 +99,9 @@
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeMarginalNote')">
                             <xsl:copy-of select="tei:makeMarginalNote(., $content, $class)"/>
+                        </xsl:when>
+                        <xsl:when test="starts-with(@behaviour, 'makeNote')">
+                            <xsl:copy-of select="tei:makeNote(., $content, $class, $number)"/>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeEndnotes')">
                             <xsl:copy-of select="tei:makeEndnotes(., $content, $class)"/>
