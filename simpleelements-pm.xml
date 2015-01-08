@@ -100,7 +100,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="castItem">
       <model behaviour="makeListItem(.)">
-         <desc>Insert item, rendered as described in parent list @rendition. </desc>
+         <desc>Insert item, rendered as described in parent list rendition. </desc>
       </model>
    </elementSpec>
 
@@ -117,7 +117,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="cell">
       <model behaviour="makeCell(.)">
-         <desc>Insert cell. </desc>
+         <desc>Insert table cell. </desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="choice">
@@ -457,6 +457,11 @@
          <desc>Omit, if handled in parent choice.</desc>
       </model>
    </elementSpec>
+   <elementSpec mode="change" ident="rhyme">
+      <model behaviour="makeInline(.)">
+         <desc/>
+      </model>
+   </elementSpec>
    <elementSpec mode="change" ident="role">
       <model behaviour="makeBlock(.)">
          <desc/>
@@ -469,7 +474,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="row">
       <model behaviour="makeRow(.)">
-         <desc>Insert cell. </desc>
+         <desc>Insert table row. </desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="rs">

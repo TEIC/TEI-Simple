@@ -2209,6 +2209,21 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:element name="model.lPart" abstract="true">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ns1:macro.paraContent">
+          <xs:attributeGroup ref="ns1:att.global.attributes"/>
+          <xs:attributeGroup ref="ns1:att.typed.attributes"/>
+          <xs:attribute name="label" type="ns1:data.word">
+            <xs:annotation>
+              <xs:documentation>provides a label (usually a single letter) to identify which part of a rhyme scheme this rhyming string instantiates.</xs:documentation>
+            </xs:annotation>
+          </xs:attribute>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="model.global.meta" abstract="true" substitutionGroup="ns1:model.global">
     <xs:complexType>
       <xs:sequence>
@@ -2896,6 +2911,7 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       <xs:element ref="ns1:model.graphicLike"/>
       <xs:group ref="ns1:model.pPart.edit"/>
       <xs:element ref="ns1:model.ptrLike"/>
+      <xs:element ref="ns1:model.lPart"/>
       <xs:element ref="ns1:model.phrase.xml"/>
       <xs:group ref="ns1:model.pPart.data"/>
     </xs:choice>
@@ -6751,6 +6767,11 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
       </xs:complexContent>
     </xs:complexType>
   </xs:element>
+  <xs:element name="rhyme" substitutionGroup="ns1:model.lPart">
+    <xs:annotation>
+      <xs:documentation>marks the rhyming part of a metrical line. [6.4. ]</xs:documentation>
+    </xs:annotation>
+  </xs:element>
   <xs:element name="role" substitutionGroup="ns1:model.castItemPart">
     <xs:annotation>
       <xs:documentation>contains the name of a dramatic role, as given in a cast list. [7.1.4. ]</xs:documentation>
@@ -6832,6 +6853,7 @@ Suggested values include: 1] spoken; 2] thought; 3] written; 4] soCalled; 5] for
         <xs:element ref="ns1:term"/>
         <xs:element ref="ns1:title"/>
         <xs:element ref="ns1:hi"/>
+        <xs:element ref="ns1:rhyme"/>
         <xs:element ref="ns1:address"/>
         <xs:element ref="ns1:email"/>
         <xs:element ref="ns1:date"/>
@@ -7515,6 +7537,7 @@ Sample values include: 1] rubbing; 2] mildew; 3] smoke</xs:documentation>
         <xs:element ref="ns1:c"/>
         <xs:element ref="ns1:pc"/>
         <xs:element ref="ns1:model.global"/>
+        <xs:element ref="ns1:model.lPart"/>
         <xs:group ref="ns1:model.hiLike"/>
         <xs:group ref="ns1:model.pPart.edit"/>
       </xs:choice>

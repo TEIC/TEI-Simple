@@ -1195,7 +1195,7 @@ model.linePart =
   | zone
   | choice
 model.ptrLike = ref
-model.lPart = notAllowed
+model.lPart = rhyme
 model.global.meta = listTranspose
 model.milestoneLike = anchor | cb | fw | lb | milestone | pb
 model.gLike = g
@@ -3878,6 +3878,18 @@ reg =
     att.typed.attributes,
     empty
   }
+rhyme =
+  
+  ## marks the rhyming part of a metrical line. [6.4. ]
+  element rhyme {
+    macro.paraContent,
+    att.global.attributes,
+    att.typed.attributes,
+    
+    ## provides a label (usually a single letter) to identify which part of a rhyme scheme this rhyming string instantiates.
+    attribute label { data.word }?,
+    empty
+  }
 role =
   
   ## contains the name of a dramatic role, as given in a cast list. [7.1.4. ]
@@ -3937,6 +3949,7 @@ s =
       | term
       | title
       | hi
+      | rhyme
       | address
       | email
       | date

@@ -79,6 +79,7 @@
    <elementRef key="quote"/>
    <elementRef key="ref"/>
    <elementRef key="reg"/>
+   <elementRef key="rhyme"/>
    <elementRef key="role"/>
    <elementRef key="roleDesc"/>
    <elementRef key="row"/>

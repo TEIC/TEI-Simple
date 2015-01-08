@@ -2,7 +2,7 @@
 <div xmlns="http://www.tei-c.org/ns/1.0"
      xmlns:XSL="http://www.w3.org/1999/XSL/Transform">
    <head>Summary</head>
-   <p>A total of 104 elements are selected for use in
+   <p>A total of 105 elements are selected for use in
 	the <gi>text</gi> part of a document; an additional
 40
 elements are allowed for in the header. The following table
@@ -1401,6 +1401,17 @@ to another element.</p>
          <cell/>
       </row>
       <row>
+         <cell>rhyme</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell>interpretation</cell>
+         <cell/>
+      </row>
+      <row>
          <cell>role</cell>
          <cell rend="right">0</cell>
          <cell rend="right">0</cell>
@@ -1907,6 +1918,7 @@ to another element.</p>
          <gi>q</gi> 
          <gi>quote</gi> 
          <gi>ref</gi> 
+         <gi>rhyme</gi> 
          <gi>rs</gi> 
          <gi>seg</gi> 
          <gi>time</gi> 

@@ -478,11 +478,11 @@ to %data.word;  #IMPLIED'>
 <!ENTITY % model.ptrLike_sequenceOptional "ref?"> 
 <!ENTITY % model.ptrLike_sequenceOptionalRepeatable "ref*"> 
 <!ENTITY % model.ptrLike_sequenceRepeatable "ref+"> 
-<!ENTITY % model.lPart ""> 
-<!ENTITY % model.lPart_sequence ""> 
-<!ENTITY % model.lPart_sequenceOptional ""> 
-<!ENTITY % model.lPart_sequenceOptionalRepeatable ""> 
-<!ENTITY % model.lPart_sequenceRepeatable ""> 
+<!ENTITY % model.lPart "rhyme"> 
+<!ENTITY % model.lPart_sequence "rhyme"> 
+<!ENTITY % model.lPart_sequenceOptional "rhyme?"> 
+<!ENTITY % model.lPart_sequenceOptionalRepeatable "rhyme*"> 
+<!ENTITY % model.lPart_sequenceRepeatable "rhyme+"> 
 <!ENTITY % model.global.meta "listTranspose"> 
 <!ENTITY % model.global.meta_sequence "listTranspose"> 
 <!ENTITY % model.global.meta_sequenceOptional "listTranspose?"> 
@@ -708,11 +708,11 @@ to %data.word;  #IMPLIED'>
 <!ENTITY % model.common_sequenceOptional "%model.divPart;?, %model.inter;?"> 
 <!ENTITY % model.common_sequenceOptionalRepeatable "%model.divPart;*, %model.inter;*"> 
 <!ENTITY % model.common_sequenceRepeatable "%model.divPart;+, %model.inter;+"> 
-<!ENTITY % model.phrase "%model.segLike; |%model.highlighted; |%model.graphicLike; |%model.pPart.edit; |%model.ptrLike; |%model.phrase.xml; |%model.pPart.data;"> 
-<!ENTITY % model.phrase_sequence "%model.segLike;, %model.highlighted;, %model.graphicLike;, %model.pPart.edit;, %model.ptrLike;, %model.phrase.xml;, %model.pPart.data;"> 
-<!ENTITY % model.phrase_sequenceOptional "%model.segLike;?, %model.highlighted;?, %model.graphicLike;?, %model.pPart.edit;?, %model.ptrLike;?, %model.phrase.xml;?, %model.pPart.data;?"> 
-<!ENTITY % model.phrase_sequenceOptionalRepeatable "%model.segLike;*, %model.highlighted;*, %model.graphicLike;*, %model.pPart.edit;*, %model.ptrLike;*, %model.phrase.xml;*, %model.pPart.data;*"> 
-<!ENTITY % model.phrase_sequenceRepeatable "%model.segLike;+, %model.highlighted;+, %model.graphicLike;+, %model.pPart.edit;+, %model.ptrLike;+, %model.phrase.xml;+, %model.pPart.data;+"> 
+<!ENTITY % model.phrase "%model.segLike; |%model.highlighted; |%model.graphicLike; |%model.pPart.edit; |%model.ptrLike; |%model.lPart; |%model.phrase.xml; |%model.pPart.data;"> 
+<!ENTITY % model.phrase_sequence "%model.segLike;, %model.highlighted;, %model.graphicLike;, %model.pPart.edit;, %model.ptrLike;, %model.lPart;, %model.phrase.xml;, %model.pPart.data;"> 
+<!ENTITY % model.phrase_sequenceOptional "%model.segLike;?, %model.highlighted;?, %model.graphicLike;?, %model.pPart.edit;?, %model.ptrLike;?, %model.lPart;?, %model.phrase.xml;?, %model.pPart.data;?"> 
+<!ENTITY % model.phrase_sequenceOptionalRepeatable "%model.segLike;*, %model.highlighted;*, %model.graphicLike;*, %model.pPart.edit;*, %model.ptrLike;*, %model.lPart;*, %model.phrase.xml;*, %model.pPart.data;*"> 
+<!ENTITY % model.phrase_sequenceRepeatable "%model.segLike;+, %model.highlighted;+, %model.graphicLike;+, %model.pPart.edit;+, %model.ptrLike;+, %model.lPart;+, %model.phrase.xml;+, %model.pPart.data;+"> 
 <!ENTITY % model.limitedPhrase "%model.hiLike; |%model.emphLike; |%model.pPart.editorial; |%model.ptrLike; |%model.phrase.xml; |%model.pPart.data;"> 
 <!ENTITY % model.limitedPhrase_sequence "%model.hiLike;, %model.emphLike;, %model.pPart.editorial;, %model.ptrLike;, %model.phrase.xml;, %model.pPart.data;"> 
 <!ENTITY % model.limitedPhrase_sequenceOptional "%model.hiLike;?, %model.emphLike;?, %model.pPart.editorial;?, %model.ptrLike;?, %model.phrase.xml;?, %model.pPart.data;?"> 
@@ -1886,6 +1886,13 @@ scope %data.enumerated;  #IMPLIED >
 <!ATTLIST revisionDesc
  %att.global.attributes;
  %att.docStatus.attributes; >
+<!--doc:marks the rhyming part of a metrical line. [6.4. ] -->
+<!ELEMENT rhyme %macro.paraContent;>
+<!ATTLIST rhyme xmlns CDATA "http://www.tei-c.org/ns/1.0">
+<!ATTLIST rhyme
+ %att.global.attributes;
+ %att.typed.attributes;
+label %data.word;  #IMPLIED >
 <!--doc:contains the name of a dramatic role, as given in a cast list. [7.1.4. ] -->
 <!ELEMENT role %macro.phraseSeq;>
 <!ATTLIST role xmlns CDATA "http://www.tei-c.org/ns/1.0">
@@ -1913,7 +1920,7 @@ role (data|label|sum|total) "data"  >
  %att.typed.attributes;
  %att.responsibility.attributes; >
 <!--doc:(s-unit) contains a sentence-like division of a text. [17.1.  8.4.1. ] -->
-<!ELEMENT s (#PCDATA|%model.gLike;|%model.global;|formula|graphic|foreign|term|title|hi|address|email|date|time|measure|num|name|idno|rs|abbr|am|choice|ex|expan|subst|add|corr|damage|del|handShift|mod|orig|redo|reg|restore|retrace|sic|supplied|surplus|unclear|undo|att|gi|ref|c|pc|seg|w)*>
+<!ELEMENT s (#PCDATA|%model.gLike;|%model.global;|formula|graphic|foreign|term|title|hi|rhyme|address|email|date|time|measure|num|name|idno|rs|abbr|am|choice|ex|expan|subst|add|corr|damage|del|handShift|mod|orig|redo|reg|restore|retrace|sic|supplied|surplus|unclear|undo|att|gi|ref|c|pc|seg|w)*>
 <!ATTLIST s xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST s
  %att.global.attributes;
@@ -2214,7 +2221,7 @@ target CDATA  #IMPLIED >
 <!ATTLIST value
  %att.global.attributes; >
 <!--doc:(word) represents a grammatical (not necessarily orthographic) word. [17.1. ] -->
-<!ELEMENT w (#PCDATA|%model.gLike;|seg|w|c|pc|%model.global;|_DUMMY_model.lPart|%model.hiLike;|%model.pPart.edit;)*>
+<!ELEMENT w (#PCDATA|%model.gLike;|seg|w|c|pc|%model.global;|%model.lPart;|%model.hiLike;|%model.pPart.edit;)*>
 <!ATTLIST w xmlns CDATA "http://www.tei-c.org/ns/1.0">
 <!ATTLIST w
  %att.global.attributes;
