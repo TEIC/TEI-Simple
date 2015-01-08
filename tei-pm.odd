@@ -55,15 +55,13 @@
       </titlePage>
     </front>
     <body>
-      <schemaSpec ident="teipm" start="TEI teiCorpus specGrp">
-        <moduleRef key="header"/>
-        <moduleRef key="core"/>
-        <moduleRef key="tei"/>
-        <moduleRef key="textstructure"/>
-        <moduleRef key="tagdocs"/>
-        <moduleRef key="figures"/>
-        <moduleRef key="linking"/>
-        <!-- elementSpec for added model element -->
+      <div>
+	<head>The TEI Processing Model</head>
+	<p></p>
+      </div>
+      <div>
+	<head>Extensions to the TEI</head>
+	<specGrp xml:id="extensions">
         <elementSpec ident="model" mode="add">
           <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
           <desc versionDate="2015-01-06" xml:lang="en">documentation of an intended processing model for this
@@ -181,7 +179,59 @@
             </egXML>
           </exemplum>
         </elementSpec>
+
         <!-- elementSpec for added model element -->
+        <elementSpec ident="modelSequence" mode="add">
+          <gloss versionDate="2015-01-06" xml:lang="en">sequence of processing model </gloss>
+          <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+            for this element, to be acted upon in sequence</desc>
+          <classes>
+            <memberOf key="att.global"/>
+          </classes>
+          <content>
+            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+              <choice>
+                <ref name="model.glossLike"/>
+                <ref name="model.descLike"/>
+              </choice>
+            </zeroOrMore>
+            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+              <ref name="model"/>
+            </zeroOrMore>
+          </content>
+          <attList>
+            <attDef ident="predicate" usage="opt">
+              <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
+              </datatype>
+            </attDef>
+            <attDef ident="useRenditionAttribute" usage="opt">
+              <desc>whether to obey any rendition attribute which is present</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
+              </datatype>
+            </attDef>
+            <attDef ident="output" usage="opt">
+              <desc>the intended output method</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+              </datatype>
+              <valList type="closed">
+                <valItem ident="web">
+                  <desc>the output is intended for presentation in a web format</desc>
+                </valItem>
+                <valItem ident="print">
+                  <desc>the output is intended for presentation in a print format</desc>
+                </valItem>
+                <valItem ident="plaintext">
+                  <desc>the output is intended for presentation in a plain text format</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
+	</elementSpec>
+
         <elementSpec ident="modelGrp" mode="add">
           <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
           <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
@@ -202,10 +252,10 @@
             </zeroOrMore>
           </content>
           <attList>
-            <attDef ident="class" usage="opt">
-              <desc>the name of the appearance of the presentation</desc>
-              <datatype maxOccurs="unbounded">
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+           <attDef ident="useRenditionAttribute" usage="opt">
+              <desc>whether to obey any rendition attribute which is present</desc>
+              <datatype>
+                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
               </datatype>
             </attDef>
             <attDef ident="output" usage="opt">
@@ -250,12 +300,20 @@
           <exemplum xml:lang="en">
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <modelGrp output="print">
-                <model behaviour="makeInline(.)"/>
-                <model behaviour="makeFootnote(.)"/>
+		<modelSequence>
+                  <model behaviour="makeInline(.)"/>
+                  <model behaviour="makeFootnote(.)"/>
+		</modelSequence>
               </modelGrp>
             </egXML>
           </exemplum>
         </elementSpec>
+
+	</specGrp>
+      </div> 
+      <div>
+	<head>Changes to the TEI</head>
+	<specGrp xml:id="changes">
         <!-- adding model/modelGrp to elementSpec element -->
         <elementSpec ident="elementSpec" mode="change">
           <content>
@@ -282,10 +340,11 @@
                 <ref name="attList"/>
               </optional>
               <zeroOrMore>
-                <ref name="model"/>
-              </zeroOrMore>
-              <zeroOrMore>
-                <ref name="modelGrp"/>
+		<choice>
+                  <ref name="model"/>
+                  <ref name="modelGrp"/>
+		  <ref name="modelSequence"/>
+		</choice>
               </zeroOrMore>
               <zeroOrMore>
                 <ref name="exemplum"/>
@@ -301,13 +360,28 @@
         </elementSpec>
 
 	<elementSpec mode="change"  ident="rendition">
-	  <classes mode="replace">
+	  <classes>
 	    <memberOf key="att.global"/>
 	    <memberOf key="att.styleDef"/>
-	    <memberOf key="oddDecl"/>
+	    <memberOf key="model.oddDecl"/>
 	  </classes>
 	</elementSpec>
-      </schemaSpec>
+	</specGrp>
+      </div> 
+      <div>
+	<head>Schema for processing extended ODD</head>
+	<schemaSpec ident="teipm" start="TEI teiCorpus specGrp">
+        <moduleRef key="header"/>
+        <moduleRef key="core"/>
+        <moduleRef key="tei"/>
+        <moduleRef key="textstructure"/>
+        <moduleRef key="tagdocs"/>
+        <moduleRef key="figures"/>
+        <moduleRef key="linking"/>
+	<specGrpRef target="#additions"/>
+	<specGrpRef target="#changes"/>
+	</schemaSpec>
+      </div>
     </body>
   </text>
 </TEI>

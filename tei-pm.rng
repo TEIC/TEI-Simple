@@ -160,9 +160,6 @@ TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.7.0/
    <define name="data.replacement">
       <text/>
    </define>
-   <define name="data.xpath">
-      <text/>
-   </define>
    <define name="data.word">
       <data type="token">
          <param name="pattern">(\p{L}|\p{N}|\p{P}|\p{S})+</param>
@@ -1978,6 +1975,7 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
    </define>
    <define name="model.oddDecl">
       <choice>
+         <ref name="rendition"/>
          <ref name="moduleSpec"/>
          <ref name="specGrp"/>
          <ref name="specGrpRef"/>
@@ -1990,6 +1988,7 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
    </define>
    <define name="model.oddDecl_alternation">
       <choice>
+         <ref name="rendition"/>
          <ref name="moduleSpec"/>
          <ref name="specGrp"/>
          <ref name="specGrpRef"/>
@@ -2001,6 +2000,7 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       </choice>
    </define>
    <define name="model.oddDecl_sequence">
+      <ref name="rendition"/>
       <ref name="moduleSpec"/>
       <ref name="specGrp"/>
       <ref name="specGrpRef"/>
@@ -2011,6 +2011,9 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       <ref name="constraintSpec"/>
    </define>
    <define name="model.oddDecl_sequenceOptional">
+      <optional>
+         <ref name="rendition"/>
+      </optional>
       <optional>
          <ref name="moduleSpec"/>
       </optional>
@@ -2038,6 +2041,9 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
    </define>
    <define name="model.oddDecl_sequenceOptionalRepeatable">
       <zeroOrMore>
+         <ref name="rendition"/>
+      </zeroOrMore>
+      <zeroOrMore>
          <ref name="moduleSpec"/>
       </zeroOrMore>
       <zeroOrMore>
@@ -2063,6 +2069,9 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       </zeroOrMore>
    </define>
    <define name="model.oddDecl_sequenceRepeatable">
+      <oneOrMore>
+         <ref name="rendition"/>
+      </oneOrMore>
       <oneOrMore>
          <ref name="moduleSpec"/>
       </oneOrMore>
@@ -7526,10 +7535,7 @@ Child elements of <name/> are only allowed when an external module is being load
                <ref name="attList"/>
             </optional>
             <zeroOrMore>
-               <ref name="model"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="modelGrp"/>
+               <empty/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="exemplum"/>
@@ -8747,88 +8753,6 @@ You must supply at least two values for @target on <name/>
                   <a:documentation>(exclusive) indicates that the alternation is exclusive, i.e. that at most one of the alternatives occurs.</a:documentation>
                   <value>incl</value>
                   <a:documentation>(inclusive) indicates that the alternation is not exclusive, i.e. that one or more of the alternatives occur.</a:documentation>
-               </choice>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="model">
-      <element name="model">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(processing model) documentation of an intended processing model for this element</a:documentation>
-         <zeroOrMore>
-            <choice>
-               <ref name="model.glossLike"/>
-               <ref name="model.descLike"/>
-               <ref name="rendition"/>
-            </choice>
-         </zeroOrMore>
-         <ref name="att.global.attributes"/>
-         <attribute name="behaviour">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">which processing function, optionally containing parameters, should be used to present this element in output</a:documentation>
-            <ref name="data.text"/>
-         </attribute>
-         <optional>
-            <attribute name="predicate">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the condition under which this model applies given as an XPath Predicate Expression</a:documentation>
-               <ref name="data.xpath"/>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="useRenditionAttribute">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">whether to obey any rendition attribute which is present</a:documentation>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="output">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the intended output method</a:documentation>
-               <choice>
-                  <value>web</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a web format</a:documentation>
-                  <value>print</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a print format</a:documentation>
-                  <value>plaintext</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a plain text format</a:documentation>
-               </choice>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="modelGrp">
-      <element name="modelGrp">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(processing model group) a group of model elements documenting intended processing models for this element</a:documentation>
-         <zeroOrMore>
-            <choice>
-               <ref name="model.glossLike"/>
-               <ref name="model.descLike"/>
-               <ref name="rendition"/>
-            </choice>
-         </zeroOrMore>
-         <zeroOrMore>
-            <ref name="model"/>
-         </zeroOrMore>
-         <ref name="att.global.attributes"/>
-         <optional>
-            <attribute name="class">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the name of the appearance of the presentation</a:documentation>
-               <list>
-                  <oneOrMore>
-                     <ref name="data.enumerated"/>
-                  </oneOrMore>
-               </list>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="output">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the intended output method</a:documentation>
-               <choice>
-                  <value>web</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a web format</a:documentation>
-                  <value>print</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a print format</a:documentation>
-                  <value>plaintext</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a plain text format</a:documentation>
                </choice>
             </attribute>
          </optional>
