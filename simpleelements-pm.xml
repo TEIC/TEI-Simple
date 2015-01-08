@@ -307,8 +307,10 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="l">
-      <model behaviour="makeBlock(.)">
-         <desc/>
+      <model behaviour="makeBlock(.)" useRenditionAttribute="true">
+	<rendition>
+	  margin-left: 1em;
+	</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="label">
