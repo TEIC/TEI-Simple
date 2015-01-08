@@ -315,7 +315,7 @@ text-decoration: underline;
 }
 
 
-/* an inner &lt;text&gt;, eg inside a &lt;q&gt; */
+/* an inner <text>, eg inside a <q> */
 div.innertext {
 margin: 6pt;
 border: 1pt solid red;
@@ -644,7 +644,7 @@ font-weight: bold;
 margin-right: 1em;
 }
 
-/* a &lt;bibl&gt; inside a &lt;cit&gt; */
+/* a <bibl> inside a <cit> */
 div.citbibl:before {
 content: "(";
 }
@@ -655,7 +655,7 @@ div.citbibl {
 font-style: italic;
 font-size: smaller;
 }
-/* a &lt;quote&gt; inside a &lt;cit&gt; */
+/* a <quote> inside a <cit> */
 div.citquote {
 margin-left: 10pt;
 margin-right: 10pt;
@@ -875,7 +875,7 @@ text-align:right;
 text-align:left;
 }
 
-/* &lt;hi&gt; rend values */
+/* <hi> rend values */
 span.typewriter{
 font-family: monospace;
 }
@@ -1140,10 +1140,10 @@ vertical-align: top;
 font-weight: normal;
 }
 table.elementList td.odd_label:before {
-content: "&lt;";
+content: "<";
 }
 table.elementList td.odd_label:after {
-content: "&gt;";
+content: ">";
 }
 table.wovenodd tr td table.attList {
 border-spacing:0px;
@@ -1361,11 +1361,11 @@ span.specList-elementSpec {
 font-weight: bold;
 }
 span.specList-elementSpec:before {
-content: "&lt;";
+content: "<";
 
 }
 span.specList-elementSpec:after {
-content: "&gt;";
+content: ">";
 
 }
 span.specList-classSpec {
@@ -1519,7 +1519,7 @@ border: solid orange 1pt;
 <span class="element">&lt;/model&gt;</span>
 <span class="element">&lt;model <span class="attribute">behaviour</span>="<span class="attributevalue">makeBlock(.)</span>"&gt;</span>
  <span class="element">&lt;rendition&gt;</span>left-margin: 2em;<span class="element">&lt;/rendition&gt;</span>
-<span class="element">&lt;/model&gt;</span></div> Here the <a class="link_ref" itemprop="ref" href="#TEI.model" title="&lt;model&gt;">&lt;model&gt;</a>s are <em itemprop="emph">alternatives</em>; only if the test (the <span class="att" itemprop="hi">predicate</span> on the first fails will the second be activated.</div></section><section class="teidiv0" id="index.xml-body.1_div.2"><header><h1><span class="headingNumber">2. </span><span class="head" itemprop="head">Extensions to the TEI</span></h1></header><div class="table"><table itemprop="table"><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.model" title="&lt;model&gt;">&lt;model&gt;</a></td><td>add</td></tr><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.modelSequence" title="&lt;modelSequence&gt;">&lt;modelSequence&gt;</a></td><td>add</td></tr><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.modelGrp" title="&lt;modelGrp&gt;">&lt;modelGrp&gt;</a></td><td>add</td></tr></table></div></section><section class="teidiv0" id="index.xml-body.1_div.3"><header><h1><span class="headingNumber">3. </span><span class="head" itemprop="head">Changes to the TEI</span></h1></header><div class="table"><table itemprop="table"><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.elementSpec" title="&lt;elementSpec&gt;">&lt;elementSpec&gt;</a></td><td>change</td></tr><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.rendition" title="&lt;rendition&gt;">&lt;rendition&gt;</a></td><td>change</td></tr></table></div></section><section class="teidiv0" id="index.xml-body.1_div.4"><header><h1><span class="headingNumber">4. </span><span class="head" itemprop="head">Schema for processing extended ODD</span></h1></header><div class="teidiv1" id="index.xml-body.1_div.4_div.1"><h2><span class="headingNumber">4.1. </span><span class="head" itemprop="head">Elements</span></h2><div class="refdoc" id="TEI.TEI"><h3><span class="headingNumber">4.1.1. </span><span class="head" itemprop="head">&lt;TEI&gt;</span></h3><div class="table"><table class="wovenodd" itemprop="table"><tr itemprop="row"><td colspan="2" class="wovenodd-col2"><span class="label" itemprop="hi">&lt;TEI&gt; </span>(<span lang="en" itemprop="seg">TEI document</span>) <span lang="en" itemprop="seg">contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a <a class="link_ref" itemprop="ref" href="#TEI.teiCorpus" title="&lt;teiCorpus&gt;">&lt;teiCorpus&gt;</a> element.</span> [<a class="link_ref" itemprop="ref" href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/DS.html#DS">4. </a> <a class="link_ref" itemprop="ref" href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/CC.html#CCDEF">15.1. </a>]</td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">Module</span></td><td class="wovenodd-col2">textstructure</td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">Attributes</span></td><td class="wovenodd-col2"><span lang="en" itemprop="seg">Attributes </span><a class="link_ref" itemprop="ref" href="#TEI.att.global" title="att.global">att.global</a> (<span class="attribute" itemprop="hi">@xml:id</span>, <span class="attribute" itemprop="hi">@n</span>, <span class="attribute" itemprop="hi">@xml:lang</span>, <span class="attribute" itemprop="hi">@rend</span>, <span class="attribute" itemprop="hi">@style</span>, <span class="attribute" itemprop="hi">@rendition</span>, <span class="attribute" itemprop="hi">@xml:base</span>, <span class="attribute" itemprop="hi">@xml:space</span>)  (<a class="link_ref" itemprop="ref" href="#TEI.att.global.linking" title="att.global.linking">att.global.linking</a> (<span class="attribute" itemprop="hi">@corresp</span>, <span class="attribute" itemprop="hi">@synch</span>, <span class="attribute" itemprop="hi">@sameAs</span>, <span class="attribute" itemprop="hi">@copyOf</span>, <span class="attribute" itemprop="hi">@next</span>, <span class="attribute" itemprop="hi">@prev</span>, <span class="attribute" itemprop="hi">@exclude</span>, <span class="attribute" itemprop="hi">@select</span>)) <div class="table"><table class="attList" itemprop="table"><tr itemprop="row"><td class="odd_label">version</td><td class="odd_value"><span lang="en" itemprop="seg">specifies the major version number of the TEI Guidelines against which this document is valid.</span><div class="table"><table class="attDef" itemprop="table"><tr itemprop="row"><td class="odd_label"><span lang="en" class="label" itemprop="hi">Status</span></td><td class="odd_value"><span lang="en" itemprop="seg">Optional</span></td></tr><tr itemprop="row"><td class="odd_label"><span lang="en" class="label" itemprop="hi">Datatype</span></td><td class="odd_value"><pre>
+<span class="element">&lt;/model&gt;</span></div> Here the <a class="link_ref" itemprop="ref" href="#TEI.model" title="&lt;model&gt;">&lt;model&gt;</a>s are <em itemprop="emph">alternatives</em>; only if the test (the <span class="att" itemprop="hi">predicate</span>) on the first fails will the second be activated.</div></section><section class="teidiv0" id="index.xml-body.1_div.2"><header><h1><span class="headingNumber">2. </span><span class="head" itemprop="head">Extensions to the TEI</span></h1></header><div class="table"><table itemprop="table"><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.model" title="&lt;model&gt;">&lt;model&gt;</a></td><td>add</td></tr><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.modelSequence" title="&lt;modelSequence&gt;">&lt;modelSequence&gt;</a></td><td>add</td></tr><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.modelGrp" title="&lt;modelGrp&gt;">&lt;modelGrp&gt;</a></td><td>add</td></tr></table></div></section><section class="teidiv0" id="index.xml-body.1_div.3"><header><h1><span class="headingNumber">3. </span><span class="head" itemprop="head">Changes to the TEI</span></h1></header><div class="table"><table itemprop="table"><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.elementSpec" title="&lt;elementSpec&gt;">&lt;elementSpec&gt;</a></td><td>change</td></tr><tr itemprop="row"><td>Element <a class="link_ref" itemprop="ref" href="#TEI.rendition" title="&lt;rendition&gt;">&lt;rendition&gt;</a></td><td>change</td></tr></table></div></section><section class="teidiv0" id="index.xml-body.1_div.4"><header><h1><span class="headingNumber">4. </span><span class="head" itemprop="head">Schema for processing extended ODD</span></h1></header><div class="teidiv1" id="index.xml-body.1_div.4_div.1"><h2><span class="headingNumber">4.1. </span><span class="head" itemprop="head">Elements</span></h2><div class="refdoc" id="TEI.TEI"><h3><span class="headingNumber">4.1.1. </span><span class="head" itemprop="head">&lt;TEI&gt;</span></h3><div class="table"><table class="wovenodd" itemprop="table"><tr itemprop="row"><td colspan="2" class="wovenodd-col2"><span class="label" itemprop="hi">&lt;TEI&gt; </span>(<span lang="en" itemprop="seg">TEI document</span>) <span lang="en" itemprop="seg">contains a single TEI-conformant document, comprising a TEI header and a text, either in isolation or as part of a <a class="link_ref" itemprop="ref" href="#TEI.teiCorpus" title="&lt;teiCorpus&gt;">&lt;teiCorpus&gt;</a> element.</span> [<a class="link_ref" itemprop="ref" href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/DS.html#DS">4. </a> <a class="link_ref" itemprop="ref" href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/CC.html#CCDEF">15.1. </a>]</td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">Module</span></td><td class="wovenodd-col2">textstructure</td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">Attributes</span></td><td class="wovenodd-col2"><span lang="en" itemprop="seg">Attributes </span><a class="link_ref" itemprop="ref" href="#TEI.att.global" title="att.global">att.global</a> (<span class="attribute" itemprop="hi">@xml:id</span>, <span class="attribute" itemprop="hi">@n</span>, <span class="attribute" itemprop="hi">@xml:lang</span>, <span class="attribute" itemprop="hi">@rend</span>, <span class="attribute" itemprop="hi">@style</span>, <span class="attribute" itemprop="hi">@rendition</span>, <span class="attribute" itemprop="hi">@xml:base</span>, <span class="attribute" itemprop="hi">@xml:space</span>)  (<a class="link_ref" itemprop="ref" href="#TEI.att.global.linking" title="att.global.linking">att.global.linking</a> (<span class="attribute" itemprop="hi">@corresp</span>, <span class="attribute" itemprop="hi">@synch</span>, <span class="attribute" itemprop="hi">@sameAs</span>, <span class="attribute" itemprop="hi">@copyOf</span>, <span class="attribute" itemprop="hi">@next</span>, <span class="attribute" itemprop="hi">@prev</span>, <span class="attribute" itemprop="hi">@exclude</span>, <span class="attribute" itemprop="hi">@select</span>)) <div class="table"><table class="attList" itemprop="table"><tr itemprop="row"><td class="odd_label">version</td><td class="odd_value"><span lang="en" itemprop="seg">specifies the major version number of the TEI Guidelines against which this document is valid.</span><div class="table"><table class="attDef" itemprop="table"><tr itemprop="row"><td class="odd_label"><span lang="en" class="label" itemprop="hi">Status</span></td><td class="odd_value"><span lang="en" itemprop="seg">Optional</span></td></tr><tr itemprop="row"><td class="odd_label"><span lang="en" class="label" itemprop="hi">Datatype</span></td><td class="odd_value"><pre>
 <a class="link_ref" itemprop="ref" href="#TEI.data.version" title="data.version">data.version</a></pre></td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">Note</span></td><td class="wovenodd-col2">The major version number is historically prefixed by a P (for Proposal), and is distinct from the version number used for individual releases of the Guidelines, as used by (for example) the <span class="att" itemprop="hi">source</span> of the <a class="link_ref" itemprop="ref" href="#TEI.schemaSpec" title="&lt;schemaSpec&gt;">&lt;schemaSpec&gt;</a> element. The current version is P5.</td></tr></table></div></td></tr></table></div></td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">Contained by</span></td><td class="wovenodd-col2"><div class="parent" itemprop="ab"><div class="specChildren" itemprop="ab"><div class="specChild" itemprop="ab"><span class="specChildModule" itemprop="seg">core: </span><span class="specChildElements" itemprop="seg"><a class="link_odd_elementSpec" itemprop="ref" href="#TEI.teiCorpus" title="&lt;teiCorpus&gt;">teiCorpus</a></span></div></div></div></td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">May contain</span></td><td class="wovenodd-col2"><div class="specChildren" itemprop="ab"><div class="specChild" itemprop="ab"><span class="specChildModule" itemprop="seg">header: </span><span class="specChildElements" itemprop="seg"><a class="link_odd_elementSpec" itemprop="ref" href="#TEI.teiHeader" title="&lt;teiHeader&gt;">teiHeader</a></span></div><div class="specChild" itemprop="ab"><span class="specChildModule" itemprop="seg">textstructure: </span><span class="specChildElements" itemprop="seg"><a class="link_odd_elementSpec" itemprop="ref" href="#TEI.text" title="&lt;text&gt;">text</a></span></div></div></td></tr><tr itemprop="row"><td class="wovenodd-col1"><span lang="en" class="label" itemprop="hi">Declaration</span></td><td class="wovenodd-col2"><pre>
 element TEI
 {
