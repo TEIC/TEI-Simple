@@ -299,6 +299,14 @@
             </group>
           </content>
         </elementSpec>
+
+	<elementSpec mode="change"  ident="rendition">
+	  <classes mode="replace">
+	    <memberOf key="att.global"/>
+	    <memberOf key="att.styleDef"/>
+	    <memberOf key="oddDecl"/>
+	  </classes>
+	</elementSpec>
       </schemaSpec>
     </body>
   </text>

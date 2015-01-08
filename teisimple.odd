@@ -1,33 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<?xml-model
-  href="tei-pm.nvdl"
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="tei-pm.nvdl"
   type="application/xml"
   schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
-<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-   xml:lang="en">
-   <teiHeader>
-      <fileDesc>
-         <titleStmt>
-            <title>TEI Simple</title>
-         </titleStmt>
-         <publicationStmt>
-            <publisher>TEI Consortium</publisher>
-            <availability>
-               <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed under a
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple</title>
+      </titleStmt>
+      <publicationStmt>
+        <publisher>TEI Consortium</publisher>
+        <availability>
+          <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed under a
                   Creative Commons Attribution-ShareAlike 3.0 Unported License </licence>
-               <licence target="http://www.opensource.org/licenses/BSD-2-Clause">
-                  <p>Copyright 2014 TEI Consortium.</p>
-                  <p>All rights reserved.</p>
-                  <p>Redistribution and use in source and binary forms, with or without
+          <licence target="http://www.opensource.org/licenses/BSD-2-Clause">
+            <p>Copyright 2014 TEI Consortium.</p>
+            <p>All rights reserved.</p>
+            <p>Redistribution and use in source and binary forms, with or without
                      modification, are permitted provided that the following conditions are met:</p>
-                  <list>
-                     <item>Redistributions of source code must retain the above copyright notice,
+            <list>
+              <item>Redistributions of source code must retain the above copyright notice,
                         this list of conditions and the following disclaimer.</item>
-                     <item>Redistributions in binary form must reproduce the above copyright notice,
+              <item>Redistributions in binary form must reproduce the above copyright notice,
                         this list of conditions and the following disclaimer in the documentation
                         and/or other materials provided with the distribution.</item>
-                  </list>
-                  <p>This software is provided by the copyright holders and contributors "as is" and
+            </list>
+            <p>This software is provided by the copyright holders and contributors "as is" and
                      any express or implied warranties, including, but not limited to, the implied
                      warranties of merchantability and fitness for a particular purpose are
                      disclaimed. In no event shall the copyright holder or contributors be liable
@@ -37,542 +35,613 @@
                      caused and on any theory of liability, whether in contract, strict liability,
                      or tort (including negligence or otherwise) arising in any way out of the use
                      of this software, even if advised of the possibility of such damage.</p>
-               </licence>
-               <p>TEI material can be licensed differently depending on the use you intend to make
+          </licence>
+          <p>TEI material can be licensed differently depending on the use you intend to make
                   of it. Hence it is made available under both the CC+BY and BSD-2 licences. The
                   CC+BY licence is generally appropriate for usages which treat TEI content as data
                   or documentation. The BSD-2 licence is generally appropriate for usage of TEI
                   content in a software environment. For further information or clarification,
                   please contact the <ref target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
-            </availability>
-         </publicationStmt>
-         <sourceDesc>
-            <p>created ab initio during a meeting in Oxford</p>
-         </sourceDesc>
-      </fileDesc>
-   </teiHeader>
-   <text>
-      <front>
-         <titlePage>
-            <docTitle>
-               <titlePart type="main">TEI Simple</titlePart>
-            </docTitle>
-            <docAuthor>Sebastian Rahtz</docAuthor>
-            <docAuthor>Brian Pytlik Zillig</docAuthor>
-            <docAuthor>Martin Mueller</docAuthor>
-            <docDate>Version 0.1: 30th November 2014</docDate>
-         </titlePage>
-      </front>
-      <body>
-         <div>
-            <head>The TEI Simple schema</head>
-            <schemaSpec ident="teisimple" start="TEI teiCorpus">
-               <specGrpRef target="#base"/>
-               <specGrpRef target="#header"/>
-               <specGrpRef target="#transcr"/>
-               <specGrpRef target="#attclasses"/>
-               <specGrpRef target="#modelclasses"/>
-               <specGrpRef target="#simpleelements"/>
-               <specGrpRef target="#simpleelementspm"/>
-               <specGrpRef target="#simplechanges"/>
-            </schemaSpec>
-            <include xmlns="http://www.w3.org/2001/XInclude" href="elementsummary.xml"/>
-            <div>
-               <head>The TEI infrastructure</head>
-               <specGrp xml:id="base">
-                  <moduleRef key="tei"/>
-               </specGrp>
-            </div>
-            <div>
-               <head>The header</head>
-               <p>The default set of elements for the header are loaded using the
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>created ab initio during a meeting in Oxford</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <front>
+      <titlePage>
+        <docTitle>
+          <titlePart type="main">TEI Simple</titlePart>
+        </docTitle>
+        <docAuthor>Sebastian Rahtz</docAuthor>
+        <docAuthor>Brian Pytlik Zillig</docAuthor>
+        <docAuthor>Martin Mueller</docAuthor>
+        <docDate>Version 0.1: 30th November 2014</docDate>
+      </titlePage>
+    </front>
+    <body>
+      <div>
+        <head>The TEI Simple schema</head>
+        <schemaSpec ident="teisimple" start="TEI teiCorpus">
+          <specGrpRef target="#base"/>
+          <specGrpRef target="#header"/>
+          <specGrpRef target="#transcr"/>
+          <specGrpRef target="#attclasses"/>
+          <specGrpRef target="#modelclasses"/>
+          <specGrpRef target="#simpleelements"/>
+          <specGrpRef target="#simpleelementspm"/>
+          <specGrpRef target="#simplechanges"/>
+          <specGrpRef target="#rendition"/>
+        </schemaSpec>
+        <include xmlns="http://www.w3.org/2001/XInclude" href="elementsummary.xml"/>
+        <div>
+          <head>The TEI infrastructure</head>
+          <specGrp xml:id="base">
+            <moduleRef key="tei"/>
+          </specGrp>
+        </div>
+        <div>
+          <head>The header</head>
+          <p>The default set of elements for the header are loaded using the
                      <term>header</term> module. In addition, elements from other modules are
                   loaded, if they are tagged in the classification as being needed for the header
                   only.</p>
-               <specGrp xml:id="header">
-                  <moduleRef key="header"/>
-                  <elementRef key="att"/>
-                  <elementRef key="biblStruct"/>
-                  <elementRef key="biblScope"/>
-                  <elementRef key="charDecl"/>
-                  <elementRef key="charProp"/>
-                  <elementRef key="editor"/>
-                  <elementRef key="email"/>
-                  <elementRef key="gi"/>
-                  <elementRef key="glyph"/>
-                  <elementRef key="glyphName"/>
-                  <elementRef key="imprint"/>
-                  <elementRef key="localName"/>
-                  <elementRef key="listPerson"/>
-                  <elementRef key="monogr"/>
-                  <elementRef key="msDesc"/>
-                  <elementRef key="msIdentifier"/>
-                  <elementRef key="physDesc"/>
-                  <elementRef key="relatedItem"/>
-                  <elementRef key="repository"/>
-                  <elementRef key="resp"/>
-                  <elementRef key="respStmt"/>
-                  <elementRef key="teiHeader"/>
-                  <elementRef key="term"/>
-                  <elementRef key="textDesc"/>
-                  <elementRef key="typeDesc"/>
-                  <elementRef key="value"/>
-                  <p>Elements which are only intended to be used in the header are banned from the
+          <specGrp xml:id="header">
+            <moduleRef key="header"/>
+            <elementRef key="att"/>
+            <elementRef key="biblStruct"/>
+            <elementRef key="biblScope"/>
+            <elementRef key="charDecl"/>
+            <elementRef key="charProp"/>
+            <elementRef key="editor"/>
+            <elementRef key="email"/>
+            <elementRef key="gi"/>
+            <elementRef key="glyph"/>
+            <elementRef key="glyphName"/>
+            <elementRef key="imprint"/>
+            <elementRef key="localName"/>
+            <elementRef key="listPerson"/>
+            <elementRef key="monogr"/>
+            <elementRef key="msDesc"/>
+            <elementRef key="msIdentifier"/>
+            <elementRef key="physDesc"/>
+            <elementRef key="relatedItem"/>
+            <elementRef key="repository"/>
+            <elementRef key="resp"/>
+            <elementRef key="respStmt"/>
+            <elementRef key="teiHeader"/>
+            <elementRef key="term"/>
+            <elementRef key="textDesc"/>
+            <elementRef key="typeDesc"/>
+            <elementRef key="value"/>
+            <p>Elements which are only intended to be used in the header are banned from the
                         <gi>text</gi>, using a Schematron rule.</p>
-                  <elementSpec ident="text" mode="change">
-                     <include xmlns="http://www.w3.org/2001/XInclude" href="headeronly.xml"/>
-                  </elementSpec>
-               </specGrp>
-            </div>
-            <div>
-               <head>Transcription</head>
-               <p>In order to support the <gi>sourcedoc</gi> and <gi>facsimile</gi> elements, the
+            <elementSpec ident="text" mode="change">
+              <include xmlns="http://www.w3.org/2001/XInclude" href="headeronly.xml"/>
+            </elementSpec>
+          </specGrp>
+        </div>
+        <div>
+          <head>Transcription</head>
+          <p>In order to support the <gi>sourcedoc</gi> and <gi>facsimile</gi> elements, the
                   basic transcriptional elements are loaded, and two attribute classes.</p>
-               <specGrp xml:id="transcr">
-                  <elementRef key="damage"/>
-                  <elementRef key="damageSpan"/>
-                  <elementRef key="facsimile"/>
-                  <elementRef key="line"/>
-                  <elementRef key="listTranspose"/>
-                  <elementRef key="metamark"/>
-                  <elementRef key="mod"/>
-                  <elementRef key="redo"/>
-                  <elementRef key="restore"/>
-                  <elementRef key="retrace"/>
-                  <elementRef key="sourceDoc"/>
-                  <elementRef key="surface"/>
-                  <elementRef key="surfaceGrp"/>
-                  <elementRef key="surplus"/>
-                  <elementRef key="transpose"/>
-                  <elementRef key="undo"/>
-                  <elementRef key="zone"/>
-                  <classRef key="att.coordinated"/>
-                  <classRef key="att.global.change"/>
-               </specGrp>
-            </div>
-            <div>
-               <head>Attribute classes</head>
-               <specGrp xml:id="attclasses">
-                  <p>The <term>tei</term> module brings with it a default set of attribute classes.
+          <specGrp xml:id="transcr">
+            <elementRef key="damage"/>
+            <elementRef key="damageSpan"/>
+            <elementRef key="facsimile"/>
+            <elementRef key="line"/>
+            <elementRef key="listTranspose"/>
+            <elementRef key="metamark"/>
+            <elementRef key="mod"/>
+            <elementRef key="redo"/>
+            <elementRef key="restore"/>
+            <elementRef key="retrace"/>
+            <elementRef key="sourceDoc"/>
+            <elementRef key="surface"/>
+            <elementRef key="surfaceGrp"/>
+            <elementRef key="surplus"/>
+            <elementRef key="transpose"/>
+            <elementRef key="undo"/>
+            <elementRef key="zone"/>
+            <classRef key="att.coordinated"/>
+            <classRef key="att.global.change"/>
+          </specGrp>
+        </div>
+        <div>
+          <head>Attribute classes</head>
+          <specGrp xml:id="attclasses">
+            <p>The <term>tei</term> module brings with it a default set of attribute classes.
                      We need some more specialist ones from other modules, and to delete some
                      default ones which we don't plan to use.</p>
-                  <classRef key="att.global.analytic"/>
-                  <classRef key="att.global.facs"/>
-                  <classRef key="att.milestoneUnit"/>
-                  <classRef key="att.global.linking"/>
-                  <classSpec type="atts"  ident="att.datcat" mode="delete"/>
-                  <classSpec type="atts"  ident="att.declarable" mode="delete"/>
-                  <classSpec type="atts"  ident="att.divLike" mode="delete"/>
-                  <p>Some uncommon attributes are removed from global linking.</p>
-                  <classSpec type="atts"  ident="att.global.linking" mode="change">
-                     <attList>
-                        <attDef ident="synch" mode="delete"/>
-                        <attDef ident="copyOf" mode="delete"/>
-                        <attDef ident="exclude" mode="delete"/>
-                        <attDef ident="select" mode="delete"/>
-                     </attList>
-                  </classSpec>
-                  <p>URLs have a constraint that a local pointer must have a corresponding ID.</p>
-                  <classSpec type="atts"  ident="att.pointing" mode="change">
-                     <attList>
-                        <attDef ident="target" mode="change">
-                           <constraintSpec ident="validtarget" scheme="isoschematron">
-                              <constraint>
-                                 <rule xmlns="http://purl.oclc.org/dsdl/schematron"
-                                    context="tei:*[@target]">
-                                    <let name="results"
-                                       value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-                                    <report test="some $x in $results  satisfies $x"> Error: Every
+            <classRef key="att.global.analytic"/>
+            <classRef key="att.global.facs"/>
+            <classRef key="att.milestoneUnit"/>
+            <classRef key="att.global.linking"/>
+            <classSpec type="atts" ident="att.datcat" mode="delete"/>
+            <classSpec type="atts" ident="att.declarable" mode="delete"/>
+            <classSpec type="atts" ident="att.divLike" mode="delete"/>
+            <p>Some uncommon attributes are removed from global linking.</p>
+            <classSpec type="atts" ident="att.global.linking" mode="change">
+              <attList>
+                <attDef ident="synch" mode="delete"/>
+                <attDef ident="copyOf" mode="delete"/>
+                <attDef ident="exclude" mode="delete"/>
+                <attDef ident="select" mode="delete"/>
+              </attList>
+            </classSpec>
+            <p>URLs have a constraint that a local pointer must have a corresponding ID.</p>
+            <classSpec type="atts" ident="att.pointing" mode="change">
+              <attList>
+                <attDef ident="target" mode="change">
+                  <constraintSpec ident="validtarget" scheme="isoschematron">
+                    <constraint>
+                      <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@target]">
+                        <let name="results" value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                        <report test="some $x in $results  satisfies $x"> Error: Every
                                        local pointer in "<value-of select="@target"/>" must point to
-                                       an ID in this document (<value-of select="$results"
-                                       />)</report>
-                                 </rule>
-                              </constraint>
-                           </constraintSpec>
-                        </attDef>
-                     </attList>
-                  </classSpec>
-                  <p>Constrained value lists are added to attribute classes where possible.</p>
-                  <classSpec type="atts"  mode="change" ident="att.placement">
-                     <attList>
-                        <attDef ident="place" mode="change">
-                           <valList type="closed" mode="replace">
-                              <valItem ident="above">
-                                 <?exactMatch supralinear?>
-                                 <desc>above the line</desc>
-                              </valItem>
-                              <valItem ident="below">
-                                 <desc>below the line</desc>
-                              </valItem>
-                              <valItem ident="top">
-                                 <?exactMatch pageTop?>
-                                 <desc>at the top of the page</desc>
-                              </valItem>
-                              <valItem ident="top-right">
-                                 <desc>at the top right of the page</desc>
-                              </valItem>
-                              <valItem ident="top-left">
-                                 <desc>at the top left of the page</desc>
-                              </valItem>
-                              <valItem ident="top-center">
-                                 <desc>at the top center of the page</desc>
-                              </valItem>
-                              <valItem ident="bottom-right">
-                                 <?exactMatch bot-right?>
-                                 <desc>at the bottom right of the page</desc>
-                              </valItem>
-                              <valItem ident="bottom-left">
-                                 <?exactMatch bot-left?>
-                                 <desc>at the bottom left of the page</desc>
-                              </valItem>
-                              <valItem ident="bottom-center">
-                                 <?exactMatch bot-center?>
-                                 <desc>at the bottom center of the page</desc>
-                              </valItem>
-                              <valItem ident="bottom">
-                                 <?exactMatch foot?>
-                                 <desc>at the foot of the page</desc>
-                              </valItem>
-                              <valItem ident="tablebottom">
-                                 <desc>underneath a table</desc>
-                                 <?exactMatch tablefoot?>
-                              </valItem>
-                              <valItem ident="margin">
-                                 <?exactMatch margin-outer?>
-                                 <?exactMatch marg1?>
-                                 <?exactMatch marg2?>
-                                 <?exactMatch marg4?>
-                                 <desc>in the outer margin</desc>
-                              </valItem>
-                              <valItem ident="margin-left">
-                                 <?exactMatch left?>
-                                 <desc>in the left margin</desc>
-                              </valItem>
-                              <valItem ident="margin-right">
-                                 <?exactMatch right?>
-                                 <desc>in the right margin</desc>
-                              </valItem>
-                              <valItem ident="opposite">
-                                 <desc>on the opposite, i.e. facing, page.</desc>
-                              </valItem>
-                              <valItem ident="overleaf">
-                                 <desc>on the other side of the leaf.</desc>
-                              </valItem>
-                              <valItem ident="end">
-                                 <desc>at the end of the volume.</desc>
-                              </valItem>
-                              <valItem ident="divend">
-                                 <desc>at the end the current division.</desc>
-                              </valItem>
-                              <valItem ident="parend">
-                                 <desc>at the end the current paragraph.</desc>
-                              </valItem>
-                              <valItem ident="inline">
-                                 <?exactMatch in?>
-                                 <desc>within the body of the text.</desc>
-                              </valItem>
-                              <valItem ident="inspace">
-                                 <desc>in a predefined space, for example left by an earlier
+                                       an ID in this document (<value-of select="$results"/>)</report>
+                      </rule>
+                    </constraint>
+                  </constraintSpec>
+                </attDef>
+              </attList>
+            </classSpec>
+            <p>Constrained value lists are added to attribute classes where possible.</p>
+            <classSpec type="atts" mode="change" ident="att.placement">
+              <attList>
+                <attDef ident="place" mode="change">
+                  <valList type="closed" mode="replace">
+                    <valItem ident="above">
+                      <?exactMatch supralinear?>
+                      <desc>above the line</desc>
+                    </valItem>
+                    <valItem ident="below">
+                      <desc>below the line</desc>
+                    </valItem>
+                    <valItem ident="top">
+                      <?exactMatch pageTop?>
+                      <desc>at the top of the page</desc>
+                    </valItem>
+                    <valItem ident="top-right">
+                      <desc>at the top right of the page</desc>
+                    </valItem>
+                    <valItem ident="top-left">
+                      <desc>at the top left of the page</desc>
+                    </valItem>
+                    <valItem ident="top-center">
+                      <desc>at the top center of the page</desc>
+                    </valItem>
+                    <valItem ident="bottom-right">
+                      <?exactMatch bot-right?>
+                      <desc>at the bottom right of the page</desc>
+                    </valItem>
+                    <valItem ident="bottom-left">
+                      <?exactMatch bot-left?>
+                      <desc>at the bottom left of the page</desc>
+                    </valItem>
+                    <valItem ident="bottom-center">
+                      <?exactMatch bot-center?>
+                      <desc>at the bottom center of the page</desc>
+                    </valItem>
+                    <valItem ident="bottom">
+                      <?exactMatch foot?>
+                      <desc>at the foot of the page</desc>
+                    </valItem>
+                    <valItem ident="tablebottom">
+                      <desc>underneath a table</desc>
+                      <?exactMatch tablefoot?>
+                    </valItem>
+                    <valItem ident="margin">
+                      <?exactMatch margin-outer?>
+                      <?exactMatch marg1?>
+                      <?exactMatch marg2?>
+                      <?exactMatch marg4?>
+                      <desc>in the outer margin</desc>
+                    </valItem>
+                    <valItem ident="margin-left">
+                      <?exactMatch left?>
+                      <desc>in the left margin</desc>
+                    </valItem>
+                    <valItem ident="margin-right">
+                      <?exactMatch right?>
+                      <desc>in the right margin</desc>
+                    </valItem>
+                    <valItem ident="opposite">
+                      <desc>on the opposite, i.e. facing, page.</desc>
+                    </valItem>
+                    <valItem ident="overleaf">
+                      <desc>on the other side of the leaf.</desc>
+                    </valItem>
+                    <valItem ident="end">
+                      <desc>at the end of the volume.</desc>
+                    </valItem>
+                    <valItem ident="divend">
+                      <desc>at the end the current division.</desc>
+                    </valItem>
+                    <valItem ident="parend">
+                      <desc>at the end the current paragraph.</desc>
+                    </valItem>
+                    <valItem ident="inline">
+                      <?exactMatch in?>
+                      <desc>within the body of the text.</desc>
+                    </valItem>
+                    <valItem ident="inspace">
+                      <desc>in a predefined space, for example left by an earlier
                                     scribe.</desc>
-                              </valItem>
-                              <valItem ident="display">
-                                 <desc>formatted like a quotation</desc>
-                              </valItem>
-                           </valList>
-                        </attDef>
-                     </attList>
-                  </classSpec>
-                  <classSpec type="atts"  ident="att.dimensions" mode="change">
-                     <attList>
-                        <attDef ident="unit" mode="change">
-                           <valList mode="add" type="closed">
-                              <valItem ident="chars">
-                                 <desc>characters</desc>
-                                 <?exactMatch char?>
-                                 <?exactMatch characters?>
-                              </valItem>
-                              <valItem ident="lines">
-                                 <desc>lines</desc>
-                                 <?exactMatch line?>
-                              </valItem>
-                              <valItem ident="pages">
-                                 <desc>pages</desc>
-                                 <?exactMatch page?>
-                              </valItem>
-                              <valItem ident="words">
-                                 <desc>words</desc>
-                                 <?exactMatch word?>
-                              </valItem>
-                              <valItem ident="cm">
-                                 <desc>centimetres</desc>
-                              </valItem>
-                              <valItem ident="mm">
-                                 <desc>millimetre</desc>
-                              </valItem>
-                              <valItem ident="in">
-                                 <desc>inches</desc>
-                              </valItem>
-                           </valList>
-                        </attDef>
-                     </attList>
-                  </classSpec>
-                  <classSpec type="atts"  ident="att.global"
-			     mode="change">
-                           <constraintSpec ident="renditionpointer" scheme="isoschematron">
-                              <constraint>
-                                 <rule xmlns="http://purl.oclc.org/dsdl/schematron"
-                                    context="tei:*[@rendition]">
-                                    <let name="results"
-                                       value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
-                                    <assert test="every $x in $results satisfies $x"> Error: Each of
+                    </valItem>
+                    <valItem ident="display">
+                      <desc>formatted like a quotation</desc>
+                    </valItem>
+                  </valList>
+                </attDef>
+              </attList>
+            </classSpec>
+            <classSpec type="atts" ident="att.dimensions" mode="change">
+              <attList>
+                <attDef ident="unit" mode="change">
+                  <valList mode="add" type="closed">
+                    <valItem ident="chars">
+                      <desc>characters</desc>
+                      <?exactMatch char?>
+                      <?exactMatch characters?>
+                    </valItem>
+                    <valItem ident="lines">
+                      <desc>lines</desc>
+                      <?exactMatch line?>
+                    </valItem>
+                    <valItem ident="pages">
+                      <desc>pages</desc>
+                      <?exactMatch page?>
+                    </valItem>
+                    <valItem ident="words">
+                      <desc>words</desc>
+                      <?exactMatch word?>
+                    </valItem>
+                    <valItem ident="cm">
+                      <desc>centimetres</desc>
+                    </valItem>
+                    <valItem ident="mm">
+                      <desc>millimetre</desc>
+                    </valItem>
+                    <valItem ident="in">
+                      <desc>inches</desc>
+                    </valItem>
+                  </valList>
+                </attDef>
+              </attList>
+            </classSpec>
+            <classSpec type="atts" ident="att.global" mode="change">
+              <constraintSpec ident="renditionpointer" scheme="isoschematron">
+                <constraint>
+                  <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
+                    <let name="results" value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
+                    <assert test="every $x in $results satisfies $x"> Error: Each of
                                        the rendition values in "<value-of select="@rendition"/>"
                                        must point to a local ID or to a token in the Simple scheme
                                           (<value-of select="$results"/>)</assert>
-                                 </rule>
-                              </constraint>
-                           </constraintSpec>
-
-                     <attList>
-                        <attDef ident="rend" mode="delete"/>
-                        <attDef ident="style" mode="delete"/>
-                        <attDef ident="rendition" mode="change">
-                           <valList mode="add" type="semi">
-                              <valItem ident="simple:allcaps">
-                                 <?exactMatch upper-roman?>
-                                 <?exactMatch uc?>
-                                 <desc>all capitals</desc>
-                              </valItem>
-                              <valItem ident="simple:blackletter">
-                                 <?exactMatch blackLetter?>
-                                 <?exactMatch blackletterType?>
-                                 <?exactMatch FrakturType?>
-                                 <?exactMatch gothic?>
-                                 <desc>black letter or gothic typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:bold">
-                                 <?exactMatch b?>
-                                 <?exactMatch bo?>
-                                 <?exactMatch bol?>
-                                 <?exactMatch strong?>
-                                 <desc>bold typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:bottombraced">
-                                 <desc>marked with a brace under the bottom of the text</desc>
-                              </valItem>
-                              <valItem ident="simple:boxed">
-                                 <?exactMatch border?>
-                                 <desc>border around the text</desc>
-                              </valItem>
-                              <valItem ident="simple:centre">
-                                 <?exactMatch center?>
-                                 <desc>centred</desc>
-                              </valItem>
-                              <valItem ident="simple:cursive">
-                                 <desc>cursive typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:doublestrikethrough">
-                                 <desc>strikethrough with double line</desc>
-                              </valItem>
-                              <valItem ident="simple:doubleunderline">
-                                 <desc>underlined with double line</desc>
-                              </valItem>
-                              <valItem ident="simple:dropcap">
-                                 <?exactMatch decorInit?>
-                                 <desc>initial letter larger or decorated</desc>
-                              </valItem>
-                              <valItem ident="simple:float">
-                                 <desc>floated out of main flow</desc>
-                              </valItem>
-                              <valItem ident="simple:hyphen">
-                                 <desc>with a hyphen here (eg in line break)</desc>
-                              </valItem>
-                              <valItem ident="simple:italic">
-                                 <?exactMatch italics?>
-                                 <?exactMatch ITALIC?>
-                                 <?exactMatch i?>
-                                 <?exactMatch it?>
-                                 <?exactMatch ital?>
-                                 <desc>italic typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:larger">
-                                 <?exactMatch large?>
-                                 <desc>larger type</desc>
-                              </valItem>
-                              <valItem ident="simple:left">
-                                 <?exactMatch left?>
-                                 <desc>aligned to the left or left-justified</desc>
-                              </valItem>
-                              <valItem ident="simple:leftbraced">
-                                 <?exactMatch braced?>
-                                 <desc>marked with a brace on the left side of the text</desc>
-                              </valItem>
-                              <valItem ident="simple:letterspace">
-                                 <?exactMatch spaceletter?>
-                                 <desc>letter-spaced</desc>
-                              </valItem>
-                              <valItem ident="simple:normalstyle">
-                                 <desc>upright shape and default weight of typeface</desc>
-                              </valItem>
-                              <valItem ident="simple:normalweight">
-                                 <?exactMatch roman?>
-                                 <desc>normal typeface weight</desc>
-                              </valItem>
-                              <valItem ident="simple:right">
-                                 <?exactMatch right-aligned?>
-                                 <desc>aligned to the right or right-justified</desc>
-                              </valItem>
-                              <valItem ident="simple:rightbraced">
-                                 <desc>marked with a brace to the right of the text</desc>
-                              </valItem>
-                              <valItem ident="simple:rotateleft">
-                                 <?exactMatch rotateCounterclockwise?>
-                                 <desc>rotated to the left</desc>
-                              </valItem>
-                              <valItem ident="simple:rotateright">
-                                 <?exactMatch rotateClockwise?>
-                                 <desc>rotated to the right</desc>
-                              </valItem>
-                              <valItem ident="simple:smallcaps">
-                                 <?exactMatch sc?>
-                                 <?exactMatch smallCap?>
-                                 <desc>small caps</desc>
-                              </valItem>
-                              <valItem ident="simple:smaller">
-                                 <?exactMatch small?>
-                                 <desc>smaller type</desc>
-                              </valItem>
-                              <valItem ident="simple:strikethrough">
-                                 <desc>strike through</desc>
-                              </valItem>
-                              <valItem ident="simple:subscript">
-                                 <?exactMatch sub?>
-                                 <desc>subscript</desc>
-                              </valItem>
-                              <valItem ident="simple:superscript">
-                                 <?exactMatch sup?>
-                                 <?exactMatch super?>
-                                 <desc>superscript</desc>
-                              </valItem>
-                              <valItem ident="simple:topbraced">
-                                 <desc>marked with a brace above the text</desc>
-                              </valItem>
-                              <valItem ident="simple:typewriter">
-                                 <desc>fixed-width typeface, like typewriter</desc>
-                              </valItem>
-                              <valItem ident="simple:underline">
-                                 <?exactMatch u?>
-                                 <desc>underlined with single line</desc>
-                              </valItem>
-                              <valItem ident="simple:wavyunderline">
-                                 <desc>underlined with wavy line</desc>
-                              </valItem>
-                           </valList>
-                        </attDef>
-                     </attList>
-                  </classSpec>
-               </specGrp>
-            </div>
-            <div>
-               <head>Model classes</head>
-               <specGrp xml:id="modelclasses">
-                  <p>A set of unused model classes are removed.</p>
-                  <classSpec type="model"  ident="model.entryPart" mode="delete"/>
-                  <classSpec type="model"  ident="model.placeNamePart" mode="delete"/>
-                  <classSpec type="model"  ident="model.placeStateLike" mode="delete"/>
-                  <classSpec type="model"  ident="model.egLike" mode="delete"/>
-                  <classSpec type="model"  ident="model.offsetLike" mode="delete"/>
-                  <classSpec type="model"  ident="model.pPart.msdesc" mode="delete"/>
-                  <classSpec type="model"  ident="model.oddDecl" mode="delete"/>
-                  <classSpec type="model"  ident="model.specDescLike" mode="delete"/>
-                  <classSpec type="model"  ident="model.entryPart" mode="delete"/>
-                  <classSpec type="model"  ident="model.placeNamePart" mode="delete"/>
-                  <classSpec type="model"  ident="model.placeStateLike" mode="delete"/>
-                  <classSpec type="model"  ident="model.certLike" mode="delete"/>
-                  <classSpec type="model"  ident="model.glossLike" mode="delete"/>
-               </specGrp>
-            </div>
-            <div>
-               <head>Elements</head>
-               <p>The main part of Simple is the set of selected elements.</p>
-               <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements.xml"/>
-               <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements-pm.xml"/>
-               <specGrp xml:id="simplechanges">
-                  <p>A small number of elements have constrained value lists added.</p>
-                  <elementSpec ident="formula" mode="change">
-                     <attList>
-                        <attDef ident="notation" mode="change">
-                           <valList mode="add" type="semi">
-                              <valItem ident="TeX">
-                                 <desc>Using TeX or LaTeX notation</desc>
-                              </valItem>
-                           </valList>
-                        </attDef>
-                     </attList>
-                  </elementSpec>
-                  <elementSpec ident="name" mode="change">
-                     <attList>
-                        <attDef ident="type" mode="change">
-                           <valList mode="add" type="closed">
-                              <valItem ident="person"/>
-                              <valItem ident="forename"/>
-                              <valItem ident="surname"/>
-                              <valItem ident="personGenName"/>
-                              <valItem ident="personRoleName"/>
-                              <valItem ident="personAddName"/>
-                              <valItem ident="nameLink"/>
-                              <valItem ident="organisation"/>
-                              <valItem ident="country"/>
-                              <valItem ident="placeGeog"/>
-                              <valItem ident="place"/>
-                           </valList>
-                        </attDef>
-                     </attList>
-                  </elementSpec>
-                  <elementSpec ident="cell" mode="change">
-                     <attList>
-                        <attDef ident="role" mode="change">
-                           <valList mode="add" type="closed">
-                              <valItem ident="data">
-                                 <desc>data cell</desc>
-                              </valItem>
-                              <valItem ident="label">
-                                 <desc>label cell</desc>
-                                 <?exactMatch LABEL?>
-                              </valItem>
-                              <valItem ident="sum">
-                                 <desc>row or column sum data</desc>
-                              </valItem>
-                              <valItem ident="total">
-                                 <desc>table total data</desc>
-                              </valItem>
-                           </valList>
-                        </attDef>
-                     </attList>
-                  </elementSpec>
-                  <elementSpec ident="row" mode="change">
-                     <attList>
-                        <attDef ident="role" mode="change">
-                           <valList mode="add" type="closed">
-                              <valItem ident="data">
-                                 <desc>data cell</desc>
-                              </valItem>
-                              <valItem ident="label">
-                                 <desc>label cell</desc>
-                              </valItem>
-                              <valItem ident="sum">
-                                 <desc>row or column sum data</desc>
-                              </valItem>
-                              <valItem ident="total">
-                                 <desc>table total data</desc>
-                              </valItem>
-                           </valList>
-                        </attDef>
-                     </attList>
-                  </elementSpec>
-               </specGrp>
-            </div>
-
-         </div>
-      </body>
-   </text>
+                  </rule>
+                </constraint>
+              </constraintSpec>
+              <attList>
+                <attDef ident="rend" mode="delete"/>
+                <attDef ident="style" mode="delete"/>
+                <attDef ident="rendition" mode="change">
+                  <valList mode="add" type="semi">
+                    <valItem ident="simple:allcaps">
+                      <?exactMatch upper-roman?>
+                      <?exactMatch uc?>
+                      <desc>all capitals</desc>
+                    </valItem>
+                    <valItem ident="simple:blackletter">
+                      <?exactMatch blackLetter?>
+                      <?exactMatch blackletterType?>
+                      <?exactMatch FrakturType?>
+                      <?exactMatch gothic?>
+                      <desc>black letter or gothic typeface</desc>
+                    </valItem>
+                    <valItem ident="simple:bold">
+                      <?exactMatch b?>
+                      <?exactMatch bo?>
+                      <?exactMatch bol?>
+                      <?exactMatch strong?>
+                      <desc>bold typeface</desc>
+                    </valItem>
+                    <valItem ident="simple:bottombraced">
+                      <desc>marked with a brace under the bottom of the text</desc>
+                    </valItem>
+                    <valItem ident="simple:boxed">
+                      <?exactMatch border?>
+                      <desc>border around the text</desc>
+                    </valItem>
+                    <valItem ident="simple:centre">
+                      <?exactMatch center?>
+                      <desc>centred</desc>
+                    </valItem>
+                    <valItem ident="simple:cursive">
+                      <desc>cursive typeface</desc>
+                    </valItem>
+                    <valItem ident="simple:doublestrikethrough">
+                      <desc>strikethrough with double line</desc>
+                    </valItem>
+                    <valItem ident="simple:doubleunderline">
+                      <desc>underlined with double line</desc>
+                    </valItem>
+                    <valItem ident="simple:dropcap">
+                      <?exactMatch decorInit?>
+                      <desc>initial letter larger or decorated</desc>
+                    </valItem>
+                    <valItem ident="simple:float">
+                      <desc>floated out of main flow</desc>
+                    </valItem>
+                    <valItem ident="simple:hyphen">
+                      <desc>with a hyphen here (eg in line break)</desc>
+                    </valItem>
+                    <valItem ident="simple:italic">
+                      <?exactMatch italics?>
+                      <?exactMatch ITALIC?>
+                      <?exactMatch i?>
+                      <?exactMatch it?>
+                      <?exactMatch ital?>
+                      <desc>italic typeface</desc>
+                    </valItem>
+                    <valItem ident="simple:larger">
+                      <?exactMatch large?>
+                      <desc>larger type</desc>
+                    </valItem>
+                    <valItem ident="simple:left">
+                      <?exactMatch left?>
+                      <desc>aligned to the left or left-justified</desc>
+                    </valItem>
+                    <valItem ident="simple:leftbraced">
+                      <?exactMatch braced?>
+                      <desc>marked with a brace on the left side of the text</desc>
+                    </valItem>
+                    <valItem ident="simple:letterspace">
+                      <?exactMatch spaceletter?>
+                      <desc>letter-spaced</desc>
+                    </valItem>
+                    <valItem ident="simple:normalstyle">
+                      <desc>upright shape and default weight of typeface</desc>
+                    </valItem>
+                    <valItem ident="simple:normalweight">
+                      <?exactMatch roman?>
+                      <desc>normal typeface weight</desc>
+                    </valItem>
+                    <valItem ident="simple:right">
+                      <?exactMatch right-aligned?>
+                      <desc>aligned to the right or right-justified</desc>
+                    </valItem>
+                    <valItem ident="simple:rightbraced">
+                      <desc>marked with a brace to the right of the text</desc>
+                    </valItem>
+                    <valItem ident="simple:rotateleft">
+                      <?exactMatch rotateCounterclockwise?>
+                      <desc>rotated to the left</desc>
+                    </valItem>
+                    <valItem ident="simple:rotateright">
+                      <?exactMatch rotateClockwise?>
+                      <desc>rotated to the right</desc>
+                    </valItem>
+                    <valItem ident="simple:smallcaps">
+                      <?exactMatch sc?>
+                      <?exactMatch smallCap?>
+                      <desc>small caps</desc>
+                    </valItem>
+                    <valItem ident="simple:smaller">
+                      <?exactMatch small?>
+                      <desc>smaller type</desc>
+                    </valItem>
+                    <valItem ident="simple:strikethrough">
+                      <desc>strike through</desc>
+                    </valItem>
+                    <valItem ident="simple:subscript">
+                      <?exactMatch sub?>
+                      <desc>subscript</desc>
+                    </valItem>
+                    <valItem ident="simple:superscript">
+                      <?exactMatch sup?>
+                      <?exactMatch super?>
+                      <desc>superscript</desc>
+                    </valItem>
+                    <valItem ident="simple:topbraced">
+                      <desc>marked with a brace above the text</desc>
+                    </valItem>
+                    <valItem ident="simple:typewriter">
+                      <desc>fixed-width typeface, like typewriter</desc>
+                    </valItem>
+                    <valItem ident="simple:underline">
+                      <?exactMatch u?>
+                      <desc>underlined with single line</desc>
+                    </valItem>
+                    <valItem ident="simple:wavyunderline">
+                      <desc>underlined with wavy line</desc>
+                    </valItem>
+                  </valList>
+                </attDef>
+              </attList>
+            </classSpec>
+          </specGrp>
+        </div>
+        <div>
+          <head>Model classes</head>
+          <specGrp xml:id="modelclasses">
+            <p>A set of unused model classes are removed.</p>
+            <classSpec type="model" ident="model.entryPart" mode="delete"/>
+            <classSpec type="model" ident="model.placeNamePart" mode="delete"/>
+            <classSpec type="model" ident="model.placeStateLike" mode="delete"/>
+            <classSpec type="model" ident="model.egLike" mode="delete"/>
+            <classSpec type="model" ident="model.offsetLike" mode="delete"/>
+            <classSpec type="model" ident="model.pPart.msdesc" mode="delete"/>
+            <classSpec type="model" ident="model.oddDecl" mode="delete"/>
+            <classSpec type="model" ident="model.specDescLike" mode="delete"/>
+            <classSpec type="model" ident="model.entryPart" mode="delete"/>
+            <classSpec type="model" ident="model.placeNamePart" mode="delete"/>
+            <classSpec type="model" ident="model.placeStateLike" mode="delete"/>
+            <classSpec type="model" ident="model.certLike" mode="delete"/>
+            <classSpec type="model" ident="model.glossLike" mode="delete"/>
+          </specGrp>
+        </div>
+        <div>
+          <head>Elements</head>
+          <p>The main part of Simple is the set of selected elements.</p>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements-pm.xml"/>
+          <specGrp xml:id="simplechanges">
+            <p>A small number of elements have constrained value lists added.</p>
+            <elementSpec ident="formula" mode="change">
+              <attList>
+                <attDef ident="notation" mode="change">
+                  <valList mode="add" type="semi">
+                    <valItem ident="TeX">
+                      <desc>Using TeX or LaTeX notation</desc>
+                    </valItem>
+                  </valList>
+                </attDef>
+              </attList>
+            </elementSpec>
+            <elementSpec ident="name" mode="change">
+              <attList>
+                <attDef ident="type" mode="change">
+                  <valList mode="add" type="closed">
+                    <valItem ident="person"/>
+                    <valItem ident="forename"/>
+                    <valItem ident="surname"/>
+                    <valItem ident="personGenName"/>
+                    <valItem ident="personRoleName"/>
+                    <valItem ident="personAddName"/>
+                    <valItem ident="nameLink"/>
+                    <valItem ident="organisation"/>
+                    <valItem ident="country"/>
+                    <valItem ident="placeGeog"/>
+                    <valItem ident="place"/>
+                  </valList>
+                </attDef>
+              </attList>
+            </elementSpec>
+            <elementSpec ident="cell" mode="change">
+              <attList>
+                <attDef ident="role" mode="change">
+                  <valList mode="add" type="closed">
+                    <valItem ident="data">
+                      <desc>data cell</desc>
+                    </valItem>
+                    <valItem ident="label">
+                      <desc>label cell</desc>
+                      <?exactMatch LABEL?>
+                    </valItem>
+                    <valItem ident="sum">
+                      <desc>row or column sum data</desc>
+                    </valItem>
+                    <valItem ident="total">
+                      <desc>table total data</desc>
+                    </valItem>
+                  </valList>
+                </attDef>
+              </attList>
+            </elementSpec>
+            <elementSpec ident="row" mode="change">
+              <attList>
+                <attDef ident="role" mode="change">
+                  <valList mode="add" type="closed">
+                    <valItem ident="data">
+                      <desc>data cell</desc>
+                    </valItem>
+                    <valItem ident="label">
+                      <desc>label cell</desc>
+                    </valItem>
+                    <valItem ident="sum">
+                      <desc>row or column sum data</desc>
+                    </valItem>
+                    <valItem ident="total">
+                      <desc>table total data</desc>
+                    </valItem>
+                  </valList>
+                </attDef>
+              </attList>
+            </elementSpec>
+          </specGrp>
+          <specGrp xml:id="rendition">
+            <rendition xml:id="allcaps">
+</rendition>
+            <rendition xml:id="blackletter">
+</rendition>
+            <rendition xml:id="bold">
+font:weight: bold;
+</rendition>
+            <rendition xml:id="bottombraced">
+</rendition>
+            <rendition xml:id="boxed">
+ border: solid black 1pt;
+</rendition>
+            <rendition xml:id="centre">
+ text-align: center;
+</rendition>
+            <rendition xml:id="cursive">
+</rendition>
+            <rendition xml:id="doublestrikethrough">
+</rendition>
+            <rendition xml:id="doubleunderline">
+</rendition>
+            <rendition xml:id="dropcap">
+</rendition>
+            <rendition xml:id="float">
+</rendition>
+            <rendition xml:id="hyphen">
+</rendition>
+            <rendition xml:id="italic">
+  font-style: italic;
+</rendition>
+            <rendition xml:id="larger">
+  font-size: larger;
+</rendition>
+            <rendition xml:id="left">
+ text-align: left;
+</rendition>
+            <rendition xml:id="leftbraced">
+</rendition>
+            <rendition xml:id="letterspace">
+</rendition>
+            <rendition xml:id="normalstyle">
+font-style:roman;
+</rendition>
+            <rendition xml:id="normalweight">
+font-weight:normal;
+</rendition>
+            <rendition xml:id="right">
+ text-align: right;
+</rendition>
+            <rendition xml:id="rightbraced">
+</rendition>
+            <rendition xml:id="rotateleft">
+</rendition>
+            <rendition xml:id="rotateright">
+</rendition>
+            <rendition xml:id="smallcaps">
+</rendition>
+            <rendition xml:id="smaller">
+  font-size: smaller;
+</rendition>
+            <rendition xml:id="strikethrough">
+   text-decoration: line-through;
+</rendition>
+            <rendition xml:id="subscript">
+</rendition>
+            <rendition xml:id="superscript">
+</rendition>
+            <rendition xml:id="topbraced">
+</rendition>
+            <rendition xml:id="typewriter">
+</rendition>
+            <rendition xml:id="underline">
+text-decoration: underline;
+</rendition>
+            <rendition xml:id="wavyunderline">
+</rendition>
+          </specGrp>
+        </div>
+      </div>
+    </body>
+  </text>
 </TEI>

@@ -306,13 +306,15 @@
          <desc>Pithy description. </desc>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="l">
-      <model behaviour="makeBlock(.)" useRenditionAttribute="true">
+      <model behaviour="makeBlock(.)"  useRenditionAttribute="true">
 	<rendition>
 	  margin-left: 1em;
 	</rendition>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="label">
       <model behaviour="makeInline(.)">
          <desc/>
@@ -356,11 +358,24 @@
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="note">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+
+     <model predicate="@place" behaviour="makeNote(.,@place)"/>
+
+     <model predicate="parent::div and not(@place)"
+	    behaviour="makeBlock(.)">
+       <rendition>margin-left: 10px;margin-right: 10px; font-size:smaller;</rendition>
+     </model>
+
+     <model predicate="not(@place)" behaviour="makeInline(.)">
+       <rendition scope="before">content:' [';</rendition>
+       <rendition scope="after">content:'] ';</rendition>
+       <rendition>font-size:small;</rendition>
+     </model>
+
    </elementSpec>
+
    <elementSpec mode="change" ident="num">
       <model behaviour="makeInline(.)">
          <desc/>
@@ -411,6 +426,7 @@
          <desc/>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="quote">
       <model predicate="ancestor::p" behaviour="makeInline(.)">
          <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
@@ -419,12 +435,15 @@
          <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
       </model>
    </elementSpec>
+
    <elementSpec mode="change" ident="ref">
-      <model behaviour="makeInline(.)">
-         <desc/>
-      </model>
+     <model behaviour="makeInline(.)" predicate="not(@target)"/>
+     <model predicate="not(text())" behaviour="makeLink(@target,@target)"/>
+     <model behaviour="makeLink(.,@target)"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="reg">
+      <model predicate="not(parent::choice)" behaviour="makeInline(.)"/>
       <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
          <desc>Omit, if handled in parent choice.</desc>
       </model>
@@ -499,7 +518,9 @@
    </elementSpec>
    <elementSpec mode="change" ident="speaker">
       <model behaviour="makeBlock(.)">
-         <desc/>
+	<rendition>
+	  font-style:italic;
+	</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="spGrp">

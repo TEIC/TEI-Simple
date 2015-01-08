@@ -720,13 +720,13 @@ Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bo
       <rule xmlns:rng="http://relaxng.org/ns/structure/1.0"
             xmlns:skos="http://www.w3.org/2004/02/skos/core#"
             context="tei:*[@rendition]">
-                                    <let name="results"
+                    <let name="results"
               value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
-                                    <assert test="every $x in $results satisfies $x"> Error: Each of
+                    <assert test="every $x in $results satisfies $x"> Error: Each of
                                        the rendition values in "<value-of select="@rendition"/>"
                                        must point to a local ID or to a token in the Simple scheme
                                           (<value-of select="$results"/>)</assert>
-                                 </rule>
+                  </rule>
    </pattern>
    <define name="att.handFeatures.attributes">
       <ref name="att.handFeatures.attribute.scribe"/>
@@ -1096,12 +1096,12 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
             xmlns:rng="http://relaxng.org/ns/structure/1.0"
             xmlns:skos="http://www.w3.org/2004/02/skos/core#"
             context="tei:*[@target]">
-                                    <let name="results"
+                        <let name="results"
               value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-                                    <report test="some $x in $results  satisfies $x"> Error: Every
+                        <report test="some $x in $results  satisfies $x"> Error: Every
                                        local pointer in "<value-of select="@target"/>" must point to
                                        an ID in this document (<value-of select="$results"/>)</report>
-                                 </rule>
+                      </rule>
    </pattern>
    <define name="att.pointing.attribute.evaluate">
       <optional>
