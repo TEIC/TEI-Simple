@@ -57,8 +57,10 @@
     </front>
     <body>
       <div>
-	<head>The TEI Processing Model</head>
-	<p>TEI elements are generally
+        <head>The TEI Processing Model</head>
+	<div>
+	  <head>Introduction</head>
+        <p>TEI elements are generally
 	<emph>descriptive</emph> of the interpreted semantics of the
 	source text (<q>this is a title</q>, <q>this is a
 	quotation</q>), where the interpretation is often based on a
@@ -67,7 +69,6 @@
 	layout. The resulting encoded text is very amenable to
 	analysis, but for the common case of re-presenting the text on
 	the web, the TEI model is incomplete.</p>
-
         <p>The processing model notation allows each element to be
         assigned to a structural category (<gi>model</gi>, and given
         an outline rendition description (<gi>rendition</gi>). This
@@ -75,31 +76,23 @@
         not, and broadly speaking how to display or otherwise process
         it. The model and rendition instructions are embedded in a
         TEI ODD customization.</p>
-
-	<p>This model assumes a workflow of three parts, and three
+        <p>This model assumes a workflow of three parts, and three
 	distinct sets of expertise, to create a digital edition from a
 	TEI text:
-	<list rend="ordered">
-	  <item>an <emph>editor</emph> manages the text integrity,
+	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
 	  makes the high-level output decisions. These 	fall into two parts
-	<list rend="ordered">
-	  <item><emph>Structural</emph> descriptions, eg  <q>should the
+	<list rend="ordered"><item><emph>Structural</emph> descriptions, eg  <q>should the
 	  original or corrected version be displayed by default</q>,
-	  or <q>is this a block level or inline component</q></item>
-	  <item>Indications of <emph>appearance</emph> (<q>titles are in
-	  italics</q>).</item>
-	</list>
-	  </item>
-	  <item>a <emph>designer</emph> creates the output envelope (for
+	  or <q>is this a block level or inline component</q></item><item>Indications of <emph>appearance</emph> (<q>titles are in
+	  italics</q>).</item></list>
+	  </item><item>a <emph>designer</emph> creates the output envelope (for
 	  example, and book layout using InDesign, or a web site using
 	  Drupal), making decisions in conjunction with the editor
 	  (<q>use Garamond font throughout</q> or <q>every page must
-	  show the departmental logo</q>)</item>
-	  <item>a <emph>programmer</emph> takes the
+	  show the departmental logo</q>)</item><item>a <emph>programmer</emph> takes the
 	  <emph>editor</emph>'s specification, and the TEI text(s),
 	  and creates the input for the <emph>designer</emph> to make
-	  the output.</item>
-	</list>
+	  the output.</item></list>
 	It is crucial to understand here that neither the designer nor
 	the programmer need have any understanding of the semantics of
 	TEI elements, or the structure of a TEI document. The
@@ -108,19 +101,24 @@
 	way. The method works for a variety of output formats, as the
 	programmer simply has to provide implementations for a small
 	number of functions, and understand the well-documented
-	features of CSS. The concepts addressed by the functions
-	(eg <q>block</q> and <q>inline</q>)are
-	in line with XSL FO, and HTML. An important precondition for an
+	features of CSS. The concepts addressed by the functions (eg
+	<q>block</q> and <q>inline</q>) are in line with XSL FO, and
+	HTML; the catalogue of functions is given at <ptr target="#functions"/>.</p>
+        <p>An important precondition for an
 	implementation is that it must include an XPath interpreter,
-	as this is used in several places in the processing notation.	</p>
+	as this is used in several places in the processing
+	notation. </p>
+	<p>It is an important principle of the processing model (know informally as the
+	Tuurska Tenet) that the transformation stage should be
+	minimally intelligent; that is to say, it should contain as
+	few TEI-specific rules as possible.</p>
+	</div>
 
-	<p>There are two key elements for specifying the structural
+	<div>
+	  <head>Processing model elements</head>
+        <p>There are two key elements for specifying the structural
 	and appearance components of a processing model:
-	  <specList>
-	    <specDesc key="model" atts="predicate behaviour
-					useRenditionAttribute output"/>
-	    <specDesc key="rendition" atts="scope"/>
-	  </specList>
+	  <specList><specDesc key="model" atts="predicate behaviour      useSourceRendition output"/><specDesc key="rendition" atts="scope"/></specList>
 	  For a given <gi>elementSpec</gi>, there can be as many
 	  <gi>model</gi> statements as required, each of which can
 	  have multiple <gi>rendition</gi> children. A set  of multiple
@@ -132,15 +130,10 @@
 	  <gi>model</gi> statements to be active at the same time,
 	  they must be enclosed inside a <gi>modelSequence</gi>.
 	</p>
-
-	<p>Let us consider a simple case, the handling of the
+        <p>Let us consider a simple case, the handling of the
 	<gi>hi</gi> element. We decide that it is an inline element,
 	normally rendered in italics:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model behaviour="makeInline(.)">
-		<rendition>font-style: italic;</rendition>
-	      </model>
-            </egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)"><rendition>font-style: italic;</rendition></model></egXML>
 	    The <att>behaviour</att> attribute has a value of a call
 	    to the function <term>makeInline</term>, with a parameter
 	    of the content of the element. The notation here uses
@@ -151,37 +144,25 @@
 	    to the rendition, to indicate that it is inline, but the
 	    intention is to separate the structural decision from the
 	    appearance decision.</p>
-	    <p>It is common for <gi>hi</gi> to use a
+        <p>It is common for <gi>hi</gi> to use a
 	    <att>rendition</att> attribute to indicate appearance. By
 	    default, this is ignored, but 
-	    <att>useRenditionAttribute</att> can be used to indicate
+	    <att>useSourceRendition</att> can be used to indicate
 	    that it should be taken account of:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model behaviour="makeInline(.)" useRenditionAttribute="true">
-		<rendition>font-style: italic;</rendition>
-	      </model>
-            </egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)" useSourceRendition="true"><rendition>font-style: italic;</rendition></model></egXML>
 	    in this case the <gi>rendition</gi> is only a fallback and
 	    may be overridden by the <att>rendition</att>. This uses
 	    the same behaviour as CSS; ie if <att>rendition</att>
 	    involves a change to a different property than
 	    <q>font-style</q>, then this remains active.</p>
-
-	    <p>If the processing model is context-dependent, we can
+        <p>If the processing model is context-dependent, we can
 	    use <att>predicate</att> (an XPath expression) to show
 	    when different models apply:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model predicate="ancestor::p" behaviour="makeInline(.)" >
-		<rendition>font-style: italic;</rendition>
-	      </model>
-              <model behaviour="makeBlock(.)" >
-		<rendition>left-margin: 2em;</rendition>
-	      </model>
-            </egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="makeInline(.)"><rendition>font-style: italic;</rendition></model><model behaviour="makeBlock(.)"><rendition>left-margin: 2em;</rendition></model></egXML>
 	    Here the <gi>model</gi>s are <emph>alternatives</emph>;
 	    only if the test (the <att>predicate</att>) on the first
 	    fails will the second be activated.</p>
-	    <p>So far we have mapped TEI elements to simple block and
+        <p>So far we have mapped TEI elements to simple block and
 	    inline concepts. A more complex example is provided by
 	    processing the <gi>choice</gi> element; this is commonly
 	    used to provide a pair of alternates (eg <gi>sic</gi> and
@@ -192,15 +173,10 @@
 	    tooltip), the alternate; this service is provided by a
 	    function <term>makeAlternate</term>. We have three models, for
 	    different cases of input:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples">
-	     <model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/>
-	     <model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/>
-	     <model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/>
-	   </egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/><model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/><model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/></egXML>
 	   Note the use of XPath notation to choose the first of
 	   several possible sibling elements.</p>
-
-	   <p>Sometimes we want different behaviour for different
+        <p>Sometimes we want different behaviour for different
 	   output formats, specified using <att>output</att>; the
 	   following example is designed to handle <gi>date</gi>,
 	   which has an optional <att>when</att> containing a
@@ -210,381 +186,509 @@
 	   we are making web pages. In the latter case, we use the
 	   same <term>makeAlternate</term> function as in the previous example,
 	   but for print we force use of <att>when</att> when it is present.
-           <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model output="print" predicate="text()" behaviour="makeInline(.)"/>
-                <model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/>
-                <model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/>
-	   </egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model output="print" predicate="text()" behaviour="makeInline(.)"/><model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/><model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/></egXML>
 	   </p>
-	   <p>Elements which have attributes can access the values
+        <p>Elements which have attributes can access the values
 	   using the usual XPath notation. For example, the
 	   <gi>ref</gi> element has an important attribute,
 	   <att>target</att>, to which is a link should be
 	   created. Sometimes the <gi>ref</gi> has text content, but
 	   sometimes just the <att>target</att>. Our rule caters for
 	   these two situations:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples">
-	     <model predicate="not(text())" behaviour="makeLink(@target,@target)"/>
-	     <model behaviour="makeLink(.,@target)"/>
-	   </egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="not(text())" behaviour="makeLink(@target,@target)"/><model behaviour="makeLink(.,@target)"/></egXML>
 	   Here the <term>makeLink</term> function takes two parameters, the text
 	   to be shown, and the URL to which it should be linked.</p>
 	 </div>
-	 <div>
-	   <head>Implementing the TEI processing model</head>
-	   <p>A program which implements this processing model should
+      </div>
+      <div>
+        <head>Implementing the TEI processing model</head>
+        <p>A program which implements this processing model should
 	   proceed as follows:
-	   <list rend="ordered">
-	     <item>When meeting a new element in the instance
+	   <list rend="ordered"><item>When meeting a new element in the instance
 	     document, see if any
 	     <gi>model</gi> or <gi>modelSequences</gi> are available
 	     for the current output format. Process them in order
 	     until a match with the <att>predicate</att> is found, or
 	     a <gi>model</gi> with no <att>predicate</att> is
-	     available.</item>
-	     <item>Follow the function provided by the
+	     available.</item><item>Follow the function provided by the
 	     <att>behaviour</att> attribute. Where the value passed to
 	     that function is <q>.</q>, follow this process for
 	     all child elements of the current element, within the
 	     context of the named function. Thus a
 	     <term>makeBlock(.)</term> should create a block-type
 	     object in the output containing this element and all its
-	     children.</item>
-	     <item>If there are <gi>model</gi>s, but no has a
+	     children.</item><item>If there are <gi>model</gi>s, but none has a
 	     <att>predicate</att>
-	     which matches the current element, do nothing.</item>
-	     <item>If there is no <gi>model</gi> provided for the
+	     which matches the current element,  proceed to its children and see if there are
+	     models for them.</item><item>If there is no <gi>model</gi> provided for the
 	     element, proceed to its children and see if there are
-	     models for them.</item>
-	     <item>The special function <term>omit()</term> means that
+	     models for them.</item><item>The special function <term>omit()</term> means that
 	     processing should stop for this element, and move to the
-	     next sibling.</item>	     
-	   </list>
+	     next sibling.</item></list>
 	   This is broadly similar to the processing model for XSLT.
 	   </p>
       </div>
+      <div xml:id="functions">
+        <head>TEI Processing Model functions</head>
+        <table>
+          <row role="label">
+            <cell>Function name</cell>
+            <cell>Parameters</cell>
+            <cell>Description</cell>
+            <cell>Probable HTML container</cell>
+          </row>
+          <row>
+            <cell>makeAlternate</cell>
+            <cell>preferred element, alternate element</cell>
+            <cell>Creates a specialized display of alternating elements for displaying the
+                  preferred version, both at once or toggling between the two.</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>makeAnchor</cell>
+            <cell>ID</cell>
+            <cell>create anchor with ID</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>makeBlock</cell>
+            <cell>content</cell>
+            <cell>Creates a block out of the content parameter. Can be formatted with
+                  <code>class</code>.</cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>makeCell</cell>
+            <cell>content</cell>
+            <cell>Creates a table cell</cell>
+            <cell>td</cell>
+          </row>
+          <row>
+            <cell>makeCit</cell>
+            <cell>content</cell>
+            <cell>Creates a citation</cell>
+            <cell>span?</cell>
+          </row>
+          <row>
+            <cell>makeFigure</cell>
+            <cell>content</cell>
+            <cell>Deals with <gi>figure</gi>s. </cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>makeGlyph</cell>
+            <cell>content</cell>
+            <cell/>
+            <cell/>
+          </row>
+          <row>
+            <cell>makeGraphic</cell>
+            <cell>url of image file</cell>
+            <cell>If <att>url</att> is present, uses it to display graphic,
+                  else display placeholder image. </cell>
+            <cell>img</cell>
+          </row>
+          <row>
+            <cell>makeHeading</cell>
+            <cell>content</cell>
+            <cell>Creates a heading. Can be decorated with <code>class</code></cell>
+            <cell>span</cell>
+          </row>
+          <row>
+            <cell>makeInline</cell>
+            <cell>content</cell>
+            <cell>Creates inline element out of <code>content</code> if there's something in
+                  <gi>rendition</gi>, use that formatting
+                  otherwise just show text of selected content.</cell>
+            <cell>span</cell>
+          </row>
+          <row>
+            <cell>makeLink</cell>
+            <cell>content,link url</cell>
+            <cell>create hyperlink</cell>
+            <cell>a</cell>
+          </row>
+          <row>
+            <cell>makeList</cell>
+            <cell>children content</cell>
+            <cell>Create a list by following children</cell>
+            <cell>ol, ul, or dl</cell>
+          </row>
+          <row>
+            <cell>makeListItem</cell>
+            <cell>content</cell>
+            <cell>create list item</cell>
+            <cell>li</cell>
+          </row>
+          <row>
+            <cell>makeNote</cell>
+            <cell>content,place</cell>
+            <cell>Creates a note block out of <code>content</code>,
+	    as per value of <code>place</code></cell>
+            <cell>span or div</cell>
+          </row>
+          <row>
+            <cell>makeParagraph</cell>
+            <cell>content</cell>
+            <cell>Creates a paragraph out of <code>content</code>.</cell>
+            <cell>p</cell>
+          </row>
+          <row>
+            <cell>makeRow</cell>
+            <cell>content</cell>
+            <cell>make table row</cell>
+            <cell>tr</cell>
+          </row>
+          <row>
+            <cell>makeSection</cell>
+            <cell>content</cell>
+            <cell/>
+            <cell/>
+          </row>
+          <row>
+            <cell>makeTable</cell>
+            <cell>content</cell>
+            <cell>make table</cell>
+            <cell>table</cell>
+          </row>
+          <row>
+            <cell>makeTOC</cell>
+            <cell></cell>
+            <cell>create table of contents</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>omit</cell>
+            <cell></cell>
+            <cell>Do nothing, do not process children</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>showBreak</cell>
+            <cell>content</cell>
+            <cell/>
+            <cell/>
+          </row>
+        </table>
+      </div>
       <div>
-	<head>Extensions to the TEI</head>
-	<specGrp xml:id="additions">
-        <elementSpec ident="model" mode="add" module="tagdocs">
-          <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
-          <desc versionDate="2015-01-06" xml:lang="en">documentation of an intended processing model for this
+        <head>Extensions to the TEI</head>
+        <specGrp xml:id="additions">
+          <elementSpec ident="model" mode="add" module="tagdocs">
+            <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
+            <desc versionDate="2015-01-06" xml:lang="en">documentation of an intended processing model for this
             element</desc>
-          <classes>
-            <memberOf key="att.global"/>
-          </classes>
-          <content>
-            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-              <choice>
-                <ref name="model.glossLike"/>
-                <ref name="model.descLike"/>
-                <ref name="rendition"/>
-              </choice>
-            </zeroOrMore>
-          </content>
-          <attList>
-            <attDef ident="behaviour" usage="req">
-              <desc>which processing function, optionally containing parameters, should be used to present this element
+            <classes>
+              <memberOf key="att.global"/>
+            </classes>
+            <content>
+              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+                <choice>
+                  <ref name="model.glossLike"/>
+                  <ref name="model.descLike"/>
+                  <ref name="rendition"/>
+                </choice>
+              </zeroOrMore>
+            </content>
+            <attList>
+              <attDef ident="behaviour" usage="req">
+                <desc>which processing function, optionally containing parameters, should be used to present this element
                 in output</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.text"/>
-              </datatype>
-            </attDef>
-            <attDef ident="predicate" usage="opt">
-              <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
-              </datatype>
-            </attDef>
-            <attDef ident="useRenditionAttribute" usage="opt">
-              <desc>whether to obey any rendition attribute which is present</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
-              </datatype>
-            </attDef>
-            <attDef ident="output" usage="opt">
-              <desc>the intended output method</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
-              </datatype>
-              <valList type="closed">
-                <valItem ident="web">
-                  <desc>the output is intended for presentation in a web format</desc>
-                </valItem>
-                <valItem ident="print">
-                  <desc>the output is intended for presentation in a print format</desc>
-                </valItem>
-                <valItem ident="plaintext">
-                  <desc>the output is intended for presentation in a plain text format</desc>
-                </valItem>
-              </valList>
-            </attDef>
-          </attList>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model behaviour="makeInline(.)"/>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <elementSpec mode="change" ident="quote">
-                <model predicate="ancestor::p" behaviour="makeInline(.)">
-                  <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.text"/>
+                </datatype>
+              </attDef>
+              <attDef ident="predicate" usage="opt">
+                <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
+                </datatype>
+              </attDef>
+              <attDef ident="useSourceRendition" usage="opt">
+                <desc>whether to obey any rendition attribute which is present</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
+                </datatype>
+              </attDef>
+              <attDef ident="output" usage="opt">
+                <desc>the intended output method</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+                </datatype>
+                <valList type="closed">
+                  <valItem ident="web">
+                    <desc>the output is intended for presentation in a web format</desc>
+                  </valItem>
+                  <valItem ident="print">
+                    <desc>the output is intended for presentation in a print format</desc>
+                  </valItem>
+                  <valItem ident="plaintext">
+                    <desc>the output is intended for presentation in a plain text format</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model behaviour="makeInline(.)"/>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <elementSpec mode="change" ident="quote">
+                  <model predicate="ancestor::p" behaviour="makeInline(.)">
+                    <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+                  </model>
+                  <model predicate="not(ancestor::p)" behaviour="makeBlock(.)">
+                    <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+                  </model>
+                </elementSpec>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model predicate="parent::person" behaviour="makeInline()"/>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model behaviour="makeInline(.)">
+                  <rendition>font-weight:bold</rendition>
                 </model>
-                <model predicate="not(ancestor::p)" behaviour="makeBlock(.)">
-                  <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
-                </model>
-              </elementSpec>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model predicate="parent::person" behaviour="makeInline()"/>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model behaviour="makeInline(.)">
-                <rendition>font-weight:bold</rendition>
-              </model>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model behaviour="makeInline(.)" output="print"/>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model predicate="ancestor::p" behaviour="makeInline(@n)"/>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <elementSpec mode="change" ident="date">
-                <model output="print" predicate="text()" behaviour="makeInline(.)"/>
-                <model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/>
-                <model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/>
-              </elementSpec>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <elementSpec mode="change" ident="choice">
-                <model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/>
-                <model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/>
-                <model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/>
-              </elementSpec>
-            </egXML>
-          </exemplum>
-        </elementSpec>
-
-        <!-- elementSpec for added model element -->
-        <elementSpec ident="modelSequence" mode="add"  module="tagdocs">
-          <gloss versionDate="2015-01-06" xml:lang="en">sequence of processing model </gloss>
-          <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model behaviour="makeInline(.)" output="print"/>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model predicate="ancestor::p" behaviour="makeInline(@n)"/>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <elementSpec mode="change" ident="date">
+                  <model output="print" predicate="text()" behaviour="makeInline(.)"/>
+                  <model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/>
+                  <model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/>
+                </elementSpec>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <elementSpec mode="change" ident="choice">
+                  <model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/>
+                  <model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/>
+                  <model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/>
+                </elementSpec>
+              </egXML>
+            </exemplum>
+          </elementSpec>
+          <!-- elementSpec for added model element -->
+          <elementSpec ident="modelSequence" mode="add" module="tagdocs">
+            <gloss versionDate="2015-01-06" xml:lang="en">sequence of processing model </gloss>
+            <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
             for this element, to be acted upon in sequence</desc>
-          <classes>
-            <memberOf key="att.global"/>
-          </classes>
-          <content>
-            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-              <choice>
-                <ref name="model.glossLike"/>
-                <ref name="model.descLike"/>
-              </choice>
-            </zeroOrMore>
-            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-              <ref name="model"/>
-            </zeroOrMore>
-          </content>
-          <attList>
-            <attDef ident="predicate" usage="opt">
-              <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
-              </datatype>
-            </attDef>
-            <attDef ident="useRenditionAttribute" usage="opt">
-              <desc>whether to obey any rendition attribute which is present</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
-              </datatype>
-            </attDef>
-            <attDef ident="output" usage="opt">
-              <desc>the intended output method</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
-              </datatype>
-              <valList type="closed">
-                <valItem ident="web">
-                  <desc>the output is intended for presentation in a web format</desc>
-                </valItem>
-                <valItem ident="print">
-                  <desc>the output is intended for presentation in a print format</desc>
-                </valItem>
-                <valItem ident="plaintext">
-                  <desc>the output is intended for presentation in a plain text format</desc>
-                </valItem>
-              </valList>
-            </attDef>
-          </attList>
-	</elementSpec>
-
-        <elementSpec ident="modelGrp" mode="add"  module="tagdocs">
-          <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
-          <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
-            for this element</desc>
-          <classes>
-            <memberOf key="att.global"/>
-          </classes>
-          <content>
-            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-              <choice>
-                <ref name="model.glossLike"/>
-                <ref name="model.descLike"/>
-                <ref name="rendition"/>
-              </choice>
-            </zeroOrMore>
-            <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-              <ref name="model"/>
-            </zeroOrMore>
-          </content>
-          <attList>
-           <attDef ident="useRenditionAttribute" usage="opt">
-              <desc>whether to obey any rendition attribute which is present</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
-              </datatype>
-            </attDef>
-            <attDef ident="output" usage="opt">
-              <desc>the intended output method</desc>
-              <datatype>
-                <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
-              </datatype>
-              <valList type="closed">
-                <valItem ident="web">
-                  <desc>the output is intended for presentation in a web format</desc>
-                </valItem>
-                <valItem ident="print">
-                  <desc>the output is intended for presentation in a print format</desc>
-                </valItem>
-                <valItem ident="plaintext">
-                  <desc>the output is intended for presentation in a plain text format</desc>
-                </valItem>
-              </valList>
-            </attDef>
-          </attList>
-          <!-- Need better example here -JC -->
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <elementSpec mode="change" ident="abbr">
-                <modelGrp output="web">
-                  <model predicate="parent::choice" behaviour="omit()"/>
-                  <model predicate="ancestor::front" behaviour="makeInline">
-                    <rendition>font-style:italic; </rendition>
-                  </model>
-                  <model predicate="not(parent::choice)" behaviour="makeInline">
-                    <rendition scope="before">content: ' ('</rendition>
-                    <rendition scope="after">content: ')'</rendition>
-                  </model>
-                </modelGrp>
-                <modelGrp output="print">
-                  <model predicate="parent::choice" behaviour="omit()"/>
-                  <model predicate="not(parent::choice)" behaviour="makeNote(.,'foot')"/>
-                </modelGrp>
-              </elementSpec>
-            </egXML>
-          </exemplum>
-          <exemplum xml:lang="en">
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-              <modelGrp output="print">
-		<modelSequence>
-                  <model behaviour="makeInline(.)"/>
-                  <model behaviour="makeFootnote(.)"/>
-		</modelSequence>
-              </modelGrp>
-            </egXML>
-          </exemplum>
-        </elementSpec>
-
-	</specGrp>
-      </div> 
-      <div>
-	<head>Changes to the TEI</head>
-	<specGrp xml:id="changes">
-        <!-- adding model/modelGrp to elementSpec element -->
-        <elementSpec ident="elementSpec" mode="change">
-          <content>
-            <group xmlns="http://relaxng.org/ns/structure/1.0">
-              <zeroOrMore>
+            <classes>
+              <memberOf key="att.global"/>
+            </classes>
+            <content>
+              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
                 <choice>
                   <ref name="model.glossLike"/>
                   <ref name="model.descLike"/>
                 </choice>
               </zeroOrMore>
-              <optional>
-                <ref name="classes"/>
-              </optional>
-              <optional>
-                <ref name="content"/>
-              </optional>
-              <optional>
-                <ref name="valList"/>
-              </optional>
-              <zeroOrMore>
-                <ref name="constraintSpec"/>
+              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+                <ref name="model"/>
               </zeroOrMore>
-              <optional>
-                <ref name="attList"/>
-              </optional>
-              <zeroOrMore>
-		<choice>
-                  <ref name="model"/>
-                  <ref name="modelGrp"/>
-		  <ref name="modelSequence"/>
-		</choice>
+            </content>
+            <attList>
+              <attDef ident="predicate" usage="opt">
+                <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
+                </datatype>
+              </attDef>
+              <attDef ident="useSourceRendition" usage="opt">
+                <desc>whether to obey any rendition attribute which is present</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
+                </datatype>
+              </attDef>
+              <attDef ident="output" usage="opt">
+                <desc>the intended output method</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+                </datatype>
+                <valList type="closed">
+                  <valItem ident="web">
+                    <desc>the output is intended for presentation in a web format</desc>
+                  </valItem>
+                  <valItem ident="print">
+                    <desc>the output is intended for presentation in a print format</desc>
+                  </valItem>
+                  <valItem ident="plaintext">
+                    <desc>the output is intended for presentation in a plain text format</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+          </elementSpec>
+          <elementSpec ident="modelGrp" mode="add" module="tagdocs">
+            <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
+            <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+            for this element</desc>
+            <classes>
+              <memberOf key="att.global"/>
+            </classes>
+            <content>
+              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+                <choice>
+                  <ref name="model.glossLike"/>
+                  <ref name="model.descLike"/>
+                  <ref name="rendition"/>
+                </choice>
               </zeroOrMore>
-              <zeroOrMore>
-                <ref name="exemplum"/>
+              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+                <ref name="model"/>
               </zeroOrMore>
-              <zeroOrMore>
-                <ref name="remarks"/>
-              </zeroOrMore>
-              <zeroOrMore>
-                <ref name="listRef"/>
-              </zeroOrMore>
-            </group>
-          </content>
-        </elementSpec>
-
-	<elementSpec mode="change"  ident="rendition">
-	  <classes>
-	    <memberOf key="att.global"/>
-	    <memberOf key="att.styleDef"/>
-	    <memberOf key="model.oddDecl"/>
-	  </classes>
-	</elementSpec>
-	</specGrp>
-      </div> 
+            </content>
+            <attList>
+              <attDef ident="useSourceRendition" usage="opt">
+                <desc>whether to obey any rendition attribute which is present</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
+                </datatype>
+              </attDef>
+              <attDef ident="output" usage="opt">
+                <desc>the intended output method</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+                </datatype>
+                <valList type="closed">
+                  <valItem ident="web">
+                    <desc>the output is intended for presentation in a web format</desc>
+                  </valItem>
+                  <valItem ident="print">
+                    <desc>the output is intended for presentation in a print format</desc>
+                  </valItem>
+                  <valItem ident="plaintext">
+                    <desc>the output is intended for presentation in a plain text format</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
+            <!-- Need better example here -JC -->
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <elementSpec mode="change" ident="abbr">
+                  <modelGrp output="web">
+                    <model predicate="parent::choice" behaviour="omit()"/>
+                    <model predicate="ancestor::front" behaviour="makeInline">
+                      <rendition>font-style:italic; </rendition>
+                    </model>
+                    <model predicate="not(parent::choice)" behaviour="makeInline">
+                      <rendition scope="before">content: ' ('</rendition>
+                      <rendition scope="after">content: ')'</rendition>
+                    </model>
+                  </modelGrp>
+                  <modelGrp output="print">
+                    <model predicate="parent::choice" behaviour="omit()"/>
+                    <model predicate="not(parent::choice)" behaviour="makeNote(.,'foot')"/>
+                  </modelGrp>
+                </elementSpec>
+              </egXML>
+            </exemplum>
+            <exemplum xml:lang="en">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <modelGrp output="print">
+                  <modelSequence>
+                    <model behaviour="makeInline(.)"/>
+                    <model behaviour="makeFootnote(.)"/>
+                  </modelSequence>
+                </modelGrp>
+              </egXML>
+            </exemplum>
+          </elementSpec>
+        </specGrp>
+      </div>
       <div>
-	<head>Schema for processing extended ODD</head>
-	<schemaSpec ident="teipm" start="TEI teiCorpus specGrp">
-        <moduleRef key="header"/>
-        <moduleRef key="core"/>
-        <moduleRef key="tei"/>
-        <moduleRef key="textstructure"/>
-        <moduleRef key="tagdocs"/>
-        <moduleRef key="figures"/>
-        <moduleRef key="linking"/>
-	<specGrpRef target="#additions"/>
-	<specGrpRef target="#changes"/>
-	</schemaSpec>
+        <head>Changes to the TEI</head>
+        <specGrp xml:id="changes">
+          <!-- adding model/modelGrp to elementSpec element -->
+          <elementSpec ident="elementSpec" mode="change">
+            <content>
+              <group xmlns="http://relaxng.org/ns/structure/1.0">
+                <zeroOrMore>
+                  <choice>
+                    <ref name="model.glossLike"/>
+                    <ref name="model.descLike"/>
+                  </choice>
+                </zeroOrMore>
+                <optional>
+                  <ref name="classes"/>
+                </optional>
+                <optional>
+                  <ref name="content"/>
+                </optional>
+                <optional>
+                  <ref name="valList"/>
+                </optional>
+                <zeroOrMore>
+                  <ref name="constraintSpec"/>
+                </zeroOrMore>
+                <optional>
+                  <ref name="attList"/>
+                </optional>
+                <zeroOrMore>
+                  <choice>
+                    <ref name="model"/>
+                    <ref name="modelGrp"/>
+                    <ref name="modelSequence"/>
+                  </choice>
+                </zeroOrMore>
+                <zeroOrMore>
+                  <ref name="exemplum"/>
+                </zeroOrMore>
+                <zeroOrMore>
+                  <ref name="remarks"/>
+                </zeroOrMore>
+                <zeroOrMore>
+                  <ref name="listRef"/>
+                </zeroOrMore>
+              </group>
+            </content>
+          </elementSpec>
+          <elementSpec mode="change" ident="rendition">
+            <classes>
+              <memberOf key="att.global"/>
+              <memberOf key="att.styleDef"/>
+              <memberOf key="model.oddDecl"/>
+            </classes>
+          </elementSpec>
+        </specGrp>
+      </div>
+      <div>
+        <head>Schema for processing extended ODD</head>
+        <schemaSpec ident="teipm" start="TEI teiCorpus specGrp">
+          <moduleRef key="header"/>
+          <moduleRef key="core"/>
+          <moduleRef key="tei"/>
+          <moduleRef key="textstructure"/>
+          <moduleRef key="tagdocs"/>
+          <moduleRef key="figures"/>
+          <moduleRef key="linking"/>
+          <specGrpRef target="#additions"/>
+          <specGrpRef target="#changes"/>
+        </schemaSpec>
       </div>
     </body>
   </text>

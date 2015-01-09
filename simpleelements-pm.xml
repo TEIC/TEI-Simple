@@ -102,7 +102,7 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="castList">
-      <model predicate="child::*" behaviour="makeList(.)" useRenditionAttribute="true">
+      <model predicate="child::*" behaviour="makeList(.)" useSourceRendition="true">
          <rendition>list-style: ordered;</rendition>
       </model>
    </elementSpec>
@@ -306,7 +306,7 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="hi">
-      <model predicate="@rendition" behaviour="makeInline(.)"  useRenditionAttribute="true">
+      <model predicate="@rendition" behaviour="makeInline(.)"  useSourceRendition="true">
 	<rendition>font-style: italic;</rendition>
       </model>
       <model predicate="not(@rendition)" behaviour="makeInline(.)">
@@ -330,7 +330,7 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="l">
-      <model behaviour="makeBlock(.)" useRenditionAttribute="true">
+      <model behaviour="makeBlock(.)" useSourceRendition="true">
          <rendition> margin-left: 1em; </rendition>
       </model>
    </elementSpec>
@@ -411,7 +411,7 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="p" >
-      <model behaviour="makeParagraph(.)"  useRenditionAttribute="true"/>
+      <model behaviour="makeParagraph(.)"  useSourceRendition="true"/>
    </elementSpec>
 
    <elementSpec mode="change" ident="pb">

@@ -133,6 +133,7 @@
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
       <param name="lang" expression="${lang}" if="lang"/>
       <param name="doclang" expression="${lang}" if="lang"/>
+      <param name="summaryDoc" expression="true"/>
       <param name="documentationLanguage" expression="${lang}" if="lang"/>
     </xslt>
     <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd.tmp" out="teisimple.odd.html">
