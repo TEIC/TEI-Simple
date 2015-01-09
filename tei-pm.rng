@@ -8800,7 +8800,7 @@ You must supply at least two values for @target on <name/>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a web format</a:documentation>
                   <value>print</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a print format</a:documentation>
-                  <value>plaintext</value>
+                  <value>plain</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a plain text format</a:documentation>
                </choice>
             </attribute>

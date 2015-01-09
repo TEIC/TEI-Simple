@@ -76,9 +76,8 @@
         not, and broadly speaking how to display or otherwise process
         it. The model and rendition instructions are embedded in a
         TEI ODD customization.</p>
-        <p>This model assumes a workflow of three parts, and three
-	distinct sets of expertise, to create a digital edition from a
-	TEI text:
+        <p>This model (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
+	distinct roles, to create a digital edition from a TEI text:
 	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
 	  makes the high-level output decisions. These 	fall into two parts
 	<list rend="ordered"><item><emph>Structural</emph> descriptions, eg  <q>should the
@@ -108,10 +107,11 @@
 	implementation is that it must include an XPath interpreter,
 	as this is used in several places in the processing
 	notation. </p>
-	<p>It is an important principle of the processing model (know informally as the
-	Tuurska Tenet) that the transformation stage should be
+	<p>It is an important principle of the processing model (known informally as the
+	Turska Tenet) that the transformation stage should be
 	minimally intelligent; that is to say, it should contain as
-	few TEI-specific rules as possible.</p>
+	few TEI-specific rules as possible. The ODD should be as
+	explicit as possible, and provide maximum expressivity to the editor.</p>
 	</div>
 
 	<div>
@@ -133,9 +133,9 @@
         <p>Let us consider a simple case, the handling of the
 	<gi>hi</gi> element. We decide that it is an inline element,
 	normally rendered in italics:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)"><rendition>font-style: italic;</rendition></model></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline(.)"><rendition>font-style: italic;</rendition></model></egXML>
 	    The <att>behaviour</att> attribute has a value of a call
-	    to the function <term>makeInline</term>, with a parameter
+	    to the function <term>inline</term>, with a parameter
 	    of the content of the element. The notation here uses
 	    XPath, in which <q>.</q> means <q>the current context</q>;
 	    separately, the <gi>rendition</gi> element uses CSS
@@ -149,7 +149,7 @@
 	    default, this is ignored, but 
 	    <att>useSourceRendition</att> can be used to indicate
 	    that it should be taken account of:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="makeInline(.)" useSourceRendition="true"><rendition>font-style: italic;</rendition></model></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline(.)" useSourceRendition="true"><rendition>font-style: italic;</rendition></model></egXML>
 	    in this case the <gi>rendition</gi> is only a fallback and
 	    may be overridden by the <att>rendition</att>. This uses
 	    the same behaviour as CSS; ie if <att>rendition</att>
@@ -158,7 +158,7 @@
         <p>If the processing model is context-dependent, we can
 	    use <att>predicate</att> (an XPath expression) to show
 	    when different models apply:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="makeInline(.)"><rendition>font-style: italic;</rendition></model><model behaviour="makeBlock(.)"><rendition>left-margin: 2em;</rendition></model></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="inline(.)"><rendition>font-style: italic;</rendition></model><model behaviour="block(.)"><rendition>left-margin: 2em;</rendition></model></egXML>
 	    Here the <gi>model</gi>s are <emph>alternatives</emph>;
 	    only if the test (the <att>predicate</att>) on the first
 	    fails will the second be activated.</p>
@@ -171,9 +171,9 @@
 	    the corrected version by default, but allow for  the
 	    implementation to switch to, or display (perhaps as a
 	    tooltip), the alternate; this service is provided by a
-	    function <term>makeAlternate</term>. We have three models, for
+	    function <term>alternate</term>. We have three models, for
 	    different cases of input:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/><model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/><model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/></egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/><model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/><model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/></egXML>
 	   Note the use of XPath notation to choose the first of
 	   several possible sibling elements.</p>
         <p>Sometimes we want different behaviour for different
@@ -184,9 +184,9 @@
 	   the element, and we are making print; b) when there is no
 	   text but there is a <att>when</att> attribute; and c) when
 	   we are making web pages. In the latter case, we use the
-	   same <term>makeAlternate</term> function as in the previous example,
+	   same <term>alternate</term> function as in the previous example,
 	   but for print we force use of <att>when</att> when it is present.
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model output="print" predicate="text()" behaviour="makeInline(.)"/><model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/><model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/></egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model output="print" predicate="text()" behaviour="inline(.)"/><model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/><model predicate="@when" output="web" behaviour="alternate(.,@when)"/></egXML>
 	   </p>
         <p>Elements which have attributes can access the values
 	   using the usual XPath notation. For example, the
@@ -195,8 +195,8 @@
 	   created. Sometimes the <gi>ref</gi> has text content, but
 	   sometimes just the <att>target</att>. Our rule caters for
 	   these two situations:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="not(text())" behaviour="makeLink(@target,@target)"/><model behaviour="makeLink(.,@target)"/></egXML>
-	   Here the <term>makeLink</term> function takes two parameters, the text
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="not(text())" behaviour="link(@target,@target)"/><model behaviour="link(.,@target)"/></egXML>
+	   Here the <term>link</term> function takes two parameters, the text
 	   to be shown, and the URL to which it should be linked.</p>
 	 </div>
       </div>
@@ -204,29 +204,49 @@
         <head>Implementing the TEI processing model</head>
         <p>A program which implements this processing model should
 	   proceed as follows:
-	   <list rend="ordered"><item>When meeting a new element in the instance
-	     document, see if any
-	     <gi>model</gi> or <gi>modelSequences</gi> are available
-	     for the current output format. Process them in order
-	     until a match with the <att>predicate</att> is found, or
-	     a <gi>model</gi> with no <att>predicate</att> is
-	     available.</item><item>Follow the function provided by the
+	   <list rend="ordered">
+
+	     <item>When processing an element in the instance
+	     document,  any applicable <gi>model</gi> or
+	     <gi>modelSequence</gi> for the current
+	     output format should be followed. Process them in order until a match with
+	     the <att>predicate</att> is found, or a <gi>model</gi>
+	     with no <att>predicate</att> is available. If a
+	     <gi>model</gi> has no <att>predicate</att>, it matches
+	     any occurrence of the element. If a
+	     <gi>model</gi> has no <att>output</att>, it applies to
+	     all outputs.
+	     </item>
+
+	     <item>All of the <gi>model</gi>s inside a
+	     <gi>modelSequence</gi> should be applied in order
+	     (although they may have limiting <att>predicate</att>s</item>
+	     
+	     <item>Follow the function provided by the
 	     <att>behaviour</att> attribute. Where the value passed to
-	     that function is <q>.</q>, follow this process for
-	     all child elements of the current element, within the
-	     context of the named function. Thus a
-	     <term>makeBlock(.)</term> should create a block-type
-	     object in the output containing this element and all its
-	     children.</item><item>If there are <gi>model</gi>s, but none has a
-	     <att>predicate</att>
-	     which matches the current element,  proceed to its children and see if there are
-	     models for them.</item><item>If there is no <gi>model</gi> provided for the
+	     that function is <q>.</q>, follow this process for all
+	     child elements of the current element, within the context
+	     of the named function. Thus a <term>block(.)</term>
+	     should create a block-type object in the output
+	     for this element and all the results from processing its children.</item>
+
+	     <item>If there are possible <gi>model</gi>s, but none has a
+	     <att>predicate</att> which matches the current element,
+	     proceed to its children and see if there are models for
+	     them.</item>
+
+	     <item>If there is no <gi>model</gi> provided for the
 	     element, proceed to its children and see if there are
-	     models for them.</item><item>The special function <term>omit()</term> means that
+	     models for them.</item>
+
+	     <item>The special function <term>omit()</term> means that
 	     processing should stop for this element, and move to the
-	     next sibling.</item></list>
-	   This is broadly similar to the processing model for XSLT.
+	     next sibling.</item>
+
+	   </list>
+
 	   </p>
+	   <p>This is broadly similar to the processing model for XSLT. </p>
       </div>
       <div xml:id="functions">
         <head>TEI Processing Model functions</head>
@@ -238,64 +258,63 @@
             <cell>Probable HTML container</cell>
           </row>
           <row>
-            <cell>makeAlternate</cell>
+            <cell>alternate</cell>
             <cell>preferred element, alternate element</cell>
             <cell>Creates a specialized display of alternating elements for displaying the
                   preferred version, both at once or toggling between the two.</cell>
             <cell/>
           </row>
           <row>
-            <cell>makeAnchor</cell>
+            <cell>anchor</cell>
             <cell>ID</cell>
             <cell>create anchor with ID</cell>
             <cell/>
           </row>
           <row>
-            <cell>makeBlock</cell>
+            <cell>block</cell>
             <cell>content</cell>
-            <cell>Creates a block out of the content parameter. Can be formatted with
-                  <code>class</code>.</cell>
+            <cell>Creates a block out of the content parameter. </cell>
             <cell>div</cell>
           </row>
           <row>
-            <cell>makeCell</cell>
+            <cell>cell</cell>
             <cell>content</cell>
             <cell>Creates a table cell</cell>
             <cell>td</cell>
           </row>
           <row>
-            <cell>makeCit</cell>
-            <cell>content</cell>
-            <cell>Creates a citation</cell>
-            <cell>span?</cell>
+            <cell>cit</cell>
+            <cell>content,source</cell>
+            <cell>shows the content, with an attribute of the source</cell>
+            <cell></cell>
           </row>
           <row>
             <cell>makeFigure</cell>
-            <cell>content</cell>
-            <cell>Deals with <gi>figure</gi>s. </cell>
+            <cell>title</cell>
+            <cell>make a figure with the title</cell>
             <cell>div</cell>
           </row>
           <row>
-            <cell>makeGlyph</cell>
-            <cell>content</cell>
+            <cell>glyph</cell>
+            <cell>content, reference</cell>
             <cell/>
             <cell/>
           </row>
           <row>
-            <cell>makeGraphic</cell>
+            <cell>graphic</cell>
             <cell>url of image file</cell>
             <cell>If <att>url</att> is present, uses it to display graphic,
                   else display placeholder image. </cell>
             <cell>img</cell>
           </row>
           <row>
-            <cell>makeHeading</cell>
+            <cell>heading</cell>
             <cell>content</cell>
-            <cell>Creates a heading. Can be decorated with <code>class</code></cell>
+            <cell>Creates a heading. </cell>
             <cell>span</cell>
           </row>
           <row>
-            <cell>makeInline</cell>
+            <cell>inline</cell>
             <cell>content</cell>
             <cell>Creates inline element out of <code>content</code> if there's something in
                   <gi>rendition</gi>, use that formatting
@@ -303,44 +322,44 @@
             <cell>span</cell>
           </row>
           <row>
-            <cell>makeLink</cell>
+            <cell>link</cell>
             <cell>content,link url</cell>
             <cell>create hyperlink</cell>
             <cell>a</cell>
           </row>
           <row>
-            <cell>makeList</cell>
+            <cell>list</cell>
             <cell>children content</cell>
             <cell>Create a list by following children</cell>
             <cell>ol, ul, or dl</cell>
           </row>
           <row>
-            <cell>makeListItem</cell>
+            <cell>listItem</cell>
             <cell>content</cell>
             <cell>create list item</cell>
             <cell>li</cell>
           </row>
           <row>
-            <cell>makeNote</cell>
+            <cell>note</cell>
             <cell>content,place</cell>
             <cell>Creates a note block out of <code>content</code>,
 	    as per value of <code>place</code></cell>
             <cell>span or div</cell>
           </row>
           <row>
-            <cell>makeParagraph</cell>
+            <cell>paragraph</cell>
             <cell>content</cell>
             <cell>Creates a paragraph out of <code>content</code>.</cell>
             <cell>p</cell>
           </row>
           <row>
-            <cell>makeRow</cell>
+            <cell>row</cell>
             <cell>content</cell>
             <cell>make table row</cell>
             <cell>tr</cell>
           </row>
           <row>
-            <cell>makeSection</cell>
+            <cell>section</cell>
             <cell>content</cell>
             <cell/>
             <cell/>
@@ -352,9 +371,9 @@
             <cell>table</cell>
           </row>
           <row>
-            <cell>makeTOC</cell>
-            <cell></cell>
-            <cell>create table of contents</cell>
+            <cell>index</cell>
+            <cell>type,content</cell>
+            <cell>generate list according to <term>type</term></cell>
             <cell/>
           </row>
           <row>
@@ -364,8 +383,8 @@
             <cell/>
           </row>
           <row>
-            <cell>showBreak</cell>
-            <cell>content</cell>
+            <cell>break</cell>
+            <cell></cell>
             <cell/>
             <cell/>
           </row>
@@ -422,7 +441,7 @@
                   <valItem ident="print">
                     <desc>the output is intended for presentation in a print format</desc>
                   </valItem>
-                  <valItem ident="plaintext">
+                  <valItem ident="plain">
                     <desc>the output is intended for presentation in a plain text format</desc>
                   </valItem>
                 </valList>
@@ -430,16 +449,16 @@
             </attList>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model behaviour="makeInline(.)"/>
+                <model behaviour="inline(.)"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="quote">
-                  <model predicate="ancestor::p" behaviour="makeInline(.)">
+                  <model predicate="ancestor::p" behaviour="inline(.)">
                     <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
                   </model>
-                  <model predicate="not(ancestor::p)" behaviour="makeBlock(.)">
+                  <model predicate="not(ancestor::p)" behaviour="block(.)">
                     <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
                   </model>
                 </elementSpec>
@@ -447,24 +466,24 @@
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model predicate="parent::person" behaviour="makeInline()"/>
+                <model predicate="parent::person" behaviour="inline()"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model behaviour="makeInline(.)">
+                <model behaviour="inline(.)">
                   <rendition>font-weight:bold</rendition>
                 </model>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model behaviour="makeInline(.)" output="print"/>
+                <model behaviour="inline(.)" output="print"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model predicate="ancestor::p" behaviour="makeInline(@n)"/>
+                <model predicate="ancestor::p" behaviour="inline(@n)"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
@@ -475,18 +494,18 @@
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="date">
-                  <model output="print" predicate="text()" behaviour="makeInline(.)"/>
-                  <model output="print" predicate="@when and not(text())" behaviour="makeInline(@when)"/>
-                  <model predicate="@when" output="web" behaviour="makeAlternate(.,@when)"/>
+                  <model output="print" predicate="text()" behaviour="inline(.)"/>
+                  <model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/>
+                  <model predicate="@when" output="web" behaviour="alternate(.,@when)"/>
                 </elementSpec>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="choice">
-                  <model predicate="sic and corr" behaviour="makeAlternate(corr[1],sic[1])"/>
-                  <model predicate="abbr and expan" behaviour="makeAlternate(expan[1],abbr[1])"/>
-                  <model predicate="orig and reg" behaviour="makeAlternate(reg[1],orig[1])"/>
+                  <model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/>
+                  <model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/>
+                  <model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/>
                 </elementSpec>
               </egXML>
             </exemplum>
@@ -592,17 +611,17 @@
                 <elementSpec mode="change" ident="abbr">
                   <modelGrp output="web">
                     <model predicate="parent::choice" behaviour="omit()"/>
-                    <model predicate="ancestor::front" behaviour="makeInline">
+                    <model predicate="ancestor::front" behaviour="inline">
                       <rendition>font-style:italic; </rendition>
                     </model>
-                    <model predicate="not(parent::choice)" behaviour="makeInline">
+                    <model predicate="not(parent::choice)" behaviour="inline">
                       <rendition scope="before">content: ' ('</rendition>
                       <rendition scope="after">content: ')'</rendition>
                     </model>
                   </modelGrp>
                   <modelGrp output="print">
                     <model predicate="parent::choice" behaviour="omit()"/>
-                    <model predicate="not(parent::choice)" behaviour="makeNote(.,'foot')"/>
+                    <model predicate="not(parent::choice)" behaviour="note(.,'foot')"/>
                   </modelGrp>
                 </elementSpec>
               </egXML>
@@ -611,7 +630,7 @@
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <modelGrp output="print">
                   <modelSequence>
-                    <model behaviour="makeInline(.)"/>
+                    <model behaviour="inline(.)"/>
                     <model behaviour="makeFootnote(.)"/>
                   </modelSequence>
                 </modelGrp>
