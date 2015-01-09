@@ -11,7 +11,7 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="abbr">
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
       <model behaviour="inline(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="actor">
@@ -135,7 +135,7 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="corr">
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
          <desc>Omit, if handled in parent choice. </desc>
       </model>
       <model behaviour="inline(.)"/>
@@ -145,6 +145,7 @@
      <model output="print" predicate="text()" behaviour="inline(.)"/>
      <model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/>
      <model predicate="@when" output="web" behaviour="alternate(.,@when)"/>
+     <model predicate="text()" behaviour="inline(.)"/>
    </elementSpec>
    <elementSpec mode="change" ident="dateline">
       <model behaviour="block(.)">
@@ -167,28 +168,28 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="docAuthor">
-      <model predicate="ancestor::teiHeader" behaviour="omit(.)">
+      <model predicate="ancestor::teiHeader" behaviour="omit()">
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="docDate">
-      <model predicate="ancestor::teiHeader" behaviour="omit(.)">
+      <model predicate="ancestor::teiHeader" behaviour="omit()">
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="docEdition">
-      <model predicate="ancestor::teiHeader" behaviour="omit(.)">
+      <model predicate="ancestor::teiHeader" behaviour="omit()">
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="docImprint">
-      <model predicate="ancestor::teiHeader" behaviour="omit(.)">
+      <model predicate="ancestor::teiHeader" behaviour="omit()">
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
 
    <elementSpec mode="change" ident="docTitle">
-      <model predicate="ancestor::teiHeader" behaviour="omit(.)">
+      <model predicate="ancestor::teiHeader" behaviour="omit()">
          <desc>Omit if located in teiHeader. </desc>
       </model>
 
@@ -211,7 +212,7 @@
    </elementSpec>
    <elementSpec mode="change" ident="expan">
       <model predicate="parent::choice and count(parent::*/*) gt 1"
-	     behaviour="omit(.)"/>
+	     behaviour="omit()"/>
       <model behaviour="inline(.)"/>
 
    </elementSpec>
@@ -324,11 +325,11 @@
    </elementSpec>
    <elementSpec mode="change" ident="item">
       <model predicate="parent::list[@rendition]"
-         behaviour="listItem(., parent::list[@rendition])">
+         behaviour="listItem(.)">
          <desc>Pithy description. </desc>
       </model>
       <model predicate="not(parent::list[@rendition])"
-         behaviour="listItem(., 'simple:bulleted')">
+         behaviour="listItem(.)">
          <desc>Pithy description. </desc>
       </model>
    </elementSpec>
@@ -347,17 +348,17 @@
    <elementSpec mode="change" ident="lb">
       <model behaviour="break('line')"/>
    </elementSpec>
+
    <elementSpec mode="change" ident="lg">
       <model behaviour="inline(.)">
          <desc/>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="list">
-      <model predicate="@rendition" behaviour="list(.,@rendition)">
-         <desc>Pithy description. </desc>
-      </model>
-      <model predicate="not(@rendition)" behaviour="list(.,'simple:bulleted')">
-         <desc>Pithy description. </desc>
+      <model predicate="@rendition" behaviour="list(.)"
+	     useSourceRendition="true"/>
+      <model predicate="not(@rendition)" behaviour="list(.)">
+	<rendition>list-style: disc;</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="listBibl">
@@ -390,8 +391,8 @@
       </model>
 
       <model predicate="not(@place)" behaviour="inline(.)">
-         <rendition scope="before">content:' [';</rendition>
-         <rendition scope="after">content:'] ';</rendition>
+         <rendition scope="before">content:" [";</rendition>
+         <rendition scope="after">content:"] ";</rendition>
          <rendition>font-size:small;</rendition>
       </model>
 
@@ -408,7 +409,7 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="orig">
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
          <desc>Omit, if handled in parent choice. </desc>
       </model>
       <model behaviour="inline(.)"/>
@@ -439,12 +440,12 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="publisher">
-      <model predicate="ancestor::teiHeader" behaviour="omit(.)">
+      <model predicate="ancestor::teiHeader" behaviour="omit()">
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="pubPlace">
-      <model predicate="ancestor::teiHeader" behaviour="omit(.)">
+      <model predicate="ancestor::teiHeader" behaviour="omit()">
          <desc>Omit if located in teiHeader. </desc>
       </model>
    </elementSpec>
@@ -471,7 +472,7 @@
 
    <elementSpec mode="change" ident="reg">
       <model predicate="not(parent::choice)" behaviour="inline(.)"/>
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
          <desc>Omit, if handled in parent choice.</desc>
       </model>
       <model behaviour="inline(.)"/>
@@ -533,15 +534,12 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="signed">
-      <model behaviour="block(.)">
-         <desc/>
-      </model>
-      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)">
+      <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
          <desc>Omit, if handled in parent choice.</desc>
       </model>
       <model behaviour="inline(.)"/>
-
    </elementSpec>
+
    <elementSpec mode="change" ident="sp">
       <model behaviour="block(.)">
          <desc/>
@@ -583,14 +581,8 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="TEI">
-      <model behaviour="block(.)">
-         <desc/>
-      </model>
    </elementSpec>
    <elementSpec mode="change" ident="teiCorpus">
-      <model behaviour="block(.)">
-         <desc/>
-      </model>
    </elementSpec>
    <elementSpec mode="change" ident="text">
       <model behaviour="block(.)">
