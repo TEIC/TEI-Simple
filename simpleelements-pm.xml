@@ -78,6 +78,7 @@
    <elementSpec mode="change" ident="body">
       <model behaviour="index(.)"/>
       <model behaviour="body(.)"/>
+      
    </elementSpec>
 
    <elementSpec mode="change" ident="byline">
@@ -584,9 +585,13 @@
    </elementSpec>
    <elementSpec mode="change" ident="teiCorpus">
    </elementSpec>
+   <elementSpec mode="change" ident="teiHeader">
+      <model behaviour="omit(.)"/>
+   </elementSpec>
    <elementSpec mode="change" ident="text">
       <model behaviour="block(.)">
          <desc/>
+         <rendition>max-width: 80%; margin: auto;</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="time">

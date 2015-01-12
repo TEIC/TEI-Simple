@@ -1,5 +1,11 @@
 
-    body { margin-left: 5%; margin-right: 5%; background:#fff; text-align:justify; }
+    body{
+   color: #000000;
+   background-color: #FFFFFF;
+   margin: 0px;
+   padding:0;
+   font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;
+}
     p { text-indent: 3em; margin-top: 0.5em; margin-bottom: .2em; }
     div { margin-top: 0.2em; margin-bottom: 0.2em; }
     .titlePage    {background-color: #DDE; color: #000; padding: 1em; margin-left: 10%; margin-right: 10%; font-family: sans-serif; font-size: 95%; border: 1px dotted black;}

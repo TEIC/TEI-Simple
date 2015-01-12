@@ -21,7 +21,9 @@
             
             <p>To do:
                 <list>
-                    <item>deal with @follow_rendition attribute?</item>
+                    <item>deal with renditions that have a @scope</item>
+                    <item>make room for modelGrp and modelSeq elements: the latter requires major revisions to the current script</item>
+                    <item>deal with @useRendition attribute?</item>
                     <item>deal with styling instructions from simple namespace (eg. simple:bold)</item>
                 </list>
             </p>
@@ -59,37 +61,101 @@
 
             <xslo:output method="html"/>
             
-            <xsl:apply-templates select="//tei:elementSpec"/>
+            <xsl:apply-templates select="//elementSpec[.//model]"/>
 
             <xslo:template match="/">
                 <html>
                     <xsl:copy-of select="tei:makeHTMLHeader(., //elementSpec, '')"/>
                     <body>
-                        <xslo:apply-templates select="descendant::text"/>
+                        <xslo:apply-templates/>
                     </body>
                 </html>
             </xslo:template>
-
 
             <xslo:template match="*">
                 <xslo:apply-templates/>
             </xslo:template>
         </xslo:stylesheet>
     </xsl:template>
-<xsl:function name="tei:findModelPosition" as="xs:string">
-    <xsl:param name="models"/>
-    <xsl:param name="modelId"/>
-    <xsl:for-each select="$models">
-        <xsl:if test="generate-id(.)=$modelId">
-            <xsl:value-of select="position()"/>
-        </xsl:if>
-    </xsl:for-each>
-</xsl:function>
 
-    <xsl:template match="tei:elementSpec">
+
+    <xsl:template match="elementSpec">
+        <!--
+            for each standalone model (that is not a child of modelSeq) or modelSeq create a when statement in a template for a given element;
+            modelSeq child models should be translated into series of if statements
+            
+            if standalone model without predicate exists use it as otherwise option in a template else create otherwise option that just does apply-templates
+        -->
+        <xsl:variable name="models" select="model"/>
+
+        
+<xsl:variable name="template">
+    
+    <!-- is that right to have class equal to element name by default? -->
+        <xsl:variable name="class" select="@ident"/>
+    
+        <xsl:variable name="iden" select="@ident"/>
+    <xslo:template match="{@ident}">
+            <xslo:choose>
+            <xsl:for-each select="modelSeq">
+                
+                <xslo:when test="{@predicate}">
+                    <xsl:for-each select="model">
+                        <xsl:variable name="modelId" select="generate-id()"/>
+                        <xsl:variable name="number" select="tei:findModelPosition($models, $modelId)"/>
+                        <xslo:if test="{@predicate}">
+                    <!-- now find what function to apply -->
+                    <xsl:sequence select="tei:matchFunction($iden, ., $class, $number)"/>
+                </xslo:if>
+                    </xsl:for-each>
+                </xslo:when>
+            </xsl:for-each>
+           
+            <xsl:for-each select="descendant::model[not(descendant::modelSeq)]">
+                <xsl:variable name="modelId" select="generate-id()"/>
+                <xsl:variable name="number" select="tei:findModelPosition($models, $modelId)"/>
+                    <xsl:choose>
+                    <xsl:when test="@predicate">
+                    <xslo:when test="{@predicate}">
+                        <xsl:sequence select="tei:matchFunction($iden, ., $class, $number)"/>
+                    </xslo:when>
+                    </xsl:when>
+                        <xsl:otherwise>
+                            <xslo:otherwise>
+                                <xsl:sequence select="tei:matchFunction($iden, ., $class, $number)"/>
+                            </xslo:otherwise>
+                        </xsl:otherwise>
+                    </xsl:choose>
+            </xsl:for-each>
+                <!-- if there is no behaviour to apply in all cases, go the default route and try to process children -->
+                <xsl:if test="not(descendant::model[not(@predicate)][not(parent::modelSeq)])">
+                    <xslo:otherwise>
+                        <xslo:apply-templates/>
+                    </xslo:otherwise>
+                </xsl:if>
+            </xslo:choose>
+            
+        </xslo:template>
+</xsl:variable>
+        
+        <xsl:choose>
+            <xsl:when test="$template//xsl:when and not($template//xsl:when[preceding-sibling::xsl:otherwise])">
+                <xsl:copy-of select="$template"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xslo:template match="{$template/xsl:template/@match}">
+                <xsl:copy-of select="$template//xsl:otherwise[1]/*"/>
+                </xslo:template>
+            </xsl:otherwise>
+        </xsl:choose>
+    
+    </xsl:template>
+    
+<!--    
+    <xsl:template match="tei:elementSpec" mode="deprecated">
         <xsl:variable name="models" select="model"/>
         
-        <xsl:for-each-group select="model[@output='render' or not(@output)]" group-by="if(@predicate) then @predicate else ''">
+        <xsl:for-each-group select="model[parent::modelSeq][@output='render' or not(@output)]" group-by="if(@predicate) then @predicate else ''">
             <xsl:variable name="xpth" select="current-group()[1]"/>
 
             <xsl:variable name="xp"
@@ -114,7 +180,6 @@
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeNote')">
                             <xsl:copy-of select="tei:makeNote(., $content, $class, $number)"/>
-                            <xsl:message><xsl:value-of select="parent::node()/@ident"/>number <xsl:value-of select="$number"/></xsl:message>
                         </xsl:when>
                         <xsl:when test="starts-with(@behaviour, 'makeEndnotes')">
                             <xsl:copy-of select="tei:makeEndnotes(., $content, $class, $number)"/>
@@ -153,7 +218,7 @@
                             <xsl:copy-of select="tei:makeFigure(., $content, $class, $number)"/>
                         </xsl:when>
                         
-                        <!-- when omit() generate empty template -->
+                        <!-\- when omit() generate empty template -\->
                         <xsl:when test="starts-with(@behaviour, 'omit')"/>
                         
                         <xsl:otherwise>
@@ -165,5 +230,5 @@
             </xslo:template>
         </xsl:for-each-group>
     </xsl:template>
-
+-->
 </xsl:stylesheet>
