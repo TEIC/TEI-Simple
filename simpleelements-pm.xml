@@ -165,6 +165,9 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="div">
+      <model predicate="@type='title_page'" behaviour="block(.)">
+         <rendition>border: 1px solid black; padding: 5px;</rendition>
+      </model>
       <model behaviour="section(.)"/>
    </elementSpec>
 
@@ -249,7 +252,6 @@
 
    <elementSpec mode="change" ident="front">
       <model behaviour="block(.)">
-         <rendition>border: 1px solid red;</rendition>
          <desc/>
       </model>
    </elementSpec>
@@ -269,7 +271,8 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="gap">
-      <model behaviour="inline(.)">
+      <model behaviour="inline()">
+         <rendition scope="before">content: '[...]';</rendition>
          <desc/>
       </model>
    </elementSpec>
@@ -288,27 +291,34 @@
    </elementSpec>
    <elementSpec mode="change" ident="head">
       <model predicate="parent::div/parent::body and parent::div[not(@type)]"
-         behaviour="heading(.)">
+         behaviour="heading(., 'h1')">
          <desc>@type on a parent div maycarry the information about what kind of header is
             this</desc>
+         <rendition>font-variant: small-caps;</rendition>
       </model>
       <model predicate="parent::div[@type]" behaviour="heading(.,@type)">
          <desc>Insert as header.</desc>
+         <rendition>font-weight: normal;</rendition>
       </model>
       <model predicate="parent::figure" behaviour="heading(.,'figure')">
          <desc>Insert as header.</desc>
+         <rendition>font-weight: normal;</rendition>
       </model>
       <model predicate="parent::table" behaviour="heading(.,'table')">
          <desc>Insert as header.</desc>
+         <rendition>font-weight: normal;</rendition>
       </model>
       <model predicate="parent::lg" behaviour="heading(.,'verse')">
          <desc>Insert as header.</desc>
+         <rendition>font-weight: normal;</rendition>
       </model>
       <model predicate="parent::list" behaviour="heading(.,'list')">
          <desc>Insert as header.</desc>
+         <rendition>font-weight: normal;</rendition>
       </model>
       <model behaviour="heading(.)">
          <desc>Insert as header.</desc>
+         <rendition>font-weight: normal;</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="hi">
@@ -347,7 +357,8 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="lb">
-      <model behaviour="break('line')"/>
+      <model predicate="ancestor::sp" behaviour="break('line')"/>
+      <model behaviour="omit()"/>
    </elementSpec>
 
    <elementSpec mode="change" ident="lg">
@@ -417,7 +428,9 @@
    </elementSpec>
 
    <elementSpec mode="change" ident="p" >
-      <model behaviour="paragraph(.)"  useSourceRendition="true"/>
+      <model behaviour="paragraph(.)"  useSourceRendition="true">
+         <rendition>text-align: justify;</rendition>
+      </model>
    </elementSpec>
 
    <elementSpec mode="change" ident="pb">
@@ -427,6 +440,8 @@
 	  color: grey;
 	  float: right;
 	</rendition>
+         <rendition scope="before">content: '[Page ';</rendition>
+         <rendition scope="after">content: ']';</rendition>
       </model>
    </elementSpec>
 
@@ -562,8 +577,9 @@
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="stage">
-      <model behaviour="inline(.)">
+      <model behaviour="block(.)">
          <desc/>
+         <rendition>font-style: italic;</rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="subst">
@@ -591,7 +607,12 @@
    <elementSpec mode="change" ident="text">
       <model behaviour="block(.)">
          <desc/>
-         <rendition>max-width: 80%; margin: auto;</rendition>
+         <rendition>
+            max-width: 80%;
+            margin: auto;
+            font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;
+            line-height: 1.2em;
+         </rendition>
       </model>
    </elementSpec>
    <elementSpec mode="change" ident="time">

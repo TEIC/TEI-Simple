@@ -16,14 +16,14 @@
                     <item>if no @predicate, assume it means self</item>
                     <item>if no @output, means model valid for all outputs</item>
                     <item>if no @class, use default css rendition for a given element</item>
+                    <item>sibling <gi>model</gi>s are considered mutually exclusive and are translated into sequence of <gi>xsl:when</gi> statements except when grouped within a <gi>modelSeq</gi></item>
                 </list>
             </p>
             
             <p>To do:
                 <list>
-                    <item>deal with renditions that have a @scope</item>
-                    <item>make room for modelGrp and modelSeq elements: the latter requires major revisions to the current script</item>
-                    <item>deal with @useRendition attribute?</item>
+                    <item>make room for modelGrp and inheritance of its outcome, predicate and rendition</item>
+                    <item>deal with @useSourceRendition attribute</item>
                     <item>deal with styling instructions from simple namespace (eg. simple:bold)</item>
                 </list>
             </p>

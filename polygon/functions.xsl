@@ -79,8 +79,6 @@ Description: row(.)
     <xsl:param name="model"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-<!--    <xsl:message>model for <xsl:value-of select="$elName"/> <xsl:text> </xsl:text><xsl:value-of select="$model/@predicate"/> <xsl:text> </xsl:text> <xsl:value-of select="$model/@behaviour"/></xsl:message>
--->    
     <xsl:variable name="content"
         select="if($model/@behaviour) then substring-before(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ',') else '.'"/>
     
@@ -108,7 +106,9 @@ Description: row(.)
 -->            <xsl:sequence select="tei:block($elName, $content, $class, $number)"/>
         </xsl:when>
         <xsl:when test="starts-with($model/@behaviour, 'heading')">
-            <xsl:sequence select="tei:heading($model, $content, $class, $number)"/>
+            <xsl:variable name="type" select="if($model/@behaviour) then substring-before(substring-after(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ','), ',') else ''"/>
+            
+            <xsl:sequence select="tei:heading($model, $content, $type, $class, $number)"/>
         </xsl:when>
         <xsl:when test="starts-with($model/@behaviour, 'alternate(')">
             <xsl:sequence select="tei:alternate($model, $content, $class, $number)"/>
@@ -128,7 +128,7 @@ Description: row(.)
         <xsl:when test="starts-with($model/@behaviour, 'makeNewline')">
             <xsl:sequence select="tei:newline($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'showPageBreak')">
+        <xsl:when test="starts-with($model/@behaviour, 'break')">
             <xsl:sequence select="tei:break($model, $content, $class, $number)"/>
         </xsl:when>
         <xsl:when test="starts-with($model/@behaviour, 'paragraph(')">
@@ -200,6 +200,7 @@ Description: row(.)
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
+        <xsl:copy-of select="tei:makeElement('br', '', '', '')"/>
         
     </xsl:function>
     
@@ -216,7 +217,6 @@ Description: row(.)
         <xsl:choose>
             <xsl:when test="string($class)">
                 <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
-                
             </xsl:when>
             <xsl:otherwise>
                 <xsl:if test="string($content)">
@@ -235,10 +235,22 @@ Description: row(.)
     <xsl:function name="tei:heading" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="type"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('h1', concat($class, $number), $content, '')"/>
+        <xsl:variable name="container">
+            <xsl:choose>
+                <xsl:when test="$type='h1'">h1</xsl:when>
+                <xsl:when test="$type='verse'">h3</xsl:when>
+                <xsl:when test="$type='list'">h3</xsl:when>
+                <xsl:when test="$type='table'">h3</xsl:when>
+                <xsl:when test="$type='figure'">h3</xsl:when>
+                <xsl:otherwise>h2</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        
+        <xsl:copy-of select="tei:makeElement($container, concat($class, $number), $content, '')"/>
         </xsl:function>
 
 
@@ -409,9 +421,11 @@ Description: row(.)
     <xsl:element name="{$name}">
         <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
         <xsl:if test="string($nameA)"><xsl:attribute name="name"><xsl:value-of select="$nameA"/></xsl:attribute></xsl:if>
+        <xsl:if test="string($content)">
         <xslo:apply-templates>
-            <xsl:if test="$content!='.' and string($content)"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
+            <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
         </xslo:apply-templates>
+        </xsl:if>
     </xsl:element>
     </xsl:function>
     
@@ -447,23 +461,27 @@ Description: row(.)
             <style>
                 <xsl:for-each select="$content">
                         <xsl:for-each select=".//tei:model">
-                            <xsl:variable name="container"><xsl:value-of select="tei:simpleContainer(@behaviour)"/></xsl:variable>
-                            
+                            <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(@behaviour)"/></xsl:variable>
                             <!-- use position of a model to distinguish between classes for differing behaviours -->
                             <xsl:variable name="elname"><xsl:value-of select="ancestor::tei:elementSpec/@ident"/></xsl:variable>
                             <xsl:variable name="pos"><xsl:value-of select="position()"/></xsl:variable>
+
                             
                             <xsl:for-each select="./tei:rendition">
-                                <xsl:value-of select="$container"/><xsl:text>.</xsl:text><xsl:value-of select="$elname"/><xsl:value-of select="$pos"/>
+                                <xsl:variable name="scope" select="@scope"/>
+                                <xsl:variable name="rendition" select="."/>
                                 
+                                <xsl:for-each select="$container/node()">
+                                    <xsl:value-of select="."/><xsl:text>.</xsl:text><xsl:value-of select="$elname"/><xsl:value-of select="$pos"/>
                                 
-                            <xsl:if test="@scope">
-                                <xsl:text>::</xsl:text><xsl:value-of select="@scope"/>
+                            <xsl:if test="string($scope)">
+                                <xsl:text>::</xsl:text><xsl:value-of select="$scope"/>
                             </xsl:if>
                             <xsl:text> {</xsl:text>
-                            <xsl:value-of select="."/>
+                            <xsl:value-of select="$rendition"/>
                             <xsl:text>}</xsl:text>
                             <xsl:text>&#xa;</xsl:text>
+                            </xsl:for-each>
                             </xsl:for-each>
                         </xsl:for-each>
                 </xsl:for-each>
@@ -473,27 +491,27 @@ Description: row(.)
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Determine the container for the function</desc>
+        <desc>Determine the container(s) for the function</desc>
     </doc>
-    <xsl:function name="tei:simpleContainer" as="xs:string">
+    <xsl:function name="tei:simpleContainer">
         <xsl:param name="name"/>
 
 <xsl:choose>
-    <xsl:when test="starts-with($name, 'anchor')">a</xsl:when>
-    <xsl:when test="starts-with($name, 'note')">span</xsl:when>
-    <xsl:when test="starts-with($name, 'makeMarginalNote')">span</xsl:when>
-    <xsl:when test="starts-with($name, 'endnotes')">div</xsl:when>
-    <xsl:when test="starts-with($name, 'block')">div</xsl:when>
-    <xsl:when test="starts-with($name, 'heading')">h1</xsl:when>
-    <xsl:when test="starts-with($name, 'alternate')">span</xsl:when>
-    <xsl:when test="starts-with($name, 'date')">span</xsl:when>
-    <xsl:when test="starts-with($name, 'list(')">ol</xsl:when>
-    <xsl:when test="starts-with($name, 'listItem')">li</xsl:when>
-    <xsl:when test="starts-with($name, 'inline')">span</xsl:when>
-    <xsl:when test="starts-with($name, 'newline')">br</xsl:when>
-    <xsl:when test="starts-with($name, 'break')">span</xsl:when>
-    <xsl:when test="starts-with($name, 'paragraph')">p</xsl:when>
-    <xsl:when test="starts-with($name, 'figure')">img</xsl:when>
+    <xsl:when test="starts-with($name, 'anchor')"><gi>a</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'note')"><gi>span</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'makeMarginalNote')"><gi>span</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'endnotes')"><gi>div</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'block')"><gi>div</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'heading')"><gi>h2</gi><gi>h3</gi><gi>h1</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'alternate')"><gi>span</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'date')"><gi>span</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'list(')"><gi>ol</gi><gi>ul</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'listItem')"><gi>li</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'inline')"><gi>span</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'newline')"><gi>br</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'break')"><gi>span</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'paragraph')"><gi>p</gi></xsl:when>
+    <xsl:when test="starts-with($name, 'figure')"><gi>img</gi></xsl:when>
     <xsl:otherwise>div</xsl:otherwise>
 </xsl:choose>
     </xsl:function>
