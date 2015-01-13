@@ -289,7 +289,7 @@
             <cell></cell>
           </row>
           <row>
-            <cell>makeFigure</cell>
+            <cell>figure</cell>
             <cell>title</cell>
             <cell>make a figure with the title</cell>
             <cell>div</cell>
@@ -611,10 +611,10 @@
                 <elementSpec mode="change" ident="abbr">
                   <modelGrp output="web">
                     <model predicate="parent::choice" behaviour="omit()"/>
-                    <model predicate="ancestor::front" behaviour="inline">
+                    <model predicate="ancestor::front" behaviour="inline(.)">
                       <rendition>font-style:italic; </rendition>
                     </model>
-                    <model predicate="not(parent::choice)" behaviour="inline">
+                    <model predicate="not(parent::choice)" behaviour="inline(.)">
                       <rendition scope="before">content: ' ('</rendition>
                       <rendition scope="after">content: ')'</rendition>
                     </model>
@@ -631,7 +631,7 @@
                 <modelGrp output="print">
                   <modelSequence>
                     <model behaviour="inline(.)"/>
-                    <model behaviour="makeFootnote(.)"/>
+                    <model behaviour="note(.,'foot')"/>
                   </modelSequence>
                 </modelGrp>
               </egXML>
