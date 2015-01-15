@@ -41,7 +41,7 @@ theory of liability, whether in contract, strict liability, or tort
 (including negligence or otherwise) arising in any way out of the use
 of this software, even if advised of the possibility of such damage.
 </p>
-      <p>Author: See AUTHORS</p>
+      <p>Author: Magdalena Turska</p>
       <p>Id: $Id$</p>
       <p>Copyright: 2014, TEI Consortium</p>
     </desc>
@@ -49,30 +49,6 @@ of this software, even if advised of the possibility of such damage.
 
 
 <xsl:param name="css">simple.css</xsl:param>
-
-<!--Description: paragraph(.)
-Description: omit()
-Description: inline(.)
-Description: block(.)
-Description: anchor(@xml:id)
-Description: index(.)
-Description: body(.)
-Description: list(.)
-Description: listItem(.)
-Description: break('column')
-Description: cell(.)
-Description: alternate(corr[1],sic[1])
-Description: cit(.)
-Description: section(.)
-Description: glyph(@ref)
-Description: graphic(@url)
-Description: heading(.)
-Description: break('line')
-Description: note(.,@place)
-Description: link(@target,@target)
-Description: row(.)
--->
-
 
 <xsl:function name="tei:matchFunction">
     <xsl:param name="elName"/>
@@ -82,28 +58,19 @@ Description: row(.)
     <xsl:variable name="content"
         select="if($model/@behaviour) then substring-before(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ',') else '.'"/>
     
-<!--    <xsl:message> content <xsl:value-of select="$content"/></xsl:message>
---><!--    <xsl:variable name="modelId"><xsl:value-of select="generate-id()"/></xsl:variable>
-    <xsl:variable name="number" select="tei:findModelPosition($models, $modelId)"/>
-    <xsl:variable name="class" select="if(@class) then @class else parent::node()/@ident"/>
---> 
-    
     <xsl:choose>
         <xsl:when test="starts-with($model/@behaviour, 'anchor(')">
             <xsl:sequence select="tei:anchor($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'makeMarginalNote')">
-            <xsl:sequence select="tei:note($model, $content, $class, $number)"/>
-        </xsl:when>
         <xsl:when test="starts-with($model/@behaviour, 'note(')">
-            <xsl:sequence select="tei:note($model, $content, $class, $number)"/>
+            <xsl:variable name="place" select="if($model/@behaviour) then substring-before(substring-after(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ','), ',') else ''"/>
+            <xsl:sequence select="tei:note($model, $content, $place, $class, $number)"/>
         </xsl:when>
         <xsl:when test="starts-with($model/@behaviour, 'makeEndnotes')">
             <xsl:sequence select="tei:endnotes($model, $content, $class, $number)"/>
         </xsl:when>
         <xsl:when test="starts-with($model/@behaviour, 'block(')">
-<!--            <xsl:message>block for <xsl:value-of select="$elName"/> <xsl:text> </xsl:text><xsl:value-of select="$model/@predicate"/> <xsl:text> </xsl:text> <xsl:value-of select="$model/@behaviour"/></xsl:message>
--->            <xsl:sequence select="tei:block($elName, $content, $class, $number)"/>
+            <xsl:sequence select="tei:block($elName, $content, $class, $number)"/>
         </xsl:when>
         <xsl:when test="starts-with($model/@behaviour, 'heading')">
             <xsl:variable name="type" select="if($model/@behaviour) then substring-before(substring-after(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ','), ',') else ''"/>
@@ -160,8 +127,6 @@ Description: row(.)
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-<!--        <xsl:message>block for <xsl:value-of select="$element"/> <xsl:text> *</xsl:text><xsl:value-of select="$content"/> <xsl:text>* </xsl:text> <xsl:value-of select="$class"/></xsl:message>
--->        
         <xsl:copy-of select="tei:makeElement('div', concat($class, $number), $content, '')"/>
     </xsl:function>
     
@@ -335,28 +300,42 @@ Description: row(.)
     <xsl:function name="tei:note" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="place"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <!-- relies on css for the positioning and formatting of the note block -->
-        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
-    </xsl:function>
-    
-    
-
-    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Marginal note</desc>
-    </doc>
-    <xsl:function name="tei:makeMarginalNote" as="node()*">
-        <xsl:param name="element"/>
-        <xsl:param name="content"/>
-        <xsl:param name="class"/>
-        <xsl:param name="number"/>
+        <xsl:variable name="location">
+            <xsl:choose>
+                <xsl:when test="$place='@place'">foot</xsl:when>
+                <xsl:otherwise>floating</xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
         
-        <!-- relies on css for the positioning and formatting of the note block -->
-        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
+        <xsl:element name="span">
+            <xslo:variable name="type">
+                <xsl:choose>
+                    <xsl:when test="$place='margin'">margin</xsl:when>
+                    <xsl:otherwise>
+                        <xslo:value-of select="{$place}"/>
+                    </xsl:otherwise>
+                </xsl:choose>
+            </xslo:variable>
+            <xslo:variable name="class" select="{$class}"/>
+            <xslo:variable name="number" select="{$number}"/>
+            
+            <xslo:choose>
+                <xslo:when test="string($type)"><xslo:attribute name="class"><xslo:value-of select="concat($type, $class, $number)"></xslo:value-of></xslo:attribute></xslo:when>
+                <xslo:otherwise><xslo:attribute name="class"><xslo:value-of select="concat($class, $number)"></xslo:value-of></xslo:attribute></xslo:otherwise>
+            </xslo:choose>
+            <xsl:if test="string($content)">
+                <xslo:apply-templates>
+                    <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
+                </xslo:apply-templates>
+            </xsl:if>
+        </xsl:element>
+        
     </xsl:function>
-
+    
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>End note</desc>
     </doc>
@@ -405,7 +384,8 @@ Description: row(.)
                                 <xslo:attribute name="src"><xslo:value-of select="@facs"/></xslo:attribute>
                             </xsl:element>
                     </xslo:when>
-                    <xslo:otherwise>                <span class="verybig">�</span>
+                    <xslo:otherwise>
+                        <span class="verybig">�</span>
                     </xslo:otherwise>
                 </xslo:choose>
                 
@@ -459,13 +439,27 @@ Description: row(.)
                 </title>
                 <link rel="StyleSheet" href="{$css}" type="text/css"/>
             <style>
+
+span.foot {
+float: bottom;
+display: block;
+background-color: red;
+font-size: smaller;
+}
+
+                span.floating {
+                float: right;
+                display: block;
+                background-color: #C0C0C0;
+                font-size: smaller;
+                }
+                
                 <xsl:for-each select="$content">
                         <xsl:for-each select=".//tei:model">
                             <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(@behaviour)"/></xsl:variable>
                             <!-- use position of a model to distinguish between classes for differing behaviours -->
                             <xsl:variable name="elname"><xsl:value-of select="ancestor::tei:elementSpec/@ident"/></xsl:variable>
                             <xsl:variable name="pos"><xsl:value-of select="position()"/></xsl:variable>
-
                             
                             <xsl:for-each select="./tei:rendition">
                                 <xsl:variable name="scope" select="@scope"/>
@@ -473,15 +467,14 @@ Description: row(.)
                                 
                                 <xsl:for-each select="$container/node()">
                                     <xsl:value-of select="."/><xsl:text>.</xsl:text><xsl:value-of select="$elname"/><xsl:value-of select="$pos"/>
-                                
-                            <xsl:if test="string($scope)">
-                                <xsl:text>::</xsl:text><xsl:value-of select="$scope"/>
-                            </xsl:if>
-                            <xsl:text> {</xsl:text>
-                            <xsl:value-of select="$rendition"/>
-                            <xsl:text>}</xsl:text>
-                            <xsl:text>&#xa;</xsl:text>
-                            </xsl:for-each>
+                                    <xsl:if test="string($scope)">
+                                        <xsl:text>::</xsl:text><xsl:value-of select="$scope"/>
+                                    </xsl:if>
+                                    <xsl:text> {</xsl:text>
+                                    <xsl:value-of select="$rendition"/>
+                                    <xsl:text>}</xsl:text>
+                                    <xsl:text>&#xa;</xsl:text>
+                                </xsl:for-each>
                             </xsl:for-each>
                         </xsl:for-each>
                 </xsl:for-each>
@@ -496,24 +489,23 @@ Description: row(.)
     <xsl:function name="tei:simpleContainer">
         <xsl:param name="name"/>
 
-<xsl:choose>
-    <xsl:when test="starts-with($name, 'anchor')"><gi>a</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'note')"><gi>span</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'makeMarginalNote')"><gi>span</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'endnotes')"><gi>div</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'block')"><gi>div</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'heading')"><gi>h2</gi><gi>h3</gi><gi>h1</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'alternate')"><gi>span</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'date')"><gi>span</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'list(')"><gi>ol</gi><gi>ul</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'listItem')"><gi>li</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'inline')"><gi>span</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'newline')"><gi>br</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'break')"><gi>span</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'paragraph')"><gi>p</gi></xsl:when>
-    <xsl:when test="starts-with($name, 'figure')"><gi>img</gi></xsl:when>
-    <xsl:otherwise>div</xsl:otherwise>
-</xsl:choose>
+        <xsl:choose>
+            <xsl:when test="starts-with($name, 'anchor')"><gi>a</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'note')"><gi>span</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'endnotes')"><gi>div</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'block')"><gi>div</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'heading')"><gi>h2</gi><gi>h3</gi><gi>h1</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'alternate')"><gi>span</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'date')"><gi>span</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'list(')"><gi>ol</gi><gi>ul</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'listItem')"><gi>li</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'inline')"><gi>span</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'newline')"><gi>br</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'break')"><gi>span</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'paragraph')"><gi>p</gi></xsl:when>
+            <xsl:when test="starts-with($name, 'figure')"><gi>img</gi></xsl:when>
+            <xsl:otherwise>div</xsl:otherwise>
+        </xsl:choose>
     </xsl:function>
     
     <xsl:function name="tei:findModelPosition" as="xs:string">
@@ -532,7 +524,5 @@ Description: row(.)
             <xsl:otherwise>XYZ</xsl:otherwise>
         </xsl:choose>
     </xsl:function>
-    
-    
     
 </xsl:stylesheet>
