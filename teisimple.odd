@@ -556,7 +556,605 @@
           <head>Elements</head>
           <p>The main part of Simple is the set of selected elements.</p>
           <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements.xml"/>
-          <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements-pm.xml"/>
+          <specGrp xmlns="http://www.tei-c.org/ns/1.0" xmlns:XSL="http://www.w3.org/1999/XSL/Transform" xml:id="simpleelementspm">
+            <elementSpec mode="change" ident="ab">
+              <model behaviour="paragraph(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="abbr">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="actor">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="add">
+              <model behaviour="inline(.)">
+                <rendition>color: green; text-decoration: underline;</rendition>
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="address">
+              <model behaviour="block(.)">
+                <rendition>margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom:
+            2em;</rendition>
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="addrLine">
+              <model behaviour="block(.)">
+                <rendition>white-space: nowrap;</rendition>
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="addSpan">
+              <model behaviour="anchor(@xml:id)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="am">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="anchor">
+              <model behaviour="anchor(@xml:id)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="argument">
+              <model behaviour="block(.)">
+                <rendition>margin-bottom: 0.5em;</rendition>
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="author">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="back">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="bibl">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="body">
+              <model behaviour="index(.)"/>
+              <model behaviour="body(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="byline">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="c">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="castGroup">
+              <model predicate="child::*" behaviour="list(.)">
+                <desc>Insert list. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="castItem">
+              <model behaviour="listItem(.)">
+                <desc>Insert item, rendered as described in parent list rendition. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="castList">
+              <model predicate="child::*" behaviour="list(.)" useSourceRendition="true">
+                <rendition>list-style: ordered;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="cb">
+              <model behaviour="break('column')"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="cell">
+              <model behaviour="cell(.)">
+                <desc>Insert table cell. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="choice">
+              <model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/>
+              <model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/>
+              <model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/>
+              <model output="plain" predicate="sic and corr" behaviour="inline(corr[1])"/>
+              <model output="plain" predicate="abbr and expan" behaviour="inline(expan[1])"/>
+              <model output="plain" predicate="orig and reg" behaviour="inline(reg[1])"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="cit">
+              <model predicate="child::quote and child::bibl" behaviour="cit(.)">
+                <desc>Insert cit. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="closer">
+              <model predicate="child::*" behaviour="block(.)">
+                <rendition>margin-top: 1em; margin-left: 1em; margin-left: 1em;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="corr">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
+                <desc>Omit, if handled in parent choice. </desc>
+              </model>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="date">
+              <model output="print" predicate="text()" behaviour="inline(.)"/>
+              <model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/>
+              <model predicate="@when" output="web" behaviour="alternate(.,@when)"/>
+              <model predicate="text()" behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="dateline">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="del">
+              <model behaviour="inline(.)">
+                <rendition>   text-decoration: line-through;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="desc">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="div">
+              <model predicate="@type='title_page'" behaviour="block(.)">
+                <rendition>border: 1px solid black; padding: 5px;</rendition>
+              </model>
+              <model behaviour="section(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="docAuthor">
+              <model predicate="ancestor::teiHeader" behaviour="omit()">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="docDate">
+              <model predicate="ancestor::teiHeader" behaviour="omit()">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="docEdition">
+              <model predicate="ancestor::teiHeader" behaviour="omit()">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="docImprint">
+              <model predicate="ancestor::teiHeader" behaviour="omit()">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="docTitle">
+              <model predicate="ancestor::teiHeader" behaviour="omit()">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+              <model predicate="not(ancestor::teiHeader)" behaviour="block(.)">
+                <rendition>font-size: large;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="epigraph">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="ex">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="expan">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="figDesc">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="figure">
+              <model predicate="head or @rendition='simple:display'" behaviour="block(.)"/>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="floatingText">
+              <model behaviour="block(.)">
+                <rendition>
+	  margin: 6pt;
+	  border: solid black 1pt;
+	</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="foreign">
+              <model behaviour="inline(.)">
+                <rendition>font-style:italic;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="formula">
+              <model predicate="@rendition='simple:display'" behaviour="block(.)"/>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="front">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="fw">
+              <model predicate="ancestor::p or ancestor::ab" behaviour="inline(.)">
+                <desc/>
+              </model>
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="g">
+              <model predicate="not(text())" behaviour="glyph(@ref)"/>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="gap">
+              <model behaviour="inline()">
+                <rendition scope="before">content: '[...]';</rendition>
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="graphic">
+              <model behaviour="graphic(@url)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="group">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="handShift">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="head">
+              <model predicate="parent::div/parent::body and parent::div[not(@type)]" behaviour="heading(., 'h1')">
+                <desc>@type on a parent div maycarry the information about what kind of header is
+            this</desc>
+                <rendition>font-variant: small-caps;</rendition>
+              </model>
+              <model predicate="parent::div[@type]" behaviour="heading(.,@type)">
+                <desc>Insert as header.</desc>
+                <rendition>font-weight: normal;</rendition>
+              </model>
+              <model predicate="parent::figure" behaviour="heading(.,'figure')">
+                <desc>Insert as header.</desc>
+                <rendition>font-weight: normal;</rendition>
+              </model>
+              <model predicate="parent::table" behaviour="heading(.,'table')">
+                <desc>Insert as header.</desc>
+                <rendition>font-weight: normal;</rendition>
+              </model>
+              <model predicate="parent::lg" behaviour="heading(.,'verse')">
+                <desc>Insert as header.</desc>
+                <rendition>font-weight: normal;</rendition>
+              </model>
+              <model predicate="parent::list" behaviour="heading(.,'list')">
+                <desc>Insert as header.</desc>
+                <rendition>font-weight: normal;</rendition>
+              </model>
+              <model behaviour="heading(.)">
+                <desc>Insert as header.</desc>
+                <rendition>font-weight: normal;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="hi">
+              <model predicate="@rendition" behaviour="inline(.)" useSourceRendition="true">
+                <rendition>font-style: italic;</rendition>
+              </model>
+              <model predicate="not(@rendition)" behaviour="inline(.)">
+                <rendition>font-style: italic;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="imprimatur">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="item">
+              <model predicate="parent::list[@rendition]" behaviour="listItem(.)">
+                <desc>Pithy description. </desc>
+              </model>
+              <model predicate="not(parent::list[@rendition])" behaviour="listItem(.)">
+                <desc>Pithy description. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="l">
+              <model behaviour="block(.)" useSourceRendition="true">
+                <rendition> margin-left: 1em; </rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="label">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="lb">
+              <model predicate="ancestor::sp" behaviour="break('line')"/>
+              <model behaviour="omit()"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="lg">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="list">
+              <model predicate="@rendition" behaviour="list(.)" useSourceRendition="true"/>
+              <model predicate="not(@rendition)" behaviour="list(.)">
+                <rendition>list-style: disc;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="listBibl">
+              <model behaviour="list(.)">
+                <desc>Pithy description. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="measure">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="milestone">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="name">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="note">
+              <model predicate="@place" behaviour="note(.,@place)"/>
+              <model predicate="parent::div and not(@place)" behaviour="block(.)">
+                <rendition>margin-left: 10px;margin-right: 10px; font-size:smaller;</rendition>
+              </model>
+              <model predicate="not(@place)" behaviour="inline(.)">
+                <rendition scope="before">content:" [";</rendition>
+                <rendition scope="after">content:"] ";</rendition>
+                <rendition>font-size:small;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="num">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="opener">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="orig">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
+                <desc>Omit, if handled in parent choice. </desc>
+              </model>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="p">
+              <model behaviour="paragraph(.)" useSourceRendition="true">
+                <rendition>text-align: justify;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="pb">
+              <model behaviour="inline(@n)">
+                <rendition>
+	  display: block;
+	  color: grey;
+	  float: right;
+	</rendition>
+                <rendition scope="before">content: '[Page ';</rendition>
+                <rendition scope="after">content: ']';</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="pc">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="postscript">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="publisher">
+              <model predicate="ancestor::teiHeader" behaviour="omit()">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="pubPlace">
+              <model predicate="ancestor::teiHeader" behaviour="omit()">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="q">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="quote">
+              <model predicate="ancestor::p" behaviour="inline(.)">
+                <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+              </model>
+              <model predicate="not(ancestor::p)" behaviour="block(.)">
+                <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="ref">
+              <model behaviour="inline(.)" predicate="not(@target)"/>
+              <model predicate="not(text())" behaviour="link(@target,@target)"/>
+              <model behaviour="link(.,@target)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="reg">
+              <model predicate="not(parent::choice)" behaviour="inline(.)"/>
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
+                <desc>Omit, if handled in parent choice.</desc>
+              </model>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="rhyme">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="role">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="roleDesc">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="row">
+              <model behaviour="row(.)">
+                <desc>Insert table row. </desc>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="rs">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="s">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="salute">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="seg">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec ident="sic" mode="change">
+              <modelGrp>
+                <rendition>font-size: large</rendition>
+                <model behaviour="inline(.)">
+                  <rendition>font-weight: normal;</rendition>
+                  <desc/>
+                </model>
+                <model predicate="parent::div" behaviour="block(.)">
+                  <rendition>font-size: small;</rendition>
+                  <desc/>
+                </model>
+              </modelGrp>
+            </elementSpec>
+            <elementSpec mode="change" ident="signed">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
+                <desc>Omit, if handled in parent choice.</desc>
+              </model>
+              <model behaviour="inline(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="sp">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="space">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="speaker">
+              <model behaviour="block(.)">
+                <rendition> font-style:italic; </rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="spGrp">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="stage">
+              <model behaviour="block(.)">
+                <desc/>
+                <rendition>font-style: italic;</rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="subst">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="supplied">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="table">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="TEI">
+   </elementSpec>
+            <elementSpec mode="change" ident="teiCorpus">
+   </elementSpec>
+            <elementSpec mode="change" ident="teiHeader">
+              <model behaviour="omit(.)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="text">
+              <model behaviour="block(.)">
+                <desc/>
+                <rendition>
+            max-width: 80%;
+            margin: auto;
+            font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;
+            line-height: 1.2em;
+         </rendition>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="time">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="title">
+              <model behaviour="inline(.)">
+                <rendition>color: red; font-size: 2em;</rendition>
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="titlePage">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="titlePart">
+              <model behaviour="block(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="trailer">
+              <model behaviour="block(.)">
+                <rendition>color: green;</rendition>
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="unclear">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+            <elementSpec mode="change" ident="w">
+              <model behaviour="inline(.)">
+                <desc/>
+              </model>
+            </elementSpec>
+          </specGrp>
           <specGrp xml:id="simplechanges">
             <p>A small number of elements have constrained value lists added.</p>
             <elementSpec ident="formula" mode="change">
