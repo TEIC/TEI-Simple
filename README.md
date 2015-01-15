@@ -2,15 +2,15 @@ TEI-Simple
 ==========
 TEI Simple aims to define a new _highly-constrained_ and _prescriptive_ subset of the Text Encoding Initiative (TEI) Guidelines suited to the representation of early modern and modern books, a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts, mapping to other ontologies, and processes to describe the encoding status and richness of a TEI digital text.
 
-Documented ODD: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/teisimple.html
+. Useful links
+Documented ODD for Simple: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/teisimple.html for differences
+and  http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/teisimple.odd.html for full version
 
-Documented full ODD: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/teisimple.odd.html
-
-Documented extensions for processing: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tei-pm.html 
-
-Documented full ODD extensions for processing: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tei-pm.odd.html
+Documented extensions for processing: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tei-pm.html for differences and http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tei-pm.odd.html for full version
 
 TEI Simple schema (RELAX NG): https://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple.rng
+
+Test file https://github.com/TEIC/TEI-Simple/blob/master/tests/testsimple.xml (before) and http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tests/testsimple.html (after)
 
 # Background
 
