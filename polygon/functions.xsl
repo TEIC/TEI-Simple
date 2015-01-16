@@ -3,9 +3,10 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
     xmlns:tei="http://www.tei-c.org/ns/1.0" 
+    xpath-default-namespace="http://www.tei-c.org/ns/1.0" 
     exclude-result-prefixes="xs"
     version="2.0">
-    
+
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
     <desc>
       <p> TEI Simple utility stylesheet defining functions for use when generating stylesheets based on Simple ODD extension.</p>
@@ -48,6 +49,7 @@ of this software, even if advised of the possibility of such damage.
   </doc>
 
 
+  <xsl:param name="debug">false</xsl:param>
 <xsl:param name="css">simple.css</xsl:param>
 
 <xsl:function name="tei:matchFunction">
@@ -55,57 +57,67 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="model"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:variable name="content"
-        select="if($model/@behaviour) then substring-before(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ',') else '.'"/>
+    <xsl:variable name="task" select="substring-before(normalize-space($model/@behaviour),'(')"/>
+    <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'.*\(([^\)]*)\).*','$1'),',')"/>
+    <xsl:if test="$debug='true'">
+      <xsl:message><xsl:value-of
+      select="($elName,$model/@behaviour,$task)"/>:   <xsl:copy-of
+      select="$parms"/></xsl:message>
+    </xsl:if>
+    <xsl:variable name="content" select="$parms[1]"/>
     
     <xsl:choose>
-        <xsl:when test="starts-with($model/@behaviour, 'anchor(')">
+        <xsl:when test="$task ='anchor'">
             <xsl:sequence select="tei:anchor($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'note(')">
-            <xsl:variable name="place" select="if($model/@behaviour) then substring-before(substring-after(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ','), ',') else ''"/>
-            <xsl:sequence select="tei:note($model, $content, $place, $class, $number)"/>
+        <xsl:when test="$task ='note'">
+            <xsl:sequence select="tei:note($model, $content, $parms[2], $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'makeEndnotes')">
+        <xsl:when test="$task ='makeEndnotes'">
             <xsl:sequence select="tei:endnotes($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'block(')">
+        <xsl:when test="$task ='block'">
             <xsl:sequence select="tei:block($elName, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'heading')">
-            <xsl:variable name="type" select="if($model/@behaviour) then substring-before(substring-after(concat(substring-before(substring-after($model/@behaviour, '('), ')'), ','), ','), ',') else ''"/>
-            
-            <xsl:sequence select="tei:heading($model, $content, $type, $class, $number)"/>
+        <xsl:when test="$task ='heading'">
+          <xsl:sequence select="tei:heading($model, $content, $parms[2], $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'alternate(')">
-            <xsl:sequence select="tei:alternate($model, $content, $class, $number)"/>
+        <xsl:when test="$task ='alternate'">
+            <xsl:sequence select="tei:alternate($model, $content, $parms[2],$class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'makeDate')">
-            <xsl:sequence select="tei:date($model, $content, $class, $number)"/>
-        </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'list(')">
+        <xsl:when test="$task ='list'">
             <xsl:sequence select="tei:list($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'listItem(')">
+        <xsl:when test="$task ='listItem'">
             <xsl:sequence select="tei:listItem($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'inline(')">
+        <xsl:when test="$task ='inline'">
             <xsl:sequence select="tei:inline($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'makeNewline')">
+        <xsl:when test="$task ='newline'">
             <xsl:sequence select="tei:newline($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'break')">
+        <xsl:when test="$task ='break'">
             <xsl:sequence select="tei:break($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'paragraph(')">
+        <xsl:when test="$task ='paragraph'">
             <xsl:sequence select="tei:paragraph($model, $content, $class, $number)"/>
         </xsl:when>
-        <xsl:when test="starts-with($model/@behaviour, 'figure(')">
+        <xsl:when test="$task ='figure'">
             <xsl:sequence select="tei:figure($model, $content, $class, $number)"/>
         </xsl:when>
+
+        <xsl:when test="$task ='table'">
+            <xsl:sequence select="tei:table($model, $content, $class, $number)"/>
+        </xsl:when>
+        <xsl:when test="$task ='row'">
+            <xsl:sequence select="tei:row($model, $content, $class, $number)"/>
+        </xsl:when>
+        <xsl:when test="$task ='cell'">
+            <xsl:sequence select="tei:cell($model, $content, $class, $number)"/>
+        </xsl:when>
         
-        <xsl:when test="starts-with($model/@behaviour, 'omit')"/>
+        <xsl:when test="$task ='omit'"/>
         
         <xsl:otherwise>
             <xsl:sequence select="tei:makeDefault($model, $content, $class, $number)"/>
@@ -224,6 +236,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:alternate" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="altcontent"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
@@ -252,9 +265,42 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), substring-before($content, ','), '')"/>
+        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
     </xsl:function>
     
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Placeholder for doing something sensible with rows</desc>
+    </doc>
+    <xsl:function name="tei:row" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        
+        <xsl:copy-of select="tei:makeElement('tr', concat($class, $number), $content, '')"/>
+    </xsl:function>
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Placeholder for doing something sensible with cells</desc>
+    </doc>
+    <xsl:function name="tei:cell" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        <xsl:copy-of select="tei:makeElement('td', concat($class, $number), $content, '')"/>
+    </xsl:function>
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Placeholder for doing something sensible with tables</desc>
+    </doc>
+    <xsl:function name="tei:table" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        
+        <xsl:copy-of select="tei:makeElement('table', concat($class, $number), $content, '')"/>
+    </xsl:function>
+
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Placeholder for doing something sensible with list items</desc>
     </doc>
@@ -264,7 +310,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('li', concat($class, $number), substring-before($content, ','), '')"/>
+        <xsl:copy-of select="tei:makeElement('li', concat($class, $number), $content, '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -395,11 +441,11 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="name"/>
         <xsl:param name="class"/>
         <xsl:param name="content"/>
-        <xsl:param name="nameA"/>
+        <xsl:param name="anchorName"/>
         
     <xsl:element name="{$name}">
         <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
-        <xsl:if test="string($nameA)"><xsl:attribute name="name"><xsl:value-of select="$nameA"/></xsl:attribute></xsl:if>
+        <xsl:if test="string($anchorName)"><xsl:attribute name="name"><xsl:value-of select="$anchorName"/></xsl:attribute></xsl:if>
         <xsl:if test="string($content)">
         <xslo:apply-templates>
             <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
@@ -454,18 +500,18 @@ font-size: smaller;
                 }
                 
                 <xsl:for-each select="$content">
-                        <xsl:for-each select=".//tei:model">
-                            <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(@behaviour)"/></xsl:variable>
+                        <xsl:for-each select=".//model">
+                            <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(substring-before(@behaviour,'('))"/></xsl:variable>
                             <!-- use position of a model to distinguish between classes for differing behaviours -->
-                            <xsl:variable name="elname"><xsl:value-of select="ancestor::tei:elementSpec/@ident"/></xsl:variable>
-                            <xsl:variable name="pos"><xsl:value-of select="position()"/></xsl:variable>
-                            
-                            <xsl:for-each select="./tei:rendition">
+                            <xsl:variable name="elname"><xsl:value-of select="ancestor::elementSpec/@ident"/></xsl:variable>
+                            <xsl:variable name="pos"   
+					  select="if  (count(../model) &gt; 1) then position() else  ''"/>        
+                            <xsl:for-each select="./rendition">
                                 <xsl:variable name="scope" select="@scope"/>
                                 <xsl:variable name="rendition" select="normalize-space(.)"/>
                                 
                                 <xsl:for-each select="$container/node()">
-                                    <xsl:value-of select="."/><xsl:text>.</xsl:text><xsl:value-of select="$elname"/><xsl:value-of select="$pos"/>
+                                    <xsl:value-of select="concat(.,'.',$elname,$pos)"/>
                                     <xsl:if test="string($scope)">
                                         <xsl:text>:</xsl:text><xsl:value-of select="$scope"/>
                                     </xsl:if>
@@ -489,20 +535,23 @@ font-size: smaller;
         <xsl:param name="name"/>
 
         <xsl:choose>
-            <xsl:when test="starts-with($name, 'anchor')"><gi>a</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'note')"><gi>span</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'endnotes')"><gi>div</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'block')"><gi>div</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'heading')"><gi>h2</gi><gi>h3</gi><gi>h1</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'alternate')"><gi>span</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'date')"><gi>span</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'list(')"><gi>ol</gi><gi>ul</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'listItem')"><gi>li</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'inline')"><gi>span</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'newline')"><gi>br</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'break')"><gi>span</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'paragraph')"><gi>p</gi></xsl:when>
-            <xsl:when test="starts-with($name, 'figure')"><gi>img</gi></xsl:when>
+            <xsl:when test="$name = 'alternate'"><gi>span</gi></xsl:when>
+            <xsl:when test="$name = 'anchor'"><gi>a</gi></xsl:when>
+            <xsl:when test="$name = 'block'"><gi>div</gi></xsl:when>
+            <xsl:when test="$name = 'break'"><gi>span</gi></xsl:when>
+            <xsl:when test="$name = 'cell'"><gi>td</gi></xsl:when>
+            <xsl:when test="$name = 'date'"><gi>span</gi></xsl:when>
+            <xsl:when test="$name = 'endnotes'"><gi>div</gi></xsl:when>
+            <xsl:when test="$name = 'graphic'"><gi>img</gi></xsl:when>
+            <xsl:when test="$name = 'heading'"><gi>h2</gi><gi>h3</gi><gi>h1</gi></xsl:when>
+            <xsl:when test="$name = 'inline'"><gi>span</gi></xsl:when>
+            <xsl:when test="$name = 'list'"><gi>ol</gi><gi>ul</gi></xsl:when>
+            <xsl:when test="$name = 'listItem'"><gi>li</gi></xsl:when>
+            <xsl:when test="$name = 'newline'"><gi>br</gi></xsl:when>
+            <xsl:when test="$name = 'note'"><gi>span</gi></xsl:when>
+            <xsl:when test="$name = 'paragraph'"><gi>p</gi></xsl:when>
+            <xsl:when test="$name = 'row'"><gi>tr</gi></xsl:when>
+            <xsl:when test="$name = 'table'"><gi>table</gi></xsl:when>
             <xsl:otherwise>div</xsl:otherwise>
         </xsl:choose>
     </xsl:function>
@@ -513,15 +562,11 @@ font-size: smaller;
         <xsl:variable name="positions">
             <xsl:for-each select="$models">
                 <xsl:if test="generate-id(.)=$modelId">
-                    <xsl:value-of select="position()"/>
+                  <xsl:value-of   select="if  (count(parent::*/model) &gt; 1 ) then   position() else ''"/>
                 </xsl:if>
             </xsl:for-each>
         </xsl:variable>
-        <xsl:choose>
-            <xsl:when test="$positions/string()"><xsl:value-of select="$positions"/></xsl:when>
-            <!-- why this happen? -->
-            <xsl:otherwise>XYZ</xsl:otherwise>
-        </xsl:choose>
+	<xsl:value-of select="$positions"/>
     </xsl:function>
     
 </xsl:stylesheet>
