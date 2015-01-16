@@ -94,6 +94,9 @@ of this software, even if advised of the possibility of such damage.
         <xsl:when test="$task ='inline'">
             <xsl:sequence select="tei:inline($model, $content, $class, $number)"/>
         </xsl:when>
+        <xsl:when test="$task ='text'">
+            <xsl:sequence select="tei:text($content)"/>
+        </xsl:when>
         <xsl:when test="$task ='newline'">
             <xsl:sequence select="tei:newline($model, $content, $class, $number)"/>
         </xsl:when>
@@ -180,13 +183,12 @@ of this software, even if advised of the possibility of such damage.
         
     </xsl:function>
     
-
-    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Inline element. If there's something going on re class or rendition keep span and attributes, otherwise make it just text of selected content</desc>
-    </doc>
-    <xsl:function name="tei:inline" as="node()*">
+<doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Inline element. If there's something going on re class or rendition keep span and attributes</desc>
+     </doc>
+<xsl:function name="tei:inline" as="node()*">
         <xsl:param name="element"/>
-        <xsl:param name="content"/>
+         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
@@ -197,12 +199,20 @@ of this software, even if advised of the possibility of such damage.
             <xsl:otherwise>
                 <xsl:if test="string($content)">
                 <xslo:apply-templates>
-                    <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
+                    <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"/></xsl:attribute></xsl:if>
                 </xslo:apply-templates>
                 </xsl:if>
             </xsl:otherwise>
         </xsl:choose>
-        
+</xsl:function>
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Inline text. </desc>
+    </doc>
+    <xsl:function name="tei:text" as="node()*">
+        <xsl:param name="content"/>
+	<xslo:value-of>
+	  <xsl:attribute name="select"><xsl:value-of select="$content"/></xsl:attribute>
+	</xslo:value-of>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
