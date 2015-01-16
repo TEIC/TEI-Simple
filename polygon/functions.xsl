@@ -58,7 +58,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <xsl:variable name="task" select="substring-before(normalize-space($model/@behaviour),'(')"/>
-    <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'.*\(([^\)]*)\).*','$1'),',')"/>
+    <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'.*\((.*)\)$','$1'),',')"/>
     <xsl:if test="$debug='true'">
       <xsl:message><xsl:value-of
       select="($elName,$model/@behaviour,$task)"/>:   <xsl:copy-of
