@@ -180,6 +180,7 @@
       <param name="useFixedDate" expression="true"/>
     </xslt>
   </target>
+
   <target name="tests">
     <!--
 	<echo>Validate Simple schema against tei-pm</echo>
@@ -194,6 +195,20 @@
     <echo>Validate instance against XSD</echo>
     <schemavalidate noNamespaceFile="teisimple.xsd" file="tests/testsimple.xml"/>
   </target>
+
+  <target name="pm">
+    <echo>create simple XSL from PM</echo>
+    <xslt force="yes" style="polygon/simpleoddtoxsl.xsl" in="teisimple.odd" out="teisimple-pm.xsl">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+    </xslt>
+    <echo>run test file through PM</echo>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple.xml" out="tests/testsimple.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+  </target>
+
   <target name="cleanup">
     <delete dir="${tempDir}"/>
 

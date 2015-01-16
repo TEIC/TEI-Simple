@@ -8,6 +8,9 @@ docx:
 teisimple:
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) 	
 
+pm:
+	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) pm
+
 valid:
 	xmllint --xinclude teisimple.odd > xsimple.odd
 	jing tei-pm.rng xsimple.odd

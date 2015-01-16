@@ -975,16 +975,25 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="q">
-              <model behaviour="inline(.)">
-                <desc/>
-              </model>
+              <model predicate="ancestor::p" behaviour="inline(.)">
+                <rendition scope="before">content: '‘';</rendition>
+                <rendition scope="after">content: '’';</rendition>
+	      </model>
+              <model behaviour="block(.)">
+                <rendition>margin-left: 10px; margin-right: 10px;
+		</rendition>
+	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="quote">
               <model predicate="ancestor::p" behaviour="inline(.)">
                 <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+                <rendition scope="before">content: '‘';</rendition>
+                <rendition scope="after">content: '’';</rendition>
               </model>
-              <model predicate="not(ancestor::p)" behaviour="block(.)">
+              <model behaviour="block(.)">
                 <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
+                <rendition>margin-left: 10px; margin-right: 10px;
+		</rendition>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="ref">
