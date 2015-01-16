@@ -77,7 +77,7 @@ Defaults:
 
 ##Prototype implementation [January 2015]##
 
-The premise of processing model implementation is to generate XSLT stylesheet based solely on TEI Simple ODD file that contains <model>s and <rendition>s that define intended processing for TEI Simple elements. Base TEI Simple ODD can be found at https://github.com/TEIC/TEI-Simple/blob/master/teisimple.odd
+The premise of processing model implementation is to generate XSLT stylesheet based solely on TEI Simple ODD file that contains **models** and **rendition**s that define intended processing for TEI Simple elements. Base TEI Simple ODD can be found at https://github.com/TEIC/TEI-Simple/blob/master/teisimple.odd
 
 _Please note that this is an incomplete prototype implementation that is not endorsed as the only or even suggested way of using TEI Simple processing model._
 
