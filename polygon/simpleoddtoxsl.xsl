@@ -4,8 +4,8 @@
     xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" exclude-result-prefixes="xs"
     xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
 
-
     <xsl:import href="functions.xsl"/>
+<xsl:output indent="yes"/>
     
     <xsl:namespace-alias stylesheet-prefix="xslo" result-prefix="xsl"/>
 

@@ -126,7 +126,6 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        
         <xsl:copy-of select="tei:makeElement('div', concat($class, $number), $content, '')"/>
     </xsl:function>
     
@@ -463,12 +462,12 @@ font-size: smaller;
                             
                             <xsl:for-each select="./tei:rendition">
                                 <xsl:variable name="scope" select="@scope"/>
-                                <xsl:variable name="rendition" select="."/>
+                                <xsl:variable name="rendition" select="normalize-space(.)"/>
                                 
                                 <xsl:for-each select="$container/node()">
                                     <xsl:value-of select="."/><xsl:text>.</xsl:text><xsl:value-of select="$elname"/><xsl:value-of select="$pos"/>
                                     <xsl:if test="string($scope)">
-                                        <xsl:text>::</xsl:text><xsl:value-of select="$scope"/>
+                                        <xsl:text>:</xsl:text><xsl:value-of select="$scope"/>
                                     </xsl:if>
                                     <xsl:text> {</xsl:text>
                                     <xsl:value-of select="$rendition"/>
