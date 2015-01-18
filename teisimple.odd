@@ -1030,7 +1030,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="supplied">
-              <model predicate="parent::tei:choice" behaviour="omit()"/>
+              <model predicate="parent::choice" behaviour="omit()"/>
               <model predicate="@reason='damage'" behaviour="inline(.)">
                 <rendition scope="before">content:"&lt;";</rendition>
                 <rendition scope="after">content:"&gt;";</rendition>
@@ -1094,30 +1094,30 @@ border-bottom: solid 1pt blue;
             </elementSpec>
 
             <elementSpec mode="change" ident="title">
-              <modelSequence predicate="parent::tei:titleStmt/parent::tei:fileDesc">
-                <model predicate="preceding-sibling::tei:title" behaviour="text(' — ')"/>
+              <modelSequence predicate="parent::titleStmt/parent::fileDesc">
+                <model predicate="preceding-sibling::title" behaviour="text(' — ')"/>
                 <model behaviour="text(.)">
                   <rendition>color: red; font-size: 2em;</rendition>
                 </model>
               </modelSequence>
-              <model predicate="not(@level) and parent::tei:bibl" behaviour="inline(.)"/>
+              <model predicate="not(@level) and parent::bibl" behaviour="inline(.)"/>
               <modelSequence predicate="@level='m' or not(@level)">
                 <model behaviour="inline(.)">
                   <rendition>font-style: italic;</rendition>
                 </model>
-                <model predicate="ancestor::tei:biblStruct or       ancestor::tei:biblFull" behaviour="text(', ')"/>
+                <model predicate="ancestor::biblStruct or       ancestor::biblFull" behaviour="text(', ')"/>
               </modelSequence>
               <modelSequence predicate="@level='s' or @level='j'">
                 <model behaviour="inline(.)">
                   <rendition>font-style: italic;</rendition>
                 </model>
-                <model predicate="following-sibling::* and     (ancestor::tei:biblStruct  or     ancestor::tei:biblFull)" behaviour="text(' ')"/>
+                <model predicate="following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull)" behaviour="text(' ')"/>
               </modelSequence>
               <modelSequence predicate="@level='u' or @level='a'">
                 <model behaviour="inline(.)">
                   <rendition>font-style: italic;</rendition>
                 </model>
-                <model predicate="following-sibling::* and     (ancestor::tei:biblStruct  or     ancestor::tei:biblFull)" behaviour="text('. ')"/>
+                <model predicate="following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull)" behaviour="text('. ')"/>
               </modelSequence>
               <model behaviour="inline(.)">
                 <rendition>font-style: italic;</rendition>
