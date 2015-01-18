@@ -51,6 +51,7 @@ of this software, even if advised of the possibility of such damage.
 
 
 <xsl:param name="css">simple.css</xsl:param>
+<xsl:param name="js">simple.js</xsl:param>
 
 <xsl:function name="tei:matchFunction">
     <xsl:param name="elName"/>
@@ -673,7 +674,7 @@ of this software, even if advised of the possibility of such damage.
 	<!-- jQuery -->
 	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<!-- table of contents generation -->
-	<script type="text/javascript" charset="utf8" src="simple.js"></script>
+	<script type="text/javascript" charset="utf8" src="{$js}"></script>
         <xsl:if test="string($content)">
           <xslo:apply-templates>
             <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
