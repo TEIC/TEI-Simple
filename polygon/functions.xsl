@@ -49,7 +49,6 @@ of this software, even if advised of the possibility of such damage.
   </doc>
 
 
-  <xsl:param name="debug">false</xsl:param>
 <xsl:param name="css">simple.css</xsl:param>
 
 <xsl:function name="tei:matchFunction">
@@ -59,14 +58,18 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="number"/>
     <xsl:variable name="task" select="substring-before(normalize-space($model/@behaviour),'(')"/>
     <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'.*\((.*)\)$','$1'),',')"/>
+    <xsl:variable name="textcontent" select="replace(substring-after($model/@behaviour,'('),'\)$','')"/>
     <xsl:if test="$debug='true'">
       <xsl:message><xsl:value-of
-      select="($elName,$model/@behaviour,$task)"/>:   <xsl:copy-of
-      select="$parms"/></xsl:message>
+      select="($elName,$model/@behaviour,$task,$textcontent)"/>:   <xsl:value-of
+      select="($parms)" separator=" -- "/></xsl:message>
     </xsl:if>
     <xsl:variable name="content" select="$parms[1]"/>
     
     <xsl:choose>
+        <xsl:when test="$task ='index'">
+            <xsl:sequence select="tei:index($model, $content, $class, $number)"/>
+        </xsl:when>
         <xsl:when test="$task ='anchor'">
             <xsl:sequence select="tei:anchor($model, $content, $class, $number)"/>
         </xsl:when>
@@ -82,6 +85,9 @@ of this software, even if advised of the possibility of such damage.
         <xsl:when test="$task ='heading'">
           <xsl:sequence select="tei:heading($model, $content, $parms[2], $class, $number)"/>
         </xsl:when>
+        <xsl:when test="$task ='multiheading'">
+          <xsl:sequence select="tei:multiheading($model, $content, $parms[3], $class, $number,$parms[2])"/>
+        </xsl:when>
         <xsl:when test="$task ='alternate'">
             <xsl:sequence select="tei:alternate($model, $content, $parms[2],$class, $number)"/>
         </xsl:when>
@@ -95,7 +101,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:sequence select="tei:inline($model, $content, $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='text'">
-            <xsl:sequence select="tei:text($content)"/>
+            <xsl:sequence select="tei:text($textcontent)"/>
         </xsl:when>
         <xsl:when test="$task ='newline'">
             <xsl:sequence select="tei:newline($model, $content, $class, $number)"/>
@@ -216,7 +222,7 @@ of this software, even if advised of the possibility of such damage.
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Block level element</desc>
+        <desc>Simple heading</desc>
     </doc>
     <xsl:function name="tei:heading" as="node()*">
         <xsl:param name="element"/>
@@ -227,7 +233,6 @@ of this software, even if advised of the possibility of such damage.
         
         <xsl:variable name="container">
             <xsl:choose>
-                <xsl:when test="$type='h1'">h1</xsl:when>
                 <xsl:when test="$type='verse'">h3</xsl:when>
                 <xsl:when test="$type='list'">h3</xsl:when>
                 <xsl:when test="$type='table'">h3</xsl:when>
@@ -237,6 +242,43 @@ of this software, even if advised of the possibility of such damage.
         </xsl:variable>
         
         <xsl:copy-of select="tei:makeElement($container, concat($class, $number), $content, '')"/>
+        </xsl:function>
+
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Hierarchical heading</desc>
+    </doc>
+    <xsl:function name="tei:multiheading" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="type"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        <xsl:param name="root"/>
+        
+	<xsl:for-each select="$element">
+          <xslo:variable name="depth">
+	    <xslo:value-of>
+	      <xsl:attribute name="select">
+		<xsl:text>count(ancestor::</xsl:text>
+		<xsl:value-of select="$root"/>
+		<xsl:text>)</xsl:text>
+	      </xsl:attribute>
+	    </xslo:value-of>
+	  </xslo:variable>
+	</xsl:for-each>
+	<xslo:element>
+	  <xsl:attribute name="name">
+	    <xsl:text>{concat('h',$depth)}</xsl:text>
+	  </xsl:attribute>
+
+        <xsl:if test="string($class)"><xslo:attribute name="class"><xsl:value-of select="$class"/></xslo:attribute></xsl:if>
+        <xsl:if test="string($content)">
+          <xslo:apply-templates>
+            <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
+          </xslo:apply-templates>
+        </xsl:if>
+	</xslo:element>
         </xsl:function>
 
 
@@ -345,6 +387,18 @@ of this software, even if advised of the possibility of such damage.
         </xslo:element>
         </sup>
         
+    </xsl:function>
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Table of contents</desc>
+    </doc>
+    <xsl:function name="tei:index" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+
+	<p>TABLE OF CONTENTS</p>
     </xsl:function>
     
     
@@ -553,7 +607,7 @@ font-size: smaller;
             <xsl:when test="$name = 'date'"><gi>span</gi></xsl:when>
             <xsl:when test="$name = 'endnotes'"><gi>div</gi></xsl:when>
             <xsl:when test="$name = 'graphic'"><gi>img</gi></xsl:when>
-            <xsl:when test="$name = 'heading'"><gi>h2</gi><gi>h3</gi><gi>h1</gi></xsl:when>
+            <xsl:when test="$name = 'heading'"><gi>h1</gi><gi>h2</gi><gi>h3</gi></xsl:when>
             <xsl:when test="$name = 'inline'"><gi>span</gi></xsl:when>
             <xsl:when test="$name = 'list'"><gi>ol</gi><gi>ul</gi></xsl:when>
             <xsl:when test="$name = 'listItem'"><gi>li</gi></xsl:when>
@@ -566,17 +620,34 @@ font-size: smaller;
         </xsl:choose>
     </xsl:function>
     
-    <xsl:function name="tei:findModelPosition" as="xs:string">
-        <xsl:param name="models"/>
-        <xsl:param name="modelId"/>
-        <xsl:variable name="positions">
-            <xsl:for-each select="$models">
-                <xsl:if test="generate-id(.)=$modelId">
-                  <xsl:value-of   select="if  (count(parent::*/model) &gt; 1 ) then   position() else ''"/>
-                </xsl:if>
-            </xsl:for-each>
-        </xsl:variable>
-	<xsl:value-of select="$positions"/>
+
+
+    <xsl:function name="tei:doModel" as="node()*">
+      <xsl:param name="context"/>
+      <xsl:param name="iden"/>
+      <xsl:param name="construct"/>
+      <xsl:param name="number"/>
+      <xsl:choose>
+	<xsl:when test="$context/@predicate">
+	  <xsl:element name="xsl:{$construct}">
+	    <xsl:attribute name="test" select="$context/@predicate"/>
+	    <xsl:sequence select="tei:matchFunction($iden, $context, $iden, $number)"/>
+	  </xsl:element>
+	</xsl:when>
+	<xsl:otherwise>
+	  <xsl:sequence select="tei:matchFunction($iden, $context, $iden, $number)"/>
+	</xsl:otherwise>
+      </xsl:choose>
     </xsl:function>
-    
+
+    <xsl:function name="tei:findModelPosition" as="xs:string">
+      <xsl:param name="context"/>
+      <xsl:for-each select="$context">
+	<xsl:variable name="n">
+	  <xsl:number from="elementSpec" level="any" count="model"/>
+	</xsl:variable>
+        <xsl:value-of   select="if  (count(parent::*/model) &gt; 1 ) then   $n else ''"/>
+      </xsl:for-each>
+    </xsl:function>
+
 </xsl:stylesheet>
