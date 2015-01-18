@@ -398,7 +398,8 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         <xsl:param name="number"/>
 
-	<p>TABLE OF CONTENTS</p>
+	<div id="toc">Table of contents</div>
+
     </xsl:function>
     
     
