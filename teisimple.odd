@@ -598,6 +598,7 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="author">
+              <model predicate="ancestor::teiHeader" behaviour="omit()"/>
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="back">
@@ -655,7 +656,7 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="closer">
-              <model predicate="child::*" behaviour="block(.)">
+              <model behaviour="block(.)">
                 <rendition>margin-top: 1em; margin-left: 1em; margin-left: 1em;</rendition>
               </model>
             </elementSpec>
@@ -730,11 +731,21 @@
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="figDesc">
-              <model behaviour="inline(.)"/>
+              <model behaviour="inline(.)">
+                <rendition scope="before">content: '[..';</rendition>
+                <rendition scope="after">content: '..]';</rendition>
+                <rendition>color: grey;font-style:italic;</rendition>
+	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="figure">
               <model predicate="head or @rendition='simple:display'" behaviour="block(.)"/>
-              <model behaviour="inline(.)"/>
+              <model behaviour="inline(.)">
+		<rendition>
+display: block;
+border-top: solid 1pt blue;
+border-bottom: solid 1pt blue;
+		</rendition>
+	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="floatingText">
               <model behaviour="block(.)">
@@ -845,7 +856,6 @@
             <elementSpec mode="change" ident="list">
               <model predicate="@rendition" behaviour="list(.)" useSourceRendition="true"/>
               <model predicate="not(@rendition)" behaviour="list(.)">
-                <rendition>list-style: disc;</rendition>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="listBibl">
@@ -986,10 +996,16 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="signed">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
-                <desc>Omit, if handled in parent choice.</desc>
-              </model>
-              <model behaviour="inline(.)"/>
+              <model behaviour="block(.)" predicate="parent::closer">
+		<rendition>
+		  text-align: right;
+		</rendition>
+	      </model>
+              <model behaviour="inline(.)">
+		<rendition>
+		 font-style: italic;
+		</rendition>
+	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="sp">
               <model behaviour="block(.)"/>
@@ -1033,13 +1049,38 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="table">
-              <model behaviour="table(.)"/>
+              <model behaviour="table(.)">
+		<rendition>
+		  font-size: smaller;
+		  background-color: #F0F0F0;
+		</rendition>
+	      </model>
             </elementSpec>
+
+            <elementSpec mode="change" ident="fileDesc">
+	      <model behaviour="title(titleStmt)"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="profileDesc">
+	      <model behaviour="omit()"/>
+            </elementSpec>
+            <elementSpec mode="change" ident="revisionDesc">
+	      <model behaviour="omit()"/>
+            </elementSpec>
+
+            <elementSpec mode="change" ident="encodingDesc">
+	      <model behaviour="omit()"/>
+            </elementSpec>
+
             <elementSpec mode="change" ident="teiHeader">
-              <model behaviour="omit(.)"/>
+	      <model behaviour="metadata(.)"/>
             </elementSpec>
+
+            <elementSpec mode="change" ident="TEI">
+	      <model behaviour="document(.)"/>
+            </elementSpec>
+
             <elementSpec mode="change" ident="text">
-              <model behaviour="block(.)">
+              <model behaviour="body(.)">
                 <rendition>
             max-width: 80%;
             margin: auto;
@@ -1047,6 +1088,7 @@
          </rendition>
               </model>
             </elementSpec>
+
             <elementSpec mode="change" ident="time">
               <model behaviour="inline(.)"/>
             </elementSpec>
@@ -1054,7 +1096,7 @@
             <elementSpec mode="change" ident="title">
               <modelSequence predicate="parent::tei:titleStmt/parent::tei:fileDesc">
                 <model predicate="preceding-sibling::tei:title" behaviour="text(' — ')"/>
-                <model behaviour="inline(.)">
+                <model behaviour="text(.)">
                   <rendition>color: red; font-size: 2em;</rendition>
                 </model>
               </modelSequence>

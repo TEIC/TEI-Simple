@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-    xmlns:xs="http://www.w3.org/2001/XMLSchema"
-    xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
-    xmlns:tei="http://www.tei-c.org/ns/1.0" 
-    xpath-default-namespace="http://www.tei-c.org/ns/1.0" 
-    exclude-result-prefixes="xs"
-    version="2.0">
+		xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:xs="http://www.w3.org/2001/XMLSchema"
+		xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
+		xmlns:tei="http://www.tei-c.org/ns/1.0" 
+		xpath-default-namespace="http://www.tei-c.org/ns/1.0" 
+		exclude-result-prefixes="xs tei"
+		version="2.0">
 
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
     <desc>
@@ -127,6 +128,23 @@ of this software, even if advised of the possibility of such damage.
         </xsl:when>
         <xsl:when test="$task ='cell'">
             <xsl:sequence select="tei:cell($model, $content, $class, $number)"/>
+        </xsl:when>
+        
+
+        <xsl:when test="$task ='title'">
+            <xsl:sequence select="tei:title($model, $content, $class, $number)"/>
+        </xsl:when>
+
+        <xsl:when test="$task ='metadata'">
+            <xsl:sequence select="tei:metadata($model, $content, $class, $number)"/>
+        </xsl:when>
+
+        <xsl:when test="$task ='body'">
+            <xsl:sequence select="tei:body($model, $content, $class, $number)"/>
+        </xsl:when>
+        
+        <xsl:when test="$task ='document'">
+            <xsl:sequence select="tei:document($model, $content, $class, $number)"/>
         </xsl:when>
         
         <xsl:when test="$task ='omit'"/>
@@ -317,7 +335,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement('ul', concat($class, $number), $content, '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -421,28 +439,15 @@ of this software, even if advised of the possibility of such damage.
             </xsl:choose>
         </xsl:variable>
         
-        <xsl:element name="span">
-            <xslo:variable name="type">
-                <xsl:choose>
-                    <xsl:when test="$place='margin'">margin</xsl:when>
-                    <xsl:otherwise>
-                        <xslo:value-of select="{$place}"/>
-                    </xsl:otherwise>
-                </xsl:choose>
-            </xslo:variable>
+            <xslo:variable name="place" select="{$place}"/>
             <xslo:variable name="class" select="{$class}"/>
             <xslo:variable name="number" select="{$number}"/>
-            
-            <xslo:choose>
-                <xslo:when test="string($type)"><xslo:attribute name="class"><xslo:value-of select="concat($type, $class, $number)"></xslo:value-of></xslo:attribute></xslo:when>
-                <xslo:otherwise><xslo:attribute name="class"><xslo:value-of select="concat($class, $number)"></xslo:value-of></xslo:attribute></xslo:otherwise>
-            </xslo:choose>
-            <xsl:if test="string($content)">
-                <xslo:apply-templates>
-                    <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
-                </xslo:apply-templates>
-            </xsl:if>
-        </xsl:element>
+	    <xsl:element name="span">
+	      <xslo:attribute name="class"><xslo:value-of select="($place, concat($class, $number))"/></xslo:attribute>
+              <xslo:apply-templates>
+                <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
+              </xslo:apply-templates>
+            </xsl:element>
         
     </xsl:function>
     
@@ -548,64 +553,136 @@ of this software, even if advised of the possibility of such damage.
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Block level element</desc>
+        <desc>Join together the renditions into a CSS section</desc>
     </doc>
-    <xsl:function name="tei:makeHTMLHeader" as="node()*">
+    <xsl:function name="tei:getRenditions" as="node()*">
+        <xsl:param name="content"/>
+        
+        <link rel="StyleSheet" href="{$css}" type="text/css"/>
+        <style>
+
+	      span.foot {
+	      float: bottom;
+	      display: block;
+	      background-color: red;
+	      font-size: smaller;
+	      }
+	      
+              span.floating {
+              float: right;
+              display: block;
+              background-color: #C0C0C0;
+              font-size: smaller;
+              }
+                
+              <xsl:for-each select="$content">
+                <xsl:for-each select=".//model">
+                  <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(substring-before(@behaviour,'('))"/></xsl:variable>
+                  <!-- use position of a model to distinguish between classes for differing behaviours -->
+                  <xsl:variable name="elname"><xsl:value-of select="ancestor::elementSpec/@ident"/></xsl:variable>
+                  <xsl:variable name="pos"   
+				select="if  (count(../model) &gt; 1) then position() else  ''"/>        
+                  <xsl:for-each select="./rendition">
+                    <xsl:variable name="scope" select="@scope"/>
+                    <xsl:variable name="rendition" select="normalize-space(.)"/>
+                    
+                    <xsl:for-each select="$container/node()">
+                      <xsl:value-of select="concat(.,'.',$elname,$pos)"/>
+                      <xsl:if test="string($scope)">
+                        <xsl:text>:</xsl:text><xsl:value-of select="$scope"/>
+                      </xsl:if>
+                      <xsl:text> {</xsl:text>
+                      <xsl:value-of select="$rendition"/>
+                      <xsl:text>}</xsl:text>
+                      <xsl:text>&#xa;</xsl:text>
+                    </xsl:for-each>
+                  </xsl:for-each>
+                </xsl:for-each>
+              </xsl:for-each>
+                
+            </style>
+
+    </xsl:function>
+    
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>whole document</desc>
+    </doc>
+
+    <xsl:function name="tei:document" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
+        <xsl:param name="number"/>
         
-        <head>
-                <meta charset="UTF-8" />
-                <title>
-                    TEI-Simple: transform to html generated from odd file.
-                </title>
-                <link rel="StyleSheet" href="{$css}" type="text/css"/>
-            <style>
-
-span.foot {
-float: bottom;
-display: block;
-background-color: red;
-font-size: smaller;
-}
-
-                span.floating {
-                float: right;
-                display: block;
-                background-color: #C0C0C0;
-                font-size: smaller;
-                }
-                
-                <xsl:for-each select="$content">
-                        <xsl:for-each select=".//model">
-                            <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(substring-before(@behaviour,'('))"/></xsl:variable>
-                            <!-- use position of a model to distinguish between classes for differing behaviours -->
-                            <xsl:variable name="elname"><xsl:value-of select="ancestor::elementSpec/@ident"/></xsl:variable>
-                            <xsl:variable name="pos"   
-					  select="if  (count(../model) &gt; 1) then position() else  ''"/>        
-                            <xsl:for-each select="./rendition">
-                                <xsl:variable name="scope" select="@scope"/>
-                                <xsl:variable name="rendition" select="normalize-space(.)"/>
-                                
-                                <xsl:for-each select="$container/node()">
-                                    <xsl:value-of select="concat(.,'.',$elname,$pos)"/>
-                                    <xsl:if test="string($scope)">
-                                        <xsl:text>:</xsl:text><xsl:value-of select="$scope"/>
-                                    </xsl:if>
-                                    <xsl:text> {</xsl:text>
-                                    <xsl:value-of select="$rendition"/>
-                                    <xsl:text>}</xsl:text>
-                                    <xsl:text>&#xa;</xsl:text>
-                                </xsl:for-each>
-                            </xsl:for-each>
-                        </xsl:for-each>
-                </xsl:for-each>
-                
-            </style>
-            </head>
+      <html>
+	<xslo:apply-templates/>
+      </html>
     </xsl:function>
-    
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>body document</desc>
+    </doc>
+
+    <xsl:function name="tei:body" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        
+        <body>
+          <xsl:if test="string($content)">
+            <xslo:apply-templates>
+              <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
+            </xslo:apply-templates>
+          </xsl:if>
+	</body>
+    </xsl:function>
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>doc title</desc>
+    </doc>
+
+    <xsl:function name="tei:title" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        
+      <title>
+            <xsl:if test="string($content)">
+                <xslo:apply-templates>
+                    <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
+                </xslo:apply-templates>
+            </xsl:if>
+      </title>
+    </xsl:function>
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>metadata</desc>
+    </doc>
+    <xsl:function name="tei:metadata" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+      <head>
+        <xsl:for-each select="$TOP">
+	  <xsl:copy-of select="tei:getRenditions(//elementSpec)"/>
+	</xsl:for-each>
+	<!-- jQuery -->
+	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<!-- table of contents generation -->
+	<script type="text/javascript" charset="utf8" src="simple.js"></script>
+        <xsl:if test="string($content)">
+          <xslo:apply-templates>
+            <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
+          </xslo:apply-templates>
+        </xsl:if>
+	
+      </head>
+    </xsl:function>
+      
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Determine the container(s) for the function</desc>
     </doc>
@@ -665,3 +742,4 @@ font-size: smaller;
     </xsl:function>
 
 </xsl:stylesheet>
+

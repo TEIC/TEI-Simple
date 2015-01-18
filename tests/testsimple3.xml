@@ -118,100 +118,100 @@
       </revisionDesc>
    </teiHeader>
    <text xml:lang="eng">
-      <front>
-         <div type="illustration">
-            <pb facs="tcp:1160:1"/>
-            <p>
-               <figure>
-                  <figDesc>coat of arms of the Honourable Artillery Company</figDesc>
-                  <q>ARMA PACIS FVLCRA</q>
-               </figure>
-            </p>
-         </div>
-         <div type="frontispiece">
-            <pb facs="tcp:1160:2"/>
-            <p>
-               <figure>
-                  <head>VERA EFFIGIES GVLEIELMI BARRIFF AETATIS SVAE 35.</head>
-                  <figDesc>portrait of William Barriffe</figDesc>
-                  <lg>
-                     <l>Though this Effigies here does Repreſent</l>
-                     <l>and Portray forth his faces Liniament</l>
-                     <l>Yet Read his Booke, and you therin will finde</l>
-                     <l>that he hath Pictur'd there a Soldiers minde.</l>
-                  </lg>
-                  <byline>G Glouer fecit.</byline>
-               </figure>
-            </p>
-         </div>
-         <div type="title_page">
-            <pb facs="tcp:1160:2"/>
-            <p>MILITARY DISCIPLINE: OR, THE YONG ARTILLERY MAN.</p>
-            <p>Wherein is diſcourſed and ſhowne the Po<g ref="char:EOLhyphen"/>ſtures both of <hi>Musket</hi> and <hi>Pike:</hi> the exacteſt way, &amp;c.</p>
-            <p>Together with the <hi>Motions</hi> which are to be uſed, in the <hi>exerciſing</hi> of a <hi>Foot-compa<g ref="char:EOLhyphen"/>ny.</hi> With divers and ſeverall <hi>formes</hi> and <hi>figures</hi> of <hi>Battell;</hi> with their <hi>reducements; very neceſſary for all ſuch as are ſtu<g ref="char:EOLhyphen"/>dious in the Art</hi> Military.</p>
-            <p>By WILLIAM BARRIFF.</p>
-            <bibl>PSAL. 144. 1.</bibl>
-            <q>
-               <p>Bleſſed be the Lord my ſtrength which teacheth my hands to warre, and my fingers to fight.</p>
-            </q>
-            <p>LONDON, Printed by <hi>Thomas Harper,</hi> for <hi>Ralph Mab,</hi> 1635.</p>
-         </div>
-         <div type="dedication">
-            <pb facs="tcp:1160:3"/>
-            <head>
-               <pb facs="tcp:1160:3"/>
+<front>
+ <div type="illustration">
+    <pb facs="tcp:1160:1"/>
+    <p>
+       <figure>
+	  <figDesc>coat of arms of the Honourable Artillery Company</figDesc>
+	  <q>ARMA PACIS FVLCRA</q>
+       </figure>
+    </p>
+ </div>
+ <div type="frontispiece">
+    <pb facs="tcp:1160:2"/>
+    <p>
+       <figure>
+	  <head>VERA EFFIGIES GVLEIELMI BARRIFF AETATIS SVAE 35.</head>
+	  <figDesc>portrait of William Barriffe</figDesc>
+	  <lg>
+	     <l>Though this Effigies here does Repreſent</l>
+	     <l>and Portray forth his faces Liniament</l>
+	     <l>Yet Read his Booke, and you therin will finde</l>
+	     <l>that he hath Pictur'd there a Soldiers minde.</l>
+	  </lg>
+	  <byline>G Glouer fecit.</byline>
+       </figure>
+    </p>
+ </div>
+ <div type="title_page">
+    <pb facs="tcp:1160:2"/>
+    <p>MILITARY DISCIPLINE: OR, THE YONG ARTILLERY MAN.</p>
+    <p>Wherein is diſcourſed and ſhowne the Po<g ref="char:EOLhyphen"/>ſtures both of <hi>Musket</hi> and <hi>Pike:</hi> the exacteſt way, &amp;c.</p>
+    <p>Together with the <hi>Motions</hi> which are to be uſed, in the <hi>exerciſing</hi> of a <hi>Foot-compa<g ref="char:EOLhyphen"/>ny.</hi> With divers and ſeverall <hi>formes</hi> and <hi>figures</hi> of <hi>Battell;</hi> with their <hi>reducements; very neceſſary for all ſuch as are ſtu<g ref="char:EOLhyphen"/>dious in the Art</hi> Military.</p>
+    <p>By WILLIAM BARRIFF.</p>
+    <bibl>PSAL. 144. 1.</bibl>
+    <q>
+       <p>Bleſſed be the Lord my ſtrength which teacheth my hands to warre, and my fingers to fight.</p>
+    </q>
+    <p>LONDON, Printed by <hi>Thomas Harper,</hi> for <hi>Ralph Mab,</hi> 1635.</p>
+ </div>
+ <div type="dedication">
+    <pb facs="tcp:1160:3"/>
+    <head>
+       <pb facs="tcp:1160:3"/>
 TO THE RIGHT HONOVRABLE</head>
-            <head type="sub">
-               <hi>Algernonne,</hi> Earle of <hi>Northumberland,</hi> Lord of the <hi>Honours</hi> of <hi>Cockermouth</hi> and <hi>Petworth:</hi> Lord <hi>Percy, Lucy, Poynings, Fitz-pain, Bryan</hi> and <hi>Lattimer:</hi> Lord Lieu<g ref="char:EOLhyphen"/>tenant of his MAIESTIES For<g ref="char:EOLhyphen"/>ces in the Counties of <hi>Northum<g ref="char:EOLhyphen"/>berland</hi> and <hi>Cumberland;</hi> and Knight of the moſt No<g ref="char:EOLhyphen"/>ble Order of the Garter.</head>
-            <opener>
-               <salute>Right Honorable:</salute>
-            </opener>
-            <p>
-               <seg rend="decorInit">T</seg>He <hi>Glory</hi> of the <hi>Meridian Sun,</hi> is the more reſplen<g ref="char:EOLhyphen"/>dently ſet off; by the <hi>foile</hi> and <hi>darkneſſe</hi> of a <hi>Shadow:</hi>
-               <pb facs="tcp:1160:4"/>
+    <head type="sub">
+       <hi>Algernonne,</hi> Earle of <hi>Northumberland,</hi> Lord of the <hi>Honours</hi> of <hi>Cockermouth</hi> and <hi>Petworth:</hi> Lord <hi>Percy, Lucy, Poynings, Fitz-pain, Bryan</hi> and <hi>Lattimer:</hi> Lord Lieu<g ref="char:EOLhyphen"/>tenant of his MAIESTIES For<g ref="char:EOLhyphen"/>ces in the Counties of <hi>Northum<g ref="char:EOLhyphen"/>berland</hi> and <hi>Cumberland;</hi> and Knight of the moſt No<g ref="char:EOLhyphen"/>ble Order of the Garter.</head>
+    <opener>
+       <salute>Right Honorable:</salute>
+    </opener>
+    <p>
+       <seg rend="decorInit">T</seg>He <hi>Glory</hi> of the <hi>Meridian Sun,</hi> is the more reſplen<g ref="char:EOLhyphen"/>dently ſet off; by the <hi>foile</hi> and <hi>darkneſſe</hi> of a <hi>Shadow:</hi>
+       <pb facs="tcp:1160:4"/>
 which is a perpetuall <hi>follower</hi> of his <hi>Light;</hi> as my ambition in all humble ſervice is, to be unto your Lordſhip: The memory of ſo many <hi>Heroicall Anceſtors,</hi> as (in all ages) have en<g ref="char:EOLhyphen"/>nobliz'd your <hi>potent Family;</hi> toge<g ref="char:EOLhyphen"/>ther with their <hi>Martiall</hi> and <hi>Re<g ref="char:EOLhyphen"/>nowned Atchievements:</hi> doe for e<g ref="char:EOLhyphen"/>ver ſtand recorded, in the <hi>Booke</hi> of <hi>Honour</hi> and of <hi>Fame.</hi> And that (were occaſion fairly offered) your <hi>Honour</hi> hath <hi>Spirit</hi> and <hi>Bravery</hi> e<g ref="char:EOLhyphen"/>nough, in a <hi>Military emulation,</hi> to arrive up to the heighth of their <hi>Glo<g ref="char:EOLhyphen"/>ry:</hi> your conſtant and Noble <hi>De<g ref="char:EOLhyphen"/>portment</hi> (as well in your <hi>private carriage;</hi> as of late dayes in your <hi>publike Triumph,</hi> when you were <hi>in<g ref="char:EOLhyphen"/>stalled</hi> into that moſt <hi>Noble Order</hi> of the <hi>Garter)</hi> doe moſt evidently <hi>preſage</hi> of you. This as it hath attra<g ref="char:EOLhyphen"/>cted
 <pb facs="tcp:1160:4"/>
 all <hi>eyes</hi> and <hi>expectations:</hi> So hath it incouraged my <hi>low ambition</hi> (a<g ref="char:EOLhyphen"/>mong the reſt) to eſteeme <hi>your Ho<g ref="char:EOLhyphen"/>nour</hi> a fit Patrone for a <hi>Booke</hi> of this <hi>Nature,</hi> your <hi>innate</hi> and <hi>inbred ver<g ref="char:EOLhyphen"/>tues;</hi> together with that <hi>Courteſie, Nobleneſſe,</hi> and <hi>Affabilitie,</hi> (the in<g ref="char:EOLhyphen"/>ſeperable <hi>Companions</hi> of <hi>anciently de<g ref="char:EOLhyphen"/>ſcended Honour)</hi> ſpeak you ſo eaſie, of <hi>acceſſe;</hi> that my YONG ARTILLERY-MAN deſpaireth not of <hi>acceptance &amp; admiſsion,</hi> to kiſſe the <hi>hands</hi> of your great <hi>Lordſhip.</hi> The <hi>first-fruits,</hi> it is, of my weak <hi>endevours:</hi> and a <hi>Collec<g ref="char:EOLhyphen"/>tion,</hi> meerly of my private <hi>obſervati<g ref="char:EOLhyphen"/>ons.</hi> Such as it is, my humble requeſt unto your good <hi>Lordſhip</hi> is, that out of the accuſtomed <hi>freedom</hi> and <hi>good<g ref="char:EOLhyphen"/>neſſe</hi> of your <hi>nature;</hi> you would be pleaſed to deigne <hi>acceptance</hi> of it.
 <pb facs="tcp:1160:5"/>
 And I withall beſeech your <hi>Honour,</hi> to give <hi>pardon</hi> unto that <hi>preſumption,</hi> which hath proceeded from <hi>devotion.</hi> I confeſſe it an <hi>ambition</hi> in mee, to <hi>ſoare</hi> ſo <hi>loftily</hi> in my <hi>Dedication.</hi> But as <hi>Alexander</hi> (ſometimes) refu<g ref="char:EOLhyphen"/>ſed not a <hi>mean Preſent</hi> of <hi>fruit,</hi> from the hands of a ſimple <hi>Gardiner:</hi> ſo my hope is, your <hi>Honour</hi> will hold mee excuſed for offering ſo <hi>worthleſſe</hi> and <hi>meane</hi> a <hi>Mite</hi> to ſo <hi>great</hi> and <hi>hono<g ref="char:EOLhyphen"/>rable</hi> a <hi>Perſonage.</hi> But conſidering that the <hi>ſubiect</hi> of my <hi>Diſcourſe</hi> is in<g ref="char:EOLhyphen"/>tended for the <hi>bettering of the Souldi<g ref="char:EOLhyphen"/>ers knowledge of the trained Bands;</hi> and that your <hi>Lordſhip</hi> is one of his <hi>Majesties Lieutenants:</hi> it may prove a good <hi>inducement</hi> to your <hi>Honours</hi> liking (who are known to be ſo great a <hi>lover</hi> of your <hi>Country)</hi> to <hi>vouchſafe</hi>
-               <pb facs="tcp:1160:5"/>
+       <pb facs="tcp:1160:5"/>
 the <hi>protection</hi> and <hi>patronage</hi> of theſe my firſt <hi>endevours,</hi> whereby I ſhall for <hi>ever</hi> ſtand <hi>obliged</hi> in all <hi>humilitie, and</hi> remayne,</p>
-            <closer>
-               <signed>Your <hi>Honours</hi> moſt humble and devoted ſervant, WILLIAM BARRIFF.</signed>
-            </closer>
-         </div>
-         <div type="dedication">
-            <pb facs="tcp:1160:6"/>
-            <head>
-               <pb facs="tcp:1160:6"/>
+    <closer>
+       <signed>Your <hi>Honours</hi> moſt humble and devoted ſervant, WILLIAM BARRIFF.</signed>
+    </closer>
+ </div>
+ <div type="dedication">
+    <pb facs="tcp:1160:6"/>
+    <head>
+       <pb facs="tcp:1160:6"/>
 TO THE RIGHT VVorſhipfull, Sir <hi>Ralph Boſvile,</hi> Knight, Captaine of a Select Company of Foot in the County of <hi>Kent.</hi>
-            </head>
-            <p>
-               <seg rend="decorInit">Y</seg>Ou may be pleaſed to remember (Noble Sir) how often you have <hi>Importunde</hi> me to <hi>write ſomething</hi> (by way of inſtruction) for the <hi>bettering of the judgements of ſuch young Gen<g ref="char:EOLhyphen"/>tlemen and Souldiers whoſe mindes ſtand this way affe<g ref="char:EOLhyphen"/>cted.</hi> And although (for my own part) I can better mannage the <hi>Pike</hi> then the <hi>Pen;</hi> yet that I might not be wanting in all acknowledgement, I have taken upon me to ſatisfie your requeſt; which ſhall ever carry the <hi>authority</hi> of a <hi>Command with it.</hi> Expect not (I beſeech you Sir) to finde my <hi>Booke</hi> ſet forth with <hi>fine phraſes,</hi> nor to be deckt with <hi>hiſtoricall diſ<g ref="char:EOLhyphen"/>courſes,</hi> of <hi>forraine fought Battels:</hi> this being the onely thing by me intended in it; to ſet forth the <hi>exact grounds</hi> of this our <hi>moderne diſcipline,</hi> for the exerciſing of a <hi>foot Company.</hi> Nor is it to be eſtee<g ref="char:EOLhyphen"/>med a <hi>ſmall advancement</hi> to the knowledge of the <hi>art Military;</hi> even to have Taught this <hi>little,</hi> ſeeing it muſt be confeſſed to have beene one of the chie<g ref="char:EOLhyphen"/>feſt
+    </head>
+    <p>
+       <seg rend="decorInit">Y</seg>Ou may be pleaſed to remember (Noble Sir) how often you have <hi>Importunde</hi> me to <hi>write ſomething</hi> (by way of inſtruction) for the <hi>bettering of the judgements of ſuch young Gen<g ref="char:EOLhyphen"/>tlemen and Souldiers whoſe mindes ſtand this way affe<g ref="char:EOLhyphen"/>cted.</hi> And although (for my own part) I can better mannage the <hi>Pike</hi> then the <hi>Pen;</hi> yet that I might not be wanting in all acknowledgement, I have taken upon me to ſatisfie your requeſt; which ſhall ever carry the <hi>authority</hi> of a <hi>Command with it.</hi> Expect not (I beſeech you Sir) to finde my <hi>Booke</hi> ſet forth with <hi>fine phraſes,</hi> nor to be deckt with <hi>hiſtoricall diſ<g ref="char:EOLhyphen"/>courſes,</hi> of <hi>forraine fought Battels:</hi> this being the onely thing by me intended in it; to ſet forth the <hi>exact grounds</hi> of this our <hi>moderne diſcipline,</hi> for the exerciſing of a <hi>foot Company.</hi> Nor is it to be eſtee<g ref="char:EOLhyphen"/>med a <hi>ſmall advancement</hi> to the knowledge of the <hi>art Military;</hi> even to have Taught this <hi>little,</hi> ſeeing it muſt be confeſſed to have beene one of the chie<g ref="char:EOLhyphen"/>feſt
 <pb facs="tcp:1160:7"/>
-               <hi>meanes</hi> to make <hi>Philip</hi> from a <hi>poore Prince,</hi> to become a <hi>powerfull Monarch;</hi> and his Sonne <hi>Alex<g ref="char:EOLhyphen"/>ander amighty Conquerer.</hi> I meane his <hi>exact obſer<g ref="char:EOLhyphen"/>vance</hi> of the <hi>true grounds of military Diſcipline,</hi> which beginneth with the <hi>inſtruction</hi> of a <hi>private Company.</hi>
-            </p>
-            <p>Adde hereunto (which I have alſo toucht upon) his frequent <hi>practiſe</hi> and <hi>inuring</hi> of his <hi>Souldiers</hi> to the <hi>uſe</hi> of <hi>Armes:</hi> together with his well <hi>ordering</hi> and <hi>contriving</hi> the ſeverall <hi>formes</hi> and <hi>figures</hi> of his <hi>Battels.</hi> Alwaies (by the way) obſerving how to make his <hi>advantage,</hi> either from the <hi>time,</hi> the <hi>num<g ref="char:EOLhyphen"/>ber,</hi> or the <hi>place,</hi> or ſome other ſuch like <hi>oportunity.</hi> But not to cloy your <hi>quainter eares</hi> with <hi>impertinent diſcourſes:</hi> who are not onely a <hi>Maſter</hi> of <hi>Armes,</hi> but of <hi>Arts;</hi> alſo a Gentleman that hath beene <hi>Captaine</hi> either over <hi>horſe</hi> or <hi>foot;</hi> for the ſpace of theſe laſt <hi>forty yeeres:</hi> and from your very <hi>infancy brought</hi> up in the very <hi>boſome</hi> of the <hi>Muſes.</hi> So that you are now become a <hi>Neſtor</hi> for Counſell, an <hi>A<g ref="char:EOLhyphen"/>pollo</hi> for <hi>Muſicke,</hi> and a <hi>Mars</hi> for the <hi>Field.</hi> But leſt by acknowledging your <hi>worthy parts,</hi> (your <hi>native modeſty</hi> being ſuch, that you never love to heare your owne <hi>due deſerved praiſes)</hi> I purchaſe a <hi>frowne</hi> for a <hi>recompence:</hi> I forbeare. My humble deſire now is, that your <hi>Worſhip</hi> will be pleaſed to accept of my <hi>well meaning:</hi> and although I be wanting in <hi>artfull expreſsions,</hi> yet to reſt aſſured, that I am yours in all <hi>humble</hi> and <hi>heartie affection,</hi> and ſhall ſtill continue</p>
-            <closer>
-               <signed>Your, though unworthy, yet obedient Lievetenant, WILLIAM BARRIFF.</signed>
-            </closer>
-         </div>
-         <div type="dedication">
-            <pb facs="tcp:1160:7"/>
-            <head>TO THE WORTHY CAPTAINES, CAPTAINE EDVVARD DICHFIELD, and Captaine HENRY SANDERS, and to all the <hi>Gentlemen</hi> of the <hi>private</hi> and <hi>lo<g ref="char:EOLhyphen"/>ving</hi> Societie <hi>of</hi> Cripplegate mee<g ref="char:EOLhyphen"/>ting. <hi>W. B.</hi> wiſheth all health and <hi>long continuance.</hi>
-            </head>
-            <opener>
-               <salute>Right Worthy<g ref="char:punc">▪</g>
-               </salute>
-            </opener>
-            <p>
-               <hi>
-                  <seg rend="decorInit">C</seg>Aptaines,</hi> it is now ſomething morethen ſeven yeares, ſince the <hi>beginning</hi> of that <hi>private</hi> and <hi>commendable exerciſe</hi> of <hi>Armes</hi> by your two <hi>Companies</hi> together; how much experi<g ref="char:EOLhyphen"/>ence it hath begot in your <hi>Soul<g ref="char:EOLhyphen"/>diers,</hi> your ſelues be the <hi>Iudges.</hi> This muſt be con<g ref="char:EOLhyphen"/>feſſed, that it is ſo <hi>orderly</hi> contrived, as to become no <hi>hinderance</hi> to mens more <hi>neceſſary callings.</hi> Yea it rather calls them the <hi>earlier</hi> unto it: for that the <hi>Exerciſe</hi> continueth onely <hi>one houre</hi> the <hi>Thurſday</hi> of every weeke; and in the <hi>Summer time,</hi> ending at <hi>ſe<g ref="char:EOLhyphen"/>ven</hi> of the <hi>clocke</hi> in the <hi>Morning.</hi> Some there have been notwithſtanding, that have held a <hi>prejudicate opinion</hi> of this meeting: conceiving that it would prove an <hi>hinderance to the Artillery ground.</hi> Never<g ref="char:EOLhyphen"/>theleſſe
+       <hi>meanes</hi> to make <hi>Philip</hi> from a <hi>poore Prince,</hi> to become a <hi>powerfull Monarch;</hi> and his Sonne <hi>Alex<g ref="char:EOLhyphen"/>ander amighty Conquerer.</hi> I meane his <hi>exact obſer<g ref="char:EOLhyphen"/>vance</hi> of the <hi>true grounds of military Diſcipline,</hi> which beginneth with the <hi>inſtruction</hi> of a <hi>private Company.</hi>
+    </p>
+    <p>Adde hereunto (which I have alſo toucht upon) his frequent <hi>practiſe</hi> and <hi>inuring</hi> of his <hi>Souldiers</hi> to the <hi>uſe</hi> of <hi>Armes:</hi> together with his well <hi>ordering</hi> and <hi>contriving</hi> the ſeverall <hi>formes</hi> and <hi>figures</hi> of his <hi>Battels.</hi> Alwaies (by the way) obſerving how to make his <hi>advantage,</hi> either from the <hi>time,</hi> the <hi>num<g ref="char:EOLhyphen"/>ber,</hi> or the <hi>place,</hi> or ſome other ſuch like <hi>oportunity.</hi> But not to cloy your <hi>quainter eares</hi> with <hi>impertinent diſcourſes:</hi> who are not onely a <hi>Maſter</hi> of <hi>Armes,</hi> but of <hi>Arts;</hi> alſo a Gentleman that hath beene <hi>Captaine</hi> either over <hi>horſe</hi> or <hi>foot;</hi> for the ſpace of theſe laſt <hi>forty yeeres:</hi> and from your very <hi>infancy brought</hi> up in the very <hi>boſome</hi> of the <hi>Muſes.</hi> So that you are now become a <hi>Neſtor</hi> for Counſell, an <hi>A<g ref="char:EOLhyphen"/>pollo</hi> for <hi>Muſicke,</hi> and a <hi>Mars</hi> for the <hi>Field.</hi> But leſt by acknowledging your <hi>worthy parts,</hi> (your <hi>native modeſty</hi> being ſuch, that you never love to heare your owne <hi>due deſerved praiſes)</hi> I purchaſe a <hi>frowne</hi> for a <hi>recompence:</hi> I forbeare. My humble deſire now is, that your <hi>Worſhip</hi> will be pleaſed to accept of my <hi>well meaning:</hi> and although I be wanting in <hi>artfull expreſsions,</hi> yet to reſt aſſured, that I am yours in all <hi>humble</hi> and <hi>heartie affection,</hi> and ſhall ſtill continue</p>
+    <closer>
+       <signed>Your, though unworthy, yet obedient Lievetenant, WILLIAM BARRIFF.</signed>
+    </closer>
+ </div>
+ <div type="dedication">
+    <pb facs="tcp:1160:7"/>
+    <head>TO THE WORTHY CAPTAINES, CAPTAINE EDVVARD DICHFIELD, and Captaine HENRY SANDERS, and to all the <hi>Gentlemen</hi> of the <hi>private</hi> and <hi>lo<g ref="char:EOLhyphen"/>ving</hi> Societie <hi>of</hi> Cripplegate mee<g ref="char:EOLhyphen"/>ting. <hi>W. B.</hi> wiſheth all health and <hi>long continuance.</hi>
+    </head>
+    <opener>
+       <salute>Right Worthy<g ref="char:punc">▪</g>
+       </salute>
+    </opener>
+    <p>
+       <hi>
+	  <seg rend="decorInit">C</seg>Aptaines,</hi> it is now ſomething morethen ſeven yeares, ſince the <hi>beginning</hi> of that <hi>private</hi> and <hi>commendable exerciſe</hi> of <hi>Armes</hi> by your two <hi>Companies</hi> together; how much experi<g ref="char:EOLhyphen"/>ence it hath begot in your <hi>Soul<g ref="char:EOLhyphen"/>diers,</hi> your ſelues be the <hi>Iudges.</hi> This muſt be con<g ref="char:EOLhyphen"/>feſſed, that it is ſo <hi>orderly</hi> contrived, as to become no <hi>hinderance</hi> to mens more <hi>neceſſary callings.</hi> Yea it rather calls them the <hi>earlier</hi> unto it: for that the <hi>Exerciſe</hi> continueth onely <hi>one houre</hi> the <hi>Thurſday</hi> of every weeke; and in the <hi>Summer time,</hi> ending at <hi>ſe<g ref="char:EOLhyphen"/>ven</hi> of the <hi>clocke</hi> in the <hi>Morning.</hi> Some there have been notwithſtanding, that have held a <hi>prejudicate opinion</hi> of this meeting: conceiving that it would prove an <hi>hinderance to the Artillery ground.</hi> Never<g ref="char:EOLhyphen"/>theleſſe
 <pb facs="tcp:1160:8"/>
 the proofe hath reported the quite con<g ref="char:EOLhyphen"/>trarie: for that it hath become a great <hi>meanes</hi> to<g ref="char:EOLhyphen"/>wards the <hi>advancement thereof.</hi> And that by <hi>ſend<g ref="char:EOLhyphen"/>ing divers Gentlemen thither to enter themſelues therein, who before had not the leaſt conceit or purpoſe that way.</hi> As for the <hi>Souldiers</hi> of that <hi>meeting,</hi> they neither <hi>beat Drumme, diſplay Enſigne,</hi> nor <hi>diſcharge Musket:</hi> But onely <hi>exerciſe</hi> their <hi>Poſtures, Motions,</hi> and <hi>formes</hi> of <hi>Battell,</hi> with <hi>falſe fire</hi> in their <hi>pannes.</hi> Which is the cauſe, that the <hi>Souldiers</hi> having at<g ref="char:EOLhyphen"/>tained ſome <hi>little skill</hi> in the <hi>handling</hi> of their <hi>Armes:</hi> preſently <hi>deſire,</hi> to <hi>exerciſe with more liberty;</hi> and ſo <hi>enter</hi> upon the <hi>Artillery Garden.</hi> Wherefore (moſt worthy <hi>Captains)</hi> you ſhall do well to <hi>che<g ref="char:EOLhyphen"/>riſh</hi> your <hi>diligent</hi> and <hi>induſtrious Souldiers:</hi> that ſo they may be <hi>heartened</hi> to perſiſt, in ſo <hi>honourable</hi> and <hi>commendable</hi> an <hi>entendment.</hi> It being ſuch an exerciſe whereby <hi>God</hi> may gaine <hi>glory,</hi> the <hi>King</hi> and <hi>Kingdome, honour;</hi> your <hi>ſelues, credit;</hi> and your <hi>Souldiers, skill:</hi> For <hi>my owne part,</hi> I profeſſe and ac<g ref="char:EOLhyphen"/>knowledge my <hi>ſelfe</hi> to be one of the <hi>firſt beginners of it:</hi> and do ſtill continue a <hi>member</hi> of the <hi>ſame.</hi> And this maketh me the more <hi>ſilent,</hi> though ſtill I <hi>wiſh in heart the continuance of ſo friendly a ſocietie.</hi> And therefore <hi>(fellow Souldiers)</hi> I pray you <hi>accept</hi> of my <hi>good will</hi> for the <hi>deed:</hi> for were I as <hi>able</hi> as I am <hi>willing;</hi> I then, with the <hi>Poet,</hi>
-               <q>
-                  <l>Would conſecrate your Memories to time,</l>
-                  <l>That yours might Live, when I am turn'd to ſlime.</l>
+       <q>
+	  <l>Would conſecrate your Memories to time,</l>
+	  <l>That yours might Live, when I am turn'd to ſlime.</l>
                </q>
             </p>
             <closer>
