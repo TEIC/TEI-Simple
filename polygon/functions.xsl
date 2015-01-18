@@ -503,7 +503,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         <xsl:param name="number"/>
 	<xsl:choose>
-	  <xsl:when test="$content='char:EOLhyphen'"/>
+	  <xsl:when test="$content='char:EOLhyphen'">&#x00AD;</xsl:when>
 	</xsl:choose>
     </xsl:function>
 
