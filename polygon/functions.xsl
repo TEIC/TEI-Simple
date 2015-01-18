@@ -73,6 +73,9 @@ of this software, even if advised of the possibility of such damage.
         <xsl:when test="$task ='anchor'">
             <xsl:sequence select="tei:anchor($model, $content, $class, $number)"/>
         </xsl:when>
+        <xsl:when test="$task ='glyph'">
+            <xsl:sequence select="tei:glyph($model, $content, $class, $number)"/>
+        </xsl:when>
         <xsl:when test="$task ='note'">
             <xsl:sequence select="tei:note($model, $content, $parms[2], $class, $number)"/>
         </xsl:when>
@@ -135,10 +138,7 @@ of this software, even if advised of the possibility of such damage.
     
     
 </xsl:function>
-    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Block level element</desc>
-    </doc>
-    
+
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Block level element</desc>
     </doc>
@@ -476,6 +476,19 @@ of this software, even if advised of the possibility of such damage.
         </ul>
     </xsl:function>
     
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Glyph</desc>
+    </doc>
+    <xsl:function name="tei:glyph" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+	<xsl:choose>
+	  <xsl:when test="$content='char:EOLhyphen'"/>
+	</xsl:choose>
+    </xsl:function>
+
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Figure</desc>
     </doc>

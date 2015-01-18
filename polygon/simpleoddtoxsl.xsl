@@ -60,10 +60,13 @@
 
 
     <xsl:template match="/">
-        <xslo:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+        <xslo:stylesheet 
+	    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
             xmlns:tei="http://www.tei-c.org/ns/1.0"
+	    xmlns:xschema="http://www.w3.org/2001/XMLSchema"
             xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
-            xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
+            xpath-default-namespace="http://www.tei-c.org/ns/1.0" 
+	    version="2.0">
 
             <xslo:output method="html"/>
             
@@ -78,6 +81,56 @@
                 </html>
             </xslo:template>
 
+  <xslo:template match="text()" mode="#default plain">
+    <xslo:choose>
+      <xslo:when test="ancestor::*[@xml:space][1]/@xml:space='preserve'">
+        <xslo:value-of select="tei:escapeChars(.,parent::*)"/>
+      </xslo:when>
+      <xslo:otherwise>
+        <!-- Retain one leading space if node isn't first, has
+	     non-space content, and has leading space.-->
+	<xslo:variable name="context" select="name(parent::*)"/>
+	<xslo:if test="matches(.,'^\s') and  normalize-space()!=''">
+	  <!-- if the text is first thing in a note, zap it,  definitely -->
+	  <xslo:choose>
+	    <!-- but if its in a run on inline objects with the same
+	    name (like a sequence of <hi>), then the space needs
+	    keeping -->
+	    <xslo:when test="(parent::*/preceding-sibling::node()[1][name()=$context])">
+              <xslo:value-of select="' '"/>
+	    </xslo:when>
+	    <xslo:when test="position()=1"/>
+            <xslo:otherwise>
+              <xslo:value-of select="' '"/>
+	    </xslo:otherwise>
+	  </xslo:choose>
+	</xslo:if>
+        <xslo:value-of select="tei:escapeChars(normalize-space(.),parent::*)"/>
+        <xslo:choose>
+          <!-- node is an only child, and has content but it's all space -->
+          <xslo:when test="last()=1 and string-length()!=0 and      normalize-space()=''">
+              <xslo:value-of select="' '"/>
+          </xslo:when>
+          <!-- node isn't last, isn't first, and has trailing space -->
+          <xslo:when test="position()!=1 and position()!=last() and matches(.,'\s$')">
+              <xslo:value-of select="' '"/>
+          </xslo:when>
+          <!-- node isn't last, is first, has trailing space, and has non-space content   -->
+          <xslo:when test="position()=1 and matches(.,'\s$') and normalize-space()!=''">
+              <xslo:value-of select="' '"/>
+          </xslo:when>
+        </xslo:choose>
+      </xslo:otherwise>
+    </xslo:choose>
+  </xslo:template>
+
+
+
+  <xslo:function name="tei:escapeChars">
+    <xslo:param name="letters"/>
+    <xslo:param name="context"/>
+    <xslo:value-of select="translate($letters,'ſ','s')"/>
+  </xslo:function>
         </xslo:stylesheet>
     </xsl:template>
 
