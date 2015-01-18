@@ -96,6 +96,10 @@ of this software, even if advised of the possibility of such damage.
         <xsl:when test="$task ='alternate'">
             <xsl:sequence select="tei:alternate($model, $content, $parms[2],$class, $number)"/>
         </xsl:when>
+
+        <xsl:when test="$task ='link'">
+            <xsl:sequence select="tei:link($model, $content, $parms[2],$class, $number)"/>
+        </xsl:when>
         <xsl:when test="$task ='list'">
             <xsl:sequence select="tei:list($model, $content, $class, $number)"/>
         </xsl:when>
@@ -222,11 +226,7 @@ of this software, even if advised of the possibility of such damage.
                 <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
             </xsl:when>
             <xsl:otherwise>
-                <xsl:if test="string($content)">
-                <xslo:apply-templates>
-                    <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"/></xsl:attribute></xsl:if>
-                </xslo:apply-templates>
-                </xsl:if>
+	      <xsl:sequence select="tei:applyTemplates($content)"/>
             </xsl:otherwise>
         </xsl:choose>
 </xsl:function>
@@ -292,11 +292,7 @@ of this software, even if advised of the possibility of such damage.
 	  </xsl:attribute>
 
         <xsl:if test="string($class)"><xslo:attribute name="class"><xsl:value-of select="$class"/></xslo:attribute></xsl:if>
-        <xsl:if test="string($content)">
-          <xslo:apply-templates>
-            <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
-          </xslo:apply-templates>
-        </xsl:if>
+	<xsl:sequence select="tei:applyTemplates($content)"/>
 	</xslo:element>
         </xsl:function>
 
@@ -312,6 +308,24 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="number"/>
         
         <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
+    </xsl:function>
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>hyperlink</desc>
+    </doc>
+    <xsl:function name="tei:link" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="target"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        
+        <a>
+	  <xsl:attribute name="class"><xsl:value-of select="concat($class, $number)"/></xsl:attribute>
+	  <xsl:attribute name="href">{<xsl:value-of
+	  select="$target"/>}</xsl:attribute>
+	  <xsl:sequence select="tei:applyTemplates($content)"/>
+	</a>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -445,9 +459,7 @@ of this software, even if advised of the possibility of such damage.
             <xslo:variable name="number" select="{$number}"/>
 	    <xsl:element name="span">
 	      <xslo:attribute name="class"><xslo:value-of select="($place, concat($class, $number))"/></xslo:attribute>
-              <xslo:apply-templates>
-                <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
-              </xslo:apply-templates>
+	      <xsl:sequence select="tei:applyTemplates($content)"/>
             </xsl:element>
         
     </xsl:function>
@@ -466,8 +478,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="concat($class, $number)"/></xsl:attribute></xsl:if>
             
             <xslo:for-each>
-                    <xsl:if test="$content!='.' and string($content)"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
-                
+              <xsl:if test="$content!='.' and string($content)"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>                
                 <xslo:variable name="cId">
                     <xslo:value-of select="generate-id(.)"></xslo:value-of>
                 </xslo:variable>
@@ -530,11 +541,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:element name="{$name}">
         <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
         <xsl:if test="string($anchorName)"><xsl:attribute name="name"><xsl:value-of select="$anchorName"/></xsl:attribute></xsl:if>
-        <xsl:if test="string($content)">
-        <xslo:apply-templates>
-            <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
-        </xslo:apply-templates>
-        </xsl:if>
+	<xsl:sequence select="tei:applyTemplates($content)"/>
     </xsl:element>
     </xsl:function>
     
@@ -632,11 +639,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="number"/>
         
         <body>
-          <xsl:if test="string($content)">
-            <xslo:apply-templates>
-              <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
-            </xslo:apply-templates>
-          </xsl:if>
+	  <xsl:sequence select="tei:applyTemplates($content)"/>
 	</body>
     </xsl:function>
 
@@ -651,11 +654,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="number"/>
         
       <title>
-            <xsl:if test="string($content)">
-                <xslo:apply-templates>
-                    <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xsl:attribute></xsl:if>
-                </xslo:apply-templates>
-            </xsl:if>
+	  <xsl:sequence select="tei:applyTemplates($content)"/>
       </title>
     </xsl:function>
 
@@ -675,12 +674,7 @@ of this software, even if advised of the possibility of such damage.
 	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 	<!-- table of contents generation -->
 	<script type="text/javascript" charset="utf8" src="{$js}"></script>
-        <xsl:if test="string($content)">
-          <xslo:apply-templates>
-            <xsl:if test="$content!='.'"><xslo:attribute name="select"><xsl:value-of select="$content"></xsl:value-of></xslo:attribute></xsl:if>
-          </xslo:apply-templates>
-        </xsl:if>
-	
+	<xsl:sequence select="tei:applyTemplates($content)"/>
       </head>
     </xsl:function>
       
@@ -740,6 +734,25 @@ of this software, even if advised of the possibility of such damage.
 	</xsl:variable>
         <xsl:value-of   select="if  (count(parent::*/model) &gt; 1 ) then   $n else ''"/>
       </xsl:for-each>
+    </xsl:function>
+
+
+    <xsl:function name="tei:applyTemplates" as="node()*">
+      <xsl:param name="content"/>
+      <xsl:if test="string($content)">
+       <xsl:choose>
+	 <xsl:when test="starts-with($content,'@')">
+	   <xslo:value-of>
+	     <xsl:attribute name="select"><xsl:value-of   select="$content"/></xsl:attribute>
+	   </xslo:value-of>
+	 </xsl:when>
+	 <xsl:otherwise>
+	   <xslo:apply-templates>
+             <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"/></xsl:attribute></xsl:if>
+	   </xslo:apply-templates>
+	 </xsl:otherwise>
+       </xsl:choose>
+     </xsl:if>
     </xsl:function>
 
 </xsl:stylesheet>
