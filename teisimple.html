@@ -21,6 +21,12 @@
 . {
 	margin-top: 1em; margin-left: 1em; margin-left: 1em;
 }
+.:before {
+	content: '[';
+}
+.:after {
+	content: ']';
+}
 . {
 	   text-decoration: line-through;
 }
@@ -29,6 +35,22 @@
 }
 . {
 	font-size: large;
+}
+.:before {
+	content: '[..';
+}
+.:after {
+	content: '..]';
+}
+. {
+	color: grey;font-style:italic;
+}
+. {
+	
+display: block;
+border-top: solid 1pt blue;
+border-bottom: solid 1pt blue;
+		
 }
 . {
 	
@@ -39,20 +61,26 @@
 . {
 	font-style:italic;
 }
+. {
+	color: grey;
+}
+.:before {
+	content: '[..';
+}
+.:after {
+	content: '..]';
+}
+. {
+	color: grey;
+}
 .:before {
 	content: '[...]';
 }
 . {
-	font-variant: small-caps;
+	font-style: italic;
 }
 . {
-	font-weight: normal;
-}
-. {
-	font-weight: normal;
-}
-. {
-	font-weight: normal;
+	font-style: italic;
 }
 . {
 	font-weight: normal;
@@ -71,9 +99,6 @@
 }
 . {
 	 margin-left: 1em; 
-}
-. {
-	list-style: disc;
 }
 . {
 	margin-left: 10px;margin-right: 10px; font-size:smaller;
@@ -103,14 +128,41 @@
 .:after {
 	content: ']';
 }
-. {
-	font-size: large
+.:before {
+	content: '‘';
+}
+.:after {
+	content: '’';
 }
 . {
-	font-weight: normal;
+	margin-left: 10px; margin-right: 10px;
+		
+}
+.:before {
+	content: '‘';
+}
+.:after {
+	content: '’';
 }
 . {
-	font-size: small;
+	margin-left: 10px; margin-right: 10px;
+		
+}
+.:before {
+	content: '{';
+}
+.:after {
+	content: '}';
+}
+. {
+	
+		  text-align: right;
+		
+}
+. {
+	
+		 font-style: italic;
+		
 }
 . {
 	 font-style:italic; 
@@ -118,19 +170,63 @@
 . {
 	font-style: italic;
 }
+.:before {
+	content:"&lt;";
+}
+.:after {
+	content:"&gt;";
+}
+.:before {
+	content:"[";
+}
+.:after {
+	content:"]";
+}
+.:before {
+	content:"(";
+}
+.:after {
+	content:")";
+}
+.:before {
+	content:"{";
+}
+.:after {
+	content:"}";
+}
+. {
+	
+		  font-size: smaller;
+		  background-color: #F0F0F0;
+		
+}
 . {
 	
             max-width: 80%;
             margin: auto;
             font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;
-            line-height: 1.2em;
          
 }
 . {
 	color: red; font-size: 2em;
 }
 . {
+	font-style: italic;
+}
+. {
+	font-style: italic;
+}
+. {
+	font-style: italic;
+}
+. {
+	font-style: italic;
+}
+. {
 	color: green;
+}
+.:after {
+	content: ' [?] ';
 }
 .allcaps {
 	    text-transform: uppercase;
@@ -311,36 +407,51 @@ value</span>"&gt;</span>
   (<tt>white-space: nowrap;</tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">addSpan</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>anchor(@xml:id)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">am</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">anchor</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>anchor(@xml:id)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">argument</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>margin-bottom: 0.5em;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">author</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">back</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">bibl</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">body</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>index(.)</td></tr><tr><td>[model] <i/></td><td>body(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">byline</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">c</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">castGroup</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert list. </i></td><td>child::* ; list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">castItem</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert item, rendered as described in parent list rendition. </i></td><td>listItem(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">castList</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>child::* ; list(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">author</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::teiHeader ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">back</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">bibl</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">body</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>index(.)</td></tr> <tr><td>[model] <i/></td><td>body(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">byline</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">c</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">castGroup</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert list. </i></td><td>child::* ; list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">castItem</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert item, rendered as described in parent list rendition. </i></td><td>listItem(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">castList</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>child::* ; list(.)
   (<tt>list-style: ordered;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">cb</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>break('column')</td></tr></table></td></tr><tr><td>&lt;<span class="orange">cell</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert table cell. </i></td><td>cell(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">choice</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>sic and corr ; alternate(corr[1],sic[1])</td></tr><tr><td>[model] <i/></td><td>abbr and expan ; alternate(expan[1],abbr[1])</td></tr><tr><td>[model] <i/></td><td>orig and reg ; alternate(reg[1],orig[1])</td></tr><tr><td>[model] <i/></td><td>sic and corr ; inline(corr[1]) ; plain</td></tr><tr><td>[model] <i/></td><td>abbr and expan ; inline(expan[1]) ; plain</td></tr><tr><td>[model] <i/></td><td>orig and reg ; inline(reg[1]) ; plain</td></tr></table></td></tr><tr><td>&lt;<span class="orange">cit</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert cit. </i></td><td>child::quote and child::bibl ; cit(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">closer</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>child::* ; block(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">cb</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>break('column')</td></tr></table></td></tr><tr><td>&lt;<span class="orange">cell</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert table cell. </i></td><td>cell(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">choice</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>sic and corr ; alternate(corr[1],sic[1])</td></tr><tr><td>[model] <i/></td><td>abbr and expan ; alternate(expan[1],abbr[1])</td></tr><tr><td>[model] <i/></td><td>orig and reg ; alternate(reg[1],orig[1])</td></tr><tr><td>[model] <i/></td><td>sic and corr ; inline(corr[1]) ; plain</td></tr><tr><td>[model] <i/></td><td>abbr and expan ; inline(expan[1]) ; plain</td></tr><tr><td>[model] <i/></td><td>orig and reg ; inline(reg[1]) ; plain</td></tr></table></td></tr><tr><td>&lt;<span class="orange">cit</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert cit. </i></td><td>child::quote and child::bibl ; cit(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">closer</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>margin-top: 1em; margin-left: 1em; margin-left: 1em;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">corr</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit, if handled in parent choice. </i></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">date</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>text() ; inline(.) ; print</td></tr><tr><td>[model] <i/></td><td>@when and not(text()) ; inline(@when) ; print</td></tr><tr><td>[model] <i/></td><td>@when ; alternate(.,@when) ; web</td></tr><tr><td>[model] <i/></td><td>text() ; inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">dateline</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">del</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">corr</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit, if handled in parent choice. </i></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>content: '[';</tt>)
+
+  (<tt>content: ']';</tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">date</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>text() ; inline(.) ; print</td></tr><tr><td>[model] <i/></td><td>@when and not(text()) ; inline(@when) ; print</td></tr><tr><td>[model] <i/></td><td>@when ; alternate(.,@when) ; web</td></tr><tr><td>[model] <i/></td><td>text() ; inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">dateline</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">del</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)
   (<tt>text-decoration: line-through;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">desc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">div</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@type='title_page' ; block(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">desc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>text(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">div</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@type='title_page' ; block(.)
   (<tt>border: 1px solid black; padding: 5px;</tt>)
 </td></tr><tr><td>[model] <i/></td><td>section(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docAuthor</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docDate</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docEdition</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docImprint</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docTitle</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr><tr><td>[model] <i/></td><td>not(ancestor::teiHeader) ; block(.)
   (<tt>font-size: large;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">epigraph</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">ex</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">expan</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">figDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">figure</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>head or @rendition='simple:display' ; block(.)</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">floatingText</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">epigraph</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">ex</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">expan</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">figDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>content: '[..';</tt>)
+
+  (<tt>content: '..]';</tt>)
+
+  (<tt>color: grey;font-style:italic;</tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">figure</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>head or @rendition='simple:display' ; block(.)</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue; </tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">floatingText</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>margin: 6pt; border: solid black 1pt; </tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">foreign</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)
   (<tt>font-style:italic;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">formula</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition='simple:display' ; block(.)</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">front</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">fw</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::p or ancestor::ab ; inline(.)</td></tr><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">g</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>not(text()) ; glyph(@ref)</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">gap</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline()
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">formula</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition='simple:display' ; block(.)</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">front</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">fw</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::p or ancestor::ab ; inline(.)</td></tr><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">g</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>not(text()) ; glyph(@ref)</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">gap</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>desc ; inline(desc)
+  (<tt>color: grey;</tt>)
+</td></tr><tr><td>[model] <i/></td><td>@extent ; inline(@extent)
+  (<tt>content: '[..';</tt>)
+
+  (<tt>content: '..]';</tt>)
+
+  (<tt>color: grey;</tt>)
+</td></tr><tr><td>[model] <i/></td><td>inline()
   (<tt>content: '[...]';</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">graphic</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>graphic(@url)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">group</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">handShift</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">head</span>&gt;</td><td><table class="border"><tr><td>[model] <i>@type on a parent div maycarry the information about what kind of header is
-            this</i></td><td>parent::div/parent::body and parent::div[not(@type)] ; heading(., 'h1')
-  (<tt>font-variant: small-caps;</tt>)
-</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::div[@type] ; heading(.,@type)
-  (<tt>font-weight: normal;</tt>)
-</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::figure ; heading(.,'figure')
-  (<tt>font-weight: normal;</tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">graphic</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>graphic(@url)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">group</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">handShift</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">head</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert as header.</i></td><td>parent::figure ; heading(.,'figure')
+  (<tt>font-style: italic;</tt>)
 </td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::table ; heading(.,'table')
-  (<tt>font-weight: normal;</tt>)
+  (<tt>font-style: italic;</tt>)
 </td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::lg ; heading(.,'verse')
   (<tt>font-weight: normal;</tt>)
 </td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::list ; heading(.,'list')
   (<tt>font-weight: normal;</tt>)
-</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>heading(.)
+</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>multiheading(.,div,@type)
   (<tt>font-weight: normal;</tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">hi</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition ; inline(.)
   (<tt>font-style: italic;</tt>)
@@ -348,9 +459,7 @@ value</span>"&gt;</span>
   (<tt>font-style: italic;</tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">imprimatur</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">item</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Pithy description. </i></td><td>parent::list[@rendition] ; listItem(.)</td></tr><tr><td>[model] <i>Pithy description. </i></td><td>not(parent::list[@rendition]) ; listItem(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">l</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>margin-left: 1em; </tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">label</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lb</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::sp ; break('line')</td></tr><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">list</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition ; list(.)</td></tr><tr><td>[model] <i/></td><td>not(@rendition) ; list(.)
-  (<tt>list-style: disc;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">listBibl</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Pithy description. </i></td><td>list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">measure</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">milestone</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">name</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">note</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@place ; note(.,@place)</td></tr><tr><td>[model] <i/></td><td>parent::div and not(@place) ; block(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">label</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lb</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::sp ; break('line')</td></tr><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">list</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition ; list(.)</td></tr><tr><td>[model] <i/></td><td>not(@rendition) ; list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">listBibl</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Pithy description. </i></td><td>list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">measure</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">milestone</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">name</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">note</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@place ; note(.,@place)</td></tr><tr><td>[model] <i/></td><td>parent::div and not(@place) ; block(.)
   (<tt>margin-left: 10px;margin-right: 10px; font-size:smaller;</tt>)
 </td></tr><tr><td>[model] <i/></td><td>not(@place) ; inline(.)
   (<tt>content:" [";</tt>)
@@ -366,25 +475,65 @@ value</span>"&gt;</span>
   (<tt>content: '[Page ';</tt>)
 
   (<tt>content: ']';</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">postscript</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">publisher</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pubPlace</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">q</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">quote</span>&gt;</td><td><table class="border"><tr><td>[model] <i>If it is inside a paragraph then it is inline, otherwise it is block level</i></td><td>ancestor::p ; inline(.)</td></tr><tr><td>[model] <i>If it is inside a paragraph then it is inline, otherwise it is block level</i></td><td>not(ancestor::p) ; block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">ref</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>not(@target) ; inline(.)</td></tr><tr><td>[model] <i/></td><td>not(text()) ; link(@target,@target)</td></tr><tr><td>[model] <i/></td><td>link(.,@target)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">reg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>not(parent::choice) ; inline(.)</td></tr><tr><td>[model] <i>Omit, if handled in parent choice.</i></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">rhyme</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">role</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">roleDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">row</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert table row. </i></td><td>row(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">rs</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">s</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">salute</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">seg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">sic</span>&gt;</td><td><table class="border"><tr><td>[modelGrp] </td><td/>
-  (<tt>font-size: large</tt>)
-</tr>
-  (<tt>font-size: large</tt>)
- <tr><td>[model] <i/></td><td>inline(.)
-  (<tt>font-weight: normal;</tt>)
-</td></tr> <tr><td>[model] <i/></td><td>parent::div ; block(.)
-  (<tt>font-size: small;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">signed</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit, if handled in parent choice.</i></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">sp</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">space</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">speaker</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">postscript</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">publisher</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pubPlace</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">q</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::p ; inline(.)
+  (<tt>content: '‘';</tt>)
+
+  (<tt>content: '’';</tt>)
+</td></tr><tr><td>[model] <i/></td><td>block(.)
+  (<tt>margin-left: 10px; margin-right: 10px; </tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">quote</span>&gt;</td><td><table class="border"><tr><td>[model] <i>If it is inside a paragraph then it is inline, otherwise it is block level</i></td><td>ancestor::p ; inline(.)
+  (<tt>content: '‘';</tt>)
+
+  (<tt>content: '’';</tt>)
+</td></tr><tr><td>[model] <i>If it is inside a paragraph then it is inline, otherwise it is block level</i></td><td>block(.)
+  (<tt>margin-left: 10px; margin-right: 10px; </tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">ref</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>not(@target) ; inline(.)</td></tr><tr><td>[model] <i/></td><td>not(text()) ; link(@target,@target)</td></tr><tr><td>[model] <i/></td><td>link(.,@target)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">reg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>not(parent::choice) ; inline(.)</td></tr><tr><td>[model] <i>Omit, if handled in parent choice.</i></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">rhyme</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">role</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">roleDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">row</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert table row. </i></td><td>row(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">rs</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">s</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">salute</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>parent::closer ; inline(.)</td></tr><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">seg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">sic</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>parent::choice and count(parent::*/*) gt 1 ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>content: '{';</tt>)
+
+  (<tt>content: '}';</tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">signed</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>parent::closer ; block(.)
+  (<tt>text-align: right; </tt>)
+</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>font-style: italic; </tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">sp</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">space</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">speaker</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>font-style:italic; </tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">spGrp</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">stage</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>font-style: italic;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">subst</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">supplied</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">table</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">teiHeader</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>omit(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">text</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
-  (<tt>max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif; line-height: 1.2em; </tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">time</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">title</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">subst</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">supplied</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>parent::choice ; omit()</td></tr><tr><td>[model] <i/></td><td>@reason='damage' ; inline(.)
+  (<tt>content:"&lt;";</tt>)
+
+  (<tt>content:"&gt;";</tt>)
+</td></tr><tr><td>[model] <i/></td><td>@reason='illegible' or not(@reason) ; inline(.)
+  (<tt>content:"[";</tt>)
+
+  (<tt>content:"]";</tt>)
+</td></tr><tr><td>[model] <i/></td><td>@reason='omitted' ; inline(.)
+  (<tt>content:"(";</tt>)
+
+  (<tt>content:")";</tt>)
+</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>content:"{";</tt>)
+
+  (<tt>content:"}";</tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">table</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>table(.)
+  (<tt>font-size: smaller; background-color: #F0F0F0; </tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">fileDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>title(titleStmt)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">profileDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">revisionDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">encodingDesc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">teiHeader</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>metadata(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">TEI</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>document(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">text</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>body(.)
+  (<tt>max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif; </tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">time</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">title</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>preceding-sibling::title ; text(' — ')</td></tr> <tr><td>[model] <i/></td><td>text(.)
   (<tt>color: red; font-size: 2em;</tt>)
+</td></tr><tr><td>[model] <i/></td><td>not(@level) and parent::bibl ; inline(.)</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>font-style: italic;</tt>)
+</td></tr> <tr><td>[model] <i/></td><td>ancestor::biblStruct or       ancestor::biblFull ; text(', ')</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>font-style: italic;</tt>)
+</td></tr> <tr><td>[model] <i/></td><td>following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull) ; text(' ')</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>font-style: italic;</tt>)
+</td></tr> <tr><td>[model] <i/></td><td>following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull) ; text('. ')</td></tr><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>font-style: italic;</tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">titlePage</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">titlePart</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">trailer</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>color: green;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">unclear</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">w</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr></table><p><b>Specification group [simplechanges]</b></p><table class="border"><tr><td colspan="3" class="norules">A small number of elements have constrained value lists added.</td></tr><tr><td>&lt;<span class="orange">formula</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">notation</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">TeX</span></td><td>Using TeX or LaTeX notation</td></tr></table></td></tr></table></td></tr><tr><td>&lt;<span class="orange">name</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">type</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">person</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">forename</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">surname</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">personGenName</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">personRoleName</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">personAddName</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">nameLink</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">organisation</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">country</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">placeGeog</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">place</span></td><td/></tr></table></td></tr></table></td></tr><tr><td>&lt;<span class="orange">cell</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">role</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">data</span></td><td>data cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">label</span></td><td>label cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">sum</span></td><td>row or column sum data</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">total</span></td><td>table total data</td></tr></table></td></tr></table></td></tr><tr><td>&lt;<span class="orange">row</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">role</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">data</span></td><td>data cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">label</span></td><td>label cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">sum</span></td><td>row or column sum data</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">total</span></td><td>table total data</td></tr></table></td></tr></table></td></tr></table><p><b>Specification group [rendition]</b></p><table class="border">text-transform: uppercase;font:weight: bold;border: solid black 1pt;text-align: center;font-family: cursive;text-decoration: line-through; color: red;text-decoration: underline; color: red;font-size : 6em; font-family: cursive; font-weight : bold; vertical-align: top; height: 1em; line-height: 1em; float : left; width : 1em; color : #c00; margin: 0em; padding: 0px;float:left;display:inline;display:block;font-style: italic;font-size: larger;text-align: left;font-style:roman;font-weight:normal;text-align: right;font-variant: small-caps;font-size: smaller;text-decoration: line-through;vertical-align: bottom; font-size: smaller;vertical-align: super; font-size: smaller;font-family:monospace;text-decoration: underline;text-decoration-line: underline; text-decoration-style: wavy;</table></div></section></div><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="http://www.tei-c.org/">TEI</a> <a class="plain" href="/">Home</a> </div><address>Sebastian Rahtz, Brian Pytlik Zillig and Martin Mueller.
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">unclear</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)
+  (<tt>content: ' [?] ';</tt>)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">w</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr></table><p><b>Specification group [simplechanges]</b></p><table class="border"><tr><td colspan="3" class="norules">A small number of elements have constrained value lists added.</td></tr><tr><td>&lt;<span class="orange">formula</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">notation</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">TeX</span></td><td>Using TeX or LaTeX notation</td></tr></table></td></tr></table></td></tr><tr><td>&lt;<span class="orange">name</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">type</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">person</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">forename</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">surname</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">personGenName</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">personRoleName</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">personAddName</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">nameLink</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">organisation</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">country</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">placeGeog</span></td><td/></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">place</span></td><td/></tr></table></td></tr></table></td></tr><tr><td>&lt;<span class="orange">cell</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">role</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">data</span></td><td>data cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">label</span></td><td>label cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">sum</span></td><td>row or column sum data</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">total</span></td><td>table total data</td></tr></table></td></tr></table></td></tr><tr><td>&lt;<span class="orange">row</span>&gt;</td><td><table class="border"><tr><td>@<span class="orange">role</span></td><td><table class="border"><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">data</span></td><td>data cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">label</span></td><td>label cell</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">sum</span></td><td>row or column sum data</td></tr><tr xmlns=""><td><span xmlns="http://www.w3.org/1999/xhtml" class="green">total</span></td><td>table total data</td></tr></table></td></tr></table></td></tr></table><p><b>Specification group [rendition]</b></p><table class="border">text-transform: uppercase;font:weight: bold;border: solid black 1pt;text-align: center;font-family: cursive;text-decoration: line-through; color: red;text-decoration: underline; color: red;font-size : 6em; font-family: cursive; font-weight : bold; vertical-align: top; height: 1em; line-height: 1em; float : left; width : 1em; color : #c00; margin: 0em; padding: 0px;float:left;display:inline;display:block;font-style: italic;font-size: larger;text-align: left;font-style:roman;font-weight:normal;text-align: right;font-variant: small-caps;font-size: smaller;text-decoration: line-through;vertical-align: bottom; font-size: smaller;vertical-align: super; font-size: smaller;font-family:monospace;text-decoration: underline;text-decoration-line: underline; text-decoration-style: wavy;</table></div></section></div><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="http://www.tei-c.org/">TEI</a> <a class="plain" href="/">Home</a> </div><address>Sebastian Rahtz, Brian Pytlik Zillig and Martin Mueller.
 	    Date: 1970-01-01<br/><!--
 	  Generated from index.xml using XSLT stylesheets version 0
 	       based on http://www.tei-c.org/Stylesheets/

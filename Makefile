@@ -1,4 +1,4 @@
-default: teisimple
+default: teisimple pm
 TEXTS=/Volumes/Repo/Simple
 XSL=../Stylesheets
 ANT_OPTS="-Xss2m -Xmx752m" 
