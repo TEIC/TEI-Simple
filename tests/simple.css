@@ -76,3 +76,19 @@ span.floatingBottom {
     background: #336699;
     box-shadow: inset -5px 0px 10px -5px #000;
 }
+
+
+span.foot,span.bottom,span.end {
+    float: bottom;
+    display: block;
+    color: red;
+    font-size: smaller;
+}
+
+span.floating {
+    float: right;
+    display: block;
+    background-color: #C0C0C0;
+    font-size: smaller;
+}
+

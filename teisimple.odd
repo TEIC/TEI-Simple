@@ -696,27 +696,31 @@
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
+              <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="docDate">
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
+              <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="docEdition">
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
+              <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="docImprint">
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
+              <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="docTitle">
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
-              <model predicate="not(ancestor::teiHeader)" behaviour="block(.)">
+              <model behaviour="block(.)">
                 <rendition>font-size: large;</rendition>
               </model>
             </elementSpec>
@@ -789,7 +793,7 @@ border-bottom: solid 1pt blue;
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="graphic">
-              <model behaviour="graphic(@url)"/>
+              <model behaviour="graphic(@url,@width,@height,@scale)"/>
             </elementSpec>
             <elementSpec mode="change" ident="group">
               <model behaviour="block(.)"/>
@@ -971,7 +975,10 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="row">
-              <model behaviour="row(.)">
+             <model predicate="@role='label'" behaviour="row(.)"> 
+                <rendition>font-weight: bold;</rendition>
+	     </model>
+             <model behaviour="row(.)">
                 <desc>Insert table row. </desc>
               </model>
             </elementSpec>

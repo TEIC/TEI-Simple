@@ -75,11 +75,14 @@ of this software, even if advised of the possibility of such damage.
         <xsl:when test="$task ='anchor'">
             <xsl:sequence select="tei:anchor($model, $content, $class, $number)"/>
         </xsl:when>
+        <xsl:when test="$task ='graphic'">
+            <xsl:sequence select="tei:graphic($model, $content, $class, $number,$parms[2],$parms[3],$parms[4])"/>
+        </xsl:when>
         <xsl:when test="$task ='glyph'">
             <xsl:sequence select="tei:glyph($model, $content, $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='note'">
-            <xsl:sequence select="tei:note($model, $content, $parms[2], $class, $number)"/>
+            <xsl:sequence select="tei:note($model, $content, $class, $number,$parms[2])"/>
         </xsl:when>
         <xsl:when test="$task ='makeEndnotes'">
             <xsl:sequence select="tei:endnotes($model, $content, $class, $number)"/>
@@ -443,19 +446,18 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:note" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
-        <xsl:param name="place"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        
+        <xsl:param name="place"/>
         <xsl:variable name="location">
             <xsl:choose>
-                <xsl:when test="$place='@place'">foot</xsl:when>
+                <xsl:when test="$place='@place'"><xsl:value-of select="@place"/></xsl:when>
                 <xsl:otherwise>floating</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         
             <xslo:variable name="place" select="{$place}"/>
-            <xslo:variable name="class" select="{$class}"/>
+            <xslo:variable name="class"><xsl:value-of select="$class"/></xslo:variable>
             <xslo:variable name="number" select="{$number}"/>
 	    <xsl:element name="span">
 	      <xslo:attribute name="class"><xslo:value-of select="($place, concat($class, $number))"/></xslo:attribute>
@@ -505,6 +507,32 @@ of this software, even if advised of the possibility of such damage.
 	<xsl:choose>
 	  <xsl:when test="$content='char:EOLhyphen'">&#x00AD;</xsl:when>
 	</xsl:choose>
+    </xsl:function>
+
+    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+        <desc>Image</desc>
+    </doc>
+    <xsl:function name="tei:graphic" as="node()*">
+        <xsl:param name="element"/>
+        <xsl:param name="content"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
+        <xsl:param name="width"/>
+        <xsl:param name="height"/>
+        <xsl:param name="scale"/>
+	<img>
+	  <xsl:attribute name="src">{<xsl:value-of select="$content"/>}</xsl:attribute>
+	  <xslo:if test="string-length({$width}) &gt; 0">
+	    <xslo:attribute name="width">
+	      <xsl:attribute name="select"><xsl:value-of     select="$width"/></xsl:attribute>
+	    </xslo:attribute>
+	  </xslo:if>
+	  <xslo:if test="string-length({$height}) &gt; 0">
+	    <xslo:attribute name="height">
+	      <xsl:attribute name="select"><xsl:value-of    select="$height"/></xsl:attribute>
+	    </xslo:attribute>
+	  </xslo:if>
+	</img>
     </xsl:function>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -568,21 +596,6 @@ of this software, even if advised of the possibility of such damage.
         
         <link rel="StyleSheet" href="{$css}" type="text/css"/>
         <style>
-
-	      span.foot {
-	      float: bottom;
-	      display: block;
-	      background-color: red;
-	      font-size: smaller;
-	      }
-	      
-              span.floating {
-              float: right;
-              display: block;
-              background-color: #C0C0C0;
-              font-size: smaller;
-              }
-                
               <xsl:for-each select="$content">
                 <xsl:for-each select=".//model">
                   <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(substring-before(@behaviour,'('))"/></xsl:variable>
