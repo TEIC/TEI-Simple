@@ -6,11 +6,7 @@
             <title type="main">Tricky Tests for TEI SIMPLE Processing</title>
          </titleStmt>
          <publicationStmt>
-            <availability status="free">
-               <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed by the
-                  University of Oxford under a Creative Commons Attribution-ShareAlike 3.0 Unported
-                  License </licence>
-            </availability>
+            <p></p>
          </publicationStmt>
          <sourceDesc>
             <p>Contains bits and pieces from all over the place</p>
@@ -104,7 +100,7 @@
                      >Studenten-Kranckheiten</hi></fw><lb/>
                   <hi rendition="#aq">ctiren</hi> und zur vollen Bluͤth untuͤchtig<lb/>
                   machen. Dahero <hi rendition="#aq">Horatius</hi>
-                  <note place="foot" n="(a)"><hi rendition="#aq">l. 2. Epiſt.</hi></note> ſolche<lb/>
+                  <note place="bottom" n="(a)"><hi rendition="#aq">l. 2. Epiſt.</hi></note> ſolche<lb/>
                   <hi rendition="#aq">Orbilios plagoſos,</hi> uñ noch beſſer der ge-<lb/>
                   lehrte <hi rendition="#aq">Dornavius Anitympaniſtas</hi> nen-<lb/> net/ <hi
                      rendition="#aq">qui teneros pueros non caſtigant, ſed<lb/> carnificant,
@@ -120,10 +116,10 @@
                      hertz-<lb/> hafften Gemuͤther aber mit aller<lb/> Macht wiederſtreben/
                      und alſo ent-<lb/> weder aus Furcht oder Verwilde-<lb/> rung denen
                      freyen Kuͤnſten gute<lb/> Nacht geben.</hi>
-                  <note place="foot" n="(b)"><hi rendition="#aq">G. Franck. d. l.</hi></note>
+                  <note place="bottom" n="(b)"><hi rendition="#aq">G. Franck. d. l.</hi></note>
                   Ich gebe ſolchen<lb/> ſtraffſuͤchtigen und im Zorn geſchwin-<lb/> den
                   Lehrmeiſtern zu bedencken/ was <hi rendition="#aq">Ta-<lb/> citus</hi>
-                  ſaget: <note place="foot" n="(c)"><hi rendition="#aq">In vita
+                  ſaget: <note place="bottom" n="(c)"><hi rendition="#aq">In vita
                      Agricolæ.</hi></note> Daß ſie den Ernſt mit<lb/> Gelindigkeit/ und am
                   allermeiſten mit<lb/> Liebe vermiſchen ſollen; Denn Furcht<lb/>
                   <fw type="catch" place="bottom">und</fw><lb/>

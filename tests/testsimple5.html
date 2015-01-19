@@ -1,0 +1,156 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+      <link rel="StyleSheet" href="simple.css" type="text/css" /><style>span.add {color: green; text-decoration: underline;}
+div.address {margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;}
+div.addrLine {white-space: nowrap;}
+div.argument {margin-bottom: 0.5em;}
+ol.castList {list-style: ordered;}
+ul.castList {list-style: ordered;}
+div.closer {margin-top: 1em; margin-left: 1em; margin-left: 1em;}
+span.corr2:before {content: '[';}
+span.corr2:after {content: ']';}
+span.del {text-decoration: line-through;}
+div.div1 {border: 1px solid black; padding: 5px;}
+div.docTitle2 {font-size: large;}
+span.figDesc:before {content: '[..';}
+span.figDesc:after {content: '..]';}
+span.figDesc {color: grey;font-style:italic;}
+span.figure2 {display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue;}
+div.floatingText {margin: 6pt; border: solid black 1pt;}
+span.foreign {font-style:italic;}
+span.gap1 {color: grey;}
+span.gap2:before {content: '[..';}
+span.gap2:after {content: '..]';}
+span.gap2 {color: grey;}
+span.gap3:before {content: '[...]';}
+h1.head1 {font-style: italic;}
+h2.head1 {font-style: italic;}
+h3.head1 {font-style: italic;}
+h1.head2 {font-style: italic;}
+h2.head2 {font-style: italic;}
+h3.head2 {font-style: italic;}
+h1.head3 {font-weight: normal;}
+h2.head3 {font-weight: normal;}
+h3.head3 {font-weight: normal;}
+h1.head4 {font-weight: normal;}
+h2.head4 {font-weight: normal;}
+h3.head4 {font-weight: normal;}
+div.head5 {font-weight: normal;}
+span.hi1 {font-style: italic;}
+span.hi2 {font-style: italic;}
+div.l {margin-left: 1em;}
+div.note2 {margin-left: 10px;margin-right: 10px; font-size:smaller;}
+span.note3:before {content:" [";}
+span.note3:after {content:"] ";}
+span.note3 {font-size:small;}
+p.p {text-align: justify;}
+span.pb {display: block; color: grey; float: right;}
+span.pb:before {content: '[Page ';}
+span.pb:after {content: ']';}
+span.q1:before {content: '‘';}
+span.q1:after {content: '’';}
+div.q2 {margin-left: 10px; margin-right: 10px;}
+span.quote1:before {content: '‘';}
+span.quote1:after {content: '’';}
+div.quote2 {margin-left: 10px; margin-right: 10px;}
+tr.row1 {font-weight: bold;}
+span.sic2:before {content: '{';}
+span.sic2:after {content: '}';}
+div.signed1 {text-align: right;}
+span.signed2 {font-style: italic;}
+div.speaker {font-style:italic;}
+div.stage {font-style: italic;}
+span.supplied2:before {content:"&lt;";}
+span.supplied2:after {content:"&gt;";}
+span.supplied3:before {content:"[";}
+span.supplied3:after {content:"]";}
+span.supplied4:before {content:"(";}
+span.supplied4:after {content:")";}
+span.supplied5:before {content:"{";}
+span.supplied5:after {content:"}";}
+table.table {font-size: smaller; background-color: #F0F0F0;}
+div.text {max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;}
+div.title2 {color: red; font-size: 2em;}
+span.title4 {font-style: italic;}
+span.title6 {font-style: italic;}
+span.title8 {font-style: italic;}
+span.title10 {font-style: italic;}
+div.trailer {color: green;}
+span.unclear:after {content: ' [?] ';}
+</style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><script type="text/javascript" charset="utf8" src="simple.js"></script><title>Tricky Tests for TEI SIMPLE Processing</title> 
+   </head> 
+   <body>
+      <div class="front">
+         <div class="div">
+            <h1 class="head">TREASURE ISLAND</h1> 
+            <div class="quote2">
+               <p class="p">To S.L.O., an American gentleman in accordance with whose classic taste the following
+                  narrative has been designed, it is now, in return for numerous delightful hours, and
+                  with the kindest wishes, dedicated by his affectionate friend, the author.
+               </p>
+            </div> <span class="lg">
+               <h2 class="head3">TO THE HESITATING PURCHASER</h2> 
+               <div class="l">If sailor tales to sailor tunes,</div> 
+               <div class="l">  Storm and adventure, heat and cold,</div> 
+               <div class="l">If schooners, islands, and maroons,</div> 
+               <div class="l">  And buccaneers, and buried gold,</div> 
+               <div class="l">And all the old romance, retold</div> 
+               <div class="l">  Exactly in the ancient way,</div> 
+               <div class="l">Can please, as me they pleased of old,</div> 
+               <div class="l">  The wiser youngsters of today:</div> 
+               <div class="l">—So be it, and fall on! If not,</div> 
+               <div class="l">If studious youth no longer crave,</div> 
+               <div class="l">His ancient appetites forgot,</div> 
+               <div class="l">Kingston, or Ballantyne the brave,</div> 
+               <div class="l">Or Cooper of the wood and wave:</div> 
+               <div class="l">So be it, also! And may I</div> 
+               <div class="l">And all my pirates share the grave</div> 
+               <div class="l">Where these and their creations lie!</div></span></div>
+      </div> 
+      <div id="toc">Table of contents</div>
+      <body>
+         <div class="div">
+            <h1 class="head">PART ONE—The Old Buccaneer</h1> 
+            <div class="div">
+               <h2 class="head">The Old Sea-dog at the Admiral Benbow</h2> 
+               <p class="p">SQUIRE TRELAWNEY, Dr. Livesey, and the rest of these gentlemen having asked me to
+                  write down the whole particulars about Treasure Island, from the beginning to the
+                  end, keeping nothing back but the bearings of the island, and that only because there
+                  is still treasure not yet lifted, I take up my pen in the year of grace <span class="date4">17__</span> and go back to the time when my father kept the <span class="name">Admiral Benbow</span> inn and the brown old seaman with the sabre cut first took up his lodging under our
+                  roof.
+               </p> 
+               <p class="p">I remember him as if it were yesterday, as he came plodding to the inn door, his sea-chest
+                  following behind him in a hand-barrow—a 
+                  <ul class="list2">
+                     <li class="item2">tall, </li>
+                     <li class="item2">strong, </li>
+                     <li class="item2">heavy, </li>
+                     <li class="item2">nut-brown</li>
+                  </ul> man, his tarry pigtail falling over the shoulder of his soiled blue coat, his hands
+                  ragged and scarred, with black, broken nails, and the sabre cut across one cheek,
+                  a dirty, livid white. I remember him looking round the cover and whistling to himself
+                  as he did so, and then breaking out in that old sea-song that he sang so often afterwards:
+               </p> <span class="lg">
+                  <div class="l">"Fifteen men on the dead man's chest--</div> 
+                  <div class="l">Yo-ho-ho, and a bottle of rum!"</div></span> 
+               <p class="p">in the high, old tottering voice that seemed to have been tuned and broken at the
+                  capstan bars. Then he rapped on the door with a bit of stick like a handspike that
+                  he carried, and when my father appeared, called roughly for a <span class="choice1"></span> of rum. This, when it was brought to him, he drank slowly, like a <span class="corr2">connoisseur</span>, <span class="corr2">lingering</span> on the taste and still looking about him at the  and up at our signboard.
+               </p> 
+               <p class="p">"This is a handy cove," says he at length; "and a pleasant <span class="sic2">sittyated</span> grog-shop<sup><a class="anchor" name="Ad1e172" href="#Nd1e172">1</a></sup>. Much company, mate?"
+               </p> 
+               <p class="p">My father told him no, very little company, the more was the pity.</p> 
+               <p class="p">"Well, then," said he, "this is the berth for me. Here you, matey," he cried<span class="note3">fdslkjfd</span> to the man who trundled the barrow; "bring up alongside and help up my chest. I'll
+                  stay here a bit," he continued. "I'm a plain man; rum and bacon and eggs is what I
+                  want, and that head up there for to watch ships off. What you mought call me? You
+                  mought call me captain. Oh, I see what you're at—there"; and he threw down three or
+                  four gold pieces on the threshold. "You can tell me when I've worked through that,"
+                  says he, looking as fierce as a commander.
+               </p> 
+               <p class="p"><span class="hi1">W</span>As fuͤr eine edle Creatur ein Student sey/ ist zur Gnuͤge erwiesen. So edel aber selbiger ist/ desto mehrern Verdruͤßligkei- ten/ Kranckheiten und Gefahr ist er un- terworffen. In der Jugend muß er viel Verdruß und offt harte Schlaͤge vertragen von unverstaͤndigen Backel- Meistern/ die bißweilen mehr mit unsin- nigen Schlaͤgen/ als Verstand und gu- ten Worten solche zarte Pflaͤntzlein <span class="hi1">tra-</span> <span class="fw1">A</span><span class="fw1"><span class="hi1">cti-</span></span> <span class="pb">2</span> <span class="fw1"><span class="hi1">Studenten-Kranckheiten</span></span> <span class="hi1">ctiren</span> und zur vollen Bluͤth untuͤchtig machen. Dahero <span class="hi1">Horatius</span> <span class="bottom note1"><span class="hi1">l. 2. Epist.</span></span> solche <span class="hi1">Orbilios plagosos,</span> uñ noch besser der ge- lehrte <span class="hi1">Dornavius Anitympanistas</span> nen- net/ <span class="hi1">qui teneros pueros non castigant, sed carnificant, ut sæpe tenerrima ingenia desperent, generosa verò omni relucten- tur impetu, &amp; ita vel per timorem, vel per furorem Musis earumque ingratiis valedicant</span> das ist/ <span class="hi1">welche die zarten Kinder nicht straffen/ sondern hen- ckermaͤßig</span> <span class="hi1">tractiren,</span> <span class="hi1">daß offt die zaͤr- testen</span> <span class="hi1">ingenia</span> <span class="hi1">alle Hoffnung sincken lassen/ und verzweiffeln/ die hertz- hafften Gemuͤther aber mit aller Macht wiederstreben/ und also ent- weder aus Furcht oder Verwilde- rung denen freyen Kuͤnsten gute Nacht geben.</span> <span class="bottom note1"><span class="hi1">G. Franck. d. l.</span></span> Ich gebe solchen straffsuͤchtigen und im Zorn geschwin- den Lehrmeistern zu bedencken/ was <span class="hi1">Ta- citus</span> saget: <span class="bottom note1"><span class="hi1">In vita Agricolæ.</span></span> Daß sie den Ernst mit Gelindigkeit/ und am allermeisten mit Liebe vermischen sollen; Denn Furcht <span class="fw1">und</span> <span class="pb">3</span> <span class="fw1"><span class="hi1">und derer Curen.</span></span> und Schrecken ist ein schlechtes Band der Liebe. Rathe auch <span class="hi1">medicè,</span> die Ju- gend nicht mit Stecken und andern har- ten Instrumenten auf die Koͤpffe/ wie die Ochsen zu schlagen/ denn sie werden dumm/ und behalten Zeit Lebens schwa- che und krancke Koͤpffe/ muͤssen auch wohl gar fuͤr der Zeit sterben/ wie ich et- liche Exempel <span class="hi1">observiret.</span> Nach die- sem wachsen sie zwar zu einem hoͤhern Alter/ nemlich zum Kern-Jahren/ wel- ches ist die <span class="hi1">Adolescentia</span> und <span class="hi1">Juventus.</span> In solcher werden sie der Libertaͤt und Freyheit begieriger Krafft natuͤrlicher Zuneigung: <span class="hi1">Adolescentia enim est sta- tus humorum temperatior, ubi natura majorem acquirit vigorem, dum humo- rum qualitates se invicem non obtun- dunt, sed in</span> σνμμετ<span class="gap3"></span>ία <span class="hi1">laudabili amicè conspirant. Unde quam primum à præ- ceptorum &amp; parentum cura emancipati sunt, florentis ætatis voluptatibus avidi- us implentur, &amp; in excessus quoslibet pro- lubuntur.</span> Das ist/ <span class="hi1">die</span> <span class="hi1">Adolescenz</span> <span class="hi1">o- der die ersten Jugend Jahre seyn eine solche Beschaffenheit des Blu-</span> <span class="fw1">A 2</span><span class="fw1"><span class="hi1">tes/</span></span></p>
+            </div>
+         </div>
+      </body>
+   </body>
+</html>

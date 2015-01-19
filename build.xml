@@ -216,6 +216,12 @@
     <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple4.xml" out="tests/testsimple4.html">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple5.xml" out="tests/testsimple5.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple6.xml" out="tests/testsimple6.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
   </target>
 
   <target name="cleanup">
