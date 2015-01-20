@@ -128,6 +128,10 @@ border-bottom: solid 1pt blue;
 .:after {
 	content: ']';
 }
+. {
+	margin-left: 10px; margin-right: 10px;
+		
+}
 .:before {
 	content: '‘';
 }
@@ -462,7 +466,7 @@ value</span>"&gt;</span>
   (<tt>font-style: italic;</tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">imprimatur</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">item</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Pithy description. </i></td><td>parent::list[@rendition] ; listItem(.)</td></tr><tr><td>[model] <i>Pithy description. </i></td><td>not(parent::list[@rendition]) ; listItem(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">l</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)
   (<tt>margin-left: 1em; </tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">label</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lb</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::sp ; break('line')</td></tr><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">list</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition ; list(.)</td></tr><tr><td>[model] <i/></td><td>not(@rendition) ; list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">listBibl</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Pithy description. </i></td><td>list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">measure</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">milestone</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">name</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">note</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@place ; note(.,@place)</td></tr><tr><td>[model] <i/></td><td>parent::div and not(@place) ; block(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">label</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lb</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::sp ; break('line')</td></tr><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">lg</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">list</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition ; list(.)</td></tr><tr><td>[model] <i/></td><td>not(@rendition) ; list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">listBibl</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Pithy description. </i></td><td>list(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">measure</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">milestone</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">name</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">note</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@place ; note(.,@place)</td></tr><tr><td>[model] <i/></td><td>parent::div and not(@place) ; block(.)
   (<tt>margin-left: 10px;margin-right: 10px; font-size:smaller;</tt>)
 </td></tr><tr><td>[model] <i/></td><td>not(@place) ; inline(.)
   (<tt>content:" [";</tt>)
@@ -478,7 +482,9 @@ value</span>"&gt;</span>
   (<tt>content: '[Page ';</tt>)
 
   (<tt>content: ']';</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">postscript</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">publisher</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pubPlace</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">q</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>ancestor::p ; inline(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">postscript</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">publisher</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">pubPlace</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">q</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>l ; block(.)
+  (<tt>margin-left: 10px; margin-right: 10px; </tt>)
+</td></tr><tr><td>[model] <i/></td><td>ancestor::p ; inline(.)
   (<tt>content: '‘';</tt>)
 
   (<tt>content: '’';</tt>)

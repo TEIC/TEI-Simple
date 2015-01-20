@@ -1,4 +1,4 @@
-default: teisimple pm
+default: teisimple valid pm
 TEXTS=/Volumes/Repo/Simple
 XSL=../Stylesheets
 ANT_OPTS="-Xss2m -Xmx752m" 
@@ -6,7 +6,7 @@ docx:
 	teitodocx --profile=tei teisimple.xml teisimple.docx
 
 teisimple:
-	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) 	
+	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) 
 
 pm:
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) pm
