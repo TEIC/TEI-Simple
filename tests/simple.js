@@ -30,10 +30,6 @@ $(document).ready(function() {
 
     Footnotes.setup();
 
-   $("sup.footnotelink").each(function() {
-       console.log($(this));
-   });
-
 });
 // http://ignorethecode.net/blog/2010/04/20/footnotes/
 // this script requires jQuery
@@ -52,6 +48,9 @@ $(document).ready(function() {
         footnotelinks.bind('mouseout',Footnotes.footnoteoout);
     },
     footnoteover: function() {
+	var target = $(this).children("a").attr("href");
+        var el = $(target);
+	console.log(target,el);
         clearTimeout(Footnotes.footnotetimeout);
         $('#footnotediv').stop();
         $('#footnotediv').remove();
@@ -63,9 +62,7 @@ $(document).ready(function() {
         div.bind('mouseover',Footnotes.divover);
         div.bind('mouseout',Footnotes.footnoteoout);
 
-        var el = $(this).next();
         div.html($(el).html());
-        
         div.css({
 	    display: 'block',
             position:'absolute',

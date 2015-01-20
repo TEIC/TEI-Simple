@@ -452,11 +452,15 @@ of this software, even if advised of the possibility of such damage.
         <xslo:variable name="place" select="{$place}"/>
         <xslo:variable name="class"><xsl:value-of select="$class"/></xslo:variable>
         <xslo:variable name="number" select="{$number}"/>
+        <xslo:variable name="I"><xsl:attribute name="select">generate-id()</xsl:attribute></xslo:variable>
+
 	<xslo:variable name="N"><xslo:number from="text" level="any" count="note"/></xslo:variable>
 	<xslo:choose>
 	<xslo:when test="$place='bottom'">
-	  <sup class="footnotelink"><xslo:value-of select="if (@n) then   @n else $N"/></sup>
-	  <div>
+	  <sup class="footnotelink"><a>
+	  <xsl:attribute name="href">#{$I}</xsl:attribute>
+	  <xslo:value-of select="if (@n) then   @n else $N"/></a></sup>
+	  <div><xsl:attribute name="id">{$I}</xsl:attribute>
 	    <xslo:attribute name="class"><xslo:value-of select="($place, concat($class, $number))"/></xslo:attribute>
 	    <xsl:sequence select="tei:applyTemplates($content)"/>
 	  </div>
