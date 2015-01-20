@@ -78,10 +78,11 @@ span.floatingBottom {
 }
 
 
-span.foot,span.bottom,span.end {
-    float: bottom;
-    display: block;
-    color: red;
+div.bottom{
+    display:none;
+}
+
+span.end {
     font-size: smaller;
 }
 
@@ -91,4 +92,13 @@ span.floating {
     background-color: #C0C0C0;
     font-size: smaller;
 }
-
+#footnotediv {
+	background-color:white;
+	padding:3px;
+	padding-left:12px;
+	padding-right:12px;
+	border:1px solid #CDBBB5;
+	box-shadow:#555 0 0 10px;
+	-webkit-box-shadow:#555 0 0 10px;
+	-moz-box-shadow:0 0 10px #555;
+}

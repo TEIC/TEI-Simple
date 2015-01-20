@@ -59,106 +59,105 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <xsl:variable name="task" select="substring-before(normalize-space($model/@behaviour),'(')"/>
-    <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'.*\((.*)\)$','$1'),',')"/>
+    <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'[^\(]*\((.*)\)$','$1'),',')"/>
     <xsl:variable name="textcontent" select="replace(substring-after($model/@behaviour,'('),'\)$','')"/>
     <xsl:if test="$debug='true'">
       <xsl:message><xsl:value-of
       select="($elName,$model/@behaviour,$task,$textcontent)"/>:   <xsl:value-of
       select="($parms)" separator=" -- "/></xsl:message>
     </xsl:if>
-    <xsl:variable name="content" select="$parms[1]"/>
     
     <xsl:choose>
         <xsl:when test="$task ='index'">
-            <xsl:sequence select="tei:index($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:index($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='anchor'">
-            <xsl:sequence select="tei:anchor($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:anchor($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='graphic'">
-            <xsl:sequence select="tei:graphic($model, $content, $class, $number,$parms[2],$parms[3],$parms[4])"/>
+            <xsl:sequence select="tei:graphic($model, $parms[1],$parms[2],$parms[3],$parms[4],$class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='glyph'">
-            <xsl:sequence select="tei:glyph($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:glyph($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='note'">
-            <xsl:sequence select="tei:note($model, $content, $class, $number,$parms[2])"/>
+            <xsl:sequence select="tei:note($model, $parms[1], $parms[2],$class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='makeEndnotes'">
-            <xsl:sequence select="tei:endnotes($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:endnotes($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='block'">
-            <xsl:sequence select="tei:block($elName, $content, $class, $number)"/>
+            <xsl:sequence select="tei:block($elName, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='heading'">
-          <xsl:sequence select="tei:heading($model, $content, $parms[2], $class, $number)"/>
+          <xsl:sequence select="tei:heading($model, $parms[1], $parms[2], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='multiheading'">
-          <xsl:sequence select="tei:multiheading($model, $content, $parms[3], $class, $number,$parms[2])"/>
+          <xsl:sequence select="tei:multiheading($model, $parms[1], $parms[3], $class, $number,$parms[2])"/>
         </xsl:when>
         <xsl:when test="$task ='alternate'">
-            <xsl:sequence select="tei:alternate($model, $content, $parms[2],$class, $number)"/>
+            <xsl:sequence select="tei:alternate($model, $parms[1], $parms[2],$class, $number)"/>
         </xsl:when>
 
         <xsl:when test="$task ='link'">
-            <xsl:sequence select="tei:link($model, $content, $parms[2],$class, $number)"/>
+            <xsl:sequence select="tei:link($model, $parms[1], $parms[2],$class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='list'">
-            <xsl:sequence select="tei:list($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:list($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='listItem'">
-            <xsl:sequence select="tei:listItem($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:listItem($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='inline'">
-            <xsl:sequence select="tei:inline($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:inline($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='text'">
             <xsl:sequence select="tei:text($textcontent)"/>
         </xsl:when>
         <xsl:when test="$task ='newline'">
-            <xsl:sequence select="tei:newline($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:newline($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='break'">
-            <xsl:sequence select="tei:break($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:break($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='paragraph'">
-            <xsl:sequence select="tei:paragraph($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:paragraph($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='figure'">
-            <xsl:sequence select="tei:figure($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:figure($model, $parms[1], $class, $number)"/>
         </xsl:when>
 
         <xsl:when test="$task ='table'">
-            <xsl:sequence select="tei:table($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:table($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='row'">
-            <xsl:sequence select="tei:row($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:row($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='cell'">
-            <xsl:sequence select="tei:cell($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:cell($model, $parms[1], $class, $number)"/>
         </xsl:when>
         
 
         <xsl:when test="$task ='title'">
-            <xsl:sequence select="tei:title($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:title($model, $parms[1], $class, $number)"/>
         </xsl:when>
 
         <xsl:when test="$task ='metadata'">
-            <xsl:sequence select="tei:metadata($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:metadata($model, $parms[1], $class, $number)"/>
         </xsl:when>
 
         <xsl:when test="$task ='body'">
-            <xsl:sequence select="tei:body($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:body($model, $parms[1], $class, $number)"/>
         </xsl:when>
         
         <xsl:when test="$task ='document'">
-            <xsl:sequence select="tei:document($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:document($model, $parms[1], $class, $number)"/>
         </xsl:when>
         
         <xsl:when test="$task ='omit'"/>
         
         <xsl:otherwise>
-            <xsl:sequence select="tei:makeDefault($model, $content, $class, $number)"/>
+            <xsl:sequence select="tei:makeDefault($model, $parms[1], $class, $number)"/>
         </xsl:otherwise>
     </xsl:choose>
     
@@ -446,24 +445,29 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:note" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
+        <xsl:param name="place"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        <xsl:param name="place"/>
-        <xsl:variable name="location">
-            <xsl:choose>
-                <xsl:when test="$place='@place'"><xsl:value-of select="@place"/></xsl:when>
-                <xsl:otherwise>floating</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        
-            <xslo:variable name="place" select="{$place}"/>
-            <xslo:variable name="class"><xsl:value-of select="$class"/></xslo:variable>
-            <xslo:variable name="number" select="{$number}"/>
-	    <xsl:element name="span">
-	      <xslo:attribute name="class"><xslo:value-of select="($place, concat($class, $number))"/></xslo:attribute>
-	      <xsl:sequence select="tei:applyTemplates($content)"/>
-            </xsl:element>
-        
+
+        <xslo:variable name="place" select="{$place}"/>
+        <xslo:variable name="class"><xsl:value-of select="$class"/></xslo:variable>
+        <xslo:variable name="number" select="{$number}"/>
+	<xslo:variable name="N"><xslo:number from="text" level="any" count="note"/></xslo:variable>
+	<xslo:choose>
+	<xslo:when test="$place='bottom'">
+	  <sup class="footnotelink"><xslo:value-of select="if (@n) then   @n else $N"/></sup>
+	  <div>
+	    <xslo:attribute name="class"><xslo:value-of select="($place, concat($class, $number))"/></xslo:attribute>
+	    <xsl:sequence select="tei:applyTemplates($content)"/>
+	  </div>
+	</xslo:when>
+	<xslo:otherwise>
+	  <span>
+	    <xslo:attribute name="class"><xslo:value-of select="($place, concat($class, $number))"/></xslo:attribute>
+	    <xsl:sequence select="tei:applyTemplates($content)"/>
+	</span>
+	</xslo:otherwise>
+	</xslo:choose>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -515,23 +519,25 @@ of this software, even if advised of the possibility of such damage.
     <xsl:function name="tei:graphic" as="node()*">
         <xsl:param name="element"/>
         <xsl:param name="content"/>
-        <xsl:param name="class"/>
-        <xsl:param name="number"/>
         <xsl:param name="width"/>
         <xsl:param name="height"/>
         <xsl:param name="scale"/>
+        <xsl:param name="class"/>
+        <xsl:param name="number"/>
 	<img>
-	  <xsl:attribute name="src">{<xsl:value-of select="$content"/>}</xsl:attribute>
-	  <xslo:if test="string-length({$width}) &gt; 0">
-	    <xslo:attribute name="width">
-	      <xsl:attribute name="select"><xsl:value-of     select="$width"/></xsl:attribute>
-	    </xslo:attribute>
-	  </xslo:if>
-	  <xslo:if test="string-length({$height}) &gt; 0">
-	    <xslo:attribute name="height">
-	      <xsl:attribute name="select"><xsl:value-of    select="$height"/></xsl:attribute>
-	    </xslo:attribute>
-	  </xslo:if>
+	  <xsl:attribute name="src">{<xsl:value-of
+	  select="$content"/>}</xsl:attribute>
+	      <xslo:variable name="sizes">
+		<xslo:if test="{$width}">
+		  <xslo:value-of select="concat('width:',{$width},';')"/>
+		</xslo:if>
+		<xslo:if test="{$height}">
+		  <xslo:value-of select="concat('height:',{$height},';')"/>
+		</xslo:if>
+	      </xslo:variable>
+	      <xslo:if test="not($sizes='')">
+		<xslo:attribute name="style" select="$sizes"/>
+	      </xslo:if>
 	</img>
     </xsl:function>
 
@@ -553,7 +559,11 @@ of this software, even if advised of the possibility of such damage.
                             </xsl:element>
                     </xslo:when>
                     <xslo:otherwise>
-                        <span class="verybig">�</span>
+                      <div>
+                        <xsl:if test="string($class)">
+			  <xsl:attribute name="class"><xsl:value-of  select="concat($class,  $number)"/></xsl:attribute></xsl:if>
+			<xslo:apply-templates/>
+		      </div>
                     </xslo:otherwise>
                 </xslo:choose>
                 
@@ -567,9 +577,10 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="anchorName"/>
         
     <xsl:element name="{$name}">
-        <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
-        <xsl:if test="string($anchorName)"><xsl:attribute name="name"><xsl:value-of select="$anchorName"/></xsl:attribute></xsl:if>
-	<xsl:sequence select="tei:applyTemplates($content)"/>
+      <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
+      <xsl:if test="string($anchorName)"><xsl:attribute name="name"><xsl:value-of select="$anchorName"/></xsl:attribute></xsl:if>
+      <xslo:if test="@xml:id"><xslo:attribute name="id" select="@xml:id"/></xslo:if>
+      <xsl:sequence select="tei:applyTemplates($content)"/>
     </xsl:element>
     </xsl:function>
     
@@ -583,6 +594,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:if test="string($class)">
                 <xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>
             </xsl:if>
+	    <xslo:if test="@xml:id"><xslo:attribute name="id" select="@xml:id"/></xslo:if>
             <xslo:apply-templates/>
         </div>
         

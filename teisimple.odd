@@ -855,7 +855,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="omit()"/>
             </elementSpec>
             <elementSpec mode="change" ident="lg">
-              <model behaviour="inline(.)"/>
+              <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="list">
               <model predicate="@rendition" behaviour="list(.)" useSourceRendition="true"/>
@@ -932,6 +932,10 @@ border-bottom: solid 1pt blue;
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="q">
+              <model predicate="l" behaviour="block(.)">
+                <rendition>margin-left: 10px; margin-right: 10px;
+		</rendition>
+              </model>
               <model predicate="ancestor::p" behaviour="inline(.)">
                 <rendition scope="before">content: '‘';</rendition>
                 <rendition scope="after">content: '’';</rendition>

@@ -48,9 +48,10 @@ p.p {text-align: justify;}
 span.pb {display: block; color: grey; float: right;}
 span.pb:before {content: '[Page ';}
 span.pb:after {content: ']';}
-span.q1:before {content: '‘';}
-span.q1:after {content: '’';}
-div.q2 {margin-left: 10px; margin-right: 10px;}
+div.q1 {margin-left: 10px; margin-right: 10px;}
+span.q2:before {content: '‘';}
+span.q2:after {content: '’';}
+div.q3 {margin-left: 10px; margin-right: 10px;}
 span.quote1:before {content: '‘';}
 span.quote1:after {content: '’';}
 div.quote2 {margin-left: 10px; margin-right: 10px;}
@@ -118,9 +119,9 @@ span.unclear:after {content: ' [?] ';}
          <h0 class="head">(Bits of) A CHRISTMAS CAROL, and other things</h0> 
          <div class="div">
             <h1 class="head">Simple rendition tests</h1> 
-            <p class="p"><span class="q1">Who-e debel you?</span> — he at last said — <span class="q1">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
+            <p class="p"><span class="q2">Who-e debel you?</span> — he at last said — <span class="q2">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
             </p> 
-            <p class="p"><span class="q1">Who-e debel you?</span> — he at last said — <span class="q1">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
+            <p class="p"><span class="q2">Who-e debel you?</span> — he at last said — <span class="q2">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
             </p> 
             <table class="table">
                <tr class="row1">
@@ -208,21 +209,25 @@ span.unclear:after {content: ' [?] ';}
                </tr> 
                <tr class="row2">
                   <td class="cell">bold italic smallcaps</td> 
-                  <td class="cell"><span class="hi1">rend test 1</span> <span class="bottom note1">Cairns 2003: 11. My work is Muellner 1996.</span></td>
+                  <td class="cell"><span class="hi1">rend test 1</span> <sup class="footnotelink">[1]</sup><div class="bottom note1">Cairns 2003: 11. My work is Muellner 1996.</div>
+                  </td>
                </tr>
             </table>
          </div> 
          <div class="div">
             <h1 class="head">Quotations</h1> 
-            <p class="p">A paragraph with a footnote containing a block-level object<span class="bottom note1">We start with a quotation:<span class="lg">
+            <p class="p">A paragraph with a footnote containing a block-level object<sup class="footnotelink">2</sup><div class="bottom note1">We start with a quotation:
+                  <div class="lg">
                      <div class="l">This is the way the world ends</div>
                      <div class="l">This is the way the world ends</div>
                      <div class="l">This is the way the world ends</div>
-                     <div class="l">Not with a bang but a whimper.</div></span> which is from TS Eliot's <span class="title4">Hollow men</span></span></p> 
+                     <div class="l">Not with a bang but a whimper.</div>
+                  </div> which is from TS Eliot's <span class="title4">Hollow men</span></div>
+            </p> 
             <p class="p">Consider quotations: <span class="quote1">This is a quote which is run on within the text and will have quote marks of some
                   kind around it.</span></p> 
             <p class="p">Another quotation: <span class="quote1">This is a block quote set off as such from the rest of the text</span></p> 
-            <p class="p">Here, by contrast is an <span class="q1">inline quotation</span>. Another strange thing about quotes is this: <span class="quote1">You can put line breaksto determine where the line breaksInside a block!</span></p>
+            <p class="p">Here, by contrast is an <span class="q2">inline quotation</span>. Another strange thing about quotes is this: <span class="quote1">You can put line breaksto determine where the line breaksInside a block!</span></p>
          </div> 
          <div class="div">
             <h1 class="head">Use of xml:lang</h1> 
@@ -270,11 +275,12 @@ span.unclear:after {content: ' [?] ';}
          <div class="div">
             <h1 class="head">Footnotes and endnotes</h1> 
             <div class="div">
-               <h2 class="head">1 Zur Entstehung der <span class="hi1">Philosophischen Untersuchungen</span><span class="bottom note1">Zu Textauszeichnungen und Siglen siehe die Legende.</span></h2> 
+               <h2 class="head">1 Zur Entstehung der <span class="hi1">Philosophischen Untersuchungen</span><sup class="footnotelink">8</sup><div class="bottom note1">Zu Textauszeichnungen und Siglen siehe die Legende.</div>
+               </h2> 
                <p class="p">Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
                   eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                   praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
-                  ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod<span class="bottom note1">It is time to begin the beguine.</span> Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
+                  ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod<sup class="footnotelink">9</sup><div class="bottom note1">It is time to begin the beguine.</div> Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
                   eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                   praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
                   ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -287,7 +293,7 @@ span.unclear:after {content: ' [?] ';}
          </div> 
          <div class="div">
             <h1 class="head">Assorted elements and links</h1> 
-            <p class="p"><span class="label">Fit the first</span> The emph element is used for linguistic emph<span class="hi2">asis</span>. <span class="q1">highlighting</span> (soCalled), <span class="seg">transmogrification</span>, (a technical term).
+            <p class="p"><span class="label">Fit the first</span> The emph element is used for linguistic emph<span class="hi2">asis</span>. <span class="q2">highlighting</span> (soCalled), <span class="seg">transmogrification</span>, (a technical term).
             </p> 
             <p class="p">Now for some links! We will start by cross-referring to a later section.</p> 
             <p class="p">Here is a simple ptr to it: <a class="ref2" href="#P1">#P1</a>. Here is a simple ref, a <a class="ref3" href="#P1">reference to it</a>.
@@ -364,13 +370,13 @@ span.unclear:after {content: ' [?] ';}
                </tr>
             </table>
          </div> 
-         <div class="div">
+         <div class="div" id="P1">
             <h1 class="head">Lists</h1> 
             <p class="p">Various sorts of list are legal within paragraphs, and you can reference <a class="ref3" href="#birds">items in lists</a>... 
                <ul class="list2">
                   <li class="item2">Dogs</li>
                   <li class="item2">Zebras</li>
-                  <li class="item2">Birds</li>
+                  <li class="item2" id="birds">Birds</li>
                   <li class="item2">Cats</li>
                </ul>
             </p> 
@@ -426,11 +432,11 @@ span.unclear:after {content: ' [?] ';}
                </tr> 
                <tr class="row2">
                   <td class="cell">width="2.5in" </td> 
-                  <td class="cell"><img src="portrait.jpg" width="2.5in" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="width:2.5in;" /></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">width=".5in" </td> 
-                  <td class="cell"><img src="portrait.jpg" width="0.5in" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="width:0.5in;" /></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">scale=".5"</td> 
@@ -438,31 +444,31 @@ span.unclear:after {content: ' [?] ';}
                </tr> 
                <tr class="row2">
                   <td class="cell">width="1in"</td> 
-                  <td class="cell"><img src="portrait.jpg" width="1in" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="width:1in;" /></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">height="1in"</td> 
-                  <td class="cell"><img src="portrait.jpg" height="1in" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="height:1in;" /></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">height="1in" width="2in"</td> 
-                  <td class="cell"><img src="portrait.jpg" width="2in" height="1in" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="width:2in;height:1in;" /></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">height="2in" width="1in"</td> 
-                  <td class="cell"><img src="portrait.jpg" width="1in" height="2in" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="width:1in;height:2in;" /></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">width="10%"</td> 
-                  <td class="cell"><img src="portrait.jpg" width="10%" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="width:10%;" /></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">height="10%" width="10%"</td> 
-                  <td class="cell"><img src="portrait.jpg" width="10%" height="10%" /></td>
+                  <td class="cell"><img src="portrait.jpg" style="width:10%;height:10%;" /></td>
                </tr>
             </table>
          </div> 
-         <div class="div">
+         <div class="div" id="S1">
             <h1 class="head">Extended prose: MARLEY'S GHOST</h1> <span class="pb">1</span> 
             <p class="p">Marley was dead: to begin with. There is no doubt whatever about that. The register
                of his burial was signed by the clergyman, the clerk, the undertaker, and the chief
@@ -509,15 +515,15 @@ span.unclear:after {content: ' [?] ';}
                weather chill him. No wind that blew was bitterer than he, no falling snow was more
                intent upon its purpose, no pelting rain less open to entreaty. Foul weather didn't
                know where to have him. The heaviest rain, and snow, and hail, and sleet, could boast
-               of the advantage over him in only one respect. They often <span class="q1">came down</span> handsomely, and Scrooge never did.
+               of the advantage over him in only one respect. They often <span class="q2">came down</span> handsomely, and Scrooge never did.
             </p> 
-            <p class="p">Nobody ever stopped him in the street to say, with gladsome looks, <span class="q1">My dear Scrooge, how are you. When will you come to see me.</span> No beggars implored him to bestow a trifle, no children asked him what it was o'clock,
+            <p class="p">Nobody ever stopped him in the street to say, with gladsome looks, <span class="q2">My dear Scrooge, how are you. When will you come to see me.</span> No beggars implored him to bestow a trifle, no children asked him what it was o'clock,
                no man or woman ever once in all his life inquired the way to such and such a place,
                of Scrooge. Even the blindmen's dogs appeared to know him; and when they saw him coming
-               on, would tug their owners into doorways <span class="pb">5</span> and up courts; and then would wag their tails as though they said, <span class="q1">No eye at all is better than an evil eye, dark master! </span></p> 
+               on, would tug their owners into doorways <span class="pb">5</span> and up courts; and then would wag their tails as though they said, <span class="q2">No eye at all is better than an evil eye, dark master! </span></p> 
             <p class="p">But what did Scrooge care! It was the very thing he liked. To edge his way along the
                crowded paths of life, warning all human sympathy to keep its distance, was what the
-               knowing ones call <span class="q1">nuts</span> to Scrooge.
+               knowing ones call <span class="q2">nuts</span> to Scrooge.
             </p> 
             <p class="p">Once upon a time — of all the good days in the year, on Christmas Eve — old Scrooge
                sat busy in his counting-house. It was cold, bleak, biting weather: foggy withal:
@@ -540,32 +546,32 @@ span.unclear:after {content: ' [?] ';}
                comforter, and tried to warm himself at the candle; in which effort, not being a man
                of a strong imagination, he failed. 
             </p> 
-            <p class="p"><span class="q1">A merry Christmas, uncle! God save you!</span> cried a cheerful voice. It was the voice of Scrooge's nephew, who came upon him so
+            <p class="p"><span class="q2">A merry Christmas, uncle! God save you!</span> cried a cheerful voice. It was the voice of Scrooge's nephew, who came upon him so
                quickly that this was the first intimation he had of his approach. <span class="pb">7</span></p> 
-            <p class="p"><span class="q1">Bah!</span> said Scrooge, <span class="q1">Humbug!</span></p> 
+            <p class="p"><span class="q2">Bah!</span> said Scrooge, <span class="q2">Humbug!</span></p> 
             <p class="p">He had so heated himself with rapid walking in the fog and frost, this nephew of Scrooge's,
                that he was all in a glow; his face was ruddy and handsome; his eyes sparkled, and
                his breath smoked again. 
             </p> 
-            <p class="p"><span class="q1">Christmas a humbug, uncle!</span> said Scrooge's nephew. <span class="q1">You don't mean that, I am sure.</span></p> 
-            <p class="p"><span class="q1">I do,</span> said Scrooge. <span class="q1">Merry Christmas! What right have you to be merry? what reason have you to be merry?
+            <p class="p"><span class="q2">Christmas a humbug, uncle!</span> said Scrooge's nephew. <span class="q2">You don't mean that, I am sure.</span></p> 
+            <p class="p"><span class="q2">I do,</span> said Scrooge. <span class="q2">Merry Christmas! What right have you to be merry? what reason have you to be merry?
                   You're poor enough.</span></p> 
-            <p class="p"><span class="q1">Come, then,</span> returned the nephew gaily. <span class="q1">What right have you to be dismal? what reason have you to be morose? You're rich enough.</span></p> 
-            <p class="p">Scrooge having no better answer ready on the spur of the moment, said, <span class="q1">Bah!</span> again; and followed it up with <span class="q1">Humbug.</span></p> 
-            <p class="p"><span class="q1">Don't be cross, uncle,</span> said the nephew.
+            <p class="p"><span class="q2">Come, then,</span> returned the nephew gaily. <span class="q2">What right have you to be dismal? what reason have you to be morose? You're rich enough.</span></p> 
+            <p class="p">Scrooge having no better answer ready on the spur of the moment, said, <span class="q2">Bah!</span> again; and followed it up with <span class="q2">Humbug.</span></p> 
+            <p class="p"><span class="q2">Don't be cross, uncle,</span> said the nephew.
             </p> 
-            <p class="p"><span class="q1">What else can I be,</span> returned the uncle, <span class="q1">when I live in such a world of fools as this Merry Christmas! Out upon merry Christmas.
+            <p class="p"><span class="q2">What else can I be,</span> returned the uncle, <span class="q2">when I live in such a world of fools as this Merry Christmas! Out upon merry Christmas.
                   What's Christmas time to you but a time for <span class="pb">8</span>paying bills without money; a time for finding yourself a year older, but not an hour
                   richer; a time for balancing your books and having every item in 'em through a round
-                  dozen of months presented dead against you? If I could work my will,</span> said Scrooge indignantly, <span class="q1">every idiot who goes about with <span class="q1">Merry Christmas</span> on his lips, should be boiled with his own pudding, and buried with a stake of holly
+                  dozen of months presented dead against you? If I could work my will,</span> said Scrooge indignantly, <span class="q2">every idiot who goes about with <span class="q2">Merry Christmas</span> on his lips, should be boiled with his own pudding, and buried with a stake of holly
                   through his heart. He should!</span></p> 
-            <p class="p"><span class="q1">Uncle!</span> pleaded the nephew.
+            <p class="p"><span class="q2">Uncle!</span> pleaded the nephew.
             </p> 
-            <p class="p"><span class="q1">Nephew!</span> returned the uncle, sternly, <span class="q1">keep Christmas in your own way, and let me keep it in mine.</span></p> 
-            <p class="p"><span class="q1">Keep it!</span> repeated Scrooge's nephew. <span class="q1">But you don't keep it.</span></p> 
-            <p class="p"><span class="q1">Let me leave it alone, then,</span> said Scrooge. <span class="q1">Much good may it do you! Much good it has ever done you!</span></p> 
-            <p class="p"><span class="q1">There are many things from which I might have derived good, by which I have not profited,
-                  I dare say,</span> returned the nephew: <span class="q1">Christmas among the rest. But I am sure I have always thought of Christmas<span class="pb">9</span> time, when it has come round — apart from the veneration due to its sacred name and
+            <p class="p"><span class="q2">Nephew!</span> returned the uncle, sternly, <span class="q2">keep Christmas in your own way, and let me keep it in mine.</span></p> 
+            <p class="p"><span class="q2">Keep it!</span> repeated Scrooge's nephew. <span class="q2">But you don't keep it.</span></p> 
+            <p class="p"><span class="q2">Let me leave it alone, then,</span> said Scrooge. <span class="q2">Much good may it do you! Much good it has ever done you!</span></p> 
+            <p class="p"><span class="q2">There are many things from which I might have derived good, by which I have not profited,
+                  I dare say,</span> returned the nephew: <span class="q2">Christmas among the rest. But I am sure I have always thought of Christmas<span class="pb">9</span> time, when it has come round — apart from the veneration due to its sacred name and
                   origin, if anything belonging to it can be apart from that — as a good time: a kind,
                   forgiving, charitable, pleasant time: the only time I know of, in the long calendar
                   of the year, when men and women seem by one consent to open their shut-up hearts freely,
@@ -575,79 +581,79 @@ span.unclear:after {content: ' [?] ';}
             <p class="p">The clerk in the tank involuntarily applauded. Becoming immediately sensible of the
                impropriety, he poked the fire, and extinguished the last frail spark for ever. 
             </p> 
-            <p class="p"><span class="q1">Let me hear another sound from <span class="hi2">you</span>,</span> said Scrooge, <span class="q1">and you'll keep your Christmas by losing your situation. You're quite a powerful speaker,
-                  sir,</span> he added, turning to his nephew. <span class="q1">I wonder you don't go into Parliament.</span><span class="pb">10</span></p> 
-            <p class="p"><span class="q1">Don't be angry, uncle. Come! Dine with us to-morrow.</span></p> 
+            <p class="p"><span class="q2">Let me hear another sound from <span class="hi2">you</span>,</span> said Scrooge, <span class="q2">and you'll keep your Christmas by losing your situation. You're quite a powerful speaker,
+                  sir,</span> he added, turning to his nephew. <span class="q2">I wonder you don't go into Parliament.</span><span class="pb">10</span></p> 
+            <p class="p"><span class="q2">Don't be angry, uncle. Come! Dine with us to-morrow.</span></p> 
             <p class="p">Scrooge said that he would see him — yes, indeed he did. He went the whole length
                of the expression, and said that he would see him in that extremity first. 
             </p> 
-            <p class="p"><span class="q1">But why?</span> cried Scrooge's nephew. <span class="q1">Why?</span></p> 
-            <p class="p"><span class="q1">Why did you get married?</span> said Scrooge.
+            <p class="p"><span class="q2">But why?</span> cried Scrooge's nephew. <span class="q2">Why?</span></p> 
+            <p class="p"><span class="q2">Why did you get married?</span> said Scrooge.
             </p> 
-            <p class="p"><span class="q1">Because I fell in love.</span></p> 
-            <p class="p"><span class="q1">Because you fell in love!</span> growled Scrooge, as if that were the only one thing in the world more ridiculous than
-               a merry Christmas. <span class="q1">Good afternoon!</span></p> 
-            <p class="p"><span class="q1">Nay, uncle, but you never came to see me before that happened. Why give it as a reason
+            <p class="p"><span class="q2">Because I fell in love.</span></p> 
+            <p class="p"><span class="q2">Because you fell in love!</span> growled Scrooge, as if that were the only one thing in the world more ridiculous than
+               a merry Christmas. <span class="q2">Good afternoon!</span></p> 
+            <p class="p"><span class="q2">Nay, uncle, but you never came to see me before that happened. Why give it as a reason
                   for not coming now?</span></p> 
-            <p class="p"><span class="q1">Good afternoon,</span> said Scrooge.
+            <p class="p"><span class="q2">Good afternoon,</span> said Scrooge.
             </p> 
-            <p class="p"><span class="q1">I want nothing from you; I ask nothing of you; why cannot we be friends?</span></p> 
-            <p class="p"><span class="q1">Good afternoon,</span> said Scrooge.
+            <p class="p"><span class="q2">I want nothing from you; I ask nothing of you; why cannot we be friends?</span></p> 
+            <p class="p"><span class="q2">Good afternoon,</span> said Scrooge.
             </p> 
-            <p class="p"><span class="q1">I am sorry, with all my heart, to find you so resolute. We have never had any quarrel,
+            <p class="p"><span class="q2">I am sorry, with all my heart, to find you so resolute. We have never had any quarrel,
                   to which<span class="pb">11</span> I have been a party. But I have made the trial in homage to Christmas, and I'll keep
                   my Christmas humour to the last. So A Merry Christmas, uncle!</span></p> 
-            <p class="p"><span class="q1">Good afternoon!</span> said Scrooge.
+            <p class="p"><span class="q2">Good afternoon!</span> said Scrooge.
             </p> 
-            <p class="p"><span class="q1">And A Happy New Year!</span></p> 
-            <p class="p"><span class="q1">Good afternoon!</span> said Scrooge.
+            <p class="p"><span class="q2">And A Happy New Year!</span></p> 
+            <p class="p"><span class="q2">Good afternoon!</span> said Scrooge.
             </p> 
             <p class="p">His nephew left the room without an angry word, notwithstanding. He stopped at the
                outer door to bestow the greeting of the season on the clerk, who, cold as he was,
                was warmer than Scrooge; for he returned them cordially. 
             </p> 
-            <p class="p"><span class="q1">There's another fellow,</span> muttered Scrooge; who overheard him: <span class="q1">my clerk, with fifteen shillings a week, and a wife and family, talking about a merry
+            <p class="p"><span class="q2">There's another fellow,</span> muttered Scrooge; who overheard him: <span class="q2">my clerk, with fifteen shillings a week, and a wife and family, talking about a merry
                   Christmas. I'll retire to Bedlam.</span></p> 
             <p class="p">This lunatic, in letting Scrooge's nephew out, had let two other people in. They were
                portly gentlemen, pleasant to behold, and now stood, with their hats off, in Scrooge's
                office. They had books and papers in their hands, and bowed to him. 
             </p> 
-            <p class="p"><span class="q1">Scrooge and Marley's, I believe,</span> said one of the <span class="pb">12</span>gentlemen, referring to his list. <span class="q1">Have I the pleasure of addressing Mr Scrooge, or Mr Marley?</span></p> 
-            <p class="p"><span class="q1">Mr Marley has been dead these seven years,</span> Scrooge replied. <span class="q1">He died seven years ago, this very night.</span></p> 
-            <p class="p"><span class="q1">We have no doubt his liberality is well represented by his surviving partner,</span> said the gentleman, presenting his credentials.
+            <p class="p"><span class="q2">Scrooge and Marley's, I believe,</span> said one of the <span class="pb">12</span>gentlemen, referring to his list. <span class="q2">Have I the pleasure of addressing Mr Scrooge, or Mr Marley?</span></p> 
+            <p class="p"><span class="q2">Mr Marley has been dead these seven years,</span> Scrooge replied. <span class="q2">He died seven years ago, this very night.</span></p> 
+            <p class="p"><span class="q2">We have no doubt his liberality is well represented by his surviving partner,</span> said the gentleman, presenting his credentials.
             </p> 
-            <p class="p">It certainly was; for they had been two kindred spirits. At the ominous word <span class="q1">liberality</span>, Scrooge frowned, and shook his head, and handed the credentials back.
+            <p class="p">It certainly was; for they had been two kindred spirits. At the ominous word <span class="q2">liberality</span>, Scrooge frowned, and shook his head, and handed the credentials back.
             </p> 
-            <p class="p"><span class="q1">At this festive season of the year, Mr Scrooge,</span> said the gentleman, taking up a pen, <span class="q1">it is more than usually desirable that we should make some slight provision for the
+            <p class="p"><span class="q2">At this festive season of the year, Mr Scrooge,</span> said the gentleman, taking up a pen, <span class="q2">it is more than usually desirable that we should make some slight provision for the
                   Poor and destitute, who suffer greatly at the present time. Many thousands are in
                   want of common necessaries; hundreds of thousands are in want of common comforts,
                   sir.</span></p> 
-            <p class="p"><span class="q1">Are there no prisons?</span> asked Scrooge.
+            <p class="p"><span class="q2">Are there no prisons?</span> asked Scrooge.
             </p> 
-            <p class="p"><span class="q1">Plenty of prisons,</span> said the gentleman, laying down the pen again. <span class="pb">13</span></p> 
-            <p class="p"><span class="q1">And the Union workhouses?</span> demanded Scrooge. <span class="q1">Are they still in operation?</span></p> 
-            <p class="p"><span class="q1">They are. Still,</span> returned the gentleman, <span class="q1">I wish I could say they were not.</span></p> 
-            <p class="p"><span class="q1">The Treadmill and the Poor Law are in full vigour, then?</span> said Scrooge.
+            <p class="p"><span class="q2">Plenty of prisons,</span> said the gentleman, laying down the pen again. <span class="pb">13</span></p> 
+            <p class="p"><span class="q2">And the Union workhouses?</span> demanded Scrooge. <span class="q2">Are they still in operation?</span></p> 
+            <p class="p"><span class="q2">They are. Still,</span> returned the gentleman, <span class="q2">I wish I could say they were not.</span></p> 
+            <p class="p"><span class="q2">The Treadmill and the Poor Law are in full vigour, then?</span> said Scrooge.
             </p> 
-            <p class="p"><span class="q1">Both very busy, sir.</span></p> 
-            <p class="p"><span class="q1">Oh! I was afraid, from what you said at first, that something had occurred to stop
-                  them in their useful course,</span> said Scrooge. <span class="q1">I'm very glad to hear it.</span></p> 
-            <p class="p"><span class="q1">Under the impression that they scarcely furnish Christian cheer of mind or body to
-                  the multitude,</span> returned the gentleman, <span class="q1">a few of us are endeavouring to raise a fund to buy the Poor some meat and drink,
+            <p class="p"><span class="q2">Both very busy, sir.</span></p> 
+            <p class="p"><span class="q2">Oh! I was afraid, from what you said at first, that something had occurred to stop
+                  them in their useful course,</span> said Scrooge. <span class="q2">I'm very glad to hear it.</span></p> 
+            <p class="p"><span class="q2">Under the impression that they scarcely furnish Christian cheer of mind or body to
+                  the multitude,</span> returned the gentleman, <span class="q2">a few of us are endeavouring to raise a fund to buy the Poor some meat and drink,
                   and means of warmth. We choose this time, because it is a time, of all others, when
                   Want is keenly felt, and Abundance rejoices. What shall I put you down for?</span></p> 
-            <p class="p"><span class="q1">Nothing!</span> Scrooge replied.
+            <p class="p"><span class="q2">Nothing!</span> Scrooge replied.
             </p> 
-            <p class="p"><span class="q1">You wish to be anonymous?</span></p> 
-            <p class="p"><span class="q1">I wish to be left alone,</span> said Scrooge. <span class="q1">Since <span class="pb">14</span> you ask me what I wish, gentlemen, that is my answer. I don't make merry myself at
+            <p class="p"><span class="q2">You wish to be anonymous?</span></p> 
+            <p class="p"><span class="q2">I wish to be left alone,</span> said Scrooge. <span class="q2">Since <span class="pb">14</span> you ask me what I wish, gentlemen, that is my answer. I don't make merry myself at
                   Christmas and I can't afford to make idle people merry. I help to support the establishments
                   I have mentioned: they cost enough: and those who are badly off must go there.</span></p> 
-            <p class="p"><span class="q1">Many can't go there; and many would rather die.</span></p> 
-            <p class="p"><span class="q1">If they would rather die,</span> said Scrooge, <span class="q1">they had better do it, and decrease the surplus population. Besides — excuse me —
+            <p class="p"><span class="q2">Many can't go there; and many would rather die.</span></p> 
+            <p class="p"><span class="q2">If they would rather die,</span> said Scrooge, <span class="q2">they had better do it, and decrease the surplus population. Besides — excuse me —
                   I don't know that.</span></p> 
-            <p class="p"><span class="q1">But you might know it,</span> observed the gentleman.
+            <p class="p"><span class="q2">But you might know it,</span> observed the gentleman.
             </p> 
-            <p class="p"><span class="q1">It's not my business,</span> Scrooge returned. <span class="q1">It's enough for a man to understand his own business, and not to interfere with other
+            <p class="p"><span class="q2">It's not my business,</span> Scrooge returned. <span class="q2">It's enough for a man to understand his own business, and not to interfere with other
                   people's. Mine occupies me constantly. Good afternoon, gentlemen!</span></p> 
             <p class="p">Seeing clearly that it would be useless to pursue their point, the gentlemen withdrew.
                Scrooge resumed his labours with an improved opinion of himself, and in a more facetious
@@ -656,9 +662,11 @@ span.unclear:after {content: ' [?] ';}
                had but nipped the Evil Spirit's nose with a touch of such weather as that, <span class="note3">test of a note</span> instead of using his familiar weapons, then indeed he would have roared to lusty purpose.
                The owner of one scant young nose, gnawed and mumbled by the hungry cold as bones
                are gnawed by dogs, stooped down at Scrooge's keyhole to regale him with a Christmas
-               carol: but at the first sound of <span class="q1">
+               carol: but at the first sound of 
+               <div class="q1">
                   <div class="l">God bless you, merry gentleman! </div>
-                  <div class="l">May nothing you dismay! </div></span> Scrooge seized the ruler with such energy of action<span class="pb">17</span> that the singer fled in terror, leaving the keyhole to the fog and even more congenial
+                  <div class="l">May nothing you dismay! </div>
+               </div> Scrooge seized the ruler with such energy of action<span class="pb">17</span> that the singer fled in terror, leaving the keyhole to the fog and even more congenial
                frost.
             </p>
          </div> 
@@ -687,12 +695,12 @@ span.unclear:after {content: ' [?] ';}
             <p class="p">I wonder what are the xml-ids preserved in a transformation to XHTML, in particular
                in the case of quotations. So, let’s try :
             </p> 
-            <div class="cit"><sup><a class="anchor" name="Ad1e1739" href="#Nd1e1739">1</a></sup> 
-               <div class="quote2">
-                  <p class="p">Something longer. Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem ipsum
+            <div class="cit" id="thisCitation"><sup><a class="anchor" name="Ad1e1739" href="#Nd1e1739">1</a></sup> 
+               <div class="quote2" id="thisQuotation">
+                  <p class="p" id="thisParagraph">Something longer. Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem ipsum
                      dolor sit amet Lorem ipsum dolor sit amet.
                   </p>
-               </div> <span class="bibl">In <span class="title3">Somewhere</span>.</span></div>
+               </div> <span class="bibl" id="thisReference">In <span class="title3" id="thisTitle">Somewhere</span>.</span></div>
          </div> 
          <div class="div">
             <h1 class="head">Choice, sic, corr, reg, orig</h1> 

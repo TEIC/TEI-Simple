@@ -10,4 +10,96 @@
 $(document).ready(function() {
             $('#toc').toc({'selectors': 'h1,h2,h3'
       });
-  });
+
+   var Endnotes = [];
+   var i = 1;
+   $(".end").each(function() {
+      Endnotes.push($(this));
+      $(this).replaceWith($('<sup>').append($('<a>').attr({
+        href: '#NOTE' + i}).text(i)));
+      i++;
+   });
+
+   fdiv =     $('body').append($('<div>'));
+   fdiv.append($('<h2>').text('NOTES'));
+   var i = 1;
+   $.each(Endnotes,function() { 
+       fdiv.append($('<p>').attr({id: 'NOTE'+i}).append($('<sup>').text(i)).append($(this)));
+       i++;
+   });
+
+    Footnotes.setup();
+
+   $("sup.footnotelink").each(function() {
+       console.log($(this));
+   });
+
+});
+// http://ignorethecode.net/blog/2010/04/20/footnotes/
+// this script requires jQuery
+
+
+    var Footnotes = {
+    footnotetimeout: false,
+    setup: function() {
+        var footnotelinks = $("sup.footnotelink")
+
+        
+        footnotelinks.unbind('mouseover',Footnotes.footnoteover);
+        footnotelinks.unbind('mouseout',Footnotes.footnoteoout);
+        
+        footnotelinks.bind('mouseover',Footnotes.footnoteover);
+        footnotelinks.bind('mouseout',Footnotes.footnoteoout);
+    },
+    footnoteover: function() {
+        clearTimeout(Footnotes.footnotetimeout);
+        $('#footnotediv').stop();
+        $('#footnotediv').remove();
+        
+        var position = $(this).offset();
+    
+        var div = $(document.createElement('div'));
+        div.attr('id','footnotediv');
+        div.bind('mouseover',Footnotes.divover);
+        div.bind('mouseout',Footnotes.footnoteoout);
+
+        var el = $(this).next();
+        div.html($(el).html());
+        
+        div.css({
+	    display: 'block',
+            position:'absolute',
+            width:'400px',
+            opacity:0.9,
+        });
+        $(document.body).append(div);
+
+        var left = position.left;
+        if(left + 420  > $(window).width() + $(window).scrollLeft())
+            left = $(window).width() - 420 + $(window).scrollLeft();
+        var top = position.top+20;
+        if(top + div.height() > $(window).height() + $(window).scrollTop())
+            top = position.top - div.height() - 15;
+        div.css({
+            left:left,
+            top:top
+        });
+    },
+    footnoteoout: function() {
+        Footnotes.footnotetimeout = setTimeout(function() {
+            $('#footnotediv').animate({
+                opacity: 0
+            }, 600, function() {
+                $('#footnotediv').remove();
+            });
+        },100);
+    },
+    divover: function() {
+        clearTimeout(Footnotes.footnotetimeout);
+        $('#footnotediv').stop();
+        $('#footnotediv').css({
+                opacity: 0.9
+        });
+    }
+}
+
