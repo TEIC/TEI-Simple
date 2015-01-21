@@ -836,10 +836,10 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="item">
               <model predicate="parent::list[@rendition]" behaviour="listItem(.)">
-                <desc>Pithy description. </desc>
+                
               </model>
               <model predicate="not(parent::list[@rendition])" behaviour="listItem(.)">
-                <desc>Pithy description. </desc>
+                
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="l">
@@ -864,7 +864,7 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="listBibl">
               <model behaviour="list(.)">
-                <desc>Pithy description. </desc>
+                
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="measure">
@@ -1232,7 +1232,7 @@ border-bottom: solid 1pt blue;
           <specGrp xml:id="rendition">
             <rendition xml:id="allcaps">    text-transform: uppercase;</rendition>
             <rendition xml:id="blackletter"/>
-            <rendition xml:id="bold">font:weight: bold;</rendition>
+            <rendition xml:id="bold">font-weight: bold;</rendition>
             <rendition xml:id="bottombraced"/>
             <rendition xml:id="boxed"> border: solid black 1pt;</rendition>
             <rendition xml:id="centre"> text-align: center;</rendition>

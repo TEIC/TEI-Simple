@@ -174,7 +174,7 @@
           <row>
             <cell>bold italic smallcaps</cell>
             <cell>
-              <hi rendition="simple:bold italic smallcaps">rend test 1</hi>
+              <hi rendition="simple:bold simple:italic simple:smallcaps">rend test 1</hi>
               <note n="[1]" place="bottom">Cairns 2003: 11. My work is Muellner
 	1996.</note>
             </cell>

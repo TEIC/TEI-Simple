@@ -75,6 +75,31 @@
             
           <xsl:apply-templates select="//elementSpec[.//model]"/>
 	  
+	  
+	  <xslo:template name="localrendition">
+	    <xslo:if test="@rendition">
+	      <xslo:variable name="values">
+		<xslo:for-each select="tokenize(normalize-space(@rendition),' ')">
+		  <xslo:choose>
+		    <xslo:when test="starts-with(.,'#')">
+		      <xslo:sequence select="substring-after(.,'#')"/>
+		    </xslo:when>
+		    <xslo:when test="starts-with(.,'simple:')">
+		      <xslo:sequence select="replace(.,':','_')"/>
+		    </xslo:when>
+		    <xslo:otherwise>
+		      <xslo:for-each select="document(.)">
+			<xslo:sequence select="@xml:id"/>
+		      </xslo:for-each>
+		    </xslo:otherwise>
+		  </xslo:choose>
+		</xslo:for-each>
+	      </xslo:variable>
+	      <xslo:attribute name="class">
+		<xslo:value-of select="string-join($values,' ')"/>
+	      </xslo:attribute>
+	    </xslo:if>
+	</xslo:template>
 
   <xslo:template match="text()" mode="#default plain">
     <xslo:choose>

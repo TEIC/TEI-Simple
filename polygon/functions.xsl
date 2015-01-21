@@ -87,7 +87,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:sequence select="tei:endnotes($model, $parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='block'">
-            <xsl:sequence select="tei:block($elName, $parms[1], $class, $number)"/>
+            <xsl:sequence select="tei:block($model,$parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='heading'">
           <xsl:sequence select="tei:heading($model, $parms[1], $parms[2], $class, $number)"/>
@@ -168,23 +168,22 @@ of this software, even if advised of the possibility of such damage.
         <desc>Block level element</desc>
     </doc>
     <xsl:function name="tei:block" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        <xsl:copy-of select="tei:makeElement('div', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'div', concat($class, $number), $content, '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Paragraphs</desc>
     </doc>
     <xsl:function name="tei:paragraph" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        
-        <xsl:copy-of select="tei:makeElement('p', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'p', concat($class, $number), $content, '')"/>
     </xsl:function>
     
     
@@ -192,11 +191,11 @@ of this software, even if advised of the possibility of such damage.
         <desc>Newline</desc>
     </doc>
     <xsl:function name="tei:newline" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        <xsl:copy-of select="tei:inline($element, '', $class, $number)"/>
+        <xsl:copy-of select="tei:inline($model, '', $class, $number)"/>
         <br />
     </xsl:function>
     
@@ -205,12 +204,12 @@ of this software, even if advised of the possibility of such damage.
         <desc>Page break. Only a placeholder. Needs adding to.</desc>
     </doc>
     <xsl:function name="tei:break" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('br', '', '', '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'br', '', '', '')"/>
         
     </xsl:function>
     
@@ -218,14 +217,14 @@ of this software, even if advised of the possibility of such damage.
         <desc>Inline element. If there's something going on re class or rendition keep span and attributes</desc>
      </doc>
 <xsl:function name="tei:inline" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
          <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
         <xsl:choose>
             <xsl:when test="string($class)">
-                <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
+                <xsl:copy-of select="tei:makeElement($model,'span', concat($class, $number), $content, '')"/>
             </xsl:when>
             <xsl:otherwise>
 	      <xsl:sequence select="tei:applyTemplates($content)"/>
@@ -246,7 +245,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>Simple heading</desc>
     </doc>
     <xsl:function name="tei:heading" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="type"/>
         <xsl:param name="class"/>
@@ -262,7 +261,7 @@ of this software, even if advised of the possibility of such damage.
             </xsl:choose>
         </xsl:variable>
         
-        <xsl:copy-of select="tei:makeElement($container, concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,$container, concat($class, $number), $content, '')"/>
         </xsl:function>
 
 
@@ -270,14 +269,14 @@ of this software, even if advised of the possibility of such damage.
         <desc>Hierarchical heading</desc>
     </doc>
     <xsl:function name="tei:multiheading" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="type"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         <xsl:param name="root"/>
         
-	<xsl:for-each select="$element">
+	<xsl:for-each select="$model">
           <xslo:variable name="depth">
 	    <xslo:value-of>
 	      <xsl:attribute name="select">
@@ -303,20 +302,20 @@ of this software, even if advised of the possibility of such damage.
         <desc>Choice element</desc>
     </doc>
     <xsl:function name="tei:alternate" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="altcontent"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'span', concat($class, $number), $content, '')"/>
     </xsl:function>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>hyperlink</desc>
     </doc>
     <xsl:function name="tei:link" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="target"/>
         <xsl:param name="class"/>
@@ -334,12 +333,12 @@ of this software, even if advised of the possibility of such damage.
         <desc>Date element</desc>
     </doc>
     <xsl:function name="tei:date" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('span', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'span', concat($class, $number), $content, '')"/>
     </xsl:function>
     
     
@@ -347,64 +346,64 @@ of this software, even if advised of the possibility of such damage.
         <desc>Placeholder for doing something sensible with lists</desc>
     </doc>
     <xsl:function name="tei:list" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('ul', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'ul', concat($class, $number), $content, '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Placeholder for doing something sensible with rows</desc>
     </doc>
     <xsl:function name="tei:row" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('tr', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'tr', concat($class, $number), $content, '')"/>
     </xsl:function>
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Placeholder for doing something sensible with cells</desc>
     </doc>
     <xsl:function name="tei:cell" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        <xsl:copy-of select="tei:makeElement('td', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'td', concat($class, $number), $content, '')"/>
     </xsl:function>
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Placeholder for doing something sensible with tables</desc>
     </doc>
     <xsl:function name="tei:table" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('table', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'table', concat($class, $number), $content, '')"/>
     </xsl:function>
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Placeholder for doing something sensible with list items</desc>
     </doc>
     <xsl:function name="tei:listItem" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:copy-of select="tei:makeElement('li', concat($class, $number), $content, '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'li', concat($class, $number), $content, '')"/>
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
         <desc>Anchor</desc>
     </doc>
     <xsl:function name="tei:anchor" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -428,7 +427,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>Table of contents</desc>
     </doc>
     <xsl:function name="tei:index" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -443,7 +442,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>Note</desc>
     </doc>
     <xsl:function name="tei:note" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="place"/>
         <xsl:param name="class"/>
@@ -478,7 +477,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>End note</desc>
     </doc>
     <xsl:function name="tei:endnotes" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -508,7 +507,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>Glyph</desc>
     </doc>
     <xsl:function name="tei:glyph" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -521,7 +520,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>Image</desc>
     </doc>
     <xsl:function name="tei:graphic" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="width"/>
         <xsl:param name="height"/>
@@ -549,7 +548,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>Figure</desc>
     </doc>
     <xsl:function name="tei:figure" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -575,21 +574,22 @@ of this software, even if advised of the possibility of such damage.
     
 
     <xsl:function name="tei:makeElement" as="node()*">
+        <xsl:param name="model"/>
         <xsl:param name="name"/>
         <xsl:param name="class"/>
         <xsl:param name="content"/>
         <xsl:param name="anchorName"/>
         
-    <xsl:element name="{$name}">
-      <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
-      <xsl:if test="string($anchorName)"><xsl:attribute name="name"><xsl:value-of select="$anchorName"/></xsl:attribute></xsl:if>
-      <xslo:if test="@xml:id"><xslo:attribute name="id" select="@xml:id"/></xslo:if>
-      <xsl:sequence select="tei:applyTemplates($content)"/>
-    </xsl:element>
+	<xsl:element name="{$name}">
+	  <xsl:if test="string($class)"><xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute></xsl:if>
+	  <xsl:if test="string($anchorName)"><xsl:attribute name="name"><xsl:value-of select="$anchorName"/></xsl:attribute></xsl:if>
+	  <xsl:sequence select="tei:attributes($model)"/>
+	  <xsl:sequence select="tei:applyTemplates($content)"/>
+	</xsl:element>
     </xsl:function>
     
     <xsl:function name="tei:makeDefault" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -598,7 +598,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:if test="string($class)">
                 <xsl:attribute name="class"><xsl:value-of select="$class"/></xsl:attribute>
             </xsl:if>
-	    <xslo:if test="@xml:id"><xslo:attribute name="id" select="@xml:id"/></xslo:if>
+	    <xsl:sequence select="tei:attributes($model)"/>
             <xslo:apply-templates/>
         </div>
         
@@ -613,6 +613,16 @@ of this software, even if advised of the possibility of such damage.
         <link rel="StyleSheet" href="{$css}" type="text/css"/>
         <style>
               <xsl:for-each select="$content">
+
+                <xsl:for-each select="//rendition[@xml:id and
+				      not(parent::model)]">
+		  <xsl:text>.simple_</xsl:text>
+		  <xsl:value-of select="@xml:id"/> 
+		  <xsl:text> { </xsl:text>
+		  <xsl:value-of select="."/>
+		  <xsl:text> } 
+</xsl:text>
+		</xsl:for-each>
                 <xsl:for-each select=".//model">
                   <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(substring-before(@behaviour,'('))"/></xsl:variable>
                   <!-- use position of a model to distinguish between classes for differing behaviours -->
@@ -647,7 +657,7 @@ of this software, even if advised of the possibility of such damage.
     </doc>
 
     <xsl:function name="tei:document" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -662,7 +672,7 @@ of this software, even if advised of the possibility of such damage.
     </doc>
 
     <xsl:function name="tei:body" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -677,7 +687,7 @@ of this software, even if advised of the possibility of such damage.
     </doc>
 
     <xsl:function name="tei:title" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -691,7 +701,7 @@ of this software, even if advised of the possibility of such damage.
         <desc>metadata</desc>
     </doc>
     <xsl:function name="tei:metadata" as="node()*">
-        <xsl:param name="element"/>
+        <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
@@ -784,5 +794,16 @@ of this software, even if advised of the possibility of such damage.
      </xsl:if>
     </xsl:function>
 
-</xsl:stylesheet>
+    <xsl:function name="tei:attributes" as="node()*">
+      <xsl:param name="model"/>
+      <xslo:if test="@xml:id">
+	<xslo:attribute name="id"  select="@xml:id"/>
+      </xslo:if>
+      <xsl:if test="$model/@useSourceRendition='true'">
+	<xslo:call-template name="localrendition"/>
+      </xsl:if>
+    </xsl:function>
+
+
+  </xsl:stylesheet>
 
