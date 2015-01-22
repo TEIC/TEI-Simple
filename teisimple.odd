@@ -1257,12 +1257,12 @@ border-bottom: solid 1pt blue;
             <rendition xml:id="italic">  font-style: italic;</rendition>
             <rendition xml:id="larger">  font-size: larger;</rendition>
             <rendition xml:id="left"> text-align: left;</rendition>
-            <rendition xml:id="leftbraced"/>
-            <rendition xml:id="letterspace"/>
+            <rendition xml:id="leftbraced"> padding-left: 2pt; border-left: solid blue 2pt; </rendition>
+            <rendition xml:id="letterspace">letter-spacing: 0.5em;</rendition>
             <rendition xml:id="normalstyle">font-style:roman;</rendition>
             <rendition xml:id="normalweight">font-weight:normal;</rendition>
             <rendition xml:id="right"> text-align: right;</rendition>
-            <rendition xml:id="rightbraced"/>
+            <rendition xml:id="rightbraced">  padding-right: 2pt; border-right: solid blue 2pt; </rendition>
             <rendition xml:id="rotateleft"/>
             <rendition xml:id="rotateright"/>
             <rendition xml:id="smallcaps">    font-variant: small-caps;</rendition>
@@ -1270,10 +1270,10 @@ border-bottom: solid 1pt blue;
             <rendition xml:id="strikethrough">   text-decoration: line-through;</rendition>
             <rendition xml:id="subscript">    vertical-align: bottom;    font-size: smaller;</rendition>
             <rendition xml:id="superscript">    vertical-align: super;    font-size: smaller;</rendition>
-            <rendition xml:id="topbraced"/>
+            <rendition xml:id="topbraced"> padding-top: 2pt;  border-top: solid blue 2pt; </rendition>
             <rendition xml:id="typewriter">font-family:monospace;</rendition>
             <rendition xml:id="underline">text-decoration: underline;</rendition>
-            <rendition xml:id="wavyunderline">       text-decoration-line: underline;       text-decoration-style: wavy;</rendition>
+            <rendition xml:id="wavyunderline">       text-decoration: underline;       text-decoration-style: wavy;</rendition>
           </specGrp>
         </div>
       </div>

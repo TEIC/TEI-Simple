@@ -110,6 +110,10 @@
             <cell>This is <hi>hi</hi> tag</cell>
           </row>
           <row>
+            <cell>letterspace</cell>
+            <cell>This is <hi rendition="simple:letterspace">letter spaced</hi> effect</cell>
+          </row>
+          <row>
             <cell>typewriter</cell>
             <cell>This is <hi rendition="simple:typewriter">typewriter</hi> effect</cell>
           </row>
@@ -268,7 +272,7 @@
           <head>1 Zur Entstehung der <hi rendition="simple:smcap">Philosophischen 
 	Untersuchungen</hi><note n="8" place="bottom">Zu Textauszeichnungen und 
 	Siglen siehe die Legende.</note></head>
-          <p>Iriure dolor in hendrerit in vulputate velit esse molestie
+          <p rendition="simple:rightbraced">Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
@@ -278,7 +282,7 @@
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod</p>
-          <p>Iriure dolor in hendrerit in vulputate<note place="end">Not Vulture</note> velit esse molestie
+          <p rendition="simple:topbraced">Iriure dolor in hendrerit in vulputate<note place="end">Not Vulture</note> velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit<note place="end">Not Blandings</note> praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
