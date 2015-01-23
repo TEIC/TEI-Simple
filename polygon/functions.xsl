@@ -591,7 +591,8 @@ of this software, even if advised of the possibility of such damage.
         <link rel="StyleSheet" href="{$css}" type="text/css"/>
         <style>
               <xsl:for-each select="$content">
-
+                  <xsl:if test="position()=1">
+                  
                 <xsl:for-each select="//rendition[@xml:id and
 				      not(parent::model)]">
 		  <xsl:text>.simple_</xsl:text>
@@ -601,6 +602,7 @@ of this software, even if advised of the possibility of such damage.
 		  <xsl:text> } 
 </xsl:text>
 		</xsl:for-each>
+                  </xsl:if>
                 <xsl:for-each select=".//model">
                   <xsl:variable name="container"><xsl:copy-of select="tei:simpleContainer(substring-before(@behaviour,'('))"/></xsl:variable>
                   <!-- use position of a model to distinguish between classes for differing behaviours -->
@@ -685,8 +687,9 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="number"/>
       <head>
         <xsl:for-each select="$TOP">
-	  <xsl:copy-of select="tei:getRenditions(//elementSpec)"/>
+            <xsl:copy-of select="tei:getRenditions(//elementSpec)"/>
 	</xsl:for-each>
+          
 	<!-- jQuery -->
 	<script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
      
