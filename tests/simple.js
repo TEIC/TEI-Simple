@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     $("span.alternate").tooltip({
         content: function() {
-            return $($(this).attr("onmouseover")).html();
+            return $($(this).children("span.altcontent")).html();
         },
         position:{
             my:"left+10 top+25",

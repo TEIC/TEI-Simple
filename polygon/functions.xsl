@@ -280,7 +280,9 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <!-- alternate needs a whole bunch of extra parameters like title (to make tooltips fire) and onmouseover to point to the content element -->
+        <!-- alternate:
+            because of how jquery tooltips work it needs a title (to make tooltips fire)
+            tooltip works for elements of .alternate class and presents the content of it's span.altcontent child as a tooltip -->
         <xsl:copy-of select="tei:makeElement($model,'span', concat('alternate ', $class, $number), 'alternate', $content, '', tei:makeElement($model, 'span', 'hidden altcontent ', '', $altcontent, '', ''))"/>
     </xsl:function>
 
