@@ -661,10 +661,10 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="corr">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
+<!--              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
                 <desc>Omit, if handled in parent choice. </desc>
               </model>
-              <model behaviour="inline(.)">
+-->              <model behaviour="inline(.)">
                 <rendition scope="before">content: '[';</rendition>
                 <rendition scope="after">content: ']';</rendition>
               </model>
@@ -1000,8 +1000,8 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec ident="sic" mode="change">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
-              <model behaviour="inline(.)">
+<!--              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
+-->              <model behaviour="inline(.)">
                 <rendition scope="before">content: '{';</rendition>
                 <rendition scope="after">content: '}';</rendition>
               </model>
