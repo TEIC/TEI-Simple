@@ -83,13 +83,10 @@ border-bottom: solid 1pt blue;
 	font-style: italic;
 }
 . {
-	font-weight: normal;
+	font-style: italic;
 }
 . {
-	font-weight: normal;
-}
-. {
-	font-weight: normal;
+	font-weight: bold;
 }
 . {
 	font-style: italic;
@@ -424,7 +421,7 @@ value</span>"&gt;</span>
   (<tt>content: ']';</tt>)
 </td></tr></table></td></tr><tr><td>&lt;<span class="orange">date</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>text() ; inline(.) ; print</td></tr><tr><td>[model] <i/></td><td>@when and not(text()) ; inline(@when) ; print</td></tr><tr><td>[model] <i/></td><td>@when ; alternate(.,@when) ; web</td></tr><tr><td>[model] <i/></td><td>text() ; inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">dateline</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">del</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)
   (<tt>text-decoration: line-through;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">desc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>text(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">div</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@type='title_page' ; block(.)
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">desc</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>omit()</td></tr></table></td></tr><tr><td>&lt;<span class="orange">div</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@type='title_page' ; block(.)
   (<tt>border: 1px solid black; padding: 5px;</tt>)
 </td></tr><tr><td>[model] <i/></td><td>section(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docAuthor</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docDate</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docEdition</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docImprint</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">docTitle</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Omit if located in teiHeader. </i></td><td>ancestor::teiHeader ; omit()</td></tr><tr><td>[model] <i/></td><td>block(.)
   (<tt>font-size: large;</tt>)
@@ -450,17 +447,15 @@ value</span>"&gt;</span>
   (<tt>color: grey;</tt>)
 </td></tr><tr><td>[model] <i/></td><td>inline()
   (<tt>content: '[...]';</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">graphic</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>graphic(@url,@width,@height,@scale)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">group</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">handShift</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">head</span>&gt;</td><td><table class="border"><tr><td>[model] <i>Insert as header.</i></td><td>parent::figure ; heading(.,'figure')
+</td></tr></table></td></tr><tr><td>&lt;<span class="orange">graphic</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>graphic(@url,@width,@height,@scale)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">group</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">handShift</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>inline(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">head</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>parent::figure ; block(.)
   (<tt>font-style: italic;</tt>)
-</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::table ; heading(.,'table')
+</td></tr><tr><td>[model] <i/></td><td>parent::table ; block(.)
   (<tt>font-style: italic;</tt>)
-</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::lg ; heading(.,'verse')
-  (<tt>font-weight: normal;</tt>)
-</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>parent::list ; heading(.,'list')
-  (<tt>font-weight: normal;</tt>)
-</td></tr><tr><td>[model] <i>Insert as header.</i></td><td>multiheading(.,div,@type)
-  (<tt>font-weight: normal;</tt>)
-</td></tr></table></td></tr><tr><td>&lt;<span class="orange">hi</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition ; inline(.)
+</td></tr><tr><td>[model] <i/></td><td>parent::lg ; block(.)
+  (<tt>font-style: italic;</tt>)
+</td></tr><tr><td>[model] <i/></td><td>parent::list ; block(.)
+  (<tt>font-weight: bold;</tt>)
+</td></tr><tr><td>[model] <i/></td><td>parent::div ; heading(.,@type,div)</td></tr><tr><td>[model] <i/></td><td>block(.)</td></tr></table></td></tr><tr><td>&lt;<span class="orange">hi</span>&gt;</td><td><table class="border"><tr><td>[model] <i/></td><td>@rendition ; inline(.)
   (<tt>font-style: italic;</tt>)
 </td></tr><tr><td>[model] <i/></td><td>not(@rendition) ; inline(.)
   (<tt>font-style: italic;</tt>)

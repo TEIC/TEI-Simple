@@ -90,7 +90,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:sequence select="tei:block($model,$parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='heading'">
-          <xsl:sequence select="tei:heading($model, $parms[1],$parms[2],$class, $number)"/>
+          <xsl:sequence select="tei:heading($model, $parms[1],$parms[2],$parms[3],$class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='alternate'">
             <xsl:sequence select="tei:alternate($model, $parms[1], $parms[2],$class, $number)"/>
@@ -245,15 +245,15 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="model"/>
         <xsl:param name="content"/>
         <xsl:param name="type"/>
+        <xsl:param name="root"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
-        
 	<xsl:for-each select="$model">
           <xslo:variable name="depth">
 	    <xslo:value-of>
 	      <xsl:attribute name="select">
 		<xsl:text>count(ancestor::</xsl:text>
-		<xsl:value-of select="$model/ancestor::elementSpec/@ident"/>
+		<xsl:value-of select="$root"/>
 		<xsl:text>)</xsl:text>
 	      </xsl:attribute>
 	    </xslo:value-of>
@@ -774,11 +774,15 @@ of this software, even if advised of the possibility of such damage.
 	     <xsl:attribute name="select"><xsl:value-of   select="$content"/></xsl:attribute>
 	   </xslo:value-of>
 	 </xsl:when>
-	 <xsl:otherwise>
-	   <xslo:apply-templates>
-             <xsl:if test="$content!='.'"><xsl:attribute name="select"><xsl:value-of select="$content"/></xsl:attribute></xsl:if>
-	   </xslo:apply-templates>
-	 </xsl:otherwise>
+	   <xsl:when test="$content!='.'">
+	     <xslo:for-each>
+	       <xsl:attribute name="select"><xsl:value-of select="$content"/></xsl:attribute>
+	       <xslo:apply-templates/>
+	     </xslo:for-each>
+	   </xsl:when>
+	   <xsl:otherwise>
+	     <xslo:apply-templates/>
+	   </xsl:otherwise>
        </xsl:choose>
      </xsl:if>
     </xsl:function>

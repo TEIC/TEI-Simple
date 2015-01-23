@@ -117,3 +117,6 @@ td {
 }
 
 .hidden {display: none;}
+.alternate {
+	background-color: #E7E6E7;
+}

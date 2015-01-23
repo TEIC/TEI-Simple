@@ -661,10 +661,10 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="corr">
-<!--              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
                 <desc>Omit, if handled in parent choice. </desc>
               </model>
--->              <model behaviour="inline(.)">
+              <model behaviour="inline(.)">
                 <rendition scope="before">content: '[';</rendition>
                 <rendition scope="after">content: ']';</rendition>
               </model>
@@ -684,7 +684,7 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="desc">
-              <model behaviour="text(.)"/>
+              <model behaviour="omit()"/>
             </elementSpec>
             <elementSpec mode="change" ident="div">
               <model predicate="@type='title_page'" behaviour="block(.)">
@@ -802,26 +802,20 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="head">
-              <model predicate="parent::figure" behaviour="heading(.,'figure')">
-                <desc>Insert as header.</desc>
+              <model predicate="parent::figure" behaviour="block(.)">
                 <rendition>font-style: italic;</rendition>
               </model>
-              <model predicate="parent::table" behaviour="heading(.,'table')">
-                <desc>Insert as header.</desc>
+              <model predicate="parent::table" behaviour="block(.)">
                 <rendition>font-style: italic;</rendition>
               </model>
-              <model predicate="parent::lg" behaviour="heading(.,'verse')">
-                <desc>Insert as header.</desc>
-                <rendition>font-weight: normal;</rendition>
+              <model predicate="parent::lg" behaviour="block(.)">
+                <rendition>font-style: italic;</rendition>
               </model>
-              <model predicate="parent::list" behaviour="heading(.,'list')">
-                <desc>Insert as header.</desc>
-                <rendition>font-weight: normal;</rendition>
+              <model predicate="parent::list" behaviour="block(.)">
+                <rendition>font-weight: bold;</rendition>
               </model>
-              <model behaviour="multiheading(.,div,@type)">
-                <desc>Insert as header.</desc>
-                <rendition>font-weight: normal;</rendition>
-              </model>
+              <model predicate="parent::div" behaviour="heading(.,@type,div)"/>
+              <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="hi">
               <model predicate="@rendition" behaviour="inline(.)" useSourceRendition="true">
@@ -1000,8 +994,8 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec ident="sic" mode="change">
-<!--              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
--->              <model behaviour="inline(.)">
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
+              <model behaviour="inline(.)">
                 <rendition scope="before">content: '{';</rendition>
                 <rendition scope="after">content: '}';</rendition>
               </model>
