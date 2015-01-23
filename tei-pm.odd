@@ -277,6 +277,13 @@
             <cell>div</cell>
           </row>
           <row>
+            <cell>break</cell>
+            <cell></cell>
+            <cell/>
+            <cell/>
+          </row>
+
+          <row>
             <cell>cell</cell>
             <cell>content</cell>
             <cell>Creates a table cell</cell>
@@ -286,6 +293,12 @@
             <cell>cit</cell>
             <cell>content,source</cell>
             <cell>shows the content, with an attribute of the source</cell>
+            <cell></cell>
+          </row>
+          <row>
+            <cell>document</cell>
+            <cell>content</cell>
+            <cell>start a new output document</cell>
             <cell></cell>
           </row>
           <row>
@@ -314,6 +327,12 @@
             <cell>span</cell>
           </row>
           <row>
+            <cell>index</cell>
+            <cell>content,type</cell>
+            <cell>generate list according to <term>type</term></cell>
+            <cell/>
+          </row>
+          <row>
             <cell>inline</cell>
             <cell>content</cell>
             <cell>Creates inline element out of <code>content</code> if there's something in
@@ -340,12 +359,25 @@
             <cell>li</cell>
           </row>
           <row>
+            <cell>metadata</cell>
+            <cell>content</cell>
+            <cell>create metadata section</cell>
+            <cell>head</cell>
+          </row>
+          <row>
             <cell>note</cell>
             <cell>content,place</cell>
             <cell>Creates a note block out of <code>content</code>,
 	    as per value of <code>place</code></cell>
             <cell>span or div</cell>
           </row>
+          <row>
+            <cell>omit</cell>
+            <cell></cell>
+            <cell>Do nothing, do not process children</cell>
+            <cell/>
+          </row>
+
           <row>
             <cell>paragraph</cell>
             <cell>content</cell>
@@ -365,28 +397,16 @@
             <cell/>
           </row>
           <row>
-            <cell>makeTable</cell>
+            <cell>table</cell>
             <cell>content</cell>
             <cell>make table</cell>
             <cell>table</cell>
           </row>
           <row>
-            <cell>index</cell>
-            <cell>type,content</cell>
-            <cell>generate list according to <term>type</term></cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>omit</cell>
-            <cell></cell>
-            <cell>Do nothing, do not process children</cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>break</cell>
-            <cell></cell>
-            <cell/>
-            <cell/>
+            <cell>title</cell>
+            <cell>content</cell>
+            <cell>make document title</cell>
+            <cell>title</cell>
           </row>
         </table>
       </div>

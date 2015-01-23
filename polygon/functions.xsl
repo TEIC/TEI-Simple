@@ -69,7 +69,7 @@ of this software, even if advised of the possibility of such damage.
     
     <xsl:choose>
         <xsl:when test="$task ='index'">
-            <xsl:sequence select="tei:index($model, $parms[1], $class, $number)"/>
+            <xsl:sequence select="tei:index($model, $parms[1], $class, $number,$parms[2])"/>
         </xsl:when>
         <xsl:when test="$task ='anchor'">
             <xsl:sequence select="tei:anchor($model, $parms[1], $class, $number)"/>
@@ -90,10 +90,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:sequence select="tei:block($model,$parms[1], $class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='heading'">
-          <xsl:sequence select="tei:heading($model, $parms[1], $parms[2], $class, $number)"/>
-        </xsl:when>
-        <xsl:when test="$task ='multiheading'">
-          <xsl:sequence select="tei:multiheading($model, $parms[1], $parms[3], $class, $number,$parms[2])"/>
+          <xsl:sequence select="tei:heading($model, $parms[1],$parms[2],$class, $number)"/>
         </xsl:when>
         <xsl:when test="$task ='alternate'">
             <xsl:sequence select="tei:alternate($model, $parms[1], $parms[2],$class, $number)"/>
@@ -242,7 +239,7 @@ of this software, even if advised of the possibility of such damage.
     </xsl:function>
     
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Simple heading</desc>
+        <desc>Hierarchical heading</desc>
     </doc>
     <xsl:function name="tei:heading" as="node()*">
         <xsl:param name="model"/>
@@ -251,37 +248,12 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="class"/>
         <xsl:param name="number"/>
         
-        <xsl:variable name="container">
-            <xsl:choose>
-                <xsl:when test="$type='verse'">h3</xsl:when>
-                <xsl:when test="$type='list'">h3</xsl:when>
-                <xsl:when test="$type='table'">h3</xsl:when>
-                <xsl:when test="$type='figure'">h3</xsl:when>
-                <xsl:otherwise>h2</xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        
-        <xsl:copy-of select="tei:makeElement($model,$container, concat($class, $number), $content, '')"/>
-        </xsl:function>
-
-
-    <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-        <desc>Hierarchical heading</desc>
-    </doc>
-    <xsl:function name="tei:multiheading" as="node()*">
-        <xsl:param name="model"/>
-        <xsl:param name="content"/>
-        <xsl:param name="type"/>
-        <xsl:param name="class"/>
-        <xsl:param name="number"/>
-        <xsl:param name="root"/>
-        
 	<xsl:for-each select="$model">
           <xslo:variable name="depth">
 	    <xslo:value-of>
 	      <xsl:attribute name="select">
 		<xsl:text>count(ancestor::</xsl:text>
-		<xsl:value-of select="$root"/>
+		<xsl:value-of select="$model/ancestor::elementSpec/@ident"/>
 		<xsl:text>)</xsl:text>
 	      </xsl:attribute>
 	    </xslo:value-of>
@@ -431,6 +403,7 @@ of this software, even if advised of the possibility of such damage.
         <xsl:param name="content"/>
         <xsl:param name="class"/>
         <xsl:param name="number"/>
+        <xsl:param name="type"/>
 
 	<div id="toc">Table of contents</div>
 

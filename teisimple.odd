@@ -609,7 +609,7 @@
             </elementSpec>
             <elementSpec mode="change" ident="body">
 	      <modelSequence>
-		<model behaviour="index(.)"/>
+		<model behaviour="index(.,'toc')"/>
 		<model behaviour="body(.)"/>
 	      </modelSequence>
             </elementSpec>
