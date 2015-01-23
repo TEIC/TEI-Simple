@@ -692,29 +692,9 @@ of this software, even if advised of the possibility of such damage.
      
 <!-- tooltips -->     
           <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" />
-          <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.js"></script>
           <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
-          <link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" />
-          <script type="text/javascript">
-              
-              $(function() {
-              
-              $("span.alternate").tooltip({
-              content: function() {
-              return $($(this).attr("onmouseover")).html();
-              },
-              position:{
-              my:"left+10 top+25",
-              at:"left top"
-              }
-              });
-              });
-              
-          </script>
-          <style type="text/css">
-              .hidden {display: none;}
-          </style>
-          
+          <link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css"/>
+                   
 	<!-- table of contents generation -->
 	<script type="text/javascript" charset="utf8" src="{$js}"></script>
 	<xsl:sequence select="tei:applyTemplates($content)"/>
