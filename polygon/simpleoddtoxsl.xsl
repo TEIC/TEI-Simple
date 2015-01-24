@@ -6,7 +6,7 @@
 		xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias"
 		xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
 
-    <xsl:import href="functions.xsl"/>
+    <xsl:import href="html_functions.xsl"/>
     <xsl:variable name="sq">'</xsl:variable>
     <xsl:output indent="yes"/>
 
@@ -16,7 +16,9 @@
 
     <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
         <desc>
-            <p>Prototype TEI utility stylesheet for transformation TEI Simple ODDs into XSLT stylesheet for processing TEI Simple documents</p>
+            <p>Prototype TEI utility stylesheet for transformation TEI
+	    Simple ODDs into XSLT stylesheet for processing TEI Simple
+	    documents to web output</p>
             <p>Default behaviour:
                 <list>
                     <item>if no @predicate, assume it means self</item>
@@ -252,6 +254,159 @@
         </xsl:choose>
     
     </xsl:template>
+
+
+  <xsl:function name="tei:doModel" as="node()*">
+    <xsl:param name="context"/>
+    <xsl:param name="iden"/>
+    <xsl:param name="construct"/>
+    <xsl:param name="number"/>
+    <xsl:choose>
+      <xsl:when test="$context/@predicate">
+        <xsl:element name="xsl:{$construct}">
+          <xsl:attribute name="test" select="$context/@predicate"/>
+          <xsl:sequence select="tei:matchFunction($iden, $context, $iden, $number)"/>
+        </xsl:element>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="tei:matchFunction($iden, $context, $iden, $number)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
+  <xsl:function name="tei:findModelPosition" as="xs:string">
+    <xsl:param name="context"/>
+    <xsl:for-each select="$context">
+      <xsl:variable name="n">
+        <xsl:number from="elementSpec" level="any" count="model"/>
+      </xsl:variable>
+      <xsl:value-of select="if  (count(parent::*/model) &gt; 1 ) then   $n else ''"/>
+    </xsl:for-each>
+  </xsl:function>
+  <xsl:function name="tei:applyTemplates" as="node()*">
+    <xsl:param name="content"/>
+    <xsl:if test="string($content)">
+      <xsl:choose>
+        <xsl:when test="starts-with($content,'@')">
+          <xslo:value-of>
+            <xsl:attribute name="select">
+              <xsl:value-of select="$content"/>
+            </xsl:attribute>
+          </xslo:value-of>
+        </xsl:when>
+        <xsl:when test="$content!='.'">
+          <xslo:for-each>
+            <xsl:attribute name="select">
+              <xsl:value-of select="$content"/>
+            </xsl:attribute>
+            <xslo:apply-templates/>
+          </xslo:for-each>
+        </xsl:when>
+        <xsl:otherwise>
+          <xslo:apply-templates/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:if>
+  </xsl:function>
+  <xsl:function name="tei:attributes" as="node()*">
+    <xsl:param name="model"/>
+    <xslo:if test="@xml:id">
+      <xslo:attribute name="id" select="@xml:id"/>
+    </xslo:if>
+    <xsl:if test="$model/@useSourceRendition='true'">
+      <xslo:call-template name="localrendition"/>
+    </xsl:if>
+  </xsl:function>
+
+  <xsl:function name="tei:matchFunction">
+    <xsl:param name="elName"/>
+    <xsl:param name="model"/>
+    <xsl:param name="class"/>
+    <xsl:param name="number"/>
+    <xsl:variable name="task" select="substring-before(normalize-space($model/@behaviour),'(')"/>
+    <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'[^\(]*\((.*)\)$','$1'),',')"/>
+    <xsl:variable name="textcontent" select="replace(substring-after($model/@behaviour,'('),'\)$','')"/>
+    <xsl:if test="$debug='true'">
+      <xsl:message><xsl:value-of select="($elName,$model/@behaviour,$task,$textcontent)"/>:   <xsl:value-of select="($parms)" separator=" -- "/></xsl:message>
+    </xsl:if>
+    <xsl:choose>
+      <xsl:when test="$task ='index'">
+        <xsl:sequence select="tei:index($model, $parms[1], $class, $number,$parms[2])"/>
+      </xsl:when>
+      <xsl:when test="$task ='anchor'">
+        <xsl:sequence select="tei:anchor($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='graphic'">
+        <xsl:sequence select="tei:graphic($model, $parms[1],$parms[2],$parms[3],$parms[4],$class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='glyph'">
+        <xsl:sequence select="tei:glyph($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='note'">
+        <xsl:sequence select="tei:note($model, $parms[1], $parms[2],$class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='block'">
+        <xsl:sequence select="tei:block($model,$parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='heading'">
+        <xsl:sequence select="tei:heading($model, $parms[1],$parms[2],$parms[3],$class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='alternate'">
+        <xsl:sequence select="tei:alternate($model, $parms[1], $parms[2],$class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='link'">
+        <xsl:sequence select="tei:link($model, $parms[1], $parms[2],$class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='list'">
+        <xsl:sequence select="tei:list($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='listItem'">
+        <xsl:sequence select="tei:listItem($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='inline'">
+        <xsl:sequence select="tei:inline($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='text'">
+        <xsl:sequence select="tei:text($textcontent)"/>
+      </xsl:when>
+      <xsl:when test="$task ='newline'">
+        <xsl:sequence select="tei:newline($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='break'">
+        <xsl:sequence select="tei:break($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='paragraph'">
+        <xsl:sequence select="tei:paragraph($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='figure'">
+        <xsl:sequence select="tei:figure($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='table'">
+        <xsl:sequence select="tei:table($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='row'">
+        <xsl:sequence select="tei:row($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='cell'">
+        <xsl:sequence select="tei:cell($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='title'">
+        <xsl:sequence select="tei:title($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='metadata'">
+        <xsl:sequence select="tei:metadata($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='body'">
+        <xsl:sequence select="tei:body($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='document'">
+        <xsl:sequence select="tei:document($model, $parms[1], $class, $number)"/>
+      </xsl:when>
+      <xsl:when test="$task ='omit'"/>
+      <xsl:otherwise>
+        <xsl:sequence select="tei:makeDefault($model, $parms[1], $class, $number)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:function>
 
 
 </xsl:stylesheet>
