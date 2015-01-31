@@ -510,6 +510,37 @@ sch:pattern [
   "\x{a}" ~
   "   "
 ]
+sch:pattern [
+  id = "teisimple-att.global-corresppointer-constraint-3"
+  "\x{a}" ~
+  "      "
+  sch:rule [
+    context = "tei:*[@corresp]"
+    "\x{a}" ~
+    "                        "
+    sch:let [
+      name = "results"
+      value =
+        "for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"
+    ]
+    "\x{a}" ~
+    "                        "
+    sch:report [
+      test = "some $x in $results  satisfies $x"
+      " Error: Every\x{a}" ~
+      '                                       local pointer in "'
+      sch:value-of [ select = "@corresp" ]
+      '" must point to\x{a}' ~
+      "                                       an ID in this document ("
+      sch:value-of [ select = "$results" ]
+      ")"
+    ]
+    "\x{a}" ~
+    "                      "
+  ]
+  "\x{a}" ~
+  "   "
+]
 att.handFeatures.attributes =
   att.handFeatures.attribute.scribe,
   att.handFeatures.attribute.scribeRef,
@@ -767,7 +798,7 @@ att.typed.attribute.subtype =
   ## provides a sub-categorization of the element, if needed
   attribute subtype { data.enumerated }?
 sch:pattern [
-  id = "teisimple-att.typed-subtypeTyped-constraint-3"
+  id = "teisimple-att.typed-subtypeTyped-constraint-4"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -796,7 +827,7 @@ att.pointing.attribute.targetLang =
   ## specifies the language of the content to be found at the destination referenced by target, using a language tag generated according to BCP 47.
   attribute targetLang { data.language }?
 sch:pattern [
-  id = "teisimple-att.pointing-targetLang-targetLang-constraint-4"
+  id = "teisimple-att.pointing-targetLang-targetLang-constraint-5"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -820,7 +851,7 @@ att.pointing.attribute.target =
     list { data.pointer+ }
   }?
 sch:pattern [
-  id = "teisimple-att.pointing-target-validtarget-constraint-5"
+  id = "teisimple-att.pointing-target-validtarget-constraint-6"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -895,7 +926,7 @@ att.spanning.attribute.spanTo =
   ## indicates the end of a span initiated by the element bearing this attribute.
   attribute spanTo { data.pointer }?
 sch:pattern [
-  id = "teisimple-att.spanning-spanTo-spanTo-2-constraint-6"
+  id = "teisimple-att.spanning-spanTo-spanTo-2-constraint-7"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -944,7 +975,7 @@ att.styleDef.attribute.schemeVersion =
   attribute schemeVersion { data.versionNumber }?
 sch:pattern [
   id =
-    "teisimple-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-7"
+    "teisimple-att.styleDef-schemeVersion-schemeVersionRequiresScheme-constraint-8"
   "\x{a}" ~
   "      "
   sch:rule [
@@ -1710,7 +1741,7 @@ quotation =
   element quotation {
     (model.pLike*)
     >> sch:pattern [
-         id = "teisimple-quotation-quotationContents-constraint-2"
+         id = "teisimple-quotation-quotationContents-constraint-3"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2313,7 +2344,7 @@ msIdentifier =
   element msIdentifier {
     ((repository?, idno?), empty*)
     >> sch:pattern [
-         id = "teisimple-msIdentifier-msId_minimal-constraint-3"
+         id = "teisimple-msIdentifier-msId_minimal-constraint-4"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2348,7 +2379,7 @@ relatedItem =
   element relatedItem {
     ((model.biblLike | model.ptrLike)?)
     >> sch:pattern [
-         id = "teisimple-relatedItem-targetorcontent1-constraint-4"
+         id = "teisimple-relatedItem-targetorcontent1-constraint-5"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -2974,15 +3005,38 @@ bibl =
   
   ## (bibliographic citation) contains a loosely-structured bibliographic citation of which the sub-components may or may not be explicitly tagged. [3.11.1.  2.2.7.  15.3.2. ]
   element bibl {
-    (text
-     | model.gLike
-     | model.highlighted
-     | model.pPart.data
-     | model.pPart.edit
-     | model.segLike
-     | model.ptrLike
-     | model.biblPart
-     | model.global)*,
+    ((text
+      | model.gLike
+      | model.highlighted
+      | model.pPart.data
+      | model.pPart.edit
+      | model.segLike
+      | model.ptrLike
+      | model.biblPart
+      | model.global)*)
+    >> sch:pattern [
+         id = "teisimple-bibl-noEmptyBibl-constraint-12"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:bibl"
+           "\x{a}" ~
+           "               "
+           sch:assert [
+             test = "child::* or child::text()[normalize-space(.)]"
+             role = "ERROR"
+             "\x{a}" ~
+             '                Element "'
+             sch:name [ ]
+             '" may not be empty.\x{a}' ~
+             "            "
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
     att.global.attributes,
     att.typed.attributes,
     att.sortable.attributes,
@@ -3111,7 +3165,55 @@ choice =
   
   ## groups a number of alternative encodings for the same point in a text. [3.4. ]
   element choice {
-    (model.choicePart | choice)*, att.global.attributes, empty
+    ((model.choicePart | choice)*)
+    >> sch:pattern [
+         id = "teisimple-choice-choiceSize-constraint-13"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:choice"
+           "\x{a}" ~
+           "               "
+           sch:assert [
+             test = "count(*) > 1"
+             role = "ERROR"
+             "\x{a}" ~
+             '                    Element "'
+             sch:name [ ]
+             '" must have at least two child\x{a}' ~
+             "		    elements."
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ]
+    >> sch:pattern [
+         id = "teisimple-choice-choiceContent-constraint-14"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:choice"
+           "\x{a}" ~
+           "               "
+           sch:assert [
+             test =
+               "(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))"
+             role = "ERROR"
+             "\x{a}" ~
+             '                    Element "'
+             sch:name [ ]
+             '" must have corresponding corr/sic, expand/abbr, reg/orig '
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
+    att.global.attributes,
+    empty
   }
 cit =
   
@@ -3496,7 +3598,7 @@ lg =
       | lg)*,
      (model.divBottom, model.global*)*)
     >> sch:pattern [
-         id = "teisimple-lg-atleast1oflggapl-constraint-12"
+         id = "teisimple-lg-atleast1oflggapl-constraint-15"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3845,7 +3947,7 @@ ref =
   element ref {
     macro.paraContent
     >> sch:pattern [
-         id = "teisimple-ref-refAtts-constraint-5"
+         id = "teisimple-ref-refAtts-constraint-6"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -3995,7 +4097,7 @@ s =
       | seg
       | w)*)
     >> sch:pattern [
-         id = "teisimple-s-noNestedS-constraint-6"
+         id = "teisimple-s-noNestedS-constraint-7"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -4153,7 +4255,7 @@ subst =
   element subst {
     ((add | del | model.milestoneLike)+)
     >> sch:pattern [
-         id = "teisimple-subst-substContents1-constraint-13"
+         id = "teisimple-subst-substContents1-constraint-16"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -4248,7 +4350,7 @@ teiCorpus =
      model.global*,
      (back, model.global*)?)
     >> sch:pattern [
-         id = "teisimple-text-headeronlyelement-constraint-8"
+         id = "teisimple-text-headeronlyelement-constraint-9"
          "\x{a}" ~
          "            "
          sch:rule [

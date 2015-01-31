@@ -387,6 +387,16 @@
                   </rule>
                 </constraint>
               </constraintSpec>
+              <constraintSpec ident="corresppointer" scheme="isoschematron">
+                <constraint>
+                      <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@corresp]">
+                        <let name="results" value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                        <report test="some $x in $results  satisfies $x"> Error: Every
+                                       local pointer in "<value-of select="@corresp"/>" must point to
+                                       an ID in this document (<value-of select="$results"/>)</report>
+                      </rule>
+                </constraint>
+              </constraintSpec>
               <attList>
                 <attDef ident="rend" mode="delete"/>
                 <attDef ident="style" mode="delete"/>
@@ -605,6 +615,13 @@
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="bibl">
+              <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
+                    <constraint>
+	              <assert xmlns="http://purl.oclc.org/dsdl/schematron"  test="child::* or child::text()[normalize-space(.)]" role="ERROR">
+                Element "<name/>" may not be empty.
+            </assert>
+		    </constraint>
+	      </constraintSpec>
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="body">
@@ -643,12 +660,31 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="choice">
-              <model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/>
+	      <constraintSpec ident="choiceSize"
+			      scheme="isoschematron" mode="add">
+		<constraint>
+		  <assert xmlns="http://purl.oclc.org/dsdl/schematron"  test="count(*) > 1" role="ERROR">
+                    Element "<name/>" must have at least two child
+		    elements.</assert>
+		</constraint>
+	      </constraintSpec>
+	      <constraintSpec ident="choiceContent"
+			      scheme="isoschematron" mode="add">
+		<constraint>
+		  <assert xmlns="http://purl.oclc.org/dsdl/schematron"
+			  test="(tei:corr or tei:sic or tei:expan or
+				tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan
+				and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
+                    Element "<name/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
+		</constraint>
+	      </constraintSpec>
+             <model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/>
               <model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/>
               <model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/>
               <model output="plain" predicate="sic and corr" behaviour="inline(corr[1])"/>
               <model output="plain" predicate="abbr and expan" behaviour="inline(expan[1])"/>
-              <model output="plain" predicate="orig and reg" behaviour="inline(reg[1])"/>
+              <model output="plain" predicate="orig and reg"
+		     behaviour="inline(reg[1])"/>
             </elementSpec>
             <elementSpec mode="change" ident="cit">
               <model predicate="child::quote and child::bibl" behaviour="cit(.)">
@@ -930,7 +966,7 @@ border-bottom: solid 1pt blue;
                 <rendition>margin-left: 10px; margin-right: 10px;
 		</rendition>
               </model>
-              <model predicate="ancestor::p" behaviour="inline(.)">
+              <model predicate="ancestor::p or ancestor::cell" behaviour="inline(.)">
                 <rendition scope="before">content: '‘';</rendition>
                 <rendition scope="after">content: '’';</rendition>
               </model>
@@ -1130,7 +1166,9 @@ border-bottom: solid 1pt blue;
             </elementSpec>
 
             <elementSpec mode="change" ident="titlePage">
-              <model behaviour="block(.)"/>
+              <model behaviour="block(.)">
+		<rendition>    text-align: center;</rendition>
+	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="titlePart">
               <model behaviour="block(.)"/>
@@ -1224,16 +1262,16 @@ border-bottom: solid 1pt blue;
             </elementSpec>
           </specGrp>
           <specGrp xml:id="rendition">
-            <rendition xml:id="allcaps">    text-transform: uppercase;</rendition>
-            <rendition xml:id="blackletter"/>
+            <rendition xml:id="allcaps">text-transform: uppercase;</rendition>
+            <rendition xml:id="blackletter">font-family: fantasy;</rendition>
             <rendition xml:id="bold">font-weight: bold;</rendition>
-            <rendition xml:id="bottombraced"/>
-            <rendition xml:id="boxed"> border: solid black 1pt;</rendition>
-            <rendition xml:id="centre"> text-align: center;</rendition>
+            <rendition xml:id="bottombraced">padding-bottom: 2pt; border-bottom: dashed gray 2pt;</rendition>
+            <rendition xml:id="boxed">padding: 2pt; border: solid black 1pt;</rendition>
+            <rendition xml:id="centre">text-align: center;</rendition>
             <rendition xml:id="cursive">font-family: cursive;</rendition>
-            <rendition xml:id="doublestrikethrough">    text-decoration: line-through;    color: red;</rendition>
-            <rendition xml:id="doubleunderline">    text-decoration: underline;    color: red;</rendition>
-            <rendition xml:id="dropcap"> font-size : 6em;
+            <rendition xml:id="doublestrikethrough">text-decoration: line-through;    color: red;</rendition>
+            <rendition xml:id="doubleunderline">text-decoration: underline;    color: red;</rendition>
+            <rendition xml:id="dropcap">font-size : 6em;
     font-family: cursive;
     font-weight : bold;
     vertical-align: top;
@@ -1244,30 +1282,35 @@ border-bottom: solid 1pt blue;
     color : #c00;
     margin: 0em;
     padding: 0px;</rendition>
-            <rendition xml:id="float">float:left;</rendition>
+            <rendition xml:id="float">float:right;    display: block;
+    font-size: smaller;
+    clear: right;
+    padding: 4pt;
+    width: 15%;
+</rendition>
             <rendition xml:id="hyphen"/>
             <rendition xml:id="inline">display:inline;</rendition>
             <rendition xml:id="display">display:block;</rendition>
-            <rendition xml:id="italic">  font-style: italic;</rendition>
-            <rendition xml:id="larger">  font-size: larger;</rendition>
-            <rendition xml:id="left"> text-align: left;</rendition>
-            <rendition xml:id="leftbraced"> padding-left: 2pt; border-left: solid blue 2pt; </rendition>
+            <rendition xml:id="italic">font-style: italic;</rendition>
+            <rendition xml:id="larger">font-size: larger;</rendition>
+            <rendition xml:id="left">text-align: left;</rendition>
+            <rendition xml:id="leftbraced">padding-left: 2pt; border-left: dotted gray 2pt; </rendition>
             <rendition xml:id="letterspace">letter-spacing: 0.5em;</rendition>
             <rendition xml:id="normalstyle">font-style:roman;</rendition>
             <rendition xml:id="normalweight">font-weight:normal;</rendition>
-            <rendition xml:id="right"> text-align: right;</rendition>
-            <rendition xml:id="rightbraced">  padding-right: 2pt; border-right: solid blue 2pt; </rendition>
-            <rendition xml:id="rotateleft"/>
-            <rendition xml:id="rotateright"/>
-            <rendition xml:id="smallcaps">    font-variant: small-caps;</rendition>
-            <rendition xml:id="smaller">  font-size: smaller;</rendition>
-            <rendition xml:id="strikethrough">   text-decoration: line-through;</rendition>
-            <rendition xml:id="subscript">    vertical-align: bottom;    font-size: smaller;</rendition>
-            <rendition xml:id="superscript">    vertical-align: super;    font-size: smaller;</rendition>
-            <rendition xml:id="topbraced"> padding-top: 2pt;  border-top: solid blue 2pt; </rendition>
+            <rendition xml:id="right">text-align: right;</rendition>
+            <rendition xml:id="rightbraced">padding-right: 2pt; border-right: dotted gray 2pt; </rendition>
+            <rendition xml:id="rotateleft">-webkit-transform: rotate(90deg);    transform: rotate(90deg);</rendition>
+            <rendition xml:id="rotateright">-webkit-transform: rotate(-90deg);    transform: rotate(-90deg);</rendition>
+            <rendition xml:id="smallcaps">font-variant: small-caps;</rendition>
+            <rendition xml:id="smaller">font-size: smaller;</rendition>
+            <rendition xml:id="strikethrough">text-decoration: line-through;</rendition>
+            <rendition xml:id="subscript">vertical-align: bottom;    font-size: smaller;</rendition>
+            <rendition xml:id="superscript">vertical-align: super;    font-size: smaller;</rendition>
+            <rendition xml:id="topbraced">padding-top: 2pt;  border-top: dotted gray 2pt; </rendition>
             <rendition xml:id="typewriter">font-family:monospace;</rendition>
             <rendition xml:id="underline">text-decoration: underline;</rendition>
-            <rendition xml:id="wavyunderline">       text-decoration: underline;       text-decoration-style: wavy;</rendition>
+            <rendition xml:id="wavyunderline">text-decoration: underline;       text-decoration-style: wavy;</rendition>
           </specGrp>
         </div>
       </div>
