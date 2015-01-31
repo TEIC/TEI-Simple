@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <link rel="StyleSheet" href="simple.css" type="text/css" /><style>.simple_allcaps {     text-transform: uppercase; } 
-.simple_blackletter {  } 
+      <link rel="StyleSheet" href="simple.css" type="text/css" /><style>.simple_allcaps { text-transform: uppercase; } 
+.simple_blackletter { font-family: fantasy; } 
 .simple_bold { font-weight: bold; } 
-.simple_bottombraced {  } 
-.simple_boxed {  border: solid black 1pt; } 
-.simple_centre {  text-align: center; } 
+.simple_bottombraced { padding-bottom: 2pt; border-bottom: dashed gray 2pt; } 
+.simple_boxed { padding: 2pt; border: solid black 1pt; } 
+.simple_centre { text-align: center; } 
 .simple_cursive { font-family: cursive; } 
-.simple_doublestrikethrough {     text-decoration: line-through;    color: red; } 
-.simple_doubleunderline {     text-decoration: underline;    color: red; } 
-.simple_dropcap {  font-size : 6em;
+.simple_doublestrikethrough { text-decoration: line-through;    color: red; } 
+.simple_doubleunderline { text-decoration: underline;    color: red; } 
+.simple_dropcap { font-size : 6em;
     font-family: cursive;
     font-weight : bold;
     vertical-align: top;
@@ -21,30 +21,35 @@
     color : #c00;
     margin: 0em;
     padding: 0px; } 
-.simple_float { float:left; } 
+.simple_float { float:right;    display: block;
+    font-size: smaller;
+    clear: right;
+    padding: 4pt;
+    width: 15%;
+ } 
 .simple_hyphen {  } 
 .simple_inline { display:inline; } 
 .simple_display { display:block; } 
-.simple_italic {   font-style: italic; } 
-.simple_larger {   font-size: larger; } 
-.simple_left {  text-align: left; } 
-.simple_leftbraced {  padding-left: 2pt; border-left: solid blue 2pt;  } 
+.simple_italic { font-style: italic; } 
+.simple_larger { font-size: larger; } 
+.simple_left { text-align: left; } 
+.simple_leftbraced { padding-left: 2pt; border-left: dotted gray 2pt;  } 
 .simple_letterspace { letter-spacing: 0.5em; } 
 .simple_normalstyle { font-style:roman; } 
 .simple_normalweight { font-weight:normal; } 
-.simple_right {  text-align: right; } 
-.simple_rightbraced {   padding-right: 2pt; border-right: solid blue 2pt;  } 
-.simple_rotateleft {  } 
-.simple_rotateright {  } 
-.simple_smallcaps {     font-variant: small-caps; } 
-.simple_smaller {   font-size: smaller; } 
-.simple_strikethrough {    text-decoration: line-through; } 
-.simple_subscript {     vertical-align: bottom;    font-size: smaller; } 
-.simple_superscript {     vertical-align: super;    font-size: smaller; } 
-.simple_topbraced {  padding-top: 2pt;  border-top: solid blue 2pt;  } 
+.simple_right { text-align: right; } 
+.simple_rightbraced { padding-right: 2pt; border-right: dotted gray 2pt;  } 
+.simple_rotateleft { -webkit-transform: rotate(90deg);    transform: rotate(90deg); } 
+.simple_rotateright { -webkit-transform: rotate(-90deg);    transform: rotate(-90deg); } 
+.simple_smallcaps { font-variant: small-caps; } 
+.simple_smaller { font-size: smaller; } 
+.simple_strikethrough { text-decoration: line-through; } 
+.simple_subscript { vertical-align: bottom;    font-size: smaller; } 
+.simple_superscript { vertical-align: super;    font-size: smaller; } 
+.simple_topbraced { padding-top: 2pt;  border-top: dotted gray 2pt;  } 
 .simple_typewriter { font-family:monospace; } 
 .simple_underline { text-decoration: underline; } 
-.simple_wavyunderline {        text-decoration: underline;       text-decoration-style: wavy; } 
+.simple_wavyunderline { text-decoration: underline;       text-decoration-style: wavy; } 
 span.add {color: green; text-decoration: underline;}
 div.address {margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;}
 div.addrLine {white-space: nowrap;}
@@ -112,6 +117,7 @@ span.title4 {font-style: italic;}
 span.title6 {font-style: italic;}
 span.title8 {font-style: italic;}
 span.title10 {font-style: italic;}
+div.titlePage {text-align: center;}
 div.trailer {color: green;}
 span.unclear:after {content: ' [?] ';}
 </style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf8" src="simple.js"></script><title>A Christmas Carol </title> 
@@ -151,7 +157,7 @@ span.unclear:after {content: ' [?] ';}
       </div> 
       <body>
          <div class="head6">(Bits of) A CHRISTMAS CAROL, and other things</div> 
-         <div class="div">
+         <div class="div" id="foo">
             <h1 class="head">Simple rendition tests</h1> 
             <p class="p"><span class="q2">Who-e debel you?</span> — he at last said — <span class="q2">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
             </p> 
@@ -159,103 +165,309 @@ span.unclear:after {content: ' [?] ';}
             </p> 
             <table class="table">
                <tr class="row1">
-                  <td class="cell">Effect</td> 
+                  <td class="cell">Element</td> 
                   <td class="cell">Example</td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">emph</td> 
-                  <td class="cell">This is <span class="hi2">emph</span> tag
-                  </td>
+                  <td class="cell">abbr</td> 
+                  <td class="cell">This is an <span class="abbr2">example of abbr</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">add</td> 
+                  <td class="cell">This is an <span class="add">example of add</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">bibl</td> 
+                  <td class="cell">This is an <span class="bibl">example of bibl</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">c</td> 
+                  <td class="cell">This is an <span class="c">example of c</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">corr</td> 
+                  <td class="cell">This is an <span class="corr2">example of corr</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">date</td> 
+                  <td class="cell">This is an <span class="date4">example of date</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">del</td> 
+                  <td class="cell">This is an <span class="del">example of del</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">expan</td> 
+                  <td class="cell">This is an <span class="expan2">example of expan</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">foreign</td> 
+                  <td class="cell">This is an <span class="foreign">example of foreign</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">formula</td> 
+                  <td class="cell">This is an <span class="formula2">example of formula</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">g</td> 
+                  <td class="cell">This is an <span class="g2">example of g</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">hi</td> 
-                  <td class="cell">This is <span class="hi2">hi</span> tag
+                  <td class="cell">This is an <span class="hi2">example of hi</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">label</td> 
+                  <td class="cell">This is an <span class="label">example of label</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">measure</td> 
+                  <td class="cell">This is an <span class="measure">example of measure</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">name</td> 
+                  <td class="cell">This is an <span class="name">example of name</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">note</td> 
+                  <td class="cell">This is an <span class="note3">example of note</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">num</td> 
+                  <td class="cell">This is an <span class="num">example of num</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">orig</td> 
+                  <td class="cell">This is an <span class="orig2">example of orig</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">pb</td> 
+                  <td class="cell">This is an <span class="pb">1001</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">pc</td> 
+                  <td class="cell">This is an <span class="pc">example of pc</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">q</td> 
+                  <td class="cell">This is an <span class="q2">example of q</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">quote</td> 
+                  <td class="cell">This is an 
+                     <div class="quote2">example of quote</div>
                   </td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">letterspace</td> 
-                  <td class="cell">This is <span class="simple_letterspace">letter spaced</span> effect
-                  </td>
+                  <td class="cell">ref</td> 
+                  <td class="cell">This is an <a class="ref3" href="http://www.tei-c.org">example of ref</a></td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">typewriter</td> 
-                  <td class="cell">This is <span class="simple_typewriter">typewriter</span> effect
-                  </td>
+                  <td class="cell">reg</td> 
+                  <td class="cell">This is an <span class="reg1">example of reg</span></td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">bold</td> 
-                  <td class="cell">This is <span class="simple_bold">bold</span> effect
-                  </td>
+                  <td class="cell">rhyme</td> 
+                  <td class="cell">This is an <span class="rhyme">example of rhyme</span></td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">normalweight</td> 
-                  <td class="cell">This is <span class="simple_normalweight">normalweight</span> effect
-                  </td>
+                  <td class="cell">rs</td> 
+                  <td class="cell">This is an <span class="rs">example of rs</span></td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">smallcaps</td> 
-                  <td class="cell">This is <span class="simple_smallcaps">smallcaps</span> effect
-                  </td>
+                  <td class="cell">s</td> 
+                  <td class="cell">This is an <span class="s">example of s</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">seg</td> 
+                  <td class="cell">This is an <span class="seg">example of seg</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">sic</td> 
+                  <td class="cell">This is an <span class="sic2">example of sic</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">space</td> 
+                  <td class="cell">This is an <span class="space"></span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">supplied</td> 
+                  <td class="cell">This is an <span class="supplied3">example of supplied</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">time</td> 
+                  <td class="cell">This is an <span class="time">example of time</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">title</td> 
+                  <td class="cell">This is an <span class="title4">example of title</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">unclear</td> 
+                  <td class="cell">This is an <span class="unclear">example of unclear</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">w</td> 
+                  <td class="cell">This is an <span class="w">example of w</span></td>
+               </tr>
+            </table> 
+            <table class="table">
+               <tr class="row1">
+                  <td class="cell">Rendition</td> 
+                  <td class="cell">Example</td>
                </tr> 
                <tr class="row2">
                   <td class="cell">allcaps</td> 
-                  <td class="cell">This is <span class="simple_allcaps">allcaps</span> effect
-                  </td>
+                  <td class="cell">This is an <span class="simple_allcaps">example of allcaps</span></td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">strikethrough</td> 
-                  <td class="cell">This is <span class="simple_strikethrough">strikethrough</span> effect
-                  </td>
+                  <td class="cell">blackletter</td> 
+                  <td class="cell">This is an <span class="simple_blackletter">example of blackletter</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">bold</td> 
+                  <td class="cell">This is an <span class="simple_bold">example of bold</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">cursive</td> 
+                  <td class="cell">This is an <span class="simple_cursive">example of cursive</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">doublestrikethrough</td> 
-                  <td class="cell">This is <span class="simple_doublestrikethrough">doublestrikethrough</span> effect
-                  </td>
-               </tr> 
-               <tr class="row2">
-                  <td class="cell">color(red)</td> 
-                  <td class="cell">This is <span class="simple_color(red)">color(red)</span> effect
-                  </td>
-               </tr> 
-               <tr class="row2">
-                  <td class="cell">underline</td> 
-                  <td class="cell">This is <span class="simple_underline">underline</span> effect
-                  </td>
-               </tr> 
-               <tr class="row2">
-                  <td class="cell">wavyunderline</td> 
-                  <td class="cell">This is <span class="simple_wavyunderline">wavyunderline</span> effect
-                  </td>
+                  <td class="cell">This is an <span class="simple_doublestrikethrough">example of doublestrikethrough</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">doubleunderline</td> 
-                  <td class="cell">This is <span class="simple_doubleunderline">doubleunderline</span> effect
-                  </td>
+                  <td class="cell">This is an <span class="simple_doubleunderline">example of doubleunderline</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">hyphen</td> 
+                  <td class="cell">This is an <span class="simple_hyphen">example of hyphen</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">italic</td> 
+                  <td class="cell">This is an <span class="simple_italic">example of italic</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">larger</td> 
+                  <td class="cell">This is an <span class="simple_larger">example of larger</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">letterspace</td> 
+                  <td class="cell">This is an <span class="simple_letterspace">example of letterspace</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">normalstyle</td> 
+                  <td class="cell">This is an <span class="simple_normalstyle">example of normalstyle</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">normalweight</td> 
+                  <td class="cell">This is an <span class="simple_normalweight">example of normalweight</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">smallcaps</td> 
+                  <td class="cell">This is an <span class="simple_smallcaps">example of smallcaps</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">smaller</td> 
+                  <td class="cell">This is an <span class="simple_smaller">example of smaller</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">strikethrough</td> 
+                  <td class="cell">This is an <span class="simple_strikethrough">example of strikethrough</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">subscript</td> 
-                  <td class="cell">This is <span class="simple_subscript">subscript</span> effect
-                  </td>
+                  <td class="cell">This is an <span class="simple_subscript">example of subscript</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">superscript</td> 
-                  <td class="cell">This is <span class="simple_superscript">superscript</span> effect
-                  </td>
+                  <td class="cell">This is an <span class="simple_superscript">example of superscript</span></td>
                </tr> 
                <tr class="row2">
-                  <td class="cell">bold italic red, done separately</td> 
-                  <td class="cell"><span class="simple_bold"><span class="simple_italic"><span class="simple_color(red)">rend test 1</span></span></span></td>
+                  <td class="cell">typewriter</td> 
+                  <td class="cell">This is an <span class="simple_typewriter">example of typewriter</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">underline</td> 
+                  <td class="cell">This is an <span class="simple_underline">example of underline</span></td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">wavyunderline</td> 
+                  <td class="cell">This is an <span class="simple_wavyunderline">example of wavyunderline</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">bold italic smallcaps</td> 
-                  <td class="cell"><span class="simple_bold simple_italic simple_smallcaps">rend test 1</span> <sup class="footnotelink"><a href="#d1e419">[1]</a></sup><div id="d1e419" class="bottom note1">Cairns 2003: 11. My work is Muellner 1996.</div>
+                  <td class="cell"><span class="simple_bold simple_italic simple_smallcaps">rend test 1</span> <sup class="footnotelink"><a href="#d1e850">[1]</a></sup><div id="d1e850" class="bottom note1">Cairns 2003: 11. My work is Muellner 1996.</div>
                   </td>
                </tr>
-            </table>
+            </table> 
+            <p class="simple_bottombraced">bottombraced: Iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+               vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+               dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+               nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+               nonummy nibh euismod is an example of bottombraced
+            </p> 
+            <p class="simple_boxed">boxed: Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+               dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+               qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+               is an example of boxed
+            </p> 
+            <p class="simple_centre">centre: Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+               illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+               qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+               is an example of centre
+            </p> 
+            <p class="p"><span class="simple_dropcap">D</span>ropcap: Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+               illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+               qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+               is an example of dropcap
+            </p> 
+            <p class="simple_float">float: Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+               dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+               qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+               is an example of float
+            </p> 
+            <p class="simple_left">left: Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+               dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+               qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+               is an example of left
+            </p> 
+            <p class="simple_leftbraced">leftbraced: Iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+               vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+               dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+               nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+               nonummy nibh euismod is an example of leftbraced
+            </p> 
+            <p class="simple_right">right: Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+               dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+               qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+               is an example of right
+            </p> 
+            <p class="simple_rightbraced">rightbraced: Iriure dolor in hendrerit in vulputate velit esse molestie consequat,
+               vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+               dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait
+               nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+               nonummy nibh euismod is an example of rightbraced
+            </p> 
+            <p class="simple_rotateleft">rotateleft: Iriure dolor in hendrerit in an example of rotateleft</p> 
+            <p class="simple_rotateright">rotateright: Iriure dolor in hendrerit rotateright</p> 
+            <p class="simple_topbraced">topbraced: Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel
+               illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim
+               qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+               Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+               is an example of topbraced
+            </p>
          </div> 
          <div class="div">
             <h1 class="head">Quotations</h1> 
-            <p class="p">A paragraph with a footnote containing a block-level object<sup class="footnotelink"><a href="#d1e433">2</a></sup><div id="d1e433" class="bottom note1">We start with a quotation:
+            <p class="p">A paragraph with a footnote containing a block-level object<sup class="footnotelink"><a href="#d1e904">3</a></sup><div id="d1e904" class="bottom note1">We start with a quotation:
                   <div class="lg">
                      <div class="l">This is the way the world ends</div>
                      <div class="l">This is the way the world ends</div>
@@ -314,12 +526,12 @@ span.unclear:after {content: ' [?] ';}
          <div class="div">
             <h1 class="head">Footnotes and endnotes</h1> 
             <div class="div">
-               <h2 class="head">1 Zur Entstehung der <span class="simple_smcap">Philosophischen Untersuchungen</span><sup class="footnotelink"><a href="#d1e699">8</a></sup><div id="d1e699" class="bottom note1">Zu Textauszeichnungen und Siglen siehe die Legende.</div>
+               <h2 class="head">1 Zur Entstehung der <span class="simple_smcap">Philosophischen Untersuchungen</span><sup class="footnotelink"><a href="#d1e1170">8</a></sup><div id="d1e1170" class="bottom note1">Zu Textauszeichnungen und Siglen siehe die Legende.</div>
                </h2> 
                <p class="simple_rightbraced">Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
                   eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                   praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
-                  ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod<sup class="footnotelink"><a href="#d1e704">9</a></sup><div id="d1e704" class="bottom note1">It is time to begin the beguine.</div> Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
+                  ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod<sup class="footnotelink"><a href="#d1e1175">9</a></sup><div id="d1e1175" class="bottom note1">It is time to begin the beguine.</div> Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
                   eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                   praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
                   ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -734,7 +946,7 @@ span.unclear:after {content: ' [?] ';}
             <p class="p">I wonder what are the xml-ids preserved in a transformation to XHTML, in particular
                in the case of quotations. So, let’s try :
             </p> 
-            <div class="cit" id="thisCitation"><sup><a class="anchor" name="Ad1e1751" href="#Nd1e1751">1</a></sup> 
+            <div class="cit" id="thisCitation"><sup><a class="anchor" name="Ad1e2222" href="#Nd1e2222">1</a></sup> 
                <div class="quote2" id="thisQuotation">
                   <p class="p" id="thisParagraph">Something longer. Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem ipsum
                      dolor sit amet Lorem ipsum dolor sit amet.

@@ -23,7 +23,6 @@ span.floating {
     padding: 4pt;
     font-style: italic;
     width: 15%;
-    float:right;
     background-color: #F8F8FF;
     margin: 6pt;
 }
@@ -107,6 +106,8 @@ sup.footnotelink {
 	padding:2px;
 }
 table {
+    margin-top: 4pt;
+    margin-bottom: 4pt;
   border-collapse: collapse;
 }
 tr {

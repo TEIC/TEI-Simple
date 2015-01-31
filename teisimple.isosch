@@ -35,18 +35,27 @@ belongs, but this <name/> element has no textual content.</assert>
                                           (<value-of select="$results"/>)</assert>
                   </rule>
                 </pattern>
-   <pattern id="teisimple-att.typed-constraint-subtypeTyped-3">
+   <pattern id="teisimple-att.global-constraint-corresppointer-3">
+                      <rule context="tei:*[@corresp]">
+                        <let name="results"
+              value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                        <report test="some $x in $results  satisfies $x"> Error: Every
+                                       local pointer in "<value-of select="@corresp"/>" must point to
+                                       an ID in this document (<value-of select="$results"/>)</report>
+                      </rule>
+                </pattern>
+   <pattern id="teisimple-att.typed-constraint-subtypeTyped-4">
       <rule context="*[@subtype]">
         <assert test="@type">The <name/> element should not be categorized in detail with @subtype
  unless also categorized in general with @type</assert>
       </rule>
     </pattern>
-   <pattern id="teisimple-att.pointing-targetLang-constraint-targetLang-4">
+   <pattern id="teisimple-att.pointing-targetLang-constraint-targetLang-5">
           <rule context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
             <assert test="count(@target)">@targetLang can only be used if @target is specified.</assert>
           </rule>
         </pattern>
-   <pattern id="teisimple-att.pointing-target-constraint-validtarget-5">
+   <pattern id="teisimple-att.pointing-target-constraint-validtarget-6">
                       <rule context="tei:*[@target]">
                         <let name="results"
               value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
@@ -55,32 +64,32 @@ belongs, but this <name/> element has no textual content.</assert>
                                        an ID in this document (<value-of select="$results"/>)</report>
                       </rule>
                     </pattern>
-   <pattern id="teisimple-att.spanning-spanTo-constraint-spanTo-2-6">
+   <pattern id="teisimple-att.spanning-spanTo-constraint-spanTo-2-7">
           <rule context="tei:*[@spanTo]">
             <assert test="id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]">
 The element indicated by @spanTo (<value-of select="@spanTo"/>) must follow the current element <name/>
                   </assert>
           </rule>
         </pattern>
-   <pattern id="teisimple-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-7">
+   <pattern id="teisimple-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-8">
           <rule context="tei:*[@schemeVersion]">
             <assert test="@scheme and not(@scheme = 'free')">
               @schemeVersion can only be used if @scheme is specified.
             </assert>
           </rule>
         </pattern>
-   <pattern id="teisimple-quotation-constraint-quotationContents-8">
+   <pattern id="teisimple-quotation-constraint-quotationContents-9">
       <rule context="tei:quotation">
          <report test="not(@marks) and not (tei:p)">
 On <name/>, either the @marks attribute should be used, or a paragraph of description provided</report>
       </rule>
    </pattern>
-   <pattern id="teisimple-msIdentifier-constraint-msId_minimal-9">
+   <pattern id="teisimple-msIdentifier-constraint-msId_minimal-10">
       <rule context="tei:msIdentifier">
          <report test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">An msIdentifier must contain either a repository or location of some type, or a manuscript name</report>
       </rule>
    </pattern>
-   <pattern id="teisimple-relatedItem-constraint-targetorcontent1-10">
+   <pattern id="teisimple-relatedItem-constraint-targetorcontent1-11">
       <rule context="tei:relatedItem">
          <report test="@target and count( child::* ) &gt; 0">
 If the @target attribute on <name/> is used, the
@@ -89,43 +98,64 @@ relatedItem element must be empty</report>
         or a child element to indicate the related bibliographic item</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-damageSpan-constraint-spanTo-11">
+   <pattern id="teisimple-damageSpan-constraint-spanTo-12">
       <rule context="tei:damageSpan">
          <assert test="@spanTo">
 The @spanTo attribute of <name/> is required.</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-addSpan-constraint-spanTo-13">
+   <pattern id="teisimple-addSpan-constraint-spanTo-14">
       <rule context="tei:addSpan">
          <assert test="@spanTo">The @spanTo attribute of <name/> is required.</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-lg-constraint-atleast1oflggapl-15">
+   <pattern id="teisimple-bibl-constraint-noEmptyBibl-16">
+      <rule context="tei:bibl">
+	              <assert test="child::* or child::text()[normalize-space(.)]" role="ERROR">
+                Element "<name/>" may not be empty.
+            </assert>
+		    </rule>
+   </pattern>
+   <pattern id="teisimple-choice-constraint-choiceSize-17">
+      <rule context="tei:choice">
+		       <assert test="count(*) &gt; 1" role="ERROR">
+                    Element "<name/>" must have at least two child
+		    elements.</assert>
+		    </rule>
+   </pattern>
+   <pattern id="teisimple-choice-constraint-choiceContent-18">
+      <rule context="tei:choice">
+		       <assert test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))"
+                 role="ERROR">
+                    Element "<name/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
+		    </rule>
+   </pattern>
+   <pattern id="teisimple-lg-constraint-atleast1oflggapl-19">
       <rule context="tei:lg">
          <assert test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
         must contain at least one child l, lg or gap element.</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-ref-constraint-refAtts-16">
+   <pattern id="teisimple-ref-constraint-refAtts-20">
       <rule context="tei:ref">
          <report test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
          </report>
       </rule>
    </pattern>
-   <pattern id="teisimple-s-constraint-noNestedS-17">
+   <pattern id="teisimple-s-constraint-noNestedS-21">
       <rule context="tei:s">
          <report test="tei:s">You may not nest one s element within
       another: use seg instead</report>
       </rule>
    </pattern>
-   <pattern id="teisimple-subst-constraint-substContents1-18">
+   <pattern id="teisimple-subst-constraint-substContents1-22">
       <rule context="tei:subst">
          <assert test="child::tei:add and child::tei:del">
             <name/> must have at least one child add and at least one child del</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-text-constraint-headeronlyelement-21">
+   <pattern id="teisimple-text-constraint-headeronlyelement-25">
       <rule context="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value">
          <report test="ancestor::tei:text">Error:  The element <name/>
 is not permitted outside the header</report>

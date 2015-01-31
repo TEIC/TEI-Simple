@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <link rel="StyleSheet" href="simple.css" type="text/css" /><style>.simple_allcaps {     text-transform: uppercase; } 
-.simple_blackletter {  } 
+      <link rel="StyleSheet" href="simple.css" type="text/css" /><style>.simple_allcaps { text-transform: uppercase; } 
+.simple_blackletter { font-family: fantasy; } 
 .simple_bold { font-weight: bold; } 
-.simple_bottombraced {  } 
-.simple_boxed {  border: solid black 1pt; } 
-.simple_centre {  text-align: center; } 
+.simple_bottombraced { padding-bottom: 2pt; border-bottom: dashed gray 2pt; } 
+.simple_boxed { padding: 2pt; border: solid black 1pt; } 
+.simple_centre { text-align: center; } 
 .simple_cursive { font-family: cursive; } 
-.simple_doublestrikethrough {     text-decoration: line-through;    color: red; } 
-.simple_doubleunderline {     text-decoration: underline;    color: red; } 
-.simple_dropcap {  font-size : 6em;
+.simple_doublestrikethrough { text-decoration: line-through;    color: red; } 
+.simple_doubleunderline { text-decoration: underline;    color: red; } 
+.simple_dropcap { font-size : 6em;
     font-family: cursive;
     font-weight : bold;
     vertical-align: top;
@@ -21,30 +21,35 @@
     color : #c00;
     margin: 0em;
     padding: 0px; } 
-.simple_float { float:left; } 
+.simple_float { float:right;    display: block;
+    font-size: smaller;
+    clear: right;
+    padding: 4pt;
+    width: 15%;
+ } 
 .simple_hyphen {  } 
 .simple_inline { display:inline; } 
 .simple_display { display:block; } 
-.simple_italic {   font-style: italic; } 
-.simple_larger {   font-size: larger; } 
-.simple_left {  text-align: left; } 
-.simple_leftbraced {  padding-left: 2pt; border-left: solid blue 2pt;  } 
+.simple_italic { font-style: italic; } 
+.simple_larger { font-size: larger; } 
+.simple_left { text-align: left; } 
+.simple_leftbraced { padding-left: 2pt; border-left: dotted gray 2pt;  } 
 .simple_letterspace { letter-spacing: 0.5em; } 
 .simple_normalstyle { font-style:roman; } 
 .simple_normalweight { font-weight:normal; } 
-.simple_right {  text-align: right; } 
-.simple_rightbraced {   padding-right: 2pt; border-right: solid blue 2pt;  } 
-.simple_rotateleft {  } 
-.simple_rotateright {  } 
-.simple_smallcaps {     font-variant: small-caps; } 
-.simple_smaller {   font-size: smaller; } 
-.simple_strikethrough {    text-decoration: line-through; } 
-.simple_subscript {     vertical-align: bottom;    font-size: smaller; } 
-.simple_superscript {     vertical-align: super;    font-size: smaller; } 
-.simple_topbraced {  padding-top: 2pt;  border-top: solid blue 2pt;  } 
+.simple_right { text-align: right; } 
+.simple_rightbraced { padding-right: 2pt; border-right: dotted gray 2pt;  } 
+.simple_rotateleft { -webkit-transform: rotate(90deg);    transform: rotate(90deg); } 
+.simple_rotateright { -webkit-transform: rotate(-90deg);    transform: rotate(-90deg); } 
+.simple_smallcaps { font-variant: small-caps; } 
+.simple_smaller { font-size: smaller; } 
+.simple_strikethrough { text-decoration: line-through; } 
+.simple_subscript { vertical-align: bottom;    font-size: smaller; } 
+.simple_superscript { vertical-align: super;    font-size: smaller; } 
+.simple_topbraced { padding-top: 2pt;  border-top: dotted gray 2pt;  } 
 .simple_typewriter { font-family:monospace; } 
 .simple_underline { text-decoration: underline; } 
-.simple_wavyunderline {        text-decoration: underline;       text-decoration-style: wavy; } 
+.simple_wavyunderline { text-decoration: underline;       text-decoration-style: wavy; } 
 span.add {color: green; text-decoration: underline;}
 div.address {margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;}
 div.addrLine {white-space: nowrap;}
@@ -112,6 +117,7 @@ span.title4 {font-style: italic;}
 span.title6 {font-style: italic;}
 span.title8 {font-style: italic;}
 span.title10 {font-style: italic;}
+div.titlePage {text-align: center;}
 div.trailer {color: green;}
 span.unclear:after {content: ' [?] ';}
 </style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf8" src="simple.js"></script><title>Tricky Tests for TEI SIMPLE Processing</title> 
@@ -176,9 +182,9 @@ span.unclear:after {content: ' [?] ';}
                </div> 
                <p class="p">in the high, old tottering voice that seemed to have been tuned and broken at the
                   capstan bars. Then he rapped on the door with a bit of stick like a handspike that
-                  he carried, and when my father appeared, called roughly for a <span class="alternate choice1" title="alternate">glass<span class="hidden altcontent ">barrell</span></span> of rum. This, when it was brought to him, he drank slowly, like a <span class="corr2">connoisseur</span>, <span class="corr2">lingering</span> on the taste and still looking about him at the  and up at our signboard.
+                  he carried, and when my father appeared, called roughly for a <span class="alternate choice1" title="alternate">glass<span class="hidden altcontent ">barrell</span></span> of rum. This, when it was brought to him, he drank slowly, like a <span class="corr2">connoisseur</span>, <span class="corr2">lingering</span> on the taste and still looking about him at the <span class="corr2">cliffs</span> and up at our signboard.
                </p> 
-               <p class="p">"This is a handy cove," says he at length; "and a pleasant <span class="sic2">sittyated</span> grog-shop<sup><a class="anchor" name="Ad1e172" href="#Nd1e172">1</a></sup>. Much company, mate?"
+               <p class="p">"This is a handy cove," says he at length; "and a pleasant <span class="sic2">sittyated</span> grog-shop<sup><a class="anchor" name="Ad1e171" href="#Nd1e171">1</a></sup>. Much company, mate?"
                </p> 
                <p class="p">My father told him no, very little company, the more was the pity.</p> 
                <p class="p">"Well, then," said he, "this is the berth for me. Here you, matey," he cried<span class="note3" id="N1">fdslkjfd</span> to the man who trundled the barrow; "bring up alongside and help up my chest. I'll
@@ -188,7 +194,7 @@ span.unclear:after {content: ' [?] ';}
                   four gold pieces on the threshold. "You can tell me when I've worked through that,"
                   says he, looking as fierce as a commander.
                </p> 
-               <p class="p"><span class="in">W</span>As fuͤr eine edle Creatur ein Student sey/ ist zur Gnuͤge erwiesen. So edel aber selbiger ist/ desto mehrern Verdruͤßligkei- ten/ Kranckheiten und Gefahr ist er un- terworffen. In der Jugend muß er viel Verdruß und offt harte Schlaͤge vertragen von unverstaͤndigen Backel- Meistern/ die bißweilen mehr mit unsin- nigen Schlaͤgen/ als Verstand und gu- ten Worten solche zarte Pflaͤntzlein <span class="aq">tra-</span> <span class="fw1">A</span><span class="fw1"><span class="aq">cti-</span></span> <span class="pb">2</span> <span class="fw1"><span class="b">Studenten-Kranckheiten</span></span> <span class="aq">ctiren</span> und zur vollen Bluͤth untuͤchtig machen. Dahero <span class="aq">Horatius</span> <sup class="footnotelink"><a href="#d1e239">(a)</a></sup><div id="d1e239" class="bottom note1"><span class="aq">l. 2. Epist.</span></div> solche <span class="aq">Orbilios plagosos,</span> uñ noch besser der ge- lehrte <span class="aq">Dornavius Anitympanistas</span> nen- net/ <span class="aq">qui teneros pueros non castigant, sed carnificant, ut sæpe tenerrima ingenia desperent, generosa verò omni relucten- tur impetu, &amp; ita vel per timorem, vel per furorem Musis earumque ingratiis valedicant</span> das ist/ <span class="fr">welche die zarten Kinder nicht straffen/ sondern hen- ckermaͤßig</span> <span class="aq">tractiren,</span> <span class="fr">daß offt die zaͤr- testen</span> <span class="aq">ingenia</span> <span class="fr">alle Hoffnung sincken lassen/ und verzweiffeln/ die hertz- hafften Gemuͤther aber mit aller Macht wiederstreben/ und also ent- weder aus Furcht oder Verwilde- rung denen freyen Kuͤnsten gute Nacht geben.</span> <sup class="footnotelink"><a href="#d1e304">(b)</a></sup><div id="d1e304" class="bottom note1"><span class="aq">G. Franck. d. l.</span></div> Ich gebe solchen straffsuͤchtigen und im Zorn geschwin- den Lehrmeistern zu bedencken/ was <span class="aq">Ta- citus</span> saget: <sup class="footnotelink"><a href="#d1e318">(c)</a></sup><div id="d1e318" class="bottom note1"><span class="aq">In vita Agricolæ.</span></div> Daß sie den Ernst mit Gelindigkeit/ und am allermeisten mit Liebe vermischen sollen; Denn Furcht <span class="fw1">und</span> <span class="pb">3</span> <span class="fw1"><span class="b">und derer Curen.</span></span> und Schrecken ist ein schlechtes Band der Liebe. Rathe auch <span class="aq">medicè,</span> die Ju- gend nicht mit Stecken und andern har- ten Instrumenten auf die Koͤpffe/ wie die Ochsen zu schlagen/ denn sie werden dumm/ und behalten Zeit Lebens schwa- che und krancke Koͤpffe/ muͤssen auch wohl gar fuͤr der Zeit sterben/ wie ich et- liche Exempel <span class="aq">observiret.</span> Nach die- sem wachsen sie zwar zu einem hoͤhern Alter/ nemlich zum Kern-Jahren/ wel- ches ist die <span class="aq">Adolescentia</span> und <span class="aq">Juventus.</span> In solcher werden sie der Libertaͤt und Freyheit begieriger Krafft natuͤrlicher Zuneigung: <span class="aq">Adolescentia enim est sta- tus humorum temperatior, ubi natura majorem acquirit vigorem, dum humo- rum qualitates se invicem non obtun- dunt, sed in</span> σνμμετ<span class="gap3"></span>ία <span class="aq">laudabili amicè conspirant. Unde quam primum à præ- ceptorum &amp; parentum cura emancipati sunt, florentis ætatis voluptatibus avidi- us implentur, &amp; in excessus quoslibet pro- lubuntur.</span> Das ist/ <span class="fr">die</span> <span class="aq">Adolescenz</span> <span class="fr">o- der die ersten Jugend Jahre seyn eine solche Beschaffenheit des Blu-</span> <span class="fw1">A 2</span><span class="fw1"><span class="fr">tes/</span></span></p>
+               <p class="p"><span class="hi2">W</span>As fuͤr eine edle Creatur ein Student sey/ ist zur Gnuͤge erwiesen. So edel aber selbiger ist/ desto mehrern Verdruͤßligkei- ten/ Kranckheiten und Gefahr ist er un- terworffen. In der Jugend muß er viel Verdruß und offt harte Schlaͤge vertragen von unverstaͤndigen Backel- Meistern/ die bißweilen mehr mit unsin- nigen Schlaͤgen/ als Verstand und gu- ten Worten solche zarte Pflaͤntzlein <span class="hi2">tra-</span> <span class="fw1">A</span><span class="fw1"><span class="hi2">cti-</span></span> <span class="pb">2</span> <span class="fw1"><span class="simple_bold">Studenten-Kranckheiten</span></span> <span class="hi2">ctiren</span> und zur vollen Bluͤth untuͤchtig machen. Dahero <span class="hi2">Horatius</span> <sup class="footnotelink"><a href="#d1e238">(a)</a></sup><div id="d1e238" class="bottom note1"><span class="hi2">l. 2. Epist.</span></div> solche <span class="hi2">Orbilios plagosos,</span> uñ noch besser der ge- lehrte <span class="hi2">Dornavius Anitympanistas</span> nen- net/ <span class="hi2">qui teneros pueros non castigant, sed carnificant, ut sæpe tenerrima ingenia desperent, generosa verò omni relucten- tur impetu, &amp; ita vel per timorem, vel per furorem Musis earumque ingratiis valedicant</span> das ist/ <span class="hi2">welche die zarten Kinder nicht straffen/ sondern hen- ckermaͤßig</span> <span class="hi2">tractiren,</span> <span class="hi2">daß offt die zaͤr- testen</span> <span class="hi2">ingenia</span> <span class="hi2">alle Hoffnung sincken lassen/ und verzweiffeln/ die hertz- hafften Gemuͤther aber mit aller Macht wiederstreben/ und also ent- weder aus Furcht oder Verwilde- rung denen freyen Kuͤnsten gute Nacht geben.</span> <sup class="footnotelink"><a href="#d1e303">(b)</a></sup><div id="d1e303" class="bottom note1"><span class="hi2">G. Franck. d. l.</span></div> Ich gebe solchen straffsuͤchtigen und im Zorn geschwin- den Lehrmeistern zu bedencken/ was <span class="hi2">Ta- citus</span> saget: <sup class="footnotelink"><a href="#d1e317">(c)</a></sup><div id="d1e317" class="bottom note1"><span class="hi2">In vita Agricolæ.</span></div> Daß sie den Ernst mit Gelindigkeit/ und am allermeisten mit Liebe vermischen sollen; Denn Furcht <span class="fw1">und</span> <span class="pb">3</span> <span class="fw1"><span class="simple_bold">und derer Curen.</span></span> und Schrecken ist ein schlechtes Band der Liebe. Rathe auch <span class="hi2">medicè,</span> die Ju- gend nicht mit Stecken und andern har- ten Instrumenten auf die Koͤpffe/ wie die Ochsen zu schlagen/ denn sie werden dumm/ und behalten Zeit Lebens schwa- che und krancke Koͤpffe/ muͤssen auch wohl gar fuͤr der Zeit sterben/ wie ich et- liche Exempel <span class="hi2">observiret.</span> Nach die- sem wachsen sie zwar zu einem hoͤhern Alter/ nemlich zum Kern-Jahren/ wel- ches ist die <span class="hi2">Adolescentia</span> und <span class="hi2">Juventus.</span> In solcher werden sie der Libertaͤt und Freyheit begieriger Krafft natuͤrlicher Zuneigung: <span class="hi2">Adolescentia enim est sta- tus humorum temperatior, ubi natura majorem acquirit vigorem, dum humo- rum qualitates se invicem non obtun- dunt, sed in</span> σνμμετ<span class="gap3"></span>ία <span class="hi2">laudabili amicè conspirant. Unde quam primum à præ- ceptorum &amp; parentum cura emancipati sunt, florentis ætatis voluptatibus avidi- us implentur, &amp; in excessus quoslibet pro- lubuntur.</span> Das ist/ <span class="hi2">die</span> <span class="hi2">Adolescenz</span> <span class="hi2">o- der die ersten Jugend Jahre seyn eine solche Beschaffenheit des Blu-</span> <span class="fw1">A 2</span><span class="fw1"><span class="hi2">tes/</span></span></p>
             </div>
          </div>
       </body>

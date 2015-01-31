@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><TEI xmlns="http://www.tei-c.org/ns/1.0">
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
   <teiHeader type="text">
     <fileDesc>
       <titleStmt>
@@ -82,7 +83,7 @@
     </front>
     <body>
       <head>(Bits of) A CHRISTMAS CAROL, and other things</head>
-      <div>
+      <div xml:id="foo">
         <head>Simple rendition tests</head>
         <p><q rendition="#qbefore #qafter">Who-e debel
 	  you?</q> — he at last said — 
@@ -98,83 +99,267 @@
 	  about me in the dark.</p>
         <table>
           <row role="label">
-            <cell>Effect</cell>
+            <cell>Element</cell>
             <cell>Example</cell>
           </row>
           <row>
-            <cell>emph</cell>
-            <cell>This is <hi>emph</hi> tag</cell>
+            <cell>abbr</cell>
+            <cell>This is an <abbr>example of abbr</abbr></cell>
+          </row>
+          <row>
+            <cell>add</cell>
+            <cell>This is an <add>example of add</add></cell>
+          </row>
+          <row>
+            <cell>bibl</cell>
+            <cell>This is an <bibl>example of bibl</bibl></cell>
+          </row>
+          <row>
+            <cell>c</cell>
+            <cell>This is an <c>example of c</c></cell>
+          </row>
+          <row>
+            <cell>corr</cell>
+            <cell>This is an <corr>example of corr</corr></cell>
+          </row>
+          <row>
+            <cell>date</cell>
+            <cell>This is an <date>example of date</date></cell>
+          </row>
+          <row>
+            <cell>del</cell>
+            <cell>This is an <del>example of del</del></cell>
+          </row>
+          <row>
+            <cell>expan</cell>
+            <cell>This is an <expan>example of expan</expan></cell>
+          </row>
+          <row>
+            <cell>foreign</cell>
+            <cell>This is an <foreign>example of foreign</foreign></cell>
+          </row>
+          <row>
+            <cell>formula</cell>
+            <cell>This is an <formula>example of formula</formula></cell>
+          </row>
+          <row>
+            <cell>g</cell>
+            <cell>This is an <g ref="#whatever">example of g</g></cell>
           </row>
           <row>
             <cell>hi</cell>
-            <cell>This is <hi>hi</hi> tag</cell>
+            <cell>This is an <hi>example of hi</hi></cell>
           </row>
           <row>
-            <cell>letterspace</cell>
-            <cell>This is <hi rendition="simple:letterspace">letter spaced</hi> effect</cell>
+            <cell>label</cell>
+            <cell>This is an <label>example of label</label></cell>
           </row>
           <row>
-            <cell>typewriter</cell>
-            <cell>This is <hi rendition="simple:typewriter">typewriter</hi> effect</cell>
+            <cell>measure</cell>
+            <cell>This is an <measure>example of measure</measure></cell>
           </row>
           <row>
-            <cell>bold</cell>
-            <cell>This is <hi rendition="simple:bold">bold</hi> effect</cell>
+            <cell>name</cell>
+            <cell>This is an <name>example of name</name></cell>
           </row>
           <row>
-            <cell>normalweight</cell>
-            <cell>This is <hi rendition="simple:normalweight">normalweight</hi> effect</cell>
+            <cell>note</cell>
+            <cell>This is an <note>example of note</note></cell>
           </row>
           <row>
-            <cell>smallcaps</cell>
-            <cell>This is <hi rendition="simple:smallcaps">smallcaps</hi> effect</cell>
+            <cell>num</cell>
+            <cell>This is an <num>example of num</num></cell>
           </row>
           <row>
-            <cell>allcaps</cell>
-            <cell>This is <hi rendition="simple:allcaps">allcaps</hi> effect</cell>
+            <cell>orig</cell>
+            <cell>This is an <orig>example of orig</orig></cell>
           </row>
           <row>
-            <cell>strikethrough</cell>
-            <cell>This is <hi rendition="simple:strikethrough">strikethrough</hi> effect</cell>
+            <cell>pb</cell>
+            <cell>This is an <pb n="1001"/></cell>
           </row>
           <row>
-            <cell>doublestrikethrough</cell>
-            <cell>This is <hi rendition="simple:doublestrikethrough">doublestrikethrough</hi> effect</cell>
+            <cell>pc</cell>
+            <cell>This is an <pc>example of pc</pc></cell>
           </row>
           <row>
-            <cell>color(red)</cell>
-            <cell>This is <hi rendition="simple:color(red)">color(red)</hi> effect</cell>
+            <cell>q</cell>
+            <cell>This is an <q>example of q</q></cell>
           </row>
           <row>
-            <cell>underline</cell>
-            <cell>This is <hi rendition="simple:underline">underline</hi> effect</cell>
+            <cell>quote</cell>
+            <cell>This is an <quote>example of quote</quote></cell>
           </row>
           <row>
-            <cell>wavyunderline</cell>
-            <cell>This is <hi rendition="simple:wavyunderline">wavyunderline</hi> effect</cell>
+            <cell>ref</cell>
+            <cell>This is an <ref target="http://www.tei-c.org">example of ref</ref></cell>
           </row>
           <row>
-            <cell>doubleunderline</cell>
-            <cell>This is <hi rendition="simple:doubleunderline">doubleunderline</hi> effect</cell>
+            <cell>reg</cell>
+            <cell>This is an <reg>example of reg</reg></cell>
           </row>
           <row>
-            <cell>subscript</cell>
-            <cell>This is <hi rendition="simple:subscript">subscript</hi> effect</cell>
+            <cell>rhyme</cell>
+            <cell>This is an <rhyme>example of rhyme</rhyme></cell>
           </row>
           <row>
-            <cell>superscript</cell>
-            <cell>This is <hi rendition="simple:superscript">superscript</hi> effect</cell>
+            <cell>rs</cell>
+            <cell>This is an <rs>example of rs</rs></cell>
           </row>
           <row>
-            <cell>bold italic red, done separately</cell>
-            <cell>
-              <hi rendition="simple:bold">
-                <hi rendition="simple:italic">
-                  <hi rendition="simple:color(red)">rend test 1</hi>
-                </hi>
-              </hi>
-            </cell>
+            <cell>s</cell>
+            <cell>This is an <s>example of s</s></cell>
           </row>
+          <row>
+            <cell>seg</cell>
+            <cell>This is an <seg>example of seg</seg></cell>
+          </row>
+          <row>
+            <cell>sic</cell>
+            <cell>This is an <sic>example of sic</sic></cell>
+          </row>
+          <row>
+            <cell>space</cell>
+            <cell>This is an <space quantity="7" unit="chars"/></cell>
+          </row>
+          <row>
+            <cell>supplied</cell>
+            <cell>This is an <supplied>example of supplied</supplied></cell>
+          </row>
+          <row>
+            <cell>time</cell>
+            <cell>This is an <time>example of time</time></cell>
+          </row>
+          <row>
+            <cell>title</cell>
+            <cell>This is an <title>example of title</title></cell>
+          </row>
+          <row>
+            <cell>unclear</cell>
+            <cell>This is an <unclear>example of unclear</unclear></cell>
+          </row>
+          <row>
+            <cell>w</cell>
+            <cell>This is an <w>example of w</w></cell>
+          </row>
+        </table>
+        <table>
+          <row role="label">
+            <cell>Rendition</cell>
+            <cell>Example</cell>
+          </row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>allcaps</cell>
+   <cell>This is an <hi rendition="simple:allcaps">example of allcaps</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>blackletter</cell>
+   <cell>This is an <hi rendition="simple:blackletter">example of blackletter</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>bold</cell>
+   <cell>This is an <hi rendition="simple:bold">example of bold</hi>
+   </cell>
+</row>
+
+
+
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>cursive</cell>
+   <cell>This is an <hi rendition="simple:cursive">example of cursive</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>doublestrikethrough</cell>
+   <cell>This is an <hi rendition="simple:doublestrikethrough">example of doublestrikethrough</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>doubleunderline</cell>
+   <cell>This is an <hi rendition="simple:doubleunderline">example of doubleunderline</hi>
+   </cell>
+</row>
+
+
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>hyphen</cell>
+   <cell>This is an <hi rendition="simple:hyphen">example of hyphen</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>italic</cell>
+   <cell>This is an <hi rendition="simple:italic">example of italic</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>larger</cell>
+   <cell>This is an <hi rendition="simple:larger">example of larger</hi>
+   </cell>
+</row>
+
+
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>letterspace</cell>
+   <cell>This is an <hi rendition="simple:letterspace">example of letterspace</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>normalstyle</cell>
+   <cell>This is an <hi rendition="simple:normalstyle">example of normalstyle</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>normalweight</cell>
+   <cell>This is an <hi rendition="simple:normalweight">example of normalweight</hi>
+   </cell>
+</row>
+
+
+
+
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>smallcaps</cell>
+   <cell>This is an <hi rendition="simple:smallcaps">example of smallcaps</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>smaller</cell>
+   <cell>This is an <hi rendition="simple:smaller">example of smaller</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>strikethrough</cell>
+   <cell>This is an <hi rendition="simple:strikethrough">example of strikethrough</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>subscript</cell>
+   <cell>This is an <hi rendition="simple:subscript">example of subscript</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>superscript</cell>
+   <cell>This is an <hi rendition="simple:superscript">example of superscript</hi>
+   </cell>
+</row>
+
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>typewriter</cell>
+   <cell>This is an <hi rendition="simple:typewriter">example of typewriter</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>underline</cell>
+   <cell>This is an <hi rendition="simple:underline">example of underline</hi>
+   </cell>
+</row>
+<row xmlns="http://www.tei-c.org/ns/1.0">
+   <cell>wavyunderline</cell>
+   <cell>This is an <hi rendition="simple:wavyunderline">example of wavyunderline</hi>
+   </cell>
+</row>
           <row>
             <cell>bold italic smallcaps</cell>
             <cell>
@@ -184,6 +369,60 @@
             </cell>
           </row>
         </table>
+
+<p rendition="simple:bottombraced">bottombraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of bottombraced</p>
+<p rendition="simple:boxed">boxed: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of boxed</p>
+<p rendition="simple:centre">centre: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of centre</p>
+<p><hi rendition="simple:dropcap">D</hi>ropcap: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of dropcap</p>
+<p rendition="simple:float">float: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of float</p>
+<p rendition="simple:left">left: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of left</p>
+<p rendition="simple:leftbraced">leftbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of leftbraced</p>
+<p rendition="simple:right">right: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of right</p>
+<p rendition="simple:rightbraced">rightbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of rightbraced</p>
+<p rendition="simple:rotateleft">rotateleft: Iriure dolor in hendrerit in an example of rotateleft</p>
+<p rendition="simple:rotateright">rotateright: Iriure dolor in hendrerit rotateright</p>
+<p rendition="simple:topbraced">topbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+      consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
+      accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+      delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
+      sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of topbraced</p>
+
       </div>
       <div>
         <head>Quotations</head>
@@ -459,7 +698,6 @@
             </list>
           </item>
         </list>
-
       </div>
       <div>
         <head>Pictures</head>
@@ -526,7 +764,6 @@
           </row>
         </table>
       </div>
-
       <div xml:id="S1" type="stave">
         <head>Extended prose: MARLEY'S GHOST</head>
         <pb rendition="simple:foo" n="1" facs="bar.jpg"/>
@@ -987,7 +1224,6 @@ frost.
 	    <seg>Fit the first&amp;quot;</seg>
 	    <seg>Fit the first @ <ref target="http://www.example.com/?foo=bar&amp;bar=foo&amp;#3">http://www.example.com/?foo=bar&amp;bar=foo&amp;#3</ref></seg>.
 	  </p>
-          
         </div>
         <div>
           <p>Fit the <ref>second</ref></p>
