@@ -421,13 +421,11 @@
               <memberOf key="att.global"/>
             </classes>
             <content>
-              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-                <choice>
-                  <ref name="model.glossLike"/>
-                  <ref name="model.descLike"/>
-                  <ref name="rendition"/>
-                </choice>
-              </zeroOrMore>
+              <alternate minOccurs="0" maxOccurs="unbounded" >
+                  <classRef key="model.glossLike"/>
+                  <classRef key="model.descLike"/>
+                  <elementRef key="rendition"/>
+	      </alternate>
             </content>
             <attList>
               <attDef ident="behaviour" usage="req">
@@ -539,15 +537,15 @@
               <memberOf key="att.global"/>
             </classes>
             <content>
-              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-                <choice>
-                  <ref name="model.glossLike"/>
-                  <ref name="model.descLike"/>
-                </choice>
-              </zeroOrMore>
-              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-                <ref name="model"/>
-              </zeroOrMore>
+	      <sequence>
+		<alternate minOccurs="0" maxOccurs="unbounded" >
+                  <classRef key="model.glossLike"/>
+                  <classRef key="model.descLike"/>
+		</alternate>
+		<alternate maxOccurs="unbounded" >
+                  <elementRef key="model"/>
+		</alternate>
+	      </sequence>
             </content>
             <attList>
               <attDef ident="predicate" usage="opt">
@@ -589,16 +587,16 @@
               <memberOf key="att.global"/>
             </classes>
             <content>
-              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-                <choice>
-                  <ref name="model.glossLike"/>
-                  <ref name="model.descLike"/>
-                  <ref name="rendition"/>
-                </choice>
-              </zeroOrMore>
-              <zeroOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-                <ref name="model"/>
-              </zeroOrMore>
+	      <sequence>
+		<alternate maxOccurs="unbounded">
+                  <classRef key="model.glossLike"/>
+                  <classRef key="model.descLike"/>
+		</alternate>
+                <classRef key="rendition" minOccurs="0"/>
+		<alternate maxOccurs="unbounded">
+                  <elementRef key="model"/>
+		</alternate>
+	      </sequence>
             </content>
             <attList>
               <attDef ident="useSourceRendition" usage="opt">
@@ -665,45 +663,25 @@
           <!-- adding model/modelGrp to elementSpec element -->
           <elementSpec ident="elementSpec" mode="change">
             <content>
-              <group xmlns="http://relaxng.org/ns/structure/1.0">
-                <zeroOrMore>
-                  <choice>
-                    <ref name="model.glossLike"/>
-                    <ref name="model.descLike"/>
-                  </choice>
-                </zeroOrMore>
-                <optional>
-                  <ref name="classes"/>
-                </optional>
-                <optional>
-                  <ref name="content"/>
-                </optional>
-                <optional>
-                  <ref name="valList"/>
-                </optional>
-                <zeroOrMore>
-                  <ref name="constraintSpec"/>
-                </zeroOrMore>
-                <optional>
-                  <ref name="attList"/>
-                </optional>
-                <zeroOrMore>
-                  <choice>
-                    <ref name="model"/>
-                    <ref name="modelGrp"/>
-                    <ref name="modelSequence"/>
-                  </choice>
-                </zeroOrMore>
-                <zeroOrMore>
-                  <ref name="exemplum"/>
-                </zeroOrMore>
-                <zeroOrMore>
-                  <ref name="remarks"/>
-                </zeroOrMore>
-                <zeroOrMore>
-                  <ref name="listRef"/>
-                </zeroOrMore>
-              </group>
+	      <sequence>
+                <alternate minOccurs="0" maxOccurs="unbounded">
+                    <classRef key="model.glossLike"/>
+                    <classRef key="model.descLike"/>
+		</alternate>
+                  <classRef key="classes" minOccurs="0"/>
+                  <classRef key="content" minOccurs="0"/>
+                  <classRef key="valList" minOccurs="0"/>
+                  <classRef key="constraintSpec" maxOccurs="unbounded" minOccurs="0"/>
+                  <classRef key="attList" minOccurs="0"/>
+                <alternate maxOccurs="unbounded" minOccurs="0">
+                    <elementRef key="model"/>
+                    <elementRef key="modelGrp"/>
+                    <elementRef key="modelSequence"/>
+		</alternate>
+                <classRef key="exemplum" maxOccurs="unbounded" minOccurs="0"/>
+                <classRef key="remarks" maxOccurs="unbounded" minOccurs="0"/>
+                <classRef key="listRef" maxOccurs="unbounded" minOccurs="0"/>
+	      </sequence>
             </content>
           </elementSpec>
           <elementSpec mode="change" ident="rendition">
