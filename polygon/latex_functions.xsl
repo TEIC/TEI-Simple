@@ -523,6 +523,11 @@ of this software, even if advised of the possibility of such damage.
 \thispagestyle{empty}
 \let\tabcellsep&amp; 
 \IfFileExists{tei.sty}{\RequirePackage{tei}}{}
+</xslo:text>
+<xsl:for-each select="$TOP">
+  <xsl:copy-of select="tei:getRenditions(//elementSpec)"/>
+</xsl:for-each>
+<xslo:text>
 \begin{document}
 </xslo:text>
       <xslo:apply-templates/>
@@ -630,11 +635,11 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
       <xsl:for-each select="$content">
         <xsl:if test="position()=1">
-          <xsl:for-each select="//rendition[@xml:id and           not(parent::model)]">
-            <xsl:text>.simple_</xsl:text>
+          <xsl:for-each select="//rendition[@xml:id and not(parent::model)]">
+            <xsl:text>\def\simple_</xsl:text>
             <xsl:value-of select="@xml:id"/>
             <xsl:text> { </xsl:text>
-            <xsl:value-of select="."/>
+            <xsl:value-of select="tei:cssToLaTeX(.)"/>
             <xsl:text> } 
 </xsl:text>
           </xsl:for-each>
@@ -650,13 +655,9 @@ of this software, even if advised of the possibility of such damage.
           <xsl:variable name="pos" select="if  (count(../model) &gt; 1) then position() else  ''"/>
           <xsl:for-each select="./rendition">
             <xsl:variable name="scope" select="@scope"/>
-            <xsl:variable name="rendition" select="normalize-space(.)"/>
+            <xsl:variable name="rendition" select="tei:cssToLaTeX(.)"/>
             <xsl:for-each select="$container/node()">
-              <xsl:value-of select="concat(.,'.',$elname,$pos)"/>
-              <xsl:if test="string($scope)">
-                <xsl:text>:</xsl:text>
-                <xsl:value-of select="$scope"/>
-              </xsl:if>
+              <xsl:value-of select="concat(.,'\def\',$elname,$pos)"/>
               <xsl:text> {</xsl:text>
               <xsl:value-of select="$rendition"/>
               <xsl:text>}</xsl:text>
@@ -724,5 +725,127 @@ of this software, even if advised of the possibility of such damage.
 	<xslo:call-template name="localrendition"/>
       </xsl:if>
     </xsl:function>
+
+<!--
+     [xslt] [align] [bottom]
+     [xslt] [align] [center]
+     [xslt] [align] [justify]
+     [xslt] [align] [left]
+     [xslt] [align] [right]
+     [xslt] [align] [super]
+     [xslt] [align] [top]
+     [xslt] [border] [1px solid black]
+     [xslt] [border] [solid black 1pt]
+     [xslt] [bottom] [0.5em]
+     [xslt] [bottom] [2em]
+     [xslt] [bottom] [2pt]
+     [xslt] [bottom] [dashed gray 2pt]
+     [xslt] [bottom] [solid 1pt blue]
+     [xslt] [clear] [right]
+     [xslt] [color] [#F0F0F0]
+     [xslt] [color] [#c00]
+     [xslt] [color] [green]
+     [xslt] [color] [grey]
+     [xslt] [color] [red]
+     [xslt] [content] [" ["]
+     [xslt] [content] ["&gt;"]
+     [xslt] [content] ["&lt;"]
+     [xslt] [content] ["("]
+     [xslt] [content] [")"]
+     [xslt] [content] ["["]
+     [xslt] [content] ["] "]
+     [xslt] [content] ["]"]
+     [xslt] [content] ["{"]
+     [xslt] [content] ["}"]
+     [xslt] [content] [' [?] ']
+     [xslt] [content] ['..]']
+     [xslt] [content] ['[']
+     [xslt] [content] ['[..']
+     [xslt] [content] ['[...]']
+     [xslt] [content] ['[Page ']
+     [xslt] [content] [']']
+     [xslt] [content] ['{']
+     [xslt] [content] ['}']
+     [xslt] [content] ['‘']
+     [xslt] [content] ['’']
+     [xslt] [decoration] [line-through]
+     [xslt] [decoration] [underline]
+     [xslt] [display] [block]
+     [xslt] [display] [inline]
+     [xslt] [family] [Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif]
+     [xslt] [family] [cursive]
+     [xslt] [family] [fantasy]
+     [xslt] [family] [monospace]
+     [xslt] [float] [left]
+     [xslt] [float] [right]
+     [xslt] [height] [1em]
+     [xslt] [left] [10px]
+     [xslt] [left] [1em]
+     [xslt] [left] [2em]
+     [xslt] [left] [2pt]
+     [xslt] [left] [dotted gray 2pt]
+     [xslt] [margin] [0em]
+     [xslt] [margin] [6pt]
+     [xslt] [margin] [auto]
+     [xslt] [padding] [0px]
+     [xslt] [padding] [2pt]
+     [xslt] [padding] [4pt]
+     [xslt] [padding] [5px]
+     [xslt] [right] [10px]
+     [xslt] [right] [2em]
+     [xslt] [right] [2pt]
+     [xslt] [right] [dotted gray 2pt]
+     [xslt] [size] [2em]
+     [xslt] [size] [6em]
+     [xslt] [size] [large]
+     [xslt] [size] [larger]
+     [xslt] [size] [small]
+     [xslt] [size] [smaller]
+     [xslt] [space] [nowrap]
+     [xslt] [spacing] [0.5em]
+     [xslt] [style] [italic]
+     [xslt] [style] [ordered]
+     [xslt] [style] [roman]
+     [xslt] [style] [wavy]
+     [xslt] [top] [1em]
+     [xslt] [top] [2em]
+     [xslt] [top] [2pt]
+     [xslt] [top] [dotted gray 2pt]
+     [xslt] [top] [solid 1pt blue]
+     [xslt] [transform] [rotate(-90deg)]
+     [xslt] [transform] [rotate(90deg)]
+     [xslt] [transform] [uppercase]
+     [xslt] [variant] [small-caps]
+     [xslt] [weight] [bold]
+     [xslt] [weight] [normal]
+     [xslt] [width] [15%]
+     [xslt] [width] [1em]
+     [xslt] [width] [80%]
+-->
+    <xsl:function name="tei:cssToLaTeX" as="node()*">
+      <xsl:param name="css"/>
+      <xsl:for-each select="tokenize(normalize-space($css),';')">
+	<xsl:analyze-string select="." regex="\s*(\w+)\s*:\s*(.*)">
+	  <xsl:matching-substring>
+	    <xsl:message>[<xsl:value-of select="regex-group(1)"/>] [<xsl:value-of select="regex-group(2)"/>]</xsl:message>
+	    <xsl:choose>
+	      <xsl:when test="regex-group(1)='font-style'">
+		<xsl:choose>
+		  <xsl:when test="regex-group(2)='italic'">\itshape </xsl:when>
+		</xsl:choose>
+	      </xsl:when>
+	      <xsl:when test="regex-group(1)='font-weight'">
+		<xsl:choose>
+		  <xsl:when test="regex-group(2)='bold">\bfseries </xsl:when>
+		</xsl:choose>
+	      </xsl:when>
+	    </xsl:choose>
+	  </xsl:matching-substring>
+	  <xsl:non-matching-substring>
+	  </xsl:non-matching-substring>
+	</xsl:analyze-string>
+      </xsl:for-each>
+    </xsl:function>
+
 
 </xsl:stylesheet>
