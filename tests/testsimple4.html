@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <link rel="StyleSheet" href="simple.css" type="text/css" /><style>.simple_allcaps { text-transform: uppercase; } 
+      <link rel="StyleSheet" href="simple.css" type="text/css" /><style type="text/css">.simple_allcaps { text-transform: uppercase; } 
 .simple_blackletter { font-family: fantasy; } 
 .simple_bold { font-weight: bold; } 
 .simple_bottombraced { padding-bottom: 2pt; border-bottom: dashed gray 2pt; } 
@@ -120,7 +120,19 @@ span.title10 {font-style: italic;}
 div.titlePage {text-align: center;}
 div.trailer {color: green;}
 span.unclear:after {content: ' [?] ';}
-</style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf8" src="simple.js"></script><title>A Christmas Carol </title> 
+</style><style type="text/css">
+.document_prequote:before {
+	content:"’";
+}
+.document_postquote:after {
+	content:"’";
+}
+.document_qbefore:before {
+	content:"”";
+}
+.document_qafter:after {
+	content:"“";
+}</style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf8" src="simple.js"></script><title>A Christmas Carol </title> 
    </head> 
    <body>
       <div class="front">
@@ -159,7 +171,7 @@ span.unclear:after {content: ' [?] ';}
          <div class="head6">(Bits of) A CHRISTMAS CAROL, and other things</div> 
          <div class="div" id="foo">
             <h1 class="head">Simple rendition tests</h1> 
-            <p class="p"><span class="q2">Who-e debel you?</span> — he at last said — <span class="q2">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
+            <p class="p"><span class="document_qbefore document_qafter">Who-e debel you?</span> — he at last said — <span class="document_qbefore document_qafter">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
             </p> 
             <p class="p"><span class="q2">Who-e debel you?</span> — he at last said — <span class="q2">you no speak-e, damme, I kill-e.</span> And so saying, the lighted tomahawk began flourishing about me in the dark.
             </p> 
@@ -477,7 +489,7 @@ span.unclear:after {content: ' [?] ';}
             </p> 
             <p class="p">Consider quotations: <span class="quote1">This is a quote which is run on within the text and will have quote marks of some
                   kind around it.</span></p> 
-            <p class="p">Another quotation: <span class="quote1">This is a block quote set off as such from the rest of the text</span></p> 
+            <p class="p">Another quotation: <span class="simple_display">This is a block quote set off as such from the rest of the text</span></p> 
             <p class="p">Here, by contrast is an <span class="q2">inline quotation</span>. Another strange thing about quotes is this: <span class="quote1">You can put line breaksto determine where the line breaksInside a block!</span></p>
          </div> 
          <div class="div">

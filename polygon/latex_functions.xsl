@@ -465,7 +465,6 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-<xsl:message>START DOC</xsl:message>
 <xslo:text>
 \documentclass[11pt,twoside]{article}\makeatletter
 

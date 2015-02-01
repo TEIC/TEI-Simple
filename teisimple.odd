@@ -962,26 +962,27 @@ border-bottom: solid 1pt blue;
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="q">
-              <model predicate="l" behaviour="block(.)">
+              <model predicate="l" behaviour="block(.)"  useSourceRendition="true">
                 <rendition>margin-left: 10px; margin-right: 10px;
 		</rendition>
               </model>
-              <model predicate="ancestor::p or ancestor::cell" behaviour="inline(.)">
+              <model predicate="ancestor::p or ancestor::cell"
+		     behaviour="inline(.)"  useSourceRendition="true">
                 <rendition scope="before">content: '‘';</rendition>
                 <rendition scope="after">content: '’';</rendition>
               </model>
-              <model behaviour="block(.)">
+              <model behaviour="block(.)"  useSourceRendition="true">
                 <rendition>margin-left: 10px; margin-right: 10px;
 		</rendition>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="quote">
-              <model predicate="ancestor::p" behaviour="inline(.)">
+              <model predicate="ancestor::p" behaviour="inline(.)"  useSourceRendition="true">
                 <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
                 <rendition scope="before">content: '‘';</rendition>
                 <rendition scope="after">content: '’';</rendition>
               </model>
-              <model behaviour="block(.)">
+              <model behaviour="block(.)"  useSourceRendition="true">
                 <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
                 <rendition>margin-left: 10px; margin-right: 10px;
 		</rendition>

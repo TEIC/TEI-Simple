@@ -46,8 +46,15 @@
 		     exclude-result-prefixes="tei"
 		     xpath-default-namespace="http://www.tei-c.org/ns/1.0"
 		     version="2.0">
-      <xslo:output method="{if ($output ='latex') then 'text' else 'xhtml'}"/>
+      <xslo:output method="{if ($output ='latex') then 'text' else
+			   'xhtml'}"/>
+      <xslo:key name="ALL-EXTRENDITION" match="@rendition[not(starts-with(.,'simple:') or starts-with(.,'#'))]" use="1"/>
+      <xslo:key name="EXTRENDITION"
+	    match="@rendition[not(starts-with(.,'simple:') or starts-with(.,'#'))]" use="."/>
+      <xslo:key name="ALL-LOCALRENDITION" match="tei:rendition" use='1'/>
+
       <xsl:apply-templates select="//elementSpec[.//model]"/>
+
       <xsl:sequence select="tei:processLocalRendition()"/>
       <xslo:template match="text()" mode="#default plain">
         <xslo:choose>

@@ -15,10 +15,10 @@
     </fileDesc>
     <encodingDesc>
       <tagsDecl>
-        <rendition xml:id="prequote" scheme="css" scope="before">content:"‘";</rendition>
+        <rendition xml:id="prequote" scheme="css" scope="before">content:"’";</rendition>
         <rendition xml:id="postquote" scheme="css" scope="after">content:"’";</rendition>
-        <rendition xml:id="qbefore" scheme="css" scope="before">content:"“";</rendition>
-        <rendition xml:id="qafter" scheme="css" scope="after">content:"“";</rendition>
+        <rendition xml:id="qafter" scheme="css" scope="before">content:"”";</rendition>
+        <rendition xml:id="qbefore" scheme="css" scope="after">content:"“";</rendition>
       </tagsDecl>
       <listPrefixDef>
         <prefixDef ident="psn" matchPattern="([a-z]+)" replacementPattern="http://www.example.com/personography.html#$1">
@@ -248,118 +248,106 @@
             <cell>Rendition</cell>
             <cell>Example</cell>
           </row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>allcaps</cell>
-   <cell>This is an <hi rendition="simple:allcaps">example of allcaps</hi>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>allcaps</cell>
+            <cell>This is an <hi rendition="simple:allcaps">example of allcaps</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>blackletter</cell>
-   <cell>This is an <hi rendition="simple:blackletter">example of blackletter</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>blackletter</cell>
+            <cell>This is an <hi rendition="simple:blackletter">example of blackletter</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>bold</cell>
-   <cell>This is an <hi rendition="simple:bold">example of bold</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>bold</cell>
+            <cell>This is an <hi rendition="simple:bold">example of bold</hi>
    </cell>
-</row>
-
-
-
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>cursive</cell>
-   <cell>This is an <hi rendition="simple:cursive">example of cursive</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>cursive</cell>
+            <cell>This is an <hi rendition="simple:cursive">example of cursive</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>doublestrikethrough</cell>
-   <cell>This is an <hi rendition="simple:doublestrikethrough">example of doublestrikethrough</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>doublestrikethrough</cell>
+            <cell>This is an <hi rendition="simple:doublestrikethrough">example of doublestrikethrough</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>doubleunderline</cell>
-   <cell>This is an <hi rendition="simple:doubleunderline">example of doubleunderline</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>doubleunderline</cell>
+            <cell>This is an <hi rendition="simple:doubleunderline">example of doubleunderline</hi>
    </cell>
-</row>
-
-
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>hyphen</cell>
-   <cell>This is an <hi rendition="simple:hyphen">example of hyphen</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>hyphen</cell>
+            <cell>This is an <hi rendition="simple:hyphen">example of hyphen</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>italic</cell>
-   <cell>This is an <hi rendition="simple:italic">example of italic</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>italic</cell>
+            <cell>This is an <hi rendition="simple:italic">example of italic</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>larger</cell>
-   <cell>This is an <hi rendition="simple:larger">example of larger</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>larger</cell>
+            <cell>This is an <hi rendition="simple:larger">example of larger</hi>
    </cell>
-</row>
-
-
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>letterspace</cell>
-   <cell>This is an <hi rendition="simple:letterspace">example of letterspace</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>letterspace</cell>
+            <cell>This is an <hi rendition="simple:letterspace">example of letterspace</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>normalstyle</cell>
-   <cell>This is an <hi rendition="simple:normalstyle">example of normalstyle</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>normalstyle</cell>
+            <cell>This is an <hi rendition="simple:normalstyle">example of normalstyle</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>normalweight</cell>
-   <cell>This is an <hi rendition="simple:normalweight">example of normalweight</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>normalweight</cell>
+            <cell>This is an <hi rendition="simple:normalweight">example of normalweight</hi>
    </cell>
-</row>
-
-
-
-
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>smallcaps</cell>
-   <cell>This is an <hi rendition="simple:smallcaps">example of smallcaps</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>smallcaps</cell>
+            <cell>This is an <hi rendition="simple:smallcaps">example of smallcaps</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>smaller</cell>
-   <cell>This is an <hi rendition="simple:smaller">example of smaller</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>smaller</cell>
+            <cell>This is an <hi rendition="simple:smaller">example of smaller</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>strikethrough</cell>
-   <cell>This is an <hi rendition="simple:strikethrough">example of strikethrough</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>strikethrough</cell>
+            <cell>This is an <hi rendition="simple:strikethrough">example of strikethrough</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>subscript</cell>
-   <cell>This is an <hi rendition="simple:subscript">example of subscript</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>subscript</cell>
+            <cell>This is an <hi rendition="simple:subscript">example of subscript</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>superscript</cell>
-   <cell>This is an <hi rendition="simple:superscript">example of superscript</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>superscript</cell>
+            <cell>This is an <hi rendition="simple:superscript">example of superscript</hi>
    </cell>
-</row>
-
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>typewriter</cell>
-   <cell>This is an <hi rendition="simple:typewriter">example of typewriter</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>typewriter</cell>
+            <cell>This is an <hi rendition="simple:typewriter">example of typewriter</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>underline</cell>
-   <cell>This is an <hi rendition="simple:underline">example of underline</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>underline</cell>
+            <cell>This is an <hi rendition="simple:underline">example of underline</hi>
    </cell>
-</row>
-<row xmlns="http://www.tei-c.org/ns/1.0">
-   <cell>wavyunderline</cell>
-   <cell>This is an <hi rendition="simple:wavyunderline">example of wavyunderline</hi>
+          </row>
+          <row xmlns="http://www.tei-c.org/ns/1.0">
+            <cell>wavyunderline</cell>
+            <cell>This is an <hi rendition="simple:wavyunderline">example of wavyunderline</hi>
    </cell>
-</row>
+          </row>
           <row>
             <cell>bold italic smallcaps</cell>
             <cell>
@@ -369,60 +357,58 @@
             </cell>
           </row>
         </table>
-
-<p rendition="simple:bottombraced">bottombraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:bottombraced">bottombraced: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of bottombraced</p>
-<p rendition="simple:boxed">boxed: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:boxed">boxed: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of boxed</p>
-<p rendition="simple:centre">centre: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:centre">centre: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of centre</p>
-<p><hi rendition="simple:dropcap">D</hi>ropcap: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p><hi rendition="simple:dropcap">D</hi>ropcap: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of dropcap</p>
-<p rendition="simple:float">float: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:float">float: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of float</p>
-<p rendition="simple:left">left: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:left">left: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of left</p>
-<p rendition="simple:leftbraced">leftbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:leftbraced">leftbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of leftbraced</p>
-<p rendition="simple:right">right: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:right">right: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of right</p>
-<p rendition="simple:rightbraced">rightbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:rightbraced">rightbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of rightbraced</p>
-<p rendition="simple:rotateleft">rotateleft: Iriure dolor in hendrerit in an example of rotateleft</p>
-<p rendition="simple:rotateright">rotateright: Iriure dolor in hendrerit rotateright</p>
-<p rendition="simple:topbraced">topbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
+        <p rendition="simple:rotateleft">rotateleft: Iriure dolor in hendrerit in an example of rotateleft</p>
+        <p rendition="simple:rotateright">rotateright: Iriure dolor in hendrerit rotateright</p>
+        <p rendition="simple:topbraced">topbraced: Iriure dolor in hendrerit in vulputate velit esse molestie
       consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et
       accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
       delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor
       sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod is an example of topbraced</p>
-
       </div>
       <div>
         <head>Quotations</head>

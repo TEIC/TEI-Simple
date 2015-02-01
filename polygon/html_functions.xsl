@@ -516,6 +516,7 @@ of this software, even if advised of the possibility of such damage.
       <xsl:for-each select="$TOP">
         <xsl:copy-of select="tei:getRenditions(//elementSpec)"/>
       </xsl:for-each>
+      <xslo:call-template name="localRendition"/>
       <!-- jQuery -->
       <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"/>
       <!-- tooltips -->
@@ -594,10 +595,10 @@ of this software, even if advised of the possibility of such damage.
   <xsl:function name="tei:getRenditions" as="node()*">
     <xsl:param name="content"/>
     <link rel="StyleSheet" href="{$css}" type="text/css"/>
-    <style>
+    <style  type="text/css">
       <xsl:for-each select="$content">
         <xsl:if test="position()=1">
-          <xsl:for-each select="//rendition[@xml:id and           not(parent::model)]">
+          <xsl:for-each select="//rendition[@xml:id and  not(parent::model)]">
             <xsl:text>.simple_</xsl:text>
             <xsl:value-of select="@xml:id"/>
             <xsl:text> { </xsl:text>
@@ -636,22 +637,24 @@ of this software, even if advised of the possibility of such damage.
     </style>
   </xsl:function>
 
-  <xsl:function name="tei:processLocalRendition" as="node()">
+  <xsl:function name="tei:processLocalRendition" as="node()*">
 
     <xslo:template name="localrendition">
       <xslo:if test="@rendition">
 	<xslo:variable name="values">
-	  <xslo:for-each select="tokenize(normalize-space(@rendition),' ')">
+	  <xslo:for-each
+	      select="tokenize(normalize-space(@rendition),' ')">
 	    <xslo:choose>
 	      <xslo:when test="starts-with(.,'#')">
-		<xslo:sequence select="substring-after(.,'#')"/>
+		<xslo:sequence
+		    select="concat('document_',substring-after(.,'#'))"/>
 	      </xslo:when>
 	      <xslo:when test="starts-with(.,'simple:')">
 		<xslo:sequence select="replace(.,':','_')"/>
 	      </xslo:when>
 	      <xslo:otherwise>
 		<xslo:for-each select="document(.)">
-		  <xslo:sequence select="@xml:id"/>
+		  <xslo:sequence select="concat('external_',@xml:id)"/>
 		</xslo:for-each>
 	      </xslo:otherwise>
 	    </xslo:choose>
@@ -662,7 +665,46 @@ of this software, even if advised of the possibility of such damage.
 	</xslo:attribute>
       </xslo:if>
     </xslo:template>
-    
+    <xslo:template name="localRendition">
+      <xslo:if test="key('ALL-LOCALRENDITION',1)">
+         <style type="text/css">
+	   <xslo:for-each select="key('ALL-LOCALRENDITION',1)">
+	     <xslo:text>&#10;.document_</xslo:text>
+	     <xslo:value-of select="@xml:id"/>
+	     <xslo:if test="@scope">
+	       <xslo:text>:</xslo:text>
+	       <xslo:value-of select="@scope"/>
+	     </xslo:if>
+	     <xslo:text> {&#10;	</xslo:text>
+	     <xslo:value-of select="."/>
+	     <xslo:text>&#10;}</xslo:text>
+	   </xslo:for-each>
+	   <xslo:text>&#10;</xslo:text>
+         </style>
+      </xslo:if>
+      <xslo:if test="key('ALL-EXTRENDITION',1)">
+         <style type="text/css">
+	   <xslo:for-each select="key('ALL-EXTRENDITION',1)">
+	     <xslo:variable name="pointer">
+	       <xslo:value-of select="."/>
+	     </xslo:variable>
+	     <xslo:for-each select="key('EXTRENDITION',$pointer)[1]">
+	       <xslo:for-each select="document($pointer)">
+		 <xslo:text>&#10;.</xslo:text>
+		 <xslo:value-of select="@xml:id"/>
+		 <xslo:if test="@scope">
+		   <xslo:text>:</xslo:text>
+		   <xslo:value-of select="@scope"/>
+		 </xslo:if>
+		 <xslo:text> {&#10;</xslo:text>
+		 <xslo:value-of select="."/>
+		 <xslo:text>&#10;}</xslo:text>
+	       </xslo:for-each>
+	     </xslo:for-each>
+	   </xslo:for-each>
+         </style>
+      </xslo:if>
+    </xslo:template>
   </xsl:function>
 
   <xsl:function name="tei:attributes" as="node()*">
@@ -674,5 +716,8 @@ of this software, even if advised of the possibility of such damage.
       <xslo:call-template name="localrendition"/>
     </xsl:if>
   </xsl:function>
+
+
+
 
 </xsl:stylesheet>
