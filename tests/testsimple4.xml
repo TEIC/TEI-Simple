@@ -443,6 +443,25 @@
       <foreign xml:lang="zh-TW">中文</foreign>.</p>
       </div>
       <div>
+	<head>Some less common characters</head>
+	<p>Checking that these  all work in in both verbatim and
+	non-verbatim modes</p>
+<table>
+<row><cell>{</cell><cell>{</cell></row>
+<row><cell>}</cell><cell>}</cell></row>
+<row><cell>%</cell><cell>%</cell></row>
+<row><cell>&amp;</cell><cell>&amp;</cell></row>
+<row><cell>$</cell><cell>$</cell></row>
+<row><cell>#</cell><cell>#</cell></row>
+<row><cell>&lt;</cell><cell>&lt;</cell></row>
+<row><cell>&gt;</cell><cell>&gt;</cell></row>
+<row><cell>_</cell><cell>_</cell></row>
+<row><cell>^</cell><cell>^</cell></row>
+<row><cell>~</cell><cell>~</cell></row>
+<row><cell>\</cell><cell>\</cell></row>
+</table>
+      </div>
+      <div>
         <head>del, gap, add, unclear etc</head>
         <p><del><gap/>. The <hi rendition="simple:superscript">interest</hi> &amp; — affor <gap/>
 	the amount <unclear>over</unclear><lb/> so small</del> the interest afforded

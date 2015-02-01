@@ -705,6 +705,13 @@ of this software, even if advised of the possibility of such damage.
          </style>
       </xslo:if>
     </xslo:template>
+
+      <xslo:function name="tei:escapeChars">
+        <xslo:param name="letters"/>
+        <xslo:param name="context"/>
+        <xslo:value-of select="translate($letters,'ſ','s')"/>
+      </xslo:function>
+
   </xsl:function>
 
   <xsl:function name="tei:attributes" as="node()*">

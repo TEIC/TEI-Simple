@@ -80,7 +80,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:copy-of select="tei:makeElement($model,'br', '', '', '', '', '')"/>
+    <xsl:copy-of select="tei:makeElement($model,'linebreak', '', '', '', '', '')"/>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Inline element. If there's something going on re class or rendition keep span and attributes</desc>
@@ -92,7 +92,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="number"/>
     <xsl:choose>
       <xsl:when test="string($class)">
-        <xsl:copy-of select="tei:makeElement($model,'span', concat($class, $number), '', $content, '', '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'inline', concat($class, $number), '', $content, '', '')"/>
       </xsl:when>
       <xsl:otherwise>
         <xsl:sequence select="tei:applyTemplates($content)"/>
@@ -166,13 +166,15 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="target"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <a>
-      <xsl:attribute name="class">
-        <xsl:value-of select="concat($class, $number)"/>
+    <xsl:text>\hyperlink{</xsl:text>
+    <xslo:value-of>
+      <xsl:attribute name="select">
+	<xsl:value-of select="$target"/>
       </xsl:attribute>
-      <xsl:attribute name="href">{<xsl:value-of select="$target"/>}</xsl:attribute>
+    </xslo:value-of>
+    <xsl:text>}{</xsl:text>
       <xsl:sequence select="tei:applyTemplates($content)"/>
-    </a>
+    <xsl:text>}</xsl:text>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Placeholder for doing something sensible with lists</desc>
@@ -182,7 +184,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:copy-of select="tei:makeElement($model,'ul', concat($class, $number), '', $content, '', '')"/>
+    <xsl:copy-of select="tei:makeEnvironment($model,'itemize', concat($class, $number), '', $content, '', '')"/>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Placeholder for doing something sensible with rows</desc>
@@ -192,7 +194,8 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:copy-of select="tei:makeElement($model,'tr', concat($class, $number), '', $content, '', '')"/>
+    <xsl:sequence select="tei:applyTemplates($content)"/>
+    <xsl:text>\\&#10;</xsl:text>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Placeholder for doing something sensible with cells</desc>
@@ -202,7 +205,8 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:copy-of select="tei:makeElement($model,'td', concat($class, $number), '', $content, '', '')"/>
+    <xsl:text>&amp;</xsl:text>
+    <xsl:sequence select="tei:applyTemplates($content)"/>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Placeholder for doing something sensible with tables</desc>
@@ -212,7 +216,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:copy-of select="tei:makeElement($model,'table', concat($class, $number), '', $content, '', '')"/>
+    <xsl:copy-of select="tei:makeEnvironment($model,'table', concat($class, $number), '', $content, '', '')"/>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Placeholder for doing something sensible with list items</desc>
@@ -222,7 +226,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:copy-of select="tei:makeElement($model,'li', concat($class, $number), '', $content, '', '')"/>
+    <xsl:copy-of select="tei:makeElement($model,'item', concat($class, $number), '', $content, '', '')"/>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Anchor</desc>
@@ -260,7 +264,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="type"/>
     <xsl:choose>
       <xsl:when test="$type='toc'">
-	<div id="toc">Table of contents</div>
+	<xsl:text>\tableofcontents &#10;</xsl:text>
       </xsl:when>
     </xsl:choose>
   </xsl:function>
@@ -425,28 +429,33 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="anchorName"/>
     <xsl:param name="nested"/>
-    <xsl:element name="{$name}">
-      <xsl:if test="string($class)">
-        <xsl:attribute name="class">
-          <xsl:value-of select="$class"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:if test="string($title)">
-        <xsl:attribute name="title">
-          <xsl:value-of select="$title"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:if test="string($anchorName)">
-        <xsl:attribute name="name">
-          <xsl:value-of select="$anchorName"/>
-        </xsl:attribute>
-      </xsl:if>
-      <xsl:sequence select="tei:attributes($model)"/>
+    <xsl:text>\</xsl:text>
+    <xsl:value-of select="$name"/>
+    <xsl:text> </xsl:text>
       <xsl:sequence select="tei:applyTemplates($content)"/>
       <xsl:if test="$nested instance of element()">
         <xsl:sequence select="$nested"/>
       </xsl:if>
-    </xsl:element>
+  </xsl:function>
+
+  <xsl:function name="tei:makeEnvironment" as="node()*">
+    <xsl:param name="model"/>
+    <xsl:param name="name"/>
+    <xsl:param name="class"/>
+    <xsl:param name="title"/>
+    <xsl:param name="content"/>
+    <xsl:param name="anchorName"/>
+    <xsl:param name="nested"/>
+    <xsl:text>\begin{</xsl:text>
+    <xsl:value-of select="$name"/>
+    <xsl:text>}</xsl:text>
+      <xsl:sequence select="tei:applyTemplates($content)"/>
+      <xsl:if test="$nested instance of element()">
+        <xsl:sequence select="$nested"/>
+      </xsl:if>
+    <xsl:text>\end{</xsl:text>
+    <xsl:value-of select="$name"/>
+    <xsl:text>}</xsl:text>
   </xsl:function>
   <xsl:function name="tei:makeDefault" as="node()*">
     <xsl:param name="model"/>
@@ -466,334 +475,54 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="class"/>
     <xsl:param name="number"/>
 <xslo:text>
-\documentclass[11pt,twoside]{article}\makeatletter
-
-\IfFileExists{xcolor.sty}%
-  {\RequirePackage{xcolor}}%
-  {\RequirePackage{color}}
-\usepackage{colortbl}
-\usepackage{wrapfig}
-\usepackage{ifxetex}
-\ifxetex
-  \usepackage{fontspec}
-  \usepackage{xunicode}
-  \catcode`⃥=\active \def⃥{\textbackslash}
-  \catcode`❴=\active \def❴{\{}
-  \catcode`❵=\active \def❵{\}}
-  \def\textJapanese{\fontspec{Kochi Mincho}}
-  \def\textChinese{\fontspec{HAN NOM A}\XeTeXlinebreaklocale "zh"\XeTeXlinebreakskip = 0pt plus 1pt }
-  \def\textKorean{\fontspec{Baekmuk Gulim} }
-  \setmonofont{DejaVu Sans Mono}
-  
-\else
-  \IfFileExists{utf8x.def}%
-   {\usepackage[utf8x]{inputenc}
-      \PrerenderUnicode{–}
-    }%
-   {\usepackage[utf8]{inputenc}}
-  \usepackage[english]{babel}
-  \usepackage[T1]{fontenc}
-  \usepackage{float}
-  \usepackage[]{ucs}
-  \uc@dclc{8421}{default}{\textbackslash }
-  \uc@dclc{10100}{default}{\{}
-  \uc@dclc{10101}{default}{\}}
-  \uc@dclc{8491}{default}{\AA{}}
-  \uc@dclc{8239}{default}{\,}
-  \uc@dclc{20154}{default}{ }
-  \uc@dclc{10148}{default}{>}
-  \def\textschwa{\rotatebox{-90}{e}}
-  \def\textJapanese{}
-  \def\textChinese{}
-  \IfFileExists{tipa.sty}{\usepackage{tipa}}{}
-  \usepackage{times}
-\fi
-\def\exampleFont{\ttfamily\small}
+\documentclass[11pt,twoside]{book}\makeatletter
+\catcode`⃥=\active \def⃥{\textbackslash}
+\catcode`❴=\active \def❴{\{}
+\catcode`❵=\active \def❵{\}}
+\def\textJapanese{\fontspec{Kochi Mincho}}
+\def\textChinese{\fontspec{HAN NOM A}\XeTeXlinebreaklocale "zh"\XeTeXlinebreakskip = 0pt plus 1pt }
+\def\textKorean{\fontspec{Baekmuk Gulim} }
 \DeclareTextSymbol{\textpi}{OML}{25}
-\usepackage{relsize}
-\RequirePackage{array}
-\def\@testpach{\@chclass
- \ifnum \@lastchclass=6 \@ne \@chnum \@ne \else
-  \ifnum \@lastchclass=7 5 \else
-   \ifnum \@lastchclass=8 \tw@ \else
-    \ifnum \@lastchclass=9 \thr@@
-   \else \z@
-   \ifnum \@lastchclass = 10 \else
-   \edef\@nextchar{\expandafter\string\@nextchar}%
-   \@chnum
-   \if \@nextchar c\z@ \else
-    \if \@nextchar l\@ne \else
-     \if \@nextchar r\tw@ \else
-   \z@ \@chclass
-   \if\@nextchar |\@ne \else
-    \if \@nextchar !6 \else
-     \if \@nextchar @7 \else
-      \if \@nextchar (8 \else
-       \if \@nextchar )9 \else
-  10
-  \@chnum
-  \if \@nextchar m\thr@@\else
-   \if \@nextchar p4 \else
-    \if \@nextchar b5 \else
-   \z@ \@chclass \z@ \@preamerr \z@ \fi \fi \fi \fi
-   \fi \fi  \fi  \fi  \fi  \fi  \fi \fi \fi \fi \fi \fi}
-\gdef\arraybackslash{\let\\=\@arraycr}
-\def\@textsubscript#1{{\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
-\def\Panel#1#2#3#4{\multicolumn{#3}{){\columncolor{#2}}#4}{#1}}
-\def\abbr{}
-\def\corr{}
-\def\expan{}
-\def\gap{}
-\def\orig{}
-\def\reg{}
-\def\ref{}
-\def\sic{}
-\def\persName{}\def\name{}
-\def\placeName{}
-\def\orgName{}
 \def\textcal#1{{\fontspec{Lucida Calligraphy}#1}}
 \def\textgothic#1{{\fontspec{Lucida Blackletter}#1}}
 \def\textlarge#1{{\large #1}}
 \def\textoverbar#1{\ensuremath{\overline{#1}}}
-\def\textquoted#1{‘#1’}
 \def\textsmall#1{{\small #1}}
 \def\textsubscript#1{\@textsubscript{\selectfont#1}}
 \def\textxi{\ensuremath{\xi}}
 \def\titlem{\itshape}
-\newenvironment{biblfree}{}{\ifvmode\par\fi }
-\newenvironment{bibl}{}{}
-\newenvironment{byline}{\vskip6pt\itshape\fontsize{16pt}{18pt}\selectfont}{\par }
-\newenvironment{citbibl}{}{\ifvmode\par\fi }
-\newenvironment{docAuthor}{\ifvmode\vskip4pt\fontsize{16pt}{18pt}\selectfont\fi\itshape}{\ifvmode\par\fi }
-\newenvironment{docDate}{}{\ifvmode\par\fi }
-\newenvironment{docImprint}{\vskip 6pt}{\ifvmode\par\fi }
-\newenvironment{docTitle}{\vskip6pt\bfseries\fontsize{18pt}{22pt}\selectfont}{\par }
-\newenvironment{msHead}{\vskip 6pt}{\par}
-\newenvironment{msItem}{\vskip 6pt}{\par}
-\newenvironment{rubric}{}{}
-\newenvironment{titlePart}{}{\par }
-
-\newcolumntype{L}[1]{){\raggedright\arraybackslash}p{#1}}
-\newcolumntype{C}[1]{){\centering\arraybackslash}p{#1}}
-\newcolumntype{R}[1]{){\raggedleft\arraybackslash}p{#1}}
-\newcolumntype{P}[1]{){\arraybackslash}p{#1}}
-\newcolumntype{B}[1]{){\arraybackslash}b{#1}}
-\newcolumntype{M}[1]{){\arraybackslash}m{#1}}
-\definecolor{label}{gray}{0.75}
-\def\unusedattribute#1{\sout{\textcolor{label}{#1}}}
-\DeclareRobustCommand*{\xref}{\hyper@normalise\xref@}
-\def\xref@#1#2{\hyper@linkurl{#2}{#1}}
-\begingroup
-\catcode`\_=\active
-\gdef_#1{\ensuremath{\sb{\mathrm{#1}}}}
-\endgroup
-\mathcode`\_=\string"8000
-\catcode`\_=12\relax
-
-\usepackage[a4paper,twoside,lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in,marginparwidth=0.75in]{geometry}
-\usepackage{framed}
-
-\definecolor{shadecolor}{gray}{0.95}
-\usepackage{longtable}
+\IfFileExists{xcolor.sty}%
+  {\RequirePackage{xcolor}}%
+  {\RequirePackage{color}}
 \usepackage[normalem]{ulem}
-\usepackage{fancyvrb}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{endnotes}
 \usepackage{fancyhdr}
+\usepackage{fancyvrb}
+\usepackage{fontspec}
+\usepackage{framed}
+\usepackage[a4paper,twoside,lmargin=1in,rmargin=1in,tmargin=1in,bmargin=1in,marginparwidth=0.75in]{geometry}
 \usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{ifxetex}
+\usepackage{longtable}
 \usepackage{marginnote}
-
+\usepackage{relsize}
+\usepackage{wrapfig}
+\usepackage{xunicode}
 \renewcommand*{\marginfont}{\itshape\footnotesize}
-
-  \usepackage{endnotes}
-  
-      \def\theendnote{\@alph\c@endnote}
-    
+\def\theendnote{\@alph\c@endnote}
 \def\Gin@extensions{.pdf,.png,.jpg,.mps,.tif}
-
-  \pagestyle{fancy}
-
+\pagestyle{fancy}
 \hyperbaseurl{}
-
-	 \paperwidth210mm
-	 \paperheight297mm
-              
-\def\@pnumwidth{1.55em}
-\def\@tocrmarg {2.55em}
-\def\@dotsep{4.5}
-\setcounter{tocdepth}{3}
-\clubpenalty=8000
-\emergencystretch 3em
-\hbadness=4000
-\hyphenpenalty=400
-\pretolerance=750
-\tolerance=2000
-\vbadness=4000
-\widowpenalty=10000
-
-\renewcommand\section{\@startsection {section}{1}{\z@}%
-     {-1.75ex \@plus -0.5ex \@minus -.2ex}%
-     {0.5ex \@plus .2ex}%
-     {\reset@font\Large\bfseries\sffamily}}
-\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
-     {-1.75ex\@plus -0.5ex \@minus- .2ex}%
-     {0.5ex \@plus .2ex}%
-     {\reset@font\Large\sffamily}}
-\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
-     {-1.5ex\@plus -0.35ex \@minus -.2ex}%
-     {0.5ex \@plus .2ex}%
-     {\reset@font\large\sffamily}}
-\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
-     {-1ex \@plus-0.35ex \@minus -0.2ex}%
-     {0.5ex \@plus .2ex}%
-     {\reset@font\normalsize\sffamily}}
-\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
-     {1.5ex \@plus1ex \@minus .2ex}%
-     {-1em}%
-     {\reset@font\normalsize\bfseries}}
-
-
-\def\l@section#1#2{\addpenalty{\@secpenalty} \addvspace{1.0em plus 1pt}
- \@tempdima 1.5em \begingroup
- \parindent \z@ \rightskip \@pnumwidth 
- \parfillskip -\@pnumwidth 
- \bfseries \leavevmode #1\hfil \hbox to\@pnumwidth{\hss #2}\par
- \endgroup}
-\def\l@subsection{\@dottedtocline{2}{1.5em}{2.3em}}
-\def\l@subsubsection{\@dottedtocline{3}{3.8em}{3.2em}}
-\def\l@paragraph{\@dottedtocline{4}{7.0em}{4.1em}}
-\def\l@subparagraph{\@dottedtocline{5}{10em}{5em}}
-\@ifundefined{c@section}{\newcounter{section}}{}
-\@ifundefined{c@chapter}{\newcounter{chapter}}{}
-\newif\if@mainmatter 
-\@mainmattertrue
+\paperwidth210mm
+\paperheight297mm
 \def\chaptername{Chapter}
-\def\frontmatter{%
-  \pagenumbering{roman}
-  \def\thechapter{\@roman\c@chapter}
-  \def\theHchapter{\roman{chapter}}
-  \def\thesection{\@roman\c@section}
-  \def\theHsection{\roman{section}}
-  \def\@chapapp{}%
-}
-\def\mainmatter{%
-  \cleardoublepage
-  \def\thechapter{\@arabic\c@chapter}
-  \setcounter{chapter}{0}
-  \setcounter{section}{0}
-  \pagenumbering{arabic}
-  \setcounter{secnumdepth}{6}
-  \def\@chapapp{\chaptername}%
-  \def\theHchapter{\arabic{chapter}}
-  \def\thesection{\@arabic\c@section}
-  \def\theHsection{\arabic{section}}
-}
-\def\backmatter{%
-  \cleardoublepage
-  \setcounter{chapter}{0}
-  \setcounter{section}{0}
-  \setcounter{secnumdepth}{2}
-  \def\@chapapp{\appendixname}%
-  \def\thechapter{\@Alph\c@chapter}
-  \def\theHchapter{\Alph{chapter}}
-  \appendix
-}
-\newenvironment{bibitemlist}[1]{%
-   \list{\@biblabel{\@arabic\c@enumiv}}%
-       {\settowidth\labelwidth{\@biblabel{#1}}%
-        \leftmargin\labelwidth
-        \advance\leftmargin\labelsep
-        \@openbib@code
-        \usecounter{enumiv}%
-        \let\p@enumiv\@empty
-        \renewcommand\theenumiv{\@arabic\c@enumiv}%
-	}%
-  \sloppy
-  \clubpenalty4000
-  \@clubpenalty \clubpenalty
-  \widowpenalty4000%
-  \sfcode`\.\@m}%
-  {\def\@noitemerr
-    {\@latex@warning{Empty `bibitemlist' environment}}%
-    \endlist}
-
 \def\tableofcontents{\section*{\contentsname}\@starttoc{toc}}
-\parskip0pt
-\parindent1em
-\def\Panel#1#2#3#4{\multicolumn{#3}{){\columncolor{#2}}#4}{#1}}
-\newenvironment{reflist}{%
-  \begin{raggedright}\begin{list}{}
-  {%
-   \setlength{\topsep}{0pt}%
-   \setlength{\rightmargin}{0.25in}%
-   \setlength{\itemsep}{0pt}%
-   \setlength{\itemindent}{0pt}%
-   \setlength{\parskip}{0pt}%
-   \setlength{\parsep}{2pt}%
-   \def\makelabel##1{\itshape ##1}}%
-  }
-  {\end{list}\end{raggedright}}
-\newenvironment{sansreflist}{%
-  \begin{raggedright}\begin{list}{}
-  {%
-   \setlength{\topsep}{0pt}%
-   \setlength{\rightmargin}{0.25in}%
-   \setlength{\itemindent}{0pt}%
-   \setlength{\parskip}{0pt}%
-   \setlength{\itemsep}{0pt}%
-   \setlength{\parsep}{2pt}%
-   \def\makelabel##1{\upshape\sffamily ##1}}%
-  }
-  {\end{list}\end{raggedright}}
-\newenvironment{specHead}[2]%
- {\vspace{20pt}\hrule\vspace{10pt}%
-  \label{#1}\markright{#2}%
-
-  \pdfbookmark[2]{#2}{#1}%
-  \hspace{-0.75in}{\bfseries\fontsize{16pt}{18pt}\selectfont#2}%
-  }{}
-      \def\TheFullDate{1970-01-01}
-\def\TheID{\makeatother }
-\def\TheDate{1970-01-01}
-\makeatletter 
-\makeatletter
-\newcommand*{\cleartoleftpage}{%
-  \clearpage
-    \if@twoside
-    \ifodd\c@page
-      \hbox{}\newpage
-      \if@twocolumn
-        \hbox{}\newpage
-      \fi
-    \fi
-  \fi
-}
-\makeatother
-\makeatletter
 \thispagestyle{empty}
-\markright{\@title}\markboth{\@title}{\@author}
-\renewcommand\small{\@setfontsize\small{9pt}{11pt}\abovedisplayskip 8.5\p@ plus3\p@ minus4\p@
-\belowdisplayskip \abovedisplayskip
-\abovedisplayshortskip \z@ plus2\p@
-\belowdisplayshortskip 4\p@ plus2\p@ minus2\p@
-\def\@listi{\leftmargin\leftmargini
-               \topsep 2\p@ plus1\p@ minus1\p@
-               \parsep 2\p@ plus\p@ minus\p@
-               \itemsep 1pt}
-}
-\makeatother
-\fvset{frame=single,numberblanklines=false,xleftmargin=5mm,xrightmargin=5mm}
-\fancyhf{} 
-\setlength{\headheight}{14pt}
-\fancyhead[LE]{\bfseries\leftmark} 
-\fancyhead[RO]{\bfseries\rightmark} 
-\fancyfoot[RO]{}
-\fancyfoot[CO]{\thepage}
-\fancyfoot[LO]{\TheID}
-\fancyfoot[LE]{}
-\fancyfoot[CE]{\thepage}
-\fancyfoot[RE]{\TheID}
-\hypersetup{linkbordercolor=0.75 0.75 0.75,urlbordercolor=0.75 0.75 0.75,bookmarksnumbered=true}
 \let\tabcellsep&amp; 
-\fancypagestyle{plain}{\fancyhead{}\renewcommand{\headrulewidth}{0pt}}\makeatother 
+\IfFileExists{tei.sty}{\RequirePackage{tei}}{}
 \begin{document}
 </xslo:text>
       <xslo:apply-templates/>
@@ -810,8 +539,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-<xslo:text>\bodymatter
-</xslo:text>
+
       <xsl:sequence select="tei:applyTemplates($content)"/>
 
   </xsl:function>
@@ -941,7 +669,7 @@ of this software, even if advised of the possibility of such damage.
 
   </xsl:function>
 
-  <xsl:function name="tei:processLocalRendition" as="node()">
+  <xsl:function name="tei:processLocalRendition" as="node()*">
 
     <xslo:template name="localrendition">
       <xslo:if test="@rendition">
@@ -968,31 +696,33 @@ of this software, even if advised of the possibility of such damage.
       </xslo:if>
     </xslo:template>
     
-  </xsl:function>
 
-  <xsl:function name="tei:escapeChars" as="xs:string" override="yes">
-    <xsl:param name="letters"/>
-    <xsl:param name="context"/>
-      <xsl:value-of
-	  select="replace(replace(replace(replace(replace(translate($letters,'ſ&#10;','s '), 
+    <xslo:function name="tei:escapeChars" override="yes">
+      <xslo:param name="letters"/>
+      <xslo:param name="context"/>
+      <xslo:value-of>
+	<xsl:attribute name="select">
+	  <xsl:text>replace(replace(replace(replace(replace(translate($letters,'ſ&#10;','s '), 
 		  '\\','\\textbackslash '),
 		  '_','\\textunderscore '),
 		  '\^','\\textasciicircum '),
 		  '~','\\textasciitilde '),
-		  '([\}\{%&amp;\$#])','\\$1')"/>
-
+		  '([\}\{%&amp;\$#])','\\$1')</xsl:text>
+	</xsl:attribute>
+      </xslo:value-of>
+    </xslo:function>
   </xsl:function>
 
-  <xsl:function name="tei:attributes" as="node()*">
-    <xsl:param name="model"/>
-    <xslo:if test="@xml:id">
-      <xslo:text>\anchor{</xslo:text>
-      <xslo:value-of select="@xml:id"/>
-      <xslo:text>}</xslo:text>
-    </xslo:if>
-    <xsl:if test="$model/@useSourceRendition='true'">
-      <xslo:call-template name="localrendition"/>
-    </xsl:if>
-  </xsl:function>
+    <xsl:function name="tei:attributes" as="node()*">
+      <xsl:param name="model"/>
+      <xslo:if test="@xml:id">
+	<xslo:text>\label{</xslo:text>
+	<xslo:value-of select="@xml:id"/>
+	<xslo:text>}</xslo:text>
+      </xslo:if>
+      <xsl:if test="$model/@useSourceRendition='true'">
+	<xslo:call-template name="localrendition"/>
+      </xsl:if>
+    </xsl:function>
 
 </xsl:stylesheet>

@@ -627,7 +627,7 @@
             <elementSpec mode="change" ident="body">
 	      <modelSequence>
 		<model behaviour="index(.,'toc')"/>
-		<model behaviour="body(.)"/>
+		<model behaviour="block(.)"/>
 	      </modelSequence>
             </elementSpec>
             <elementSpec mode="change" ident="byline">

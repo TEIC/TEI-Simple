@@ -127,10 +127,10 @@ span.unclear:after {content: ' [?] ';}
 .document_postquote:after {
 	content:"’";
 }
-.document_qbefore:before {
+.document_qafter:before {
 	content:"”";
 }
-.document_qafter:after {
+.document_qbefore:after {
 	content:"“";
 }</style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf8" src="simple.js"></script><title>A Christmas Carol </title> 
    </head> 
@@ -167,7 +167,7 @@ span.unclear:after {content: ' [?] ';}
             </ul>
          </div>
       </div> 
-      <body>
+      <div class="body2">
          <div class="head6">(Bits of) A CHRISTMAS CAROL, and other things</div> 
          <div class="div" id="foo">
             <h1 class="head">Simple rendition tests</h1> 
@@ -500,6 +500,60 @@ span.unclear:after {content: ' [?] ';}
             </p>
          </div> 
          <div class="div">
+            <h1 class="head">Some less common characters</h1> 
+            <p class="p">Checking that these all work in in both verbatim and non-verbatim modes</p> 
+            <table class="table">
+               <tr class="row2">
+                  <td class="cell">{</td>
+                  <td class="cell">{</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">}</td>
+                  <td class="cell">}</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">%</td>
+                  <td class="cell">%</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">&amp;</td>
+                  <td class="cell">&amp;</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">$</td>
+                  <td class="cell">$</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">#</td>
+                  <td class="cell">#</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">&lt;</td>
+                  <td class="cell">&lt;</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">&gt;</td>
+                  <td class="cell">&gt;</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">_</td>
+                  <td class="cell">_</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">^</td>
+                  <td class="cell">^</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">~</td>
+                  <td class="cell">~</td>
+               </tr> 
+               <tr class="row2">
+                  <td class="cell">\</td>
+                  <td class="cell">\</td>
+               </tr>
+            </table>
+         </div> 
+         <div class="div">
             <h1 class="head">del, gap, add, unclear etc</h1> 
             <p class="p"><span class="del"><span class="gap3"></span>. The <span class="simple_superscript">interest</span> &amp; — affor <span class="gap3"></span> the amount <span class="unclear">over</span> so small</span> the interest afforded <span class="add">compared with cash, <span class="del"><span class="gap3"></span></span></span> by the Annuity note paper to those who <span class="unclear">tutor</span> <span class="add"><span class="unclear">think</span></span> it, <span class="add">or keep it,</span> with a view  to circulation, will, <span class="del">when compared with cash</span> <span class="add">be it ever so small</span> be  so much <span class="simple_underline">profit</span>: compared with <span class="del">a</span> <span class="add">the</span> preceding higher  rate of interest, the <span class="add">reduced</span> rate afforded by the Annuity  note paper, to those who, <span class="unclear"><span class="del">tutor</span></span> if they <span class="unclear">tutor</span> it,  will, <span class="del">have to depend upon</span> to the extent of their  respective capitals so invested, have nothing else  to depend upon for their <span class="add">respective</span> incomes, will, <span class="del"><span class="gap3"></span></span> <span class="add">by</span> the  amount of the difference, <span class="unclear">foremost</span> itself as so  much less.
             </p>
@@ -538,12 +592,12 @@ span.unclear:after {content: ' [?] ';}
          <div class="div">
             <h1 class="head">Footnotes and endnotes</h1> 
             <div class="div">
-               <h2 class="head">1 Zur Entstehung der <span class="simple_smcap">Philosophischen Untersuchungen</span><sup class="footnotelink"><a href="#d1e1170">8</a></sup><div id="d1e1170" class="bottom note1">Zu Textauszeichnungen und Siglen siehe die Legende.</div>
+               <h2 class="head">1 Zur Entstehung der <span class="simple_smcap">Philosophischen Untersuchungen</span><sup class="footnotelink"><a href="#d1e1256">8</a></sup><div id="d1e1256" class="bottom note1">Zu Textauszeichnungen und Siglen siehe die Legende.</div>
                </h2> 
                <p class="simple_rightbraced">Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
                   eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                   praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
-                  ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod<sup class="footnotelink"><a href="#d1e1175">9</a></sup><div id="d1e1175" class="bottom note1">It is time to begin the beguine.</div> Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
+                  ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod<sup class="footnotelink"><a href="#d1e1261">9</a></sup><div id="d1e1261" class="bottom note1">It is time to begin the beguine.</div> Iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore
                   eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit
                   praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem
                   ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
@@ -958,7 +1012,7 @@ span.unclear:after {content: ' [?] ';}
             <p class="p">I wonder what are the xml-ids preserved in a transformation to XHTML, in particular
                in the case of quotations. So, let’s try :
             </p> 
-            <div class="cit" id="thisCitation"><sup><a class="anchor" name="Ad1e2222" href="#Nd1e2222">1</a></sup> 
+            <div class="cit" id="thisCitation"><sup><a class="anchor" name="Ad1e2308" href="#Nd1e2308">1</a></sup> 
                <div class="quote2" id="thisQuotation">
                   <p class="p" id="thisParagraph">Something longer. Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem ipsum
                      dolor sit amet Lorem ipsum dolor sit amet.
@@ -983,6 +1037,6 @@ span.unclear:after {content: ' [?] ';}
                <p class="p">Fit the <span class="ref1">second</span></p>
             </div>
          </div>
-      </body>
+      </div>
    </body>
 </html>

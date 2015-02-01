@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" exclude-result-prefixes="xs" xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
+<xsl:stylesheet 		     xmlns:xschema="http://www.w3.org/2001/XMLSchema"
+ xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" exclude-result-prefixes="xs" xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
   <xsl:variable name="sq">'</xsl:variable>
   <xsl:param name="debug">false</xsl:param>
   <xsl:namespace-alias stylesheet-prefix="xslo" result-prefix="xsl"/>
@@ -94,11 +95,6 @@
           </xslo:otherwise>
         </xslo:choose>
       </xslo:template>
-      <xslo:function name="tei:escapeChars">
-        <xslo:param name="letters"/>
-        <xslo:param name="context"/>
-        <xslo:value-of select="translate($letters,'ſ','s')"/>
-      </xslo:function>
     </xslo:stylesheet>
   </xsl:template>
   <xsl:template match="elementSpec">
