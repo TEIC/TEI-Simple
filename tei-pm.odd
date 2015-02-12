@@ -259,82 +259,84 @@
           </row>
           <row>
             <cell>alternate</cell>
-            <cell>preferred element, alternate element</cell>
+            <cell><table rend="rules"><row><cell>preferred element</cell><cell>XPath</cell></row>
+<row><cell>alternate element</cell><cell>XPath</cell></row></table></cell>
             <cell>Creates a specialized display of alternating elements for displaying the
                   preferred version, both at once or toggling between the two.</cell>
             <cell/>
           </row>
           <row>
             <cell>anchor</cell>
-            <cell>ID</cell>
+            <cell><table rend="rules"><row><cell>ID</cell><cell>XPath</cell></row></table></cell>
             <cell>create anchor with ID</cell>
             <cell/>
           </row>
           <row>
             <cell>block</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>Creates a block out of the content parameter. </cell>
             <cell>div</cell>
           </row>
           <row>
             <cell>break</cell>
-            <cell></cell>
+            <cell><table rend="rules"><row><cell></cell><cell>XPath</cell></row></table></cell>
             <cell/>
             <cell/>
           </row>
 
           <row>
             <cell>cell</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>Creates a table cell</cell>
             <cell>td</cell>
           </row>
           <row>
             <cell>cit</cell>
-            <cell>content,source</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row>
+	    <row><cell>source</cell><cell>URI</cell></row></table></cell>
             <cell>shows the content, with an attribute of the source</cell>
             <cell></cell>
           </row>
           <row>
             <cell>document</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>start a new output document</cell>
             <cell></cell>
           </row>
           <row>
             <cell>figure</cell>
-            <cell>title</cell>
-            <cell>make a figure with the title</cell>
+            <cell><table rend="rules"><row><cell>title</cell><cell>XPath</cell></row></table></cell>
+            <cell>make a figure with the <term>title</term> as caption</cell>
             <cell>div</cell>
           </row>
           <row>
             <cell>glyph</cell>
-            <cell>content, reference</cell>
-            <cell/>
+            <cell><table rend="rules"><row><cell>content</cell><cell>URI</cell></row></table></cell>
+            <cell>show a character by looking up reference</cell>
             <cell/>
           </row>
           <row>
             <cell>graphic</cell>
-            <cell>url of image file</cell>
+            <cell><table rend="rules"><row><cell>url of image file</cell><cell>XPath</cell></row></table></cell>
             <cell>If <att>url</att> is present, uses it to display graphic,
                   else display placeholder image. </cell>
             <cell>img</cell>
           </row>
           <row>
             <cell>heading</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>Creates a heading. </cell>
             <cell>span</cell>
           </row>
           <row>
             <cell>index</cell>
-            <cell>content,type</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row><row><cell>type</cell><cell>string</cell></row></table></cell>
             <cell>generate list according to <term>type</term></cell>
             <cell/>
           </row>
           <row>
             <cell>inline</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>Creates inline element out of <code>content</code> if there's something in
                   <gi>rendition</gi>, use that formatting
                   otherwise just show text of selected content.</cell>
@@ -342,31 +344,33 @@
           </row>
           <row>
             <cell>link</cell>
-            <cell>content,link url</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row>
+<row><cell>link url</cell><cell>URI</cell></row></table></cell>
             <cell>create hyperlink</cell>
             <cell>a</cell>
           </row>
           <row>
             <cell>list</cell>
-            <cell>children content</cell>
-            <cell>Create a list by following children</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>Create a list by following <term>content</term></cell>
             <cell>ol, ul, or dl</cell>
           </row>
           <row>
             <cell>listItem</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>create list item</cell>
             <cell>li</cell>
           </row>
           <row>
             <cell>metadata</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>create metadata section</cell>
             <cell>head</cell>
           </row>
           <row>
             <cell>note</cell>
-            <cell>content,place</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row>
+	    <row><cell>place</cell><cell>string</cell></row></table></cell>
             <cell>Creates a note block out of <code>content</code>,
 	    as per value of <code>place</code></cell>
             <cell>span or div</cell>
@@ -380,31 +384,31 @@
 
           <row>
             <cell>paragraph</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>Creates a paragraph out of <code>content</code>.</cell>
             <cell>p</cell>
           </row>
           <row>
             <cell>row</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
             <cell>make table row</cell>
             <cell>tr</cell>
           </row>
           <row>
             <cell>section</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>XPath</cell><cell>content</cell></row></table></cell>
             <cell/>
             <cell/>
           </row>
           <row>
             <cell>table</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>XPath</cell><cell>content</cell></row></table></cell>
             <cell>make table</cell>
             <cell>table</cell>
           </row>
           <row>
             <cell>title</cell>
-            <cell>content</cell>
+            <cell><table rend="rules"><row><cell>XPath</cell><cell>content</cell></row></table></cell>
             <cell>make document title</cell>
             <cell>title</cell>
           </row>

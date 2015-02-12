@@ -637,7 +637,7 @@
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="castGroup">
-              <model predicate="child::*" behaviour="list(.)">
+              <model predicate="child::*" behaviour="list(castItem|castGroup)">
                 <desc>Insert list. </desc>
               </model>
             </elementSpec>
@@ -647,7 +647,7 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="castList">
-              <model predicate="child::*" behaviour="list(.)" useSourceRendition="true">
+              <model predicate="child::*" behaviour="list(castItem)" useSourceRendition="true">
                 <rendition>list-style: ordered;</rendition>
               </model>
             </elementSpec>
@@ -888,13 +888,12 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="list">
-              <model predicate="@rendition" behaviour="list(.)" useSourceRendition="true"/>
-              <model predicate="not(@rendition)" behaviour="list(.)">
+              <model predicate="@rendition" behaviour="list(item)" useSourceRendition="true"/>
+              <model predicate="not(@rendition)" behaviour="list(item)">
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="listBibl">
-              <model behaviour="list(.)">
-                
+              <model behaviour="list(bibl)">
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="measure">

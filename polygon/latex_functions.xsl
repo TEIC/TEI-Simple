@@ -836,7 +836,7 @@ of this software, even if advised of the possibility of such damage.
 	      </xsl:when>
 	      <xsl:when test="regex-group(1)='font-weight'">
 		<xsl:choose>
-		  <xsl:when test="regex-group(2)='bold">\bfseries </xsl:when>
+		  <xsl:when test="regex-group(2)='bold'">\bfseries </xsl:when>
 		</xsl:choose>
 	      </xsl:when>
 	    </xsl:choose>
