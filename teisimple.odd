@@ -652,7 +652,7 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="cb">
-              <model behaviour="break('column')"/>
+              <model behaviour="break('column',@n)"/>
             </elementSpec>
             <elementSpec mode="change" ident="cell">
               <model behaviour="cell(.)">
@@ -881,7 +881,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="lb">
-              <model predicate="ancestor::sp" behaviour="break('line')"/>
+              <model predicate="ancestor::sp" behaviour="break('line',@n)"/>
               <model behaviour="omit()"/>
             </elementSpec>
             <elementSpec mode="change" ident="lg">
@@ -934,7 +934,17 @@ border-bottom: solid 1pt blue;
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="pb">
-              <model behaviour="inline(@n)">
+                  <constraintSpec ident="pbposition" scheme="isoschematron">
+                    <constraint>
+                        <report
+			    xmlns="http://purl.oclc.org/dsdl/schematron"
+			    test="parent::*/text() and not
+				      (preceding-sibling::text() and
+				      following-sibling::text())">please make sure pb elements are not at the start or end of mixed content </report>
+                    </constraint>
+                  </constraintSpec>
+
+              <model behaviour="break('page',@n)">
                 <rendition>
 	  display: block;
 	  color: grey;

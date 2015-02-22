@@ -136,26 +136,31 @@ The @spanTo attribute of <name/> is required.</assert>
         must contain at least one child l, lg or gap element.</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-ref-constraint-refAtts-20">
+   <pattern id="teisimple-pb-constraint-pbposition-20">
+      <rule context="tei:pb">
+                        <report test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">please make sure pb elements are not at the start or end of mixed content </report>
+                    </rule>
+   </pattern>
+   <pattern id="teisimple-ref-constraint-refAtts-21">
       <rule context="tei:ref">
          <report test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
          </report>
       </rule>
    </pattern>
-   <pattern id="teisimple-s-constraint-noNestedS-21">
+   <pattern id="teisimple-s-constraint-noNestedS-22">
       <rule context="tei:s">
          <report test="tei:s">You may not nest one s element within
       another: use seg instead</report>
       </rule>
    </pattern>
-   <pattern id="teisimple-subst-constraint-substContents1-22">
+   <pattern id="teisimple-subst-constraint-substContents1-23">
       <rule context="tei:subst">
          <assert test="child::tei:add and child::tei:del">
             <name/> must have at least one child add and at least one child del</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-text-constraint-headeronlyelement-25">
+   <pattern id="teisimple-text-constraint-headeronlyelement-26">
       <rule context="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value">
          <report test="ancestor::tei:text">Error:  The element <name/>
 is not permitted outside the header</report>

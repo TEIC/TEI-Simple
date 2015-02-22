@@ -182,6 +182,7 @@
       <xsl:apply-templates select="/" mode="M24"/>
       <xsl:apply-templates select="/" mode="M25"/>
       <xsl:apply-templates select="/" mode="M26"/>
+      <xsl:apply-templates select="/" mode="M27"/>
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
@@ -587,11 +588,28 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M21"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-ref-constraint-refAtts-20-->
+   <!--PATTERN teisimple-pb-constraint-pbposition-20-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:ref" priority="1000" mode="M22">
+<xsl:template match="tei:pb" priority="1000" mode="M22">
+
+		<!--REPORT -->
+<xsl:if test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">
+         <xsl:message>please make sure pb elements are not at the start or end of mixed content  (parent::*/text() and not (preceding-sibling::text() and following-sibling::text()))</xsl:message>
+      </xsl:if>
+      <xsl:apply-templates select="*" mode="M22"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M22"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M22">
+      <xsl:apply-templates select="*" mode="M22"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-ref-constraint-refAtts-21-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:ref" priority="1000" mode="M23">
 
 		<!--REPORT -->
 <xsl:if test="@target and @cRef">
@@ -601,24 +619,6 @@ The @spanTo attribute of <xsl:text/>
             <xsl:text/>
           (@target and @cRef)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M22"/>
-   </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M22"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M22">
-      <xsl:apply-templates select="*" mode="M22"/>
-   </xsl:template>
-
-   <!--PATTERN teisimple-s-constraint-noNestedS-21-->
-
-
-	<!--RULE -->
-<xsl:template match="tei:s" priority="1000" mode="M23">
-
-		<!--REPORT -->
-<xsl:if test="tei:s">
-         <xsl:message>You may not nest one s element within
-      another: use seg instead (tei:s)</xsl:message>
-      </xsl:if>
       <xsl:apply-templates select="*" mode="M23"/>
    </xsl:template>
    <xsl:template match="text()" priority="-1" mode="M23"/>
@@ -626,11 +626,29 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M23"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-subst-constraint-substContents1-22-->
+   <!--PATTERN teisimple-s-constraint-noNestedS-22-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:subst" priority="1000" mode="M24">
+<xsl:template match="tei:s" priority="1000" mode="M24">
+
+		<!--REPORT -->
+<xsl:if test="tei:s">
+         <xsl:message>You may not nest one s element within
+      another: use seg instead (tei:s)</xsl:message>
+      </xsl:if>
+      <xsl:apply-templates select="*" mode="M24"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M24"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M24">
+      <xsl:apply-templates select="*" mode="M24"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-subst-constraint-substContents1-23-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:subst" priority="1000" mode="M25">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -642,20 +660,20 @@ The @spanTo attribute of <xsl:text/>
                <xsl:text/> must have at least one child add and at least one child del (child::tei:add and child::tei:del)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M24"/>
+      <xsl:apply-templates select="*" mode="M25"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M24"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M24">
-      <xsl:apply-templates select="*" mode="M24"/>
+   <xsl:template match="text()" priority="-1" mode="M25"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M25">
+      <xsl:apply-templates select="*" mode="M25"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-text-constraint-headeronlyelement-25-->
+   <!--PATTERN teisimple-text-constraint-headeronlyelement-26-->
 
 
 	<!--RULE -->
 <xsl:template match="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value"
                  priority="1000"
-                 mode="M25">
+                 mode="M26">
 
 		<!--REPORT -->
 <xsl:if test="ancestor::tei:text">
@@ -664,28 +682,28 @@ The @spanTo attribute of <xsl:text/>
             <xsl:text/>
 is not permitted outside the header (ancestor::tei:text)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M25"/>
+      <xsl:apply-templates select="*" mode="M26"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M25"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M25">
-      <xsl:apply-templates select="*" mode="M25"/>
+   <xsl:template match="text()" priority="-1" mode="M26"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M26">
+      <xsl:apply-templates select="*" mode="M26"/>
    </xsl:template>
 
    <!--PATTERN -->
 
 
 	<!--RULE -->
-<xsl:template match="tei:biblScope" priority="1000" mode="M26">
+<xsl:template match="tei:biblScope" priority="1000" mode="M27">
 
 		<!--REPORT nonfatal-->
 <xsl:if test="@type">
          <xsl:message>WARNING: use of deprecated attribute — @type of the biblScope element will be removed from the TEI on 2014-12-17.
                  (@type / nonfatal)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M26"/>
+      <xsl:apply-templates select="*" mode="M27"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M26"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M26">
-      <xsl:apply-templates select="*" mode="M26"/>
+   <xsl:template match="text()" priority="-1" mode="M27"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M27">
+      <xsl:apply-templates select="*" mode="M27"/>
    </xsl:template>
 </xsl:stylesheet>

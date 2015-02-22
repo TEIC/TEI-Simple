@@ -3830,7 +3830,26 @@ pb =
   
   ## (page break) marks the start of a new page in a paginated document. [3.10.3. ]
   element pb {
-    empty,
+    empty
+    >> sch:pattern [
+         id = "teisimple-pb-pbposition-constraint-6"
+         "\x{a}" ~
+         "            "
+         sch:rule [
+           context = "tei:pb"
+           "\x{a}" ~
+           "               "
+           sch:report [
+             test =
+               "parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())"
+             "please make sure pb elements are not at the start or end of mixed content "
+           ]
+           "\x{a}" ~
+           "            "
+         ]
+         "\x{a}" ~
+         "         "
+       ],
     att.global.attributes,
     att.typed.attributes,
     att.edition.attributes,
@@ -3947,7 +3966,7 @@ ref =
   element ref {
     macro.paraContent
     >> sch:pattern [
-         id = "teisimple-ref-refAtts-constraint-6"
+         id = "teisimple-ref-refAtts-constraint-7"
          "\x{a}" ~
          "            "
          sch:rule [
@@ -4097,7 +4116,7 @@ s =
       | seg
       | w)*)
     >> sch:pattern [
-         id = "teisimple-s-noNestedS-constraint-7"
+         id = "teisimple-s-noNestedS-constraint-8"
          "\x{a}" ~
          "            "
          sch:rule [

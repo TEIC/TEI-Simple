@@ -27,7 +27,7 @@
             <p rendition="simple:foo #bold italic"/>
             <p rendition="simple:italic"/>
             <p rendition="#bad #foo"/>
-	    <p><ref target="http://www.bbc.co.uk/ #bad bar #foobar #foo"/></p>
+	    <p><pb/> some text <ref target="http://www.bbc.co.uk/ #bad bar #foobar #foo"/></p>
         </body>
     </text>
 </TEI>

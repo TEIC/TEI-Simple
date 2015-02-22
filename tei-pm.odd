@@ -279,8 +279,11 @@
           </row>
           <row>
             <cell>break</cell>
-            <cell><table rend="rules"><row><cell></cell><cell>XPath</cell></row></table></cell>
-            <cell/>
+            <cell><table rend="rules">
+	    <row><cell>type</cell><cell>string</cell></row>
+	    <row><cell>label</cell><cell>XPath</cell></row>
+	    </table></cell>
+            <cell>make a line, column, or page break according to <term>type</term></cell>
             <cell/>
           </row>
 
