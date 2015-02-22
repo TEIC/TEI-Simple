@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" xmlns:tei="http://www.tei-c.org/ns/1.0" xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.tei-c.org/ns/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" xmlns:tei="http://www.tei-c.org/ns/1.0" xpath-default-namespace="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="xs" version="2.0">
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
     <desc>
       <p> TEI Simple utility stylesheet defining functions for use when generating stylesheets based on Simple ODD extension.</p>
@@ -524,8 +524,8 @@ of this software, even if advised of the possibility of such damage.
 \let\tabcellsep&amp; 
 \IfFileExists{tei.sty}{\RequirePackage{tei}}{}
 </xslo:text>
-<xsl:for-each select="$TOP">
-  <xsl:copy-of select="tei:getRenditions(//elementSpec)"/>
+<xsl:for-each select="$TOP"><xsl:message>
+  <xsl:copy-of select="tei:getRenditions(//elementSpec)"/></xsl:message>
 </xsl:for-each>
 <xslo:text>
 \begin{document}
@@ -658,16 +658,35 @@ of this software, even if advised of the possibility of such damage.
             <xsl:variable name="rendition" select="tei:cssToLaTeX(.)"/>
             <xsl:for-each select="$container/node()">
               <xsl:value-of select="concat(.,'\def\',$elname,$pos)"/>
-              <xsl:text> {</xsl:text>
-              <xsl:value-of select="$rendition"/>
-              <xsl:text>}</xsl:text>
-              <xsl:text>
-</xsl:text>
-            </xsl:for-each>
-          </xsl:for-each>
-        </xsl:for-each>
-      </xsl:for-each>
+              <xsl:text>#1{</xsl:text>
 
+	      <xsl:for-each select="$rendition/env">
+	      <xsl:value-of select="concat('\begin{',.,'}')"/>
+	      </xsl:for-each>
+
+	      <xsl:for-each select="$rendition/cmd">
+		<xsl:value-of select="concat('\',.,'{')"/>
+	      </xsl:for-each>
+
+	      <xsl:for-each select="$rendition/decl">
+		<xsl:value-of select="concat('\',.,' ')"/>
+	      </xsl:for-each>
+
+	      <xsl:text>#1</xsl:text>
+
+	      <xsl:for-each select="$rendition/cmd">
+		<xsl:text>}</xsl:text>
+	      </xsl:for-each>
+
+	      <xsl:for-each select="$rendition/env">
+	      <xsl:value-of select="concat('\end{',.,'}')"/>
+            <xsl:text>}
+</xsl:text>
+	      </xsl:for-each>
+	    </xsl:for-each>
+	  </xsl:for-each>
+	</xsl:for-each>
+      </xsl:for-each>
   </xsl:function>
 
   <xsl:function name="tei:processLocalRendition" as="node()*">
@@ -727,121 +746,107 @@ of this software, even if advised of the possibility of such damage.
     </xsl:function>
 
 <!--
-     [xslt] [align] [bottom]
-     [xslt] [align] [center]
-     [xslt] [align] [justify]
-     [xslt] [align] [left]
-     [xslt] [align] [right]
-     [xslt] [align] [super]
-     [xslt] [align] [top]
-     [xslt] [border] [1px solid black]
-     [xslt] [border] [solid black 1pt]
-     [xslt] [bottom] [0.5em]
-     [xslt] [bottom] [2em]
-     [xslt] [bottom] [2pt]
-     [xslt] [bottom] [dashed gray 2pt]
-     [xslt] [bottom] [solid 1pt blue]
-     [xslt] [clear] [right]
-     [xslt] [color] [#F0F0F0]
-     [xslt] [color] [#c00]
-     [xslt] [color] [green]
-     [xslt] [color] [grey]
-     [xslt] [color] [red]
-     [xslt] [content] [" ["]
-     [xslt] [content] ["&gt;"]
-     [xslt] [content] ["&lt;"]
-     [xslt] [content] ["("]
-     [xslt] [content] [")"]
-     [xslt] [content] ["["]
-     [xslt] [content] ["] "]
-     [xslt] [content] ["]"]
-     [xslt] [content] ["{"]
-     [xslt] [content] ["}"]
-     [xslt] [content] [' [?] ']
-     [xslt] [content] ['..]']
-     [xslt] [content] ['[']
-     [xslt] [content] ['[..']
-     [xslt] [content] ['[...]']
-     [xslt] [content] ['[Page ']
-     [xslt] [content] [']']
-     [xslt] [content] ['{']
-     [xslt] [content] ['}']
-     [xslt] [content] ['‘']
-     [xslt] [content] ['’']
-     [xslt] [decoration] [line-through]
-     [xslt] [decoration] [underline]
-     [xslt] [display] [block]
-     [xslt] [display] [inline]
-     [xslt] [family] [Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif]
-     [xslt] [family] [cursive]
-     [xslt] [family] [fantasy]
-     [xslt] [family] [monospace]
-     [xslt] [float] [left]
-     [xslt] [float] [right]
-     [xslt] [height] [1em]
-     [xslt] [left] [10px]
-     [xslt] [left] [1em]
-     [xslt] [left] [2em]
-     [xslt] [left] [2pt]
-     [xslt] [left] [dotted gray 2pt]
-     [xslt] [margin] [0em]
-     [xslt] [margin] [6pt]
-     [xslt] [margin] [auto]
-     [xslt] [padding] [0px]
-     [xslt] [padding] [2pt]
-     [xslt] [padding] [4pt]
-     [xslt] [padding] [5px]
-     [xslt] [right] [10px]
-     [xslt] [right] [2em]
-     [xslt] [right] [2pt]
-     [xslt] [right] [dotted gray 2pt]
-     [xslt] [size] [2em]
-     [xslt] [size] [6em]
-     [xslt] [size] [large]
-     [xslt] [size] [larger]
-     [xslt] [size] [small]
-     [xslt] [size] [smaller]
-     [xslt] [space] [nowrap]
-     [xslt] [spacing] [0.5em]
-     [xslt] [style] [italic]
-     [xslt] [style] [ordered]
-     [xslt] [style] [roman]
-     [xslt] [style] [wavy]
-     [xslt] [top] [1em]
-     [xslt] [top] [2em]
-     [xslt] [top] [2pt]
-     [xslt] [top] [dotted gray 2pt]
-     [xslt] [top] [solid 1pt blue]
-     [xslt] [transform] [rotate(-90deg)]
-     [xslt] [transform] [rotate(90deg)]
-     [xslt] [transform] [uppercase]
-     [xslt] [variant] [small-caps]
-     [xslt] [weight] [bold]
-     [xslt] [weight] [normal]
-     [xslt] [width] [15%]
-     [xslt] [width] [1em]
-     [xslt] [width] [80%]
+background-color:#F0F0F0
+border-bottom:solid 1pt blue
+border-top:solid 1pt blue
+border:1px solid black
+border:solid black 1pt
+color:green
+color:grey
+color:red
+display:block
+float:right
+list-style:ordered
+margin-bottom:0.5em
+margin-bottom:2em
+margin-left:10px
+margin-left:1em
+margin-left:2em
+margin-right:10px
+margin-right:2em
+margin-top:1em
+margin-top:2em
+margin:6pt
+margin:auto
+max-width:80%
+padding:5px
+text-decoration:line-through
+text-decoration:underline
+white-space:nowrap
 -->
     <xsl:function name="tei:cssToLaTeX" as="node()*">
       <xsl:param name="css"/>
       <xsl:for-each select="tokenize(normalize-space($css),';')">
-	<xsl:analyze-string select="." regex="\s*(\w+)\s*:\s*(.*)">
+	<xsl:analyze-string select="." regex="\s*([A-z0-9\-]+)\s*:\s*(.*)">
 	  <xsl:matching-substring>
-	    <xsl:message>[<xsl:value-of select="regex-group(1)"/>] [<xsl:value-of select="regex-group(2)"/>]</xsl:message>
 	    <xsl:choose>
+	      <xsl:when test="regex-group(1)='content'">
+		<text><xsl:value-of select="regex-group(2)"/></text>
+	     </xsl:when>
+	      <xsl:when test="regex-group(1)='font-family'">
+		<decl>
+		<xsl:choose>
+		  <xsl:when test="regex-group(2)='cursive'">\textcal</xsl:when>
+		  <xsl:when test="regex-group(2)='fantasy'">\textgothic</xsl:when>
+		  <xsl:when test="regex-group(2)='monospace'">\texttt</xsl:when>
+		</xsl:choose>
+		</decl>
+	     </xsl:when>
 	      <xsl:when test="regex-group(1)='font-style'">
+		<decl>
 		<xsl:choose>
-		  <xsl:when test="regex-group(2)='italic'">\itshape </xsl:when>
+		  <xsl:when test="regex-group(2)='italic'">\itshape</xsl:when>
 		</xsl:choose>
-	      </xsl:when>
+		</decl>
+	     </xsl:when>
 	      <xsl:when test="regex-group(1)='font-weight'">
+		<decl>
 		<xsl:choose>
-		  <xsl:when test="regex-group(2)='bold'">\bfseries </xsl:when>
+		  <xsl:when test="regex-group(2)='bold'">\bfseries</xsl:when>
 		</xsl:choose>
-	      </xsl:when>
+		</decl>
+	     </xsl:when>
+	      <xsl:when test="regex-group(1)='font-size'">
+		<decl>
+		<xsl:choose>
+		  <xsl:when  test="regex-group(2)='large'">\large</xsl:when>
+		  <xsl:when  test="regex-group(2)='larger'">\larger</xsl:when>
+		  <xsl:when  test="regex-group(2)='small'">\small</xsl:when>
+		  <xsl:when  test="regex-group(2)='smaller'">\smaller</xsl:when>
+		  <xsl:when
+		      test="matches(regex-group(2),'^[0-9]')">
+		    <xsl:text>\font-size</xsl:text>
+		    <xsl:value-of select="replace(regex-group(2),'(^[0-9\.]+)(.+)','{$1}{$2}')"/>
+		 </xsl:when>
+		</xsl:choose>
+		</decl>
+	     </xsl:when>
+	      <xsl:when test="regex-group(1)='text-align'">
+		<env>
+		<xsl:choose>
+		  <xsl:when test="regex-group(2)='left'">\raggedright</xsl:when>
+		  <xsl:when test="regex-group(2)='right'">\raggedleft</xsl:when>
+		  <xsl:when test="regex-group(2)='center'">\centering</xsl:when>
+		</xsl:choose>
+		</env>
+	     </xsl:when>
+	      <xsl:when test="regex-group(1)='text-decoration'">
+		<cmd>
+		<xsl:choose>
+		  <xsl:when test="regex-group(2)='underline'">\underline</xsl:when>
+		  <xsl:when test="regex-group(2)='strikethrough'">\sout</xsl:when>
+		</xsl:choose>
+		</cmd>
+	     </xsl:when>
+	      <xsl:otherwise>
+		<xsl:message>unrecognized CSS: <xsl:value-of
+		select="regex-group(1)"/>:<xsl:value-of
+		select="regex-group(2)"/></xsl:message>
+	      </xsl:otherwise>
 	    </xsl:choose>
 	  </xsl:matching-substring>
 	  <xsl:non-matching-substring>
+		<xsl:message>unparseable CSS: <xsl:value-of select="."/></xsl:message>
 	  </xsl:non-matching-substring>
 	</xsl:analyze-string>
       </xsl:for-each>
