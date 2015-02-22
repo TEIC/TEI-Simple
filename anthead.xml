@@ -4,6 +4,7 @@
   <property name="trang" value="lib/trang.jar"/>
   <property name="jing" value="lib/jing.jar"/>
   <property name="dir" value="."/>
+  <property name="xsl" value="../Stylesheets"/>
 
   <path id="classpath">
     <pathelement path="${java.class.path}"/>
@@ -23,7 +24,7 @@
     <runjing rngfile="tei_all.rng" file="@{name}"
 	     failonerror="false"/>
     <echo>Normalize file to fit TEI Simple</echo>
-    <xslt processor="trax" force="yes" style="teitosimple.xsl" in="@{name}" out="@{file}">
+    <xslt processor="trax" force="yes" style="${xsl}/simple/teitosimple.xsl" in="@{name}" out="@{file}">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
     <echo level="info">Validate @{file} against teisimple.rng</echo>
