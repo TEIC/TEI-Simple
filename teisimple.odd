@@ -1037,7 +1037,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="seg">
-              <model behaviour="inline(.)"/>
+              <model behaviour="inline(.)"   useSourceRendition="true"/>
             </elementSpec>
             <elementSpec ident="sic" mode="change">
               <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>

@@ -237,6 +237,9 @@
     <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple6.xml" out="tests/testsimple6.html">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/A10231.xml" out="tests/A10231.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
 
     <xslt force="yes" style="teisimple-pm-latex.xsl" in="tests/testsimple4.xml" out="tests/testsimple4.tex">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
