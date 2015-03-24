@@ -121,3 +121,7 @@ td {
 .alternate {
 	background-color: #E7E6E7;
 }
+
+div.titlePage {
+    font-size: large;
+    }
