@@ -13,7 +13,7 @@ pm:
 
 valid:
 	xmllint --xinclude teisimple.odd > xsimple.odd
-	jing tei-pm.rng xsimple.odd
+	java -jar lib/jing.jar tei-pm.rng xsimple.odd
 	rm xsimple.odd
 
 validate:
