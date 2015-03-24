@@ -77,6 +77,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:copy-of select="tei:inline($model, '', $class, $number)"/>
     <br/>
   </xsl:function>
+
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Page break. Only a placeholder. Needs adding to.</desc>
   </doc>
@@ -85,8 +86,20 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="content"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:copy-of select="tei:makeElement($model,'br', '', '', '', '', '')"/>
-  </xsl:function>
+  
+    <xsl:choose>
+      <xsl:when test="string($class)">
+        <xsl:copy-of select="tei:makeElement($model,'span', concat($class, $number), '', $content, '', '')"/>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:sequence select="tei:applyTemplates($content)"/>
+      </xsl:otherwise>
+    </xsl:choose>
+    
+  </xsl:function>    
+    
+    
+  
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Inline element. If there's something going on re class or rendition keep span and attributes</desc>
   </doc>
