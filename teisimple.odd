@@ -334,8 +334,8 @@
                       <desc>in a predefined space, for example left by an earlier
                                     scribe.</desc>
                     </valItem>
-                    <valItem ident="display">
-                      <desc>formatted like a quotation</desc>
+                    <valItem ident="block">
+                      <desc>formatted as an indented paragraph</desc>
                     </valItem>
                   </valList>
                 </attDef>
@@ -708,7 +708,9 @@
             <elementSpec mode="change" ident="date">
               <model output="print" predicate="text()" behaviour="inline(.)"/>
               <model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/>
-              <model predicate="@when" output="web" behaviour="alternate(.,@when)"/>
+
+              <model output="web" predicate="@when" behaviour="alternate(.,@when)"/>
+
               <model predicate="text()" behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="dateline">
@@ -752,6 +754,7 @@
               </model>
               <model behaviour="inline(.)"/>
             </elementSpec>
+
             <elementSpec mode="change" ident="docTitle">
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
@@ -760,6 +763,7 @@
                 <rendition>font-size: larger;</rendition>
               </model>
             </elementSpec>
+
             <elementSpec mode="change" ident="epigraph">
               <model behaviour="block(.)"/>
             </elementSpec>
@@ -881,8 +885,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="lb">
-              <model predicate="ancestor::sp" behaviour="break('line',@n)"/>
-              <model behaviour="omit()"/>
+              <model  behaviour="break('line',@n)" useSourceRendition="true"/>
             </elementSpec>
             <elementSpec mode="change" ident="lg">
               <model behaviour="block(.)"/>
@@ -944,9 +947,11 @@ border-bottom: solid 1pt blue;
                     </constraint>
                   </constraintSpec>
 
-              <model behaviour="break('page',@n)">
+              <model behaviour="break('page',@n)"
+		     useSourceRendition="true">
                 <rendition>
 	  display: block;
+	  margin-left: 4pt;
 	  color: grey;
 	  float: right;
 	</rendition>
@@ -1127,6 +1132,13 @@ border-bottom: solid 1pt blue;
             </elementSpec>
 
             <elementSpec mode="change" ident="TEI">
+	      <attList>
+                <attDef ident="scheme" mode="add">
+		  <datatype  maxOccurs="unbounded">
+		    <macroRef key="data.word"/>
+		  </datatype>
+		</attDef>
+	      </attList>
 	      <model behaviour="document(.)"/>
             </elementSpec>
 

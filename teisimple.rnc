@@ -783,8 +783,8 @@ att.placement.attribute.place =
          ## in a predefined space, for example left by an earlier scribe.
          "inspace"
        | 
-         ## formatted like a quotation
-         "display")+
+         ## formatted as an indented paragraph
+         "block")+
     }
   }?
 att.typed.attributes =
@@ -4341,6 +4341,11 @@ TEI =
          uri = "http://relaxng.org/ns/structure/1.0"
        ],
     att.global.attributes,
+    
+    ##
+    attribute scheme {
+      list { data.word+ }
+    }?,
     
     ## specifies the major version number of the TEI Guidelines against which this document is valid.
     attribute version { data.version }?,
