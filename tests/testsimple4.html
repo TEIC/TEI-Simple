@@ -158,7 +158,12 @@ span.unclear:after {content: ' [?] ';}
             </p> <span class="signed2">Their faithful Friend and Servant, C.D. <span class="date4">December, 1843.</span></span></div> 
          <div class="div">
             <h1 class="head">Contents.</h1> 
-            <ul class="list2">Marley's ghost <a class="ref3" href="#S1">1</a>The first of the three spirits The second of the three spirits The last of the spirits The end of it 
+            <ul class="list2">
+               <li class="item2">Marley's ghost <a class="ref3" href="#S1">1</a></li>
+               <li class="item2">The first of the three spirits </li>
+               <li class="item2">The second of the three spirits </li>
+               <li class="item2">The last of the spirits </li>
+               <li class="item2">The end of it </li>
             </ul>
          </div>
       </div> 
@@ -177,7 +182,7 @@ span.unclear:after {content: ' [?] ';}
                </tr> 
                <tr class="row2">
                   <td class="cell">abbr</td> 
-                  <td class="cell">This is an <span class="abbr2">example of abbr</span></td>
+                  <td class="cell">This is an <span class="abbr">example of abbr</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">add</td> 
@@ -205,7 +210,7 @@ span.unclear:after {content: ' [?] ';}
                </tr> 
                <tr class="row2">
                   <td class="cell">expan</td> 
-                  <td class="cell">This is an <span class="expan2">example of expan</span></td>
+                  <td class="cell">This is an <span class="expan">example of expan</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">foreign</td> 
@@ -245,7 +250,7 @@ span.unclear:after {content: ' [?] ';}
                </tr> 
                <tr class="row2">
                   <td class="cell">orig</td> 
-                  <td class="cell">This is an <span class="orig2">example of orig</span></td>
+                  <td class="cell">This is an <span class="orig">example of orig</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">pb</td> 
@@ -271,7 +276,7 @@ span.unclear:after {content: ' [?] ';}
                </tr> 
                <tr class="row2">
                   <td class="cell">reg</td> 
-                  <td class="cell">This is an <span class="reg1">example of reg</span></td>
+                  <td class="cell">This is an <span class="reg">example of reg</span></td>
                </tr> 
                <tr class="row2">
                   <td class="cell">rhyme</td> 
@@ -685,21 +690,53 @@ span.unclear:after {content: ' [?] ';}
          <div class="div" id="P1">
             <h1 class="head">Lists</h1> 
             <p class="p">Various sorts of list are legal within paragraphs, and you can reference <a class="ref3" href="#birds">items in lists</a>... 
-               <ul class="list2">DogsZebrasBirdsCats</ul>
+               <ul class="list2">
+                  <li class="item2">Dogs</li>
+                  <li class="item2">Zebras</li>
+                  <li class="item2" id="birds">Birds</li>
+                  <li class="item2">Cats</li>
+               </ul>
             </p> 
-            <ul class="list2">first item second item third item </ul> 
+            <ul class="list2">
+               <li class="item2">first item </li>
+               <li class="item2">second item </li>
+               <li class="item2">third item </li>
+            </ul> 
             <p class="p">The preceding lists was between paragraphs.</p> 
             <p class="p">
-               <ul class="list2">first item 
-                  <ul class="list2">first item second item third item </ul>third item 
+               <ul class="list2">
+                  <li class="item2">first item </li>
+                  <li class="item2">
+                     <ul class="list2">
+                        <li class="item2">first item </li>
+                        <li class="item2">second item </li>
+                        <li class="item2">third item </li>
+                     </ul>
+                  </li>
+                  <li class="item2">third item </li>
                </ul>
             </p> 
             <p class="p">What's wrong with this list?</p> 
             <ul class="list2">
-               <ul class="list2">one 
-                  <ul class="list2">one-hayone-bee</ul>twothree
-               </ul>
-               <ul class="list2">onetwothree</ul>
+               <li class="item2">
+                  <ul class="list2">
+                     <li class="item2">one 
+                        <ul class="list2">
+                           <li class="item2">one-hay</li>
+                           <li class="item2">one-bee</li>
+                        </ul>
+                     </li>
+                     <li class="item2">two</li>
+                     <li class="item2">three</li>
+                  </ul>
+               </li>
+               <li class="item2">
+                  <ul class="list2">
+                     <li class="item2">one</li>
+                     <li class="item2">two</li>
+                     <li class="item2">three</li>
+                  </ul>
+               </li>
             </ul>
          </div> 
          <div class="div">
@@ -962,7 +999,14 @@ span.unclear:after {content: ' [?] ';}
             <p class="p">Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet
                Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet.
                With references to 
-               <ul class="list2"><a class="ref3" href="#thisQuotation">Quotation</a><a class="ref3" href="#thisCitation">Citation</a><a class="ref3" href="#thisParagraph">Paragraph</a><a class="ref3" href="#thisReference">Reference</a><a class="ref3" href="#movingAnchor">Anchor</a><a class="ref3" href="#thisTitle">Title</a></ul>
+               <ul class="list2">
+                  <li class="item2"><a class="ref3" href="#thisQuotation">Quotation</a></li>
+                  <li class="item2"><a class="ref3" href="#thisCitation">Citation</a></li>
+                  <li class="item2"><a class="ref3" href="#thisParagraph">Paragraph</a></li>
+                  <li class="item2"><a class="ref3" href="#thisReference">Reference</a></li>
+                  <li class="item2"><a class="ref3" href="#movingAnchor">Anchor</a></li>
+                  <li class="item2"><a class="ref3" href="#thisTitle">Title</a></li>
+               </ul>
             </p> 
             <p class="p">I wonder what are the xml-ids preserved in a transformation to XHTML, in particular
                in the case of quotations. So, let’s try :
@@ -976,10 +1020,10 @@ span.unclear:after {content: ' [?] ';}
          </div> 
          <div class="div">
             <h1 class="head">Choice, sic, corr, reg, orig</h1> 
-            <p class="p">v<span class="ex">oro</span> þav sam<span class="ex">m</span>ędd syskin in hei<span class="ex">lagr</span>i <span class="lb"></span> ol<span class="ex">afr</span> k<span class="ex">onvng</span>r <span class="ex">ok</span> fyrnefnd <span class="alternate choice1" title="alternate">gvn<span class="ex">n</span>hilldr<span class="hidden altcontent ">gvn<span class="ex">n</span>hillde</span></span>.
+            <p class="p">v<span class="ex">oro</span> þav sam<span class="ex">m</span>ędd syskin in hei<span class="ex">lagr</span>i <span class="lb"></span> ol<span class="ex">afr</span> k<span class="ex">onvng</span>r <span class="ex">ok</span> fyrnefnd <span class="alternate choice1" title="alternate"><span class="corr1">gvn<span class="ex">n</span>hilldr</span><span class="hidden altcontent "><span class="sic1">gvn<span class="ex">n</span>hillde</span></span></span>.
             </p> 
             <p class="p">Lastly, That, upon his solemn oath to observe all the above articles, the said man-mountain
-               shall have a daily allowance of meat and drink sufficient for the support of <span class="alternate choice1" title="alternate">1728<span class="hidden altcontent ">1724</span></span> of our subjects, with free access to our royal person, and other marks of our <span class="alternate choice3" title="alternate">favor<span class="hidden altcontent ">favour</span></span>.
+               shall have a daily allowance of meat and drink sufficient for the support of <span class="alternate choice1" title="alternate"><span class="corr1">1728</span><span class="hidden altcontent "><span class="sic1">1724</span></span></span> of our subjects, with free access to our royal person, and other marks of our <span class="alternate choice3" title="alternate"><span class="reg">favor</span><span class="hidden altcontent "><span class="orig">favour</span></span></span>.
             </p>
          </div> 
          <div class="div">

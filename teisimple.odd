@@ -571,7 +571,6 @@
               <model behaviour="paragraph(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="abbr">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="actor">
@@ -688,7 +687,7 @@
             </elementSpec>
             <elementSpec mode="change" ident="cit">
               <model predicate="child::quote and child::bibl" behaviour="cit(.)">
-                <desc>Insert cit. </desc>
+                <desc>Insert citation </desc>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="closer">
@@ -697,8 +696,8 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="corr">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
-                <desc>Omit, if handled in parent choice. </desc>
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="inline(.)">
+                <desc>simple inline, if in parent choice. </desc>
               </model>
               <model behaviour="inline(.)">
                 <rendition scope="before">content: '[';</rendition>
@@ -771,7 +770,6 @@
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="expan">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="figDesc">
@@ -926,9 +924,6 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="orig">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
-                <desc>Omit, if handled in parent choice. </desc>
-              </model>
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="p">
@@ -1008,10 +1003,6 @@ border-bottom: solid 1pt blue;
               <model behaviour="link(.,@target)"/>
             </elementSpec>
             <elementSpec mode="change" ident="reg">
-              <model predicate="not(parent::choice)" behaviour="inline(.)"/>
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()">
-                <desc>Omit, if handled in parent choice.</desc>
-              </model>
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="rhyme">
@@ -1045,7 +1036,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"   useSourceRendition="true"/>
             </elementSpec>
             <elementSpec ident="sic" mode="change">
-              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit()"/>
+              <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="inline(.)"/>
               <model behaviour="inline(.)">
                 <rendition scope="before">content: '{';</rendition>
                 <rendition scope="after">content: '}';</rendition>
@@ -1086,7 +1077,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="supplied">
-              <model predicate="parent::choice" behaviour="omit()"/>
+              <model predicate="parent::choice" behaviour="inline(.)"/>
               <model predicate="@reason='damage'" behaviour="inline(.)">
                 <rendition scope="before">content:"&lt;";</rendition>
                 <rendition scope="after">content:"&gt;";</rendition>

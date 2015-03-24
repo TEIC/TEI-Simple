@@ -221,12 +221,11 @@
           </xslo:value-of>
         </xsl:when>
         <xsl:when test="$content!='.'">
-          <xslo:for-each>
-            <xsl:attribute name="select">
-              <xsl:value-of select="$content"/>
-            </xsl:attribute>
-            <xslo:apply-templates/>
-          </xslo:for-each>
+            <xslo:apply-templates>
+              <xsl:attribute name="select">
+		<xsl:value-of select="$content"/>
+              </xsl:attribute>
+	    </xslo:apply-templates>
         </xsl:when>
         <xsl:otherwise>
           <xslo:apply-templates/>
