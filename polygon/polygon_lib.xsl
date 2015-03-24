@@ -289,7 +289,7 @@
         <xsl:sequence select="tei:newline($model, $parms[1], $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='break'">
-        <xsl:sequence select="tei:break($model, $parms[1], $class, $number)"/>
+        <xsl:sequence select="tei:break($model, $parms[2], $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='paragraph'">
         <xsl:sequence select="tei:paragraph($model, $parms[1], $class, $number)"/>
