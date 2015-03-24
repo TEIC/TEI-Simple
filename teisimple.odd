@@ -756,7 +756,7 @@
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
-              <model behaviour="block(.)">
+              <model behaviour="block(.)"  useSourceRendition="true">
                 <rendition>font-size: large;</rendition>
               </model>
             </elementSpec>
@@ -1176,12 +1176,12 @@ border-bottom: solid 1pt blue;
             </elementSpec>
 
             <elementSpec mode="change" ident="titlePage">
-              <model behaviour="block(.)">
+              <model behaviour="block(.)"  useSourceRendition="true">
 		<rendition>    text-align: center;</rendition>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="titlePart">
-              <model behaviour="block(.)"/>
+              <model behaviour="block(.)"  useSourceRendition="true"/>
             </elementSpec>
             <elementSpec mode="change" ident="trailer">
               <model behaviour="block(.)">
