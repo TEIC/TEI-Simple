@@ -757,7 +757,7 @@
                 <desc>Omit if located in teiHeader. </desc>
               </model>
               <model behaviour="block(.)"  useSourceRendition="true">
-                <rendition>font-size: large;</rendition>
+                <rendition>font-size: larger;</rendition>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="epigraph">
