@@ -722,7 +722,7 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="desc">
-              <model behaviour="omit()"/>
+              <model behaviour="inline()"/>
             </elementSpec>
             <elementSpec mode="change" ident="div">
               <model predicate="@type='title_page'" behaviour="block(.)">
@@ -938,12 +938,10 @@ border-bottom: solid 1pt blue;
                     </constraint>
                   </constraintSpec>
 
-<!--
+
               <model behaviour="break('page',(concat(if(@n) then
 				concat(@n,' ') else '',if(@facs) then
 				concat('@',@facs) else '')))"
--->
-<model behaviour="break('page',@n)"
 		     useSourceRendition="true">
                 <rendition>
 	  display: block;

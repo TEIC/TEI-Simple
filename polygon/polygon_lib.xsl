@@ -211,7 +211,7 @@
   </xsl:function>
   <xsl:function name="tei:applyTemplates" as="node()*">
     <xsl:param name="content"/>
-    <xsl:if test="string($content)">
+
       <xsl:choose>
         <xsl:when test="starts-with($content,'@')">
           <xslo:value-of>
@@ -220,18 +220,28 @@
             </xsl:attribute>
           </xslo:value-of>
         </xsl:when>
-        <xsl:when test="$content!='.'">
-            <xslo:apply-templates>
-              <xsl:attribute name="select">
-		<xsl:value-of select="$content"/>
-              </xsl:attribute>
-	    </xslo:apply-templates>
-        </xsl:when>
-        <xsl:otherwise>
+        <xsl:when test="contains($content,'concat(')">
+          <xslo:value-of>
+            <xsl:attribute name="select">
+	      <xsl:value-of select="$content"/>
+            </xsl:attribute>
+	  </xslo:value-of>
+	</xsl:when>
+        <xsl:when test="$content='.'">
           <xslo:apply-templates/>
+	</xsl:when>
+        <xsl:when test="$content=''">
+          <xslo:apply-templates/>
+	</xsl:when>
+        <xsl:otherwise>
+          <xslo:apply-templates>
+            <xsl:attribute name="select">
+	      <xsl:value-of select="$content"/>
+            </xsl:attribute>
+	  </xslo:apply-templates>
         </xsl:otherwise>
       </xsl:choose>
-    </xsl:if>
+
   </xsl:function>
   <xsl:function name="tei:matchFunction">
     <xsl:param name="elName"/>
@@ -240,10 +250,10 @@
     <xsl:param name="number"/>
     <xsl:variable name="task" select="substring-before(normalize-space($model/@behaviour),'(')"/>
     <xsl:variable name="parameterstring" select="replace(substring-after(normalize-space($model/@behaviour),'('),'\)$','')"/>
-    <xsl:variable name="parms" select="tokenize($parameterstring,',')"/>
+    <xsl:variable name="parms" select="tei:getTokens($parameterstring)" as="xs:string+" />
 
-    <xsl:if test="$debug='true'">
-      <xsl:message><xsl:value-of select="($elName,$model/@behaviour,$task)"/>:   <xsl:value-of select="($parms)" separator=" -- "/></xsl:message>
+    <xsl:if test="$debug='true'">    
+      <xsl:message><xsl:value-of select="($elName,$model/@behaviour,$task)"/>:   <xsl:value-of select="($parms)" separator="|"/></xsl:message>
     </xsl:if>
     <xsl:choose>
       <xsl:when test="$task ='index'">
@@ -324,4 +334,14 @@
       </xsl:otherwise>
     </xsl:choose>
   </xsl:function>
+
+<xsl:function name="tei:getTokens" as="xs:string+">
+    <xsl:param name="str" as="xs:string" />
+    <xsl:analyze-string select="concat($str, ',')" regex='((\(.*\))|("[^"]*")+|[^,]*),'>
+        <xsl:matching-substring>
+        <xsl:sequence select='replace(regex-group(1), "^""|""$|("")""", "$1")' />
+        </xsl:matching-substring>
+    </xsl:analyze-string>
+</xsl:function>
+
 </xsl:stylesheet>
