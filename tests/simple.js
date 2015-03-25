@@ -9,6 +9,9 @@
 
 $(document).ready(function() {
 
+    $("span.dropcap").tooltip({
+    })
+
     $("span.alternate").tooltip({
         content: function() {
             return $($(this).children("span.altcontent")).html();

@@ -1,5 +1,5 @@
 default: teisimple valid pm
-TEXTS=/Volumes/Repo/Simple
+TEXTS=/Users/rahtz/GDrive/Simple/
 XSL=../Stylesheets
 ANT_OPTS="-Xss2m -Xmx752m" 
 docx:

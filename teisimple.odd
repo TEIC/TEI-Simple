@@ -867,12 +867,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="item">
-              <model predicate="parent::list[@rendition]" behaviour="listItem(.)">
-                
-              </model>
-              <model predicate="not(parent::list[@rendition])" behaviour="listItem(.)">
-                
-              </model>
+              <model behaviour="listItem(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="l">
               <model behaviour="block(.)" useSourceRendition="true">
@@ -942,7 +937,9 @@ border-bottom: solid 1pt blue;
                     </constraint>
                   </constraintSpec>
 
-              <model behaviour="break('page',@n)"
+              <model behaviour="break('page',concat(if(@n) then
+				concat(@n,' ') else '',if(@facs) then
+				concat('@',@facs) else ''))"
 		     useSourceRendition="true">
                 <rendition>
 	  display: block;

@@ -239,10 +239,11 @@
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <xsl:variable name="task" select="substring-before(normalize-space($model/@behaviour),'(')"/>
-    <xsl:variable name="parms" select="tokenize(replace(normalize-space($model/@behaviour),'[^\(]*\((.*)\)$','$1'),',')"/>
-    <xsl:variable name="textcontent" select="replace(substring-after($model/@behaviour,'('),'\)$','')"/>
+    <xsl:variable name="parameterstring" select="replace(substring-after(normalize-space($model/@behaviour),'('),'\)$','')"/>
+    <xsl:variable name="parms" select="tokenize($parameterstring,',')"/>
+
     <xsl:if test="$debug='true'">
-      <xsl:message><xsl:value-of select="($elName,$model/@behaviour,$task,$textcontent)"/>:   <xsl:value-of select="($parms)" separator=" -- "/></xsl:message>
+      <xsl:message><xsl:value-of select="($elName,$model/@behaviour,$task)"/>:   <xsl:value-of select="($parms)" separator=" -- "/></xsl:message>
     </xsl:if>
     <xsl:choose>
       <xsl:when test="$task ='index'">
@@ -282,7 +283,7 @@
         <xsl:sequence select="tei:inline($model, $parms[1], $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='text'">
-        <xsl:sequence select="tei:text($textcontent)"/>
+        <xsl:sequence select="tei:text(replace(substring-after($model/@behaviour,'('),'\)$',''))"/>
       </xsl:when>
       <xsl:when test="$task ='newline'">
         <xsl:sequence select="tei:newline($model, $parms[1], $class, $number)"/>
