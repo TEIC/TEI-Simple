@@ -288,10 +288,8 @@ examples</cell>
 	 <item>add "standoff" to values for @method on <gi>correction</gi></item>
 	 <item>add @quality to <gi>correction</gi>, with a datatype of
 	 <term>data.probability</term> (cf Martin's analysis of EEBO)</item>
-	 <item>add @scheme to <gi>editorialDecl</gi> (eg
-	 <tag>editorialDecl scheme="teisimple"</tag>)</item>
-	 <item>make <gi>interpretation</gi> a member of
-	 att.declaring to allow categorization</item>
+	 <item>add @methodology to <gi>editorialDecl</gi> (eg
+	 <tag>editorialDecl methodology="teisimple"</tag>)</item>
 	</list>
       </div>
 
@@ -343,7 +341,7 @@ age, little Teddie loved Buckingham Palace gardens</q>:
 	</p>
 	<p>In <gi>editorialDecl</gi>:
 	<egXML xmlns="http://www.tei-c.org/ns/Examples">
-	  <interpretation decls="#named-3-1"/>
+	  <interpretation ana="#named-3-1"/>
 	</egXML>
 	</p>
       </div>

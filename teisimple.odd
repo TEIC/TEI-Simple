@@ -300,6 +300,7 @@
                       <?exactMatch margin-outer?>
                       <?exactMatch marg1?>
                       <?exactMatch marg2?>
+                      <?exactMatch marg3?>
                       <?exactMatch marg4?>
                       <desc>in the outer margin</desc>
                     </valItem>
