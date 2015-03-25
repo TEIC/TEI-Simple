@@ -937,9 +937,12 @@ border-bottom: solid 1pt blue;
                     </constraint>
                   </constraintSpec>
 
-              <model behaviour="break('page',concat(if(@n) then
+<!--
+              <model behaviour="break('page',(concat(if(@n) then
 				concat(@n,' ') else '',if(@facs) then
-				concat('@',@facs) else ''))"
+				concat('@',@facs) else '')))"
+-->
+<model behaviour="break('page',@n)"
 		     useSourceRendition="true">
                 <rendition>
 	  display: block;

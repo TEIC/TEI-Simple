@@ -109,13 +109,34 @@ examples</cell>
 </div><!-- .... -->
 
 
+<div>
+  <head>Reminder: how does processing of Simple work</head>
+        <p>The model (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
+	distinct roles, to create a digital edition from a TEI text:
+	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
+	  makes the high-level output decisions. These 	fall into two parts
+	<list rend="ordered"><item><emph>Structural</emph> descriptions, eg  <q>should the
+	  original or corrected version be displayed by default</q>,
+	  or <q>is this a block level or inline component</q></item><item>Indications of <emph>appearance</emph> (<q>titles are in
+	  italics</q>).</item></list>
+	  </item><item>a <emph>designer</emph> creates the output envelope (for
+	  example, and book layout using InDesign, or a web site using
+	  Drupal), making decisions in conjunction with the editor
+	  (<q>use Garamond font throughout</q> or <q>every page must
+	  show the departmental logo</q>)</item><item>a <emph>programmer</emph> takes the
+	  <emph>editor</emph>'s specification, and the TEI text(s),
+	  and creates the input for the <emph>designer</emph> to make
+	  the output.</item></list>
+	</p>
+</div>
+
          <div>
             <head>Simple processing model: SPM</head>
             <list>
                <item>workflow (flowchart)</item>
-               <item> extensions to tei model etc</item>
+               <item> extensions to TEI model etc</item>
                <item> example PM for simple elements</item>
-               <item> implementation of pe to html in xslt </item>
+               <item> implementation of PE to HTML in XSLT </item>
             </list>
          </div>
 
@@ -248,7 +269,7 @@ examples</cell>
 
       <div>
 	<head>Formal editorial decisions</head>
-	<p>Each of these elements has format attributes (as well as
+	<p>Each of these elements has attributes (as well as
 	prose) for providing quantifiable information</p>
 	<p>Within <gi>encodingDesc</gi>/<gi>editorialDecl</gi>:
 	<list>
@@ -261,25 +282,27 @@ examples</cell>
       </div>
 
       <div>
-	<head>Extensions we need on <gi>editorialDecl</gi></head>
+	<head>Extensions we propose on <gi>editorialDecl</gi></head>
 	<list>
 	 <item>add "sampled" to values for @status on <gi>correction</gi></item>
 	 <item>add "standoff" to values for @method on <gi>correction</gi></item>
 	 <item>add @quality to <gi>correction</gi>, with a datatype of
 	 <term>data.probability</term> (cf Martin's analysis of EEBO)</item>
-	 <item>add @scheme to <gi>editorialDecl</gi> (eg <tag>scheme="teisimple"</tag>)</item>
-	 <item>make <gi>interpretation</gi> member of
+	 <item>add @scheme to <gi>editorialDecl</gi> (eg
+	 <tag>editorialDecl scheme="teisimple"</tag>)</item>
+	 <item>make <gi>interpretation</gi> a member of
 	 att.declaring to allow categorization</item>
 	</list>
       </div>
 
       <div>
 	<head>Typical categorizations</head>
-<p>Named entities, from <q>Teddie loved Buckingham Palace</q>:
+<p>Named entities, from <q>Edward was born in London. From an early
+age, little Teddie loved Buckingham Palace gardens</q>:
 <list>
-<item>named entities recognized (Buckingham)</item>
+<item>named entities recognized (London, Buckingham)</item>
 <item>phrases identified (Buckingham Palace)</item>
-<item>identifying unique things (correlating Edward and Teddie)</item>
+<item>identifying unique entities (correlating Edward and Teddie)</item>
 <item>linked to external authority (King Edward VIII)</item>
 </list></p>
 <p>Date from <q>dated Mons, 3rd August</q>:
