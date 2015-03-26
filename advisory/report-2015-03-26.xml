@@ -30,7 +30,7 @@
         <list rend="ordered">
           <item>The highly constrained and prescriptive element subset of TEI Simple</item>
           <item>The processing model (Simple Processing Model: SPM)</item>
-          <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM</item>
+          <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM/FRBRoo</item>
           <item>TEI-Performance Indicators</item>
           <item>Integration of TEI Simple into the TEI infrastructure </item>
         </list>
@@ -106,12 +106,12 @@ examples</cell>
          platforms, and efficiently uses a single instance of the Java Virtual Machine). </item>
       <item>Tested on whole of EEBO etc. for all of TCP 60K+ files (EEBO, ECCO, Evans) </item>
    </list>
-</div><!-- .... -->
+</div>
 
 
 <div>
   <head>Reminder: how does processing of Simple work</head>
-        <p>The model (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
+        <p>The model assumes a workflow with three parts, and three
 	distinct roles, to create a digital edition from a TEI text:
 	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
 	  makes the high-level output decisions. These 	fall into two parts
@@ -131,7 +131,7 @@ examples</cell>
 </div>
 
          <div>
-            <head>Simple processing model: SPM</head>
+            <head>Simple processing model: the PM</head>
             <list>
                <item>workflow (flowchart)</item>
                <item> extensions to TEI model etc</item>
@@ -141,7 +141,7 @@ examples</cell>
          </div>
 
          <div>
-            <head>SPM: how does that work?</head>
+            <head>Processing Model: how does that work?</head>
             <list type="ordered">
                <item>TEI Simple schema ODD contains instructions for intended processing of TEI
                   Simple elements</item>
@@ -166,7 +166,7 @@ examples</cell>
                   <att>behaviour</att> (specifies the actions to undertake), <att>predicate</att>
                   (circumstances where this rule applies), <att>output</att> (output for which rule
                   applies), <att>useSourceRendition</att> (should processing take into account
-                  original rendition)) </item>
+                  original rendition) </item>
                <item><gi>modelSequence</gi> (groups sequences of tasks that are to be
                   executed)</item>
                <item><gi>modelGrp</gi> (groups <gi>model</gi>s and <gi>modelSequence</gi>s for
@@ -215,27 +215,147 @@ examples</cell>
 
          <div>
             <head>TEI Simple function library</head>
-            <p>A number of core tasks have been identified and corresponding function library
-               created. Only functions from this library are allowed for use in TEI Simple ODD </p>
-            <list>
-               <item> tei:inline</item>
-               <item> tei:block</item>
-               <item> tei:break</item>
-               <item> tei:paragraph</item>
-               <item> tei:heading tei:title </item>
-               <item> tei:anchor</item>
-               <item> tei:graphic tei:figure</item>
-               <item> tei:glyph</item>
-               <item> tei:note</item>
-               <item> tei:alternate</item>
-               <item> tei:link</item>
-               <item> tei:list tei:listItem</item>
-               <item> tei:table tei:row tei:cell</item>
-               <item> tei:index </item>
-            </list>
-            <p/>          
-         </div>
+        <table>
+          <row role="label">
+            <cell>Function name</cell>
+            <cell>Description</cell>
+            <cell>Probable HTML container</cell>
+          </row>
+          <row>
+            <cell>alternate</cell>
+            <cell>Creates a specialized display of alternating elements for displaying the
+                  preferred version, both at once or toggling between the two.</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>anchor</cell>
+            <cell>create anchor with ID</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>block</cell>
+            <cell>Creates a block out of the content parameter. </cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>break</cell>
+            <cell>make a line, column, or page break according to <term>type</term></cell>
+            <cell/>
+          </row>
 
+          <row>
+            <cell>cell</cell>
+            <cell>Creates a table cell</cell>
+            <cell>td</cell>
+          </row>
+          <row>
+            <cell>cit</cell>
+            <cell>shows the content, with an attribute of the source</cell>
+            <cell></cell>
+          </row>
+          <row>
+            <cell>document</cell>
+            <cell>start a new output document</cell>
+            <cell></cell>
+          </row>
+          <row>
+            <cell>figure</cell>
+            <cell>make a figure with the <term>title</term> as caption</cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>glyph</cell>
+            <cell>show a character by looking up reference</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>graphic</cell>
+            <cell>If <att>url</att> is present, uses it to display graphic,
+                  else display placeholder image. </cell>
+            <cell>img</cell>
+          </row>
+          <row>
+            <cell>heading</cell>
+            <cell>Creates a heading. </cell>
+            <cell>span</cell>
+          </row>
+          <row>
+            <cell>index</cell>
+            <cell>generate list according to <term>type</term></cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>inline</cell>
+            <cell>Creates inline element out of <code>content</code> if there's something in
+                  <gi>rendition</gi>, use that formatting
+                  otherwise just show text of selected content.</cell>
+            <cell>span</cell>
+          </row>
+          <row>
+            <cell>link</cell>
+            <cell>create hyperlink</cell>
+            <cell>a</cell>
+          </row>
+          <row>
+            <cell>list</cell>
+            <cell>Create a list by following <term>content</term></cell>
+            <cell>ol, ul, or dl</cell>
+          </row>
+	</table>
+	 </div>
+
+	 <div>
+	   <table>
+          <row>
+            <cell>listItem</cell>
+            <cell>create list item</cell>
+            <cell>li</cell>
+          </row>
+          <row>
+            <cell>metadata</cell>
+            <cell>create metadata section</cell>
+            <cell>head</cell>
+          </row>
+          <row>
+            <cell>note</cell>
+            <cell>Creates a note block out of <code>content</code>,
+	    as per value of <code>place</code></cell>
+            <cell>span or div</cell>
+          </row>
+          <row>
+            <cell>omit</cell>
+            <cell>Do nothing, do not process children</cell>
+            <cell/>
+          </row>
+
+          <row>
+            <cell>paragraph</cell>
+            <cell>Creates a paragraph out of <code>content</code>.</cell>
+            <cell>p</cell>
+          </row>
+          <row>
+            <cell>row</cell>
+            <cell>make table row</cell>
+            <cell>tr</cell>
+          </row>
+          <row>
+            <cell>section</cell>
+            <cell/>
+            <cell/>
+          </row>
+          <row>
+            <cell>table</cell>
+            <cell>make table</cell>
+            <cell>table</cell>
+          </row>
+          <row>
+            <cell>title</cell>
+            <cell>make document title</cell>
+	    <cell/>
+          </row>
+        </table>
+
+	 </div>
          <div>
             <head>PE implementation</head>
             <p>As a proof of concept an implementation of PE and Simple function library has been
