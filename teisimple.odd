@@ -390,12 +390,12 @@
               </constraintSpec>
               <constraintSpec ident="corresppointer" scheme="isoschematron">
                 <constraint>
-                      <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@corresp]">
-                        <let name="results" value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
-                        <report test="some $x in $results  satisfies $x"> Error: Every
+                  <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@corresp]">
+                    <let name="results" value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
+                    <report test="some $x in $results  satisfies $x"> Error: Every
                                        local pointer in "<value-of select="@corresp"/>" must point to
                                        an ID in this document (<value-of select="$results"/>)</report>
-                      </rule>
+                  </rule>
                 </constraint>
               </constraintSpec>
               <attList>
@@ -616,19 +616,19 @@
             </elementSpec>
             <elementSpec mode="change" ident="bibl">
               <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
-                    <constraint>
-	              <assert xmlns="http://purl.oclc.org/dsdl/schematron"  test="child::* or child::text()[normalize-space(.)]" role="ERROR">
+                <constraint>
+                  <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space(.)]" role="ERROR">
                 Element "<name/>" may not be empty.
             </assert>
-		    </constraint>
-	      </constraintSpec>
+                </constraint>
+              </constraintSpec>
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="body">
-	      <modelSequence>
-		<model behaviour="index(.,'toc')"/>
-		<model behaviour="block(.)"/>
-	      </modelSequence>
+              <modelSequence>
+                <model behaviour="index(.,'toc')"/>
+                <model behaviour="block(.)"/>
+              </modelSequence>
             </elementSpec>
             <elementSpec mode="change" ident="byline">
               <model behaviour="block(.)"/>
@@ -660,31 +660,25 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="choice">
-	      <constraintSpec ident="choiceSize"
-			      scheme="isoschematron" mode="add">
-		<constraint>
-		  <assert xmlns="http://purl.oclc.org/dsdl/schematron"  test="count(*) > 1" role="ERROR">
+              <constraintSpec ident="choiceSize" scheme="isoschematron" mode="add">
+                <constraint>
+                  <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR">
                     Element "<name/>" must have at least two child
 		    elements.</assert>
-		</constraint>
-	      </constraintSpec>
-	      <constraintSpec ident="choiceContent"
-			      scheme="isoschematron" mode="add">
-		<constraint>
-		  <assert xmlns="http://purl.oclc.org/dsdl/schematron"
-			  test="(tei:corr or tei:sic or tei:expan or
-				tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan
-				and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
+                </constraint>
+              </constraintSpec>
+              <constraintSpec ident="choiceContent" scheme="isoschematron" mode="add">
+                <constraint>
+                  <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))" role="ERROR">
                     Element "<name/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
-		</constraint>
-	      </constraintSpec>
-             <model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/>
-              <model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/>
-              <model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/>
+                </constraint>
+              </constraintSpec>
               <model output="plain" predicate="sic and corr" behaviour="inline(corr[1])"/>
               <model output="plain" predicate="abbr and expan" behaviour="inline(expan[1])"/>
-              <model output="plain" predicate="orig and reg"
-		     behaviour="inline(reg[1])"/>
+              <model output="plain" predicate="orig and reg" behaviour="inline(reg[1])"/>
+              <model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/>
+              <model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/>
+              <model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/>
             </elementSpec>
             <elementSpec mode="change" ident="cit">
               <model predicate="child::quote and child::bibl" behaviour="cit(.)">
@@ -708,9 +702,7 @@
             <elementSpec mode="change" ident="date">
               <model output="print" predicate="text()" behaviour="inline(.)"/>
               <model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/>
-
               <model output="web" predicate="@when" behaviour="alternate(.,@when)"/>
-
               <model predicate="text()" behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="dateline">
@@ -754,16 +746,14 @@
               </model>
               <model behaviour="inline(.)"/>
             </elementSpec>
-
             <elementSpec mode="change" ident="docTitle">
               <model predicate="ancestor::teiHeader" behaviour="omit()">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
-              <model behaviour="block(.)"  useSourceRendition="true">
+              <model behaviour="block(.)" useSourceRendition="true">
                 <rendition>font-size: larger;</rendition>
               </model>
             </elementSpec>
-
             <elementSpec mode="change" ident="epigraph">
               <model behaviour="block(.)"/>
             </elementSpec>
@@ -778,17 +768,17 @@
                 <rendition scope="before">content: '[..';</rendition>
                 <rendition scope="after">content: '..]';</rendition>
                 <rendition>color: grey;font-style:italic;</rendition>
-	      </model>
+              </model>
             </elementSpec>
             <elementSpec mode="change" ident="figure">
               <model predicate="head or @rendition='simple:display'" behaviour="block(.)"/>
               <model behaviour="inline(.)">
-		<rendition>
+                <rendition>
 display: block;
 border-top: solid 1pt blue;
 border-bottom: solid 1pt blue;
 		</rendition>
-	      </model>
+              </model>
             </elementSpec>
             <elementSpec mode="change" ident="floatingText">
               <model behaviour="block(.)">
@@ -879,7 +869,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="lb">
-              <model  behaviour="break('line',@n)" useSourceRendition="true"/>
+              <model behaviour="break('line',@n)" useSourceRendition="true"/>
             </elementSpec>
             <elementSpec mode="change" ident="lg">
               <model behaviour="block(.)"/>
@@ -928,21 +918,12 @@ border-bottom: solid 1pt blue;
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="pb">
-                  <constraintSpec ident="pbposition" scheme="isoschematron">
-                    <constraint>
-                        <report
-			    xmlns="http://purl.oclc.org/dsdl/schematron"
-			    test="parent::*/text() and not
-				      (preceding-sibling::text() and
-				      following-sibling::text())">please make sure pb elements are not at the start or end of mixed content </report>
-                    </constraint>
-                  </constraintSpec>
-
-
-              <model behaviour="break('page',(concat(if(@n) then
-				concat(@n,' ') else '',if(@facs) then
-				concat('@',@facs) else '')))"
-		     useSourceRendition="true">
+              <constraintSpec ident="pbposition" scheme="isoschematron">
+                <constraint>
+                  <report xmlns="http://purl.oclc.org/dsdl/schematron" test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">please make sure pb elements are not at the start or end of mixed content </report>
+                </constraint>
+              </constraintSpec>
+              <model behaviour="break('page',(concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else '')))" useSourceRendition="true">
                 <rendition>
 	  display: block;
 	  margin-left: 4pt;
@@ -970,27 +951,26 @@ border-bottom: solid 1pt blue;
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="q">
-              <model predicate="l" behaviour="block(.)"  useSourceRendition="true">
+              <model predicate="l" behaviour="block(.)" useSourceRendition="true">
                 <rendition>margin-left: 10px; margin-right: 10px;
 		</rendition>
               </model>
-              <model predicate="ancestor::p or ancestor::cell"
-		     behaviour="inline(.)"  useSourceRendition="true">
+              <model predicate="ancestor::p or ancestor::cell" behaviour="inline(.)" useSourceRendition="true">
                 <rendition scope="before">content: '‘';</rendition>
                 <rendition scope="after">content: '’';</rendition>
               </model>
-              <model behaviour="block(.)"  useSourceRendition="true">
+              <model behaviour="block(.)" useSourceRendition="true">
                 <rendition>margin-left: 10px; margin-right: 10px;
 		</rendition>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="quote">
-              <model predicate="ancestor::p" behaviour="inline(.)"  useSourceRendition="true">
+              <model predicate="ancestor::p" behaviour="inline(.)" useSourceRendition="true">
                 <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
                 <rendition scope="before">content: '‘';</rendition>
                 <rendition scope="after">content: '’';</rendition>
               </model>
-              <model behaviour="block(.)"  useSourceRendition="true">
+              <model behaviour="block(.)" useSourceRendition="true">
                 <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
                 <rendition>margin-left: 10px; margin-right: 10px;
 		</rendition>
@@ -1014,10 +994,10 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="row">
-             <model predicate="@role='label'" behaviour="row(.)"> 
+              <model predicate="@role='label'" behaviour="row(.)">
                 <rendition>font-weight: bold;</rendition>
-	     </model>
-             <model behaviour="row(.)">
+              </model>
+              <model behaviour="row(.)">
                 <desc>Insert table row. </desc>
               </model>
             </elementSpec>
@@ -1032,7 +1012,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="seg">
-              <model behaviour="inline(.)"   useSourceRendition="true"/>
+              <model behaviour="inline(.)" useSourceRendition="true"/>
             </elementSpec>
             <elementSpec ident="sic" mode="change">
               <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="inline(.)"/>
@@ -1043,15 +1023,15 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="signed">
               <model behaviour="block(.)" predicate="parent::closer">
-		<rendition>
+                <rendition>
 		  text-align: right;
 		</rendition>
-	      </model>
+              </model>
               <model behaviour="inline(.)">
-		<rendition>
+                <rendition>
 		 font-style: italic;
 		</rendition>
-	      </model>
+              </model>
             </elementSpec>
             <elementSpec mode="change" ident="sp">
               <model behaviour="block(.)"/>
@@ -1096,42 +1076,37 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="table">
               <model behaviour="table(.)">
-		<rendition>
+                <rendition>
 		  font-size: smaller;
 		  background-color: #F0F0F0;
 		</rendition>
-	      </model>
+              </model>
             </elementSpec>
-
             <elementSpec mode="change" ident="fileDesc">
-	      <model behaviour="title(titleStmt)"/>
+              <model behaviour="title(titleStmt)"/>
             </elementSpec>
             <elementSpec mode="change" ident="profileDesc">
-	      <model behaviour="omit()"/>
+              <model behaviour="omit()"/>
             </elementSpec>
             <elementSpec mode="change" ident="revisionDesc">
-	      <model behaviour="omit()"/>
+              <model behaviour="omit()"/>
             </elementSpec>
-
             <elementSpec mode="change" ident="encodingDesc">
-	      <model behaviour="omit()"/>
+              <model behaviour="omit()"/>
             </elementSpec>
-
             <elementSpec mode="change" ident="teiHeader">
-	      <model behaviour="metadata(.)"/>
+              <model behaviour="metadata(.)"/>
             </elementSpec>
-
             <elementSpec mode="change" ident="TEI">
-	      <attList>
+              <attList>
                 <attDef ident="scheme" mode="add">
-		  <datatype  maxOccurs="unbounded">
-		    <macroRef key="data.word"/>
-		  </datatype>
-		</attDef>
-	      </attList>
-	      <model behaviour="document(.)"/>
+                  <datatype maxOccurs="unbounded">
+                    <macroRef key="data.word"/>
+                  </datatype>
+                </attDef>
+              </attList>
+              <model behaviour="document(.)"/>
             </elementSpec>
-
             <elementSpec mode="change" ident="text">
               <model behaviour="body(.)">
                 <rendition>
@@ -1141,11 +1116,9 @@ border-bottom: solid 1pt blue;
          </rendition>
               </model>
             </elementSpec>
-
             <elementSpec mode="change" ident="time">
               <model behaviour="inline(.)"/>
             </elementSpec>
-
             <elementSpec mode="change" ident="title">
               <modelSequence predicate="parent::titleStmt/parent::fileDesc">
                 <model predicate="preceding-sibling::title" behaviour="text(' — ')"/>
@@ -1176,14 +1149,13 @@ border-bottom: solid 1pt blue;
                 <rendition>font-style: italic;</rendition>
               </model>
             </elementSpec>
-
             <elementSpec mode="change" ident="titlePage">
-              <model behaviour="block(.)"  useSourceRendition="true">
-		<rendition>    text-align: center;</rendition>
-	      </model>
+              <model behaviour="block(.)" useSourceRendition="true">
+                <rendition>    text-align: center;</rendition>
+              </model>
             </elementSpec>
             <elementSpec mode="change" ident="titlePart">
-              <model behaviour="block(.)"  useSourceRendition="true"/>
+              <model behaviour="block(.)" useSourceRendition="true"/>
             </elementSpec>
             <elementSpec mode="change" ident="trailer">
               <model behaviour="block(.)">

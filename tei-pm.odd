@@ -58,9 +58,9 @@
     <body>
       <div>
         <head>The TEI Processing Model</head>
-	<div>
-	  <head>Introduction</head>
-        <p>TEI elements are generally
+        <div>
+          <head>Introduction</head>
+          <p>TEI elements are generally
 	<emph>descriptive</emph> of the interpreted semantics of the
 	source text (<q>this is a title</q>, <q>this is a
 	quotation</q>), where the interpretation is often based on a
@@ -69,14 +69,14 @@
 	layout. The resulting encoded text is very amenable to
 	analysis, but for the common case of re-presenting the text on
 	the web, the TEI model is incomplete.</p>
-        <p>The processing model notation allows each element to be
+          <p>The processing model notation allows each element to be
         assigned to a structural category (<gi>model</gi>, and given
         an outline rendition description (<gi>rendition</gi>). This
         allows a processor to know whether to handle the element or
         not, and broadly speaking how to display or otherwise process
         it. The model and rendition instructions are embedded in a
         TEI ODD customization.</p>
-        <p>This model (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
+          <p>This model (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
 	distinct roles, to create a digital edition from a TEI text:
 	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
 	  makes the high-level output decisions. These 	fall into two parts
@@ -103,20 +103,19 @@
 	features of CSS. The concepts addressed by the functions (eg
 	<q>block</q> and <q>inline</q>) are in line with XSL FO, and
 	HTML; the catalogue of functions is given at <ptr target="#functions"/>.</p>
-        <p>An important precondition for an
+          <p>An important precondition for an
 	implementation is that it must include an XPath 2.0 interpreter,
 	as this is used in several places in the processing
 	notation. </p>
-	<p>It is an important principle of the processing model (known informally as the
+          <p>It is an important principle of the processing model (known informally as the
 	Turska Tenet) that the transformation stage should be
 	minimally intelligent; that is to say, it should contain as
 	few TEI-specific rules as possible. The ODD should be as
 	explicit as possible, and provide maximum expressivity to the editor.</p>
-	</div>
-
-	<div>
-	  <head>Processing model elements</head>
-        <p>There are two key elements for specifying the structural
+        </div>
+        <div>
+          <head>Processing model elements</head>
+          <p>There are two key elements for specifying the structural
 	and appearance components of a processing model:
 	  <specList><specDesc key="model" atts="predicate behaviour      useSourceRendition output"/><specDesc key="rendition" atts="scope"/></specList>
 	  For a given <gi>elementSpec</gi>, there can be as many
@@ -130,7 +129,7 @@
 	  <gi>model</gi> statements to be active at the same time,
 	  they must be enclosed inside a <gi>modelSequence</gi>.
 	</p>
-        <p>Let us consider a simple case, the handling of the
+          <p>Let us consider a simple case, the handling of the
 	<gi>hi</gi> element. We decide that it is an inline element,
 	normally rendered in italics:
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline(.)"><rendition>font-style: italic;</rendition></model></egXML>
@@ -144,7 +143,7 @@
 	    to the rendition, to indicate that it is inline, but the
 	    intention is to separate the structural decision from the
 	    appearance decision.</p>
-        <p>It is common for <gi>hi</gi> to use a
+          <p>It is common for <gi>hi</gi> to use a
 	    <att>rendition</att> attribute to indicate appearance. By
 	    default, this is ignored, but 
 	    <att>useSourceRendition</att> can be used to indicate
@@ -155,14 +154,14 @@
 	    the same behaviour as CSS; ie if <att>rendition</att>
 	    involves a change to a different property than
 	    <q>font-style</q>, then this remains active.</p>
-        <p>If the processing model is context-dependent, we can
+          <p>If the processing model is context-dependent, we can
 	    use <att>predicate</att> (an XPath 2.0 expression) to show
 	    when different models apply:
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="inline(.)"><rendition>font-style: italic;</rendition></model><model behaviour="block(.)"><rendition>left-margin: 2em;</rendition></model></egXML>
 	    Here the <gi>model</gi>s are <emph>alternatives</emph>;
 	    only if the test (the <att>predicate</att>) on the first
 	    fails will the second be activated.</p>
-        <p>So far we have mapped TEI elements to simple block and
+          <p>So far we have mapped TEI elements to simple block and
 	    inline concepts. A more complex example is provided by
 	    processing the <gi>choice</gi> element; this is commonly
 	    used to provide a pair of alternates (eg <gi>sic</gi> and
@@ -176,7 +175,7 @@
            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/><model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/><model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/></egXML>
 	   Note the use of XPath 2.0 notation to choose the first of
 	   several possible sibling elements.</p>
-        <p>Sometimes we want different behaviour for different
+          <p>Sometimes we want different behaviour for different
 	   output formats, specified using <att>output</att>; the
 	   following example is designed to handle <gi>date</gi>,
 	   which has an optional <att>when</att> containing a
@@ -188,7 +187,7 @@
 	   but for print we force use of <att>when</att> when it is present.
            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model output="print" predicate="text()" behaviour="inline(.)"/><model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/><model predicate="@when" output="web" behaviour="alternate(.,@when)"/></egXML>
 	   </p>
-        <p>Elements which have attributes can access the values
+          <p>Elements which have attributes can access the values
 	   using the usual XPath 2.0 notation. For example, the
 	   <gi>ref</gi> element has an important attribute,
 	   <att>target</att>, to which is a link should be
@@ -198,15 +197,13 @@
            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="not(text())" behaviour="link(@target,@target)"/><model behaviour="link(.,@target)"/></egXML>
 	   Here the <term>link</term> function takes two parameters, the text
 	   to be shown, and the URL to which it should be linked.</p>
-	 </div>
+        </div>
       </div>
       <div>
         <head>Implementing the TEI processing model</head>
         <p>A program which implements this processing model should
 	   proceed as follows:
-	   <list rend="ordered">
-
-	     <item>When processing an element in the instance
+	   <list rend="ordered"><item>When processing an element in the instance
 	     document,  any applicable <gi>model</gi> or
 	     <gi>modelSequence</gi> for the current
 	     output format should be followed. Process them in order until a match with
@@ -216,37 +213,25 @@
 	     any occurrence of the element. If a
 	     <gi>model</gi> has no <att>output</att>, it applies to
 	     all outputs.
-	     </item>
-
-	     <item>All of the <gi>model</gi>s inside a
+	     </item><item>All of the <gi>model</gi>s inside a
 	     <gi>modelSequence</gi> should be applied in order
-	     (although they may have limiting <att>predicate</att>s</item>
-	     
-	     <item>Follow the function provided by the
+	     (although they may have limiting <att>predicate</att>s</item><item>Follow the function provided by the
 	     <att>behaviour</att> attribute. Where the value passed to
 	     that function is <q>.</q>, follow this process for all
 	     child elements of the current element, within the context
 	     of the named function. Thus a <term>block(.)</term>
 	     should create a block-type object in the output
-	     for this element and all the results from processing its children.</item>
-
-	     <item>If there are possible <gi>model</gi>s, but none has a
+	     for this element and all the results from processing its children.</item><item>If there are possible <gi>model</gi>s, but none has a
 	     <att>predicate</att> which matches the current element,
 	     proceed to its children and see if there are models for
-	     them.</item>
-
-	     <item>If there is no <gi>model</gi> provided for the
+	     them.</item><item>If there is no <gi>model</gi> provided for the
 	     element, proceed to its children and see if there are
-	     models for them.</item>
-
-	     <item>The special function <term>omit()</term> means that
+	     models for them.</item><item>The special function <term>omit()</term> means that
 	     processing should stop for this element, and move to the
-	     next sibling.</item>
-
-	   </list>
+	     next sibling.</item></list>
 
 	   </p>
-	   <p>This is broadly similar to the processing model for XSLT. </p>
+        <p>This is broadly similar to the processing model for XSLT. </p>
       </div>
       <div xml:id="functions">
         <head>TEI Processing Model functions</head>
@@ -259,87 +244,188 @@
           </row>
           <row>
             <cell>alternate</cell>
-            <cell><table rend="rules"><row><cell>preferred element</cell><cell>XPath</cell></row>
-<row><cell>alternate element</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>preferred element</cell>
+                  <cell>XPath</cell>
+                </row>
+                <row>
+                  <cell>alternate element</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Creates a specialized display of alternating elements for displaying the
                   preferred version, both at once or toggling between the two.</cell>
             <cell/>
           </row>
           <row>
             <cell>anchor</cell>
-            <cell><table rend="rules"><row><cell>ID</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>ID</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>create anchor with ID</cell>
             <cell/>
           </row>
           <row>
             <cell>block</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Creates a block out of the content parameter. </cell>
             <cell>div</cell>
           </row>
           <row>
             <cell>break</cell>
-            <cell><table rend="rules">
-	    <row><cell>type</cell><cell>string</cell></row>
-	    <row><cell>label</cell><cell>XPath</cell></row>
-	    </table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>type</cell>
+                  <cell>string</cell>
+                </row>
+                <row>
+                  <cell>label</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>make a line, column, or page break according to <term>type</term></cell>
             <cell/>
           </row>
-
           <row>
             <cell>cell</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Creates a table cell</cell>
             <cell>td</cell>
           </row>
           <row>
             <cell>cit</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row>
-	    <row><cell>source</cell><cell>URI</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+                <row>
+                  <cell>source</cell>
+                  <cell>URI</cell>
+                </row>
+              </table>
+            </cell>
             <cell>shows the content, with an attribute of the source</cell>
-            <cell></cell>
+            <cell/>
           </row>
           <row>
             <cell>document</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>start a new output document</cell>
-            <cell></cell>
+            <cell/>
           </row>
           <row>
             <cell>figure</cell>
-            <cell><table rend="rules"><row><cell>title</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>title</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>make a figure with the <term>title</term> as caption</cell>
             <cell>div</cell>
           </row>
           <row>
             <cell>glyph</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>URI</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>URI</cell>
+                </row>
+              </table>
+            </cell>
             <cell>show a character by looking up reference</cell>
             <cell/>
           </row>
           <row>
             <cell>graphic</cell>
-            <cell><table rend="rules"><row><cell>url of image file</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>url of image file</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>If <att>url</att> is present, uses it to display graphic,
                   else display placeholder image. </cell>
             <cell>img</cell>
           </row>
           <row>
             <cell>heading</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Creates a heading. </cell>
             <cell>span</cell>
           </row>
           <row>
             <cell>index</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row><row><cell>type</cell><cell>string</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+                <row>
+                  <cell>type</cell>
+                  <cell>string</cell>
+                </row>
+              </table>
+            </cell>
             <cell>generate list according to <term>type</term></cell>
             <cell/>
           </row>
           <row>
             <cell>inline</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Creates inline element out of <code>content</code> if there's something in
                   <gi>rendition</gi>, use that formatting
                   otherwise just show text of selected content.</cell>
@@ -347,71 +433,146 @@
           </row>
           <row>
             <cell>link</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row>
-<row><cell>link url</cell><cell>URI</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+                <row>
+                  <cell>link url</cell>
+                  <cell>URI</cell>
+                </row>
+              </table>
+            </cell>
             <cell>create hyperlink</cell>
             <cell>a</cell>
           </row>
           <row>
             <cell>list</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Create a list by following <term>content</term></cell>
             <cell>ol, ul, or dl</cell>
           </row>
           <row>
             <cell>listItem</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>create list item</cell>
             <cell>li</cell>
           </row>
           <row>
             <cell>metadata</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>create metadata section</cell>
             <cell>head</cell>
           </row>
           <row>
             <cell>note</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row>
-	    <row><cell>place</cell><cell>string</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+                <row>
+                  <cell>place</cell>
+                  <cell>string</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Creates a note block out of <code>content</code>,
 	    as per value of <code>place</code></cell>
             <cell>span or div</cell>
           </row>
           <row>
             <cell>omit</cell>
-            <cell></cell>
+            <cell/>
             <cell>Do nothing, do not process children</cell>
             <cell/>
           </row>
-
           <row>
             <cell>paragraph</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>Creates a paragraph out of <code>content</code>.</cell>
             <cell>p</cell>
           </row>
           <row>
             <cell>row</cell>
-            <cell><table rend="rules"><row><cell>content</cell><cell>XPath</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>
+            </cell>
             <cell>make table row</cell>
             <cell>tr</cell>
           </row>
           <row>
             <cell>section</cell>
-            <cell><table rend="rules"><row><cell>XPath</cell><cell>content</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>XPath</cell>
+                  <cell>content</cell>
+                </row>
+              </table>
+            </cell>
             <cell/>
             <cell/>
           </row>
           <row>
             <cell>table</cell>
-            <cell><table rend="rules"><row><cell>XPath</cell><cell>content</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>XPath</cell>
+                  <cell>content</cell>
+                </row>
+              </table>
+            </cell>
             <cell>make table</cell>
             <cell>table</cell>
           </row>
           <row>
             <cell>title</cell>
-            <cell><table rend="rules"><row><cell>XPath</cell><cell>content</cell></row></table></cell>
+            <cell>
+              <table rend="rules">
+                <row>
+                  <cell>XPath</cell>
+                  <cell>content</cell>
+                </row>
+              </table>
+            </cell>
             <cell>make document title</cell>
             <cell>title</cell>
           </row>
@@ -428,11 +589,11 @@
               <memberOf key="att.global"/>
             </classes>
             <content>
-              <alternate minOccurs="0" maxOccurs="unbounded" >
-                  <classRef key="model.glossLike"/>
-                  <classRef key="model.descLike"/>
-                  <elementRef key="rendition"/>
-	      </alternate>
+              <alternate minOccurs="0" maxOccurs="unbounded">
+                <classRef key="model.glossLike"/>
+                <classRef key="model.descLike"/>
+                <elementRef key="rendition"/>
+              </alternate>
             </content>
             <attList>
               <attDef ident="behaviour" usage="req">
@@ -544,15 +705,15 @@
               <memberOf key="att.global"/>
             </classes>
             <content>
-	      <sequence>
-		<alternate minOccurs="0" maxOccurs="unbounded" >
+              <sequence>
+                <alternate minOccurs="0" maxOccurs="unbounded">
                   <classRef key="model.glossLike"/>
                   <classRef key="model.descLike"/>
-		</alternate>
-		<alternate maxOccurs="unbounded" >
+                </alternate>
+                <alternate maxOccurs="unbounded">
                   <elementRef key="model"/>
-		</alternate>
-	      </sequence>
+                </alternate>
+              </sequence>
             </content>
             <attList>
               <attDef ident="predicate" usage="opt">
@@ -594,17 +755,17 @@
               <memberOf key="att.global"/>
             </classes>
             <content>
-	      <sequence>
-		<alternate maxOccurs="unbounded">
+              <sequence>
+                <alternate maxOccurs="unbounded">
                   <classRef key="model.glossLike"/>
                   <classRef key="model.descLike"/>
-		</alternate>
+                </alternate>
                 <elementRef key="rendition" minOccurs="0"/>
-		<alternate minOccurs="1" maxOccurs="unbounded">
+                <alternate minOccurs="1" maxOccurs="unbounded">
                   <elementRef key="modelSequence"/>
                   <elementRef key="model"/>
-		</alternate>
-	      </sequence>
+                </alternate>
+              </sequence>
             </content>
             <attList>
               <attDef ident="useSourceRendition" usage="opt">
@@ -671,25 +832,25 @@
           <!-- adding model/modelGrp to elementSpec element -->
           <elementSpec ident="elementSpec" mode="change">
             <content>
-	      <sequence>
+              <sequence>
                 <alternate minOccurs="0" maxOccurs="unbounded">
-                    <classRef key="model.glossLike"/>
-                    <classRef key="model.descLike"/>
-		</alternate>
-                  <classRef key="classes" minOccurs="0"/>
-                  <classRef key="content" minOccurs="0"/>
-                  <classRef key="valList" minOccurs="0"/>
-                  <classRef key="constraintSpec" maxOccurs="unbounded" minOccurs="0"/>
-                  <classRef key="attList" minOccurs="0"/>
+                  <classRef key="model.glossLike"/>
+                  <classRef key="model.descLike"/>
+                </alternate>
+                <classRef key="classes" minOccurs="0"/>
+                <classRef key="content" minOccurs="0"/>
+                <classRef key="valList" minOccurs="0"/>
+                <classRef key="constraintSpec" maxOccurs="unbounded" minOccurs="0"/>
+                <classRef key="attList" minOccurs="0"/>
                 <alternate maxOccurs="unbounded" minOccurs="0">
-                    <elementRef key="model"/>
-                    <elementRef key="modelGrp"/>
-                    <elementRef key="modelSequence"/>
-		</alternate>
+                  <elementRef key="model"/>
+                  <elementRef key="modelGrp"/>
+                  <elementRef key="modelSequence"/>
+                </alternate>
                 <classRef key="exemplum" maxOccurs="unbounded" minOccurs="0"/>
                 <classRef key="remarks" maxOccurs="unbounded" minOccurs="0"/>
                 <classRef key="listRef" maxOccurs="unbounded" minOccurs="0"/>
-	      </sequence>
+              </sequence>
             </content>
           </elementSpec>
           <elementSpec mode="change" ident="rendition">

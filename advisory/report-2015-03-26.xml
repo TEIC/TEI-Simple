@@ -4,7 +4,7 @@
     <fileDesc>
       <titleStmt>
         <title>TEI Simple: state of the nation</title>
-        <author>TEI Simple Massive (SR, BPZ, MM, MT)</author>
+        <author>TEI Simple Workteam (SR, BPZ, MM, MT)</author>
       </titleStmt>
       <editionStmt>
         <edition>
@@ -26,6 +26,17 @@
   <text>
     <body>
       <div>
+        <head>What we do want to do today?</head>
+        <list rend="ordered">
+	  <item>Report on progress against TEI Simple  objectives</item>
+	  <item>Discuss useability of Processing Model</item>
+	  <item>Demonstrate implementation of Processing Engine  (Wolfgang Meier)</item>
+	  <item>Consider communications plan</item>
+	  <item>Understand what DTA is doing</item>
+        </list>
+      </div>
+
+      <div>
         <head>Reminder of objectives</head>
         <list rend="ordered">
           <item>The highly constrained and prescriptive element subset of TEI Simple</item>
@@ -35,10 +46,11 @@
           <item>Integration of TEI Simple into the TEI infrastructure </item>
         </list>
       </div>
+
       <div>
         <head>Deliverables</head>
         <list rend="ordered">
-          <item>A TEI ODD customization with the choices and constraints,  SPM notation, and RDF mapping</item>
+          <item>A TEI ODD customization with the choices and constraints,  PM notation, and RDF mapping</item>
           <item>Multi-stage tutorial documentation based on examples using page images and XML</item>
           <item>Implementation(s) of the Processing Engine (PE)</item>
         </list>
@@ -90,18 +102,18 @@ examples</cell>
       </div>
 
 <div>
-   <head>Progress on TEI-Simple subset </head>
+   <head>Progress on TEI Simple subset </head>
    <list>
-      <item>114 TEI-Simple elements located in the <gi>body</gi> of a text. (A lesson from the MONK
+      <item>114 TEI Simple elements located in the <gi>body</gi> of a text. (A lesson from the MONK
          Project about unecessary variation.) </item>
       <item>Decided to leave <gi>teiHeader</gi> alone (rightly?) </item>
       <item>Customization maintains simplicity with closed value lists for selected attribute
          classes (e.g., <gi>name</gi>, <gi>cell</gi>, <gi>row</gi>). </item>
-      <item>Completed conversion routine to TEI-Simple from normal TEI files. </item>
+      <item>Completed conversion routine to TEI Simple from normal TEI files. </item>
       <item>Schematron <gi>constraint</gi>s make it possible to check any special constraints
-         specified in the TEI-simple ODD file that are not already required in the TEI-Simple
+         specified in the TEI-simple ODD file that are not already required in the TEI Simple
          schema. </item>
-      <item>Besides Schematron, validation against a TEI-Simple RelaxNG schema, using Jing. </item>
+      <item>Besides Schematron, validation against a TEI Simple RelaxNG schema, using Jing. </item>
       <item>Schematron and Jing validation occur in a single Ant task (Ant runs in oXygen, on many
          platforms, and efficiently uses a single instance of the Java Virtual Machine). </item>
       <item>Tested on whole of EEBO etc. for all of TCP 60K+ files (EEBO, ECCO, Evans) </item>
@@ -357,7 +369,7 @@ examples</cell>
 
 	 </div>
          <div>
-            <head>PE implementation</head>
+            <head>The Processing Engine implementation: PE</head>
             <p>As a proof of concept an implementation of PE and Simple function library has been
                created in XSLT. It consists of XSLT stylesheets suite that generate transform
                stylesheets based on processing models from TEI Simple ODD.</p>
@@ -428,6 +440,7 @@ age, little Teddie loved Buckingham Palace gardens</q>:
 <item>marked up as date</item>
 <item>normalized date</item>
 </list></p>
+<p>Citation identification (Biblical texts)</p>
 <p>POS tagging:
 <list>
 <item>word recognition</item>
@@ -493,6 +506,17 @@ age, little Teddie loved Buckingham Palace gardens</q>:
 	Cummings will present the PM and PI markup additions,
 	and the Simple customization</p></div>
 
+      <div>
+	<head>Practical problems to be solved still</head>
+	<list>
+	  <item>Finalize syntax of PM</item>
+	  <item>Decide on a reliable route to PDF</item>
+	  <item>Decide how to demonstrate or implement the PI</item>
+	  <item>Work out the RDF mapping</item>
+	</list>
+      </div>
+
+
 	<div>
           <head>Upcoming activities</head>
 	     <list>
@@ -500,14 +524,15 @@ age, little Teddie loved Buckingham Palace gardens</q>:
 	       schemas and HTML transforms using XSLT PE</item>
 	       <item>WM delivers eXist-based system with PE</item>
 	       <item>MB delivers command-line Java-based PE</item>
-	       <item>Northwestern demo edition testing
-	       design/programmer differentiation</item>
+	       <item>Northwestern demo edition testing  design/programmer differentiation</item>
 	       <item>MT organizes a Simple Hackathon in May/June to test PM 1.0</item>
 	       <item>(if needed, create PM 2.0, and ask WM, MT and MB to redo PE implementations)</item>
 	       <item>MM writes documentation/tutorial  of the <hi>Simple
 	       Weltanschauung</hi> based on markup of real texts
 	       (referencing facsimiles)</item>
 	       <item>James Cummings presents TEI Simple at DH2015</item>
+	       <item>Final presentation of Simple to TEI members
+	       meeting at Lyon</item>
 	     </list>
 	</div>
     </body>
