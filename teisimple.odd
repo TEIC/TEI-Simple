@@ -219,6 +219,7 @@
                      We need some more specialist ones from other modules, and to delete some
                      default ones which we don't plan to use.</p>
             <classRef key="att.global.analytic"/>
+            <classRef key="att.global.rendition"/>
             <classRef key="att.global.facs"/>
             <classRef key="att.milestoneUnit"/>
             <classRef key="att.global.linking"/>
@@ -376,7 +377,7 @@
                 </attDef>
               </attList>
             </classSpec>
-            <classSpec type="atts" ident="att.global" mode="change">
+            <classSpec type="atts" ident="att.global.rendition" mode="change">
               <constraintSpec ident="renditionpointer" scheme="isoschematron">
                 <constraint>
                   <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
@@ -457,6 +458,9 @@
                     </valItem>
                     <valItem ident="simple:inline">
                       <desc>inline rendering</desc>
+                    </valItem>
+                    <valItem ident="simple:justified">
+                      <desc>justified text</desc>
                     </valItem>
                     <valItem ident="simple:italic">
                       <?exactMatch italics?>
@@ -887,7 +891,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="inline(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="milestone">
-              <model behaviour="inline(.)"/>
+              <model behaviour="inline()"/>
             </elementSpec>
             <elementSpec mode="change" ident="name">
               <model behaviour="inline(.)"/>
@@ -910,7 +914,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="block(.)"/>
             </elementSpec>
             <elementSpec mode="change" ident="orig">
-              <model behaviour="inline(.)"/>
+              <model behaviour="inline(,@n)"/>
             </elementSpec>
             <elementSpec mode="change" ident="p">
               <model behaviour="paragraph(.)" useSourceRendition="true">
@@ -1252,6 +1256,7 @@ border-bottom: solid 1pt blue;
             <rendition xml:id="bottombraced">padding-bottom: 2pt; border-bottom: dashed gray 2pt;</rendition>
             <rendition xml:id="boxed">padding: 2pt; border: solid black 1pt;</rendition>
             <rendition xml:id="centre">text-align: center;</rendition>
+            <rendition xml:id="justified">text-align: justify;</rendition>
             <rendition xml:id="cursive">font-family: cursive;</rendition>
             <rendition xml:id="doublestrikethrough">text-decoration: line-through;    color: red;</rendition>
             <rendition xml:id="doubleunderline">text-decoration: underline;    color: red;</rendition>
