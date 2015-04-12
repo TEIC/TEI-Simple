@@ -58,7 +58,7 @@
         <docAuthor>Sebastian Rahtz</docAuthor>
         <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>Martin Mueller</docAuthor>
-        <docDate>Version 0.1: 30th November 2014</docDate>
+        <docDate>Version 0.2: 12th April 2015</docDate>
       </titlePage>
     </front>
     <body>
@@ -459,7 +459,7 @@
                     <valItem ident="simple:inline">
                       <desc>inline rendering</desc>
                     </valItem>
-                    <valItem ident="simple:justified">
+                    <valItem ident="simple:justify">
                       <desc>justified text</desc>
                     </valItem>
                     <valItem ident="simple:italic">
@@ -1256,7 +1256,6 @@ border-bottom: solid 1pt blue;
             <rendition xml:id="bottombraced">padding-bottom: 2pt; border-bottom: dashed gray 2pt;</rendition>
             <rendition xml:id="boxed">padding: 2pt; border: solid black 1pt;</rendition>
             <rendition xml:id="centre">text-align: center;</rendition>
-            <rendition xml:id="justified">text-align: justify;</rendition>
             <rendition xml:id="cursive">font-family: cursive;</rendition>
             <rendition xml:id="doublestrikethrough">text-decoration: line-through;    color: red;</rendition>
             <rendition xml:id="doubleunderline">text-decoration: underline;    color: red;</rendition>
@@ -1281,6 +1280,7 @@ border-bottom: solid 1pt blue;
             <rendition xml:id="inline">display:inline;</rendition>
             <rendition xml:id="display">display:block;</rendition>
             <rendition xml:id="italic">font-style: italic;</rendition>
+            <rendition xml:id="justify">text-align: justify;</rendition>
             <rendition xml:id="larger">font-size: larger;</rendition>
             <rendition xml:id="left">text-align: left;</rendition>
             <rendition xml:id="leftbraced">padding-left: 2pt; border-left: dotted gray 2pt; </rendition>
