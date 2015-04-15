@@ -219,7 +219,6 @@
                      We need some more specialist ones from other modules, and to delete some
                      default ones which we don't plan to use.</p>
             <classRef key="att.global.analytic"/>
-            <classRef key="att.global.rendition"/>
             <classRef key="att.global.facs"/>
             <classRef key="att.milestoneUnit"/>
             <classRef key="att.global.linking"/>

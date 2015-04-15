@@ -183,6 +183,8 @@
       <xsl:apply-templates select="/" mode="M25"/>
       <xsl:apply-templates select="/" mode="M26"/>
       <xsl:apply-templates select="/" mode="M27"/>
+      <xsl:apply-templates select="/" mode="M28"/>
+      <xsl:apply-templates select="/" mode="M29"/>
    </xsl:template>
 
    <!--SCHEMATRON PATTERNS-->
@@ -212,7 +214,7 @@ belongs, but this <xsl:text/>
       <xsl:apply-templates select="*" mode="M5"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-att.global-constraint-renditionpointer-2-->
+   <!--PATTERN teisimple-att.global.rendition-constraint-renditionpointer-2-->
 
 
 	<!--RULE -->
@@ -241,7 +243,7 @@ belongs, but this <xsl:text/>
       <xsl:apply-templates select="*" mode="M6"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-att.global-constraint-corresppointer-3-->
+   <!--PATTERN teisimple-att.global.rendition-constraint-corresppointer-3-->
 
 
 	<!--RULE -->
@@ -404,15 +406,15 @@ On <xsl:text/>
       <xsl:apply-templates select="*" mode="M13"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-msIdentifier-constraint-msId_minimal-10-->
+   <!--PATTERN teisimple-biblStruct-constraint-deprecate-altIdentifier-child-10-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:msIdentifier" priority="1000" mode="M14">
+<xsl:template match="tei:biblStruct" priority="1000" mode="M14">
 
-		<!--REPORT -->
-<xsl:if test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">
-         <xsl:message>An msIdentifier must contain either a repository or location of some type, or a manuscript name (not(parent::tei:msPart) and (local-name(*[1])='idno' or local-name(*[1])='altIdentifier' or normalize-space(.)=''))</xsl:message>
+		<!--REPORT nonfatal-->
+<xsl:if test="child::tei:idno">
+         <xsl:message>WARNING: use of deprecated method — the use of the idno element as a direct child of the biblStruct element will be removed from the TEI on 2016-09-18 (child::tei:idno / nonfatal)</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M14"/>
    </xsl:template>
@@ -421,11 +423,28 @@ On <xsl:text/>
       <xsl:apply-templates select="*" mode="M14"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-relatedItem-constraint-targetorcontent1-11-->
+   <!--PATTERN teisimple-msIdentifier-constraint-msId_minimal-11-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:relatedItem" priority="1000" mode="M15">
+<xsl:template match="tei:msIdentifier" priority="1000" mode="M15">
+
+		<!--REPORT -->
+<xsl:if test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">
+         <xsl:message>An msIdentifier must contain either a repository or location of some type, or a manuscript name (not(parent::tei:msPart) and (local-name(*[1])='idno' or local-name(*[1])='altIdentifier' or normalize-space(.)=''))</xsl:message>
+      </xsl:if>
+      <xsl:apply-templates select="*" mode="M15"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M15"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M15">
+      <xsl:apply-templates select="*" mode="M15"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-relatedItem-constraint-targetorcontent1-12-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:relatedItem" priority="1000" mode="M16">
 
 		<!--REPORT -->
 <xsl:if test="@target and count( child::* ) &gt; 0">
@@ -444,18 +463,18 @@ relatedItem element must be empty (@target and count( child::* ) &gt; 0)</xsl:me
         or a child element to indicate the related bibliographic item (@target or child::*)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M15"/>
+      <xsl:apply-templates select="*" mode="M16"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M15"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M15">
-      <xsl:apply-templates select="*" mode="M15"/>
+   <xsl:template match="text()" priority="-1" mode="M16"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M16">
+      <xsl:apply-templates select="*" mode="M16"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-damageSpan-constraint-spanTo-12-->
+   <!--PATTERN teisimple-damageSpan-constraint-spanTo-13-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:damageSpan" priority="1000" mode="M16">
+<xsl:template match="tei:damageSpan" priority="1000" mode="M17">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -467,18 +486,18 @@ The @spanTo attribute of <xsl:text/>
                <xsl:text/> is required. (@spanTo)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M16"/>
+      <xsl:apply-templates select="*" mode="M17"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M16"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M16">
-      <xsl:apply-templates select="*" mode="M16"/>
+   <xsl:template match="text()" priority="-1" mode="M17"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M17">
+      <xsl:apply-templates select="*" mode="M17"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-addSpan-constraint-spanTo-14-->
+   <!--PATTERN teisimple-addSpan-constraint-spanTo-15-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:addSpan" priority="1000" mode="M17">
+<xsl:template match="tei:addSpan" priority="1000" mode="M18">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -489,18 +508,18 @@ The @spanTo attribute of <xsl:text/>
                <xsl:text/> is required. (@spanTo)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M17"/>
+      <xsl:apply-templates select="*" mode="M18"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M17"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M17">
-      <xsl:apply-templates select="*" mode="M17"/>
+   <xsl:template match="text()" priority="-1" mode="M18"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M18">
+      <xsl:apply-templates select="*" mode="M18"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-bibl-constraint-noEmptyBibl-16-->
+   <!--PATTERN teisimple-bibl-constraint-noEmptyBibl-17-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:bibl" priority="1000" mode="M18">
+<xsl:template match="tei:bibl" priority="1000" mode="M19">
 
 		<!--ASSERT ERROR-->
 <xsl:choose>
@@ -513,18 +532,18 @@ The @spanTo attribute of <xsl:text/>
              (child::* or child::text()[normalize-space(.)] / ERROR)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M18"/>
+      <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M18"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M18">
-      <xsl:apply-templates select="*" mode="M18"/>
+   <xsl:template match="text()" priority="-1" mode="M19"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M19">
+      <xsl:apply-templates select="*" mode="M19"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-choice-constraint-choiceSize-17-->
+   <!--PATTERN teisimple-choice-constraint-choiceSize-18-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:choice" priority="1000" mode="M19">
+<xsl:template match="tei:choice" priority="1000" mode="M20">
 
 		<!--ASSERT ERROR-->
 <xsl:choose>
@@ -537,18 +556,18 @@ The @spanTo attribute of <xsl:text/>
 		    elements. (count(*) &gt; 1 / ERROR)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M19"/>
+      <xsl:apply-templates select="*" mode="M20"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M19"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M19">
-      <xsl:apply-templates select="*" mode="M19"/>
+   <xsl:template match="text()" priority="-1" mode="M20"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M20">
+      <xsl:apply-templates select="*" mode="M20"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-choice-constraint-choiceContent-18-->
+   <!--PATTERN teisimple-choice-constraint-choiceContent-19-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:choice" priority="1000" mode="M20">
+<xsl:template match="tei:choice" priority="1000" mode="M21">
 
 		<!--ASSERT ERROR-->
 <xsl:choose>
@@ -560,18 +579,18 @@ The @spanTo attribute of <xsl:text/>
                <xsl:text/>" must have corresponding corr/sic, expand/abbr, reg/orig  ((tei:corr or tei:sic or tei:expan or tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan and tei:abbr) or (tei:reg and tei:orig)) / ERROR)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M20"/>
+      <xsl:apply-templates select="*" mode="M21"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M20"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M20">
-      <xsl:apply-templates select="*" mode="M20"/>
+   <xsl:template match="text()" priority="-1" mode="M21"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M21">
+      <xsl:apply-templates select="*" mode="M21"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-lg-constraint-atleast1oflggapl-19-->
+   <!--PATTERN teisimple-lg-constraint-atleast1oflggapl-20-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:lg" priority="1000" mode="M21">
+<xsl:template match="tei:lg" priority="1000" mode="M22">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -581,23 +600,6 @@ The @spanTo attribute of <xsl:text/>
         must contain at least one child l, lg or gap element. (count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M21"/>
-   </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M21"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M21">
-      <xsl:apply-templates select="*" mode="M21"/>
-   </xsl:template>
-
-   <!--PATTERN teisimple-pb-constraint-pbposition-20-->
-
-
-	<!--RULE -->
-<xsl:template match="tei:pb" priority="1000" mode="M22">
-
-		<!--REPORT -->
-<xsl:if test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">
-         <xsl:message>please make sure pb elements are not at the start or end of mixed content  (parent::*/text() and not (preceding-sibling::text() and following-sibling::text()))</xsl:message>
-      </xsl:if>
       <xsl:apply-templates select="*" mode="M22"/>
    </xsl:template>
    <xsl:template match="text()" priority="-1" mode="M22"/>
@@ -605,11 +607,48 @@ The @spanTo attribute of <xsl:text/>
       <xsl:apply-templates select="*" mode="M22"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-ref-constraint-refAtts-21-->
+   <!--PATTERN teisimple-list-constraint-gloss-list-must-have-labels-21-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:ref" priority="1000" mode="M23">
+<xsl:template match="tei:list[@type='gloss']" priority="1000" mode="M23">
+
+		<!--ASSERT -->
+<xsl:choose>
+         <xsl:when test="tei:label"/>
+         <xsl:otherwise>
+            <xsl:message>The content of a "gloss" list should include a sequence of one or more pairs of a label element followed by an item element (tei:label)</xsl:message>
+         </xsl:otherwise>
+      </xsl:choose>
+      <xsl:apply-templates select="*" mode="M23"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M23"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M23">
+      <xsl:apply-templates select="*" mode="M23"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-pb-constraint-pbposition-22-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:pb" priority="1000" mode="M24">
+
+		<!--REPORT -->
+<xsl:if test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">
+         <xsl:message>please make sure pb elements are not at the start or end of mixed content  (parent::*/text() and not (preceding-sibling::text() and following-sibling::text()))</xsl:message>
+      </xsl:if>
+      <xsl:apply-templates select="*" mode="M24"/>
+   </xsl:template>
+   <xsl:template match="text()" priority="-1" mode="M24"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M24">
+      <xsl:apply-templates select="*" mode="M24"/>
+   </xsl:template>
+
+   <!--PATTERN teisimple-ref-constraint-refAtts-23-->
+
+
+	<!--RULE -->
+<xsl:template match="tei:ref" priority="1000" mode="M25">
 
 		<!--REPORT -->
 <xsl:if test="@target and @cRef">
@@ -619,36 +658,36 @@ The @spanTo attribute of <xsl:text/>
             <xsl:text/>
           (@target and @cRef)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M23"/>
+      <xsl:apply-templates select="*" mode="M25"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M23"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M23">
-      <xsl:apply-templates select="*" mode="M23"/>
+   <xsl:template match="text()" priority="-1" mode="M25"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M25">
+      <xsl:apply-templates select="*" mode="M25"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-s-constraint-noNestedS-22-->
+   <!--PATTERN teisimple-s-constraint-noNestedS-24-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:s" priority="1000" mode="M24">
+<xsl:template match="tei:s" priority="1000" mode="M26">
 
 		<!--REPORT -->
 <xsl:if test="tei:s">
          <xsl:message>You may not nest one s element within
       another: use seg instead (tei:s)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M24"/>
+      <xsl:apply-templates select="*" mode="M26"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M24"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M24">
-      <xsl:apply-templates select="*" mode="M24"/>
+   <xsl:template match="text()" priority="-1" mode="M26"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M26">
+      <xsl:apply-templates select="*" mode="M26"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-subst-constraint-substContents1-23-->
+   <!--PATTERN teisimple-subst-constraint-substContents1-25-->
 
 
 	<!--RULE -->
-<xsl:template match="tei:subst" priority="1000" mode="M25">
+<xsl:template match="tei:subst" priority="1000" mode="M27">
 
 		<!--ASSERT -->
 <xsl:choose>
@@ -660,20 +699,20 @@ The @spanTo attribute of <xsl:text/>
                <xsl:text/> must have at least one child add and at least one child del (child::tei:add and child::tei:del)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
-      <xsl:apply-templates select="*" mode="M25"/>
+      <xsl:apply-templates select="*" mode="M27"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M25"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M25">
-      <xsl:apply-templates select="*" mode="M25"/>
+   <xsl:template match="text()" priority="-1" mode="M27"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M27">
+      <xsl:apply-templates select="*" mode="M27"/>
    </xsl:template>
 
-   <!--PATTERN teisimple-text-constraint-headeronlyelement-26-->
+   <!--PATTERN teisimple-text-constraint-headeronlyelement-28-->
 
 
 	<!--RULE -->
 <xsl:template match="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value"
                  priority="1000"
-                 mode="M26">
+                 mode="M28">
 
 		<!--REPORT -->
 <xsl:if test="ancestor::tei:text">
@@ -682,28 +721,28 @@ The @spanTo attribute of <xsl:text/>
             <xsl:text/>
 is not permitted outside the header (ancestor::tei:text)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M26"/>
+      <xsl:apply-templates select="*" mode="M28"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M26"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M26">
-      <xsl:apply-templates select="*" mode="M26"/>
+   <xsl:template match="text()" priority="-1" mode="M28"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M28">
+      <xsl:apply-templates select="*" mode="M28"/>
    </xsl:template>
 
    <!--PATTERN -->
 
 
 	<!--RULE -->
-<xsl:template match="tei:biblScope" priority="1000" mode="M27">
+<xsl:template match="tei:teiHeader" priority="1000" mode="M29">
 
 		<!--REPORT nonfatal-->
 <xsl:if test="@type">
-         <xsl:message>WARNING: use of deprecated attribute — @type of the biblScope element will be removed from the TEI on 2014-12-17.
+         <xsl:message>WARNING: use of deprecated attribute — @type of the teiHeader element will be removed from the TEI on 2016-11-18.
                  (@type / nonfatal)</xsl:message>
       </xsl:if>
-      <xsl:apply-templates select="*" mode="M27"/>
+      <xsl:apply-templates select="*" mode="M29"/>
    </xsl:template>
-   <xsl:template match="text()" priority="-1" mode="M27"/>
-   <xsl:template match="@*|node()" priority="-2" mode="M27">
-      <xsl:apply-templates select="*" mode="M27"/>
+   <xsl:template match="text()" priority="-1" mode="M29"/>
+   <xsl:template match="@*|node()" priority="-2" mode="M29">
+      <xsl:apply-templates select="*" mode="M29"/>
    </xsl:template>
 </xsl:stylesheet>
