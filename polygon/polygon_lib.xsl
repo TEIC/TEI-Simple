@@ -269,7 +269,7 @@
         <xsl:sequence select="tei:glyph($model, $parms[1], $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='note'">
-        <xsl:sequence select="tei:note($model, $parms[1], $parms[2],$class, $number)"/>
+        <xsl:sequence select="tei:note($model, $parms[1], $parms[2],$parms[3],$class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='block'">
         <xsl:sequence select="tei:block($model,$parms[1], $class, $number)"/>

@@ -276,6 +276,7 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="model"/>
     <xsl:param name="content"/>
     <xsl:param name="place"/>
+    <xsl:param name="marker"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <xslo:variable name="place" select="{$place}"/>

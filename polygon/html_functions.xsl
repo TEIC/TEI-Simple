@@ -290,9 +290,11 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="model"/>
     <xsl:param name="content"/>
     <xsl:param name="place"/>
+    <xsl:param name="marker"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <xslo:variable name="place" select="{$place}"/>
+    <xslo:variable name="marker" select="{$marker}"/>
     <xslo:variable name="class">
       <xsl:value-of select="$class"/>
     </xslo:variable>
@@ -308,7 +310,7 @@ of this software, even if advised of the possibility of such damage.
         <sup class="footnotelink">
           <a>
             <xsl:attribute name="href">#{$I}</xsl:attribute>
-            <xslo:value-of select="if (@n) then   @n else $N"/>
+            <xslo:value-of select="if ($marker) then   $marker else $N"/>
           </a>
         </sup>
         <div>
@@ -320,7 +322,18 @@ of this software, even if advised of the possibility of such damage.
         </div>
       </xslo:when>
       <xslo:otherwise>
+	<xsl:if test="$marker">
+	  <sup class="footnotelink">
+            <a>
+              <xsl:attribute name="href">#{$I}</xsl:attribute>
+              <xslo:value-of select="$marker"/>
+            </a>
+          </sup>
+	</xsl:if>
         <span>
+	  <xsl:if test="$marker">
+            <xsl:attribute name="id">{$I}</xsl:attribute>
+	  </xsl:if>
           <xslo:attribute name="class">
             <xslo:value-of select="($place, concat($class, $number))"/>
           </xslo:attribute>
