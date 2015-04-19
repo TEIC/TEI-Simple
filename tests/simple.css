@@ -24,11 +24,17 @@ span.floating{
     font-size:small;
     font-weight: normal;
     clear:right;
-    padding:4pt;
+    padding-bottom:1pt;
+    padding-top:1pt;
+    padding-left:2pt;
+    padding-right:2pt;
     font-style:italic;
-    width:15%;
+    width:20%;
     background-color:#F8F8FF;
-    margin:6pt;
+    margin-top:2pt;
+    margin-bottom:2pt;
+    margin-left:4pt;
+    margin-righ:4pt;
 }
 
 span.floatingBottom{
@@ -107,6 +113,10 @@ span.floating{
 }
 sup.footnotelink{
     border:1px solid green;
+    padding:2px;
+}
+sup.notelink{
+    border:1px solid gray;
     padding:2px;
 }
 table{

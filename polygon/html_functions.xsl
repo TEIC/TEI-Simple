@@ -322,21 +322,24 @@ of this software, even if advised of the possibility of such damage.
         </div>
       </xslo:when>
       <xslo:otherwise>
-	<xsl:if test="$marker">
-	  <sup class="footnotelink">
+	<xslo:if test="string-length($marker)&gt;0">
+	  <sup class="notelink">
             <a>
               <xsl:attribute name="href">#{$I}</xsl:attribute>
               <xslo:value-of select="$marker"/>
             </a>
           </sup>
-	</xsl:if>
+	</xslo:if>
         <span>
-	  <xsl:if test="$marker">
-            <xsl:attribute name="id">{$I}</xsl:attribute>
-	  </xsl:if>
           <xslo:attribute name="class">
             <xslo:value-of select="($place, concat($class, $number))"/>
           </xslo:attribute>
+	  <xslo:if test="string-length($marker)&gt;0">
+              <xslo:attribute name="id" select="$I"/>
+	      <sup class="notelink">
+		<xslo:value-of select="$marker"/>
+              </sup>
+	  </xslo:if>
           <xsl:sequence select="tei:applyTemplates($content)"/>
         </span>
       </xslo:otherwise>

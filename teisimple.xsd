@@ -1408,7 +1408,7 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                       <xs:documentation>at the top left of the page</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
-                  <xs:enumeration value="top-center">
+                  <xs:enumeration value="top-centre">
                     <xs:annotation>
                       <xs:documentation>at the top center of the page</xs:documentation>
                     </xs:annotation>
@@ -1423,9 +1423,9 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                       <xs:documentation>at the bottom left of the page</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
-                  <xs:enumeration value="bottom-center">
+                  <xs:enumeration value="bottom-centre">
                     <xs:annotation>
-                      <xs:documentation>at the bottom center of the page</xs:documentation>
+                      <xs:documentation>at the bottom centre of the page</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
                   <xs:enumeration value="bottom">
@@ -1438,19 +1438,24 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                       <xs:documentation>underneath a table</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
-                  <xs:enumeration value="margin">
+                  <xs:enumeration value="margin-right">
+                    <xs:annotation>
+                      <xs:documentation>in the right-hand margin</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="margin-outer">
                     <xs:annotation>
                       <xs:documentation>in the outer margin</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
-                  <xs:enumeration value="margin-left">
+                  <xs:enumeration value="margin-inner">
                     <xs:annotation>
-                      <xs:documentation>in the left margin</xs:documentation>
+                      <xs:documentation>in the inner margin</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
-                  <xs:enumeration value="margin-right">
+                  <xs:enumeration value="margin-left">
                     <xs:annotation>
-                      <xs:documentation>in the right margin</xs:documentation>
+                      <xs:documentation>in the left-hand margin</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
                   <xs:enumeration value="opposite">
@@ -1461,6 +1466,11 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                   <xs:enumeration value="overleaf">
                     <xs:annotation>
                       <xs:documentation>on the other side of the leaf.</xs:documentation>
+                    </xs:annotation>
+                  </xs:enumeration>
+                  <xs:enumeration value="overstrike">
+                    <xs:annotation>
+                      <xs:documentation>superimposed on top of the current context</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
                   <xs:enumeration value="end">

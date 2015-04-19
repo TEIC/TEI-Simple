@@ -747,7 +747,7 @@ att.placement.attribute.place =
          "top-left"
        | 
          ## at the top center of the page
-         "top-center"
+         "top-centre"
        | 
          ## at the bottom right of the page
          "bottom-right"
@@ -755,8 +755,8 @@ att.placement.attribute.place =
          ## at the bottom left of the page
          "bottom-left"
        | 
-         ## at the bottom center of the page
-         "bottom-center"
+         ## at the bottom centre of the page
+         "bottom-centre"
        | 
          ## at the foot of the page
          "bottom"
@@ -764,20 +764,26 @@ att.placement.attribute.place =
          ## underneath a table
          "tablebottom"
        | 
-         ## in the outer margin
-         "margin"
-       | 
-         ## in the left margin
-         "margin-left"
-       | 
-         ## in the right margin
+         ## in the right-hand margin
          "margin-right"
+       | 
+         ## in the outer margin
+         "margin-outer"
+       | 
+         ## in the inner margin
+         "margin-inner"
+       | 
+         ## in the left-hand margin
+         "margin-left"
        | 
          ## on the opposite, i.e. facing, page.
          "opposite"
        | 
          ## on the other side of the leaf.
          "overleaf"
+       | 
+         ## superimposed on top of the current context
+         "overstrike"
        | 
          ## at the end of the volume.
          "end"
