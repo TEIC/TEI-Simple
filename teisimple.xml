@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+>
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple: towards an amenable TEI</title>
+        <author>Sebastian Rahtz, Martin Mueller, Brian Pytlik Zillig</author>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          <date>2014-04-21</date>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <p>unknown</p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Converted from a Word document </p>
+      </sourceDesc>
+    </fileDesc>
+    <encodingDesc>
+      <appInfo>
+        <application ident="TEI_fromDOCX" version="2.15.0">
+          <label>DOCX to TEI</label>
+        </application>
+      </appInfo>
+    </encodingDesc>
+      <revisionDesc>
+	<change n="5" when="2014-05-21" who="Sebastian Rahtz">towards Mellon</change>
+	<change n="4" when="2013-12-20" who="Sebastian Rahtz">comments from Lou Burnard</change>
+	<change n="3" when="2013-12-08" who="Sebastian Rahtz">rename project, and incorporate comments from TEI Board/Council</change>
+	<change n="2" when="2013-12-01" who="Sebastian Rahtz">comments from MM and KH</change>
+	<change n="1" when="2013-11-27" who="Sebastian Rahtz">initial version</change>
+      </revisionDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head><anchor xml:id="SECTION_1001"/>Summary</head>
+        <p>TEI Simple aims to define a new <hi rend="italic">highly-constrained</hi> and <hi rend="italic">prescriptive</hi> subset of the Text Encoding Initiative (TEI) Guidelines suited to the representation of early modern and modern books, a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts, mapping to other ontologies, and processes to describe the encoding status and richness of a TEI digital text.</p>
+      </div>
+      <div>
+        <head><anchor xml:id="SECTION_1002"/>Background</head>
+        <p>The Text Encoding Initiative (TEI) has developed over 20 years into a key technology in text-centric humanities disciplines, with an extremely wide range of applications, from diplomatic editions to dictionaries, from prosopography to speech transcription and linguistic analysis. It has been able to achieve its range of use by adopting a <hi rend="italic">descriptive</hi> rather than <hi rend="italic">prescriptive </hi> approach , by recommending <hi rend="italic">customization</hi> to suit particular projects, and by eschewing any attempt to dictate how the digital texts should be rendered or exchanged. However, this flexibility has come at the cost of relatively limited success in interoperability. In our view there is a distinct set of uses (primarily in the area of digitized ‘European’-style books) that would benefit from a <hi rend="italic">prescriptive</hi> recipe for digital text; this will sit alongside other domain-specific, constrained TEI customizations, such as the very successful <hi rend="italic">Epidoc</hi> in the epigraphic community.  TEI-Simple may become a prototype for a new family of constrained customizations. For instance, a TEI Simple MS  for manuscript based work could be built on top of  the ENRICH project, drawing on many of the lessons and some of the code for TEI Simple. </p>
+        <p>The TEI has long maintained an introductory subset (TEI Lite), and a constrained customization for use in outsourcing production to commercial vendors (TEI Tite), but both of these permit enormous variation, and have nothing to say about processing. The present project can be viewed in some ways as a revision of TEI Lite, re-examining the basis of the choices therein, focusing it for a more specific area, and adding a "cradle to grave" processing model that associates the TEI Simple schema with explicit and standardized options for displaying and querying texts. This means being able to specify what a programmer should do with particular TEI elements when they are encountered, allowing programmers to build stylesheets that work for everybody and to query a corpus of documents reliably.</p>
+        <p>This proposal, TEI Simple, will focus on interoperability, machine generation, and low-cost integration. The TEI architecture facilitates customizations of many kinds; TEI Simple aims to produce a complete 'out of the box' customization which meets the needs of the many users for whom the task of creating a customization is daunting or seems irrelevant. TEI Simple in no way intends to constrain the expressive liberty of encoders who do not think that it is either possible or desirable to follow this path. It does, however, promise to make life easier for those who think there is some virtue in travelling that path as far as it will take you, which for quite a few projects will be far enough. Some users will never feel the need to move beyond it, others will outgrow it, and when they do they will have learned enough to do so.</p>
+        <p>‘Comparability and interoperability with other resources’ are an increasingly important topic on various Digital Humanities agendas. Echoes of it are found in a recent ‘work set construction’ Mellon grant to the Hathi Trust Research Centre. Under the heading ‘Wissenschaftliche Sammlungen’ it is a major part of an ambitious DARIAH project anchored at the SUB Göttingen. Progress towards it may be slow, tedious, and partial, but ‘simplicity, interoperability, broad use and reuse’, and ‘comparability and interoperability with other resources’ are important goals to keep in mind for many purposes. For a lot of current and future users of the TEI the really important benefits come from the simple stuff, and beyond some level of complexity they begin to feel some sympathy with Andrew Prescott's not very kind phrase about ‘angels dancing on angle brackets.’<note place="foot" xml:id="ftn1" n="1"><p rend="footnote text"> In “Consumers, creators or commentators? Problems of audience and mission in the digital humanities “</p><p rend="footnote text">Arts and Humanities in Higher Education published online 1 December 2011, http://ahh.sagepub.com/content/early/2011/11/30/1474022211428215</p></note></p>
+        <p>A major driver for this project is the texts created by phase 1 of the EEBO-TCP project, which will be placed in the public domain on 1 January 2015. Another 45,000 texts will join over the following five years, creating by 2020 an archive of 70,000 consistently encoded books published in England from 1475 to 1700, including works of literature, philosophy, politics, religion, geography, science and all other areas of human endeavor. When we compare the query potential of the EEBO TCP texts in their current and quite simple encoding with flat file versions of those text, it is clear that the difference in query potential is very high, especially if you add to that coarse encoding simple forms of linguistic annotation or named entity tagging that can be added in a largely algorithmic fashion. During 2012 and 2013 extensive work has been undertaken at Northwestern, Michigan and Oxford to enrich these texts and bring them into line with the current TEI Guidelines (where necessary working with the TEI to modify the Guidelines). TEI Simple will use this corpus as a point of departure and will provide its users with a friendlier environment for manipulating EEBO texts in various projects. But TEI Simple should not be understood as an EEBO specific project. We believe that, given the extraordinary degree of internal diversity in the EEBO source files, a project that starts from them can, with appropriate modifications, accommodate a wide range of printed texts differing in language, genre, or time and place of origin. </p>
+      </div>
+      <div>
+        <head><anchor xml:id="SECTION_1003"/>Objectives</head>
+        <p>TEI Simple has the following high-level objectives:</p>
+        <list type="ordered">
+          <item>Definition of a new <hi rend="italic">highly constrained</hi> and <hi rend="italic">prescriptive</hi> subset of the Text Encoding Initiative (TEI) Guidelines suited to the representation of early modern and modern books. The degree of detail supported will be sufficient to encompass, at a minimum, the current practices of the TCP's EEBO, ECCO, and Evans collections plus those of other major European initiatives such as Text Grid or the DTA in Germany, and the Consortium Cahier in France.</item>
+          <item>Creation of a notation (as an extension to TEI's ODD metalanguage) for specifying processing rules for TEI encoded texts,<note place="foot" xml:id="ftn2" n="2"><p rend="footnote text"> The paper on “Documenter des “attentes applicatives” (processing expectations)” by Frédéric Glorieux and Vincent Jolivet at TEI Members Meeting 2013 (http://digilab2.let.uniroma1.it/teiconf2013/program/papers/abstracts-paper/ ) also addresses this area.</p></note> referencing web standards such as XPath, CSS and XSL FO.</item>
+          <item>Reference implementations of processing rules defined for this TEI subset.</item>
+          <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM, allowing for full interoperability with the Europeana Data Model, in order to facilitate the participation of projects in the Europeana repositories.</item>
+          <item>Definition and implementation of machine-readable descriptions of the encoding status and richness of TEI texts, providing a “TEI Performance Indicators” indicating to a user what they can expect to use the text for.</item>
+        </list>
+        <p>The aim is to lower the access barriers to working with TEI-encoded texts in various web environments. Programmers familiar with a particular web environment, whether Django, Drupal, eXist, Ruby on Rails, or others will be able to integrate TEI Simple-based projects into their environment with moderate effort and with no more than their usual tools and skills.</p>
+        <p>The project will adhere to the following principles:</p>
+        <list type="unordered">
+          <item>As little overlap as possible, and as much compatibility as possible, with existing repository projects</item>
+          <item>At least as prescriptive as level 3 of the <hi rend="italic">Best Practices for TEI in Libraries</hi></item>
+          <item>Encompassing I18N principles at all times</item>
+          <item>Useable implementations of all features</item>
+        </list>
+        <p>Outcomes from TEI Simple, consisting of a documented definition in ODD of the TEI subset, a set of processing rules, and extensions to the TEI ODD language to record processing expectations, will be fully integrated into the TEI infrastructure with ongoing maintenance by the TEI Technical Council.</p>
+        <p>TEI Simple is intended to be <hi rend="italic">complementary</hi> to community projects like the TAPAS project, and to the established work of TextGrid, the German Text Archive (the DTA ‘base format’, which shares many of the goals of TEI Simple) and other national projects.</p>
+      </div>
+      <div>
+	<head>The processing model</head>
+	<p>The  current plan for a processing model for Simple is that it will define three stages: <list type="ordered">
+	<item>In the first stage, every TEI Simple element is assigned to a category, according to a taxonomy whose first draft is below.
+This allows a processor to know whether to handle the element or not, and broadly speaking
+how to display or otherwise process it. Note how XPath may be used used to refine a name.</item>
+<item>In the second stage, the categories are mapped to a presentation format, using HTML and CSS concepts
+where possible.</item>
+<item>In the third stage, a normalized set of property values is created for each element, where the combination
+of the <emph>rend</emph>, <emph>rendition</emph> and <emph>style</emph> attributes, and the
+<gi>rendition</gi> element, are interpreted to map to the names and allowed values for CSS.  This all allows a
+processor to work out how to present that element in the current context. </item>
+      </list>
+	</p>
+<table>
+<head>A preliminary processing categorisation</head>
+<row role="label"><cell>Category</cell><cell>Meaning</cell><cell>Example</cell></row>
+<row><cell>1</cell><cell>metadata header</cell><cell>fileDesc</cell></row>
+<row><cell>2</cell><cell>section heading</cell><cell>head[parent::div]</cell></row>
+<row><cell>3</cell><cell>title of object (figure, table etc)</cell><cell>head[not(parent::div)]</cell></row>
+<row><cell>4</cell><cell>structural division</cell><cell>div</cell></row>
+<row><cell>5</cell><cell>uncategorized block level object</cell><cell>quotation</cell></row>
+<row><cell>6</cell><cell>semantic block level object</cell><cell>person</cell></row>
+<row><cell>7</cell><cell>uncategorized inline object</cell><cell>hi</cell></row>
+<row><cell>8</cell><cell>semantic inline object</cell><cell>persName</cell></row>
+<row><cell>9</cell><cell>list</cell><cell>list</cell></row>
+<row><cell>10</cell><cell>list item</cell><cell>item</cell></row>
+<row><cell>11</cell><cell>table</cell><cell>table</cell></row>
+<row><cell>12</cell><cell>cell</cell><cell>cell</cell></row>
+<row><cell>13</cell><cell>row</cell><cell>row</cell></row>
+<row><cell>14</cell><cell>out of line note</cell><cell/></row>
+<row><cell>15</cell><cell>figure</cell><cell>figure</cell></row>
+<row><cell>16</cell><cell>pointer</cell><cell>ptr</cell></row>
+<row><cell>17</cell><cell>Janus element (alternate children)</cell><cell>choice</cell></row>
+<row><cell>18</cell><cell>modern commentary element</cell><cell>desc</cell></row>
+</table>
+
+<p>Processors can now create a variety of outputs without having to maintain specific rule sets for TEI Simple.
+The rules for stage 1 and stage 2 are maintained as part of the ODD schema for Simple, so a processor will 
+read both the source document and the corresponding ODD file (or some compiled version of if), and have access to all the information it needs.</p>
+<p>The processing model assertions will be modelled in ODD using a notation similar to Schematron constraints, allowing
+for multiple categories for a given element, depending on an XPath filter.</p>
+<p>There are two important differences between this setup and the "TEI to XXX" stylesheets (eg <ptr target="https://github.com/TEIC/Stylesheets"/>)
+which have been developed many times: <list type="ordered"><item>The initial explicit assertion of a category gives a place
+for the target user of Simple to commit to a style of output, separately from the details of the rendering</item>
+<item>The rules are tied to the schema, allowing the actual (eg) TEI to LaTeX or TEI to Word transformations to be
+completely agnostic.</item></list>
+We may contrast this with an example from the TEI Stylesheets, where an XSL function which 
+determines whether to render something as bold mixes up the context with the attributes,
+and is very hard to tailor for a constrained subset like Simple:
+<egXML xmlns="http://www.tei-c.org/ns/Examples">
+ <xsl:function name="tei:render-bold" as="xs:boolean">
+    <xsl:param name="element"/>
+    <xsl:for-each select="$element">
+      <xsl:choose>
+        <xsl:when test="@rend='odd_label'">true</xsl:when>
+        <xsl:when test="parent::tei:hi[starts-with(@rend,'specList-')]">true</xsl:when>
+        <xsl:when test="self::tei:docAuthor">true</xsl:when>
+        <xsl:when test="self::tei:label[following-sibling::tei:item]">true</xsl:when>
+        <xsl:when test="starts-with(@rend,'specList-')">true</xsl:when>
+        <xsl:when test="starts-with(parent::tei:hi/@rend,'specList-')">true</xsl:when>
+        <xsl:when test="@rend='label'">true</xsl:when>
+        <xsl:when test="@rend='wovenodd'">true</xsl:when>
+        <xsl:when test="@rend='important'">true</xsl:when>
+        <xsl:when test="@rend='specChildModule'">true</xsl:when>
+        <xsl:when test="ancestor-or-self::tei:cell[@rend='wovenodd-col1']">true</xsl:when>
+        <xsl:when test="ancestor-or-self::tei:cell[@role='label']">true</xsl:when>
+        <xsl:when test="ancestor-or-self::*[@rend][contains(@rend,'bold')]">true</xsl:when>
+        <xsl:when test="parent::tei:hi[starts-with(@rend,'specList-')]">true</xsl:when>
+        <xsl:when test="self::tei:cell and parent::tei:row[@role='label']">true</xsl:when>
+        <xsl:when test="self::tei:label[following-sibling::tei:item]">true</xsl:when>
+        <xsl:otherwise>false</xsl:otherwise>
+      </xsl:choose>
+    </xsl:for-each>
+  </xsl:function>
+</egXML>
+</p>
+      </div>
+
+      <div>
+        <head>Programme of work and budget</head>
+        <p>We propose a total budget of $100,000, divided into labour costs  ($57,600), travel and meeting costs ($33,000), and a contingency fund ($9,400). </p>
+
+<p>The work will be undertaken in three ways:
+<list type="ordered">
+<item>Contributed time and expertise by members of the advisory panel, and other members
+of the TEI community, in consultation events for which travel expenses may be paid.</item>
+<item>Technical development sprints during which the core programming tasks will be completed,
+in some cases as a group activity at the same location. Staff will be paid for their participation in these sessions.</item>
+<item>Some outputs will be commissioned at an agreed cost from partner organisations or individuals.</item>
+</list>
+The aim is to ensure that payments from the project are tied to explicit deliverables.</p>
+
+<p>The PIs and  advisory panel will contribute their
+time to the project but will be reimbursed for travel expenses. Some
+of the work will, with the agreement of the TEI Technical Council, be
+managed under the TEI's existing work group mechanism, which means
+funding expenses of subject experts for workshop meetings.</p>
+
+        <p>Broadly speaking, the work packages and outputs run in sequence, each depending on the previous one.</p>
+        <table rend="rules">
+          <row>
+            <cell/>
+            <cell>
+              <hi rend="bold">Task</hi>
+            </cell>
+            <cell>
+              <hi rend="bold">Method</hi>
+            </cell>
+            <cell>
+              <hi rend="bold">FTE Days</hi>
+            </cell>
+            <cell>
+              <hi rend="bold">Salary cost ($)</hi>
+            </cell>
+            <cell>
+              <hi rend="bold">Expenses cost ($)</hi>
+            </cell>
+          </row>
+          <row>
+            <cell>1</cell>
+            <cell>Management</cell>
+            <cell>Three face to face meetings of the PIs and the advisory group; tri-weekly video-conference planning meetings</cell>
+            <cell>0</cell>
+            <cell>0</cell>
+            <cell>18,000</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>2</cell>
+            <cell>Definition of the prescriptive subset in TEI ODD</cell>
+            <cell>Workshop sprint</cell>
+            <cell>30</cell>
+            <cell>10,800</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>3</cell>
+            <cell>Extension to the TEI ODD language to support processing expectations</cell>
+            <cell>TEI working group, 2 meetings</cell>
+            <cell/>
+            <cell/>
+            <cell>15,000</cell>
+          <cell></cell></row>
+          <row>
+            <cell>4</cell>
+            <cell>Definition of processing expectations for TEI Simple</cell>
+            <cell>Researcher 1</cell>
+            <cell>25</cell>
+            <cell>9,000</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>5</cell>
+            <cell>Implementation of processing expectations</cell>
+            <cell>PIs, Researcher 2, community</cell>
+            <cell>30</cell>
+            <cell>10,800</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>6</cell>
+            <cell>Maintainable open access documentation for TEI Simple</cell>
+            <cell>Researcher 1</cell>
+            <cell>20</cell>
+            <cell>7,200</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>7</cell>
+            <cell>Mapping TEI Simple to other ontologies</cell>
+            <cell>PIs, Researcher 1</cell>
+            <cell>15</cell>
+            <cell>5,400</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>8</cell>
+            <cell>Development of a markup system for recording the formal profile of a text</cell>
+            <cell>Researcher 1, community</cell>
+            <cell>15</cell>
+            <cell>5,400</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>9</cell>
+            <cell>Implementation of profile reporting</cell>
+            <cell>Researcher 2</cell>
+            <cell>25</cell>
+            <cell>9,000</cell>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell><anchor xml:id="GoBack1"/>10</cell>
+            <cell>Integration of TEI Simple into the Guidelines and other TEI Consortium infrastructure</cell>
+            <cell>Discussion with TEI Council, PIs</cell>
+            <cell/>
+            <cell/>
+            <cell/>
+          <cell></cell></row>
+          <row>
+            <cell>11</cell>
+            <cell>User validation</cell>
+            <cell>Open workshop at midpoint of project</cell>
+            <cell/>
+            <cell/>
+            <cell>5,000</cell>
+          <cell></cell></row>
+          <row>
+            <cell/>
+            <cell>Contingency </cell>
+            <cell/>
+            <cell/>
+            <cell/>
+            <cell>4,400</cell>
+          <cell></cell></row>
+          <row>
+            <cell/>
+            <cell>
+              <hi rend="bold">Total budget</hi>
+            </cell>
+            <cell/>
+            <cell>
+              <hi rend="bold">160</hi>
+            </cell>
+            <cell>
+              <hi rend="bold">57,600</hi>
+            </cell>
+            <cell>
+              <hi rend="bold">42,400</hi>
+            </cell>
+            <cell>
+              <hi rend="bold">100,000</hi>
+            </cell>
+	  </row>
+        </table>
+      </div>
+      <div>
+        <head><anchor xml:id="SECTION_1005"/>Collaboration, management, timing</head>
+        <p>TEI Simple is a cross-Atlantic collaboration between (at least) the following partners:</p>
+        <list type="ordered">
+          <item>Northwestern University, Chicago: Professor Martin Mueller</item>
+          <item>The University of Oxford: Sebastian Rahtz</item>
+          <item>The Text Encoding Initiative Consortium: Elena Pierazzo (Chair)</item>
+	  <item>The University of Nebraska: Brian Pytlik Zillig</item>
+          <item>Université Paris-Sorbonne: Frédéric Glorieux and Vincent Jolivet</item>
+          <item>The Deutsches Textarchiv (DTA): Alexander Geyken</item>
+          <item>TextGrid</item>
+        </list>
+        <p>The project will be directed by Martin Mueller (Northwestern) and Sebastian Rahtz (Oxford). </p>
+        <p>TEI Simple will commence work on 1st August 2014, and aim to complete the first stage of work in time for the TEI Annual Meeting in late October 2014. The launch at the Annual Meeting will be followed by eight more months of development and revision before final sign-off on July 1st 2015.</p>
+      </div>
+    </body>
+  </text>
+</TEI>

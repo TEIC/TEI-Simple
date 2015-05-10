@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+     xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0" 
+     xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0" 
+     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+     xmlns:rng="http://relaxng.org/ns/structure/1.0"
+     xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+     xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" 
+     xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" 
+     xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple: the processing model</title>
+        <author>Sebastian Rahtz</author>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          <date>September 2014</date>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>University of Oxford</publisher>
+        <availability>
+          <p>Freely available for use and derivative works under a Creative Commons Attribution
+	      license.</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>born digital</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+
+<div>
+<head>Prerequisites</head>
+<list>
+<item>choices about rendering preserved in ODD file</item>
+<item>support multiple rendering output</item>
+<item>support multiple uses of markup 
+<list>
+<item>appear in rendering</item>
+<item>contribute to an index</item>
+<item>subscribe to a facet</item>
+<item>appear on a map</item>
+</list>
+</item>
+<item>cf <gi>equiv</gi> to map to RDF</item>
+<item>cf <gi>constraint</gi> for providing rules about validity</item>
+</list>
+</div>
+     
+<div>
+<head>0. The status quo</head>
+<p>We have an external set of XSL stylesheets which have hard-wired rules for TEI Simple documents</p>
+</div>
+
+<div>
+  <head>1. A simple  map</head>
+  <p>Every element is classed according to a limited vocabulary</p>
+</div>
+
+<div>
+          <head>A preliminary processing categorisation</head>
+        <table xml:id="pitax">
+          <row role="label">
+            <cell>Category</cell>
+            <cell>Meaning</cell>
+            <cell>Example</cell>
+          </row>
+          <row>
+            <cell>1</cell>
+            <cell>metadata header</cell>
+            <cell>fileDesc</cell>
+          </row>
+          <row>
+            <cell>4</cell>
+            <cell>structural division</cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>5</cell>
+            <cell>uncategorized block level object</cell>
+            <cell>quotation</cell>
+          </row>
+          <row>
+            <cell>6</cell>
+            <cell>semantic block level object</cell>
+            <cell>person</cell>
+          </row>
+          <row>
+            <cell>7</cell>
+            <cell>uncategorized inline object</cell>
+            <cell>hi</cell>
+          </row>
+          <row>
+            <cell>8</cell>
+            <cell>semantic inline object</cell>
+            <cell>persName</cell>
+          </row>
+          <row>
+            <cell>9</cell>
+            <cell>list</cell>
+            <cell>list</cell>
+          </row>
+          <row>
+            <cell>10</cell>
+            <cell>list item</cell>
+            <cell>item</cell>
+          </row>
+          <row>
+            <cell>11</cell>
+            <cell>table</cell>
+            <cell>table</cell>
+          </row>
+          <row>
+            <cell>12</cell>
+            <cell>cell</cell>
+            <cell>cell</cell>
+          </row>
+          <row>
+            <cell>13</cell>
+            <cell>row</cell>
+            <cell>row</cell>
+          </row>
+          <row><cell>14</cell><cell>out of line note</cell><cell>note</cell></row>
+          <row>
+            <cell>15</cell>
+            <cell>figure</cell>
+            <cell>figure</cell>
+          </row>
+          <row>
+            <cell>16</cell>
+            <cell>pointer</cell>
+            <cell>ptr</cell>
+          </row>
+          <row>
+            <cell>17</cell>
+            <cell>Janus element (alternate children)</cell>
+            <cell>choice</cell>
+          </row>
+          <row>
+            <cell>18</cell>
+            <cell>modern commentary element</cell>
+            <cell>desc</cell>
+          </row>
+        </table>
+</div>
+
+<div>
+<head>How does that work?</head>
+<list type="ordered">
+<item>Every TEI Simple element is assigned to a category. This allows a processor
+to know whether to handle the element or not, and broadly speaking how to display or otherwise
+process it. </item>
+<item>The categories are mapped to a presentation format, using HTML and
+CSS concepts where possible.</item>
+<item>A normalized set of property values is created for each element, where the
+combination of the rend, rendition and style attributes, and the <gi>rendition</gi> element, are
+interpreted to map to the names and allowed values for CSS. This all allows a processor to
+work out how to present that element in its current "context,</item>
+</list>
+</div>
+
+<div>
+  <head>2. Conditional mapping</head>
+<table>
+          <row>
+            <cell>2</cell>
+            <cell>section heading</cell>
+            <cell>head[parent::div]</cell>
+          </row>
+          <row>
+            <cell>3</cell>
+            <cell>title of object (figure, table etc)</cell>
+            <cell>head[not(parent::div)]</cell>
+          </row>
+</table>
+</div>
+
+<div>
+  <head>RHB</head>
+  <egXML xmlns="http://www.tei-c.org/ns/Examples">
+<process content="..xpath expression…" action="makeQuote()"/>
+or
+   <process content="@n" action="makeIndexEntry()"/> 
+
+    <process output="docx" content="...xpath .." action="makeThing()"/>
+    <process output="html" content="...xpath.." action="differentThing()"/>
+
+  </egXML>
+
+</div>
+    </body>
+  </text>
+</TEI>

@@ -1,0 +1,176 @@
+/* special for  ODD  */
+unusedattribute  
+valList  
+wovenodd
+wovenodd-col1
+wovenodd-col2
+attDef 
+attList 
+specChild
+specChildElements
+specChildModule
+specChildren
+specDesc
+specList
+specList-classSpec
+specList-elementSpec
+specList-macroSpec
+showmembers1
+showmembers2
+showmembers3
+showmembers4
+odd_label 
+
+/* appearance */
+decorInit 
+ above
+ alignleft 
+ alignright
+ allcaps
+ below
+ bo
+ bold
+ center
+ centre
+ code
+ display
+ doublestrikethrough
+ doubleunderline
+ dottedunderline
+ i
+ it
+ ital
+ italic
+ indent 
+ large
+ larger
+ leftMargin
+ normalweight
+ overline
+ rightMargin
+ rules
+ sc
+ shadow
+ small
+ smallcaps
+ smaller
+ smcap
+ strikethrough
+ sub
+ subscript
+ sup
+ superscript
+ teeny
+ tight
+ tiny
+ typewriter
+ ul
+ underline
+ underlined
+ underlined_dotted
+ wavyunderline
+
+/* abstract */
+abstract
+author
+bibliography
+caption 
+change
+closer
+corrigendum
+del
+editorial
+epigraph
+eqnarray
+equation
+example
+foreign
+fragile
+important
+opener 
+unclear
+
+/* structural */
+block  
+box
+bulleted
+display
+eg 
+numbered
+ordered 
+runon
+sort
+unordered
+
+/* other */
+advertisement
+afterword
+all
+announcement
+article
+att 
+attribute
+books_received
+column
+discussion
+doc_list
+domain
+fiction
+firstfolio
+footnote_reference
+frame
+frontpage
+full
+gloss
+glosstable
+hidden
+hr
+inline
+instr_
+instr_f
+instr_n
+instr_r
+invisible
+kwic
+label
+language
+linenumber
+literal
+math
+mergeformat
+multicol
+noatts
+nohead
+noindent
+nomenu
+none
+nonumber
+norules
+nosplit
+nosup
+note
+noteref
+notions
+obituary
+paragraph
+parent
+pause
+poetry
+pre
+preface
+ptab
+quotes
+ref-document
+reference
+review
+review_article
+show
+simple
+site_page
+source
+space
+subeqn
+tab
+thead
+tight
+translator

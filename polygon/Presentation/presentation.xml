@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0"
+  xmlns:fo="urn:oasis:names:tc:opendocument:xmlns:xsl-fo-compatible:1.0"
+  xmlns:style="urn:oasis:names:tc:opendocument:xmlns:style:1.0"
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:rng="http://relaxng.org/ns/structure/1.0"
+  xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+  xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+  xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+  xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple: ideas and progress so far</title>
+        <author>Magdalena Turska</author>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          <date>September 2014</date>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>University of Oxford</publisher>
+        <availability>
+          <p>Freely available for use and derivative works under a Creative Commons Attribution
+            license.</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>Based on previous TEI Simple Committee presentation by S. Rahtz.</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+
+      <div>
+        <head>TEI</head>
+        <list>
+          <item>every project is different and we delight in flexibility and customization</item>
+          <item>projects are not that different and we aim at standardization &amp;
+            interoperability</item>
+        </list>
+        <p>
+          <q> (...) documents worth encoding in TEI are very different from customer letters. But
+            not that different, and eight out of ten probably will benefit from staying within the
+            confines of a well thought-out standard schema and its surrounding processing rules. And
+            even the two that don’t may benefit from staying within that standard schema as far as
+            possible. </q> - M. Mueller </p>
+      </div>
+
+
+      <div>
+        <head>TEI Simple</head>
+        <list>
+          <item>Joint project between TEI Consortium, Mellon Foundation, Northwestern University,
+            University of Nebraska-Lincoln, and the University of Oxford</item>
+          <item>TEI Simple aims to define a new highly-constrained and prescriptive subset of the
+            Text Encoding Initiative (TEI) Guidelines suited to the representation of early modern
+            and modern books, and a formally-defined set of processing rules which permit modern web
+            applications to easily present and analyze the encoded texts</item>
+          <item>Project investigators are Martin Mueller (NW), Brian Pytlik Zillig (UNL), Sebastian
+            Rahtz (Ox).</item>
+          <item>Project team includes Magdalena Turska (DiXiT project, Oxford), James Cummings
+            (Oxford), Lou Burnard (Oxford)</item>
+          <item>Project runs from September 2014 to July 2015</item>
+        </list>
+      </div>
+
+      <div>
+        <head>Objectives</head>
+        <list rend="ordered">
+          <item>The highly constrained and prescriptive element subset of TEI Simple</item>
+          <item>The processing model (Simple Processing Model: SPM)</item>
+          <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM</item>
+          <item>TEI-Performance Indicators</item>
+          <item>Integration of TEI Simple into the TEI infrastructure </item>
+        </list>
+        <p rend="tiny">The CIDOC Conceptual Reference Model (CRM) provides definitions and a formal
+          structure for describing the implicit and explicit concepts and relationships used in
+          cultural heritage documentation.</p>
+      </div>
+
+      <div>
+        <head>The Simple schema: guidelines</head>
+        <list>
+          <item><q>Simple</q> does not have to mean <q>Small</q></item>
+          <item>The schema is based on analysis of existing usage from corpora (over 50k printed works)<list>
+              <item>EEBO TCP</item>
+              <item>Oxford Text Archive TEI P5 files (includes ECCO)</item>
+              <item>Deutsches Textarchiv</item>
+              <item>Documenting the American South</item>
+            </list> Expecting to also use French corpora</item>
+          <item>Our biggest enemy is ambiguity for the encoder</item>
+          <item>The target is encoding of the <gi>text</gi>; the <gi>teiHeader</gi> and any
+              <gi>sourceDoc</gi> or <gi>facsimile</gi> must simply conform to
+            <ident>tei_all</ident></item>
+        </list>
+      </div>
+
+      <div>
+        <head>Results</head>
+        <p>We isolate 104 elements which are needed in the body of a text</p>
+        <p>We divide them into groups by function, mainly for documentation purposes</p>
+        <p>We start analyzing attribute usage</p>
+      </div>
+
+
+      <div>
+        <head>@rend and @type proposal</head>
+        <list>
+          <item>We will <emph>not</emph> prescribe <att>type</att>, but instead publish a separate
+            suggested taxonomy for possible interpretative use</item>
+          <item>We will preclude use of <att>rend</att> and <att>style</att></item>
+          <item>We will produce a closed list of values for <att>rendition</att> using a
+            pseudo-protocol of "simple:" <egXML xmlns="http://www.tei-c.org/ns/Examples">
+              <p rendition="simple:bold">This is quite bold, but this <hi rendition="simple:sup">is
+                  superscript</hi></p>
+            </egXML>
+          </item>
+        </list>
+      </div>
+
+      <div>
+        <head>Element groups (1)</head>
+        <list type="gloss">
+          <label>editorial</label>
+          <item>abbr add choice corr del desc expan gap handShift orig reg sic space supplied
+            unclear </item>
+          <label>plays</label>
+          <item>actor castGroup castItem castList role roleDesc sp speaker spGrp stage </item>
+          <label>name</label>
+          <item>name rs</item>
+          <label>wrapper</label>
+          <item>argument byline closer dateline epigraph opener postscript salute signed trailer </item>
+          <label>header</label>
+          <item>teiHeader</item>
+          <label>linguistic</label>
+          <item>c pc s w</item>
+          <label>titlepage</label>
+          <item>docAuthor docDate docEdition docImprint docTitle imprimatur titlePage
+            titlePart</item>
+        </list>
+      </div>
+
+      <div>
+        <head>Element groups (2)</head>
+        <list type="gloss">
+          <label>titlepage</label>
+          <item>docAuthor docDate docEdition docImprint docTitle imprimatur titlePage
+            titlePart</item>
+          <label>(general)</label>
+          <item>author ab address addrLine addSpan anchor back bibl body caesura cb cell cit code
+            date div emph figDesc figure floatingText foreign formula front fw g gloss graphic group
+            head hi item l label lb lg list listBibl measure milestone name note num p pb ptr q
+            quote ref row seg soCalled table TEI term text time title</item>
+        </list>
+      </div>
+
+      <div>
+        <head>Prerequisites</head>
+        <list>
+          <item>choices about rendering preserved in ODD file</item>
+          <item>support multiple rendering output</item>
+          <item>support multiple uses of markup <list>
+              <item>appear in rendering</item>
+              <item>contribute to an index</item>
+              <item>subscribe to a facet</item>
+              <item>appear on a map</item>
+            </list>
+          </item>
+          <item>cf <gi>equiv</gi> to map to RDF</item>
+          <item>cf <gi>constraint</gi> for providing rules about validity</item>
+        </list>
+      </div>
+
+      <div>
+        <head>ODD extension</head>
+        <p>
+          <gi>process</gi> instruction available for <gi>elementSpec</gi> will define a way of
+          processing this element </p>
+        <p>multiple processing instructions may occur to define expected behaviour in various
+          contexts or output formats </p>
+      </div>
+
+      <div>
+        <head><gi>process</gi> element</head>
+        <p>process attributes <list>
+            <label>context</label>
+            <item>XPath expression defining a context in which this processing instruction is
+              applicable</item>
+            <label>name/action</label>
+            <item>name of the function from TEI Simple function library to be applied; input for the
+              function supplied as function parameter</item>
+            <label>mode</label>
+            <item>output mode for which this processing instruction is applicable</item>
+            <label>class</label>
+            <item>css class or simple:class name of formatting instruction to be applied to the
+              output</item>
+          </list></p>
+      </div>
+
+      <div>
+        <head>Defaults</head>
+        <list>
+          <item> if no <gi>process</gi> for any given mode, emit textual content </item>
+          <item> if no @context, means any use of this element </item>
+          <item>
+            <gi>process</gi> rules are additive, not alternates </item>
+          <item> @class defaults to element name (equates to HTML @class or Word style) </item>
+          <item> @mode defaults to 'render' (????) </item>
+          <item> appearance overridden by @rendition and @style </item>
+          <item>
+            <gi>rendition</gi> override remote CSS </item>
+        </list>
+      </div>
+
+
+      <div>
+        <head>New ODD example</head>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec ident="choice">
+            <process context="not(ancestor::front) and corr and sic" name="makeInline(reg)"
+              mode="render"/>
+            <process context="corr and sic" name="makeMarginalNote(corr)" mode="render"/>
+            <process context="ancestor::front and (corr and sic)"
+              name="makeLinkedMarginalNote(corr,sic)" mode="render"/>
+            <process context="corr and sic" name="makeInline(corr)" mode="textextract"/>
+          </elementSpec>
+        </egXML>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec ident="speaker">
+            <process name="makeInline(.)" mode="render"/>
+          </elementSpec>
+        </egXML>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec indent="name">
+            <process name="makeInline(.)"/>
+            <process name="makeMarginalNote(.)"/>
+          </elementSpec>
+        </egXML>
+      </div>
+
+
+      <div>
+        <head>Multiple outputs</head>
+
+        <p>
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <elementSpec ident="app">
+              <process context="not(ancestor::app) and (lem)" name="makeMarginalNote(.)" mode="render"
+                class="note"/>
+              <process name="makeInline(.)" content="lem" mode="render"/>
+              <process name="makeInline(.)" content="lem" mode="textextract"/>
+            </elementSpec>
+          </egXML>
+        </p>
+      </div>
+
+      <div>
+        <head>Lb and fw</head>
+
+        <p>
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <elementSpec ident="lb">
+              <process name="makeNewline()" mode="diplomatic"/>
+              <!-- no specific process instruction for default "render" mode means to output textual content (in this case: no output)-->
+            </elementSpec>
+          </egXML>
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <elementSpec ident="fw">
+              <process name="omit()" mode="render"/>
+              <process name="makeMarginalNote(.)" mode="diplomatic"/>
+              <!-- no specific process instruction for default "render" mode means to output textual content (in this case: no output)-->
+            </elementSpec>
+          </egXML>
+        </p>
+      </div>
+      <div>
+        <head>titlePage</head>
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <elementSpec ident="titlePage">
+            <process name="makeBlock(.)" mode="render"/>
+            <process name="omit()" mode="textextract"/>
+          </elementSpec>
+        </egXML>
+      </div>
+
+      <div>
+        <head>A preliminary processing categorisation</head>
+        <table xml:id="pitax">
+          <row role="label">
+            <cell>Category</cell>
+            <cell>Meaning</cell>
+            <cell>Example</cell>
+          </row>
+          <row>
+            <cell>1</cell>
+            <cell>metadata header</cell>
+            <cell>fileDesc</cell>
+          </row>
+          <row>
+            <cell>4</cell>
+            <cell>structural division</cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>5</cell>
+            <cell>uncategorized block level object</cell>
+            <cell>quotation</cell>
+          </row>
+          <row>
+            <cell>6</cell>
+            <cell>semantic block level object</cell>
+            <cell>person</cell>
+          </row>
+          <row>
+            <cell>7</cell>
+            <cell>uncategorized inline object</cell>
+            <cell>hi</cell>
+          </row>
+          <row>
+            <cell>8</cell>
+            <cell>semantic inline object</cell>
+            <cell>persName</cell>
+          </row>
+          <row>
+            <cell>9</cell>
+            <cell>list</cell>
+            <cell>list</cell>
+          </row>
+          <row>
+            <cell>10</cell>
+            <cell>list item</cell>
+            <cell>item</cell>
+          </row>
+          <row>
+            <cell>11</cell>
+            <cell>table</cell>
+            <cell>table</cell>
+          </row>
+          <row>
+            <cell>12</cell>
+            <cell>cell</cell>
+            <cell>cell</cell>
+          </row>
+          <row>
+            <cell>13</cell>
+            <cell>row</cell>
+            <cell>row</cell>
+          </row>
+          <row>
+            <cell>14</cell>
+            <cell>out of line note</cell>
+            <cell>note</cell>
+          </row>
+          <row>
+            <cell>15</cell>
+            <cell>figure</cell>
+            <cell>figure</cell>
+          </row>
+          <row>
+            <cell>16</cell>
+            <cell>pointer</cell>
+            <cell>ptr</cell>
+          </row>
+          <row>
+            <cell>17</cell>
+            <cell>Janus element (alternate children)</cell>
+            <cell>choice</cell>
+          </row>
+          <row>
+            <cell>18</cell>
+            <cell>modern commentary element</cell>
+            <cell>desc</cell>
+          </row>
+        </table>
+      </div>
+
+      <div>
+        <head>How does that work?</head>
+        <list type="ordered">
+          <item>Processing categories define a format-independent way of expressing required output. </item>
+          <item>Function library that can handle these processing scenarios is an essential part of
+            TEI Simple environment. </item>
+          <item>The categories are mapped to a presentation format, using HTML and CSS concepts
+            where possible.</item>
+        </list>
+      </div>
+
+      <div>
+        <head>Requirements for SPM architecture</head>
+        <p>SPM architecture should consist of tools for editing new ODD files based on project's
+          regular ODD customization and XSLT stylesheets suite for automated generation of (possibly
+          multiple) transform stylesheets based on processing definitions from new ODD</p>
+        <list>
+          <item>library of core functions dealing with possible* scenarios (eg. makeInline(),
+            makeNote(), etc.)</item>
+          <item>room for extensions and customizations of the output stylesheets as well as core
+            functions library</item>
+          <item>library of core CSS stylesheet (skins) as well as inclusion of bespoke CSSs</item>
+          <item>graphic interface (Roma-like) for interactive creation of the new ODDs</item>
+          
+        </list>
+        <p/>
+        <p rend="tiny">*Possible within the scope of TEI Simple, eg. something that may occur in early-modern and modern printed book.</p>
+      </div>
+
+
+    </body>
+  </text>
+</TEI>
