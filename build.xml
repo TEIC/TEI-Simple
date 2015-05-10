@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." default="all" name="makeschemas">
+  <!--
+	This library is free software; you can redistribute it and/or
+	modify it under the terms of the GNU Lesser General Public
+	License as published by the Free Software Foundation; either
+	version 2.1 of the License, or (at your option) any later version.
+	
+	This library is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	Lesser General Public License for more details.
+	
+	You should have received a copy of the GNU Lesser General Public
+	License along with this library; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+	
+        Id: $Id: antbuilder.xml 12906 2014-06-04 15:59:52Z hcayless $
+        Copyright: 2011, TEI Consortium<
+-->
+  <!--
+      make TEI Simple schema in various forms
+ -->
+  <property name="trang" value="lib/trang.jar"/>
+  <property name="XSL" value="/usr/share/xml/tei/stylesheet"/>
+  <property name="lang" value="en"/>
+  <property name="doclang" value="en"/>
+  <property name="verbose" value=""/>
+  <property name="inputDir" location="."/>
+  <dirname property="outputDir" file="TEISimplespreadsheet.xlsx"/>
+  <property name="tempDir" value="${outputDir}/temp-dir-for-ant"/>
+  <path id="classpath">
+    <pathelement path="${java.class.path}"/>
+  </path>
+  <taskdef name="schematron" classname="com.schematron.ant.SchematronTask" classpath="lib/ant-schematron-2010-04-14.jar"/>
+  <taskdef name="runjing" classpath="${jing}" classname="com.thaiopensource.relaxng.util.JingTask"/>
+  <target name="all" depends="convert,schemas,tests,doc,cleanup"/>
+  <target name="convert">
+    <!-- Recreate temporary output directory -->
+    <delete dir="${tempDir}"/>
+    <mkdir dir="${tempDir}"/>
+    <echo>Unpack spreadsheet to ${tempDir}</echo>
+    <unzip src="TEISimplespreadsheet.xlsx" dest="${tempDir}"/>
+    <echo>Convert XSLX to TEI</echo>
+    <xslt force="yes" style="${XSL}/profiles/default/xlsx/from.xsl" in="${tempDir}/_rels/.rels" out="TEISimplespreadsheet.xml">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="workDir" expression="file:///${tempDir}"/>
+      <param name="inputDir" expression="${inputDir}"/>
+    </xslt>
+    <xslt force="yes" style="generate.xsl" out="null.xml" in="TEISimplespreadsheet.xml" destdir=".">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="lang" expression="${lang}" if="lang"/>
+      <param name="verbose" expression="${verbose}" if="verbose"/>
+    </xslt>
+  </target>
+  <target name="schemas">
+    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="teisimple.odd" out="teisimple.odd.compiled">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}" if="lang"/>
+      <param name="verbose" expression="${verbose}" if="verbose"/>
+    </xslt>
+    <xslt processor="trax" force="yes" style="${XSL}/odds/odd2dtd.xsl" in="teisimple.odd.compiled" out="teisimple.dtd">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}"/>
+      <param name="useFixedDate" expression="true"/>
+      <param name="documentationLanguage" expression="${docLang}"/>
+    </xslt>
+    <xslt processor="trax" force="yes" style="${XSL}/odds/odd2relax.xsl" in="teisimple.odd.compiled" out="teisimple.rng">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}"/>
+      <param name="useFixedDate" expression="true"/>
+      <param name="documentationLanguage" expression="${docLang}"/>
+    </xslt>
+    <xslt processor="trax" force="yes" style="${XSL}/odds/extract-isosch.xsl" in="teisimple.odd.compiled" out="teisimple.isosch">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="useFixedDate" expression="true"/>
+    </xslt>
+    <xslt processor="trax" force="yes" style="isoschematron/iso_schematron_message_xslt2.xsl" in="teisimple.isosch" out="teisimple.isosch.xsl">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+    </xslt>
+    <sequential>
+      <java jar="${trang}" failonerror="true" fork="true">
+        <arg value="teisimple.rng"/>
+        <arg value="teisimple.rnc"/>
+      </java>
+    </sequential>
+    <sequential>
+      <java jar="${trang}" failonerror="true" fork="true">
+        <arg value="teisimple.rng"/>
+        <arg value="teisimple.xsd"/>
+      </java>
+    </sequential>
+    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="tei-pm.odd" out="tei-pm.odd.compiled">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}" if="lang"/>
+      <param name="verbose" expression="${verbose}" if="verbose"/>
+    </xslt>
+    <xslt processor="trax" force="yes" style="${XSL}/odds/odd2relax.xsl" in="tei-pm.odd.compiled" out="tei-pm.rng">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}"/>
+      <param name="useFixedDate" expression="true"/>
+      <param name="documentationLanguage" expression="${docLang}"/>
+    </xslt>
+    <xslt processor="trax" force="yes" style="${XSL}/odds/extract-isosch.xsl" in="tei-pm.odd.compiled" out="tei-pm.isosch">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="useFixedDate" expression="true"/>
+    </xslt>
+  </target>
+  <target name="doc">
+    <echo>XSLT generate HTML files</echo>
+    <xslt force="yes" style="${XSL}/odds/odd2lite.xsl" in="teisimple.odd.compiled" out="teisimple.odd.tmp">
+      <xmlcatalog>
+        <catalogpath>
+          <pathelement location="$catalogfile"/>
+        </catalogpath>
+      </xmlcatalog>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="lang" expression="${lang}" if="lang"/>
+      <param name="doclang" expression="${lang}" if="lang"/>
+      <param name="documentationLanguage" expression="${lang}" if="lang"/>
+    </xslt>
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd.tmp" out="teisimple.odd.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="inputDir" expression="${inputDir}/"/>
+      <param name="useFixedDate" expression="true"/>
+      <param name="autoToc" expression="false"/>
+      <param name="displayMode" expression="rnc"/>
+    </xslt>
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd" out="teisimple.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="inputDir" expression="${inputDir}/"/>
+      <param name="useFixedDate" expression="true"/>
+    </xslt>
+    <xslt force="yes" style="${XSL}/odds/odd2lite.xsl" in="tei-pm.odd.compiled" out="tei-pm.odd.tmp">
+      <xmlcatalog>
+        <catalogpath>
+          <pathelement location="$catalogfile"/>
+        </catalogpath>
+      </xmlcatalog>
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+      <param name="summaryDoc" expression="true"/>
+      <param name="lang" expression="${lang}" if="lang"/>
+      <param name="doclang" expression="${lang}" if="lang"/>
+      <param name="documentationLanguage" expression="${lang}" if="lang"/>
+    </xslt>
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="tei-pm.odd.tmp" out="tei-pm.odd.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="inputDir" expression="${inputDir}/"/>
+      <param name="autoToc" expression="false"/>
+      <param name="useFixedDate" expression="true"/>
+      <param name="displayMode" expression="rnc"/>
+    </xslt>
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="tei-pm.odd" out="tei-pm.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="inputDir" expression="${inputDir}/"/>
+      <param name="useFixedDate" expression="true"/>
+    </xslt>
+  </target>
+
+  <target name="tests">
+    <!--
+	<echo>Validate Simple schema against tei-pm</echo>
+	<runjing rngfile="tei-pm.rng" file="teisimple.odd"/>
+	-->
+    <echo>Validate instances against RELAX NG</echo>
+    <runjing rngfile="teisimple.rng" file="tests/testsimple.xml"/>
+    <runjing rngfile="teisimple.rng" file="tests/testsimple2.xml"/>
+    <runjing rngfile="teisimple.rng" file="tests/testsimple3.xml"/>
+    <runjing rngfile="teisimple.rng" file="tests/testsimple4.xml"/>
+    <runjing rngfile="teisimple.rng" file="tests/testsimple5.xml"/>
+    <runjing rngfile="teisimple.rng" file="tests/testsimple6.xml"/>
+    <echo>Validate instances against Schematron</echo>
+    <schematron file="tests/testsimple.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <schematron file="tests/testsimple2.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <schematron file="tests/testsimple3.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <schematron file="tests/testsimple4.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <schematron file="tests/testsimple5.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <schematron file="tests/testsimple6.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <echo>Validate an instance against DTD</echo>
+    <xmlvalidate failonerror="yes" file="tests/testsimple.xml"/>
+    <echo>Validate an instance against XSD</echo>
+    <schemavalidate noNamespaceFile="teisimple.xsd" file="tests/testsimple.xml"/>
+  </target>
+
+  <target name="pm">
+    <echo>create simple XSL from PM</echo>
+    <xslt force="yes" style="polygon/simpleoddtoxsl.xsl" in="teisimple.odd" out="teisimple-pm.xsl">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+    </xslt>
+    <xslt force="yes" style="polygon/simpleoddtoxsl-latex.xsl" in="teisimple.odd" out="teisimple-pm-latex.xsl">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+    </xslt>
+    <echo>run test files through PM</echo>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple.xml" out="tests/testsimple.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple2.xml" out="tests/testsimple2.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple3.xml" out="tests/testsimple3.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple4.xml" out="tests/testsimple4.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple5.xml" out="tests/testsimple5.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple6.xml" out="tests/testsimple6.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+    <xslt force="yes" style="teisimple-pm.xsl" in="tests/A10231.xml" out="tests/A10231.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+
+    <xslt force="yes" style="teisimple-pm-latex.xsl" in="tests/testsimple4.xml" out="tests/testsimple4.tex">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
+  </target>
+
+  <target name="cleanup">
+    <delete dir="${tempDir}"/>
+
+    <delete file="teisimple.odd.compiled"/>
+    <delete file="teisimple.odd.tmp"/> 
+    <delete file="tei-pm.odd.tmp"/> 
+    <delete file="tei-pm.odd.compiled"/>
+
+  </target>
+</project>

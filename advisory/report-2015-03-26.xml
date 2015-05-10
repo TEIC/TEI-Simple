@@ -1,0 +1,540 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0" >
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple: state of the nation</title>
+        <author>TEI Simple Workteam (SR, BPZ, MM, MT)</author>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          <date>March 2015</date>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>University of Oxford</publisher>
+        <availability>
+          <p>Freely available for use and derivative works under a Creative Commons Attribution
+	      license.</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>born digital</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>What we do want to do today?</head>
+        <list rend="ordered">
+	  <item>Report on progress against TEI Simple  objectives</item>
+	  <item>Discuss useability of Processing Model</item>
+	  <item>Demonstrate implementation of Processing Engine  (Wolfgang Meier)</item>
+	  <item>Consider communications plan</item>
+	  <item>Understand what DTA is doing</item>
+        </list>
+      </div>
+
+      <div>
+        <head>Reminder of objectives</head>
+        <list rend="ordered">
+          <item>The highly constrained and prescriptive element subset of TEI Simple</item>
+          <item>The processing model (Simple Processing Model: SPM)</item>
+          <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM/FRBRoo</item>
+          <item>TEI-Performance Indicators</item>
+          <item>Integration of TEI Simple into the TEI infrastructure </item>
+        </list>
+      </div>
+
+      <div>
+        <head>Deliverables</head>
+        <list rend="ordered">
+          <item>A TEI ODD customization with the choices and constraints,  PM notation, and RDF mapping</item>
+          <item>Multi-stage tutorial documentation based on examples using page images and XML</item>
+          <item>Implementation(s) of the Processing Engine (PE)</item>
+        </list>
+        <p rend="box">These outputs will be offered to the TEI Technical Council to decide on how to best to incorporate and maintain them</p>
+      </div>
+      <div>
+        <head>TEI Simple: original work plan</head>
+        <table rend="rules">
+          <row>
+            <cell>October</cell><cell>Complete customization with closed value lists for
+	  attributes </cell>
+            <cell>
+              <hi rend="bold">DONE</hi>
+            </cell>
+          </row>
+          <row>
+            <cell>November/ December</cell><cell>Complete definition of the SPM</cell>
+            <cell>
+              <hi rend="bold">DONE</hi>
+            </cell>
+          </row>
+          <row>
+            <cell>December/ January/ February</cell><cell>Implementation of the
+	  SPM</cell>
+            <cell>
+              <hi rend="bold">DONE (proof of concept)</hi>
+            </cell>
+          </row>
+          <row>
+            <cell>January/ February</cell><cell>Documentation and
+examples</cell>
+            <cell>
+              <hi rend="bold">NOT COMPLETED</hi>
+            </cell>
+          </row>
+          <row>
+            <cell>March</cell><cell>TEI Performance indicators</cell>
+            <cell>
+              <hi rend="bold">STARTED</hi>
+            </cell>
+          </row>
+          <row>
+            <cell>April</cell><cell>Mapping to RDF</cell>
+            <cell>
+              <hi rend="bold">TO BE DONE</hi>
+            </cell>
+          </row>
+        </table>
+      </div>
+
+<div>
+   <head>Progress on TEI Simple subset </head>
+   <list>
+      <item>114 TEI Simple elements located in the <gi>body</gi> of a text. (A lesson from the MONK
+         Project about unecessary variation.) </item>
+      <item>Decided to leave <gi>teiHeader</gi> alone (rightly?) </item>
+      <item>Customization maintains simplicity with closed value lists for selected attribute
+         classes (e.g., <gi>name</gi>, <gi>cell</gi>, <gi>row</gi>). </item>
+      <item>Completed conversion routine to TEI Simple from normal TEI files. </item>
+      <item>Schematron <gi>constraint</gi>s make it possible to check any special constraints
+         specified in the TEI-simple ODD file that are not already required in the TEI Simple
+         schema. </item>
+      <item>Besides Schematron, validation against a TEI Simple RelaxNG schema, using Jing. </item>
+      <item>Schematron and Jing validation occur in a single Ant task (Ant runs in oXygen, on many
+         platforms, and efficiently uses a single instance of the Java Virtual Machine). </item>
+      <item>Tested on whole of EEBO etc. for all of TCP 60K+ files (EEBO, ECCO, Evans) </item>
+   </list>
+</div>
+
+
+<div>
+  <head>Reminder: how does processing of Simple work</head>
+        <p>The model assumes a workflow with three parts, and three
+	distinct roles, to create a digital edition from a TEI text:
+	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
+	  makes the high-level output decisions. These 	fall into two parts
+	<list rend="ordered"><item><emph>Structural</emph> descriptions, eg  <q>should the
+	  original or corrected version be displayed by default</q>,
+	  or <q>is this a block level or inline component</q></item><item>Indications of <emph>appearance</emph> (<q>titles are in
+	  italics</q>).</item></list>
+	  </item><item>a <emph>designer</emph> creates the output envelope (for
+	  example, and book layout using InDesign, or a web site using
+	  Drupal), making decisions in conjunction with the editor
+	  (<q>use Garamond font throughout</q> or <q>every page must
+	  show the departmental logo</q>)</item><item>a <emph>programmer</emph> takes the
+	  <emph>editor</emph>'s specification, and the TEI text(s),
+	  and creates the input for the <emph>designer</emph> to make
+	  the output.</item></list>
+	</p>
+</div>
+
+         <div>
+            <head>Simple processing model: the PM</head>
+            <list>
+               <item>workflow (flowchart)</item>
+               <item> extensions to TEI model etc</item>
+               <item> example PM for simple elements</item>
+               <item> implementation of PE to HTML in XSLT </item>
+            </list>
+         </div>
+
+         <div>
+            <head>Processing Model: how does that work?</head>
+            <list type="ordered">
+               <item>TEI Simple schema ODD contains instructions for intended processing of TEI
+                  Simple elements</item>
+               <item>instructions are simple XML fragments stating which task from a limited TEI
+                  Simple function library should be executed when processing that element</item>
+               <item>multiple processing instructions may occur to define expected behaviour in
+                  various contexts or output formats</item>
+               <item>Processing Engine is able to transform TEI Simple source documents into output
+                  format(s) according to processing instructions from TEI Simple ODD</item>
+            </list>
+            <figure>
+               <graphic url="simplebasic.png"/>
+            </figure>
+         </div>
+
+         <div>
+            <head>Necessary changes to TEI</head>
+            <p>TEI ODD language needs to be extended with following elements and attributes
+               (proposal pending consideration by TEI Council):</p>
+            <list>
+               <item><gi>model</gi>
+                  <att>behaviour</att> (specifies the actions to undertake), <att>predicate</att>
+                  (circumstances where this rule applies), <att>output</att> (output for which rule
+                  applies), <att>useSourceRendition</att> (should processing take into account
+                  original rendition) </item>
+               <item><gi>modelSequence</gi> (groups sequences of tasks that are to be
+                  executed)</item>
+               <item><gi>modelGrp</gi> (groups <gi>model</gi>s and <gi>modelSequence</gi>s for
+                  readability and conciseness</item>
+               <item><gi>rendition</gi> (specifies the formatting of the output)</item>
+            </list>
+         </div>
+
+         <div>
+            <head>TEI Simple Processing model example</head>
+            <p>TEI Simple schema ODD has been enhanced with processing models for TEI Simple
+               elements :</p>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+               <elementSpec mode="change" ident="note">
+                  <model predicate="@place" behaviour="note(.,@place)"/>
+                  <model predicate="parent::div and not(@place)" behaviour="block(.)">
+                     <rendition>margin-left: 10px;margin-right: 10px; font-size:smaller;</rendition>
+                  </model>
+                  <model predicate="not(@place)" behaviour="inline(.)">
+                     <rendition scope="before">content:" [";</rendition>
+                     <rendition scope="after">content:"] ";</rendition>
+                     <rendition>font-size:small;</rendition>
+                  </model>
+               </elementSpec>
+            </egXML>
+         </div>
+
+         <div>
+            <head>TEI Simple Processing model example (2)</head>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+               <elementSpec mode="change" ident="q">
+                  <model predicate="l" behaviour="block(.)" useSourceRendition="true">
+                     <rendition>margin-left: 10px; margin-right: 10px; </rendition>
+                  </model>
+                  <model predicate="ancestor::p or ancestor::cell" behaviour="inline(.)"
+                     useSourceRendition="true">
+                     <rendition scope="before">content: '‘';</rendition>
+                     <rendition scope="after">content: '’';</rendition>
+                  </model>
+                  <model behaviour="block(.)" useSourceRendition="true">
+                     <rendition>margin-left: 10px; margin-right: 10px; </rendition>
+                  </model>
+               </elementSpec>
+            </egXML>
+         </div>
+
+         <div>
+            <head>TEI Simple function library</head>
+        <table>
+          <row role="label">
+            <cell>Function name</cell>
+            <cell>Description</cell>
+            <cell>Probable HTML container</cell>
+          </row>
+          <row>
+            <cell>alternate</cell>
+            <cell>Creates a specialized display of alternating elements for displaying the
+                  preferred version, both at once or toggling between the two.</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>anchor</cell>
+            <cell>create anchor with ID</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>block</cell>
+            <cell>Creates a block out of the content parameter. </cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>break</cell>
+            <cell>make a line, column, or page break according to <term>type</term></cell>
+            <cell/>
+          </row>
+
+          <row>
+            <cell>cell</cell>
+            <cell>Creates a table cell</cell>
+            <cell>td</cell>
+          </row>
+          <row>
+            <cell>cit</cell>
+            <cell>shows the content, with an attribute of the source</cell>
+            <cell></cell>
+          </row>
+          <row>
+            <cell>document</cell>
+            <cell>start a new output document</cell>
+            <cell></cell>
+          </row>
+          <row>
+            <cell>figure</cell>
+            <cell>make a figure with the <term>title</term> as caption</cell>
+            <cell>div</cell>
+          </row>
+          <row>
+            <cell>glyph</cell>
+            <cell>show a character by looking up reference</cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>graphic</cell>
+            <cell>If <att>url</att> is present, uses it to display graphic,
+                  else display placeholder image. </cell>
+            <cell>img</cell>
+          </row>
+          <row>
+            <cell>heading</cell>
+            <cell>Creates a heading. </cell>
+            <cell>span</cell>
+          </row>
+          <row>
+            <cell>index</cell>
+            <cell>generate list according to <term>type</term></cell>
+            <cell/>
+          </row>
+          <row>
+            <cell>inline</cell>
+            <cell>Creates inline element out of <code>content</code> if there's something in
+                  <gi>rendition</gi>, use that formatting
+                  otherwise just show text of selected content.</cell>
+            <cell>span</cell>
+          </row>
+          <row>
+            <cell>link</cell>
+            <cell>create hyperlink</cell>
+            <cell>a</cell>
+          </row>
+          <row>
+            <cell>list</cell>
+            <cell>Create a list by following <term>content</term></cell>
+            <cell>ol, ul, or dl</cell>
+          </row>
+	</table>
+	 </div>
+
+	 <div>
+	   <table>
+          <row>
+            <cell>listItem</cell>
+            <cell>create list item</cell>
+            <cell>li</cell>
+          </row>
+          <row>
+            <cell>metadata</cell>
+            <cell>create metadata section</cell>
+            <cell>head</cell>
+          </row>
+          <row>
+            <cell>note</cell>
+            <cell>Creates a note block out of <code>content</code>,
+	    as per value of <code>place</code></cell>
+            <cell>span or div</cell>
+          </row>
+          <row>
+            <cell>omit</cell>
+            <cell>Do nothing, do not process children</cell>
+            <cell/>
+          </row>
+
+          <row>
+            <cell>paragraph</cell>
+            <cell>Creates a paragraph out of <code>content</code>.</cell>
+            <cell>p</cell>
+          </row>
+          <row>
+            <cell>row</cell>
+            <cell>make table row</cell>
+            <cell>tr</cell>
+          </row>
+          <row>
+            <cell>section</cell>
+            <cell/>
+            <cell/>
+          </row>
+          <row>
+            <cell>table</cell>
+            <cell>make table</cell>
+            <cell>table</cell>
+          </row>
+          <row>
+            <cell>title</cell>
+            <cell>make document title</cell>
+	    <cell/>
+          </row>
+        </table>
+
+	 </div>
+         <div>
+            <head>The Processing Engine implementation: PE</head>
+            <p>As a proof of concept an implementation of PE and Simple function library has been
+               created in XSLT. It consists of XSLT stylesheets suite that generate transform
+               stylesheets based on processing models from TEI Simple ODD.</p>
+            <figure>
+               <graphic url="simplexsltpe.png"/>
+            </figure>
+            
+         </div>
+
+         <div>
+            <head>TEI Simple universe and beyond</head>
+            <figure>
+               <graphic url="simpleworkflow.png"/>
+            </figure>
+         </div>
+
+      <div>
+	<head>The Performance Indicator</head>
+	<p>The aim is to be able to show for a given text 
+	<list>
+	  <item>Whether it claims to conform to the TEI Simple view of the world</item>
+	  <item>How it matches up against various encoding criteria</item>
+	  <item>Which directions it has gone in</item>
+	</list>
+	</p>
+	<p>The idea is that one can browse a corpus of texts and
+	quickly filter on the basis of encoding (cf <ptr target="http://www.ota.ox.ac.uk/tcp/"/>)</p>
+      </div>
+
+      <div>
+	<head>Formal editorial decisions</head>
+	<p>Each of these elements has attributes (as well as
+	prose) for providing quantifiable information</p>
+	<p>Within <gi>encodingDesc</gi>/<gi>editorialDecl</gi>:
+	<list>
+       <item><gi>correction </gi></item>
+       <item><gi>hyphenation </gi></item>
+       <item><gi>normalization </gi></item>
+       <item><gi>punctuation </gi></item>
+       <item><gi>quotation </gi></item>
+	</list></p>
+      </div>
+
+      <div>
+	<head>Extensions we propose on <gi>editorialDecl</gi></head>
+	<list>
+	 <item>add "sampled" to values for @status on <gi>correction</gi></item>
+	 <item>add "standoff" to values for @method on <gi>correction</gi></item>
+	 <item>add @quality to <gi>correction</gi>, with a datatype of
+	 <term>data.probability</term> (cf Martin's analysis of EEBO)</item>
+	 <item>add @methodology to <gi>editorialDecl</gi> (eg
+	 <tag>editorialDecl methodology="teisimple"</tag>)</item>
+	</list>
+      </div>
+
+      <div>
+	<head>Typical categorizations</head>
+<p>Named entities, from <q>Edward was born in London. From an early
+age, little Teddie loved Buckingham Palace gardens</q>:
+<list>
+<item>named entities recognized (London, Buckingham)</item>
+<item>phrases identified (Buckingham Palace)</item>
+<item>identifying unique entities (correlating Edward and Teddie)</item>
+<item>linked to external authority (King Edward VIII)</item>
+</list></p>
+<p>Date from <q>dated Mons, 3rd August</q>:
+<list>
+<item>marked up as date</item>
+<item>normalized date</item>
+</list></p>
+<p>Citation identification (Biblical texts)</p>
+<p>POS tagging:
+<list>
+<item>word recognition</item>
+<item>sentence recognition</item>
+<item>tagging with POS</item>
+<item>lemmatization</item>
+</list>
+</p>
+      </div>
+      <div>
+	<head>Marking up categorizations</head>
+	<p>In the header:
+	<egXML xmlns="http://www.tei-c.org/ns/Examples">
+	       <category xml:id="named">
+		 <catDesc>personal name recognition</catDesc>
+		 <category>
+		   <category xml:id="named-1">
+		     <catDesc>identified names</catDesc>
+		   </category>
+		   <category xml:id="named-2"/>
+		     <catDesc>joined together names to form unique individuals</catDesc>
+		   <category xml:id="named-3">
+		     <catDesc>linked people to external sources</catDesc>
+		     <category xml:id="named-3-1">
+		       <catDesc>mostly done but didn't bother with servants</catDesc>
+		     </category>
+		   </category>
+		 </category>
+	       </category>
+	</egXML>
+	</p>
+	<p>In <gi>editorialDecl</gi>:
+	<egXML xmlns="http://www.tei-c.org/ns/Examples">
+	  <interpretation ana="#named-3-1"/>
+	</egXML>
+	</p>
+      </div>
+
+
+      <div>
+	<head>Another example of PI, from DTA</head>
+	<egXML xmlns="http://www.tei-c.org/ns/Examples">
+	  <extent>
+	    <measure type="images">537</measure>
+	    <measure type="tokens">88183</measure>
+	    <measure type="types">5053</measure>
+	    <measure type="characters">516483</measure>
+	  </extent>
+	</egXML>
+      </div>
+
+      <div>
+	<head>Mapping to RDF (CRM and FRBRoo)</head>
+	<p>Planned to write X3ML mapping file and test transformation
+	on EEBO texts</p>
+	<p>(cf <ptr target="https://github.com/delving/x3ml"/>
+	and <ptr target="http://139.91.183.3/3M/"/>)</p>
+      </div>
+
+      <div>
+	<head>Integration with TEI Council </head>
+	<p>Scheduled for May? meeting of Council, at which James
+	Cummings will present the PM and PI markup additions,
+	and the Simple customization</p></div>
+
+      <div>
+	<head>Practical problems to be solved still</head>
+	<list>
+	  <item>Finalize syntax of PM</item>
+	  <item>Decide on a reliable route to PDF</item>
+	  <item>Decide how to demonstrate or implement the PI</item>
+	  <item>Work out the RDF mapping</item>
+	</list>
+      </div>
+
+
+	<div>
+          <head>Upcoming activities</head>
+	     <list>
+	       <item>SR creating oXygen framework which references
+	       schemas and HTML transforms using XSLT PE</item>
+	       <item>WM delivers eXist-based system with PE</item>
+	       <item>MB delivers command-line Java-based PE</item>
+	       <item>Northwestern demo edition testing  design/programmer differentiation</item>
+	       <item>MT organizes a Simple Hackathon in May/June to test PM 1.0</item>
+	       <item>(if needed, create PM 2.0, and ask WM, MT and MB to redo PE implementations)</item>
+	       <item>MM writes documentation/tutorial  of the <hi>Simple
+	       Weltanschauung</hi> based on markup of real texts
+	       (referencing facsimiles)</item>
+	       <item>James Cummings presents TEI Simple at DH2015</item>
+	       <item>Final presentation of Simple to TEI members
+	       meeting at Lyon</item>
+	     </list>
+	</div>
+    </body>
+  </text>
+</TEI>
