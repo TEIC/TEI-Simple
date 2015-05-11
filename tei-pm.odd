@@ -784,7 +784,7 @@
                 </row>
               </table>-->
     <desc>Create a list by following <term>content</term></desc>
-    <equiv name="ol, ul, or dl"/>
+    <equiv name="ol"/>
   </valItem>
   <valItem ident="listItem">
     <!--
@@ -822,7 +822,6 @@
               </table>-->
     <desc>Creates a note block out of <code>content</code>,
 	    as per value of <code>place</code></desc>
-    <equiv name="span or div"/>
   </valItem>
   <valItem ident="omit">
     <desc>Do nothing, do not process children</desc>
@@ -861,6 +860,9 @@
   <valItem ident="table">
     <desc>make table</desc>
     <equiv name="table"/>
+  </valItem>
+  <valItem ident="text">
+    <desc>literal text</desc>
   </valItem>
   <valItem ident="title">
     <!--
@@ -1140,6 +1142,7 @@
           <moduleRef key="header"/>
           <moduleRef key="core"/>
           <moduleRef key="tei"/>
+          <moduleRef key="gaiji"/>
           <moduleRef key="textstructure"/>
           <moduleRef key="tagdocs"/>
           <moduleRef key="figures"/>
