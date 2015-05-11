@@ -8949,13 +8949,63 @@ You must supply at least two values for @target on <name/>
             <choice>
                 <ref name="model.glossLike"/>
                 <ref name="model.descLike"/>
+						
                 <ref name="rendition"/>
               </choice>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
          <attribute name="behaviour">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">which processing function, optionally containing parameters, should be used to present this element in output</a:documentation>
-            <ref name="data.text"/>
+            <choice>
+               <value>alternate</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a specialized display of alternating elements for displaying the preferred version, both at once or toggling between the two.</a:documentation>
+               <value>anchor</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create anchor with ID</a:documentation>
+               <value>block</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a block out of the content parameter. </a:documentation>
+               <value>break</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make a line, column, or page break according to type</a:documentation>
+               <value>cell</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a table cell</a:documentation>
+               <value>cit</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">shows the content, with an attribute of the source</a:documentation>
+               <value>document</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">start a new output document</a:documentation>
+               <value>figure</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make a figure with the title as caption</a:documentation>
+               <value>glyph</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">show a character by looking up reference</a:documentation>
+               <value>graphic</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">If url is present, uses it to display graphic, else display placeholder image.</a:documentation>
+               <value>heading</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a heading. </a:documentation>
+               <value>index</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">generate list according to type</a:documentation>
+               <value>inline</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates inline element out of  if there's something in rendition, use that formatting otherwise just show text of selected content.</a:documentation>
+               <value>link</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create hyperlink</a:documentation>
+               <value>list</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Create a list by following content</a:documentation>
+               <value>listItem</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create list item</a:documentation>
+               <value>metadata</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create metadata section</a:documentation>
+               <value>note</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a note block out of , as per value of </a:documentation>
+               <value>omit</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Do nothing, do not process children</a:documentation>
+               <value>paragraph</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a paragraph out of .</a:documentation>
+               <value>row</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make table row</a:documentation>
+               <value>section</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <value>table</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make table</a:documentation>
+               <value>title</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make document title</a:documentation>
+            </choice>
          </attribute>
          <optional>
             <attribute name="predicate">

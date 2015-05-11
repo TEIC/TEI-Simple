@@ -523,13 +523,13 @@ The @spanTo attribute of <xsl:text/>
 
 		<!--ASSERT ERROR-->
 <xsl:choose>
-         <xsl:when test="child::* or child::text()[normalize-space(.)]"/>
+         <xsl:when test="child::* or child::text()[normalize-space]"/>
          <xsl:otherwise>
             <xsl:message>
                 Element "<xsl:text/>
                <xsl:value-of select="name(.)"/>
                <xsl:text/>" may not be empty.
-             (child::* or child::text()[normalize-space(.)] / ERROR)</xsl:message>
+             (child::* or child::text()[normalize-space] / ERROR)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M19"/>
