@@ -1,24 +1,140 @@
-<?xml version="1.0" encoding="UTF-8"?><div xmlns="http://www.w3.org/1999/xhtml" class="TEI">
-   <div class="teiHeader">
-      <div class="fileDesc">
-         <div class="title">Tricky Tests for TEI SIMPLE Processing</div> 
-         <div class="p"></div> 
-         <div class="p">Contains bits and pieces from all over the place</div>
-      </div> 
-      <div class="revisionDesc"></div>
-   </div> 
-   <div class="text">
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <link rel="StyleSheet" href="simple.css" type="text/css" /><style type="text/css">.simple_allcaps { text-transform: uppercase; } 
+.simple_blackletter { font-family: fantasy; } 
+.simple_bold { font-weight: bold; } 
+.simple_bottombraced { padding-bottom: 2pt; border-bottom: dashed gray 2pt; } 
+.simple_block { display:block; } 
+.simple_boxed { padding: 2pt; border: solid black 1pt; } 
+.simple_centre { text-align: center; } 
+.simple_cursive { font-family: cursive; } 
+.simple_doublestrikethrough { text-decoration: line-through;    color: red; } 
+.simple_doubleunderline { text-decoration: underline;    color: red; } 
+.simple_dropcap { font-size : 6em;
+    font-family: cursive;
+    font-weight : bold;
+    vertical-align: top;
+    height: 1em;
+    line-height: 1em;
+    float : left;
+    width : 1em;
+    color : #c00;
+    margin: 0em;
+    padding: 0px; } 
+.simple_float { float:right;    display: block;
+    font-size: smaller;
+    clear: right;
+    padding: 4pt;
+    width: 15%;
+ } 
+.simple_hyphen {  } 
+.simple_inline { display:inline; } 
+.simple_italic { font-style: italic; } 
+.simple_justify { text-align: justify; } 
+.simple_larger { font-size: larger; } 
+.simple_left { text-align: left; } 
+.simple_leftbraced { padding-left: 2pt; border-left: dotted gray 2pt;  } 
+.simple_letterspace { letter-spacing: 0.5em; } 
+.simple_normalstyle { font-style:roman; } 
+.simple_normalweight { font-weight:normal; } 
+.simple_right { text-align: right; } 
+.simple_rightbraced { padding-right: 2pt; border-right: dotted gray 2pt;  } 
+.simple_rotateleft { -webkit-transform: rotate(90deg);    transform: rotate(90deg); } 
+.simple_rotateright { -webkit-transform: rotate(-90deg);    transform: rotate(-90deg); } 
+.simple_smallcaps { font-variant: small-caps; } 
+.simple_smaller { font-size: smaller; } 
+.simple_strikethrough { text-decoration: line-through; } 
+.simple_subscript { vertical-align: bottom;    font-size: smaller; } 
+.simple_superscript { vertical-align: super;    font-size: smaller; } 
+.simple_topbraced { padding-top: 2pt;  border-top: dotted gray 2pt;  } 
+.simple_typewriter { font-family:monospace; } 
+.simple_underline { text-decoration: underline; } 
+.simple_wavyunderline { text-decoration: underline;       text-decoration-style: wavy; } 
+span.add {color: green; text-decoration: underline;}
+div.address {margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;}
+div.addrLine {white-space: nowrap;}
+div.argument {margin-bottom: 0.5em;}
+ol.castList {list-style: ordered;}
+ul.castList {list-style: ordered;}
+div.closer {margin-top: 1em; margin-left: 1em; margin-left: 1em;}
+span.corr2:before {content: '[';}
+span.corr2:after {content: ']';}
+span.del {text-decoration: line-through;}
+div.div1 {border: 1px solid black; padding: 5px;}
+div.docTitle2 {font-size: larger;}
+span.figDesc:before {content: '[..';}
+span.figDesc:after {content: '..]';}
+span.figDesc {color: grey;font-style:italic;}
+span.figure2 {display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue;}
+div.floatingText {margin: 6pt; border: solid black 1pt;}
+span.foreign {font-style:italic;}
+span.gap1 {color: grey;}
+span.gap2:before {content: '[..';}
+span.gap2:after {content: '..]';}
+span.gap2 {color: grey;}
+span.gap3:before {content: '[...]';}
+div.head1 {font-style: italic;}
+div.head2 {font-style: italic;}
+div.head3 {font-style: italic;}
+div.head4 {font-weight: bold;}
+span.hi1 {font-style: italic;}
+span.hi2 {font-style: italic;}
+div.l {margin-left: 1em;}
+div.note2 {margin-left: 10px;margin-right: 10px; font-size:smaller;}
+span.note3:before {content:" [";}
+span.note3:after {content:"] ";}
+span.note3 {font-size:small;}
+p.p {text-align: justify;}
+span.pb {display: block; margin-left: 4pt; color: grey; float: right;}
+span.pb:before {content: '[Page ';}
+span.pb:after {content: ']';}
+div.q1 {margin-left: 10px; margin-right: 10px;}
+span.q2:before {content: '‘';}
+span.q2:after {content: '’';}
+div.q3 {margin-left: 10px; margin-right: 10px;}
+span.quote1:before {content: '‘';}
+span.quote1:after {content: '’';}
+div.quote2 {margin-left: 10px; margin-right: 10px;}
+tr.row1 {font-weight: bold;}
+span.sic2:before {content: '{';}
+span.sic2:after {content: '}';}
+div.signed1 {text-align: right;}
+span.signed2 {font-style: italic;}
+div.speaker {font-style:italic;}
+div.stage {font-style: italic;}
+span.supplied2:before {content:"&lt;";}
+span.supplied2:after {content:"&gt;";}
+span.supplied3:before {content:"[";}
+span.supplied3:after {content:"]";}
+span.supplied4:before {content:"(";}
+span.supplied4:after {content:")";}
+span.supplied5:before {content:"{";}
+span.supplied5:after {content:"}";}
+table.table {font-size: smaller; background-color: #F0F0F0;}
+div.text {max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;}
+div.title2 {color: red; font-size: 2em;}
+span.title4 {font-style: italic;}
+span.title6 {font-style: italic;}
+span.title8 {font-style: italic;}
+span.title10 {font-style: italic;}
+div.titlePage {text-align: center;}
+div.trailer {color: green;}
+span.unclear:after {content: ' [?] ';}
+</style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf8" src="simple.js"></script><title>Tricky Tests for TEI SIMPLE Processing</title> 
+   </head> 
+   <body>
       <div class="front">
          <div class="div">
-            <div class="head">TREASURE ISLAND</div> 
-            <div class="quote">
-               <div class="p">To S.L.O., an American gentleman in accordance with whose classic taste the following
+            <h1 class="head">TREASURE ISLAND</h1> 
+            <div class="quote2">
+               <p class="p">To S.L.O., an American gentleman in accordance with whose classic taste the following
                   narrative has been designed, it is now, in return for numerous delightful hours, and
                   with the kindest wishes, dedicated by his affectionate friend, the author.
-               </div>
+               </p>
             </div> 
             <div class="lg">
-               <div class="head">TO THE HESITATING PURCHASER</div> 
+               <div class="head3">TO THE HESITATING PURCHASER</div> 
                <div class="l">If sailor tales to sailor tunes,</div> 
                <div class="l">  Storm and adventure, heat and cold,</div> 
                <div class="l">If schooners, islands, and maroons,</div> 
@@ -38,367 +154,50 @@
             </div>
          </div>
       </div> 
-      <div class="body">
+      <div class="body2">
          <div class="div">
-            <div class="head">PART ONE—The Old Buccaneer</div> 
+            <h1 class="head">PART ONE—The Old Buccaneer</h1> 
             <div class="div">
-               <div class="head">The Old Sea-dog at the Admiral Benbow</div> 
-               <div class="p">SQUIRE TRELAWNEY, Dr. Livesey, and the rest of these gentlemen having asked me to
+               <h2 class="head">The Old Sea-dog at the Admiral Benbow</h2> 
+               <p class="p">SQUIRE TRELAWNEY, Dr. Livesey, and the rest of these gentlemen having asked me to
                   write down the whole particulars about Treasure Island, from the beginning to the
                   end, keeping nothing back but the bearings of the island, and that only because there
-                  is still treasure not yet lifted, I take up my pen in the year of grace  and go back to the time when my father kept the 
-                  <div class="name">Admiral Benbow</div> inn and the brown old seaman with the sabre cut first took up his lodging under our
+                  is still treasure not yet lifted, I take up my pen in the year of grace <span class="date4">17__</span> and go back to the time when my father kept the <span class="name">Admiral Benbow</span> inn and the brown old seaman with the sabre cut first took up his lodging under our
                   roof.
-               </div> 
-               <div class="p">I remember him as if it were yesterday, as he came plodding to the inn door, his sea-chest
+               </p> 
+               <p class="p">I remember him as if it were yesterday, as he came plodding to the inn door, his sea-chest
                   following behind him in a hand-barrow—a 
-                  <div class="list">
-                     <div class="item">tall, </div>
-                     <div class="item">strong, </div>
-                     <div class="item">heavy, </div>
-                     <div class="item">nut-brown</div>
-                  </div> man, his tarry pigtail falling over the shoulder of his soiled blue coat, his hands
+                  <ul class="list2">
+                     <li class="item">tall, </li>
+                     <li class="item">strong, </li>
+                     <li class="item">heavy, </li>
+                     <li class="item">nut-brown</li>
+                  </ul> man, his tarry pigtail falling over the shoulder of his soiled blue coat, his hands
                   ragged and scarred, with black, broken nails, and the sabre cut across one cheek,
                   a dirty, livid white. I remember him looking round the cover and whistling to himself
                   as he did so, and then breaking out in that old sea-song that he sang so often afterwards:
-               </div> 
+               </p> 
                <div class="lg">
                   <div class="l">"Fifteen men on the dead man's chest--</div> 
                   <div class="l">Yo-ho-ho, and a bottle of rum!"</div>
                </div> 
-               <div class="p">in the high, old tottering voice that seemed to have been tuned and broken at the
+               <p class="p">in the high, old tottering voice that seemed to have been tuned and broken at the
                   capstan bars. Then he rapped on the door with a bit of stick like a handspike that
-                  he carried, and when my father appeared, called roughly for a 
-                  <div class="choice">
-                     <div class="corr">glass</div>
-                     <div class="sic">barrell</div>
-                  </div> of rum. This, when it was brought to him, he drank slowly, like a 
-                  <div class="corr">connoisseur</div>, 
-                  <div class="corr">lingering</div> on the taste and still looking about him at the 
-                  <div class="corr">cliffs</div> and up at our signboard.
-               </div> 
-               <div class="p">"This is a handy cove," says he at length; "and a pleasant 
-                  <div class="sic">sittyated</div> grog-shop
-                  <div class="anchor" id="A1"></div>. Much company, mate?"
-               </div> 
-               <div class="p">My father told him no, very little company, the more was the pity.</div> 
-               <div class="p">"Well, then," said he, "this is the berth for me. Here you, matey," he cried
-                  <div class="note" id="N1">fdslkjfd</div> to the man who trundled the barrow; "bring up alongside and help up my chest. I'll
+                  he carried, and when my father appeared, called roughly for a <span class="alternate choice4" title="alternate"><span class="corr1">glass</span><span class="hidden altcontent "><span class="sic1">barrell</span></span></span> of rum. This, when it was brought to him, he drank slowly, like a <span class="corr2">connoisseur</span>, <span class="corr2">lingering</span> on the taste and still looking about him at the <span class="corr2">cliffs</span> and up at our signboard.
+               </p> 
+               <p class="p">"This is a handy cove," says he at length; "and a pleasant <span class="sic2">sittyated</span> grog-shop<sup><a class="anchor" name="Ad1e171" href="#Nd1e171">1</a></sup>. Much company, mate?"
+               </p> 
+               <p class="p">My father told him no, very little company, the more was the pity.</p> 
+               <p class="p">"Well, then," said he, "this is the berth for me. Here you, matey," he cried<span class="note3" id="N1">fdslkjfd</span> to the man who trundled the barrow; "bring up alongside and help up my chest. I'll
                   stay here a bit," he continued. "I'm a plain man; rum and bacon and eggs is what I
                   want, and that head up there for to watch ships off. What you mought call me? You
                   mought call me captain. Oh, I see what you're at—there"; and he threw down three or
                   four gold pieces on the threshold. "You can tell me when I've worked through that,"
                   says he, looking as fierce as a commander.
-               </div> 
-               <div class="p">
-                  <div class="hi">W</div>As fuͤr eine edle Creatur
-                  <div class="lb"></div> ein Student sey/ ist zur
-                  <div class="lb"></div> Gnuͤge erwiesen. So
-                  <div class="lb"></div> edel aber selbiger ist/ desto
-                  <div class="lb"></div> mehrern Verdruͤßligkei-
-                  <div class="lb"></div> ten/ Kranckheiten und Gefahr ist er un-
-                  <div class="lb"></div> terworffen. In der Jugend muß er
-                  <div class="lb"></div> viel Verdruß und offt harte Schlaͤge
-                  <div class="lb"></div> vertragen von unverstaͤndigen Backel-
-                  <div class="lb"></div> Meistern/ die bißweilen mehr mit unsin-
-                  <div class="lb"></div> nigen Schlaͤgen/ als Verstand und gu-
-                  <div class="lb"></div> ten Worten solche zarte Pflaͤntzlein 
-                  <div class="hi">tra-</div>
-                  <div class="lb"></div> 
-                  <div class="fw">A</div>
-                  <div class="fw">
-                     <div class="hi">cti-</div>
-                  </div>
-                  <div class="lb"></div> 
-                  <div class="pb"></div> 
-                  <div class="fw">
-                     <div class="simple_bold">Studenten-Kranckheiten</div>
-                  </div>
-                  <div class="lb"></div> 
-                  <div class="hi">ctiren</div> und zur vollen Bluͤth untuͤchtig
-                  <div class="lb"></div> machen. Dahero 
-                  <div class="hi">Horatius</div> 
-                  <div class="note">
-                     <div class="hi">l. 2. Epist.</div>
-                  </div> solche
-                  <div class="lb"></div> 
-                  <div class="hi">Orbilios plagosos,</div> uñ noch besser der ge-
-                  <div class="lb"></div> lehrte 
-                  <div class="hi">Dornavius Anitympanistas</div> nen-
-                  <div class="lb"></div> net/ 
-                  <div class="hi">qui teneros pueros non castigant, sed
-                     <div class="lb"></div> carnificant, ut sæpe tenerrima ingenia
-                     <div class="lb"></div> desperent, generosa verò omni relucten-
-                     <div class="lb"></div> tur impetu, &amp; ita vel per timorem, vel
-                     <div class="lb"></div> per furorem Musis earumque ingratiis
-                     <div class="lb"></div> valedicant
-                  </div> das ist/ 
-                  <div class="hi">welche die zarten
-                     <div class="lb"></div> Kinder nicht straffen/ sondern hen-
-                     <div class="lb"></div> ckermaͤßig
-                  </div> 
-                  <div class="hi">tractiren,</div> 
-                  <div class="hi">daß offt die zaͤr-
-                     <div class="lb"></div> testen
-                  </div> 
-                  <div class="hi">ingenia</div> 
-                  <div class="hi">alle Hoffnung sincken
-                     <div class="lb"></div> lassen/ und verzweiffeln/ die hertz-
-                     <div class="lb"></div> hafften Gemuͤther aber mit aller
-                     <div class="lb"></div> Macht wiederstreben/ und also ent-
-                     <div class="lb"></div> weder aus Furcht oder Verwilde-
-                     <div class="lb"></div> rung denen freyen Kuͤnsten gute
-                     <div class="lb"></div> Nacht geben.
-                  </div> 
-                  <div class="note">
-                     <div class="hi">G. Franck. d. l.</div>
-                  </div> Ich gebe solchen
-                  <div class="lb"></div> straffsuͤchtigen und im Zorn geschwin-
-                  <div class="lb"></div> den Lehrmeistern zu bedencken/ was 
-                  <div class="hi">Ta-
-                     <div class="lb"></div> citus
-                  </div> saget: 
-                  <div class="note">
-                     <div class="hi">In vita Agricolæ.</div>
-                  </div> Daß sie den Ernst mit
-                  <div class="lb"></div> Gelindigkeit/ und am allermeisten mit
-                  <div class="lb"></div> Liebe vermischen sollen; Denn Furcht
-                  <div class="lb"></div> 
-                  <div class="fw">und</div>
-                  <div class="lb"></div> 
-                  <div class="pb"></div> 
-                  <div class="fw">
-                     <div class="simple_bold">und derer Curen.</div>
-                  </div>
-                  <div class="lb"></div> und Schrecken ist ein schlechtes Band
-                  <div class="lb"></div> der Liebe. Rathe auch 
-                  <div class="hi">medicè,</div> die Ju-
-                  <div class="lb"></div> gend nicht mit Stecken und andern har-
-                  <div class="lb"></div> ten Instrumenten auf die Koͤpffe/ wie
-                  <div class="lb"></div> die Ochsen zu schlagen/ denn sie werden
-                  <div class="lb"></div> dumm/ und behalten Zeit Lebens schwa-
-                  <div class="lb"></div> che und krancke Koͤpffe/ muͤssen auch
-                  <div class="lb"></div> wohl gar fuͤr der Zeit sterben/ wie ich et-
-                  <div class="lb"></div> liche Exempel 
-                  <div class="hi">observiret.</div> Nach die-
-                  <div class="lb"></div> sem wachsen sie zwar zu einem hoͤhern
-                  <div class="lb"></div> Alter/ nemlich zum Kern-Jahren/ wel-
-                  <div class="lb"></div> ches ist die 
-                  <div class="hi">Adolescentia</div> und 
-                  <div class="hi">Juventus.</div>
-                  <div class="lb"></div> In solcher werden sie der Libertaͤt und
-                  <div class="lb"></div> Freyheit begieriger Krafft natuͤrlicher
-                  <div class="lb"></div> Zuneigung: 
-                  <div class="hi">Adolescentia enim est sta-
-                     <div class="lb"></div> tus humorum temperatior, ubi natura
-                     <div class="lb"></div> majorem acquirit vigorem, dum humo-
-                     <div class="lb"></div> rum qualitates se invicem non obtun-
-                     <div class="lb"></div> dunt, sed in
-                  </div> σνμμετ
-                  <div class="gap"></div>ία 
-                  <div class="hi">laudabili amicè
-                     <div class="lb"></div> conspirant. Unde quam primum à præ-
-                     <div class="lb"></div> ceptorum &amp; parentum cura emancipati
-                     <div class="lb"></div> sunt, florentis ætatis voluptatibus avidi-
-                     <div class="lb"></div> us implentur, &amp; in excessus quoslibet pro-
-                     <div class="lb"></div> lubuntur.
-                  </div> Das ist/ 
-                  <div class="hi">die</div> 
-                  <div class="hi">Adolescenz</div> 
-                  <div class="hi">o-
-                     <div class="lb"></div> der die ersten Jugend Jahre seyn
-                     <div class="lb"></div> eine solche Beschaffenheit des Blu-
-                  </div>
-                  <div class="lb"></div> 
-                  <div class="fw">A 2</div>
-                  <div class="fw">
-                     <div class="hi">tes/</div>
-                  </div>
-                  <div class="lb"></div>
-               </div>
+               </p> 
+               <p class="p"><span class="hi2">W</span>As fuͤr eine edle Creatur<span class="lb"></span> ein Student sey/ ist zur<span class="lb"></span> Gnuͤge erwiesen. So<span class="lb"></span> edel aber selbiger ist/ desto<span class="lb"></span> mehrern Verdruͤßligkei-<span class="lb"></span> ten/ Kranckheiten und Gefahr ist er un-<span class="lb"></span> terworffen. In der Jugend muß er<span class="lb"></span> viel Verdruß und offt harte Schlaͤge<span class="lb"></span> vertragen von unverstaͤndigen Backel-<span class="lb"></span> Meistern/ die bißweilen mehr mit unsin-<span class="lb"></span> nigen Schlaͤgen/ als Verstand und gu-<span class="lb"></span> ten Worten solche zarte Pflaͤntzlein <span class="hi2">tra-</span><span class="lb"></span> <span class="fw1">A</span><span class="fw1"><span class="hi2">cti-</span></span><span class="lb"></span> <span class="pb">2 @#f0028</span> <span class="fw1"><span class="simple_bold">Studenten-Kranckheiten</span></span><span class="lb"></span> <span class="hi2">ctiren</span> und zur vollen Bluͤth untuͤchtig<span class="lb"></span> machen. Dahero <span class="hi2">Horatius</span> <sup class="footnotelink"><a href="#d1e238">(a)</a></sup><div id="d1e238" class="bottom note1"><span class="hi2">l. 2. Epist.</span></div> solche<span class="lb"></span> <span class="hi2">Orbilios plagosos,</span> uñ noch besser der ge-<span class="lb"></span> lehrte <span class="hi2">Dornavius Anitympanistas</span> nen-<span class="lb"></span> net/ <span class="hi2">qui teneros pueros non castigant, sed<span class="lb"></span> carnificant, ut sæpe tenerrima ingenia<span class="lb"></span> desperent, generosa verò omni relucten-<span class="lb"></span> tur impetu, &amp; ita vel per timorem, vel<span class="lb"></span> per furorem Musis earumque ingratiis<span class="lb"></span> valedicant</span> das ist/ <span class="hi2">welche die zarten<span class="lb"></span> Kinder nicht straffen/ sondern hen-<span class="lb"></span> ckermaͤßig</span> <span class="hi2">tractiren,</span> <span class="hi2">daß offt die zaͤr-<span class="lb"></span> testen</span> <span class="hi2">ingenia</span> <span class="hi2">alle Hoffnung sincken<span class="lb"></span> lassen/ und verzweiffeln/ die hertz-<span class="lb"></span> hafften Gemuͤther aber mit aller<span class="lb"></span> Macht wiederstreben/ und also ent-<span class="lb"></span> weder aus Furcht oder Verwilde-<span class="lb"></span> rung denen freyen Kuͤnsten gute<span class="lb"></span> Nacht geben.</span> <sup class="footnotelink"><a href="#d1e303">(b)</a></sup><div id="d1e303" class="bottom note1"><span class="hi2">G. Franck. d. l.</span></div> Ich gebe solchen<span class="lb"></span> straffsuͤchtigen und im Zorn geschwin-<span class="lb"></span> den Lehrmeistern zu bedencken/ was <span class="hi2">Ta-<span class="lb"></span> citus</span> saget: <sup class="footnotelink"><a href="#d1e317">(c)</a></sup><div id="d1e317" class="bottom note1"><span class="hi2">In vita Agricolæ.</span></div> Daß sie den Ernst mit<span class="lb"></span> Gelindigkeit/ und am allermeisten mit<span class="lb"></span> Liebe vermischen sollen; Denn Furcht<span class="lb"></span> <span class="fw1">und</span><span class="lb"></span> <span class="pb">3 @#f0029</span> <span class="fw1"><span class="simple_bold">und derer Curen.</span></span><span class="lb"></span> und Schrecken ist ein schlechtes Band<span class="lb"></span> der Liebe. Rathe auch <span class="hi2">medicè,</span> die Ju-<span class="lb"></span> gend nicht mit Stecken und andern har-<span class="lb"></span> ten Instrumenten auf die Koͤpffe/ wie<span class="lb"></span> die Ochsen zu schlagen/ denn sie werden<span class="lb"></span> dumm/ und behalten Zeit Lebens schwa-<span class="lb"></span> che und krancke Koͤpffe/ muͤssen auch<span class="lb"></span> wohl gar fuͤr der Zeit sterben/ wie ich et-<span class="lb"></span> liche Exempel <span class="hi2">observiret.</span> Nach die-<span class="lb"></span> sem wachsen sie zwar zu einem hoͤhern<span class="lb"></span> Alter/ nemlich zum Kern-Jahren/ wel-<span class="lb"></span> ches ist die <span class="hi2">Adolescentia</span> und <span class="hi2">Juventus.</span><span class="lb"></span> In solcher werden sie der Libertaͤt und<span class="lb"></span> Freyheit begieriger Krafft natuͤrlicher<span class="lb"></span> Zuneigung: <span class="hi2">Adolescentia enim est sta-<span class="lb"></span> tus humorum temperatior, ubi natura<span class="lb"></span> majorem acquirit vigorem, dum humo-<span class="lb"></span> rum qualitates se invicem non obtun-<span class="lb"></span> dunt, sed in</span> σνμμετ<span class="gap3"></span>ία <span class="hi2">laudabili amicè<span class="lb"></span> conspirant. Unde quam primum à præ-<span class="lb"></span> ceptorum &amp; parentum cura emancipati<span class="lb"></span> sunt, florentis ætatis voluptatibus avidi-<span class="lb"></span> us implentur, &amp; in excessus quoslibet pro-<span class="lb"></span> lubuntur.</span> Das ist/ <span class="hi2">die</span> <span class="hi2">Adolescenz</span> <span class="hi2">o-<span class="lb"></span> der die ersten Jugend Jahre seyn<span class="lb"></span> eine solche Beschaffenheit des Blu-</span><span class="lb"></span> <span class="fw1">A 2</span><span class="fw1"><span class="hi2">tes/</span></span><span class="lb"></span></p>
             </div>
          </div>
       </div>
-      <div class="body">
-         <div class="div">
-            <div class="head">PART ONE—The Old Buccaneer</div> 
-            <div class="div">
-               <div class="head">The Old Sea-dog at the Admiral Benbow</div> 
-               <div class="p">SQUIRE TRELAWNEY, Dr. Livesey, and the rest of these gentlemen having asked me to
-                  write down the whole particulars about Treasure Island, from the beginning to the
-                  end, keeping nothing back but the bearings of the island, and that only because there
-                  is still treasure not yet lifted, I take up my pen in the year of grace  and go back to the time when my father kept the 
-                  <div class="name">Admiral Benbow</div> inn and the brown old seaman with the sabre cut first took up his lodging under our
-                  roof.
-               </div> 
-               <div class="p">I remember him as if it were yesterday, as he came plodding to the inn door, his sea-chest
-                  following behind him in a hand-barrow—a 
-                  <div class="list">
-                     <div class="item">tall, </div>
-                     <div class="item">strong, </div>
-                     <div class="item">heavy, </div>
-                     <div class="item">nut-brown</div>
-                  </div> man, his tarry pigtail falling over the shoulder of his soiled blue coat, his hands
-                  ragged and scarred, with black, broken nails, and the sabre cut across one cheek,
-                  a dirty, livid white. I remember him looking round the cover and whistling to himself
-                  as he did so, and then breaking out in that old sea-song that he sang so often afterwards:
-               </div> 
-               <div class="lg">
-                  <div class="l">"Fifteen men on the dead man's chest--</div> 
-                  <div class="l">Yo-ho-ho, and a bottle of rum!"</div>
-               </div> 
-               <div class="p">in the high, old tottering voice that seemed to have been tuned and broken at the
-                  capstan bars. Then he rapped on the door with a bit of stick like a handspike that
-                  he carried, and when my father appeared, called roughly for a 
-                  <div class="choice">
-                     <div class="corr">glass</div>
-                     <div class="sic">barrell</div>
-                  </div> of rum. This, when it was brought to him, he drank slowly, like a 
-                  <div class="corr">connoisseur</div>, 
-                  <div class="corr">lingering</div> on the taste and still looking about him at the 
-                  <div class="corr">cliffs</div> and up at our signboard.
-               </div> 
-               <div class="p">"This is a handy cove," says he at length; "and a pleasant 
-                  <div class="sic">sittyated</div> grog-shop
-                  <div class="anchor" id="A1"></div>. Much company, mate?"
-               </div> 
-               <div class="p">My father told him no, very little company, the more was the pity.</div> 
-               <div class="p">"Well, then," said he, "this is the berth for me. Here you, matey," he cried
-                  <div class="note" id="N1">fdslkjfd</div> to the man who trundled the barrow; "bring up alongside and help up my chest. I'll
-                  stay here a bit," he continued. "I'm a plain man; rum and bacon and eggs is what I
-                  want, and that head up there for to watch ships off. What you mought call me? You
-                  mought call me captain. Oh, I see what you're at—there"; and he threw down three or
-                  four gold pieces on the threshold. "You can tell me when I've worked through that,"
-                  says he, looking as fierce as a commander.
-               </div> 
-               <div class="p">
-                  <div class="hi">W</div>As fuͤr eine edle Creatur
-                  <div class="lb"></div> ein Student sey/ ist zur
-                  <div class="lb"></div> Gnuͤge erwiesen. So
-                  <div class="lb"></div> edel aber selbiger ist/ desto
-                  <div class="lb"></div> mehrern Verdruͤßligkei-
-                  <div class="lb"></div> ten/ Kranckheiten und Gefahr ist er un-
-                  <div class="lb"></div> terworffen. In der Jugend muß er
-                  <div class="lb"></div> viel Verdruß und offt harte Schlaͤge
-                  <div class="lb"></div> vertragen von unverstaͤndigen Backel-
-                  <div class="lb"></div> Meistern/ die bißweilen mehr mit unsin-
-                  <div class="lb"></div> nigen Schlaͤgen/ als Verstand und gu-
-                  <div class="lb"></div> ten Worten solche zarte Pflaͤntzlein 
-                  <div class="hi">tra-</div>
-                  <div class="lb"></div> 
-                  <div class="fw">A</div>
-                  <div class="fw">
-                     <div class="hi">cti-</div>
-                  </div>
-                  <div class="lb"></div> 
-                  <div class="pb"></div> 
-                  <div class="fw">
-                     <div class="simple_bold">Studenten-Kranckheiten</div>
-                  </div>
-                  <div class="lb"></div> 
-                  <div class="hi">ctiren</div> und zur vollen Bluͤth untuͤchtig
-                  <div class="lb"></div> machen. Dahero 
-                  <div class="hi">Horatius</div> 
-                  <div class="note">
-                     <div class="hi">l. 2. Epist.</div>
-                  </div> solche
-                  <div class="lb"></div> 
-                  <div class="hi">Orbilios plagosos,</div> uñ noch besser der ge-
-                  <div class="lb"></div> lehrte 
-                  <div class="hi">Dornavius Anitympanistas</div> nen-
-                  <div class="lb"></div> net/ 
-                  <div class="hi">qui teneros pueros non castigant, sed
-                     <div class="lb"></div> carnificant, ut sæpe tenerrima ingenia
-                     <div class="lb"></div> desperent, generosa verò omni relucten-
-                     <div class="lb"></div> tur impetu, &amp; ita vel per timorem, vel
-                     <div class="lb"></div> per furorem Musis earumque ingratiis
-                     <div class="lb"></div> valedicant
-                  </div> das ist/ 
-                  <div class="hi">welche die zarten
-                     <div class="lb"></div> Kinder nicht straffen/ sondern hen-
-                     <div class="lb"></div> ckermaͤßig
-                  </div> 
-                  <div class="hi">tractiren,</div> 
-                  <div class="hi">daß offt die zaͤr-
-                     <div class="lb"></div> testen
-                  </div> 
-                  <div class="hi">ingenia</div> 
-                  <div class="hi">alle Hoffnung sincken
-                     <div class="lb"></div> lassen/ und verzweiffeln/ die hertz-
-                     <div class="lb"></div> hafften Gemuͤther aber mit aller
-                     <div class="lb"></div> Macht wiederstreben/ und also ent-
-                     <div class="lb"></div> weder aus Furcht oder Verwilde-
-                     <div class="lb"></div> rung denen freyen Kuͤnsten gute
-                     <div class="lb"></div> Nacht geben.
-                  </div> 
-                  <div class="note">
-                     <div class="hi">G. Franck. d. l.</div>
-                  </div> Ich gebe solchen
-                  <div class="lb"></div> straffsuͤchtigen und im Zorn geschwin-
-                  <div class="lb"></div> den Lehrmeistern zu bedencken/ was 
-                  <div class="hi">Ta-
-                     <div class="lb"></div> citus
-                  </div> saget: 
-                  <div class="note">
-                     <div class="hi">In vita Agricolæ.</div>
-                  </div> Daß sie den Ernst mit
-                  <div class="lb"></div> Gelindigkeit/ und am allermeisten mit
-                  <div class="lb"></div> Liebe vermischen sollen; Denn Furcht
-                  <div class="lb"></div> 
-                  <div class="fw">und</div>
-                  <div class="lb"></div> 
-                  <div class="pb"></div> 
-                  <div class="fw">
-                     <div class="simple_bold">und derer Curen.</div>
-                  </div>
-                  <div class="lb"></div> und Schrecken ist ein schlechtes Band
-                  <div class="lb"></div> der Liebe. Rathe auch 
-                  <div class="hi">medicè,</div> die Ju-
-                  <div class="lb"></div> gend nicht mit Stecken und andern har-
-                  <div class="lb"></div> ten Instrumenten auf die Koͤpffe/ wie
-                  <div class="lb"></div> die Ochsen zu schlagen/ denn sie werden
-                  <div class="lb"></div> dumm/ und behalten Zeit Lebens schwa-
-                  <div class="lb"></div> che und krancke Koͤpffe/ muͤssen auch
-                  <div class="lb"></div> wohl gar fuͤr der Zeit sterben/ wie ich et-
-                  <div class="lb"></div> liche Exempel 
-                  <div class="hi">observiret.</div> Nach die-
-                  <div class="lb"></div> sem wachsen sie zwar zu einem hoͤhern
-                  <div class="lb"></div> Alter/ nemlich zum Kern-Jahren/ wel-
-                  <div class="lb"></div> ches ist die 
-                  <div class="hi">Adolescentia</div> und 
-                  <div class="hi">Juventus.</div>
-                  <div class="lb"></div> In solcher werden sie der Libertaͤt und
-                  <div class="lb"></div> Freyheit begieriger Krafft natuͤrlicher
-                  <div class="lb"></div> Zuneigung: 
-                  <div class="hi">Adolescentia enim est sta-
-                     <div class="lb"></div> tus humorum temperatior, ubi natura
-                     <div class="lb"></div> majorem acquirit vigorem, dum humo-
-                     <div class="lb"></div> rum qualitates se invicem non obtun-
-                     <div class="lb"></div> dunt, sed in
-                  </div> σνμμετ
-                  <div class="gap"></div>ία 
-                  <div class="hi">laudabili amicè
-                     <div class="lb"></div> conspirant. Unde quam primum à præ-
-                     <div class="lb"></div> ceptorum &amp; parentum cura emancipati
-                     <div class="lb"></div> sunt, florentis ætatis voluptatibus avidi-
-                     <div class="lb"></div> us implentur, &amp; in excessus quoslibet pro-
-                     <div class="lb"></div> lubuntur.
-                  </div> Das ist/ 
-                  <div class="hi">die</div> 
-                  <div class="hi">Adolescenz</div> 
-                  <div class="hi">o-
-                     <div class="lb"></div> der die ersten Jugend Jahre seyn
-                     <div class="lb"></div> eine solche Beschaffenheit des Blu-
-                  </div>
-                  <div class="lb"></div> 
-                  <div class="fw">A 2</div>
-                  <div class="fw">
-                     <div class="hi">tes/</div>
-                  </div>
-                  <div class="lb"></div>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
+   </body>
+</html>
