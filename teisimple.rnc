@@ -3101,7 +3101,7 @@ bibl =
            "\x{a}" ~
            "               "
            sch:assert [
-             test = "child::* or child::text()[normalize-space]"
+             test = "child::* or child::text()[normalize-space()]"
              role = "ERROR"
              "\x{a}" ~
              '                Element "'

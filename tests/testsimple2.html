@@ -1,233 +1,447 @@
-<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml">
-   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <link rel="StyleSheet" href="simple.css" type="text/css" /><style type="text/css">.simple_allcaps { text-transform: uppercase; } 
-.simple_blackletter { font-family: fantasy; } 
-.simple_bold { font-weight: bold; } 
-.simple_bottombraced { padding-bottom: 2pt; border-bottom: dashed gray 2pt; } 
-.simple_block { display:block; } 
-.simple_boxed { padding: 2pt; border: solid black 1pt; } 
-.simple_centre { text-align: center; } 
-.simple_cursive { font-family: cursive; } 
-.simple_doublestrikethrough { text-decoration: line-through;    color: red; } 
-.simple_doubleunderline { text-decoration: underline;    color: red; } 
-.simple_dropcap { font-size : 6em;
-    font-family: cursive;
-    font-weight : bold;
-    vertical-align: top;
-    height: 1em;
-    line-height: 1em;
-    float : left;
-    width : 1em;
-    color : #c00;
-    margin: 0em;
-    padding: 0px; } 
-.simple_float { float:right;    display: block;
-    font-size: smaller;
-    clear: right;
-    padding: 4pt;
-    width: 15%;
- } 
-.simple_hyphen {  } 
-.simple_inline { display:inline; } 
-.simple_italic { font-style: italic; } 
-.simple_justify { text-align: justify; } 
-.simple_larger { font-size: larger; } 
-.simple_left { text-align: left; } 
-.simple_leftbraced { padding-left: 2pt; border-left: dotted gray 2pt;  } 
-.simple_letterspace { letter-spacing: 0.5em; } 
-.simple_normalstyle { font-style:roman; } 
-.simple_normalweight { font-weight:normal; } 
-.simple_right { text-align: right; } 
-.simple_rightbraced { padding-right: 2pt; border-right: dotted gray 2pt;  } 
-.simple_rotateleft { -webkit-transform: rotate(90deg);    transform: rotate(90deg); } 
-.simple_rotateright { -webkit-transform: rotate(-90deg);    transform: rotate(-90deg); } 
-.simple_smallcaps { font-variant: small-caps; } 
-.simple_smaller { font-size: smaller; } 
-.simple_strikethrough { text-decoration: line-through; } 
-.simple_subscript { vertical-align: bottom;    font-size: smaller; } 
-.simple_superscript { vertical-align: super;    font-size: smaller; } 
-.simple_topbraced { padding-top: 2pt;  border-top: dotted gray 2pt;  } 
-.simple_typewriter { font-family:monospace; } 
-.simple_underline { text-decoration: underline; } 
-.simple_wavyunderline { text-decoration: underline;       text-decoration-style: wavy; } 
-span.add {color: green; text-decoration: underline;}
-div.address {margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;}
-div.addrLine {white-space: nowrap;}
-div.argument {margin-bottom: 0.5em;}
-ol.castList {list-style: ordered;}
-ul.castList {list-style: ordered;}
-div.closer {margin-top: 1em; margin-left: 1em; margin-left: 1em;}
-span.corr2:before {content: '[';}
-span.corr2:after {content: ']';}
-span.del {text-decoration: line-through;}
-div.div1 {border: 1px solid black; padding: 5px;}
-div.docTitle2 {font-size: larger;}
-span.figDesc:before {content: '[..';}
-span.figDesc:after {content: '..]';}
-span.figDesc {color: grey;font-style:italic;}
-span.figure2 {display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue;}
-div.floatingText {margin: 6pt; border: solid black 1pt;}
-span.foreign {font-style:italic;}
-span.gap1 {color: grey;}
-span.gap2:before {content: '[..';}
-span.gap2:after {content: '..]';}
-span.gap2 {color: grey;}
-span.gap3:before {content: '[...]';}
-div.head1 {font-style: italic;}
-div.head2 {font-style: italic;}
-div.head3 {font-style: italic;}
-div.head4 {font-weight: bold;}
-span.hi1 {font-style: italic;}
-span.hi2 {font-style: italic;}
-div.l {margin-left: 1em;}
-div.note2 {margin-left: 10px;margin-right: 10px; font-size:smaller;}
-span.note3:before {content:" [";}
-span.note3:after {content:"] ";}
-span.note3 {font-size:small;}
-p.p {text-align: justify;}
-span.pb {display: block; margin-left: 4pt; color: grey; float: right;}
-span.pb:before {content: '[Page ';}
-span.pb:after {content: ']';}
-div.q1 {margin-left: 10px; margin-right: 10px;}
-span.q2:before {content: '‘';}
-span.q2:after {content: '’';}
-div.q3 {margin-left: 10px; margin-right: 10px;}
-span.quote1:before {content: '‘';}
-span.quote1:after {content: '’';}
-div.quote2 {margin-left: 10px; margin-right: 10px;}
-tr.row1 {font-weight: bold;}
-span.sic2:before {content: '{';}
-span.sic2:after {content: '}';}
-div.signed1 {text-align: right;}
-span.signed2 {font-style: italic;}
-div.speaker {font-style:italic;}
-div.stage {font-style: italic;}
-span.supplied2:before {content:"&lt;";}
-span.supplied2:after {content:"&gt;";}
-span.supplied3:before {content:"[";}
-span.supplied3:after {content:"]";}
-span.supplied4:before {content:"(";}
-span.supplied4:after {content:")";}
-span.supplied5:before {content:"{";}
-span.supplied5:after {content:"}";}
-table.table {font-size: smaller; background-color: #F0F0F0;}
-div.text {max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;}
-div.title2 {color: red; font-size: 2em;}
-span.title4 {font-style: italic;}
-span.title6 {font-style: italic;}
-span.title8 {font-style: italic;}
-span.title10 {font-style: italic;}
-div.titlePage {text-align: center;}
-div.trailer {color: green;}
-span.unclear:after {content: ' [?] ';}
-</style><script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf8" src="simple.js"></script><title>The Vergins advice to the maids of London to the tune of Oh! that I were but young
-         for you.
-      </title>   
-   </head> 
-   <body>
-      <div class="body2">
-         <div class="div"><span class="simple_additions">@tcp:110643:1</span>  
-            <h1 class="head">The Vergins Advice TO THE Maids of LONDON.</h1> 
-            <div class="opener">To the Tune of, <span class="hi2">Oh! that I were but young for you.</span></div> 
+<?xml version="1.0" encoding="UTF-8"?><div xmlns="http://www.w3.org/1999/xhtml" class="TEI">
+   <div class="teiHeader">
+      <div class="fileDesc">
+         <div class="title">The Vergins advice to the maids of London to the tune of Oh! that I were but young
+            for you.
+         </div>  Approx. 3 KB of XML-encoded text transcribed from 1 1-bit group-IV TIFF page image. 
+         <div class="publisher">Text Creation Partnership,</div> 
+         <div class="pubPlace">Ann Arbor, MI ; Oxford (UK) :</div> 
+         <div class="date">2009-10 (EEBO-TCP Phase 1).</div> B31385 Wing V639 ESTC R41726 31355833 ocm 31355833 110643 
+         <div class="p">This keyboarded and encoded edition of the work described above is co-owned by the
+            institutions providing financial support to the Early English Books Online Text Creation
+            Partnership. This Phase I text is available for reuse, according to the terms of 
+            <div class="ref">Creative Commons 0 1.0 Universal</div>. The text can be copied, modified, distributed and performed, even for commercial
+            purposes, all without asking permission.
+         </div> 
+         <div class="title">Early English books online.</div> 
+         <div class="note">(EEBO-TCP ; phase 1, no. B31385)</div> 
+         <div class="note">Transcribed from: (Early English Books Online ; image set 110643)</div> 
+         <div class="note">Images scanned from microfilm: (Early English books, 1641-1700 ; 1752:11)</div> 
+         <div class="title">The Vergins advice to the maids of London to the tune of Oh! that I were but young
+            for you.
+         </div>
+         <div class="title">The Vergins advice to the maids of London to the tune of Oh! that I were but young
+            for you.
+         </div> 1 sheet ([1] p.).  
+         <div class="publisher">Printed and sold by Charles Barnet,</div> 
+         <div class="pubPlace">[London] :</div>  
+         <div class="note">Date of publication suggested by Wing (2nd. ed)</div> 
+         <div class="note">Printed on right half of sheet which also contains Wing (2nd ed.) R1793, "Roger the
+            West-country lad".
+         </div> 
+         <div class="note">Imperfect: faded, with loss of print.</div> 
+         <div class="note">Reproduction of original in the Magdalene College Library, University of Cambridge.</div>
+      </div> 
+      <div class="encodingDesc">
+         <div class="p">Created by converting TCP files to TEI P5 using tcp2tei.xsl, TEI @ Oxford. </div> 
+         <div class="p">EEBO-TCP is a partnership between the Universities of Michigan and Oxford and the
+            publisher ProQuest to create accurately transcribed and encoded texts based on the
+            image sets published by ProQuest via their Early English Books Online (EEBO) database
+            (http://eebo.chadwyck.com). The general aim of EEBO-TCP is to encode one copy (usually
+            the first edition) of every monographic English-language title published between 1473
+            and 1700 available in EEBO.
+         </div> 
+         <div class="p">EEBO-TCP aimed to produce large quantities of textual data within the usual project
+            restraints of time and funding, and therefore chose to create diplomatic transcriptions
+            (as opposed to critical editions) with light-touch, mainly structural encoding based
+            on the Text Encoding Initiative (http://www.tei-c.org).
+         </div> 
+         <div class="p">The EEBO-TCP project was divided into two phases. The 25,363 texts created during
+            Phase 1 of the project have been released into the public domain as of 1 January 2015.
+            Anyone can now take and use these texts for their own purposes, but we respectfully
+            request that due credit and attribution is given to their original source.
+         </div> 
+         <div class="p">Users should be aware of the process of creating the TCP texts, and therefore of any
+            assumptions that can be made about the data.
+         </div> 
+         <div class="p">Text selection was based on the New Cambridge Bibliography of English Literature (NCBEL).
+            If an author (or for an anonymous work, the title) appears in NCBEL, then their works
+            are eligible for inclusion. Selection was intended to range over a wide variety of
+            subject areas, to reflect the true nature of the print record of the period. In general,
+            first editions of a works in English were prioritized, although there are a number
+            of works in other languages, notably Latin and Welsh, included and sometimes a second
+            or later edition of a work was chosen if there was a compelling reason to do so.
+         </div> 
+         <div class="p">Image sets were sent to external keying companies for transcription and basic encoding.
+            Quality assurance was then carried out by editorial teams in Oxford and Michigan.
+            5% (or 5 pages, whichever is the greater) of each text was proofread for accuracy
+            and those which did not meet QA standards were returned to the keyers to be redone.
+            After proofreading, the encoding was enhanced and/or corrected and characters marked
+            as illegible were corrected where possible up to a limit of 100 instances per text.
+            Any remaining illegibles were encoded as &lt;gap&gt;s. Understanding these processes should
+            make clear that, while the overall quality of TCP data is very good, some errors will
+            remain and some readable characters will be marked as illegible. Users should bear
+            in mind that in all likelihood such instances will never have been looked at by a
+            TCP editor.
+         </div> 
+         <div class="p">The texts were encoded and linked to page images in accordance with level 4 of the
+            TEI in Libraries guidelines.
+         </div> 
+         <div class="p">Copies of the texts have been issued variously as SGML (TCP schema; ASCII text with
+            mnemonic sdata character entities); displayable XML (TCP schema; characters represented
+            either as UTF-8 Unicode or text strings within braces); or lossless XML (TEI P5, characters
+            represented either as UTF-8 Unicode or TEI g elements).
+         </div> 
+         <div class="p">Keying and markup guidelines are available at the 
+            <div class="ref">Text Creation Partnership web site</div>.
+         </div>  
+      </div> 
+      <div class="profileDesc">eng Ballads, English -- 17th century. Broadsides -- London (England) -- 17th century.</div> 
+      <div class="revisionDesc"> 
+         <div class="label">TCP</div>Assigned for keying and markup  
+         <div class="label">SPi Global</div>Keyed and coded from ProQuest page images  
+         <div class="label">Megan Marion</div>Sampled and proofread  
+         <div class="label">Megan Marion</div>Text and markup reviewed and edited  
+         <div class="label">pfs</div>Batch review (QC) and XML conversion
+      </div>
+   </div> 
+   <div class="text">
+      <div class="body">
+         <div class="div">
+            <div class="simple_additions"></div>  
+            <div class="head">The Vergins Advice TO THE Maids of LONDON.</div> 
+            <div class="opener">To the Tune of, 
+               <div class="hi">Oh! that I were but young for you.</div>
+            </div> 
             <div class="lg">
                <div class="l">OFt have I heard the Wives complain,</div> 
                <div class="l">O that they were but Maids again,</div> 
-               <div class="l">Maids and they would <span class="hi2">marry</span> with none,
+               <div class="l">Maids and they would 
+                  <div class="hi">marry</div> with none,
                </div> 
-               <div class="l"><span class="hi2">For the Maid is the best that lies alone.</span></div>
+               <div class="l">
+                  <div class="hi">For the Maid is the best that lies alone.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l">What is more <span class="hi2">sweet</span> than to live <span class="hi2">free,</span></div> 
-               <div class="l">And to enjoy ones <span class="hi2">Liberty?</span></div> 
-               <div class="l">Therefore I will <span class="hi2">marry with none,</span></div> 
-               <div class="l"><span class="hi2">For the Maid is the best that lies alone.</span></div>
+               <div class="l">What is more 
+                  <div class="hi">sweet</div> than to live 
+                  <div class="hi">free,</div>
+               </div> 
+               <div class="l">And to enjoy ones 
+                  <div class="hi">Liberty?</div>
+               </div> 
+               <div class="l">Therefore I will 
+                  <div class="hi">marry with none,</div>
+               </div> 
+               <div class="l">
+                  <div class="hi">For the Maid is the best that lies alone.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l"><span class="hi2">Love</span> is a <span class="hi2">torment</span> in the breast,
+               <div class="l">
+                  <div class="hi">Love</div> is a 
+                  <div class="hi">torment</div> in the breast,
                </div> 
                <div class="l">And will not let a Maiden rest,</div> 
-               <div class="l">And the <span class="hi2">young men</span> now so faithless are <span class="hi2">grown,</span></div> 
-               <div class="l"><span class="hi2">That the maid is the best that lies alone.</span></div>
+               <div class="l">And the 
+                  <div class="hi">young men</div> now so faithless are 
+                  <div class="hi">grown,</div>
+               </div> 
+               <div class="l">
+                  <div class="hi">That the maid is the best that lies alone.</div>
+               </div>
             </div> 
             <div class="lg">
                <div class="l">When we are Young they praise us all,</div> 
-               <div class="l">And their <span class="hi2">Delights</span> and <span class="hi2">Darlings</span> call;
+               <div class="l">And their 
+                  <div class="hi">Delights</div> and 
+                  <div class="hi">Darlings</div> call;
                </div> 
-               <div class="l">And <span class="hi2">yet a Lover</span> I will have none,
+               <div class="l">And 
+                  <div class="hi">yet a Lover</div> I will have none,
                </div> 
-               <div class="l"><span class="hi2">For the Maid, &amp;c.</span></div>
+               <div class="l">
+                  <div class="hi">For the Maid, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l">Why should wear Young <span class="hi2">Cupid</span>'s Chain?
+               <div class="l">Why should wear Young 
+                  <div class="hi">Cupid</div>'s Chain?
                </div> 
                <div class="l">Why should I grieve and sigh in vain?</div> 
-               <div class="l">Now <span class="hi2">my</span> heart I'm sure is <span class="hi2">my</span> own,
+               <div class="l">Now 
+                  <div class="hi">my</div> heart I'm sure is 
+                  <div class="hi">my</div> own,
                </div> 
-               <div class="l"><span class="hi2">And the Maid, &amp;c.</span></div>
+               <div class="l">
+                  <div class="hi">And the Maid, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l">Why should the <span class="hi2">Maidens marry</span> then?
+               <div class="l">Why should the 
+                  <div class="hi">Maidens marry</div> then?
                </div> 
                <div class="l">Only to please Fantastick men;</div> 
-               <div class="l">No one <span class="hi2">need to make any moan,</span></div> 
-               <div class="l"><span class="hi2">And the Maid, &amp;c.</span></div>
+               <div class="l">No one 
+                  <div class="hi">need to make any moan,</div>
+               </div> 
+               <div class="l">
+                  <div class="hi">And the Maid, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l">Which is most fine the <span class="hi2">Rose</span> or <span class="hi2">thorn?</span></div> 
-               <div class="l">Or that which on <span class="hi2">some soft Breast</span> is worn;
+               <div class="l">Which is most fine the 
+                  <div class="hi">Rose</div> or 
+                  <div class="hi">thorn?</div>
                </div> 
-               <div class="l">There the fragrant <span class="hi2">sweetness</span> is gone,
+               <div class="l">Or that which on 
+                  <div class="hi">some soft Breast</div> is worn;
                </div> 
-               <div class="l"><span class="hi2">And the Maid, &amp;c.</span></div>
+               <div class="l">There the fragrant 
+                  <div class="hi">sweetness</div> is gone,
+               </div> 
+               <div class="l">
+                  <div class="hi">And the Maid, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l">In a <span class="hi2">sweet harmless single life,</span></div> 
+               <div class="l">In a 
+                  <div class="hi">sweet harmless single life,</div>
+               </div> 
                <div class="l">There is no scolding noise or strife,</div> 
-               <div class="l">To which the Husbands <span class="hi2">ever were</span> prone,
+               <div class="l">To which the Husbands 
+                  <div class="hi">ever were</div> prone,
                </div> 
-               <div class="l"><span class="hi2">Therefore maids are the best, &amp;c.</span></div>
+               <div class="l">
+                  <div class="hi">Therefore maids are the best, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
                <div class="l">In lying alone there is no harm,</div> 
-               <div class="l">And our <span class="hi2">maidenheads</span> sure can <span class="hi2">keep</span> us warm,
+               <div class="l">And our 
+                  <div class="hi">maidenheads</div> sure can 
+                  <div class="hi">keep</div> us warm,
                </div> 
-               <div class="l">Therefore Young Virgins <span class="hi2">keep</span> what's your own,
+               <div class="l">Therefore Young Virgins 
+                  <div class="hi">keep</div> what's your own,
                </div> 
-               <div class="l"><span class="hi2">For the Maid, &amp;c.</span></div>
+               <div class="l">
+                  <div class="hi">For the Maid, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
                <div class="l">I do advise that you touch no man,</div> 
                <div class="l">And you'll be a Maid do what they can,</div> 
                <div class="l">And this I'll lay a hundred to one</div> 
-               <div class="l"><span class="hi2">That she's the best, &amp;c.</span></div>
+               <div class="l">
+                  <div class="hi">That she's the best, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l">Though men are fond, <span class="hi2">they're fickle</span> still,
+               <div class="l">Though men are fond, 
+                  <div class="hi">they're fickle</div> still,
                </div> 
-               <div class="l">And <span class="hi2">every Jack</span> must have his <span class="hi2">Jill,</span></div> 
-               <div class="l">Have a <span class="hi2">Jill,</span> though none of his own,
+               <div class="l">And 
+                  <div class="hi">every Jack</div> must have his 
+                  <div class="hi">Jill,</div>
                </div> 
-               <div class="l"><span class="hi2">Therefore Maids are the best, &amp;c.</span></div>
+               <div class="l">Have a 
+                  <div class="hi">Jill,</div> though none of his own,
+               </div> 
+               <div class="l">
+                  <div class="hi">Therefore Maids are the best, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
-               <div class="l"><span class="hi2">Cupid</span> is but a <span class="hi2">silly Toy,</span></div> 
-               <div class="l">An idle Young blind fantastick <span class="hi2">Boy,</span></div> 
+               <div class="l">
+                  <div class="hi">Cupid</div> is but a 
+                  <div class="hi">silly Toy,</div>
+               </div> 
+               <div class="l">An idle Young blind fantastick 
+                  <div class="hi">Boy,</div>
+               </div> 
                <div class="l">Therefore Lovers I will have none,</div> 
-               <div class="l"><span class="hi2">For the maid, &amp;c.</span></div>
+               <div class="l">
+                  <div class="hi">For the maid, &amp;c.</div>
+               </div>
             </div> 
             <div class="lg">
                <div class="l">Therefore Young Damsels learn of me,</div> 
                <div class="l">For to live harmless and live free;</div> 
                <div class="l">But as for Young men meddle with none,</div> 
-               <div class="l"><span class="hi2">For the Maid is the best that lies alone.</span></div>
+               <div class="l">
+                  <div class="hi">For the Maid is the best that lies alone.</div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="body">
+         <div class="div">
+            <div class="simple_additions"></div>  
+            <div class="head">The Vergins Advice TO THE Maids of LONDON.</div> 
+            <div class="opener">To the Tune of, 
+               <div class="hi">Oh! that I were but young for you.</div>
+            </div> 
+            <div class="lg">
+               <div class="l">OFt have I heard the Wives complain,</div> 
+               <div class="l">O that they were but Maids again,</div> 
+               <div class="l">Maids and they would 
+                  <div class="hi">marry</div> with none,
+               </div> 
+               <div class="l">
+                  <div class="hi">For the Maid is the best that lies alone.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">What is more 
+                  <div class="hi">sweet</div> than to live 
+                  <div class="hi">free,</div>
+               </div> 
+               <div class="l">And to enjoy ones 
+                  <div class="hi">Liberty?</div>
+               </div> 
+               <div class="l">Therefore I will 
+                  <div class="hi">marry with none,</div>
+               </div> 
+               <div class="l">
+                  <div class="hi">For the Maid is the best that lies alone.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">
+                  <div class="hi">Love</div> is a 
+                  <div class="hi">torment</div> in the breast,
+               </div> 
+               <div class="l">And will not let a Maiden rest,</div> 
+               <div class="l">And the 
+                  <div class="hi">young men</div> now so faithless are 
+                  <div class="hi">grown,</div>
+               </div> 
+               <div class="l">
+                  <div class="hi">That the maid is the best that lies alone.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">When we are Young they praise us all,</div> 
+               <div class="l">And their 
+                  <div class="hi">Delights</div> and 
+                  <div class="hi">Darlings</div> call;
+               </div> 
+               <div class="l">And 
+                  <div class="hi">yet a Lover</div> I will have none,
+               </div> 
+               <div class="l">
+                  <div class="hi">For the Maid, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">Why should wear Young 
+                  <div class="hi">Cupid</div>'s Chain?
+               </div> 
+               <div class="l">Why should I grieve and sigh in vain?</div> 
+               <div class="l">Now 
+                  <div class="hi">my</div> heart I'm sure is 
+                  <div class="hi">my</div> own,
+               </div> 
+               <div class="l">
+                  <div class="hi">And the Maid, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">Why should the 
+                  <div class="hi">Maidens marry</div> then?
+               </div> 
+               <div class="l">Only to please Fantastick men;</div> 
+               <div class="l">No one 
+                  <div class="hi">need to make any moan,</div>
+               </div> 
+               <div class="l">
+                  <div class="hi">And the Maid, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">Which is most fine the 
+                  <div class="hi">Rose</div> or 
+                  <div class="hi">thorn?</div>
+               </div> 
+               <div class="l">Or that which on 
+                  <div class="hi">some soft Breast</div> is worn;
+               </div> 
+               <div class="l">There the fragrant 
+                  <div class="hi">sweetness</div> is gone,
+               </div> 
+               <div class="l">
+                  <div class="hi">And the Maid, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">In a 
+                  <div class="hi">sweet harmless single life,</div>
+               </div> 
+               <div class="l">There is no scolding noise or strife,</div> 
+               <div class="l">To which the Husbands 
+                  <div class="hi">ever were</div> prone,
+               </div> 
+               <div class="l">
+                  <div class="hi">Therefore maids are the best, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">In lying alone there is no harm,</div> 
+               <div class="l">And our 
+                  <div class="hi">maidenheads</div> sure can 
+                  <div class="hi">keep</div> us warm,
+               </div> 
+               <div class="l">Therefore Young Virgins 
+                  <div class="hi">keep</div> what's your own,
+               </div> 
+               <div class="l">
+                  <div class="hi">For the Maid, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">I do advise that you touch no man,</div> 
+               <div class="l">And you'll be a Maid do what they can,</div> 
+               <div class="l">And this I'll lay a hundred to one</div> 
+               <div class="l">
+                  <div class="hi">That she's the best, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">Though men are fond, 
+                  <div class="hi">they're fickle</div> still,
+               </div> 
+               <div class="l">And 
+                  <div class="hi">every Jack</div> must have his 
+                  <div class="hi">Jill,</div>
+               </div> 
+               <div class="l">Have a 
+                  <div class="hi">Jill,</div> though none of his own,
+               </div> 
+               <div class="l">
+                  <div class="hi">Therefore Maids are the best, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">
+                  <div class="hi">Cupid</div> is but a 
+                  <div class="hi">silly Toy,</div>
+               </div> 
+               <div class="l">An idle Young blind fantastick 
+                  <div class="hi">Boy,</div>
+               </div> 
+               <div class="l">Therefore Lovers I will have none,</div> 
+               <div class="l">
+                  <div class="hi">For the maid, &amp;c.</div>
+               </div>
+            </div> 
+            <div class="lg">
+               <div class="l">Therefore Young Damsels learn of me,</div> 
+               <div class="l">For to live harmless and live free;</div> 
+               <div class="l">But as for Young men meddle with none,</div> 
+               <div class="l">
+                  <div class="hi">For the Maid is the best that lies alone.</div>
+               </div>
             </div>
          </div>
       </div> 
       <div class="back">
          <div class="div">
-            <p class="p">Printed and Sold <span class="hi2">by Charles Barnes</span></p>
+            <div class="p">Printed and Sold 
+               <div class="hi">by Charles Barnes</div>
+            </div>
          </div>
       </div>
-   </body>
-</html>
+   </div>
+</div>

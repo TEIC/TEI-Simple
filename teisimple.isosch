@@ -116,7 +116,7 @@ The @spanTo attribute of <name/> is required.</assert>
    </pattern>
    <pattern id="teisimple-bibl-constraint-noEmptyBibl-17">
       <rule context="tei:bibl">
-                  <assert test="child::* or child::text()[normalize-space]" role="ERROR">
+                  <assert test="child::* or child::text()[normalize-space()]" role="ERROR">
                 Element "<name/>" may not be empty.
             </assert>
                 </rule>

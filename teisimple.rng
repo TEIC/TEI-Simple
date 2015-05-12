@@ -5257,7 +5257,7 @@ Licensing, etc. 3.11.2.4. Imprint, Size of a Document, and Reprint Information]<
                <assert xmlns:XSL="http://www.w3.org/1999/XSL/Transform"
                        xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-                       test="child::* or child::text()[normalize-space]"
+                       test="child::* or child::text()[normalize-space()]"
                        role="ERROR">
                 Element "<name/>" may not be empty.
             </assert>

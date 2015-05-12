@@ -639,6 +639,17 @@
     <desc>Creates a block out of the content parameter. </desc>
     <equiv name="div"/>
   </valItem>
+  <valItem ident="body">
+    <!--
+              <table rend="rules">
+                <row>
+                  <cell>content</cell>
+                  <cell>XPath</cell>
+                </row>
+              </table>-->
+    <desc>Creates the body of a document.</desc>
+    <equiv name="body"/>
+  </valItem>
   <valItem ident="break">
     <!--
               <table rend="rules">

@@ -58,7 +58,7 @@
         <docAuthor>Sebastian Rahtz</docAuthor>
         <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>Martin Mueller</docAuthor>
-        <docDate>Version 0.2: 12th April 2015</docDate>
+        <docDate>Version 0.3: 12th May 2015</docDate>
       </titlePage>
     </front>
     <body>
@@ -630,7 +630,7 @@
             <elementSpec mode="change" ident="bibl">
               <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
                 <constraint>
-                  <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space]" role="ERROR">
+                  <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="child::* or child::text()[normalize-space()]" role="ERROR">
                 Element "<name/>" may not be empty.
             </assert>
                 </constraint>
@@ -850,7 +850,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="block"/>
             </elementSpec>
             <elementSpec mode="change" ident="g">
-              <model predicate="not(text())" behaviour="glyph">">
+              <model predicate="not(text())" behaviour="glyph">
 	      <value n="g">@ref</value>
 	      </model>
               <model behaviour="inline"/>
@@ -980,7 +980,7 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="orig">
               <model behaviour="inline">
-		<value n="contents">,@n</value>
+		<value n="label">@n</value>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="p">
@@ -995,7 +995,7 @@ border-bottom: solid 1pt blue;
                 </constraint>
               </constraintSpec>
               <model behaviour="break" useSourceRendition="true">
-		<value n="type">page</value>
+		<value n="type">'page'</value>
 		<value n="label">'page',(concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else ''))</value>
                 <rendition>
 	  display: block;
@@ -1161,7 +1161,9 @@ border-bottom: solid 1pt blue;
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="fileDesc">
-              <model behaviour="title(titleStmt)"/>
+              <model behaviour="title">
+		<value n="contents">titleStmt</value>
+	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="profileDesc">
               <model behaviour="omit"/>

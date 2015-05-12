@@ -41,7 +41,7 @@
     <mkdir dir="${tempDir}"/>
     <echo>Unpack spreadsheet to ${tempDir}</echo>
     <unzip src="TEISimplespreadsheet.xlsx" dest="${tempDir}"/>
-    <echo>Convert XSLX to TEI</echo>
+    <echo>Convert XLSX to TEI</echo>
     <xslt force="yes" style="${XSL}/profiles/default/xlsx/from.xsl" in="${tempDir}/_rels/.rels" out="TEISimplespreadsheet.xml">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
       <param name="workDir" expression="file:///${tempDir}"/>
