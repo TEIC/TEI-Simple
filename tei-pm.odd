@@ -592,301 +592,198 @@
               <alternate minOccurs="0" maxOccurs="unbounded">
                 <classRef key="model.glossLike"/>
                 <classRef key="model.descLike"/>
-		<elementRef key="value"  minOccurs="0" maxOccurs="unbounded"/>				
+                <elementRef key="value" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="rendition"/>
               </alternate>
             </content>
             <attList>
               <attDef ident="behaviour" usage="req">
-                <desc>which processing function, optionally containing parameters, should be used to present this element
+                <desc>which processing function, with
+		optional named parameters, should be used to present this element
                 in output</desc>
-<valList type="closed">
-  <valItem ident="alternate">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>preferred element</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>alternate element</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>Creates a specialized display of alternating elements for displaying the
+                <valList type="closed">
+                  <valItem ident="alternate">
+                    <attList>
+                      <attDef ident="default">
+                        <desc>preferred element</desc>
+                      </attDef>
+                      <attDef ident="alternate">
+                        <desc>alternate element</desc>
+                      </attDef>
+                    </attList>
+                    <desc>create a specialized display of alternating elements for displaying the
                   preferred version, both at once or toggling between the two.</desc>
-    
-  </valItem>
-  <valItem ident="anchor">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>ID</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>create anchor with ID</desc>
-    
-  </valItem>
-  <valItem ident="block">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>Creates a block out of the content parameter. </desc>
-    <equiv name="div"/>
-  </valItem>
-  <valItem ident="body">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>Creates the body of a document.</desc>
-    <equiv name="body"/>
-  </valItem>
-  <valItem ident="break">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>type</cell>
-                  <cell>string</cell>
-                </row>
-                <row>
-                  <cell>label</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>make a line, column, or page break according to <term>type</term></desc>
-  </valItem>
-  <valItem ident="cell">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
--->
-    <desc>Creates a table cell</desc>
-    <equiv name="td"/>
-  </valItem>
-  <valItem ident="cit">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>source</cell>
-                  <cell>URI</cell>
-                </row>
-              </table>-->
-    <desc>shows the content, with an attribute of the source</desc>
-  </valItem>
-  <valItem ident="document">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>start a new output document</desc>
-  </valItem>
-  <valItem ident="figure">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>title</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>make a figure with the <term>title</term> as caption</desc>
-    <equiv name="div"/>
-  </valItem>
-  <valItem ident="glyph">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>URI</cell>
-                </row>
-              </table>-->
-    <desc>show a character by looking up reference</desc>
-  </valItem>
-  <valItem ident="graphic">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>url of image file</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>If <att>url</att> is present, uses it to display graphic,
-                  else display placeholder image. </desc>
-    <equiv name="img"/>
-  </valItem>
-  <valItem ident="heading">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>Creates a heading. </desc>
-    <equiv name="span"/>
-  </valItem>
-  <valItem ident="index">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>type</cell>
-                  <cell>string</cell>
-                </row>
-              </table>-->
-    <desc>generate list according to <term>type</term></desc>
-  </valItem>
-  <valItem ident="inline">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>Creates inline element out of <code>content</code> if there's something in
+                  </valItem>
+                  <valItem ident="anchor">
+                    <attList>
+                      <attDef ident="id"/>
+                    </attList>
+                    <desc>create anchor with ID</desc>
+                  </valItem>
+                  <valItem ident="block">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>create a block out of the content parameter. </desc>
+                    <equiv name="div"/>
+                  </valItem>
+                  <valItem ident="body">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>create the body of a document.</desc>
+                    <equiv name="body"/>
+                  </valItem>
+                  <valItem ident="break">
+                    <attList>
+                      <attDef ident="type"/>
+                      <attDef ident="label"/>
+                    </attList>
+                    <desc>make a line, column, or page break according to <term>type</term></desc>
+                  </valItem>
+                  <valItem ident="cell">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>create a table cell</desc>
+                    <equiv name="td"/>
+                  </valItem>
+                  <valItem ident="cit">
+                    <attList>
+                      <attDef ident="content"/>
+                      <attDef ident="source"/>
+                    </attList>
+                    <desc>show the content, with an indication of the source</desc>
+                  </valItem>
+                  <valItem ident="document">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>start a new output document</desc>
+                  </valItem>
+                  <valItem ident="figure">
+                    <attList>
+                      <attDef ident="title"/>
+                    </attList>
+                    <desc>make a figure with the <term>title</term> as caption</desc>
+                    <equiv name="div"/>
+                  </valItem>
+                  <valItem ident="glyph">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>show a character by looking up reference</desc>
+                  </valItem>
+                  <valItem ident="graphic">
+                    <attList>
+                      <attDef ident="url">
+                        <desc>url of image file</desc>
+                      </attDef>
+                    </attList>
+                    <desc>If <att>url</att> is present, uses it to display graphic,
+                  else display a placeholder image. </desc>
+                    <equiv name="img"/>
+                  </valItem>
+                  <valItem ident="heading">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>Creates a heading. </desc>
+                    <equiv name="span"/>
+                  </valItem>
+                  <valItem ident="index">
+                    <attList>
+                      <attDef ident="type"/>
+                    </attList>
+                    <desc>generate list according to <term>type</term></desc>
+                  </valItem>
+                  <valItem ident="inline">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>Creates inline element out of <code>content</code> if there's something in
                   <gi>rendition</gi>, use that formatting
                   otherwise just show text of selected content.</desc>
-    <equiv name="span"/>
-  </valItem>
-  <valItem ident="link">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>link url</cell>
-                  <cell>URI</cell>
-                </row>
-              </table>-->
-    <desc>create hyperlink</desc>
-    <equiv name="a"/>
-  </valItem>
-  <valItem ident="list">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>Create a list by following <term>content</term></desc>
-    <equiv name="ol"/>
-  </valItem>
-  <valItem ident="listItem">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>create list item</desc>
-    <equiv name="li"/>
-  </valItem>
-  <valItem ident="metadata">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>create metadata section</desc>
-    <equiv name="head"/>
-  </valItem>
-  <valItem ident="note">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>place</cell>
-                  <cell>string</cell>
-                </row>
-              </table>-->
-    <desc>Creates a note block out of <code>content</code>,
-	    as per value of <code>place</code></desc>
-  </valItem>
-  <valItem ident="omit">
-    <desc>Do nothing, do not process children</desc>
-  </valItem>
-  <valItem ident="paragraph">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>Creates a paragraph out of <code>content</code>.</desc>
-    <equiv name="p"/>
-  </valItem>
-  <valItem ident="row">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>-->
-    <desc>make table row</desc>
-    <equiv name="tr"/>
-  </valItem>
-  <valItem ident="section">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>XPath</cell>
-                  <cell>content</cell>
-                </row>
-              </table>-->
-  </valItem>
-  <valItem ident="table">
-    <desc>make table</desc>
-    <equiv name="table"/>
-  </valItem>
-  <valItem ident="text">
-    <desc>literal text</desc>
-  </valItem>
-  <valItem ident="title">
-    <!--
-              <table rend="rules">
-                <row>
-                  <cell>XPath</cell>
-                  <cell>content</cell>
-                </row>
-              </table>-->
-    <desc>make document title</desc>
-    <equiv name="title"/>
-  </valItem>
-</valList>
+                    <equiv name="span"/>
+                  </valItem>
+                  <valItem ident="link">
+                    <attList>
+                      <attDef ident="content"/>
+                      <attDef ident="target">
+                        <desc>link url</desc>
+                      </attDef>
+                    </attList>
+                    <desc>create hyperlink</desc>
+                    <equiv name="a"/>
+                  </valItem>
+                  <valItem ident="list">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>Create a list by following <term>content</term></desc>
+                    <equiv name="ol"/>
+                  </valItem>
+                  <valItem ident="listItem">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>create list item</desc>
+                    <equiv name="li"/>
+                  </valItem>
+                  <valItem ident="metadata">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>create metadata section</desc>
+                    <equiv name="head"/>
+                  </valItem>
+                  <valItem ident="note">
+                    <attList>
+                      <attDef ident="content"/>
+                      <attDef ident="place"/>
+                      <attDef ident="marker"/>
+                    </attList>
+                  </valItem>
+                  <valItem ident="omit">
+                    <desc>Do nothing, do not process children</desc>
+                  </valItem>
+                  <valItem ident="paragraph">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>Creates a paragraph out of <code>content</code>.</desc>
+                    <equiv name="p"/>
+                  </valItem>
+                  <valItem ident="row">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>make table row</desc>
+                    <equiv name="tr"/>
+                  </valItem>
+                  <valItem ident="section">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                  </valItem>
+                  <valItem ident="table">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>make table</desc>
+                    <equiv name="table"/>
+                  </valItem>
+                  <valItem ident="text">
+                    <desc>literal text</desc>
+                  </valItem>
+                  <valItem ident="title">
+                    <attList>
+                      <attDef ident="content"/>
+                    </attList>
+                    <desc>make document title</desc>
+                    <equiv name="title"/>
+                  </valItem>
+                </valList>
               </attDef>
               <attDef ident="predicate" usage="opt">
                 <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
