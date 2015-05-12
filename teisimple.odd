@@ -653,7 +653,7 @@
             </elementSpec>
             <elementSpec mode="change" ident="castGroup">
               <model predicate="child::*" behaviour="list">
-		<value n="contents">castItem|castGroup</value>
+		<value n="content">castItem|castGroup</value>
                 <desc>Insert list. </desc>
               </model>
             </elementSpec>
@@ -664,7 +664,7 @@
             </elementSpec>
             <elementSpec mode="change" ident="castList">
               <model predicate="child::*" behaviour="list" useSourceRendition="true">
-		<value n="contents">castItem</value>
+		<value n="content">castItem</value>
                 <rendition>list-style: ordered;</rendition>
               </model>
             </elementSpec>
@@ -695,15 +695,15 @@
               </constraintSpec>
               <model output="plain" predicate="sic and corr"
 		     behaviour="inline">
-		<value n="contents">corr[1]</value>
+		<value n="content">corr[1]</value>
 	      </model>
               <model output="plain" predicate="abbr and expan"
 		     behaviour="inline">
-		<value n="contents">expan[1]</value>
+		<value n="content">expan[1]</value>
 	      </model>
               <model output="plain" predicate="orig and reg"
 		     behaviour="inline">
-		<value n="contents">reg[1]</value>
+		<value n="content">reg[1]</value>
 	      </model>
               <model predicate="sic and corr" behaviour="alternate">
 		<value n="default">corr[1]</value>
@@ -738,17 +738,17 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="date">
-              <model output="print" predicate="text" behaviour="inline"/>
+              <model output="print" predicate="text()" behaviour="inline"/>
               <model output="print" predicate="@when and not(text())"
 		     behaviour="inline">
-		<value n="contents">@when</value>
+		<value n="content">@when</value>
 	      </model>
               <model output="web" predicate="@when"
 		     behaviour="alternate">
 		<value n="default">.</value>
 		<value n="alternate">@when</value>
 	      </model>
-              <model predicate="text" behaviour="inline"/>
+              <model predicate="text()" behaviour="inline"/>
             </elementSpec>
             <elementSpec mode="change" ident="dateline">
               <model behaviour="block"/>
@@ -875,7 +875,7 @@ border-bottom: solid 1pt blue;
 		<value n="width">@width</value>
 		<value n="height">@height</value>
 		<value n="scale">@scale</value>
-		<value n="contents">desc</value>
+		<value n="content">desc</value>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="group">
@@ -899,7 +899,7 @@ border-bottom: solid 1pt blue;
               </model>
               <model predicate="parent::div" behaviour="heading">
 		<value n="type">@type</value>
-		<value n="contents">div</value>
+		<value n="root">div</value>
 	      </model>
               <model behaviour="block"/>
             </elementSpec>
@@ -928,7 +928,7 @@ border-bottom: solid 1pt blue;
             <elementSpec mode="change" ident="lb">
               <model behaviour="break"
 		     useSourceRendition="true">
-				<value n="type">'line'</value>
+		<value n="type">'line'</value>
 		<value n="label">@n</value>
 	      </model>
             </elementSpec>
@@ -938,15 +938,15 @@ border-bottom: solid 1pt blue;
             <elementSpec mode="change" ident="list">
               <model predicate="@rendition" behaviour="list"
 		     useSourceRendition="true">
-		<value n="contents">item</value>
+		<value n="content">item</value>
 	      </model>
               <model predicate="not(@rendition)" behaviour="list">
-		<value n="contents">item</value>
+		<value n="content">item</value>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="listBibl">
               <model behaviour="list">
-		<value n="contents">bibl</value>
+		<value n="content">bibl</value>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="measure">
@@ -996,7 +996,7 @@ border-bottom: solid 1pt blue;
               </constraintSpec>
               <model behaviour="break" useSourceRendition="true">
 		<value n="type">'page'</value>
-		<value n="label">'page',(concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else ''))</value>
+		<value n="label">(concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else ''))</value>
                 <rendition>
 	  display: block;
 	  margin-left: 4pt;
@@ -1162,7 +1162,7 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="fileDesc">
               <model behaviour="title">
-		<value n="contents">titleStmt</value>
+		<value n="content">titleStmt</value>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="profileDesc">
@@ -1203,7 +1203,7 @@ border-bottom: solid 1pt blue;
               <modelSequence predicate="parent::titleStmt/parent::fileDesc">
                 <model predicate="preceding-sibling::title"
 		       behaviour="text">
-		  <value n="label">' — '</value>
+		  <value n="content">' — '</value>
 		</model>
                 <model behaviour="text">
                   <rendition>color: red; font-size: 2em;</rendition>
@@ -1215,7 +1215,7 @@ border-bottom: solid 1pt blue;
                   <rendition>font-style: italic;</rendition>
                 </model>
                 <model predicate="ancestor::biblStruct or       ancestor::biblFull" behaviour="text">
-		  <value n="label">', '</value>
+		  <value n="content">', '</value>
 		</model>
               </modelSequence>
               <modelSequence predicate="@level='s' or @level='j'">
@@ -1223,7 +1223,7 @@ border-bottom: solid 1pt blue;
                   <rendition>font-style: italic;</rendition>
                 </model>
                 <model predicate="following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull)" behaviour="text">
-		  <value n="label">', '</value>
+		  <value n="content">', '</value>
 		</model>
               </modelSequence>
               <modelSequence predicate="@level='u' or @level='a'">
@@ -1231,7 +1231,7 @@ border-bottom: solid 1pt blue;
                   <rendition>font-style: italic;</rendition>
                 </model>
                 <model predicate="following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull)" behaviour="text">
-		  <value n="label">'. '</value>
+		  <value n="content">'. '</value>
 		</model>
               </modelSequence>
               <model behaviour="inline">
