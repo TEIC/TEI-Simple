@@ -8947,12 +8947,10 @@ You must supply at least two values for @target on <name/>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">parameter of a model behaviour</a:documentation>
          <ref name="data.xpath"/>
          <ref name="att.global.attributes"/>
-         <optional>
-            <attribute name="name">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Name of parameter</a:documentation>
-               <text/>
-            </attribute>
-         </optional>
+         <attribute name="name">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Name of parameter</a:documentation>
+            <text/>
+         </attribute>
          <empty/>
       </element>
    </define>

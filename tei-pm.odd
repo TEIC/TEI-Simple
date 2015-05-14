@@ -111,7 +111,9 @@
 	Turska Tenet) that the transformation stage should be
 	minimally intelligent; that is to say, it should contain as
 	few TEI-specific rules as possible. The ODD should be as
-	explicit as possible, and provide maximum expressivity to the editor.</p>
+	explicit as possible, and provide maximum expressivity to the
+	  editor.</p>
+	  <figure><graphic url="SPM2.png"/><head>Processing model workflow</head></figure>
         </div>
         <div>
           <head>Processing model elements</head>
@@ -176,7 +178,7 @@
 	   predicate="sic and corr" behaviour="alternate">
 	   <param name="default">corr</param>
 	   <param name="alternate">sic</param></model>
-	   <model predicate="abbr and expan" behaviour="alternate">
+	   <model predicate="abbr and expan[1]" behaviour="alternate">
 	   <param name="default">expan</param>
 	   <param name="alternate">abbr</param>
 	   </model><model predicate="orig and reg" behaviour="alternate">
@@ -619,7 +621,7 @@
 	      <macroRef key="data.xpath"/>
 	    </content>
 	    <attList>
-	      <attDef ident="name">
+	      <attDef ident="name" usage="req">
 		<desc>Name of parameter</desc>
 	      </attDef>
 	    </attList>
@@ -676,10 +678,10 @@
                   <valItem ident="alternate">
                     <paramList>
                       <paramSpec ident="default">
-                        <desc>preferred element</desc>
+                        <desc>preferred content</desc>
                       </paramSpec>
                       <paramSpec ident="alternate">
-                        <desc>alternate element</desc>
+                        <desc>alternate content</desc>
                       </paramSpec>
                     </paramList>
                     <desc>create a specialized display of alternating elements for displaying the
