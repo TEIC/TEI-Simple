@@ -610,7 +610,7 @@
         <head>Extensions to the TEI</head>
         <specGrp xml:id="additions">
           <elementSpec ident="param" mode="add" module="tagdocs">
-            <desc versionDate="2015-01-06" xml:lang="en">parameter of
+            <desc versionDate="2015-05-15" xml:lang="en">parameter of
 	    a model behaviour</desc>
             <classes>
               <memberOf key="att.global"/>
@@ -624,10 +624,37 @@
 	      </attDef>
 	    </attList>
 	  </elementSpec>
-	  
+
+	  <elementSpec ident="paramSpec" mode="add" module="tagdocs">
+            <desc versionDate="2015-05-15" xml:lang="en">specification
+	    of a parameter of
+	    a model behaviour</desc>
+            <classes>
+              <memberOf key="att.global"/>
+	      <memberOf key="att.identifiable"/>
+            </classes>
+	    <content>
+	      <alternate minOccurs="0" maxOccurs="unbounded">
+                <classRef key="model.glossLike"/>
+                <classRef key="model.descLike"/>
+	      </alternate>
+	    </content>
+	  </elementSpec>
+
+          <elementSpec ident="paramList" mode="add" module="tagdocs">
+            <desc versionDate="2015-05-15" xml:lang="en">list of
+	    parameter specifications</desc>
+            <classes>
+              <memberOf key="att.global"/>
+            </classes>
+	    <content>
+	      <elementRef key="paramSpec"/>
+	    </content>
+	  </elementSpec>
+
           <elementSpec ident="model" mode="add" module="tagdocs">
-            <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
-            <desc versionDate="2015-01-06" xml:lang="en">documentation of an intended processing model for this
+            <gloss versionDate="2015-05-15" xml:lang="en">processing model</gloss>
+            <desc versionDate="2015-05-15" xml:lang="en">documentation of an intended processing model for this
             element</desc>
             <classes>
               <memberOf key="att.global"/>
@@ -647,173 +674,173 @@
                 in output</desc>
                 <valList type="closed">
                   <valItem ident="alternate">
-                    <attList>
-                      <attDef ident="default">
+                    <paramList>
+                      <paramSpec ident="default">
                         <desc>preferred element</desc>
-                      </attDef>
-                      <attDef ident="alternate">
+                      </paramSpec>
+                      <paramSpec ident="alternate">
                         <desc>alternate element</desc>
-                      </attDef>
-                    </attList>
+                      </paramSpec>
+                    </paramList>
                     <desc>create a specialized display of alternating elements for displaying the
                   preferred version, both at once or toggling between the two.</desc>
                   </valItem>
                   <valItem ident="anchor">
-                    <attList>
-                      <attDef ident="id"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="id"/>
+                    </paramList>
                     <desc>create anchor with ID</desc>
                   </valItem>
                   <valItem ident="block">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>create a block out of the content parameter. </desc>
                     <equiv name="div"/>
                   </valItem>
                   <valItem ident="body">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>create the body of a document.</desc>
                     <equiv name="body"/>
                   </valItem>
                   <valItem ident="break">
-                    <attList>
-                      <attDef ident="type"/>
-                      <attDef ident="label"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="type"/>
+                      <paramSpec ident="label"/>
+                    </paramList>
                     <desc>make a line, column, or page break according to <term>type</term></desc>
                   </valItem>
                   <valItem ident="cell">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>create a table cell</desc>
                     <equiv name="td"/>
                   </valItem>
                   <valItem ident="cit">
-                    <attList>
-                      <attDef ident="content"/>
-                      <attDef ident="source"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                      <paramSpec ident="source"/>
+                    </paramList>
                     <desc>show the content, with an indication of the source</desc>
                   </valItem>
                   <valItem ident="document">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>start a new output document</desc>
                   </valItem>
                   <valItem ident="figure">
-                    <attList>
-                      <attDef ident="title"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="title"/>
+                    </paramList>
                     <desc>make a figure with the <term>title</term> as caption</desc>
                     <equiv name="div"/>
                   </valItem>
                   <valItem ident="glyph">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>show a character by looking up reference</desc>
                   </valItem>
                   <valItem ident="graphic">
-                    <attList>
-                      <attDef ident="url">
+                    <paramList>
+                      <paramSpec ident="url">
                         <desc>url of image file</desc>
-                      </attDef>
-                    </attList>
+                      </paramSpec>
+                    </paramList>
                     <desc>If <att>url</att> is present, uses it to display graphic,
                   else display a placeholder image. </desc>
                     <equiv name="img"/>
                   </valItem>
                   <valItem ident="heading">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>Creates a heading. </desc>
                     <equiv name="span"/>
                   </valItem>
                   <valItem ident="index">
-                    <attList>
-                      <attDef ident="type"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="type"/>
+                    </paramList>
                     <desc>generate list according to <term>type</term></desc>
                   </valItem>
                   <valItem ident="inline">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>Creates inline element out of <code>content</code> if there's something in
                   <gi>rendition</gi>, use that formatting
                   otherwise just show text of selected content.</desc>
                     <equiv name="span"/>
                   </valItem>
                   <valItem ident="link">
-                    <attList>
-                      <attDef ident="content"/>
-                      <attDef ident="target">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                      <paramSpec ident="target">
                         <desc>link url</desc>
-                      </attDef>
-                    </attList>
+                      </paramSpec>
+                    </paramList>
                     <desc>create hyperlink</desc>
                     <equiv name="a"/>
                   </valItem>
                   <valItem ident="list">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>Create a list by following <term>content</term></desc>
                     <equiv name="ol"/>
                   </valItem>
                   <valItem ident="listItem">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>create list item</desc>
                     <equiv name="li"/>
                   </valItem>
                   <valItem ident="metadata">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>create metadata section</desc>
                     <equiv name="head"/>
                   </valItem>
                   <valItem ident="note">
-                    <attList>
-                      <attDef ident="content"/>
-                      <attDef ident="place"/>
-                      <attDef ident="marker"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                      <paramSpec ident="place"/>
+                      <paramSpec ident="marker"/>
+                    </paramList>
                   </valItem>
                   <valItem ident="omit">
                     <desc>Do nothing, do not process children</desc>
                   </valItem>
                   <valItem ident="paragraph">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>Creates a paragraph out of <code>content</code>.</desc>
                     <equiv name="p"/>
                   </valItem>
                   <valItem ident="row">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>make table row</desc>
                     <equiv name="tr"/>
                   </valItem>
                   <valItem ident="section">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                   </valItem>
                   <valItem ident="table">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>make table</desc>
                     <equiv name="table"/>
                   </valItem>
@@ -821,9 +848,9 @@
                     <desc>literal text</desc>
                   </valItem>
                   <valItem ident="title">
-                    <attList>
-                      <attDef ident="content"/>
-                    </attList>
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>make document title</desc>
                     <equiv name="title"/>
                   </valItem>
@@ -942,8 +969,8 @@
           </elementSpec>
           <!-- elementSpec for added model element -->
           <elementSpec ident="modelSequence" mode="add" module="tagdocs">
-            <gloss versionDate="2015-01-06" xml:lang="en">sequence of processing model </gloss>
-            <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+            <gloss versionDate="2015-05-15" xml:lang="en">sequence of processing model </gloss>
+            <desc versionDate="2015-05-15" xml:lang="en">a group of model elements documenting intended processing models
             for this element, to be acted upon in sequence</desc>
             <classes>
               <memberOf key="att.global"/>
@@ -992,8 +1019,8 @@
             </attList>
           </elementSpec>
           <elementSpec ident="modelGrp" mode="add" module="tagdocs">
-            <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
-            <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+            <gloss versionDate="2015-05-15" xml:lang="en">processing model group</gloss>
+            <desc versionDate="2015-05-15" xml:lang="en">a group of model elements documenting intended processing models
             for this element</desc>
             <classes>
               <memberOf key="att.global"/>
