@@ -765,7 +765,8 @@
               <model predicate="@type='title_page'" behaviour="block">
                 <rendition>border: 1px solid black; padding: 5px;</rendition>
               </model>
-              <model behaviour="section"/>
+              <model behaviour="section" predicate="parent::body or parent::front or parent::back"/>
+              <model behaviour="block"/>
             </elementSpec>
             <elementSpec mode="change" ident="docAuthor">
               <model predicate="ancestor::teiHeader" behaviour="omit">

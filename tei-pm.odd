@@ -52,7 +52,7 @@
         <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>James Cummings</docAuthor>
         <docAuthor>Magdalena Turska</docAuthor>
-        <docDate>Version 0.1: 6th January 2014</docDate>
+        <docDate>Version 0.2: 13th May 2015</docDate>
       </titlePage>
     </front>
     <body>
@@ -102,7 +102,7 @@
 	number of functions, and understand the well-documented
 	features of CSS. The concepts addressed by the functions (eg
 	<q>block</q> and <q>inline</q>) are in line with XSL FO, and
-	HTML; the catalogue of functions is given at <ptr target="#functions"/>.</p>
+	HTML; the catalogue of functions is given under the element <gi>model</gi>.</p>
           <p>An important precondition for an
 	implementation is that it must include an XPath 2.0 interpreter,
 	as this is used in several places in the processing
@@ -137,9 +137,10 @@
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline"><rendition>font-style: italic;</rendition></model></egXML>
 	    The <att>behaviour</att> attribute has a value of a call
 	    to the function <term>inline</term>, with a parameter
-	    of the content of the element. The notation here uses
-	    XPath 2.0, in which <q>.</q> means <q>the current context</q>;
-	    separately, the <gi>rendition</gi> element uses CSS
+	    of the content of the element. The datatype for the
+	    parameter is always
+	    XPath 2.0, in which <q>.</q> means <q>the current context</q>.
+	    Separately, the <gi>rendition</gi> element uses CSS
 	    syntax to specific the appearance.  It would have been
 	    possible here to simply add <code>display: inline</code>
 	    to the rendition, to indicate that it is inline, but the
@@ -262,351 +263,6 @@
 
 	   </p>
         <p>This is broadly similar to the processing model for XSLT. </p>
-      </div>
-      <div xml:id="functions">
-        <head>TEI Processing Model functions</head>
-        <table>
-          <row role="label">
-            <cell>Function name</cell>
-            <cell>Parameters</cell>
-            <cell>Description</cell>
-            <cell>Probable HTML container</cell>
-          </row>
-          <row>
-            <cell>alternate</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>preferred element</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>alternate element</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Creates a specialized display of alternating elements for displaying the
-                  preferred version, both at once or toggling between the two.</cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>anchor</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>ID</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>create anchor with ID</cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>block</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Creates a block out of the content parameter. </cell>
-            <cell>div</cell>
-          </row>
-          <row>
-            <cell>break</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>type</cell>
-                  <cell>string</cell>
-                </row>
-                <row>
-                  <cell>label</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>make a line, column, or page break according to <term>type</term></cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>cell</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Creates a table cell</cell>
-            <cell>td</cell>
-          </row>
-          <row>
-            <cell>cit</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>source</cell>
-                  <cell>URI</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>shows the content, with an attribute of the source</cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>document</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>start a new output document</cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>figure</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>title</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>make a figure with the <term>title</term> as caption</cell>
-            <cell>div</cell>
-          </row>
-          <row>
-            <cell>glyph</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>URI</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>show a character by looking up reference</cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>graphic</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>url of image file</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>If <att>url</att> is present, uses it to display graphic,
-                  else display placeholder image. </cell>
-            <cell>img</cell>
-          </row>
-          <row>
-            <cell>heading</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Creates a heading. </cell>
-            <cell>span</cell>
-          </row>
-          <row>
-            <cell>index</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>type</cell>
-                  <cell>string</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>generate list according to <term>type</term></cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>inline</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Creates inline element out of <code>content</code> if there's something in
-                  <gi>rendition</gi>, use that formatting
-                  otherwise just show text of selected content.</cell>
-            <cell>span</cell>
-          </row>
-          <row>
-            <cell>link</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>link url</cell>
-                  <cell>URI</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>create hyperlink</cell>
-            <cell>a</cell>
-          </row>
-          <row>
-            <cell>list</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Create a list by following <term>content</term></cell>
-            <cell>ol, ul, or dl</cell>
-          </row>
-          <row>
-            <cell>listItem</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>create list item</cell>
-            <cell>li</cell>
-          </row>
-          <row>
-            <cell>metadata</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>create metadata section</cell>
-            <cell>head</cell>
-          </row>
-          <row>
-            <cell>note</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-                <row>
-                  <cell>place</cell>
-                  <cell>string</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Creates a note block out of <code>content</code>,
-	    as per value of <code>place</code></cell>
-            <cell>span or div</cell>
-          </row>
-          <row>
-            <cell>omit</cell>
-            <cell/>
-            <cell>Do nothing, do not process children</cell>
-            <cell/>
-          </row>
-          <row>
-            <cell>paragraph</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>Creates a paragraph out of <code>content</code>.</cell>
-            <cell>p</cell>
-          </row>
-          <row>
-            <cell>row</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>content</cell>
-                  <cell>XPath</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>make table row</cell>
-            <cell>tr</cell>
-          </row>
-          <row>
-            <cell>section</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>XPath</cell>
-                  <cell>content</cell>
-                </row>
-              </table>
-            </cell>
-            <cell/>
-            <cell/>
-          </row>
-          <row>
-            <cell>table</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>XPath</cell>
-                  <cell>content</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>make table</cell>
-            <cell>table</cell>
-          </row>
-          <row>
-            <cell>title</cell>
-            <cell>
-              <table rend="rules">
-                <row>
-                  <cell>XPath</cell>
-                  <cell>content</cell>
-                </row>
-              </table>
-            </cell>
-            <cell>make document title</cell>
-            <cell>title</cell>
-          </row>
-        </table>
       </div>
       <div>
         <head>Extensions to the TEI</head>
@@ -753,7 +409,7 @@
                         <desc>url of image file</desc>
                       </paramSpec>
                     </paramList>
-                    <desc>If <att>url</att> is present, uses it to display graphic,
+                    <desc>if <att>url</att> is present, uses it to display graphic,
                   else display a placeholder image. </desc>
                     <equiv name="img"/>
                   </valItem>
@@ -761,7 +417,7 @@
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>Creates a heading. </desc>
+                    <desc>creates a heading. </desc>
                     <equiv name="span"/>
                   </valItem>
                   <valItem ident="index">
@@ -774,7 +430,7 @@
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>Creates inline element out of <code>content</code> if there's something in
+                    <desc>creates inline element out of <term>content</term> if there's something in
                   <gi>rendition</gi>, use that formatting
                   otherwise just show text of selected content.</desc>
                     <equiv name="span"/>
@@ -793,7 +449,7 @@
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>Create a list by following <term>content</term></desc>
+                    <desc>create a list by following <term>content</term></desc>
                     <equiv name="ol"/>
                   </valItem>
                   <valItem ident="listItem">
@@ -816,15 +472,18 @@
                       <paramSpec ident="place"/>
                       <paramSpec ident="marker"/>
                     </paramList>
+		    <desc>create a note, according to value of
+		    <term>place</term>; could be margin, footnote,
+		    endnote, inline</desc>
                   </valItem>
                   <valItem ident="omit">
-                    <desc>Do nothing, do not process children</desc>
+                    <desc>do nothing, do not process children</desc>
                   </valItem>
                   <valItem ident="paragraph">
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>Creates a paragraph out of <code>content</code>.</desc>
+                    <desc>create a paragraph out of <term>content</term>.</desc>
                     <equiv name="p"/>
                   </valItem>
                   <valItem ident="row">
@@ -838,6 +497,7 @@
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
+		    <desc>create a new section of the output document</desc>
                   </valItem>
                   <valItem ident="table">
                     <paramList>
@@ -847,6 +507,9 @@
                     <equiv name="table"/>
                   </valItem>
                   <valItem ident="text">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
                     <desc>literal text</desc>
                   </valItem>
                   <valItem ident="title">
@@ -1081,7 +744,10 @@
                   </modelGrp>
                   <modelGrp output="print">
                     <model predicate="parent::choice" behaviour="omit"/>
-                    <model predicate="not(parent::choice)" behaviour="note(.,'foot')"/>
+                    <model predicate="not(parent::choice)"
+			   behaviour="note">
+		      <param name="place">'foot'</param>
+		    </model>
                   </modelGrp>
                 </elementSpec>
               </egXML>
@@ -1091,7 +757,9 @@
                 <modelGrp output="print">
                   <modelSequence>
                     <model behaviour="inline(@n)"/>
-                    <model behaviour="note(.,'foot')"/>
+                    <model behaviour="note">
+		      <param name="place">'foot'</param>
+		    </model>
                   </modelSequence>
                 </modelGrp>
               </egXML>

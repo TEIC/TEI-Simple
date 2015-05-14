@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 1970-01-01. Version 0.1: 6th January 2014.
+Schema generated from ODD source 1970-01-01. Version 0.2: 13th May 2015.
 TEI Edition: Version 2.8.0. Last updated on
 	6th April 2015, revision 13197
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.8.0/
@@ -9005,31 +9005,31 @@ You must supply at least two values for @target on <name/>
                <value>glyph</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">show a character by looking up reference</a:documentation>
                <value>graphic</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">If url is present, uses it to display graphic, else display a placeholder image.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if url is present, uses it to display graphic, else display a placeholder image.</a:documentation>
                <value>heading</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a heading. </a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">creates a heading. </a:documentation>
                <value>index</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">generate list according to type</a:documentation>
                <value>inline</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates inline element out of  if there's something in rendition, use that formatting otherwise just show text of selected content.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">creates inline element out of content if there's something in rendition, use that formatting otherwise just show text of selected content.</a:documentation>
                <value>link</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create hyperlink</a:documentation>
                <value>list</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Create a list by following content</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a list by following content</a:documentation>
                <value>listItem</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create list item</a:documentation>
                <value>metadata</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create metadata section</a:documentation>
                <value>note</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a note, according to value of place; could be margin, footnote, endnote, inline</a:documentation>
                <value>omit</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Do nothing, do not process children</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">do nothing, do not process children</a:documentation>
                <value>paragraph</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a paragraph out of .</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a paragraph out of content.</a:documentation>
                <value>row</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make table row</a:documentation>
                <value>section</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a new section of the output document</a:documentation>
                <value>table</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make table</a:documentation>
                <value>text</value>

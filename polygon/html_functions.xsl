@@ -41,9 +41,6 @@ of this software, even if advised of the possibility of such damage.
     </desc>
   </doc>
 
-  <xslo:output method="xhtml" omit-xml-declaration="yes"     encoding="utf-8"/>
-            
-
   <xsl:param name="css">simple.css</xsl:param>
   <xsl:param name="js">simple.js</xsl:param>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
@@ -65,6 +62,17 @@ of this software, even if advised of the possibility of such damage.
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <xsl:copy-of select="tei:makeElement($model,'p', concat($class, $number), '', $content, '', '')"/>
+  </xsl:function>
+
+  <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
+    <desc>Sections</desc>
+  </doc>
+  <xsl:function name="tei:section" as="node()*">
+    <xsl:param name="model"/>
+    <xsl:param name="content"/>
+    <xsl:param name="class"/>
+    <xsl:param name="number"/>
+    <xsl:copy-of select="tei:makeElement($model,'section', concat($class, $number), '', $content, '', '')"/>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
     <desc>Newline</desc>
@@ -548,13 +556,13 @@ of this software, even if advised of the possibility of such damage.
       </xsl:for-each>
       <xslo:call-template name="localRendition"/>
       <!-- jQuery -->
-      <script type="text/javascript" charset="utf8" src="http://code.jquery.com/jquery-1.10.2.min.js"/>
+      <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.10.2.min.js"/>
       <!-- tooltips -->
       <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css"/>
       <script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"/>
       <link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css"/>
       <!-- table of contents generation -->
-      <script type="text/javascript" charset="utf8" src="{$js}"/>
+      <script type="text/javascript" charset="utf-8" src="{$js}"/>
       <xsl:sequence select="tei:applyTemplates($content)"/>
     </head>
   </xsl:function>
