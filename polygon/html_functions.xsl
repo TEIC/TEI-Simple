@@ -83,16 +83,17 @@ of this software, even if advised of the possibility of such damage.
   </doc>
   <xsl:function name="tei:break" as="node()*">
     <xsl:param name="model"/>
-    <xsl:param name="content"/>
+    <xsl:param name="type"/>
+    <xsl:param name="label"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
   
     <xsl:choose>
       <xsl:when test="string($class)">
-        <xsl:copy-of select="tei:makeElement($model,'span', concat($class, $number), '', $content, '', '')"/>
+        <xsl:copy-of select="tei:makeElement($model,'span', concat($class, $number), '', $label, '', '')"/>
       </xsl:when>
       <xsl:otherwise>
-        <xsl:sequence select="tei:applyTemplates($content)"/>
+        <xsl:sequence select="tei:applyTemplates($label)"/>
       </xsl:otherwise>
     </xsl:choose>
     
@@ -268,14 +269,14 @@ of this software, even if advised of the possibility of such damage.
     </sup>
   </xsl:function>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl">
-    <desc>List of objects  eg TOC)</desc>
+    <desc>List of objects eg TOC</desc>
   </doc>
   <xsl:function name="tei:index" as="node()*">
     <xsl:param name="model"/>
-    <xsl:param name="content"/>
+    <xsl:param name="type"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:param name="type"/>
+
     <xsl:choose>
       <xsl:when test="$type='toc'">
 	<div id="toc">Table of contents</div>
@@ -396,14 +397,14 @@ of this software, even if advised of the possibility of such damage.
   </doc>
   <xsl:function name="tei:graphic" as="node()*">
     <xsl:param name="model"/>
-    <xsl:param name="content"/>
+    <xsl:param name="url"/>
     <xsl:param name="width"/>
     <xsl:param name="height"/>
     <xsl:param name="scale"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <img>
-      <xsl:attribute name="src">{<xsl:value-of select="$content"/>}</xsl:attribute>
+      <xsl:attribute name="src">{<xsl:value-of select="$url"/>}</xsl:attribute>
       <xslo:variable name="sizes">
         <xslo:if test="{$width}">
           <xslo:value-of select="concat('width:',{$width},';')"/>
@@ -638,7 +639,7 @@ of this software, even if advised of the possibility of such damage.
         </xsl:if>
         <xsl:for-each select=".//model">
           <xsl:variable name="container">
-            <xsl:copy-of select="tei:simpleContainer(substring-before(@behaviour,'('))"/>
+            <xsl:copy-of select="tei:simpleContainer(@behaviour)"/>
           </xsl:variable>
           <!-- use position of a model to distinguish between classes for differing behaviours -->
           <xsl:variable name="elname">

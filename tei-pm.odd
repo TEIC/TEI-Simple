@@ -132,7 +132,7 @@
           <p>Let us consider a simple case, the handling of the
 	<gi>hi</gi> element. We decide that it is an inline element,
 	normally rendered in italics:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline(.)"><rendition>font-style: italic;</rendition></model></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline"><rendition>font-style: italic;</rendition></model></egXML>
 	    The <att>behaviour</att> attribute has a value of a call
 	    to the function <term>inline</term>, with a parameter
 	    of the content of the element. The notation here uses
@@ -148,7 +148,7 @@
 	    default, this is ignored, but 
 	    <att>useSourceRendition</att> can be used to indicate
 	    that it should be taken account of:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline(.)" useSourceRendition="true"><rendition>font-style: italic;</rendition></model></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline" useSourceRendition="true"><rendition>font-style: italic;</rendition></model></egXML>
 	    in this case the <gi>rendition</gi> is only a fallback and
 	    may be overridden by the <att>rendition</att>. This uses
 	    the same behaviour as CSS; ie if <att>rendition</att>
@@ -157,7 +157,7 @@
           <p>If the processing model is context-dependent, we can
 	    use <att>predicate</att> (an XPath 2.0 expression) to show
 	    when different models apply:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="inline(.)"><rendition>font-style: italic;</rendition></model><model behaviour="block(.)"><rendition>left-margin: 2em;</rendition></model></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="inline"><rendition>font-style: italic;</rendition></model><model behaviour="block"><rendition>left-margin: 2em;</rendition></model></egXML>
 	    Here the <gi>model</gi>s are <emph>alternatives</emph>;
 	    only if the test (the <att>predicate</att>) on the first
 	    fails will the second be activated.</p>
@@ -172,7 +172,17 @@
 	    tooltip), the alternate; this service is provided by a
 	    function <term>alternate</term>. We have three models, for
 	    different cases of input:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/><model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/><model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/></egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model
+	   predicate="sic and corr" behaviour="alternate">
+	   <param name="default">corr</param>
+	   <param name="alternate">sic</param></model>
+	   <model predicate="abbr and expan" behaviour="alternate">
+	   <param name="default">expan</param>
+	   <param name="alternate">abbr</param>
+	   </model><model predicate="orig and reg" behaviour="alternate">
+	   	   <param name="default">reg</param>
+	   <param name="alternate">orig</param>
+	   </model></egXML>
 	   Note the use of XPath 2.0 notation to choose the first of
 	   several possible sibling elements.</p>
           <p>Sometimes we want different behaviour for different
@@ -185,7 +195,16 @@
 	   we are making web pages. In the latter case, we use the
 	   same <term>alternate</term> function as in the previous example,
 	   but for print we force use of <att>when</att> when it is present.
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model output="print" predicate="text()" behaviour="inline(.)"/><model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/><model predicate="@when" output="web" behaviour="alternate(.,@when)"/></egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model
+	   output="print" predicate="text()"
+	   behaviour="inline"/><model output="print" predicate="@when
+	   and not(text())" behaviour="inline">
+	   <param name="content">@when</param></model>
+	   <model predicate="@when" output="web" behaviour="alternate">
+	     	   <param name="default">.</param>
+		   <param name="alternate">@when</param>
+	   </model>
+		 </egXML>
 	   </p>
           <p>Elements which have attributes can access the values
 	   using the usual XPath 2.0 notation. For example, the
@@ -194,7 +213,16 @@
 	   created. Sometimes the <gi>ref</gi> has text content, but
 	   sometimes just the <att>target</att>. Our rule caters for
 	   these two situations:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="not(text())" behaviour="link(@target,@target)"/><model behaviour="link(.,@target)"/></egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model
+							       predicate="not(text())"
+							       behaviour="link">
+		 	     	   <param name="content">@target</param>
+				   <param name="link">@target</param>
+		   </model><model behaviour="link">
+		 	     	   <param name="content">.</param>
+		   <param name="link">@target</param>
+		 </model>
+	   </egXML>
 	   Here the <term>link</term> function takes two parameters, the text
 	   to be shown, and the URL to which it should be linked.</p>
         </div>
@@ -219,14 +247,14 @@
 	     <att>behaviour</att> attribute. Where the value passed to
 	     that function is <q>.</q>, follow this process for all
 	     child elements of the current element, within the context
-	     of the named function. Thus a <term>block(.)</term>
+	     of the named function. Thus a <term>block</term>
 	     should create a block-type object in the output
 	     for this element and all the results from processing its children.</item><item>If there are possible <gi>model</gi>s, but none has a
 	     <att>predicate</att> which matches the current element,
 	     proceed to its children and see if there are models for
 	     them.</item><item>If there is no <gi>model</gi> provided for the
 	     element, proceed to its children and see if there are
-	     models for them.</item><item>The special function <term>omit()</term> means that
+	     models for them.</item><item>The special function <term>omit</term> means that
 	     processing should stop for this element, and move to the
 	     next sibling.</item></list>
 
@@ -581,9 +609,52 @@
       <div>
         <head>Extensions to the TEI</head>
         <specGrp xml:id="additions">
+          <elementSpec ident="param" mode="add" module="tagdocs">
+            <desc versionDate="2015-05-15" xml:lang="en">parameter of
+	    a model behaviour</desc>
+            <classes>
+              <memberOf key="att.global"/>
+            </classes>
+	    <content>
+	      <macroRef key="data.xpath"/>
+	    </content>
+	    <attList>
+	      <attDef ident="name">
+		<desc>Name of parameter</desc>
+	      </attDef>
+	    </attList>
+	  </elementSpec>
+
+	  <elementSpec ident="paramSpec" mode="add" module="tagdocs">
+            <desc versionDate="2015-05-15" xml:lang="en">specification
+	    of a parameter of
+	    a model behaviour</desc>
+            <classes>
+              <memberOf key="att.global"/>
+	      <memberOf key="att.identifiable"/>
+            </classes>
+	    <content>
+	      <alternate minOccurs="0" maxOccurs="unbounded">
+                <classRef key="model.glossLike"/>
+                <classRef key="model.descLike"/>
+	      </alternate>
+	    </content>
+	  </elementSpec>
+
+          <elementSpec ident="paramList" mode="add" module="tagdocs">
+            <desc versionDate="2015-05-15" xml:lang="en">list of
+	    parameter specifications</desc>
+            <classes>
+              <memberOf key="att.global"/>
+            </classes>
+	    <content>
+	      <elementRef key="paramSpec"/>
+	    </content>
+	  </elementSpec>
+
           <elementSpec ident="model" mode="add" module="tagdocs">
-            <gloss versionDate="2015-01-06" xml:lang="en">processing model</gloss>
-            <desc versionDate="2015-01-06" xml:lang="en">documentation of an intended processing model for this
+            <gloss versionDate="2015-05-15" xml:lang="en">processing model</gloss>
+            <desc versionDate="2015-05-15" xml:lang="en">documentation of an intended processing model for this
             element</desc>
             <classes>
               <memberOf key="att.global"/>
@@ -592,16 +663,198 @@
               <alternate minOccurs="0" maxOccurs="unbounded">
                 <classRef key="model.glossLike"/>
                 <classRef key="model.descLike"/>
+                <elementRef key="param" minOccurs="0" maxOccurs="unbounded"/>
                 <elementRef key="rendition"/>
               </alternate>
             </content>
             <attList>
               <attDef ident="behaviour" usage="req">
-                <desc>which processing function, optionally containing parameters, should be used to present this element
+                <desc>which processing function, with
+		optional named parameters, should be used to present this element
                 in output</desc>
-                <datatype>
-                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.text"/>
-                </datatype>
+                <valList type="closed">
+                  <valItem ident="alternate">
+                    <paramList>
+                      <paramSpec ident="default">
+                        <desc>preferred element</desc>
+                      </paramSpec>
+                      <paramSpec ident="alternate">
+                        <desc>alternate element</desc>
+                      </paramSpec>
+                    </paramList>
+                    <desc>create a specialized display of alternating elements for displaying the
+                  preferred version, both at once or toggling between the two.</desc>
+                  </valItem>
+                  <valItem ident="anchor">
+                    <paramList>
+                      <paramSpec ident="id"/>
+                    </paramList>
+                    <desc>create anchor with ID</desc>
+                  </valItem>
+                  <valItem ident="block">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>create a block out of the content parameter. </desc>
+                    <equiv name="div"/>
+                  </valItem>
+                  <valItem ident="body">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>create the body of a document.</desc>
+                    <equiv name="body"/>
+                  </valItem>
+                  <valItem ident="break">
+                    <paramList>
+                      <paramSpec ident="type"/>
+                      <paramSpec ident="label"/>
+                    </paramList>
+                    <desc>make a line, column, or page break according to <term>type</term></desc>
+                  </valItem>
+                  <valItem ident="cell">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>create a table cell</desc>
+                    <equiv name="td"/>
+                  </valItem>
+                  <valItem ident="cit">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                      <paramSpec ident="source"/>
+                    </paramList>
+                    <desc>show the content, with an indication of the source</desc>
+                  </valItem>
+                  <valItem ident="document">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>start a new output document</desc>
+                  </valItem>
+                  <valItem ident="figure">
+                    <paramList>
+                      <paramSpec ident="title"/>
+                    </paramList>
+                    <desc>make a figure with the <term>title</term> as caption</desc>
+                    <equiv name="div"/>
+                  </valItem>
+                  <valItem ident="glyph">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>show a character by looking up reference</desc>
+                  </valItem>
+                  <valItem ident="graphic">
+                    <paramList>
+                      <paramSpec ident="url">
+                        <desc>url of image file</desc>
+                      </paramSpec>
+                    </paramList>
+                    <desc>If <att>url</att> is present, uses it to display graphic,
+                  else display a placeholder image. </desc>
+                    <equiv name="img"/>
+                  </valItem>
+                  <valItem ident="heading">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>Creates a heading. </desc>
+                    <equiv name="span"/>
+                  </valItem>
+                  <valItem ident="index">
+                    <paramList>
+                      <paramSpec ident="type"/>
+                    </paramList>
+                    <desc>generate list according to <term>type</term></desc>
+                  </valItem>
+                  <valItem ident="inline">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>Creates inline element out of <code>content</code> if there's something in
+                  <gi>rendition</gi>, use that formatting
+                  otherwise just show text of selected content.</desc>
+                    <equiv name="span"/>
+                  </valItem>
+                  <valItem ident="link">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                      <paramSpec ident="target">
+                        <desc>link url</desc>
+                      </paramSpec>
+                    </paramList>
+                    <desc>create hyperlink</desc>
+                    <equiv name="a"/>
+                  </valItem>
+                  <valItem ident="list">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>Create a list by following <term>content</term></desc>
+                    <equiv name="ol"/>
+                  </valItem>
+                  <valItem ident="listItem">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>create list item</desc>
+                    <equiv name="li"/>
+                  </valItem>
+                  <valItem ident="metadata">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>create metadata section</desc>
+                    <equiv name="head"/>
+                  </valItem>
+                  <valItem ident="note">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                      <paramSpec ident="place"/>
+                      <paramSpec ident="marker"/>
+                    </paramList>
+                  </valItem>
+                  <valItem ident="omit">
+                    <desc>Do nothing, do not process children</desc>
+                  </valItem>
+                  <valItem ident="paragraph">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>Creates a paragraph out of <code>content</code>.</desc>
+                    <equiv name="p"/>
+                  </valItem>
+                  <valItem ident="row">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>make table row</desc>
+                    <equiv name="tr"/>
+                  </valItem>
+                  <valItem ident="section">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                  </valItem>
+                  <valItem ident="table">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>make table</desc>
+                    <equiv name="table"/>
+                  </valItem>
+                  <valItem ident="text">
+                    <desc>literal text</desc>
+                  </valItem>
+                  <valItem ident="title">
+                    <paramList>
+                      <paramSpec ident="content"/>
+                    </paramList>
+                    <desc>make document title</desc>
+                    <equiv name="title"/>
+                  </valItem>
+                </valList>
               </attDef>
               <attDef ident="predicate" usage="opt">
                 <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
@@ -635,16 +888,16 @@
             </attList>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model behaviour="inline(.)"/>
+                <model behaviour="inline"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="quote">
-                  <model predicate="ancestor::p" behaviour="inline(.)">
+                  <model predicate="ancestor::p" behaviour="inline">
                     <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
                   </model>
-                  <model predicate="not(ancestor::p)" behaviour="block(.)">
+                  <model predicate="not(ancestor::p)" behaviour="block">
                     <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
                   </model>
                 </elementSpec>
@@ -652,54 +905,72 @@
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model predicate="parent::person" behaviour="inline()"/>
+                <model predicate="parent::person" behaviour="inline"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model behaviour="inline(.)">
+                <model behaviour="inline">
                   <rendition>font-weight:bold</rendition>
                 </model>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model behaviour="inline(.)" output="print"/>
+                <model behaviour="inline" output="print"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model predicate="ancestor::p" behaviour="inline(@n)"/>
+                <model predicate="ancestor::p" behaviour="inline">
+		       	     	     	   <param name="content">@n</param>
+		</model>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit(.)"/>
+                <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit"/>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="date">
-                  <model output="print" predicate="text()" behaviour="inline(.)"/>
-                  <model output="print" predicate="@when and not(text())" behaviour="inline(@when)"/>
-                  <model predicate="@when" output="web" behaviour="alternate(.,@when)"/>
+                  <model output="print" predicate="text()" behaviour="inline"/>
+                  <model output="print" predicate="@when and
+						   not(text())"
+			 behaviour="inline">
+		    		   <param name="content">@when</param>
+		  </model>
+                  <model predicate="@when" output="web"
+			 behaviour="alternate">
+		  		    		   <param name="default">.</param>
+		    		   <param name="alternate">@when</param>
+		  </model>
                 </elementSpec>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <elementSpec mode="change" ident="choice">
-                  <model predicate="sic and corr" behaviour="alternate(corr[1],sic[1])"/>
-                  <model predicate="abbr and expan" behaviour="alternate(expan[1],abbr[1])"/>
-                  <model predicate="orig and reg" behaviour="alternate(reg[1],orig[1])"/>
-                </elementSpec>
+
+			       <elementSpec mode="change" ident="choice">
+				 xmlns="http://www.tei-c.org/ns/Examples">
+			     <model	   predicate="sic and corr" behaviour="alternate">
+	   <param name="default">corr</param>
+	   <param name="alternate">sic</param></model>
+	   <model predicate="abbr and expan" behaviour="alternate">
+	   <param name="default">expan</param>
+	   <param name="alternate">abbr</param>
+	   </model><model predicate="orig and reg" behaviour="alternate">
+	   	   <param name="default">reg</param>
+	   <param name="alternate">orig</param>
+	   </model></elementSpec>
               </egXML>
             </exemplum>
           </elementSpec>
           <!-- elementSpec for added model element -->
           <elementSpec ident="modelSequence" mode="add" module="tagdocs">
-            <gloss versionDate="2015-01-06" xml:lang="en">sequence of processing model </gloss>
-            <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+            <gloss versionDate="2015-05-15" xml:lang="en">sequence of processing model </gloss>
+            <desc versionDate="2015-05-15" xml:lang="en">a group of model elements documenting intended processing models
             for this element, to be acted upon in sequence</desc>
             <classes>
               <memberOf key="att.global"/>
@@ -748,8 +1019,8 @@
             </attList>
           </elementSpec>
           <elementSpec ident="modelGrp" mode="add" module="tagdocs">
-            <gloss versionDate="2015-01-06" xml:lang="en">processing model group</gloss>
-            <desc versionDate="2015-01-06" xml:lang="en">a group of model elements documenting intended processing models
+            <gloss versionDate="2015-05-15" xml:lang="en">processing model group</gloss>
+            <desc versionDate="2015-05-15" xml:lang="en">a group of model elements documenting intended processing models
             for this element</desc>
             <classes>
               <memberOf key="att.global"/>
@@ -797,17 +1068,17 @@
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="abbr">
                   <modelGrp output="web">
-                    <model predicate="parent::choice" behaviour="omit()"/>
-                    <model predicate="ancestor::front" behaviour="inline(.)">
+                    <model predicate="parent::choice" behaviour="omit"/>
+                    <model predicate="ancestor::front" behaviour="inline">
                       <rendition>font-style:italic; </rendition>
                     </model>
-                    <model predicate="not(parent::choice)" behaviour="inline(.)">
+                    <model predicate="not(parent::choice)" behaviour="inline">
                       <rendition scope="before">content: ' ('</rendition>
                       <rendition scope="after">content: ')'</rendition>
                     </model>
                   </modelGrp>
                   <modelGrp output="print">
-                    <model predicate="parent::choice" behaviour="omit()"/>
+                    <model predicate="parent::choice" behaviour="omit"/>
                     <model predicate="not(parent::choice)" behaviour="note(.,'foot')"/>
                   </modelGrp>
                 </elementSpec>

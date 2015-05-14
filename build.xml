@@ -41,7 +41,7 @@
     <mkdir dir="${tempDir}"/>
     <echo>Unpack spreadsheet to ${tempDir}</echo>
     <unzip src="TEISimplespreadsheet.xlsx" dest="${tempDir}"/>
-    <echo>Convert XSLX to TEI</echo>
+    <echo>Convert XLSX to TEI</echo>
     <xslt force="yes" style="${XSL}/profiles/default/xlsx/from.xsl" in="${tempDir}/_rels/.rels" out="TEISimplespreadsheet.xml">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
       <param name="workDir" expression="file:///${tempDir}"/>
@@ -213,11 +213,13 @@
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
     </xslt>
-    <xslt force="yes" style="polygon/simpleoddtoxsl-latex.xsl" in="teisimple.odd" out="teisimple-pm-latex.xsl">
+    <!--
+	<xslt force="yes" style="polygon/simpleoddtoxsl-latex.xsl" in="teisimple.odd" out="teisimple-pm-latex.xsl">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
-    </xslt>
+      </xslt>
+      -->
     <echo>run test files through PM</echo>
     <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple.xml" out="tests/testsimple.html">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
@@ -240,10 +242,11 @@
     <xslt force="yes" style="teisimple-pm.xsl" in="tests/A10231.xml" out="tests/A10231.html">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>
-
+    <!--
     <xslt force="yes" style="teisimple-pm-latex.xsl" in="tests/testsimple4.xml" out="tests/testsimple4.tex">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-    </xslt>
+      </xslt>
+      -->
   </target>
 
   <target name="cleanup">

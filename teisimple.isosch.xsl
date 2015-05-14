@@ -227,13 +227,9 @@ belongs, but this <xsl:text/>
          <xsl:when test="every $x in $results satisfies $x"/>
          <xsl:otherwise>
             <xsl:message> Error: Each of
-                                       the rendition values in "<xsl:text/>
-               <xsl:value-of select="@rendition"/>
-               <xsl:text/>"
+                                       the rendition values in ""
                                        must point to a local ID or to a token in the Simple scheme
-                                          (<xsl:text/>
-               <xsl:value-of select="$results"/>
-               <xsl:text/>) (every $x in $results satisfies $x)</xsl:message>
+                                          () (every $x in $results satisfies $x)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M6"/>
@@ -254,12 +250,8 @@ belongs, but this <xsl:text/>
 		    <!--REPORT -->
 <xsl:if test="some $x in $results  satisfies $x">
          <xsl:message> Error: Every
-                                       local pointer in "<xsl:text/>
-            <xsl:value-of select="@corresp"/>
-            <xsl:text/>" must point to
-                                       an ID in this document (<xsl:text/>
-            <xsl:value-of select="$results"/>
-            <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
+                                       local pointer in "" must point to
+                                       an ID in this document () (some $x in $results satisfies $x)</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M7"/>
    </xsl:template>
@@ -324,12 +316,8 @@ belongs, but this <xsl:text/>
 		    <!--REPORT -->
 <xsl:if test="some $x in $results  satisfies $x">
          <xsl:message> Error: Every
-                                       local pointer in "<xsl:text/>
-            <xsl:value-of select="@target"/>
-            <xsl:text/>" must point to
-                                       an ID in this document (<xsl:text/>
-            <xsl:value-of select="$results"/>
-            <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
+                                       local pointer in "" must point to
+                                       an ID in this document () (some $x in $results satisfies $x)</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M10"/>
    </xsl:template>
@@ -523,13 +511,13 @@ The @spanTo attribute of <xsl:text/>
 
 		<!--ASSERT ERROR-->
 <xsl:choose>
-         <xsl:when test="child::* or child::text()[normalize-space(.)]"/>
+         <xsl:when test="child::* or child::text()[normalize-space()]"/>
          <xsl:otherwise>
             <xsl:message>
                 Element "<xsl:text/>
                <xsl:value-of select="name(.)"/>
                <xsl:text/>" may not be empty.
-             (child::* or child::text()[normalize-space(.)] / ERROR)</xsl:message>
+             (child::* or child::text()[normalize-space()] / ERROR)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M19"/>
