@@ -1978,9 +1978,7 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       </choice>
    </define>
    <define name="model.gLike">
-      <choice>
-         <ref name="g"/>
-      </choice>
+      <notAllowed/>
    </define>
    <define name="model.oddDecl">
       <choice>
@@ -2987,7 +2985,6 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
          <ref name="classDecl"/>
          <ref name="geoDecl"/>
          <ref name="appInfo"/>
-         <ref name="charDecl"/>
          <ref name="schemaSpec"/>
       </choice>
    </define>
@@ -5883,169 +5880,6 @@ Suggested values include: 1] sent; 2] received; 3] transmitted; 4] redirected; 5
                <ref name="data.truthValue"/>
             </attribute>
          </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="g">
-      <element name="g">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character or glyph) represents a glyph, or a non-standard character. [5. Characters, Glyphs, and Writing Modes]</a:documentation>
-         <text/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <optional>
-            <attribute name="ref">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to a description of the character or glyph intended.</a:documentation>
-               <ref name="data.pointer"/>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="char">
-      <element name="char">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character) provides descriptive information about a character. [5.2. Markup Constructs for Representation of Characters and Glyphs]</a:documentation>
-         <group>
-            <optional>
-               <ref name="charName"/>
-            </optional>
-            <zeroOrMore>
-               <ref name="model.descLike"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="charProp"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="mapping"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="figure"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="model.graphicLike"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="model.noteLike"/>
-            </zeroOrMore>
-         </group>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="charName">
-      <element name="charName">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character name) contains the name of a character, expressed following Unicode conventions. [5.2. Markup Constructs for Representation of Characters and Glyphs]</a:documentation>
-         <text/>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="charProp">
-      <element name="charProp">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character property) provides a name and value for some property of the parent character or glyph. [5.2. Markup Constructs for Representation of Characters and Glyphs]</a:documentation>
-         <group>
-            <choice>
-               <ref name="unicodeName"/>
-               <ref name="localName"/>
-            </choice>
-            <ref name="value"/>
-         </group>
-         <ref name="att.global.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="charDecl">
-      <element name="charDecl">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character declarations) provides information about nonstandard characters and glyphs. [5.2. Markup Constructs for Representation of Characters and Glyphs]</a:documentation>
-         <group>
-            <optional>
-               <ref name="desc"/>
-            </optional>
-            <oneOrMore>
-               <choice>
-                  <ref name="char"/>
-                  <ref name="glyph"/>
-               </choice>
-            </oneOrMore>
-         </group>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="glyph">
-      <element name="glyph">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character glyph) provides descriptive information about a character glyph. [5.2. Markup Constructs for Representation of Characters and Glyphs]</a:documentation>
-         <group>
-            <optional>
-               <ref name="glyphName"/>
-            </optional>
-            <zeroOrMore>
-               <ref name="model.descLike"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="charProp"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="mapping"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="figure"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="model.graphicLike"/>
-            </zeroOrMore>
-            <zeroOrMore>
-               <ref name="model.noteLike"/>
-            </zeroOrMore>
-         </group>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="glyphName">
-      <element name="glyphName">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character glyph name) contains the name of a glyph, expressed following Unicode conventions for character names. [5.2. Markup Constructs for Representation of Characters and Glyphs]</a:documentation>
-         <text/>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="localName">
-      <element name="localName">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(locally-defined property name) contains a locally defined name for some property. [5.2.1. Character Properties]</a:documentation>
-         <text/>
-         <ref name="att.global.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="mapping">
-      <element name="mapping">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(character mapping) contains one or more characters which are related to the parent character or glyph in some respect, as specified by the type attribute. [5.2. Markup Constructs for Representation of Characters and Glyphs]</a:documentation>
-         <ref name="macro.xtext"/>
-         <ref name="att.global.attributes"/>
-         <ref name="att.typed.attributes"/>
-         <empty/>
-      </element>
-   </define>
-   <define name="unicodeName">
-      <element name="unicodeName">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(unicode property name) contains the name of a registered Unicode normative or informative property. [5.2.1. Character Properties]</a:documentation>
-         <text/>
-         <ref name="att.global.attributes"/>
-         <optional>
-            <attribute name="version">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the version number of the Unicode Standard in which this property name is defined.</a:documentation>
-               <ref name="data.version"/>
-            </attribute>
-         </optional>
-         <empty/>
-      </element>
-   </define>
-   <define name="value">
-      <element name="value">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains a single value for some property, attribute, or other analysis. [5.2.1. Character Properties]</a:documentation>
-         <ref name="macro.xtext"/>
-         <ref name="att.global.attributes"/>
          <empty/>
       </element>
    </define>
@@ -9108,6 +8942,20 @@ You must supply at least two values for @target on <name/>
          <empty/>
       </element>
    </define>
+   <define name="param">
+      <element name="param">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">parameter of a model behaviour</a:documentation>
+         <ref name="data.xpath"/>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute name="name">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Name of parameter</a:documentation>
+               <text/>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
    <define name="model">
       <element name="model">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(processing model) documentation of an intended processing model for this element</a:documentation>
@@ -9115,30 +8963,30 @@ You must supply at least two values for @target on <name/>
             <choice>
                 <ref name="model.glossLike"/>
                 <ref name="model.descLike"/>
-		             <zeroOrMore>
-                  <ref name="value"/>
-               </zeroOrMore>				
+                <zeroOrMore>
+                  <ref name="param"/>
+               </zeroOrMore>
                 <ref name="rendition"/>
               </choice>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
          <attribute name="behaviour">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">which processing function, optionally containing parameters, should be used to present this element in output</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">which processing function, with optional named parameters, should be used to present this element in output</a:documentation>
             <choice>
                <value>alternate</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a specialized display of alternating elements for displaying the preferred version, both at once or toggling between the two.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a specialized display of alternating elements for displaying the preferred version, both at once or toggling between the two.</a:documentation>
                <value>anchor</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create anchor with ID</a:documentation>
                <value>block</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a block out of the content parameter. </a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a block out of the content parameter. </a:documentation>
                <value>body</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates the body of a document.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create the body of a document.</a:documentation>
                <value>break</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make a line, column, or page break according to type</a:documentation>
                <value>cell</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a table cell</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a table cell</a:documentation>
                <value>cit</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">shows the content, with an attribute of the source</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">show the content, with an indication of the source</a:documentation>
                <value>document</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">start a new output document</a:documentation>
                <value>figure</value>
@@ -9146,7 +8994,7 @@ You must supply at least two values for @target on <name/>
                <value>glyph</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">show a character by looking up reference</a:documentation>
                <value>graphic</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">If url is present, uses it to display graphic, else display placeholder image.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">If url is present, uses it to display graphic, else display a placeholder image.</a:documentation>
                <value>heading</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a heading. </a:documentation>
                <value>index</value>
@@ -9162,7 +9010,7 @@ You must supply at least two values for @target on <name/>
                <value>metadata</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create metadata section</a:documentation>
                <value>note</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Creates a note block out of , as per value of </a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                <value>omit</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Do nothing, do not process children</a:documentation>
                <value>paragraph</value>

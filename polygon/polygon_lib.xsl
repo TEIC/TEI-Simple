@@ -246,7 +246,7 @@
   <xsl:function name="tei:getParam">
     <xsl:param name="source"/>
     <xsl:param name="what"/>
-    <xsl:value-of select="$source/tei:value[@n=$what]"/>
+    <xsl:value-of select="$source/tei:param[@name=$what]"/>
   </xsl:function>
   
   <xsl:function name="tei:matchFunction">
@@ -259,7 +259,7 @@
 					 then '.' else  tei:getParam($model,'content')"/>
 
       <xsl:if test="$debug='true'">
-      <xsl:message>Look at <xsl:value-of select="($elName,$task)"/>:   <xsl:value-of select="($model/tei:value)" separator="|"/>:     <xsl:value-of select="$contents"/></xsl:message>
+      <xsl:message>Look at <xsl:value-of select="($elName,$task)"/>:   <xsl:value-of select="($model/tei:param)" separator="|"/>:     <xsl:value-of select="$contents"/></xsl:message>
       </xsl:if>
     <xsl:choose>
       <xsl:when test="$task ='index'">

@@ -243,8 +243,8 @@
                       <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@target]">
                         <let name="results" value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                         <report test="some $x in $results  satisfies $x"> Error: Every
-                                       local pointer in "<value-of select="@target"/>" must point to
-                                       an ID in this document (<value-of select="$results"/>)</report>
+                                       local pointer in "<param-of select="@target"/>" must point to
+                                       an ID in this document (<param-of select="$results"/>)</report>
                       </rule>
                     </constraint>
                   </constraintSpec>
@@ -392,9 +392,9 @@
                   <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
                     <let name="results" value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
                     <assert test="every $x in $results satisfies $x"> Error: Each of
-                                       the rendition values in "<value-of select="@rendition"/>"
+                                       the rendition values in "<param-of select="@rendition"/>"
                                        must point to a local ID or to a token in the Simple scheme
-                                          (<value-of select="$results"/>)</assert>
+                                          (<param-of select="$results"/>)</assert>
                   </rule>
                 </constraint>
               </constraintSpec>
@@ -403,8 +403,8 @@
                   <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@corresp]">
                     <let name="results" value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                     <report test="some $x in $results  satisfies $x"> Error: Every
-                                       local pointer in "<value-of select="@corresp"/>" must point to
-                                       an ID in this document (<value-of select="$results"/>)</report>
+                                       local pointer in "<param-of select="@corresp"/>" must point to
+                                       an ID in this document (<param-of select="$results"/>)</report>
                   </rule>
                 </constraint>
               </constraintSpec>
@@ -607,13 +607,13 @@
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="addSpan">
-              <model behaviour="anchor"><value n="id">@xml:id</value></model>
+              <model behaviour="anchor"><param name="id">@xml:id</param></model>
             </elementSpec>
             <elementSpec mode="change" ident="am">
               <model behaviour="inline"/>
             </elementSpec>
             <elementSpec mode="change" ident="anchor">
-              <model behaviour="anchor"><value n="id">@xml:id</value></model>
+              <model behaviour="anchor"><param name="id">@xml:id</param></model>
             </elementSpec>
             <elementSpec mode="change" ident="argument">
               <model behaviour="block">
@@ -640,7 +640,7 @@
             <elementSpec mode="change" ident="body">
               <modelSequence>
                 <model behaviour="index">
-		  <value n="type">'toc'</value>
+		  <param name="type">'toc'</param>
 		</model>
                 <model behaviour="block"/>
               </modelSequence>
@@ -653,7 +653,7 @@
             </elementSpec>
             <elementSpec mode="change" ident="castGroup">
               <model predicate="child::*" behaviour="list">
-		<value n="content">castItem|castGroup</value>
+		<param name="content">castItem|castGroup</param>
                 <desc>Insert list. </desc>
               </model>
             </elementSpec>
@@ -664,14 +664,14 @@
             </elementSpec>
             <elementSpec mode="change" ident="castList">
               <model predicate="child::*" behaviour="list" useSourceRendition="true">
-		<value n="content">castItem</value>
+		<param name="content">castItem</param>
                 <rendition>list-style: ordered;</rendition>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="cb">
               <model behaviour="break">
-		<value n="type">'column'</value>
-		<value n="label">@n</value>
+		<param name="type">'column'</param>
+		<param name="label">@n</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="cell">
@@ -695,27 +695,27 @@
               </constraintSpec>
               <model output="plain" predicate="sic and corr"
 		     behaviour="inline">
-		<value n="content">corr[1]</value>
+		<param name="content">corr[1]</param>
 	      </model>
               <model output="plain" predicate="abbr and expan"
 		     behaviour="inline">
-		<value n="content">expan[1]</value>
+		<param name="content">expan[1]</param>
 	      </model>
               <model output="plain" predicate="orig and reg"
 		     behaviour="inline">
-		<value n="content">reg[1]</value>
+		<param name="content">reg[1]</param>
 	      </model>
               <model predicate="sic and corr" behaviour="alternate">
-		<value n="default">corr[1]</value>
-		<value n="alternate">sic[1]</value>
+		<param name="default">corr[1]</param>
+		<param name="alternate">sic[1]</param>
 	      </model>
               <model predicate="abbr and expan" behaviour="alternate">
-		<value n="default">expan[1]</value>
-		<value n="alternate">abbr[1]</value>
+		<param name="default">expan[1]</param>
+		<param name="alternate">abbr[1]</param>
 	      </model>
               <model predicate="orig and reg" behaviour="alternate">
-		<value n="default">reg[1]</value>
-		<value n="alternate">orig[1]</value>
+		<param name="default">reg[1]</param>
+		<param name="alternate">orig[1]</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="cit">
@@ -741,12 +741,12 @@
               <model output="print" predicate="text()" behaviour="inline"/>
               <model output="print" predicate="@when and not(text())"
 		     behaviour="inline">
-		<value n="content">@when</value>
+		<param name="content">@when</param>
 	      </model>
               <model output="web" predicate="@when"
 		     behaviour="alternate">
-		<value n="default">.</value>
-		<value n="alternate">@when</value>
+		<param name="default">.</param>
+		<param name="alternate">@when</param>
 	      </model>
               <model predicate="text()" behaviour="inline"/>
             </elementSpec>
@@ -851,7 +851,7 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="g">
               <model predicate="not(text())" behaviour="glyph">
-	      <value n="g">@ref</value>
+	      <param name="g">@ref</param>
 	      </model>
               <model behaviour="inline"/>
             </elementSpec>
@@ -860,7 +860,7 @@ border-bottom: solid 1pt blue;
                 <rendition>color: grey;</rendition>
               </model>
               <model predicate="@extent" behaviour="inline">
-		<value n="content">@extent</value>
+		<param name="content">@extent</param>
                 <rendition scope="before">content: '[..';</rendition>
                 <rendition scope="after">content: '..]';</rendition>
                 <rendition>color: grey;</rendition>
@@ -871,11 +871,11 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="graphic">
               <model behaviour="graphic">
-		<value n="url">@url</value>
-		<value n="width">@width</value>
-		<value n="height">@height</value>
-		<value n="scale">@scale</value>
-		<value n="content">desc</value>
+		<param name="url">@url</param>
+		<param name="width">@width</param>
+		<param name="height">@height</param>
+		<param name="scale">@scale</param>
+		<param name="content">desc</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="group">
@@ -898,8 +898,8 @@ border-bottom: solid 1pt blue;
                 <rendition>font-weight: bold;</rendition>
               </model>
               <model predicate="parent::div" behaviour="heading">
-		<value n="type">@type</value>
-		<value n="root">div</value>
+		<param name="type">@type</param>
+		<param name="root">div</param>
 	      </model>
               <model behaviour="block"/>
             </elementSpec>
@@ -928,8 +928,8 @@ border-bottom: solid 1pt blue;
             <elementSpec mode="change" ident="lb">
               <model behaviour="break"
 		     useSourceRendition="true">
-		<value n="type">'line'</value>
-		<value n="label">@n</value>
+		<param name="type">'line'</param>
+		<param name="label">@n</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="lg">
@@ -938,15 +938,15 @@ border-bottom: solid 1pt blue;
             <elementSpec mode="change" ident="list">
               <model predicate="@rendition" behaviour="list"
 		     useSourceRendition="true">
-		<value n="content">item</value>
+		<param name="content">item</param>
 	      </model>
               <model predicate="not(@rendition)" behaviour="list">
-		<value n="content">item</value>
+		<param name="content">item</param>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="listBibl">
               <model behaviour="list">
-		<value n="content">bibl</value>
+		<param name="content">bibl</param>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="measure">
@@ -960,8 +960,8 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="note">
               <model predicate="@place" behaviour="note">
-		<value n="place">@place</value>
-		<value n="label">@n</value>
+		<param name="place">@place</param>
+		<param name="label">@n</param>
 	      </model>
               <model predicate="parent::div and not(@place)" behaviour="block">
                 <rendition>margin-left: 10px;margin-right: 10px; font-size:smaller;</rendition>
@@ -980,7 +980,7 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="orig">
               <model behaviour="inline">
-		<value n="label">@n</value>
+		<param name="label">@n</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="p">
@@ -995,8 +995,8 @@ border-bottom: solid 1pt blue;
                 </constraint>
               </constraintSpec>
               <model behaviour="break" useSourceRendition="true">
-		<value n="type">'page'</value>
-		<value n="label">(concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else ''))</value>
+		<param name="type">'page'</param>
+		<param name="label">(concat(if(@n) then     concat(@n,' ') else '',if(@facs) then     concat('@',@facs) else ''))</param>
                 <rendition>
 	  display: block;
 	  margin-left: 4pt;
@@ -1052,11 +1052,11 @@ border-bottom: solid 1pt blue;
             <elementSpec mode="change" ident="ref">
               <model behaviour="inline" predicate="not(@target)"/>
               <model predicate="not(text())" behaviour="link">
-		<value n="content">@target</value>
-		<value n="link">@target</value>
+		<param name="content">@target</param>
+		<param name="link">@target</param>
 	      </model>
               <model behaviour="link">
-		<value n="link">@target</value>
+		<param name="link">@target</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="reg">
@@ -1162,7 +1162,7 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="fileDesc">
               <model behaviour="title">
-		<value n="content">titleStmt</value>
+		<param name="content">titleStmt</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="profileDesc">
@@ -1203,7 +1203,7 @@ border-bottom: solid 1pt blue;
               <modelSequence predicate="parent::titleStmt/parent::fileDesc">
                 <model predicate="preceding-sibling::title"
 		       behaviour="text">
-		  <value n="content">' — '</value>
+		  <param name="content">' — '</param>
 		</model>
                 <model behaviour="text">
                   <rendition>color: red; font-size: 2em;</rendition>
@@ -1215,7 +1215,7 @@ border-bottom: solid 1pt blue;
                   <rendition>font-style: italic;</rendition>
                 </model>
                 <model predicate="ancestor::biblStruct or       ancestor::biblFull" behaviour="text">
-		  <value n="content">', '</value>
+		  <param name="content">', '</param>
 		</model>
               </modelSequence>
               <modelSequence predicate="@level='s' or @level='j'">
@@ -1223,7 +1223,7 @@ border-bottom: solid 1pt blue;
                   <rendition>font-style: italic;</rendition>
                 </model>
                 <model predicate="following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull)" behaviour="text">
-		  <value n="content">', '</value>
+		  <param name="content">', '</param>
 		</model>
               </modelSequence>
               <modelSequence predicate="@level='u' or @level='a'">
@@ -1231,7 +1231,7 @@ border-bottom: solid 1pt blue;
                   <rendition>font-style: italic;</rendition>
                 </model>
                 <model predicate="following-sibling::* and     (ancestor::biblStruct  or     ancestor::biblFull)" behaviour="text">
-		  <value n="content">'. '</value>
+		  <param name="content">'. '</param>
 		</model>
               </modelSequence>
               <model behaviour="inline">
