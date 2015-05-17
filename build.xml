@@ -34,7 +34,7 @@
   </path>
   <taskdef name="schematron" classname="com.schematron.ant.SchematronTask" classpath="lib/ant-schematron-2010-04-14.jar"/>
   <taskdef name="runjing" classpath="${jing}" classname="com.thaiopensource.relaxng.util.JingTask"/>
-  <target name="all" depends="convert,schemas,tests,doc,cleanup"/>
+  <target name="all" depends="convert,schemas,tests,doc,chain,cleanup"/>
   <target name="convert">
     <!-- Recreate temporary output directory -->
     <delete dir="${tempDir}"/>
@@ -206,6 +206,26 @@
     <schemavalidate noNamespaceFile="teisimple.xsd" file="tests/testsimple.xml"/>
   </target>
 
+    <target name="chain">
+    <echo>Test customization of TEI Simple</echo>
+    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="tests/myteisimple.odd" out="myteisimple.odd.compiled">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}" if="lang"/>
+      <param name="verbose" expression="${verbose}" if="verbose"/>
+    </xslt>
+    <xslt processor="trax" force="yes" style="${XSL}/odds/odd2relax.xsl" in="myteisimple.odd.compiled" out="myteisimple.rng">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}"/>
+      <param name="useFixedDate" expression="true"/>
+      <param name="documentationLanguage" expression="${docLang}"/>
+    </xslt>
+
+  </target>
+
   <target name="pm">
     <echo>create simple XSL from PM</echo>
     <xslt force="yes" style="polygon/simpleoddtoxsl.xsl" in="teisimple.odd" out="teisimple-pm.xsl">
@@ -251,8 +271,9 @@
 
   <target name="cleanup">
     <delete dir="${tempDir}"/>
-
+<!--
     <delete file="teisimple.odd.compiled"/>
+    -->
     <delete file="teisimple.odd.tmp"/> 
     <delete file="tei-pm.odd.tmp"/> 
     <delete file="tei-pm.odd.compiled"/>
