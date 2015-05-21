@@ -135,8 +135,8 @@
 	  they can be enclosed inside a <gi>modelSequence</gi>.
 	  </p>
 
-	  <p>Within each <gi>model</gi> there can be a
-	  <gi>rendition</gi> element.</p>
+	  <p>Within each <gi>model</gi> there can be set of
+	  <gi>rendition</gi> elements.</p>
 	  
           <p>Let us consider a simple case, the handling of the
 	<gi>hi</gi> element. We decide that it is an inline element,
@@ -328,10 +328,9 @@
               <alternate minOccurs="0" maxOccurs="unbounded">
                 <classRef key="model.glossLike"/>
                 <classRef key="model.descLike"/>
-                <elementRef key="param" minOccurs="0"
-			    maxOccurs="unbounded"/>
 	      </alternate>
-              <elementRef key="rendition"/>
+              <elementRef key="param" minOccurs="0"   maxOccurs="unbounded"/>
+              <elementRef key="rendition" minOccurs="0" maxOccurs="unbounded"/>
             </content>
             <attList>
               <attDef ident="behaviour" usage="req">

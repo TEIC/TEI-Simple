@@ -656,8 +656,8 @@
             </elementSpec>
             <elementSpec mode="change" ident="castGroup">
               <model predicate="child::*" behaviour="list">
-		<param name="content">castItem|castGroup</param>
                 <desc>Insert list. </desc>
+		<param name="content">castItem|castGroup</param>
               </model>
             </elementSpec>
             <elementSpec mode="change" ident="castItem">
