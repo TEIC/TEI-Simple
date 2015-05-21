@@ -52,7 +52,7 @@
         <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>James Cummings</docAuthor>
         <docAuthor>Magdalena Turska</docAuthor>
-        <docDate>Version 0.2: 13th May 2015</docDate>
+        <docDate>Version 0.3: 21st May 2015</docDate>
       </titlePage>
     </front>
     <body>
@@ -64,19 +64,22 @@
 	<emph>descriptive</emph> of the interpreted semantics of the
 	source text (<q>this is a title</q>, <q>this is a
 	quotation</q>), where the interpretation is often based on a
-	human interpretation of layout. The <att>rend</att> attribute
-	is sometimes, but not necessarily, used to describe that
+	human interpretation of layout. The <att>rend</att>,
+	<att>rendition</att> and <att>style</att> attributes
+	are sometimes, but not necessarily, used to describe that
 	layout. The resulting encoded text is very amenable to
 	analysis, but for the common case of re-presenting the text on
-	the web, the TEI model is incomplete.</p>
+	the web or in print as a digital edition, the TEI model by itself is incomplete.</p>
           <p>The processing model notation allows each element to be
-        assigned to a structural category (<gi>model</gi>, and given
+        assigned to a structural category (<gi>model</gi>), and given
         an outline rendition description (<gi>rendition</gi>). This
         allows a processor to know whether to handle the element or
         not, and broadly speaking how to display or otherwise process
-        it. The model and rendition instructions are embedded in a
-        TEI ODD customization.</p>
-          <p>This model (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
+        it. The model and rendition instructions are part of the 
+        TEI ODD, so can be changed in TEI customizations in the normal
+	  way.</p>
+	  <p><figure><graphic url="SPM2.png"/><head>Processing model workflow</head></figure></p>
+          <p>This method of working (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
 	distinct roles, to create a digital edition from a TEI text:
 	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
 	  makes the high-level output decisions. These 	fall into two parts
@@ -103,23 +106,23 @@
 	features of CSS. The concepts addressed by the functions (eg
 	<q>block</q> and <q>inline</q>) are in line with XSL FO, and
 	HTML; the catalogue of functions is given under the element <gi>model</gi>.</p>
-          <p>An important precondition for an
+          <p>An precondition for an
 	implementation is that it must include an XPath 2.0 interpreter,
 	as this is used in several places in the processing
 	notation. </p>
-          <p>It is an important principle of the processing model (known informally as the
+          <p>It is an principle of the processing model (known informally as the
 	Turska Tenet) that the transformation stage should be
 	minimally intelligent; that is to say, it should contain as
 	few TEI-specific rules as possible. The ODD should be as
 	explicit as possible, and provide maximum expressivity to the
 	  editor.</p>
-	  <figure><graphic url="SPM2.png"/><head>Processing model workflow</head></figure>
         </div>
+
         <div>
           <head>Processing model elements</head>
-          <p>There are two key elements for specifying the structural
+          <p>There are two main elements for specifying the structural
 	and appearance components of a processing model:
-	  <specList><specDesc key="model" atts="predicate behaviour      useSourceRendition output"/><specDesc key="rendition" atts="scope"/></specList>
+	  <specList><specDesc key="model" atts="predicate behaviour useSourceRendition output"/><specDesc key="rendition" atts="scope"/></specList>
 	  For a given <gi>elementSpec</gi>, there can be as many
 	  <gi>model</gi> statements as required, each of which can
 	  have multiple <gi>rendition</gi> children. A set  of multiple
@@ -129,8 +132,12 @@
 	  <q>case statement</q> in some programming
 	  languages. If the intention is for several
 	  <gi>model</gi> statements to be active at the same time,
-	  they must be enclosed inside a <gi>modelSequence</gi>.
-	</p>
+	  they can be enclosed inside a <gi>modelSequence</gi>.
+	  </p>
+
+	  <p>Within each <gi>model</gi> there can be a
+	  <gi>rendition</gi> element.</p>
+	  
           <p>Let us consider a simple case, the handling of the
 	<gi>hi</gi> element. We decide that it is an inline element,
 	normally rendered in italics:
@@ -321,9 +328,10 @@
               <alternate minOccurs="0" maxOccurs="unbounded">
                 <classRef key="model.glossLike"/>
                 <classRef key="model.descLike"/>
-                <elementRef key="param" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="rendition"/>
-              </alternate>
+                <elementRef key="param" minOccurs="0"
+			    maxOccurs="unbounded"/>
+	      </alternate>
+              <elementRef key="rendition"/>
             </content>
             <attList>
               <attDef ident="behaviour" usage="req">
