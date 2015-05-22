@@ -8,6 +8,9 @@ docx:
 teisimple:
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) 
 
+chain:
+	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) chain
+
 pm:
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) pm
 
