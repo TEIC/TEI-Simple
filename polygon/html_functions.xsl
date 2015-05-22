@@ -143,16 +143,15 @@ of this software, even if advised of the possibility of such damage.
   <xsl:function name="tei:heading" as="node()*">
     <xsl:param name="model"/>
     <xsl:param name="content"/>
-    <xsl:param name="type"/>
-    <xsl:param name="root"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
     <xsl:for-each select="$model">
+      <xslo:variable name="p" select="local-name(..)"/>
       <xslo:variable name="depth">
         <xslo:value-of>
           <xsl:attribute name="select">
-            <xsl:text>count(ancestor::</xsl:text>
-            <xsl:value-of select="$root"/>
+            <xsl:text>count(</xsl:text>
+	    <xsl:text>ancestor::*[name(.)=$p]</xsl:text>
             <xsl:text>)</xsl:text>
           </xsl:attribute>
         </xslo:value-of>

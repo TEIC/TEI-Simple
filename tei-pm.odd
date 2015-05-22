@@ -436,6 +436,7 @@
                   <valItem ident="inline">
                     <paramList>
                       <paramSpec ident="content"/>
+                      <paramSpec ident="label"/>
                     </paramList>
                     <desc>creates inline element out of <term>content</term> if there's something in
                   <gi>rendition</gi>, use that formatting
