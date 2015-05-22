@@ -9,7 +9,7 @@ elements are allowed for in the header. The following table
 	shows the usage of all elements in six existing corpora, and
 	classifies them 11 usage groups. There are
 16 elements 
-listed which are <emph>not</emph> allowed in TEI Simple, but should be transformed
+listed which are <emph>not</emph> allowed in TEI SImple, but should be transformed
 to another element.</p>
    <table>
       <row role="label">

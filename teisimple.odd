@@ -901,10 +901,7 @@ border-bottom: solid 1pt blue;
               <model predicate="parent::list" behaviour="block">
                 <rendition>font-weight: bold;</rendition>
               </model>
-              <model predicate="parent::div" behaviour="heading">
-		<param name="type">@type</param>
-		<param name="root">div</param>
-	      </model>
+              <model predicate="parent::div" behaviour="heading"/>
               <model behaviour="block"/>
             </elementSpec>
             <elementSpec mode="change" ident="hi">
@@ -983,9 +980,7 @@ border-bottom: solid 1pt blue;
               <model behaviour="block"/>
             </elementSpec>
             <elementSpec mode="change" ident="orig">
-              <model behaviour="inline">
-		<param name="label">@n</param>
-	      </model>
+              <model behaviour="inline"/>
             </elementSpec>
             <elementSpec mode="change" ident="p">
               <model behaviour="paragraph" useSourceRendition="true">
