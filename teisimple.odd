@@ -82,7 +82,7 @@
           However, this flexibility has come at the cost of relatively limited success in
           interoperability. In our view there is a distinct set of uses (primarily in the area of
           digitized ‘European’-style books) that would benefit from a <hi rend="italic">prescriptive</hi> recipe for digital text; this will sit alongside other
-          domain-specific, constrained TEI customizations, such as the very successful <hi rend="italic">Epidoc</hi> in the epigraphic community. TEI-Simple may become a prototype
+          domain-specific, constrained TEI customizations, such as the very successful <hi rend="italic">Epidoc</hi> in the epigraphic community. TEI Simple may become a prototype
           for a new family of constrained customizations. For instance, a TEI Simple MS for
           manuscript based work could be built on top of the ENRICH project, drawing on many of the
           lessons and some of the code for TEI Simple. </p>
