@@ -604,7 +604,7 @@ Suggested values include: 1] internal; 2] external; 3] conjecture</xs:documentat
     <xs:attribute name="rendition">
       <xs:annotation>
         <xs:documentation>points to a description of the rendering or presentation used for this element in the source text.
-Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:display; 9] simple:doublestrikethrough; 10] simple:doubleunderline; 11] simple:dropcap; 12] simple:float; 13] simple:hyphen; 14] simple:inline; 15] simple:justify; 16] simple:italic; 17] simple:larger; 18] simple:left; 19] simple:leftbraced; 20] simple:letterspace; 21] simple:normalstyle; 22] simple:normalweight; 23] simple:right; 24] simple:rightbraced; 25] simple:rotateleft; 26] simple:rotateright; 27] simple:smallcaps; 28] simple:smaller; 29] simple:strikethrough; 30] simple:subscript; 31] simple:superscript; 32] simple:topbraced; 33] simple:typewriter; 34] simple:underline; 35] simple:wavyunderline</xs:documentation>
+Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bold; 4] simple:bottombraced; 5] simple:boxed; 6] simple:centre; 7] simple:cursive; 8] simple:display; 9] simple:doublestrikethrough; 10] simple:doubleunderline; 11] simple:dropcap; 12] simple:float; 13] simple:hyphen; 14] simple:inline; 15] simple:justify; 16] simple:italic; 17] simple:larger; 18] simple:left; 19] simple:leftbraced; 20] simple:letterspace; 21] simple:literal; 22] simple:normalstyle; 23] simple:normalweight; 24] simple:right; 25] simple:rightbraced; 26] simple:rotateleft; 27] simple:rotateright; 28] simple:smallcaps; 29] simple:smaller; 30] simple:strikethrough; 31] simple:subscript; 32] simple:superscript; 33] simple:topbraced; 34] simple:typewriter; 35] simple:underline; 36] simple:wavyunderline</xs:documentation>
       </xs:annotation>
       <xs:simpleType>
         <xs:restriction>
@@ -788,6 +788,15 @@ Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bo
                       <xs:enumeration value="simple:letterspace">
                         <xs:annotation>
                           <xs:documentation>letter-spaced</xs:documentation>
+                        </xs:annotation>
+                      </xs:enumeration>
+                    </xs:restriction>
+                  </xs:simpleType>
+                  <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                      <xs:enumeration value="simple:literal">
+                        <xs:annotation>
+                          <xs:documentation>fixed-width typeface, spacing preserved</xs:documentation>
                         </xs:annotation>
                       </xs:enumeration>
                     </xs:restriction>

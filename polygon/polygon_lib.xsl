@@ -279,7 +279,7 @@
         <xsl:sequence select="tei:graphic($model, tei:getParam($model,'url'), tei:getParam($model,'width'), tei:getParam($model,'height'), tei:getParam($model,'scale'),$class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='heading'">
-        <xsl:sequence select="tei:heading($model, $contents,tei:getParam($model,'type'),tei:getParam($model,'root'),$class, $number)"/>
+        <xsl:sequence select="tei:heading($model, $contents, $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='index'">
         <xsl:sequence select="tei:index($model, tei:getParam($model,'type'), $class, $number)"/>

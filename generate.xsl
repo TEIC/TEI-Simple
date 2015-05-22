@@ -49,7 +49,7 @@ elements are allowed for in the header. The following table
 	classifies them 11 usage groups. There are
 <XSL:value-of select="count(//row[  position()&gt;1 and
 		      normalize-space(cell[10]) = ''])"/> elements 
-listed which are <emph>not</emph> allowed in TEI SImple, but should be transformed
+listed which are <emph>not</emph> allowed in TEI Simple, but should be transformed
 to another element.</p>
         <XSL:variable name="corpses" select="distinct-values(doc('count.xml')//elementRef/@corpus)"/>
         <table>

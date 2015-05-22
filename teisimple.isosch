@@ -3,22 +3,22 @@
    <title>ISO Schematron rules</title>
    <!-- This file generated 1970-01-01 by 'extract-isosch.xsl'. -->
 
-<!-- ********************* -->
-<!-- namespaces, declared: -->
-<!-- ********************* -->
-<ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+   <!-- ********************* -->
+   <!-- namespaces, declared: -->
+   <!-- ********************* -->
+   <ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
    <ns prefix="xs" uri="http://www.w3.org/2001/XMLSchema"/>
    <ns prefix="rng" uri="http://relaxng.org/ns/structure/1.0"/>
 
    <!-- ********************* -->
-<!-- namespaces, implicit: -->
-<!-- ********************* -->
-<ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
+   <!-- namespaces, implicit: -->
+   <!-- ********************* -->
+   <ns prefix="tei" uri="http://www.tei-c.org/ns/1.0"/>
 
    <!-- ************ -->
-<!-- constraints: -->
-<!-- ************ -->
-<pattern id="teisimple-att.datable-calendar-constraint-calendar-1">
+   <!-- constraints: -->
+   <!-- ************ -->
+   <pattern id="teisimple-att.datable-calendar-constraint-calendar-1">
           <rule context="tei:*[@calendar]">
             <assert test="string-length(.) gt 0">
 @calendar indicates the system or calendar to which the date represented by the content of this element
@@ -178,9 +178,9 @@ is not permitted outside the header</report>
    </pattern>
 
    <!-- *********** -->
-<!-- deprecated: -->
-<!-- *********** -->
-<pattern>
+   <!-- deprecated: -->
+   <!-- *********** -->
+   <pattern>
       <rule context="tei:teiHeader">
          <report test="@type" role="nonfatal">WARNING: use of deprecated attribute — @type of the teiHeader element will be removed from the TEI on 2016-11-18.
                 </report>

@@ -10,7 +10,7 @@
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 version="2.0"><!--Implementers: please note that overriding process-prolog or process-root is 
     the preferred method for meta-stylesheets to use where possible. -->
-<xsl:param name="archiveDirParameter"/>
+   <xsl:param name="archiveDirParameter"/>
    <xsl:param name="archiveNameParameter"/>
    <xsl:param name="fileNameParameter"/>
    <xsl:param name="fileDirParameter"/>
@@ -21,27 +21,27 @@
    <!--PHASES-->
 
 
-<!--PROLOG-->
-<xsl:output method="text"/>
+   <!--PROLOG-->
+   <xsl:output method="text"/>
 
    <!--XSD TYPES FOR XSLT2-->
 
 
-<!--KEYS AND FUNCTIONS-->
+   <!--KEYS AND FUNCTIONS-->
 
 
-<!--DEFAULT RULES-->
+   <!--DEFAULT RULES-->
 
 
-<!--MODE: SCHEMATRON-SELECT-FULL-PATH-->
-<!--This mode can be used to generate an ugly though full XPath for locators-->
-<xsl:template match="*" mode="schematron-select-full-path">
+   <!--MODE: SCHEMATRON-SELECT-FULL-PATH-->
+   <!--This mode can be used to generate an ugly though full XPath for locators-->
+   <xsl:template match="*" mode="schematron-select-full-path">
       <xsl:apply-templates select="." mode="schematron-get-full-path"/>
    </xsl:template>
 
    <!--MODE: SCHEMATRON-FULL-PATH-->
-<!--This mode can be used to generate an ugly though full XPath for locators-->
-<xsl:template match="*" mode="schematron-get-full-path">
+   <!--This mode can be used to generate an ugly though full XPath for locators-->
+   <xsl:template match="*" mode="schematron-get-full-path">
       <xsl:apply-templates select="parent::*" mode="schematron-get-full-path"/>
       <xsl:text>/</xsl:text>
       <xsl:choose>
@@ -79,8 +79,8 @@
    </xsl:template>
 
    <!--MODE: SCHEMATRON-FULL-PATH-2-->
-<!--This mode can be used to generate prefixed XPath for humans-->
-<xsl:template match="node() | @*" mode="schematron-get-full-path-2">
+   <!--This mode can be used to generate prefixed XPath for humans-->
+   <xsl:template match="node() | @*" mode="schematron-get-full-path-2">
       <xsl:for-each select="ancestor-or-self::*">
          <xsl:text>/</xsl:text>
          <xsl:value-of select="name(.)"/>
@@ -95,9 +95,9 @@
       </xsl:if>
    </xsl:template>
    <!--MODE: SCHEMATRON-FULL-PATH-3-->
-<!--This mode can be used to generate prefixed XPath for humans 
+   <!--This mode can be used to generate prefixed XPath for humans 
 	(Top-level element has index)-->
-<xsl:template match="node() | @*" mode="schematron-get-full-path-3">
+   <xsl:template match="node() | @*" mode="schematron-get-full-path-3">
       <xsl:for-each select="ancestor-or-self::*">
          <xsl:text>/</xsl:text>
          <xsl:value-of select="name(.)"/>
@@ -113,7 +113,7 @@
    </xsl:template>
 
    <!--MODE: GENERATE-ID-FROM-PATH -->
-<xsl:template match="/" mode="generate-id-from-path"/>
+   <xsl:template match="/" mode="generate-id-from-path"/>
    <xsl:template match="text()" mode="generate-id-from-path">
       <xsl:apply-templates select="parent::*" mode="generate-id-from-path"/>
       <xsl:value-of select="concat('.text-', 1+count(preceding-sibling::text()), '-')"/>
@@ -137,7 +137,7 @@
    </xsl:template>
 
    <!--MODE: GENERATE-ID-2 -->
-<xsl:template match="/" mode="generate-id-2">U</xsl:template>
+   <xsl:template match="/" mode="generate-id-2">U</xsl:template>
    <xsl:template match="*" mode="generate-id-2" priority="2">
       <xsl:text>U</xsl:text>
       <xsl:number level="multiple" count="*"/>
@@ -156,10 +156,11 @@
       <xsl:text>_</xsl:text>
       <xsl:value-of select="translate(name(),':','.')"/>
    </xsl:template>
-   <!--Strip characters--><xsl:template match="text()" priority="-1"/>
+   <!--Strip characters-->
+   <xsl:template match="text()" priority="-1"/>
 
    <!--SCHEMA SETUP-->
-<xsl:template match="/">
+   <xsl:template match="/">
       <xsl:apply-templates select="/" mode="M5"/>
       <xsl:apply-templates select="/" mode="M6"/>
       <xsl:apply-templates select="/" mode="M7"/>
@@ -190,14 +191,14 @@
    <!--SCHEMATRON PATTERNS-->
 
 
-<!--PATTERN teisimple-att.datable-calendar-constraint-calendar-1-->
+   <!--PATTERN teisimple-att.datable-calendar-constraint-calendar-1-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:*[@calendar]" priority="1000" mode="M5">
+	  <!--RULE -->
+   <xsl:template match="tei:*[@calendar]" priority="1000" mode="M5">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="string-length(.) gt 0"/>
          <xsl:otherwise>
             <xsl:message>
@@ -217,13 +218,13 @@ belongs, but this <xsl:text/>
    <!--PATTERN teisimple-att.global.rendition-constraint-renditionpointer-2-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:*[@rendition]" priority="1000" mode="M6">
+	  <!--RULE -->
+   <xsl:template match="tei:*[@rendition]" priority="1000" mode="M6">
       <xsl:variable name="results"
                     select="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
 
 		    <!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="every $x in $results satisfies $x"/>
          <xsl:otherwise>
             <xsl:message> Error: Each of
@@ -242,13 +243,13 @@ belongs, but this <xsl:text/>
    <!--PATTERN teisimple-att.global.rendition-constraint-corresppointer-3-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:*[@corresp]" priority="1000" mode="M7">
+	  <!--RULE -->
+   <xsl:template match="tei:*[@corresp]" priority="1000" mode="M7">
       <xsl:variable name="results"
                     select="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
 
 		    <!--REPORT -->
-<xsl:if test="some $x in $results  satisfies $x">
+      <xsl:if test="some $x in $results  satisfies $x">
          <xsl:message> Error: Every
                                        local pointer in "" must point to
                                        an ID in this document () (some $x in $results satisfies $x)</xsl:message>
@@ -263,11 +264,11 @@ belongs, but this <xsl:text/>
    <!--PATTERN teisimple-att.typed-constraint-subtypeTyped-4-->
 
 
-	<!--RULE -->
-<xsl:template match="*[@subtype]" priority="1000" mode="M8">
+	  <!--RULE -->
+   <xsl:template match="*[@subtype]" priority="1000" mode="M8">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="@type"/>
          <xsl:otherwise>
             <xsl:message>The <xsl:text/>
@@ -286,13 +287,13 @@ belongs, but this <xsl:text/>
    <!--PATTERN teisimple-att.pointing-targetLang-constraint-targetLang-5-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:*[not(self::tei:schemaSpec)][@targetLang]"
+	  <!--RULE -->
+   <xsl:template match="tei:*[not(self::tei:schemaSpec)][@targetLang]"
                  priority="1000"
                  mode="M9">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="count(@target)"/>
          <xsl:otherwise>
             <xsl:message>@targetLang can only be used if @target is specified. (count(@target))</xsl:message>
@@ -308,13 +309,13 @@ belongs, but this <xsl:text/>
    <!--PATTERN teisimple-att.pointing-target-constraint-validtarget-6-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:*[@target]" priority="1000" mode="M10">
+	  <!--RULE -->
+   <xsl:template match="tei:*[@target]" priority="1000" mode="M10">
       <xsl:variable name="results"
                     select="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
 
 		    <!--REPORT -->
-<xsl:if test="some $x in $results  satisfies $x">
+      <xsl:if test="some $x in $results  satisfies $x">
          <xsl:message> Error: Every
                                        local pointer in "" must point to
                                        an ID in this document () (some $x in $results satisfies $x)</xsl:message>
@@ -329,11 +330,11 @@ belongs, but this <xsl:text/>
    <!--PATTERN teisimple-att.spanning-spanTo-constraint-spanTo-2-7-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:*[@spanTo]" priority="1000" mode="M11">
+	  <!--RULE -->
+   <xsl:template match="tei:*[@spanTo]" priority="1000" mode="M11">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="id(substring(@spanTo,2)) and following::*[@xml:id=substring(current()/@spanTo,2)]"/>
          <xsl:otherwise>
             <xsl:message>
@@ -355,11 +356,11 @@ The element indicated by @spanTo (<xsl:text/>
    <!--PATTERN teisimple-att.styleDef-schemeVersion-constraint-schemeVersionRequiresScheme-8-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:*[@schemeVersion]" priority="1000" mode="M12">
+	  <!--RULE -->
+   <xsl:template match="tei:*[@schemeVersion]" priority="1000" mode="M12">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="@scheme and not(@scheme = 'free')"/>
          <xsl:otherwise>
             <xsl:message>
@@ -377,11 +378,11 @@ The element indicated by @spanTo (<xsl:text/>
    <!--PATTERN teisimple-quotation-constraint-quotationContents-9-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:quotation" priority="1000" mode="M13">
+	  <!--RULE -->
+   <xsl:template match="tei:quotation" priority="1000" mode="M13">
 
 		<!--REPORT -->
-<xsl:if test="not(@marks) and not (tei:p)">
+      <xsl:if test="not(@marks) and not (tei:p)">
          <xsl:message>
 On <xsl:text/>
             <xsl:value-of select="name(.)"/>
@@ -397,11 +398,11 @@ On <xsl:text/>
    <!--PATTERN teisimple-biblStruct-constraint-deprecate-altIdentifier-child-10-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:biblStruct" priority="1000" mode="M14">
+	  <!--RULE -->
+   <xsl:template match="tei:biblStruct" priority="1000" mode="M14">
 
 		<!--REPORT nonfatal-->
-<xsl:if test="child::tei:idno">
+      <xsl:if test="child::tei:idno">
          <xsl:message>WARNING: use of deprecated method — the use of the idno element as a direct child of the biblStruct element will be removed from the TEI on 2016-09-18 (child::tei:idno / nonfatal)</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M14"/>
@@ -414,11 +415,11 @@ On <xsl:text/>
    <!--PATTERN teisimple-msIdentifier-constraint-msId_minimal-11-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:msIdentifier" priority="1000" mode="M15">
+	  <!--RULE -->
+   <xsl:template match="tei:msIdentifier" priority="1000" mode="M15">
 
 		<!--REPORT -->
-<xsl:if test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">
+      <xsl:if test="not(parent::tei:msPart) and       (local-name(*[1])='idno' or       local-name(*[1])='altIdentifier' or       normalize-space(.)='')">
          <xsl:message>An msIdentifier must contain either a repository or location of some type, or a manuscript name (not(parent::tei:msPart) and (local-name(*[1])='idno' or local-name(*[1])='altIdentifier' or normalize-space(.)=''))</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M15"/>
@@ -431,11 +432,11 @@ On <xsl:text/>
    <!--PATTERN teisimple-relatedItem-constraint-targetorcontent1-12-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:relatedItem" priority="1000" mode="M16">
+	  <!--RULE -->
+   <xsl:template match="tei:relatedItem" priority="1000" mode="M16">
 
 		<!--REPORT -->
-<xsl:if test="@target and count( child::* ) &gt; 0">
+      <xsl:if test="@target and count( child::* ) &gt; 0">
          <xsl:message>
 If the @target attribute on <xsl:text/>
             <xsl:value-of select="name(.)"/>
@@ -444,7 +445,7 @@ relatedItem element must be empty (@target and count( child::* ) &gt; 0)</xsl:me
       </xsl:if>
 
 		    <!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="@target or child::*"/>
          <xsl:otherwise>
             <xsl:message>A relatedItem element should have either a 'target' attribute
@@ -461,11 +462,11 @@ relatedItem element must be empty (@target and count( child::* ) &gt; 0)</xsl:me
    <!--PATTERN teisimple-damageSpan-constraint-spanTo-13-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:damageSpan" priority="1000" mode="M17">
+	  <!--RULE -->
+   <xsl:template match="tei:damageSpan" priority="1000" mode="M17">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="@spanTo"/>
          <xsl:otherwise>
             <xsl:message>
@@ -484,11 +485,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-addSpan-constraint-spanTo-15-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:addSpan" priority="1000" mode="M18">
+	  <!--RULE -->
+   <xsl:template match="tei:addSpan" priority="1000" mode="M18">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="@spanTo"/>
          <xsl:otherwise>
             <xsl:message>The @spanTo attribute of <xsl:text/>
@@ -506,11 +507,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-bibl-constraint-noEmptyBibl-17-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:bibl" priority="1000" mode="M19">
+	  <!--RULE -->
+   <xsl:template match="tei:bibl" priority="1000" mode="M19">
 
 		<!--ASSERT ERROR-->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="child::* or child::text()[normalize-space()]"/>
          <xsl:otherwise>
             <xsl:message>
@@ -530,11 +531,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-choice-constraint-choiceSize-18-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:choice" priority="1000" mode="M20">
+	  <!--RULE -->
+   <xsl:template match="tei:choice" priority="1000" mode="M20">
 
 		<!--ASSERT ERROR-->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="count(*) &gt; 1"/>
          <xsl:otherwise>
             <xsl:message>
@@ -554,11 +555,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-choice-constraint-choiceContent-19-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:choice" priority="1000" mode="M21">
+	  <!--RULE -->
+   <xsl:template match="tei:choice" priority="1000" mode="M21">
 
 		<!--ASSERT ERROR-->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))"/>
          <xsl:otherwise>
             <xsl:message>
@@ -577,11 +578,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-lg-constraint-atleast1oflggapl-20-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:lg" priority="1000" mode="M22">
+	  <!--RULE -->
+   <xsl:template match="tei:lg" priority="1000" mode="M22">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0"/>
          <xsl:otherwise>
             <xsl:message>An lg element
@@ -598,11 +599,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-list-constraint-gloss-list-must-have-labels-21-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:list[@type='gloss']" priority="1000" mode="M23">
+	  <!--RULE -->
+   <xsl:template match="tei:list[@type='gloss']" priority="1000" mode="M23">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="tei:label"/>
          <xsl:otherwise>
             <xsl:message>The content of a "gloss" list should include a sequence of one or more pairs of a label element followed by an item element (tei:label)</xsl:message>
@@ -618,11 +619,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-pb-constraint-pbposition-22-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:pb" priority="1000" mode="M24">
+	  <!--RULE -->
+   <xsl:template match="tei:pb" priority="1000" mode="M24">
 
 		<!--REPORT -->
-<xsl:if test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">
+      <xsl:if test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">
          <xsl:message>please make sure pb elements are not at the start or end of mixed content  (parent::*/text() and not (preceding-sibling::text() and following-sibling::text()))</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M24"/>
@@ -635,11 +636,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-ref-constraint-refAtts-23-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:ref" priority="1000" mode="M25">
+	  <!--RULE -->
+   <xsl:template match="tei:ref" priority="1000" mode="M25">
 
 		<!--REPORT -->
-<xsl:if test="@target and @cRef">
+      <xsl:if test="@target and @cRef">
          <xsl:message>Only one of the
 	attributes @target' and @cRef' may be supplied on <xsl:text/>
             <xsl:value-of select="name(.)"/>
@@ -656,11 +657,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-s-constraint-noNestedS-24-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:s" priority="1000" mode="M26">
+	  <!--RULE -->
+   <xsl:template match="tei:s" priority="1000" mode="M26">
 
 		<!--REPORT -->
-<xsl:if test="tei:s">
+      <xsl:if test="tei:s">
          <xsl:message>You may not nest one s element within
       another: use seg instead (tei:s)</xsl:message>
       </xsl:if>
@@ -674,11 +675,11 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-subst-constraint-substContents1-25-->
 
 
-	<!--RULE -->
-<xsl:template match="tei:subst" priority="1000" mode="M27">
+	  <!--RULE -->
+   <xsl:template match="tei:subst" priority="1000" mode="M27">
 
 		<!--ASSERT -->
-<xsl:choose>
+      <xsl:choose>
          <xsl:when test="child::tei:add and child::tei:del"/>
          <xsl:otherwise>
             <xsl:message>
@@ -697,13 +698,13 @@ The @spanTo attribute of <xsl:text/>
    <!--PATTERN teisimple-text-constraint-headeronlyelement-28-->
 
 
-	<!--RULE -->
-<xsl:template match="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value"
+	  <!--RULE -->
+   <xsl:template match="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value"
                  priority="1000"
                  mode="M28">
 
 		<!--REPORT -->
-<xsl:if test="ancestor::tei:text">
+      <xsl:if test="ancestor::tei:text">
          <xsl:message>Error:  The element <xsl:text/>
             <xsl:value-of select="name(.)"/>
             <xsl:text/>
@@ -719,11 +720,11 @@ is not permitted outside the header (ancestor::tei:text)</xsl:message>
    <!--PATTERN -->
 
 
-	<!--RULE -->
-<xsl:template match="tei:teiHeader" priority="1000" mode="M29">
+	  <!--RULE -->
+   <xsl:template match="tei:teiHeader" priority="1000" mode="M29">
 
 		<!--REPORT nonfatal-->
-<xsl:if test="@type">
+      <xsl:if test="@type">
          <xsl:message>WARNING: use of deprecated attribute — @type of the teiHeader element will be removed from the TEI on 2016-11-18.
                  (@type / nonfatal)</xsl:message>
       </xsl:if>
