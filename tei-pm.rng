@@ -9024,7 +9024,7 @@ You must supply at least two values for @target on <name/>
                <value>metadata</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create metadata section</a:documentation>
                <value>note</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a note, according to value of place; could be margin, footnote, endnote, inline</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a out of line note, according to value of place; could be margin, footnote, endnote, inline</a:documentation>
                <value>omit</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">do nothing, do not process children</a:documentation>
                <value>paragraph</value>

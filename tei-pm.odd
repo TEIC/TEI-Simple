@@ -415,6 +415,18 @@
                       <paramSpec ident="url">
                         <desc>url of image file</desc>
                       </paramSpec>
+                      <paramSpec ident="width">
+                        <desc>desired width of image</desc>
+                      </paramSpec>
+                      <paramSpec ident="height">
+                        <desc>desired height of image</desc>
+                      </paramSpec>
+                      <paramSpec ident="scale">
+                        <desc>scaling for image</desc>
+                      </paramSpec>
+                      <paramSpec ident="title">
+                        <desc>title of figure (usually not displayed directly)</desc>
+                      </paramSpec>
                     </paramList>
                     <desc>if <att>url</att> is present, uses it to display graphic,
                   else display a placeholder image. </desc>
@@ -446,7 +458,7 @@
                   <valItem ident="link">
                     <paramList>
                       <paramSpec ident="content"/>
-                      <paramSpec ident="target">
+                      <paramSpec ident="link">
                         <desc>link url</desc>
                       </paramSpec>
                     </paramList>
@@ -478,9 +490,9 @@
                     <paramList>
                       <paramSpec ident="content"/>
                       <paramSpec ident="place"/>
-                      <paramSpec ident="marker"/>
+                      <paramSpec ident="label"/>
                     </paramList>
-		    <desc>create a note, according to value of
+		    <desc>create a out of line note, according to value of
 		    <term>place</term>; could be margin, footnote,
 		    endnote, inline</desc>
                   </valItem>

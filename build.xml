@@ -182,10 +182,10 @@
   </target>
 
   <target name="tests">
-    <!--
-	<echo>Validate Simple schema against tei-pm</echo>
-	<runjing rngfile="tei-pm.rng" file="teisimple.odd"/>
-	-->
+    <echo>Validate Simple ODD against tei-pm RELAX NG</echo>
+    <runjing file="xsimple.odd" rngfile="tei-pm.rng" />
+    <echo>Validate Simple ODD against tei-pm Schematron</echo>
+    <schematron file="xsimple.odd" queryLanguageBinding="xslt2" schema="tei-pm.isosch" failonerror="true"/>
     <echo>Validate instances against RELAX NG</echo>
     <runjing rngfile="teisimple.rng" file="tests/testsimple.xml"/>
     <runjing rngfile="teisimple.rng" file="tests/testsimple2.xml"/>

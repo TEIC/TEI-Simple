@@ -273,7 +273,7 @@
         <xsl:sequence select="tei:figure($model, $contents, $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='glyph'">
-        <xsl:sequence select="tei:glyph($model, tei:getParam($model,'g'), $class, $number)"/>
+        <xsl:sequence select="tei:glyph($model, $contents, $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='graphic'">
         <xsl:sequence select="tei:graphic($model, tei:getParam($model,'url'), tei:getParam($model,'width'), tei:getParam($model,'height'), tei:getParam($model,'scale'),$class, $number)"/>

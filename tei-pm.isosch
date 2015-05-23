@@ -225,4 +225,181 @@ You must supply at least two values for @target on <name/>
                 </report>
       </rule>
    </pattern>
+   <pattern id="teipm-model-paramList-1">
+      <rule context="tei:param[parent::tei:model/@behaviour='alternate']">
+         <assert role="error" test="@name='default'   or  @name='alternate'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: default, alternate</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-2">
+      <rule context="tei:param[parent::tei:model/@behaviour='anchor']">
+         <assert role="error" test="@name='id'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: id</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-3">
+      <rule context="tei:param[parent::tei:model/@behaviour='block']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-4">
+      <rule context="tei:param[parent::tei:model/@behaviour='body']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-5">
+      <rule context="tei:param[parent::tei:model/@behaviour='break']">
+         <assert role="error" test="@name='type'   or  @name='label'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: type, label</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-6">
+      <rule context="tei:param[parent::tei:model/@behaviour='cell']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-7">
+      <rule context="tei:param[parent::tei:model/@behaviour='cit']">
+         <assert role="error" test="@name='content'   or  @name='source'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content, source</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-8">
+      <rule context="tei:param[parent::tei:model/@behaviour='document']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-9">
+      <rule context="tei:param[parent::tei:model/@behaviour='figure']">
+         <assert role="error" test="@name='title'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: title</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-10">
+      <rule context="tei:param[parent::tei:model/@behaviour='glyph']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-11">
+      <rule context="tei:param[parent::tei:model/@behaviour='graphic']">
+         <assert role="error"
+                 test="@name='url'   or  @name='width'   or  @name='height'   or  @name='scale'   or  @name='title'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: url, width, height, scale, title</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-12">
+      <rule context="tei:param[parent::tei:model/@behaviour='heading']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-13">
+      <rule context="tei:param[parent::tei:model/@behaviour='index']">
+         <assert role="error" test="@name='type'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: type</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-14">
+      <rule context="tei:param[parent::tei:model/@behaviour='inline']">
+         <assert role="error" test="@name='content'   or  @name='label'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content, label</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-15">
+      <rule context="tei:param[parent::tei:model/@behaviour='link']">
+         <assert role="error" test="@name='content'   or  @name='link'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content, link</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-16">
+      <rule context="tei:param[parent::tei:model/@behaviour='list']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-17">
+      <rule context="tei:param[parent::tei:model/@behaviour='listItem']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-18">
+      <rule context="tei:param[parent::tei:model/@behaviour='metadata']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-19">
+      <rule context="tei:param[parent::tei:model/@behaviour='note']">
+         <assert role="error"
+                 test="@name='content'   or  @name='place'   or  @name='label'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content, place, label</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-20">
+      <rule context="tei:param[parent::tei:model/@behaviour='paragraph']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-21">
+      <rule context="tei:param[parent::tei:model/@behaviour='row']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-22">
+      <rule context="tei:param[parent::tei:model/@behaviour='section']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-23">
+      <rule context="tei:param[parent::tei:model/@behaviour='table']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-24">
+      <rule context="tei:param[parent::tei:model/@behaviour='text']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
+   <pattern id="teipm-model-paramList-25">
+      <rule context="tei:param[parent::tei:model/@behaviour='title']">
+         <assert role="error" test="@name='content'">
+	      Parameter name '<value-of select="@name"/>'  (on <value-of select="ancestor::tei:elementSpec/@ident"/>) not allowed.
+	      Must  be  drawn from the list: content</assert>
+      </rule>
+   </pattern>
 </schema>

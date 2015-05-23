@@ -6,6 +6,7 @@ docx:
 	teitodocx --profile=tei teisimple.xml teisimple.docx
 
 teisimple:
+	xmllint --xinclude teisimple.odd > xsimple.odd
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) 
 
 pm:
