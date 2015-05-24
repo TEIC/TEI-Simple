@@ -52,7 +52,7 @@
         <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>James Cummings</docAuthor>
         <docAuthor>Magdalena Turska</docAuthor>
-        <docDate>Version 0.3: 21st May 2015</docDate>
+        <docDate>Version 0.3: 24th May 2015</docDate>
       </titlePage>
     </front>
     <body>
@@ -348,19 +348,20 @@
                       </paramSpec>
                     </paramList>
                     <desc>create a specialized display of alternating elements for displaying the
-                  preferred version, both at once or toggling between the two.</desc>
+                  preferred version and an alternative, both at once
+		    or by some method of toggling between the two.</desc>
                   </valItem>
                   <valItem ident="anchor">
                     <paramList>
                       <paramSpec ident="id"/>
                     </paramList>
-                    <desc>create anchor with ID</desc>
+                    <desc>create an anchor with ID</desc>
                   </valItem>
                   <valItem ident="block">
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>create a block out of the content parameter. </desc>
+                    <desc>create a block structure</desc>
                     <equiv name="div"/>
                   </valItem>
                   <valItem ident="body">
@@ -375,7 +376,7 @@
                       <paramSpec ident="type"/>
                       <paramSpec ident="label"/>
                     </paramList>
-                    <desc>make a line, column, or page break according to <term>type</term></desc>
+                    <desc>create a line, column, or page break according to <term>type</term></desc>
                   </valItem>
                   <valItem ident="cell">
                     <paramList>
@@ -492,7 +493,8 @@
                       <paramSpec ident="place"/>
                       <paramSpec ident="label"/>
                     </paramList>
-		    <desc>create a out of line note, according to value of
+		    <desc>create an note, often out of line,
+		    depending on the  value of
 		    <term>place</term>; could be margin, footnote,
 		    endnote, inline</desc>
                   </valItem>
@@ -510,7 +512,7 @@
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>make table row</desc>
+                    <desc>create a table row</desc>
                     <equiv name="tr"/>
                   </valItem>
                   <valItem ident="section">
@@ -523,26 +525,26 @@
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>make table</desc>
+                    <desc>create a table</desc>
                     <equiv name="table"/>
                   </valItem>
                   <valItem ident="text">
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>literal text</desc>
+                    <desc>create literal text</desc>
                   </valItem>
                   <valItem ident="title">
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-                    <desc>make document title</desc>
+                    <desc>create document title</desc>
                     <equiv name="title"/>
                   </valItem>
                 </valList>
               </attDef>
               <attDef ident="predicate" usage="opt">
-                <desc>the condition under which this model applies given as an XPath Predicate Expression</desc>
+                <desc>the condition under which this model applies, given as an XPath Predicate Expression</desc>
                 <datatype>
                   <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
                 </datatype>
@@ -580,17 +582,19 @@
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="quote">
                   <model predicate="ancestor::p" behaviour="inline">
-                    <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+                    <desc>If it's inside a paragraph then it's inline</desc>
                   </model>
                   <model predicate="not(ancestor::p)" behaviour="block">
-                    <desc>If it's inside a paragraph then it's inline, otherwise it's block level</desc>
+                    <desc>If it's not inside a paragraph then it is block level</desc>
                   </model>
                 </elementSpec>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-                <model predicate="parent::person" behaviour="inline"/>
+                <model predicate="parent::person" behaviour="inline">
+		  <desc>If it is a child of a person element, treat as inline</desc>
+		</model>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
@@ -621,15 +625,14 @@
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="date">
                   <model output="print" predicate="text()" behaviour="inline"/>
-                  <model output="print" predicate="@when and
-						   not(text())"
+                  <model output="print" predicate="@when and  not(text())"
 			 behaviour="inline">
-		    		   <param name="content">@when</param>
+		    <param name="content">@when</param>
 		  </model>
                   <model predicate="@when" output="web"
 			 behaviour="alternate">
-		  		    		   <param name="default">.</param>
-		    		   <param name="alternate">@when</param>
+		    <param name="default">.</param>
+		    <param name="alternate">@when</param>
 		  </model>
                 </elementSpec>
               </egXML>

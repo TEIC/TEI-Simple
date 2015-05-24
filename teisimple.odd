@@ -1376,6 +1376,7 @@ border-bottom: solid 1pt blue;
             <rendition xml:id="rightbraced">padding-right: 2pt; border-right: dotted gray 2pt; </rendition>
             <rendition xml:id="rotateleft">-webkit-transform: rotate(90deg);    transform: rotate(90deg);</rendition>
             <rendition xml:id="rotateright">-webkit-transform: rotate(-90deg);    transform: rotate(-90deg);</rendition>
+            <rendition xml:id="rules">border: 1px solid black; padding: 2px;border-collapse:collapse;border-spacing:0;</rendition>
             <rendition xml:id="smallcaps">font-variant: small-caps;</rendition>
             <rendition xml:id="smaller">font-size: smaller;</rendition>
             <rendition xml:id="strikethrough">text-decoration: line-through;</rendition>
