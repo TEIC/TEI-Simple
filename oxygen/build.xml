@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project basedir="." default="spm" name="simpletohtml">
+  <!--
+	This library is free software; you can redistribute it and/or
+	modify it under the terms of the GNU Lesser General Public
+	License as published by the Free Software Foundation; either
+	version 2.1 of the License, or (at your option) any later version.
+	
+	This library is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+	Lesser General Public License for more details.
+	
+	You should have received a copy of the GNU Lesser General Public
+	License along with this library; if not, write to the Free Software
+	Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+  -->
+  
+  <!--
+      Convert TEI Simple documents into HTML files.
+  -->
+    <!-- where does oxygen keep stuff -->
+  <property name="oxygenlib" value=""/>
+  <!-- Path to TEI XML file. -->
+  <property name="inputFile" value=""/>
+  <!-- Path where the output file will be saved. -->
+  <property name="outputFile" value=""/>
+  <!-- directories -->
+  <dirname property="outputDir" file="${outputFile}"/>
+  <dirname property="inputDir" file="${inputFile}"/>
+
+  <target name="spm">
+
+  <xslt force="yes" style="../polygon/simpleoddtoxsl.xsl" in="../teisimple.odd" out="../teisimple-pm.xsl">
+    <factory name="net.sf.saxon.TransformerFactoryImpl">
+      <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+    </factory>
+    <classpath location="${basedir}/../lib/saxon9he.jar"/>
+    <param name="css" expression="${basedir}/../tests/simple.css"/>
+    <param name="js" expression="${basedir}/../tests/simple.js"/>
+  </xslt>
+  <xslt force="yes" style="../teisimple-pm.xsl" in="${inputFile}" out="${outputFile}">
+    <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    <classpath location="${basedir}/../lib/saxon9he.jar"/>
+  </xslt>
+    </target>
+</project>
