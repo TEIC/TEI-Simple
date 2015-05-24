@@ -678,9 +678,9 @@ Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bo
                     <let name="results"
               value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
                     <assert test="every $x in $results satisfies $x"> Error: Each of
-                                       the rendition values in "<param-of select="@rendition"/>"
+                                       the rendition values in "<value-of select="@rendition"/>"
                                        must point to a local ID or to a token in the Simple scheme
-                                          (<param-of select="$results"/>)</assert>
+                                          (<value-of select="$results"/>)</assert>
                   </rule>
    </pattern>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -691,8 +691,8 @@ Suggested values include: 1] simple:allcaps; 2] simple:blackletter; 3] simple:bo
                     <let name="results"
               value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                     <report test="some $x in $results  satisfies $x"> Error: Every
-                                       local pointer in "<param-of select="@corresp"/>" must point to
-                                       an ID in this document (<param-of select="$results"/>)</report>
+                                       local pointer in "<value-of select="@corresp"/>" must point to
+                                       an ID in this document (<value-of select="$results"/>)</report>
                   </rule>
    </pattern>
    <define name="att.global.attributes">
@@ -1128,8 +1128,8 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                         <let name="results"
               value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                         <report test="some $x in $results  satisfies $x"> Error: Every
-                                       local pointer in "<param-of select="@target"/>" must point to
-                                       an ID in this document (<param-of select="$results"/>)</report>
+                                       local pointer in "<value-of select="@target"/>" must point to
+                                       an ID in this document (<value-of select="$results"/>)</report>
                       </rule>
    </pattern>
    <define name="att.pointing.attribute.evaluate">

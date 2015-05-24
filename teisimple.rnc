@@ -472,11 +472,11 @@ sch:pattern [
       test = "every $x in $results satisfies $x"
       " Error: Each of\x{a}" ~
       '                                       the rendition values in "'
-      sch:param-of [ select = "@rendition" ]
+      sch:value-of [ select = "@rendition" ]
       '"\x{a}' ~
       "                                       must point to a local ID or to a token in the Simple scheme\x{a}" ~
       "                                          ("
-      sch:param-of [ select = "$results" ]
+      sch:value-of [ select = "$results" ]
       ")"
     ]
     "\x{a}" ~
@@ -504,10 +504,10 @@ sch:pattern [
       test = "some $x in $results  satisfies $x"
       " Error: Every\x{a}" ~
       '                                       local pointer in "'
-      sch:param-of [ select = "@corresp" ]
+      sch:value-of [ select = "@corresp" ]
       '" must point to\x{a}' ~
       "                                       an ID in this document ("
-      sch:param-of [ select = "$results" ]
+      sch:value-of [ select = "$results" ]
       ")"
     ]
     "\x{a}" ~
@@ -889,10 +889,10 @@ sch:pattern [
       test = "some $x in $results  satisfies $x"
       " Error: Every\x{a}" ~
       '                                       local pointer in "'
-      sch:param-of [ select = "@target" ]
+      sch:value-of [ select = "@target" ]
       '" must point to\x{a}' ~
       "                                       an ID in this document ("
-      sch:param-of [ select = "$results" ]
+      sch:value-of [ select = "$results" ]
       ")"
     ]
     "\x{a}" ~
