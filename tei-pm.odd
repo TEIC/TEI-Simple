@@ -122,10 +122,13 @@
           <head>Processing model elements</head>
           <p>There are two main elements for specifying the structural
 	and appearance components of a processing model:
-	  <specList><specDesc key="model" atts="predicate behaviour useSourceRendition output"/><specDesc key="rendition" atts="scope"/></specList>
+	<specList>
+	  <specDesc key="model" atts="predicate behaviour
+	  useSourceRendition output"/>
+	  <specDesc key="param" atts="name"/>
+	  <specDesc key="rendition" atts="scope"/></specList>
 	  For a given <gi>elementSpec</gi>, there can be as many
-	  <gi>model</gi> statements as required, each of which can
-	  have multiple <gi>rendition</gi> children. A set  of multiple
+	  <gi>model</gi> statements as required. A set  of multiple
 	  <gi>model</gi> statements is regarded as an
 	  <hi>alternation</hi>, i.e. only one of them will be
 	  applied; this is comparable to a
@@ -143,10 +146,10 @@
 	normally rendered in italics:
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline"><rendition>font-style: italic;</rendition></model></egXML>
 	    The <att>behaviour</att> attribute has a value of a call
-	    to the function <term>inline</term>, with a parameter
-	    of the content of the element. The datatype for the
-	    parameter is always
-	    XPath 2.0, in which <q>.</q> means <q>the current context</q>.
+	    to the function <term>inline</term>. If no <gi>param</gi>
+	    is supplied to override it, the content of the inline
+	    object is assumed to be the children of the element (text
+	    or elements).
 	    Separately, the <gi>rendition</gi> element uses CSS
 	    syntax to specific the appearance.  It would have been
 	    possible here to simply add <code>display: inline</code>
@@ -160,7 +163,7 @@
 	    that it should be taken account of:
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline" useSourceRendition="true"><rendition>font-style: italic;</rendition></model></egXML>
 	    in this case the <gi>rendition</gi> is only a fallback and
-	    may be overridden by the <att>rendition</att>. This uses
+	    may be overridden by the <att>rendition</att> attribute. This uses
 	    the same behaviour as CSS; ie if <att>rendition</att>
 	    involves a change to a different property than
 	    <q>font-style</q>, then this remains active.</p>
@@ -193,8 +196,14 @@
 	   	   <param name="default">reg</param>
 	   <param name="alternate">orig</param>
 	   </model></egXML>
-	   Note the use of XPath 2.0 notation to choose the first of
-	   several possible sibling elements.</p>
+	   Here there are named <gi>param</gi> children of
+	   <gi>model</gi>, which provide parameters to the function
+	   given by <att>behaviour</att>. The content of the
+	   parameters is always an XPath 2.0 expression. Thus in the
+	  example above, we specify <code>expan[1]</code> to choose
+	  the first of any available set of <gi>expan</gi>
+	  children.</p>
+	  
           <p>Sometimes we want different behaviour for different
 	   output formats, specified using <att>output</att>; the
 	   following example is designed to handle <gi>date</gi>,
@@ -233,7 +242,7 @@
 		   <param name="link">@target</param>
 		 </model>
 	   </egXML>
-	   Here the <term>link</term> function takes two parameters, the text
+	   Here the <term>link</term> function has  two <gi>param</gi>, the text
 	   to be shown, and the URL to which it should be linked.</p>
         </div>
       </div>
@@ -817,6 +826,17 @@
               </sequence>
             </content>
           </elementSpec>
+
+	  <elementSpec ident="valItem" mode="change" module="tagdocs">
+	    <content>
+	      <alternate maxOccurs="unbounded"  minOccurs="0" >
+		<classRef key="model.descLike"/>
+		<classRef key="model.glossLike"/>
+	      </alternate>
+	      <elementRef key="paramList" minOccurs="0" maxOccurs="1"/>
+	    </content>
+	  </elementSpec>
+
           <elementSpec mode="change" ident="rendition">
             <classes>
               <memberOf key="att.global"/>
