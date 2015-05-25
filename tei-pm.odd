@@ -110,7 +110,7 @@
 	implementation is that it must include an XPath 2.0 interpreter,
 	as this is used in several places in the processing
 	notation. </p>
-          <p>It is an principle of the processing model (known informally as the
+          <p>It is a principle of the processing model (known informally as the
 	Turska Tenet) that the transformation stage should be
 	minimally intelligent; that is to say, it should contain as
 	few TEI-specific rules as possible. The ODD should be as
