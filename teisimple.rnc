@@ -771,7 +771,7 @@ att.placement.attribute.place =
          "margin-right"
        | 
          ## in the outer margin
-         "margin-outer"
+         "margin"
        | 
          ## in the inner margin
          "margin-inner"
@@ -4465,11 +4465,6 @@ TEI =
          uri = "http://relaxng.org/ns/structure/1.0"
        ],
     att.global.attributes,
-    
-    ##
-    attribute scheme {
-      list { data.word+ }
-    }?,
     
     ## specifies the major version number of the TEI Guidelines against which this document is valid.
     attribute version { data.version }?,

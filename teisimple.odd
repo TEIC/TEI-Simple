@@ -299,7 +299,6 @@
                       <?exactMatch tablefoot?>
                     </valItem>
                     <valItem ident="margin-right">
-                      <?exactMatch margin-outer?>
                       <?exactMatch right?>
                       <?exactMatch marg1?>
                       <?exactMatch marg2?>
@@ -307,8 +306,8 @@
                       <?exactMatch marg4?>
                       <desc>in the right-hand margin</desc>
                     </valItem>
-                    <valItem ident="margin-outer">
-                      <?exactMatch margin?>
+                    <valItem ident="margin">
+                      <?exactMatch margin-outer?>
 		      <desc>in the outer margin</desc>
 		    </valItem>
                     <valItem ident="margin-inner">
@@ -1177,13 +1176,6 @@ border-bottom: solid 1pt blue;
               <model behaviour="metadata"/>
             </elementSpec>
             <elementSpec mode="change" ident="TEI">
-              <attList>
-                <attDef ident="scheme" mode="add">
-                  <datatype maxOccurs="unbounded">
-                    <macroRef key="data.word"/>
-                  </datatype>
-                </attDef>
-              </attList>
               <model behaviour="document"/>
             </elementSpec>
             <elementSpec mode="change" ident="text">
