@@ -16,9 +16,9 @@ validate:
 	echo "</target></project>" >> v.xml
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -Dxsl=${XSL} -Dbasedir=`pwd` -f v.xml       
 
-dist:
-	mkdir -p oxygen
-	cp tei_simple.framework build-oxygen.xml teisimple.odd elementsummary.xml headeronly.xml simpleelements.xml teisimple.rng teisimple.isosch teisimple.nvdl polygon/*xsl tests/simple.css tests/simple.js oxygen
+oxygen:
+	mkdir -p frameworks/teisimple
+	cp tei_simple.framework build-oxygen.xml teisimple.odd elementsummary.xml headeronly.xml simpleelements.xml teisimple.rng teisimple.isosch teisimple.nvdl polygon/*xsl tests/simple.css tests/simple.js frameworks/teisimple
+	zip -r simpleoxygen frameworks
 
-#ANT_OPTS="-Xss2m -Xmx752m" ant -lib lib/saxon9he.jar:lib/jing.jar -Dbasedir=`pwd` -f v.xml
 
