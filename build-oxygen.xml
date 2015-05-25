@@ -30,18 +30,19 @@
   <dirname property="inputDir" file="${inputFile}"/>
 
   <target name="spm">
-
-  <xslt force="yes" style="../polygon/simpleoddtoxsl.xsl" in="../teisimple.odd" out="../teisimple-pm.xsl">
+  <echo>Generate ${outputDir}/teisimple-pm.xsl</echo>
+  <xslt force="yes" style="simpleoddtoxsl.xsl" in="teisimple.odd" out="${outputDir}/teisimple-pm.xsl">
     <factory name="net.sf.saxon.TransformerFactoryImpl">
       <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
     </factory>
-    <classpath location="${basedir}/../lib/saxon9he.jar"/>
-    <param name="css" expression="${basedir}/../tests/simple.css"/>
-    <param name="js" expression="${basedir}/../tests/simple.js"/>
+    <classpath location="${oxygenlib}/saxon9ee.jar"/>
+    <param name="css" expression="${basedir}/simple.css"/>
+    <param name="js" expression="${basedir}/simple.js"/>
   </xslt>
-  <xslt force="yes" style="../teisimple-pm.xsl" in="${inputFile}" out="${outputFile}">
+  <echo>Create ${outputFile} from ${inputFile}</echo>
+  <xslt force="yes" style="teisimple-pm.xsl" in="${inputFile}" out="${outputFile}">
     <factory name="net.sf.saxon.TransformerFactoryImpl"/>
-    <classpath location="${basedir}/../lib/saxon9he.jar"/>
+    <classpath location="${oxygenlib}/saxon9ee.jar"/>
   </xslt>
     </target>
 </project>
