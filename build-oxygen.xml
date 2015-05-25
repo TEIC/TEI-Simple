@@ -40,7 +40,7 @@
     <param name="js" expression="${basedir}/simple.js"/>
   </xslt>
   <echo>Create ${outputFile} from ${inputFile}</echo>
-  <xslt force="yes" style="teisimple-pm.xsl" in="${inputFile}" out="${outputFile}">
+  <xslt force="yes" style="${outputDir}/teisimple-pm.xsl" in="${inputFile}" out="${outputFile}">
     <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     <classpath location="${oxygenlib}/saxon9ee.jar"/>
   </xslt>
