@@ -106,7 +106,7 @@
 	features of CSS. The concepts addressed by the functions (eg
 	<q>block</q> and <q>inline</q>) are in line with XSL FO, and
 	HTML; the catalogue of functions is given under the element <gi>model</gi>.</p>
-          <p>An precondition for an
+          <p>A precondition for an
 	implementation is that it must include an XPath 2.0 interpreter,
 	as this is used in several places in the processing
 	notation. </p>
