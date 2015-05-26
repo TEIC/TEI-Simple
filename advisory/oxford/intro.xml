@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI Simple:  The Workshop</title>
+        <author>Sebastian Rahtz</author>
+      </titleStmt>
+      <editionStmt>
+        <edition>
+          <date>May 2015</date>
+        </edition>
+      </editionStmt>
+      <publicationStmt>
+        <publisher>University of Oxford</publisher>
+        <availability>
+          <p>Freely available for use and derivative works under a Creative Commons Attribution
+	      license.</p>
+        </availability>
+      </publicationStmt>
+      <sourceDesc>
+        <p>born digital</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text>
+    <body>
+      <div>
+        <head>Today's schedule</head>
+        <list type="gloss">
+          <label>9:15-9:45</label>
+          <item>Welcome reception and refreshments</item>
+          <label>9:45-12.00</label>
+          <item>Introduction to Simple:
+	  <list><item>Sebastian Rahtz: what is TEI Simple (10mins)</item><item>Magdalena Turska: introduction to the Processing Model (45mins)</item><item>Joe Wicentowski: eXist-db for editors (30mins)</item><item>Wolfgang Meier: TEI Simple in eXist (30mins)</item></list></item>
+          <label>12:00-12:45</label>
+          <item>Lunch</item>
+          <label>12:45-14:45</label>
+          <item>Challenge session 1</item>
+          <label>14:45-15:15</label>
+          <item>Tea break</item>
+          <label>15:15-16:45</label>
+          <item>Challenge session 2</item>
+          <label>16:45-17:00</label>
+          <item>Wrap-up</item>
+        </list>
+      </div>
+      <div>
+        <head>TEI Simple</head>
+        <list>
+          <item>Joint project between TEI Consortium, Mellon Foundation, Northwestern University, University of Nebraska-Lincoln, and the University of Oxford</item>
+          <item>TEI Simple aims to <q>define
+	  a new highly-constrained and prescriptive subset of the Text Encoding Initiative (TEI)
+	  Guidelines suited to the representation of early modern and modern books, and a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts</q></item>
+          <item>Initial project runs from September 2014 to July 2015</item>
+          <item>All outputs are open source, all working is in the open on github</item>
+        </list>
+        <p rend="box">
+          <ptr target="https://github.com/TEIC/TEI-Simple"/>
+        </p>
+      </div>
+      <div>
+        <head>Simple Staff</head>
+        <list>
+          <head>Project Investigators</head>
+          <item>Martin Mueller, Northwestern University</item>
+          <item>Brian Pytlik Zillig, University of Nebraska-Lincoln</item>
+          <item>Sebastian Rahtz, University of Oxford</item>
+        </list>
+        <list>
+          <head>Additional Project Members</head>
+          <item>Magdalena Turska, DiXiT Project / University of Oxford</item>
+          <item>James Cummings, DiXiT Project / University of Oxford</item>
+        </list>
+        <list>
+          <head>Advisory Committee</head>
+          <item>Pip Willcox, Bodleian Library, Oxford</item>
+          <item>Suzanne Haaf, Deutsches Textarchiv, Berlin</item>
+          <item>Matthias Goebel, University of Gottingen</item>
+          <item>James Cummings, University of Oxford</item>
+        </list>
+      </div>
+      <div>
+        <head>Objectives</head>
+        <list rend="ordered">
+          <item>The highly constrained and prescriptive element subset of TEI Simple</item>
+          <item>The processing model notation (TEI extension to ODD)
+	  and implementation</item>
+          <item>Processing model instance for TEI SImple</item>
+          <item>Formal mapping of the TEI elements used by Simple to the CIDOC CRM/FRBRoo</item>
+          <item>TEI Performance Indicators</item>
+          <item>Integration of TEI Simple into the TEI infrastructure </item>
+        </list>
+      </div>
+      <div>
+        <head>The Simple schema: guidelines</head>
+        <list>
+          <item><q>Simple</q> does not have to mean <q>Small</q></item>
+          <item>The schema is based on analysis of existing usage from
+	  corpora of modern-ish Western printed books:
+	  <list><item>EEBO TCP</item><item>Oxford Text Archive TEI P5 files (includes ECCO)</item><item>Deutsches Textarchiv</item><item>Documenting the American South</item></list></item>
+          <item>Our biggest enemy is ambiguity for the encoder</item>
+          <item>The target is encoding of the <gi>text</gi>; the <gi>teiHeader</gi> and any <gi>sourceDoc</gi> or <gi>facsimile</gi> must simply conform to <ident>tei_all</ident></item>
+        </list>
+      </div>
+      <div>
+        <head>Progress on TEI Simple subset </head>
+        <list>
+          <item>114 TEI Simple elements located in the <gi>body</gi> of a text</item>
+          <item>Decided to leave <gi>teiHeader</gi> alone </item>
+          <item>Customization maintains simplicity with closed value lists for selected attribute
+         classes (e.g., <gi>name</gi>, <gi>cell</gi>, <gi>row</gi>). </item>
+          <item>Completed conversion routine to TEI Simple from normal TEI files. </item>
+          <item>Schematron <gi>constraint</gi>s  to cover rules which
+	  we cannot cover in the RELAX NG   schema. eg check that
+	  local pointers (starting with # do actually have a
+	  corresponding ID)</item>
+          <item>Tested on whole of EEBO etc. for all of TCP 60K+ files (EEBO, ECCO, Evans) </item>
+        </list>
+      </div>
+      <div>
+        <head>@rend and @type attributes</head>
+        <list>
+          <item>We do <emph>not</emph> prescribe <att>type</att>;
+	  users can develop their own taxonomies for  possible interpretative use</item>
+          <item>We preclude use of <att>rend</att> and <att>style</att></item>
+          <item>We produce a closed list of values for <att>rendition</att> using a pseudo-protocol of "simple:"
+	  <egXML xmlns="http://www.tei-c.org/ns/Examples"><p rendition="simple:bold">This is quite bold, but this <hi rendition="simple:sup">is superscript</hi></p></egXML>
+	  </item>
+        </list>
+      </div>
+      <div>
+        <head>Allowed values for <att>rendition</att></head>
+        <table>
+          <row role="label">
+            <cell>value</cell>
+            <cell>alternatives</cell>
+            <cell>meaning</cell>
+          </row>
+          <row>
+            <cell>simple:allcaps</cell>
+            <cell>
+                       upper-roman
+                       uc
+                      </cell>
+            <cell>all capitals</cell>
+          </row>
+          <row>
+            <cell>simple:blackletter</cell>
+            <cell>
+                       blackLetter
+                       blackletterType
+                       FrakturType
+                       gothic</cell>
+            <cell>black letter or gothic typeface</cell>
+          </row>
+          <row>
+            <cell>simple:bold</cell>
+            <cell>
+                       b
+                       bo
+                       bol
+                       strong
+                      </cell>
+            <cell>bold typeface</cell>
+          </row>
+          <row>
+            <cell>simple:bottombraced</cell>
+            <cell>
+                    </cell>
+            <cell>marked with a brace under the bottom of the text</cell>
+          </row>
+          <row>
+            <cell>simple:boxed</cell>
+            <cell>
+                       border
+                      </cell>
+            <cell>border around the text</cell>
+          </row>
+          <row>
+            <cell>simple:centre</cell>
+            <cell>
+                       center
+                      </cell>
+            <cell>centred</cell>
+          </row>
+          <row>
+            <cell>simple:cursive</cell>
+            <cell>
+                    </cell>
+            <cell>cursive typeface</cell>
+          </row>
+          <row>
+            <cell>simple:display</cell>
+            <cell>
+                    </cell>
+            <cell>block display</cell>
+          </row>
+          <row>
+            <cell>simple:doublestrikethrough</cell>
+            <cell>
+                    </cell>
+            <cell>strikethrough with double line</cell>
+          </row>
+          <row>
+            <cell>simple:doubleunderline</cell>
+            <cell>
+                    </cell>
+            <cell>underlined with double line</cell>
+          </row>
+          <row>
+            <cell>simple:dropcap</cell>
+            <cell>
+                       decorInit
+                      </cell>
+            <cell>initial letter larger or decorated</cell>
+          </row>
+          <row>
+            <cell>simple:float</cell>
+            <cell>
+                    </cell>
+            <cell>floated out of main flow</cell>
+          </row>
+          <row>
+            <cell>simple:hyphen</cell>
+            <cell>
+                    </cell>
+            <cell>with a hyphen here (eg in line break)</cell>
+          </row>
+          <row>
+            <cell>simple:inline</cell>
+            <cell>
+                    </cell>
+            <cell>inline rendering</cell>
+          </row>
+          <row>
+            <cell>simple:justify</cell>
+            <cell>
+                    </cell>
+            <cell>justified text</cell>
+          </row>
+          <row>
+            <cell>simple:italic</cell>
+            <cell>
+                       italics
+                       ITALIC
+                       i
+                       it
+                       ital
+                      </cell>
+            <cell>italic typeface</cell>
+          </row>
+          <row>
+            <cell>simple:larger</cell>
+            <cell>
+                       large
+                      </cell>
+            <cell>larger type</cell>
+          </row>
+          <row>
+            <cell>simple:left</cell>
+            <cell>
+                       left
+                      </cell>
+            <cell>aligned to the left or left-justified</cell>
+          </row>
+          <row>
+            <cell>simple:leftbraced</cell>
+            <cell>
+                       braced
+                      </cell>
+            <cell>marked with a brace on the left side of the text</cell>
+          </row>
+          <row>
+            <cell>simple:letterspace</cell>
+            <cell>
+                       spaceletter
+                      </cell>
+            <cell>letter-spaced</cell>
+          </row>
+          <row>
+            <cell>simple:literal</cell>
+            <cell>
+                    </cell>
+            <cell>fixed-width typeface, spacing preserved</cell>
+          </row>
+          <row>
+            <cell>simple:normalstyle</cell>
+            <cell>
+                    </cell>
+            <cell>upright shape and default weight of typeface</cell>
+          </row>
+          <row>
+            <cell>simple:normalweight</cell>
+            <cell>
+                       roman
+                      </cell>
+            <cell>normal typeface weight</cell>
+          </row>
+          <row>
+            <cell>simple:right</cell>
+            <cell>
+                       right-aligned
+                      </cell>
+            <cell>aligned to the right or right-justified</cell>
+          </row>
+          <row>
+            <cell>simple:rightbraced</cell>
+            <cell>
+                    </cell>
+            <cell>marked with a brace to the right of the text</cell>
+          </row>
+          <row>
+            <cell>simple:rotateleft</cell>
+            <cell>
+                       rotateCounterclockwise
+                      </cell>
+            <cell>rotated to the left</cell>
+          </row>
+          <row>
+            <cell>simple:rotateright</cell>
+            <cell>
+                       rotateClockwise
+                      </cell>
+            <cell>rotated to the right</cell>
+          </row>
+          <row>
+            <cell>simple:smallcaps</cell>
+            <cell>
+                       sc
+                       smallCap
+                      </cell>
+            <cell>small caps</cell>
+          </row>
+          <row>
+            <cell>simple:smaller</cell>
+            <cell>
+                       small
+                      </cell>
+            <cell>smaller type</cell>
+          </row>
+          <row>
+            <cell>simple:strikethrough</cell>
+            <cell>
+                    </cell>
+            <cell>strike through</cell>
+          </row>
+          <row>
+            <cell>simple:subscript</cell>
+            <cell>
+                       sub
+                      </cell>
+            <cell>subscript</cell>
+          </row>
+          <row>
+            <cell>simple:superscript</cell>
+            <cell>
+                       sup
+                       super
+                      </cell>
+            <cell>superscript</cell>
+          </row>
+          <row>
+            <cell>simple:topbraced</cell>
+            <cell>
+                    </cell>
+            <cell>marked with a brace above the text</cell>
+          </row>
+          <row>
+            <cell>simple:typewriter</cell>
+            <cell>
+                    </cell>
+            <cell>fixed-width typeface, like typewriter</cell>
+          </row>
+          <row>
+            <cell>simple:underline</cell>
+            <cell>
+                       u
+                      </cell>
+            <cell>underlined with single line</cell>
+          </row>
+          <row>
+            <cell>simple:wavyunderline</cell>
+            <cell>
+                    </cell>
+            <cell>underlined with wavy line</cell>
+          </row>
+        </table>
+      </div>
+    </body>
+  </text>
+</TEI>
