@@ -51,7 +51,7 @@
   </teiHeader>
   <text>
 <body>
-        <schemaSpec ident="myteisimple" start="TEI teiCorpus" source="file:///Users/rahtz/TEI/TEI-Simple/myteisimple.odd.compiled">
+        <schemaSpec ident="myteisimple" start="TEI teiCorpus" source="../myteisimple.compiled.xml">
           <elementSpec mode="change" ident="add">
             <model behaviour="block">
               <rendition>color: green; text-decoration: underline;</rendition>
