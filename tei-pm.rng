@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 1970-01-01. Version 0.3: 21st May 2015.
+Schema generated from ODD source 1970-01-01. Version 0.3: 24th May 2015.
 TEI Edition: Version 2.8.0. Last updated on
 	6th April 2015, revision 13197
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.8.0/
@@ -8377,10 +8377,13 @@ Child elements of <name/> are only allowed when an external module is being load
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">documents a single value in a predefined list of values. [22.4.5. Attribute List Specification]</a:documentation>
          <zeroOrMore>
             <choice>
-               <ref name="model.descLike"/>
-               <ref name="model.glossLike"/>
-            </choice>
+		             <ref name="model.descLike"/>
+		             <ref name="model.glossLike"/>
+	           </choice>
          </zeroOrMore>
+         <optional>
+            <ref name="paramList"/>
+         </optional>
          <ref name="att.global.attributes"/>
          <ref name="att.combinable.attributes"/>
          <attribute name="ident">
@@ -8968,6 +8971,14 @@ You must supply at least two values for @target on <name/>
          <empty/>
       </element>
    </define>
+   <define name="paramList">
+      <element name="paramList">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">list of parameter specifications</a:documentation>
+         <ref name="paramSpec"/>
+         <ref name="att.global.attributes"/>
+         <empty/>
+      </element>
+   </define>
    <define name="model">
       <element name="model">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(processing model) documentation of an intended processing model for this element</a:documentation>
@@ -8988,15 +8999,15 @@ You must supply at least two values for @target on <name/>
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">which processing function, with optional named parameters, should be used to present this element in output</a:documentation>
             <choice>
                <value>alternate</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a specialized display of alternating elements for displaying the preferred version, both at once or toggling between the two.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a specialized display of alternating elements for displaying the preferred version and an alternative, both at once or by some method of toggling between the two.</a:documentation>
                <value>anchor</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create anchor with ID</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create an anchor with ID</a:documentation>
                <value>block</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a block out of the content parameter. </a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a block structure</a:documentation>
                <value>body</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create the body of a document.</a:documentation>
                <value>break</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make a line, column, or page break according to type</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a line, column, or page break according to type</a:documentation>
                <value>cell</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a table cell</a:documentation>
                <value>cit</value>
@@ -9024,26 +9035,26 @@ You must supply at least two values for @target on <name/>
                <value>metadata</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create metadata section</a:documentation>
                <value>note</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a note, according to value of place; could be margin, footnote, endnote, inline</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create an note, often out of line, depending on the value of place; could be margin, footnote, endnote, inline</a:documentation>
                <value>omit</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">do nothing, do not process children</a:documentation>
                <value>paragraph</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a paragraph out of content.</a:documentation>
                <value>row</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make table row</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a table row</a:documentation>
                <value>section</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a new section of the output document</a:documentation>
                <value>table</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make table</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create a table</a:documentation>
                <value>text</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">literal text</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create literal text</a:documentation>
                <value>title</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make document title</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create document title</a:documentation>
             </choice>
          </attribute>
          <optional>
             <attribute name="predicate">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the condition under which this model applies given as an XPath Predicate Expression</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the condition under which this model applies, given as an XPath Predicate Expression</a:documentation>
                <ref name="data.xpath"/>
             </attribute>
          </optional>

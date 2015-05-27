@@ -1,5 +1,5 @@
 <!DOCTYPE TEI SYSTEM "../teisimple.dtd">
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<TEI rendition="simple:simple"  xmlns="http://www.tei-c.org/ns/1.0">
    <teiHeader>
       <fileDesc>
          <titleStmt>
@@ -120,7 +120,7 @@
             <pb facs="unknown:000654_0001_0FA99EB66C5A8DA0"/>
             <p>UNUM NECESSARIUM AWAKENINGS FOR THE Vnregenerate. OR, The NATURE and NECESSITY OF REGENERATION.</p>
             <p>Handled in a DISCOURSE designed for the Service of any that may be thereby assisted in the GRAND CONCERN of Conversion unto God; but especially the RISING GENERATION.</p>
-            <p>With an Addition of some other Sermons relating to that Important Subject.</p>
+            <p>With an <hi rendition="simple:it">Addition</hi> of some other Sermons relating to that Important Subject.</p>
             <p>By <hi>Cotton Mather.</hi>
             </p>
             <q>

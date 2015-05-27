@@ -131,7 +131,7 @@ to another element.</p>
 	    select="doc('teisimple.odd')//attDef[.//processing-instruction()[name()='exactMatch']]"
 	    group-by="@ident">
 	  <XSL:variable name="att" select="current-grouping-key()"/>
-	  <xsl:template match="@{if ($att='rendition') then 'rend' else $att}">
+	  <xsl:template  mode="pass2 #default" match="@{if ($att='rendition') then 'rend' else $att}">
 	    <xsl:attribute name="{$att}">
 	      <xsl:choose>
 		<XSL:for-each select=".//processing-instruction()[name()='exactMatch']">

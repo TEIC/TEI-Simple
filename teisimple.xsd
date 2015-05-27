@@ -1452,7 +1452,7 @@ Suggested values include: 1] m(metre) ; 2] kg(kilogram) ; 3] s(second) ; 4] Hz(h
                       <xs:documentation>in the right-hand margin</xs:documentation>
                     </xs:annotation>
                   </xs:enumeration>
-                  <xs:enumeration value="margin-outer">
+                  <xs:enumeration value="margin">
                     <xs:annotation>
                       <xs:documentation>in the outer margin</xs:documentation>
                     </xs:annotation>
@@ -7405,16 +7405,6 @@ Suggested values include: 1] setting; 2] entrance; 3] exit; 4] business; 5] nove
         </xs:choice>
       </xs:sequence>
       <xs:attributeGroup ref="ns1:att.global.attributes"/>
-      <xs:attribute name="scheme">
-        <xs:simpleType>
-          <xs:restriction>
-            <xs:simpleType>
-              <xs:list itemType="ns1:data.word"/>
-            </xs:simpleType>
-            <xs:minLength value="1"/>
-          </xs:restriction>
-        </xs:simpleType>
-      </xs:attribute>
       <xs:attribute name="version" type="ns1:data.version">
         <xs:annotation>
           <xs:documentation>specifies the major version number of the TEI Guidelines against which this document is valid.</xs:documentation>

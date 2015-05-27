@@ -1,4 +1,4 @@
-<TEI xmlns="http://www.tei-c.org/ns/1.0">
+<TEI rendition="simple:simple"  xmlns="http://www.tei-c.org/ns/1.0">
    <teiHeader>
       <fileDesc>
          <titleStmt>
@@ -119,7 +119,7 @@
          <div type="ballad">
             <pb facs="tcp:110643:1" rendition="simple:additions"/>
             <!-- PDF PAGE 14 -->
-            <head>The Vergins Advice TO THE Maids of LONDON.</head>
+            <head>Advice TO THE Maids of LONDON.</head>
             <opener>To the Tune of, <hi>Oh! that I were but young for you.</hi>
             </opener>
             <lg>

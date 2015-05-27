@@ -182,10 +182,10 @@
   </target>
 
   <target name="tests">
-    <!--
-	<echo>Validate Simple schema against tei-pm</echo>
-	<runjing rngfile="tei-pm.rng" file="teisimple.odd"/>
-	-->
+    <echo>Validate Simple ODD against tei-pm RELAX NG</echo>
+    <runjing file="xsimple.odd" rngfile="tei-pm.rng" />
+    <echo>Validate Simple ODD against tei-pm Schematron</echo>
+    <schematron file="xsimple.odd" queryLanguageBinding="xslt2" schema="tei-pm.isosch" failonerror="true"/>
     <echo>Validate instances against RELAX NG</echo>
     <runjing rngfile="teisimple.rng" file="tests/testsimple.xml"/>
     <runjing rngfile="teisimple.rng" file="tests/testsimple2.xml"/>
@@ -193,6 +193,7 @@
     <runjing rngfile="teisimple.rng" file="tests/testsimple4.xml"/>
     <runjing rngfile="teisimple.rng" file="tests/testsimple5.xml"/>
     <runjing rngfile="teisimple.rng" file="tests/testsimple6.xml"/>
+    <runjing rngfile="teisimple.rng" file="tests/A10231.xml"/>
     <echo>Validate instances against Schematron</echo>
     <schematron file="tests/testsimple.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
     <schematron file="tests/testsimple2.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
@@ -200,6 +201,7 @@
     <schematron file="tests/testsimple4.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
     <schematron file="tests/testsimple5.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
     <schematron file="tests/testsimple6.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
+    <schematron file="tests/A10231.xml" queryLanguageBinding="xslt2" schema="teisimple.isosch" failonerror="true"/>
     <echo>Validate an instance against DTD</echo>
     <xmlvalidate failonerror="yes" file="tests/testsimple.xml"/>
     <echo>Validate an instance against XSD</echo>

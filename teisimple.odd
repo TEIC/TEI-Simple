@@ -243,8 +243,8 @@
                       <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@target]">
                         <let name="results" value="for $t in        tokenize(normalize-space(@target),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                         <report test="some $x in $results  satisfies $x"> Error: Every
-                                       local pointer in "<param-of select="@target"/>" must point to
-                                       an ID in this document (<param-of select="$results"/>)</report>
+                                       local pointer in "<value-of select="@target"/>" must point to
+                                       an ID in this document (<value-of select="$results"/>)</report>
                       </rule>
                     </constraint>
                   </constraintSpec>
@@ -299,7 +299,6 @@
                       <?exactMatch tablefoot?>
                     </valItem>
                     <valItem ident="margin-right">
-                      <?exactMatch margin-outer?>
                       <?exactMatch right?>
                       <?exactMatch marg1?>
                       <?exactMatch marg2?>
@@ -307,8 +306,8 @@
                       <?exactMatch marg4?>
                       <desc>in the right-hand margin</desc>
                     </valItem>
-                    <valItem ident="margin-outer">
-                      <?exactMatch margin?>
+                    <valItem ident="margin">
+                      <?exactMatch margin-outer?>
 		      <desc>in the outer margin</desc>
 		    </valItem>
                     <valItem ident="margin-inner">
@@ -392,9 +391,9 @@
                   <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@rendition]">
                     <let name="results" value="for $val in tokenize(normalize-space(@rendition),'\s+') return        starts-with($val,'simple:')        or        (starts-with($val,'#')        and        //tei:rendition[@xml:id=substring($val,2)])"/>
                     <assert test="every $x in $results satisfies $x"> Error: Each of
-                                       the rendition values in "<param-of select="@rendition"/>"
+                                       the rendition values in "<value-of select="@rendition"/>"
                                        must point to a local ID or to a token in the Simple scheme
-                                          (<param-of select="$results"/>)</assert>
+                                          (<value-of select="$results"/>)</assert>
                   </rule>
                 </constraint>
               </constraintSpec>
@@ -403,8 +402,8 @@
                   <rule xmlns="http://purl.oclc.org/dsdl/schematron" context="tei:*[@corresp]">
                     <let name="results" value="for $t in        tokenize(normalize-space(@corresp),'\s+') return starts-with($t,'#') and not(id(substring($t,2)))"/>
                     <report test="some $x in $results  satisfies $x"> Error: Every
-                                       local pointer in "<param-of select="@corresp"/>" must point to
-                                       an ID in this document (<param-of select="$results"/>)</report>
+                                       local pointer in "<value-of select="@corresp"/>" must point to
+                                       an ID in this document (<value-of select="$results"/>)</report>
                   </rule>
                 </constraint>
               </constraintSpec>
@@ -855,7 +854,7 @@ border-bottom: solid 1pt blue;
             </elementSpec>
             <elementSpec mode="change" ident="g">
               <model predicate="not(text())" behaviour="glyph">
-	      <param name="g">@ref</param>
+	      <param name="content">@ref</param>
 	      </model>
               <model behaviour="inline"/>
             </elementSpec>
@@ -879,7 +878,7 @@ border-bottom: solid 1pt blue;
 		<param name="width">@width</param>
 		<param name="height">@height</param>
 		<param name="scale">@scale</param>
-		<param name="content">desc</param>
+		<param name="title">desc</param>
 	      </model>
             </elementSpec>
             <elementSpec mode="change" ident="group">
@@ -1177,13 +1176,6 @@ border-bottom: solid 1pt blue;
               <model behaviour="metadata"/>
             </elementSpec>
             <elementSpec mode="change" ident="TEI">
-              <attList>
-                <attDef ident="scheme" mode="add">
-                  <datatype maxOccurs="unbounded">
-                    <macroRef key="data.word"/>
-                  </datatype>
-                </attDef>
-              </attList>
               <model behaviour="document"/>
             </elementSpec>
             <elementSpec mode="change" ident="text">
@@ -1376,6 +1368,7 @@ border-bottom: solid 1pt blue;
             <rendition xml:id="rightbraced">padding-right: 2pt; border-right: dotted gray 2pt; </rendition>
             <rendition xml:id="rotateleft">-webkit-transform: rotate(90deg);    transform: rotate(90deg);</rendition>
             <rendition xml:id="rotateright">-webkit-transform: rotate(-90deg);    transform: rotate(-90deg);</rendition>
+            <rendition xml:id="rules">border: 1px solid black; padding: 2px;border-collapse:collapse;border-spacing:0;</rendition>
             <rendition xml:id="smallcaps">font-variant: small-caps;</rendition>
             <rendition xml:id="smaller">font-size: smaller;</rendition>
             <rendition xml:id="strikethrough">text-decoration: line-through;</rendition>
