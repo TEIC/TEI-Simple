@@ -233,6 +233,16 @@
                     </cell>
             <cell>inline rendering</cell>
           </row>
+</table></div>
+      <div>
+        <head>Allowed values for <att>rendition</att> (2)</head>
+        <table>
+          <row role="label">
+            <cell>value</cell>
+            <cell>alternatives</cell>
+            <cell>meaning</cell>
+          </row>
+
           <row>
             <cell>simple:justify</cell>
             <cell>
@@ -331,6 +341,15 @@
                        smallCap
                       </cell>
             <cell>small caps</cell>
+          </row>
+</table></div>
+      <div>
+        <head>Allowed values for <att>rendition</att> (3)</head>
+        <table>
+          <row role="label">
+            <cell>value</cell>
+            <cell>alternatives</cell>
+            <cell>meaning</cell>
           </row>
           <row>
             <cell>simple:smaller</cell>
