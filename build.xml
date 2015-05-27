@@ -225,14 +225,14 @@
       <param name="useFixedDate" expression="true"/>
       <param name="documentationLanguage" expression="${docLang}"/>
     </xslt>
-    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="tests/myteisimple2.odd" out="myteisimple2.odd.compiled">
+    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="tests/myteisimple2.odd" out="myteisimple2.compiled.xml">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
       <param name="lang" expression="${lang}" if="lang"/>
       <param name="verbose" expression="${verbose}" if="verbose"/>
     </xslt>
-    <xslt processor="trax" force="yes" style="${XSL}/odds/odd2relax.xsl" in="myteisimple2.odd.compiled" out="myteisimple2.rng">
+    <xslt processor="trax" force="yes" style="${XSL}/odds/odd2relax.xsl" in="myteisimple2.compiled.xml" out="myteisimple2.rng">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
