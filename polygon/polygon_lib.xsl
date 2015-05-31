@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet xmlns:xschema="http://www.w3.org/2001/XMLSchema" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xslo="http://www.w3.org/1999/XSL/TransformAlias" exclude-result-prefixes="xs" xpath-default-namespace="http://www.tei-c.org/ns/1.0" version="2.0">
-  <xsl:variable name="sq">'</xsl:variable>
   <xsl:param name="debug">false</xsl:param>
+  <xsl:variable name="sq">'</xsl:variable>
   <xsl:namespace-alias stylesheet-prefix="xslo" result-prefix="xsl"/>
   <doc xmlns="http://www.oxygenxml.com/ns/doc/xsl" scope="stylesheet" type="stylesheet">
     <desc>
@@ -210,6 +210,11 @@
           </xsl:attribute>
         </xslo:value-of>
       </xsl:when>
+      <xsl:when test="starts-with($content,$sq)">
+        <xslo:text>
+            <xsl:value-of select="translate($content,$sq,'')"/>
+	</xslo:text>
+      </xsl:when>
       <xsl:when test="contains($content,'concat(')">
         <xslo:value-of>
           <xsl:attribute name="select">
@@ -279,7 +284,8 @@
         <xsl:sequence select="tei:graphic($model, tei:getParam($model,'url'), tei:getParam($model,'width'), tei:getParam($model,'height'), tei:getParam($model,'scale'),$class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='heading'">
-        <xsl:sequence select="tei:heading($model, $contents, $class, $number)"/>
+        <xsl:sequence select="tei:heading($model, $contents,
+			      tei:getParam($model,'level'), $class, $number)"/>
       </xsl:when>
       <xsl:when test="$task ='index'">
         <xsl:sequence select="tei:index($model, tei:getParam($model,'type'), $class, $number)"/>

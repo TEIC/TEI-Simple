@@ -250,6 +250,12 @@
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
     </xslt>
+    <echo>create MS XSL from PM</echo>
+    <xslt force="yes" style="polygon/simpleoddtoxsl.xsl" in="teipm-ms.odd" out="teipm-ms.xsl">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+    </xslt>
     <!--
 	<xslt force="yes" style="polygon/simpleoddtoxsl-latex.xsl" in="teisimple.odd" out="teisimple-pm-latex.xsl">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
@@ -258,6 +264,9 @@
       </xslt>
       -->
     <echo>run test files through PM</echo>
+    <xslt force="yes" style="teipm-ms.xsl" in="tests/testms.xml" out="tests/testms.html">
+      <factory name="net.sf.saxon.TransformerFactoryImpl"/>
+    </xslt>
     <xslt force="yes" style="teisimple-pm.xsl" in="tests/testsimple.xml" out="tests/testsimple.html">
       <factory name="net.sf.saxon.TransformerFactoryImpl"/>
     </xslt>

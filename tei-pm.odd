@@ -52,7 +52,7 @@
         <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>James Cummings</docAuthor>
         <docAuthor>Magdalena Turska</docAuthor>
-        <docDate>Version 0.3: 24th May 2015</docDate>
+        <docDate>Version 0.4:  29th May 2015</docDate>
       </titlePage>
     </front>
     <body>
@@ -72,13 +72,18 @@
 	the web or in print as a digital edition, the TEI model by itself is incomplete.</p>
           <p>The processing model notation allows each element to be
         assigned to a structural category (<gi>model</gi>), and given
-        an outline rendition description (<gi>rendition</gi>). This
+        an outline rendition description (<gi>outputRendition</gi>). This
         allows a processor to know whether to handle the element or
         not, and broadly speaking how to display or otherwise process
         it. The model and rendition instructions are part of the 
         TEI ODD, so can be changed in TEI customizations in the normal
 	  way.</p>
-	  <p><figure><graphic url="SPM2.png"/><head>Processing model workflow</head></figure></p>
+          <p>
+            <figure>
+              <graphic url="SPM2.png"/>
+              <head>Processing model workflow</head>
+            </figure>
+          </p>
           <p>This method of working (known informally as the Rahtz Rationale) assumes a workflow with three parts, and three
 	distinct roles, to create a digital edition from a TEI text:
 	<list rend="ordered"><item>an <emph>editor</emph> manages the text integrity,
@@ -117,16 +122,11 @@
 	explicit as possible, and provide maximum expressivity to the
 	  editor.</p>
         </div>
-
         <div>
           <head>Processing model elements</head>
           <p>There are two main elements for specifying the structural
 	and appearance components of a processing model:
-	<specList>
-	  <specDesc key="model" atts="predicate behaviour
-	  useSourceRendition output"/>
-	  <specDesc key="param" atts="name"/>
-	  <specDesc key="rendition" atts="scope"/></specList>
+	<specList><specDesc key="model" atts="predicate behaviour    useSourceRendition output"/><specDesc key="param" atts="name"/><specDesc key="outputRendition" atts="scope"/></specList>
 	  For a given <gi>elementSpec</gi>, there can be as many
 	  <gi>model</gi> statements as required. A set  of multiple
 	  <gi>model</gi> statements is regarded as an
@@ -137,20 +137,18 @@
 	  <gi>model</gi> statements to be active at the same time,
 	  they can be enclosed inside a <gi>modelSequence</gi>.
 	  </p>
-
-	  <p>Within each <gi>model</gi> there can be set of
-	  <gi>rendition</gi> elements.</p>
-	  
+          <p>Within each <gi>model</gi> there can be set of
+	  <gi>outputRendition</gi> elements.</p>
           <p>Let us consider a simple case, the handling of the
 	<gi>hi</gi> element. We decide that it is an inline element,
 	normally rendered in italics:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline"><rendition>font-style: italic;</rendition></model></egXML>
-	    The <att>behaviour</att> attribute has a value of a call
-	    to the function <term>inline</term>. If no <gi>param</gi>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline"><outputRendition>font-style: italic;</outputRendition></model></egXML>
+	    The <att>behaviour</att> attribute specifies the name of
+	    a function, <term>inline</term>. If no <gi>param</gi>
 	    is supplied to override it, the content of the inline
 	    object is assumed to be the children of the element (text
 	    or elements).
-	    Separately, the <gi>rendition</gi> element uses CSS
+	    Separately, the <gi>outputRendition</gi> element uses CSS
 	    syntax to specific the appearance.  It would have been
 	    possible here to simply add <code>display: inline</code>
 	    to the rendition, to indicate that it is inline, but the
@@ -161,8 +159,8 @@
 	    default, this is ignored, but 
 	    <att>useSourceRendition</att> can be used to indicate
 	    that it should be taken account of:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline" useSourceRendition="true"><rendition>font-style: italic;</rendition></model></egXML>
-	    in this case the <gi>rendition</gi> is only a fallback and
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model behaviour="inline" useSourceRendition="true"><outputRendition>font-style: italic;</outputRendition></model></egXML>
+	    in this case the <gi>outputRendition</gi> is only a fallback and
 	    may be overridden by the <att>rendition</att> attribute. This uses
 	    the same behaviour as CSS; ie if <att>rendition</att>
 	    involves a change to a different property than
@@ -170,7 +168,7 @@
           <p>If the processing model is context-dependent, we can
 	    use <att>predicate</att> (an XPath 2.0 expression) to show
 	    when different models apply:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="inline"><rendition>font-style: italic;</rendition></model><model behaviour="block"><rendition>left-margin: 2em;</rendition></model></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="ancestor::p" behaviour="inline"><outputRendition>font-style: italic;</outputRendition></model><model behaviour="block"><outputRendition>left-margin: 2em;</outputRendition></model></egXML>
 	    Here the <gi>model</gi>s are <emph>alternatives</emph>;
 	    only if the test (the <att>predicate</att>) on the first
 	    fails will the second be activated.</p>
@@ -185,17 +183,7 @@
 	    tooltip), the alternate; this service is provided by a
 	    function <term>alternate</term>. We have three models, for
 	    different cases of input:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model
-	   predicate="sic and corr" behaviour="alternate">
-	   <param name="default">corr</param>
-	   <param name="alternate">sic</param></model>
-	   <model predicate="abbr and expan[1]" behaviour="alternate">
-	   <param name="default">expan</param>
-	   <param name="alternate">abbr</param>
-	   </model><model predicate="orig and reg" behaviour="alternate">
-	   	   <param name="default">reg</param>
-	   <param name="alternate">orig</param>
-	   </model></egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="sic and corr" behaviour="alternate"><param name="default">corr</param><param name="alternate">sic</param></model><model predicate="abbr and expan[1]" behaviour="alternate"><param name="default">expan</param><param name="alternate">abbr</param></model><model predicate="orig and reg" behaviour="alternate"><param name="default">reg</param><param name="alternate">orig</param></model></egXML>
 	   Here there are named <gi>param</gi> children of
 	   <gi>model</gi>, which provide parameters to the function
 	   given by <att>behaviour</att>. The content of the
@@ -203,7 +191,6 @@
 	  example above, we specify <code>expan[1]</code> to choose
 	  the first of any available set of <gi>expan</gi>
 	  children.</p>
-	  
           <p>Sometimes we want different behaviour for different
 	   output formats, specified using <att>output</att>; the
 	   following example is designed to handle <gi>date</gi>,
@@ -214,16 +201,7 @@
 	   we are making web pages. In the latter case, we use the
 	   same <term>alternate</term> function as in the previous example,
 	   but for print we force use of <att>when</att> when it is present.
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model
-	   output="print" predicate="text()"
-	   behaviour="inline"/><model output="print" predicate="@when
-	   and not(text())" behaviour="inline">
-	   <param name="content">@when</param></model>
-	   <model predicate="@when" output="web" behaviour="alternate">
-	     	   <param name="default">.</param>
-		   <param name="alternate">@when</param>
-	   </model>
-		 </egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model output="print" predicate="text()" behaviour="inline"/><model output="print" predicate="@when     and not(text())" behaviour="inline"><param name="content">@when</param></model><model predicate="@when" output="web" behaviour="alternate"><param name="default">.</param><param name="alternate">@when</param></model></egXML>
 	   </p>
           <p>Elements which have attributes can access the values
 	   using the usual XPath 2.0 notation. For example, the
@@ -232,16 +210,7 @@
 	   created. Sometimes the <gi>ref</gi> has text content, but
 	   sometimes just the <att>target</att>. Our rule caters for
 	   these two situations:
-           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model
-							       predicate="not(text())"
-							       behaviour="link">
-		 	     	   <param name="content">@target</param>
-				   <param name="link">@target</param>
-		   </model><model behaviour="link">
-		 	     	   <param name="content">.</param>
-		   <param name="link">@target</param>
-		 </model>
-	   </egXML>
+           <egXML xmlns="http://www.tei-c.org/ns/Examples"><model predicate="not(text())" behaviour="link"><param name="content">@target</param><param name="link">@target</param></model><model behaviour="link"><param name="content">.</param><param name="link">@target</param></model></egXML>
 	   Here the <term>link</term> function has  two <gi>param</gi>, the text
 	   to be shown, and the URL to which it should be linked.</p>
         </div>
@@ -289,43 +258,40 @@
             <classes>
               <memberOf key="att.global"/>
             </classes>
-	    <content>
-	      <macroRef key="data.xpath"/>
-	    </content>
-	    <attList>
-	      <attDef ident="name" usage="req">
-		<desc>Name of parameter</desc>
-	      </attDef>
-	    </attList>
-	  </elementSpec>
-
-	  <elementSpec ident="paramSpec" mode="add" module="tagdocs">
+            <content>
+              <macroRef key="data.xpath"/>
+            </content>
+            <attList>
+              <attDef ident="name" usage="req">
+                <desc>Name of parameter</desc>
+              </attDef>
+            </attList>
+          </elementSpec>
+          <elementSpec ident="paramSpec" mode="add" module="tagdocs">
             <desc versionDate="2015-05-15" xml:lang="en">specification
 	    of a parameter of
 	    a model behaviour</desc>
             <classes>
               <memberOf key="att.global"/>
-	      <memberOf key="att.identifiable"/>
+              <memberOf key="att.identifiable"/>
             </classes>
-	    <content>
-	      <alternate minOccurs="0" maxOccurs="unbounded">
+            <content>
+              <alternate minOccurs="0" maxOccurs="unbounded">
                 <classRef key="model.glossLike"/>
                 <classRef key="model.descLike"/>
-	      </alternate>
-	    </content>
-	  </elementSpec>
-
+              </alternate>
+            </content>
+          </elementSpec>
           <elementSpec ident="paramList" mode="add" module="tagdocs">
             <desc versionDate="2015-05-15" xml:lang="en">list of
 	    parameter specifications</desc>
             <classes>
               <memberOf key="att.global"/>
             </classes>
-	    <content>
-	      <elementRef key="paramSpec"/>
-	    </content>
-	  </elementSpec>
-
+            <content>
+              <elementRef key="paramSpec"/>
+            </content>
+          </elementSpec>
           <elementSpec ident="model" mode="add" module="tagdocs">
             <gloss versionDate="2015-05-15" xml:lang="en">processing model</gloss>
             <desc versionDate="2015-05-15" xml:lang="en">documentation of an intended processing model for this
@@ -337,9 +303,9 @@
               <alternate minOccurs="0" maxOccurs="unbounded">
                 <classRef key="model.glossLike"/>
                 <classRef key="model.descLike"/>
-	      </alternate>
-              <elementRef key="param" minOccurs="0"   maxOccurs="unbounded"/>
-              <elementRef key="rendition" minOccurs="0" maxOccurs="unbounded"/>
+              </alternate>
+              <elementRef key="param" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="outputRendition" minOccurs="0" maxOccurs="unbounded"/>
             </content>
             <attList>
               <attDef ident="behaviour" usage="req">
@@ -445,6 +411,7 @@
                   <valItem ident="heading">
                     <paramList>
                       <paramSpec ident="content"/>
+                      <paramSpec ident="level"/>
                     </paramList>
                     <desc>creates a heading. </desc>
                     <equiv name="span"/>
@@ -461,7 +428,7 @@
                       <paramSpec ident="label"/>
                     </paramList>
                     <desc>creates inline element out of <term>content</term> if there's something in
-                  <gi>rendition</gi>, use that formatting
+                  <gi>outputRendition</gi>, use that formatting
                   otherwise just show text of selected content.</desc>
                     <equiv name="span"/>
                   </valItem>
@@ -502,7 +469,7 @@
                       <paramSpec ident="place"/>
                       <paramSpec ident="label"/>
                     </paramList>
-		    <desc>create an note, often out of line,
+                    <desc>create an note, often out of line,
 		    depending on the  value of
 		    <term>place</term>; could be margin, footnote,
 		    endnote, inline</desc>
@@ -528,7 +495,7 @@
                     <paramList>
                       <paramSpec ident="content"/>
                     </paramList>
-		    <desc>create a new section of the output document</desc>
+                    <desc>create a new section of the output document</desc>
                   </valItem>
                   <valItem ident="table">
                     <paramList>
@@ -602,14 +569,14 @@
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <model predicate="parent::person" behaviour="inline">
-		  <desc>If it is a child of a person element, treat as inline</desc>
-		</model>
+                  <desc>If it is a child of a person element, treat as inline</desc>
+                </model>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <model behaviour="inline">
-                  <rendition>font-weight:bold</rendition>
+                  <outputRendition>font-weight:bold</outputRendition>
                 </model>
               </egXML>
             </exemplum>
@@ -621,8 +588,8 @@
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <model predicate="ancestor::p" behaviour="inline">
-		       	     	     	   <param name="content">@n</param>
-		</model>
+                  <param name="content">@n</param>
+                </model>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
@@ -634,33 +601,22 @@
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <elementSpec mode="change" ident="date">
                   <model output="print" predicate="text()" behaviour="inline"/>
-                  <model output="print" predicate="@when and  not(text())"
-			 behaviour="inline">
-		    <param name="content">@when</param>
-		  </model>
-                  <model predicate="@when" output="web"
-			 behaviour="alternate">
-		    <param name="default">.</param>
-		    <param name="alternate">@when</param>
-		  </model>
+                  <model output="print" predicate="@when and  not(text())" behaviour="inline">
+                    <param name="content">@when</param>
+                  </model>
+                  <model predicate="@when" output="web" behaviour="alternate">
+                    <param name="default">.</param>
+                    <param name="alternate">@when</param>
+                  </model>
                 </elementSpec>
               </egXML>
             </exemplum>
             <exemplum xml:lang="en">
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
-
-			       <elementSpec mode="change" ident="choice">
-				 xmlns="http://www.tei-c.org/ns/Examples">
-			     <model	   predicate="sic and corr" behaviour="alternate">
-	   <param name="default">corr</param>
-	   <param name="alternate">sic</param></model>
-	   <model predicate="abbr and expan" behaviour="alternate">
-	   <param name="default">expan</param>
-	   <param name="alternate">abbr</param>
-	   </model><model predicate="orig and reg" behaviour="alternate">
-	   	   <param name="default">reg</param>
-	   <param name="alternate">orig</param>
-	   </model></elementSpec>
+                <elementSpec mode="change" ident="choice">
+				 xmlns="http://www.tei-c.org/ns/Examples"&gt;
+			     <model predicate="sic and corr" behaviour="alternate"><param name="default">corr</param><param name="alternate">sic</param></model>
+	   <model predicate="abbr and expan" behaviour="alternate"><param name="default">expan</param><param name="alternate">abbr</param></model><model predicate="orig and reg" behaviour="alternate"><param name="default">reg</param><param name="alternate">orig</param></model></elementSpec>
               </egXML>
             </exemplum>
           </elementSpec>
@@ -728,7 +684,7 @@
                   <classRef key="model.glossLike"/>
                   <classRef key="model.descLike"/>
                 </alternate>
-                <elementRef key="rendition" minOccurs="0"/>
+                <elementRef key="outputRendition" minOccurs="0"/>
                 <alternate minOccurs="1" maxOccurs="unbounded">
                   <elementRef key="modelSequence"/>
                   <elementRef key="model"/>
@@ -767,19 +723,18 @@
                   <modelGrp output="web">
                     <model predicate="parent::choice" behaviour="omit"/>
                     <model predicate="ancestor::front" behaviour="inline">
-                      <rendition>font-style:italic; </rendition>
+                      <outputRendition>font-style:italic; </outputRendition>
                     </model>
                     <model predicate="not(parent::choice)" behaviour="inline">
-                      <rendition scope="before">content: ' ('</rendition>
-                      <rendition scope="after">content: ')'</rendition>
+                      <outputRendition scope="before">content: ' ('</outputRendition>
+                      <outputRendition scope="after">content: ')'</outputRendition>
                     </model>
                   </modelGrp>
                   <modelGrp output="print">
                     <model predicate="parent::choice" behaviour="omit"/>
-                    <model predicate="not(parent::choice)"
-			   behaviour="note">
-		      <param name="place">'foot'</param>
-		    </model>
+                    <model predicate="not(parent::choice)" behaviour="note">
+                      <param name="place">'foot'</param>
+                    </model>
                   </modelGrp>
                 </elementSpec>
               </egXML>
@@ -788,14 +743,58 @@
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
                 <modelGrp output="print">
                   <modelSequence>
-                    <model behaviour="inline(@n)"/>
+                    <model behaviour="inline">
+                      <param name="content">@n</param>
+                    </model>
                     <model behaviour="note">
-		      <param name="place">'foot'</param>
-		    </model>
+                      <param name="place">'foot'</param>
+                    </model>
                   </modelSequence>
                 </modelGrp>
               </egXML>
             </exemplum>
+          </elementSpec>
+          <elementSpec mode="add" ident="outputRendition">
+            <gloss versionDate="2007-06-12" xml:lang="fr">rendu</gloss>
+            <desc versionDate="2007-09-22" xml:lang="en">supplies information
+  about the desired output or rendition or appearance of one or more elements in the source
+    text.</desc>
+            <classes>
+              <memberOf key="att.global"/>
+              <memberOf key="model.oddDecl"/>
+            </classes>
+            <content>
+              <textNode/>
+            </content>
+            <attList>
+              <attDef ident="scope">
+                <desc versionDate="2009-05-29" xml:lang="en">provides a way of defining
+<soCalled>pseudo-elements</soCalled>, that is, styling rules
+applicable to specific sub-portions of an element.</desc>
+                <datatype>
+                  <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+                </datatype>
+                <valList type="open">
+                  <valItem ident="first-line">
+                    <desc versionDate="2009-05-29" xml:lang="en">styling applies to the first line of
+the target element</desc>
+                  </valItem>
+                  <valItem ident="first-letter">
+                    <desc versionDate="2009-05-29" xml:lang="en">styling applies to the first letter of
+the target element</desc>
+                  </valItem>
+                  <valItem ident="before">
+                    <desc versionDate="2009-05-29" xml:lang="en">styling should be applied immediately before
+the content of the target element</desc>
+                  </valItem>
+                  <valItem ident="after">
+                    <desc versionDate="2009-05-29" xml:lang="en">styling  should be applied immediately after
+the content of
+the target element</desc>
+                  </valItem>
+                </valList>
+              </attDef>
+            </attList>
           </elementSpec>
         </specGrp>
       </div>
@@ -826,23 +825,14 @@
               </sequence>
             </content>
           </elementSpec>
-
-	  <elementSpec ident="valItem" mode="change" module="tagdocs">
-	    <content>
-	      <alternate maxOccurs="unbounded"  minOccurs="0" >
-		<classRef key="model.descLike"/>
-		<classRef key="model.glossLike"/>
-	      </alternate>
-	      <elementRef key="paramList" minOccurs="0" maxOccurs="1"/>
-	    </content>
-	  </elementSpec>
-
-          <elementSpec mode="change" ident="rendition">
-            <classes>
-              <memberOf key="att.global"/>
-              <memberOf key="att.styleDef"/>
-              <memberOf key="model.oddDecl"/>
-            </classes>
+          <elementSpec ident="valItem" mode="change" module="tagdocs">
+            <content>
+              <alternate maxOccurs="unbounded" minOccurs="0">
+                <classRef key="model.descLike"/>
+                <classRef key="model.glossLike"/>
+              </alternate>
+              <elementRef key="paramList" minOccurs="0" maxOccurs="1"/>
+            </content>
           </elementSpec>
         </specGrp>
       </div>
