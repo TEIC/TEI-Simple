@@ -1,0 +1,454 @@
+
+<!DOCTYPE html
+  SYSTEM "about:legacy-compat">
+<html xmlns="http://www.w3.org/1999/xhtml">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <link rel="StyleSheet" href="simple.css" type="text/css" /><style type="text/css">.simple_allcaps { text-transform: uppercase; } 
+.simple_blackletter { font-family: fantasy; } 
+.simple_bold { font-weight: bold; } 
+.simple_bottombraced { padding-bottom: 2pt; border-bottom: dashed gray 2pt; } 
+.simple_block { display:block; } 
+.simple_boxed { padding: 2pt; border: solid black 1pt; } 
+.simple_centre { text-align: center; } 
+.simple_cursive { font-family: cursive; } 
+.simple_doublestrikethrough { text-decoration: line-through;    color: red; } 
+.simple_doubleunderline { text-decoration: underline;    color: red; } 
+.simple_dropcap { font-size : 6em;
+    font-family: cursive;
+    font-weight : bold;
+    vertical-align: top;
+    height: 1em;
+    line-height: 1em;
+    float : left;
+    width : 1em;
+    color : #c00;
+    margin: 0em;
+    padding: 0px; } 
+.simple_float { float:right;    display: block;
+    font-size: smaller;
+    clear: right;
+    padding: 4pt;
+    width: 15%;
+ } 
+.simple_hyphen {  } 
+.simple_inline { display:inline; } 
+.simple_italic { font-style: italic; } 
+.simple_justify { text-align: justify; } 
+.simple_larger { font-size: larger; } 
+.simple_left { text-align: left; } 
+.simple_leftbraced { padding-left: 2pt; border-left: dotted gray 2pt;  } 
+.simple_letterspace { letter-spacing: 0.5em; } 
+.simple_normalstyle { font-style:roman; } 
+.simple_normalweight { font-weight:normal; } 
+.simple_right { text-align: right; } 
+.simple_rightbraced { padding-right: 2pt; border-right: dotted gray 2pt;  } 
+.simple_rotateleft { -webkit-transform: rotate(90deg);    transform: rotate(90deg); } 
+.simple_rotateright { -webkit-transform: rotate(-90deg);    transform: rotate(-90deg); } 
+.simple_smallcaps { font-variant: small-caps; } 
+.simple_smaller { font-size: smaller; } 
+.simple_strikethrough { text-decoration: line-through; } 
+.simple_subscript { vertical-align: bottom;    font-size: smaller; } 
+.simple_superscript { vertical-align: super;    font-size: smaller; } 
+.simple_topbraced { padding-top: 2pt;  border-top: dotted gray 2pt;  } 
+.simple_typewriter { font-family:monospace; } 
+.simple_underline { text-decoration: underline; } 
+.simple_wavyunderline { text-decoration: underline;       text-decoration-style: wavy; } 
+span.add {color: green; text-decoration: underline;}
+div.address {margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom: 2em;}
+div.addrLine {white-space: nowrap;}
+div.argument {margin-bottom: 0.5em;}
+ol.castList {list-style: ordered;}
+ul.castList {list-style: ordered;}
+div.closer {margin-top: 1em; margin-left: 1em; margin-left: 1em;}
+span.corr2:before {content: '[';}
+span.corr2:after {content: ']';}
+span.del {text-decoration: line-through;}
+div.div1 {border: 1px solid black; padding: 5px;}
+div.docTitle2 {font-size: larger;}
+span.figDesc:before {content: '[..';}
+span.figDesc:after {content: '..]';}
+span.figDesc {color: grey;font-style:italic;}
+span.figure2 {display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue;}
+div.floatingText {margin: 6pt; border: solid black 1pt;}
+span.foreign {font-style:italic;}
+span.gap1 {color: grey;}
+span.gap2:before {content: '[..';}
+span.gap2:after {content: '..]';}
+span.gap2 {color: grey;}
+span.gap3:before {content: '[...]';}
+div.head1 {font-style: italic;}
+div.head2 {font-style: italic;}
+div.head3 {font-style: italic;}
+div.head4 {font-weight: bold;}
+span.hi1 {font-style: italic;}
+span.hi2 {font-style: italic;}
+div.l {margin-left: 1em;}
+div.note2 {margin-left: 10px;margin-right: 10px; font-size:smaller;}
+span.note3:before {content:" [";}
+span.note3:after {content:"] ";}
+span.note3 {font-size:small;}
+p.p {text-align: justify;}
+span.pb {display: block; margin-left: 4pt; color: grey; float: right;}
+span.pb:before {content: '[Page ';}
+span.pb:after {content: ']';}
+div.q1 {margin-left: 10px; margin-right: 10px;}
+span.q2:before {content: '‘';}
+span.q2:after {content: '’';}
+div.q3 {margin-left: 10px; margin-right: 10px;}
+span.quote1:before {content: '‘';}
+span.quote1:after {content: '’';}
+div.quote2 {margin-left: 10px; margin-right: 10px;}
+tr.row1 {font-weight: bold;}
+span.sic2:before {content: '{';}
+span.sic2:after {content: '}';}
+div.signed1 {text-align: right;}
+span.signed2 {font-style: italic;}
+div.speaker {font-style:italic;}
+div.stage {font-style: italic;}
+span.supplied2:before {content:"&lt;";}
+span.supplied2:after {content:"&gt;";}
+span.supplied3:before {content:"[";}
+span.supplied3:after {content:"]";}
+span.supplied4:before {content:"(";}
+span.supplied4:after {content:")";}
+span.supplied5:before {content:"{";}
+span.supplied5:after {content:"}";}
+table.table {font-size: smaller; background-color: #F0F0F0;}
+div.text {max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica, sans-serif;}
+div.title2 {color: red; font-size: 2em;}
+span.title4 {font-style: italic;}
+span.title6 {font-style: italic;}
+span.title8 {font-style: italic;}
+span.title10 {font-style: italic;}
+div.titlePage {text-align: center;}
+div.trailer {color: green;}
+span.unclear:after {content: ' [?] ';}
+div.msDesc {font-family: "Junicode"; margin-left: 25pt; margin-right: 15pt; margin-top: 15pt; margin-bottom: 15pt; font-size: 12pt; line-height: 14pt; text-align: left}
+</style><script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-1.10.2.min.js"></script><link rel="stylesheet" href="http://code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css" /><script type="text/javascript" src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script><link rel="stylesheet" href="http://jqueryui.com/tooltip/resources/demos/style.css" /><script type="text/javascript" charset="utf-8" src="simple.js"></script><title>AM 62 fol.</title>
+   </head> 
+   <body>
+      <div class="body2">
+         <div class="listBibl2">
+            <div class="msDesc" id="AM02-062-en">
+               <h1 class="msIdentifier">Identification</h1>
+               <div class="msIdentifier2">Denmark København Den Arnamagnæanske Samling AM 62 fol. 74</div> 
+               <div class="head6"><span class="title4">Ólafs saga Tryggvasonar en mesta</span>; Iceland, <span class="tei:origDate1">s. XIV 2/2</span>. <span class="note3">This version of <span class="title4">Ólafs saga Tryggvasonar en mesta</span> incorporates various sagas or excerps of sagas and þættir about Ólafur, also at the
+                     point, where texts from other redactions of the saga end (here: fol. 51va:24 <span class="q2">t<span class="ex">il</span> engl<span class="ex">an</span>dz af syrl<span class="ex">an</span>di</span>).</span></div> 
+               <h1 class="msContents">Contents</h1>
+               <div class="msContents2">
+                  <div class="tei:msItem">1ra-51va:24 <span class="title4">Ólafs saga Tryggvasonar en mesta</span> Old Norse/Icelandic 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">h<span class="ex">ann</span> gret þo e<span class="ex">igi</span>. <span class="ex">ok</span> e<span class="ex">r</span> Þorol<span class="ex">fr</span> v<span class="ex">ar</span>d þ<span class="ex">e</span>ssa v<span class="ex">ar</span>r letti h<span class="ex">ann</span> vpp
+                     </div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2">e<span class="ex">r</span> <span class="lb"></span> þa v<span class="ex">oro</span> nyko<span class="ex">m</span>n<span class="ex">ir</span> t<span class="ex">il</span> engl<span class="ex">an</span>dz af syrl<span class="ex">an</span>di 
+                     </div> 
+                     <ul class="listBibl1">
+                        <li class="bibl1"><a class="ref3" href="FMS1">Fornmanna sögur</a>I71-306<span class="note3">Ed. S</span>;II<span class="note3">Ed. S</span>; III1-64<span class="note3">Ed. S</span></li>
+                        <li class="bibl1">Ólafur Halldórsson, <a class="ref3" href="EA-A1">Óláfs saga Tryggvasonar en mesta</a> I 73:8-400 <span class="note3">Ed. D<span class="hi2">1</span>. The text starts in the footnotes.</span>;II <span class="note3">Ed. D<span class="hi2">1</span></span></li>
+                        <li class="bibl1">Bjarni Einarsson, <a class="ref3" href="Rit15">Hallfreðar saga 1977</a> 3-21 <span class="note3">Fols 18va:13-19rb:10</span></li>
+                        <li class="bibl1">W. van Eeden, <a class="ref3" href="Hallfr1919">Hallfreðar saga 1919</a> 109-112 (Text A. Fols 18va:13-19va:16); 113 (Text B. Fols 22ra:33-b:11); 113-118 (Text
+                           C. Fols 24va:12-25vb:32); 118-123 (Text DE. Fols 28ra:9-29ra); 123-126 (Text G. Fols
+                           48ra-va:34)
+                        </li>
+                     </ul>
+                  </div> 
+                  <div class="tei:msItem">29rb-31va:23 <span class="title4">Norna-Gests þáttr</span> 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">ÞAt v<span class="ex">ar</span> a eini nott at
+                     </div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2"><span class="ex">ok</span> þottí san<span class="ex">n</span>az v<span class="ex">m</span> lifdaga h<span class="ex">an</span>s sva sem h<span class="ex">ann</span> sagdí
+                     </div> 
+                     <ul class="listBibl1">
+                        <li class="bibl1">Bugge, <a class="ref3" href="NSaSI6">Söguþáttr af Norna-Gesti</a></li>
+                        <li class="bibl1">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 15-38 <span class="note3">Ed. D<span class="hi2">1</span></span></li>
+                        <li class="bibl1">Cipolla, <a class="ref3" href="NornaGestr1996">Il racconto di Nornagestr</a> 227-244
+                        </li>
+                     </ul>
+                  </div> 
+                  <div class="tei:msItem">31va:23-32rb <span class="title4">Helga Þáttr Þórissonar</span> her s<span class="ex">egir</span> f<span class="ex">ra</span> <span class="lb"></span> godm<span class="ex">un</span> <span class="lb"></span>di k<span class="ex">konvng</span>i <span class="lb"></span> af g<span class="ex">l</span> <span class="lb"></span>asisu<span class="lb"></span>ollu<span class="ex">m</span> 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">Þor<span class="ex">ir</span> h<span class="ex">et</span> m<span class="ex">adr</span> e<span class="ex">r</span> bío j nor<span class="ex">egi</span></div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2"><span class="ex">ok</span> hef<span class="ex">ir</span> engí <span class="lb"></span> m<span class="ex">adr</span> þav sed sida<span class="ex">n</span></div> <span class="ex">ok</span> lykr h<span class="ex">er</span> þessi sǫgv <span class="ex">etc.</span> <span class="bibl2">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 38-44 <span class="note3">Ed. D<span class="hi2">1</span></span></span></div> 
+                  <div class="tei:msItem">33va-37vb <span class="title4">Færeyinga saga</span> h<span class="ex">er</span> hef<span class="ex">ir</span> færeyíngar þattr 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">Madr e<span class="ex">r</span> nef<span class="ex">ndr</span> grimr kamba<span class="ex">n</span></div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2">v<span class="ex">ar</span>ist [?] segía h<span class="ex">enni</span> hvert þ<span class="ex">at</span> <span class="gap3"></span>dit
+                     </div> <span class="bibl2">Ólafur Halldórsson, <a class="ref3" href="Rit30">Færeyinga saga</a> 3-5, 8-11, 13-37, 39-41, 43, 49-67 <span class="note3">Bottom text. Ed. D</span></span></div> 
+                  <div class="tei:msItem">44rb:3-46ra <span class="title4">Óláfr konungr braut goð þrænda</span> Capitulum 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2"><span class="supplied4">E</span>n e<span class="ex">r</span> o<span class="ex">lafr</span> k<span class="ex">onvng</span>r hafdi skama stvnd v<span class="ex">er</span>ít i þ<span class="ex">ra</span>ndh<span class="ex">eimi</span></div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2">ef þ<span class="ex">er</span> hafít adr illa <span class="ex">ok</span> oheyrilí<span class="lb"></span>ga af h<span class="ex">onv</span>m g<span class="ex">en</span>gít
+                     </div> <span class="bibl2">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 1-14 <span class="note3">Ed. D<span class="hi2">1</span></span></span></div> 
+                  <div class="tei:msItem">50ra:2-b:4 <span class="title4">Tryggva Óláfssonar hefnt</span> Capitulu<span class="ex">m</span> 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">Sva b<span class="ex">ar</span> at eítt sín<span class="ex">n</span> at har<span class="ex">alldr</span> k<span class="ex">onvng</span>r <span class="lb"></span> ko<span class="ex">m</span> þ<span class="ex">ar</span></div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2"><span class="ex">ok</span> hafdi h<span class="ex">ann</span> m<span class="ex">ed</span> ser j hírd sín<span class="ex">n</span>í
+                     </div> <span class="bibl2">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 45-47 <span class="note3">Ed. D<span class="hi2">1</span></span></span></div> 
+                  <div class="tei:msItem">51va:25-52va:36 <span class="title4">Halldórs Þáttr Snorrasonar</span> sidasti þattr olaf<span class="lb"></span>ssaug<span class="lb"></span>o try<span class="lb"></span>ggua<span class="lb"></span>son<span class="supplied4">ar</span> <span class="lb"></span> n<span class="ex">or</span>eg<span class="lb"></span>s k<span class="ex">onvn</span>gs 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">Halldor son snora goda af isl<span class="ex">an</span>di v<span class="ex">ar</span> m<span class="ex">ed</span> har<span class="ex">aldi</span> k<span class="ex">onvng</span>í sig<span class="ex">vr</span>dar s<span class="ex">yni</span></div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2">h<span class="ex">ann</span> hafdi drep<span class="ex">it</span> <span class="lb"></span> h<span class="ex">ir</span>dm<span class="ex">ann</span> har<span class="ex">alldz</span> k<span class="ex">onvng</span>s <span class="ex">ok</span> hafdi <span class="supplied4">h<span class="ex">ann</span></span> þ<span class="ex">vi</span> reidi a h<span class="ex">onv</span>m
+                     </div> 
+                     <ul class="listBibl1">
+                        <li class="bibl1"><a class="ref3" href="FMS3">Fornmanna sögur</a> III 152-163:2 <span class="note3">Ed. S</span></li>
+                        <li class="bibl1">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 47-57 <span class="note3">Ed. D<span class="hi2">1</span></span></li>
+                     </ul>
+                  </div> 
+                  <div class="tei:msItem">52vb:10-53vb:10 <span class="title4">Frá Sigurði byskupi</span> 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">Sęmilígr ken<span class="ex">n</span>í m<span class="ex">adr</span> <span class="ex">ok</span> godr<span class="ex">ar</span> mín<span class="ex">n</span>íng<span class="ex">ar</span></div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2">v<span class="ex">oro</span> þav sam<span class="ex">m</span>ędd syskin in hei<span class="ex">lagr</span>i <span class="lb"></span> ol<span class="ex">afr</span> k<span class="ex">onvng</span>r <span class="ex">ok</span> fyrnefnd <span class="alternate choice4" title="alternate"><span class="corr1">gvn<span class="ex">n</span>hilldr</span><span class="hidden altcontent "><span class="sic1">gvn<span class="ex">n</span>hillde</span></span></span>.
+                     </div> 
+                     <ul class="listBibl1">
+                        <li class="bibl1"><a class="ref3" href="FMS3">Fornmanna sögur</a> III 163:4-172 <span class="note3">Ed. S</span></li>
+                        <li class="bibl1">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 57-64 <span class="note3">Ed. D<span class="hi2">1</span></span></li>
+                     </ul>
+                  </div> 
+                  <div class="tei:msItem">53vb:14-31 <span class="title4">Sýn Brestis</span> Kapitulum <span class="gap3"></span> 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">Sva hef<span class="ex">ir</span> brod<span class="ex">ir</span> Gvnl<span class="ex">avgr</span> <span class="ex">ok</span> sagt j latínv
+                     </div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2"><span class="ex">ok</span> ept<span class="ex">ir</span> þ<span class="ex">at</span> hv<span class="ex">ar</span>f þ<span class="ex">e</span>ssi syn f<span class="ex">ra</span> bresti
+                     </div> <span class="bibl2">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 65 <span class="note3">Ed. D<span class="hi2">1</span></span></span></div> 
+                  <div class="tei:msItem">53vb:32-39 <span class="title4">Frá Gunnlaugi ok Oddi</span> 
+                     <h4 class="incipit">Incipit</h4>
+                     <div class="incipit2">Sva segía b<span class="ex">rę</span>dr gvnlavgr <span class="ex">ok</span> oddr
+                     </div> 
+                     <h4 class="explicit">Explicit</h4>
+                     <div class="explicit2">þ<span class="ex">ar</span> sem gízorí þotti þess v<span class="ex">id</span> <span class="lb"></span> þvrfa ∴
+                     </div> 
+                     <ul class="listBibl1">
+                        <li class="bibl1"><a class="ref3" href="FMS3">Fornmanna sögur</a> III 173:1-13 <span class="note3">Ed. S</span></li>
+                        <li class="bibl1">Ólafur Halldórsson, <a class="ref3" href="EA-A3">Óláfs saga Tryggvasonar en mesta</a> III 66 <span class="note3">Ed. D<span class="hi2">1</span></span></li>
+                     </ul>
+                  </div>
+               </div> 
+               <h1 class="physDesc">Physical description</h1>
+               <div class="physDesc2">
+                  <h2 class="objectDesc">Object</h2>
+                  <div class="objectDesc2">
+                     <h3 class="supportDesc">Support description</h3>
+                     <div class="supportDesc2">
+                        <h4 class="support">Support</h4>
+                        <div class="support2">
+                           <p class="p">Parchment.</p>
+                        </div> 
+                        <h4 class="extent">Extent</h4>
+                        <div class="extent2">53. Fols 32v and 33r are blank. 327236.</div> 
+                        <p class="p">Foliated in the upper right-hand corner of the recto-pages.</p> 
+                        <h4 class="collation">Collation</h4>
+                        <div class="collation2">
+                           <p class="p">The manuscript consists of five extant gatherings: 
+                              <ul class="list2">
+                                 <li class="item">I: Fols 1-10 make the first extant quire consisting of five, apparently intact, bifolia.</li>
+                                 <li class="item">II: Fols 11-22 make a complete quire of six bifolia.</li>
+                                 <li class="item">III: Fols 23-37 comprise seven bifolia and a singleton, fol. 28, the sixth leaf of the gathering.
+                                    Col. 32rb has only 13 lines, the rest of the page and fols 32v and 33r are left blank
+                                    by the scribe. It can be presumed that between fols 32 and 33 there was another blank
+                                    leaf which made a pair with fol. 28 and was at some stage severed from it.
+                                 </li>
+                                 <li class="item">IV: Fols 38-47 make the present quire of five bifolia. There is a lacuna between fols 37 and 38,
+                                    presumably only a single leaf.
+                                 </li>
+                                 <li class="item">V: Fols 48-53 make three pairs of conjoint leaves.</li>
+                              </ul>
+                           </p>
+                        </div> 
+                        <p class="p">The manuscript is not well-preserved; the beginning is defective and there are lacunae
+                           after fols 10, 37 and 47. The extant leaves have all suffered in some degree from
+                           wear and damp. Many passages are consequently hard to decipher, but there has been
+                           no loss of text as such except on fol. 37, where the vellum has crumbled away leaving
+                           a large hole in the outer column. The vellum used for the codex was not particularly
+                           well prepared. Many leaves have holes or gashes in them, some of them large, which
+                           were sewn together before the scribe began the work.
+                        </p>
+                     </div> 
+                     <h3 class="layoutDesc">Layout</h3>
+                     <div class="layoutDesc2">
+                        <p class="p">The manuscript is written in double columns each approx. 25084 with 39 to 42 lines. Majuscules occur in varying colours; shades of yellow, red, green
+                           and blue. Traces of gold are detectable here and there, e.g. on fols 3r, 22rb, 29rb,
+                           though probably not from true gold-leaf.
+                        </p> 
+                        <p class="p">Most chapter-titles or division marks are in red, but a few are in blue or blue-black
+                           with a greenish tint. In some places, instead of chapter-titles, we find examples
+                           of a fish sketched in, and occasionally a kind of spiralling line, e.g. on fol. 3.
+                           A single example of a small foliage motive occurs on fol. 2vb:21.
+                        </p>
+                     </div>
+                  </div> 
+                  <h3 class="handDesc">Hands</h3>
+                  <div class="handDesc2">
+                     <p class="p">Apart from two short passages, the codex is written in a single hand. It is written
+                        in an Icelandic gothic bookhand and the orthography is unusually consistent. The scribe
+                        normally left spaces for decorated initials at the beginning of the first two lines
+                        of each chapter. It is the work from a practised and doubtless professional scribe,
+                        who can be counted among the very best of Icelandic penmen in <span class="date4">the fourteenth century</span>. The same writer was responsible for <span class="ref1">Stock. perg. 4to nr. 19</span>, and at least a part of <span class="ref1">AM 122b fol. (<span class="title4">Reykjarfjarðarbók</span>)</span>.
+                     </p> 
+                     <p class="p">The second hand wrote fol. 11ra:17-40 <span class="q2">fyʀnefndr - ar</span>. The writing here is partly erased and in places almost illegible. It is clear, however,
+                        that the orthography and palaeography of this hand is markedly different from the
+                        first hand.
+                     </p> 
+                     <p class="p">The third hand wrote fol. 11rb:11-40 <span class="q2">marg<span class="ex">ir</span> - ketils</span>. This passage is in a very handsome professional Icelandic gothic bookhand, clearly
+                        differentiated from those of hand 1 and hand 2 in appearance but with many orthographic
+                        features in common with the latter.
+                     </p>
+                  </div> 
+                  <h3 class="decoDesc">Decoration</h3>
+                  <div class="decoDesc2">
+                     <p class="p">
+                        <ul class="list2">
+                           <li class="item">Fol. 15vb has a major initial, a littera florissa of a <span class="hi2">Þ</span> of four lines with an extension down the left margin.
+                           </li>
+                           <li class="item">Fol. 29rb: The opening of <span class="title4">Norna-Gests þáttr</span> contains a littera florissa of the letter <span class="hi2">Þ</span> with dots and branches. The first three lines are set in, but the round bow of the <span class="hi2">Þ</span> extends up the upper margin, while the descendent runs down to the bottom of the margin.
+                              The bar is metamorphosing down the page from a dotted line to some sort of a branch
+                              with leaf-like outgrows and is ending in two spirals, and a leaf in the middle, in
+                              the lower margin. The top of the <span class="hi2">Þ</span> is ending in one single spiral.
+                           </li>
+                           <li class="item">Fol. 31vaThe opening of <span class="title4">Helga þáttr Þórissonar</span> contains a major initial, a littera florissa of a <span class="hi2">Þ</span>. 3 lines are set in, but the letter extends in the margin. The <span class="hi2">Þ</span> ends with two spirals in the lower margin.
+                           </li>
+                           <li class="item">Fol. 33vaThe opening of <span class="title4">Færeyinga saga</span> contains a major initial, a littera florissa of the letter <span class="hi2">M</span> with branches and leaves. The four top lines are set in, but the <span class="hi2">M</span> extends in the upper margin. The right-hand line of the <span class="hi2">M</span> just intrudes on of the first letters of the text, showing that the illumination was
+                              done after the scribe finished his work.
+                           </li>
+                           <li class="item">Fol. 46rbcontains a major initial a <span class="hi2">Þ</span> with branches and leaves, with an extention down the margin with one fleur-de-lis-like
+                              outgrow, and ends with a fleur-de-lis.
+                           </li>
+                           <li class="item">Fol. 51va: The opening of <span class="title4">Halldórs þáttr Snorrasonar</span> contains a major initial, a littera florissa of the letter <span class="hi2">H</span>. Four lines are set in, but the initial extends nine lines up the margin.
+                           </li>
+                        </ul>
+                     </p> 
+                     <p class="p">There are also some little drawings in the margins, e.g. fol. 10r: A man with a fish on the hook of his fishing rod; fol. 22r: A kissing couple; fol. 26r: Three knights fighting a dragon who is eating one of them.</p>
+                  </div> 
+                  <p class="p">There are a few proper marginalia in the codex and some of them are illegible, some
+                     can only be read in part. 
+                     <ul class="list2">
+                        <li class="item">Fol. 26r <span class="q2">Gifur(?) þu kv(?) <span class="lb"></span> se<span class="ex">m</span> bezt se<span class="ex">m</span> <span class="lb"></span> heiter frut<span class="lb"></span>titum</span>. <span class="note3">the reading of the last word is uncertain.</span></li>
+                        <li class="item">Fol. 27r between the columns: <span class="q2">íon <span class="lb"></span> hef<span class="lb"></span>vr g<span class="lb"></span>ert o<span class="ex">g</span>(?) <span class="lb"></span> t<span class="ex">il</span> <span class="lb"></span> sett <span class="lb"></span> <span class="gap2">2</span>br<span class="lb"></span>ef</span> (<span class="date4">sixteenth century</span>).
+                        </li>
+                        <li class="item">Fol. 35v below the text: <span class="q2">Ek einar</span> (<span class="date4">fifteenth century</span>).
+                        </li>
+                        <li class="item">Fol. 36r below the text: <span class="q2">Austr ædd</span> (<span class="date4">c. 1500</span>).
+                        </li>
+                        <li class="item">Fol. 38r below the text: <span class="q2">ave maria</span> (<span class="date4">c. 1500</span>).
+                        </li>
+                        <li class="item">Fol. 46r below the text: <span class="q2">olaf<span class="ex">ur</span> <span class="gap2">4</span> <span class="lb"></span> <span class="ex">ok</span> <span class="gap2">6</span></span> (<span class="date4">fifteenth century</span>).
+                        </li>
+                        <li class="item">The originally blank column 32rb has some nib-trials, including the alphabet, and
+                           there is more writing, pen trials, epistolary forms, apophthegms and the like, on
+                           the pages originally left blank, fols 32v and 33r.
+                        </li>
+                        <li class="item">At the top of fol. 32v a hand from <span class="date4">c. 1400</span> or <span class="date4">the first half of the fifteenth century</span> wrote: <span class="q2">þ<span class="ex">ei</span>m godv<span class="ex">m</span> m<span class="ex">onnv</span>m sem þ<span class="ex">et</span>ta br<span class="ex">e</span>f sía edr heyra sen<span class="ex">n</span>d<span class="ex">er</span> sira gvdvardr p<span class="ex">re</span>str <span class="lb"></span> þ<span class="ex">or</span>keli þ<span class="ex">or</span>mrmodzsyní kvedív g<span class="ex">v</span>ds <span class="ex">ok</span> sína kv<span class="ex">n</span>nígt gerandi</span>.
+                        </li>
+                        <li class="item">At the top of fol. 32v below the note just mentioned another hand has written: <span class="q2">Þ<span class="ex">ei</span>m e<span class="ex">r</span> eckí þat t<span class="ex">il</span> mozt e<span class="ex">r</span> þan<span class="ex">n</span>en lifa s<span class="ex">em</span> wílía hallda síg m<span class="ex">ed</span> heídr <span class="ex">ok</span> gozs <span class="ex">ok</span> harma f<span class="ex">ra</span> s<span class="ex">er</span> skílía∴ <span class="lb"></span> Hʀaf<span class="ex">n</span> aur<span class="ex">n</span> hane mr þerna hauk<span class="ex">ur</span> stelkur spoe ualur <span class="ex">ok</span> kraka. langleítt haufut q<span class="ex">ua</span>d gyllta sá kautt <span class="supplied2">j</span> myr<span class="supplied4">kri</span></span>. The stanza is from <span class="title4">Skáld-Helga rímur</span> but the list of bird-names and the adage are not known from elsewhere.
+                        </li>
+                        <li class="item">Parts of these entries are repeated in younger, unpractised hands in other spaces
+                           on fols 32v and 33r, as if it had been set them as a copybook model.
+                        </li>
+                        <li class="item">Fol. 32v <span class="q2">þoruardur skrifar illa</span> (<span class="date4">c. 1500</span>).
+                        </li>
+                        <li class="item">A little further down the page: <span class="q2">helge h.</span></li>
+                        <li class="item">Fol. 33r <span class="q2">halur er erlaus þiofs haus</span> (<span class="date4">sixteenth century</span>), now very faint and perhaps partly scraped off. Elsewhere on the page <span class="q2">halur</span> is written on its own.
+                        </li>
+                        <li class="item">Fol. 33v in a rather clumsily script with matching spelling, most probably from <span class="date4">the sixteenth century</span>: <span class="q2">vertv at bok þine <span class="lb"></span> bal fvsa so<span class="ex">n</span> vel þa skaltu <span class="lb"></span> fara t<span class="ex">il</span> stehiaríns.</span></li>
+                        <li class="item">Fol. 33v Another entry, doubtless made at or about the same time, and slightly more literate
+                           than the first, reads: <span class="q2">þ<span class="ex">ei</span>m godv<span class="ex">m</span> m<span class="ex">onnu</span>m vertu at bok þine ion narfa so<span class="ex">n</span> meda<span class="ex">n</span> ek <span class="lb"></span> er aburtv elleg<span class="ex">er</span>ar fær þv flei<span class="ex">n</span>ging</span>.
+                        </li>
+                     </ul>
+                  </p> 
+                  <h2 class="bindingDesc">Binding</h2>
+                  <div class="bindingDesc2">
+                     <p class="p">In his catalogue, <span class="ref1">AM 394 fol.</span>, <span class="name">Jón Sigurðsson</span> says that AM 62 fol. was bound in a pasteboard binding. This was probably the work
+                        of <span class="name">Mattias Larsen Bloch</span> done at some time in the years <span class="date4">1771-73</span>.
+                     </p> 
+                     <p class="p">The manuscript was then re-bound three times, first, in the <span class="date4">1880'es</span> and later, in <span class="alternate date3" title="alternate">1934<span class="hidden altcontent ">1934</span></span> by <span class="name">Carl Lund</span>. During conservation from <span class="date4">9 March 1981 to 10 July 1984</span>, the manuscript was rebound by <span class="name">Birgitte Dall</span> in a modern standard half-binding.
+                     </p>
+                  </div> 
+                  <h2 class="accMat">Accompanying material</h2>
+                  <div class="accMat2">There is an AM-slip pasted in front of the volume reading: 
+                     <div class="q3">Þetta fragment true eg hafa <span class="lb"></span> heyrt Skalholltz kirkiu til. <span class="lb"></span> iafnvel þott þad eigi stande <span class="lb"></span> i neinu afhendingar registre. <span class="lb"></span> Eitt quer her ur feck eg ur ỏd<span class="lb"></span>rum stad en<span class="ex">n</span> resten. <span class="lb"></span> S<span class="ex">ira</span> Olafur 1699. kallade þad...
+                     </div>
+                  </div>
+               </div> 
+               <h1 class="history">History</h1>
+               <div class="history2">
+                  <h2 class="origin">Origin</h2>
+                  <div class="origin2">
+                     <p class="p">The manuscript was written in Iceland. <span class="name">Kristian Kålund</span> (<span class="bibl2"><a class="ref3" href="KKKat">Katalog</a>I41</span>) dated the manuscript to <span class="date4">the fifteenth century</span>. Later, however, <span class="name">Stefán Karlsson</span> (<span class="bibl2"><a class="ref3" href="StefKarl14">Ritun Reykjarfjarðarbókar</a>130</span>) dated it to <span class="tei:origDate1">the end of the fourteenth century</span>. Ólafur Halldórsson (<span class="bibl2"><a class="ref3" href="EIMF20">The Saga of King Olaf Tryggvason</a>18</span>) means that the manuscript probably was not written later than <span class="date4">c. 1370-80</span>.
+                     </p>
+                  </div> 
+                  <h2 class="provenance">Provenance</h2>
+                  <div class="provenance2">
+                     <p class="p">According to Ólafur Halldórsson (<span class="bibl2"><a class="ref3" href="EIMF20">The Saga of King Olaf Tryggvason</a>18</span>), a note written by bishop <span class="name">Oddur Einarsson</span> in <span class="alternate date3" title="alternate">1612<span class="hidden altcontent ">1612</span></span>, now in <span class="ref1">AM 416 a 4to</span>, fol. 6v, should concern AM 62 fol. If this is true, Oddur borrowed the manuscript
+                        from <span class="name">Magnús Hjaltason</span>, and then he in turn lent it to <span class="name">Grimur Ormsson</span>. When Oddur borrowed the manuscript from Magnús, it was in poor shape, but was ruined
+                        when it was returned to Oddur: <span class="q2">Magnus Hialltaßo<span class="ex">n</span> hefur <span class="lb"></span> fyr<span class="ex">er</span> lỏngu ljed mi<span class="ex">er</span> Olafs <span class="lb"></span> sỏgur lasnar Þær liede <span class="lb"></span> eg Grijme Ormßyne hier <span class="lb"></span> heima vm<span class="ex">m</span> veturen<span class="ex">n</span> til jdku<span class="lb"></span>nar þa h<span class="ex">an</span>n var hia mjer <span class="lb"></span> <span class="ex">og</span> fordiarfade h<span class="ex">an</span>n þær suo <span class="lb"></span> ad eg h<span class="ex">e</span>f ecke getad þ<span class="ex">ei</span>m apt<span class="ex">ur</span> <span class="lb"></span> skilad þuij þær voru lasn<span class="ex">ar</span> <span class="lb"></span> dur. <span class="ex">og</span> fundust kueren <span class="lb"></span> eptt<span class="ex">er</span> h<span class="ex">onu</span>m aptur <span class="ex">og</span> fram<span class="ex">m</span> <span class="lb"></span> en<span class="ex">n</span> þad s<span class="ex">e</span>m ept<span class="ex">er</span> er af þ<span class="ex">ei</span>m <span class="lb"></span> er hier til synes h<span class="ex">e</span>f eg <span class="lb"></span> tid þ<span class="ex">e</span>tta fyr<span class="ex">er</span> Magnuse <span class="lb"></span> <span class="ex">og</span> h<span class="ex">e</span>fur h<span class="ex">an</span>n lofad þ<span class="ex">ad</span> skyllde <span class="lb"></span> kuitt þo h<span class="ex">an</span>n f<span class="ex">ei</span>nge þær all<span class="lb"></span>drej apttur þuj þær være <span class="lb"></span> lijtels verdar. þo eru þær <span class="lb"></span> obitalad<span class="ex">ar</span> af mi<span class="ex">er</span> til</span>.
+                     </p> 
+                     <p class="p">Two names are written on fol. 33v: They are those of <span class="name">Páll Fúsason (Vigfússon)</span> (<span class="q2">bal fvsa so<span class="ex">n</span></span>) and <span class="name">Jón Narfason</span> (<span class="q2">ion narfa so<span class="ex">n</span></span>), who were doubtless boys when they wrote the sentences. They can be identified as
+                        Páll Vigfússon, later <span class="foreign">lögmaður</span> and living at <span class="name">Hlíðarendi</span> in <span class="name">Fljótshlíð</span> (<span class="date4">1511-70</span>) who was son of <span class="name">Vigfús Erlendsson</span> <span class="foreign">lögmaður</span> (d. <span class="alternate date3" title="alternate">1521<span class="hidden altcontent ">1521</span></span>). Vigfús had a brother, Narfi, and Narfi’s son Jón must be the other youngster named
+                        on fol. 33v of the manuscript. Since the writer of the stanza from <span class="title4">Skáld-Helga rímur</span> and what follows it on fol. 32v was also the scribe of the document in <span class="ref1">AM Fasc. XIII 1</span>, it is evident that the codex was in <span class="name">Eyjafjörður</span> region at the time and probably at <span class="name">Mýrka</span> in <span class="name">Hörgárdalur</span> when the document was written in <span class="alternate date3" title="alternate">November 1451<span class="hidden altcontent ">1451-11</span></span>. Further support for the location of the manuscript in the region around Eyjafjörður
+                        may be found in the occurrence of the name Guðvardur on fol. 32v. <span class="name">Eyjafjarðarsýsla</span> appears to be the only part of <span class="name">Iceland</span> where this name was in use.
+                     </p>
+                  </div> 
+                  <h2 class="acquisition">Acquisition</h2>
+                  <div class="acquisition2">
+                     <p class="p"><span class="name">Árni Magnússon</span> gives the following information about the acquisition of the manuscript on a slip
+                        at the front of the volume: <span class="q2">Þetta fragment true eg hafa <span class="lb"></span> heyrt Skalholltz kirkiu til. <span class="lb"></span> iafnvel þott þad eigi stande <span class="lb"></span> i neinu afhendingar registre. <span class="lb"></span> Eitt quer her ur feck eg ur ỏd<span class="lb"></span>rum stad en<span class="ex">n</span> resten. <span class="lb"></span> S<span class="ex">ira</span> Olafur 1699. kallade þad...</span> The <span class="foreign">sira</span> Ólafur reference is to a list of manuscripts which <span class="name">Jón Vídalín</span>, bishop of <span class="name">Skálholt</span>, sent to Árni in <span class="alternate date3" title="alternate">1699<span class="hidden altcontent ">1699</span></span>.
+                     </p> 
+                     <p class="p">The list, written by <span class="foreign">sira</span> <span class="name">Ólafur Jónsson</span> (<span class="date4">1672-1702</span>), no longer exists but an extract from it in Árni Magnússon's hand is in <span class="ref1">AM 435 a 4to</span>, fol. 154r-v: <span class="q2">Anno 1699. sende Mag. Jon Th.s. <span class="lb"></span> mier Registur yfir nockrar kalf<span class="lb"></span>skin<span class="ex">n</span>s skrædur, giỏrt af S<span class="ex">ira</span> Olafi Jons <span class="lb"></span> syne, sem han<span class="ex">n</span> qvadst mier ut<span class="lb"></span>vegad geta. Þar i bland voru <span class="lb"></span> fragmenta af Olafs Sỏgu Tryggva<span class="lb"></span>sonar in folio. (a) <span class="pb"></span> a] Þetta fragment eignadist eg sidan, er i <span class="lb"></span> storu folio. Item feck eg ur ỏdrum <span class="lb"></span> stad ä Islande nockud sem heyrde þ<span class="ex">ar</span> <span class="lb"></span> til, <span class="ex">og</span> lagde eg þ<span class="ex">ad</span> hier sammanvid</span>.
+                     </p> 
+                     <p class="p">On fol. 57v in AM 435 a 4to, also in Árni's hand, is the following: <span class="q2">Fragmentum af Olafs Sỏgu Tryggvasonar, i storu folio: hefur til forna, öefad, heyrt
+                           Skalholltzkirkiu til. Eg feck þetta fragment i tveim stỏdum, ä Islande, nockud þar
+                           af Mag. Jone Widalin, <span class="ex">og</span> nockud ur ỏdrum stad.</span></p> 
+                     <p class="p">An inventory of property of Skálholt was made when <span class="name">Þórður Þorláksson</span> succeeded as bishop in <span class="alternate date3" title="alternate">1674<span class="hidden altcontent ">1674</span></span>. From it Árni Magnússon produced a list of the Icelandic books the cathedral of Skálholt
+                        owned at that time, now found on fols 153 and 156 of AM 435a 4to. No. 6 in the list
+                        is <span class="title4">Olafs saga Helga</span>, here Árni denies that the codex belonged to Skálholt: <span class="q2">Þetta mun vera einhvernveigin<span class="ex">n</span> mis<span class="lb"></span>skrifad, þvi eingin Olafs Helga Saga <span class="lb"></span> hefur fylgt Sklholltz kirkiu so mikid <span class="pb"></span> sem eg hefe skynia orded. Kyn<span class="ex">n</span>e <span class="lb"></span> vera villt mlum, og eiga ad vera <span class="lb"></span> Olafs Tryggvasonar Sỏgu frag<span class="lb"></span>mentum, ka<span class="ex">n</span>skie þad sem er i <span class="lb"></span> stőru folio, og kyn<span class="ex">n</span>e þ hafa fyll<span class="lb"></span>ra vered, þő þad sie og ővïst. <span class="lb"></span> Endelega kyn<span class="ex">n</span>e þeir sem afhend<span class="lb"></span>ïnguna giỏrdu, hafa lited skagt til, <span class="lb"></span> og tekid qvi pro qvo.</span></p> 
+                     <p class="p">Ólafur Haldórsson (<span class="bibl2"><a class="ref3" href="EIMF20">The Saga of King Olaf Tryggvason</a>18</span>) suggests that it is possible that the codex originally contained the sagas of both
+                        kings, <span class="title4">Ólafs saga helga</span> and <span class="title4">Ólafs saga Tryggvasonar</span>, and that in <span class="alternate date3" title="alternate">1674<span class="hidden altcontent ">1674</span></span> it still had at least parts of <span class="title4">Ólafs saga helga</span> in it. He asserts that this surmise finds support in the note written by Bishop <span class="name">Oddur Einarsson</span> in <span class="alternate date3" title="alternate">1612<span class="hidden altcontent ">1612</span></span> (see above).
+                     </p>
+                  </div>
+               </div> 
+               <h2 class="additional">Additional</h2>
+               <div class="additional2">
+                  <p class="p">Katalogiseret <span class="alternate date3" title="alternate">19 Oktober 1999<span class="hidden altcontent ">1999-10-19</span></span> af <span class="name">EW-J</span>.
+                  </p> 
+                  <p class="p">During the restoration <span class="date4">9 March 1981 to 10 July 1984</span> by <span class="name">Birgitte Dall</span> the leaves were restored and set on meeting guards and the manuscript was rebound
+                     in a modern standard half binding.
+                  </p> 
+                  <p class="p">The manuscript was photographed twice, the first time in <span class="alternate date3" title="alternate">1968<span class="hidden altcontent ">1968</span></span> and for the second time <span class="alternate date3" title="alternate">6 August 1992<span class="hidden altcontent ">1992-08-06</span></span>. The second set of photographs was presumably made for the facsimily-edition.
+                  </p> 
+                  <p class="p">Supplementary photographs of fols 29-32r and 37, 38r.</p> 
+                  <p class="p">In <span class="alternate date3" title="alternate">August 1992<span class="hidden altcontent ">1992-08</span></span> photographs in uv-light were taken of fols 1r, 5v, 6r, 9r, 10v, 11r-v, 13r, 20v, 21r-v,
+                     23r, 24v, 25r, 26r, 30r, 33v, 34r, 37v, 38r, 43r, 51v, and 53v.
+                  </p> 
+                  <p class="p">
+                     <ul class="listBibl1">
+                        <li class="bibl1"><span class="title3">plate</span> plade 133 <span class="alternate date3" title="alternate">6 August 1992.<span class="hidden altcontent ">1992-08-06</span></span></li>
+                        <li class="bibl1"><span class="title3">plate</span>plade 21 s.d. <span class="note3">Supplementary photographs of fols 29-32r, 37, 38r.</span></li>
+                        <li class="bibl1"><span class="title3">b/w prints</span> AM 62 fol. <span class="alternate date3" title="alternate">6. August 1992<span class="hidden altcontent ">1992-08-06</span></span></li>
+                        <li class="bibl1"><span class="title3">b/w prints</span>AM 62 fol. s.d. <span class="note3">supplementary photographs of fols 29-32r and 37, 38r.</span></li>
+                        <li class="bibl1"><span class="title3">b/w prints</span> AM 62 fol <span class="alternate date3" title="alternate">August 1992<span class="hidden altcontent ">1992-08</span></span> <span class="note3">Supplementary photogrpahs in uv-light of fols 1r, 5v, 6r, 9r, 10v, 11r-v, 13r, 20v,
+                              21r-v, 23r, 24v, 25r, 26r, 30r, 33v, 34r, 37v, 38r, 43r, 51v, and 53v.</span></li>
+                        <li class="bibl1"><span class="title3">diapositive</span>AM 29 fol. s.d. <span class="note3">fol. 29r</span></li>
+                     </ul>
+                  </p> 
+                  <ul class="listBibl1">
+                     <li class="bibl1">Kålund, <a class="ref3" href="KKKat">Katalog</a> I 41-42
+                     </li>
+                     <li class="bibl1">Ólafur Halldórsson, <a class="ref3" href="EIMF20">The saga of King Olaf Tryggvason: AM 62 fol.</a> 9-26 <span class="note3">Facsimile-edition</span></li>
+                     <li class="bibl1">Ólafur Halldórsson, <a class="ref3" href="OIHalld1963">Úr sögu skinnbóka</a> <span class="note3">With facsimile of fol. 32ra:14-35</span></li>
+                     <li class="bibl1">Stefán Karlsson, <a class="ref3" href="StefKarl14">Ritun Reykjarfjarðarbókar</a></li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>

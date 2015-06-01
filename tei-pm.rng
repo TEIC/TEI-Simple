@@ -3,7 +3,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 1970-01-01. Version 0.3: 24th May 2015.
+Schema generated from ODD source 1970-01-01. Version 0.4:  29th May 2015.
 TEI Edition: Version 2.8.0. Last updated on
 	6th April 2015, revision 13197
 TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.8.0/
@@ -1983,7 +1983,6 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
    </define>
    <define name="model.oddDecl">
       <choice>
-         <ref name="rendition"/>
          <ref name="moduleSpec"/>
          <ref name="specGrp"/>
          <ref name="specGrpRef"/>
@@ -1992,11 +1991,11 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
          <ref name="macroSpec"/>
          <ref name="listRef"/>
          <ref name="constraintSpec"/>
+         <ref name="outputRendition"/>
       </choice>
    </define>
    <define name="model.oddDecl_alternation">
       <choice>
-         <ref name="rendition"/>
          <ref name="moduleSpec"/>
          <ref name="specGrp"/>
          <ref name="specGrpRef"/>
@@ -2005,10 +2004,10 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
          <ref name="macroSpec"/>
          <ref name="listRef"/>
          <ref name="constraintSpec"/>
+         <ref name="outputRendition"/>
       </choice>
    </define>
    <define name="model.oddDecl_sequence">
-      <ref name="rendition"/>
       <ref name="moduleSpec"/>
       <ref name="specGrp"/>
       <ref name="specGrpRef"/>
@@ -2017,11 +2016,9 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       <ref name="macroSpec"/>
       <ref name="listRef"/>
       <ref name="constraintSpec"/>
+      <ref name="outputRendition"/>
    </define>
    <define name="model.oddDecl_sequenceOptional">
-      <optional>
-         <ref name="rendition"/>
-      </optional>
       <optional>
          <ref name="moduleSpec"/>
       </optional>
@@ -2045,13 +2042,13 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       </optional>
       <optional>
          <ref name="constraintSpec"/>
+      </optional>
+      <optional>
+         <ref name="outputRendition"/>
       </optional>
    </define>
    <define name="model.oddDecl_sequenceOptionalRepeatable">
       <zeroOrMore>
-         <ref name="rendition"/>
-      </zeroOrMore>
-      <zeroOrMore>
          <ref name="moduleSpec"/>
       </zeroOrMore>
       <zeroOrMore>
@@ -2074,13 +2071,13 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       </zeroOrMore>
       <zeroOrMore>
          <ref name="constraintSpec"/>
+      </zeroOrMore>
+      <zeroOrMore>
+         <ref name="outputRendition"/>
       </zeroOrMore>
    </define>
    <define name="model.oddDecl_sequenceRepeatable">
       <oneOrMore>
-         <ref name="rendition"/>
-      </oneOrMore>
-      <oneOrMore>
          <ref name="moduleSpec"/>
       </oneOrMore>
       <oneOrMore>
@@ -2103,6 +2100,9 @@ Suggested values include: 1] volume; 2] issue; 3] page; 4] line; 5] chapter; 6] 
       </oneOrMore>
       <oneOrMore>
          <ref name="constraintSpec"/>
+      </oneOrMore>
+      <oneOrMore>
+         <ref name="outputRendition"/>
       </oneOrMore>
    </define>
    <define name="model.oddRef">
@@ -8377,9 +8377,9 @@ Child elements of <name/> are only allowed when an external module is being load
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">documents a single value in a predefined list of values. [22.4.5. Attribute List Specification]</a:documentation>
          <zeroOrMore>
             <choice>
-		             <ref name="model.descLike"/>
-		             <ref name="model.glossLike"/>
-	           </choice>
+                <ref name="model.descLike"/>
+                <ref name="model.glossLike"/>
+              </choice>
          </zeroOrMore>
          <optional>
             <ref name="paramList"/>
@@ -8965,7 +8965,7 @@ You must supply at least two values for @target on <name/>
             <choice>
                 <ref name="model.glossLike"/>
                 <ref name="model.descLike"/>
-	           </choice>
+              </choice>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
          <empty/>
@@ -8986,13 +8986,13 @@ You must supply at least two values for @target on <name/>
             <choice>
                 <ref name="model.glossLike"/>
                 <ref name="model.descLike"/>
-	           </choice>
+              </choice>
          </zeroOrMore>
          <zeroOrMore>
             <ref name="param"/>
          </zeroOrMore>
          <zeroOrMore>
-            <ref name="rendition"/>
+            <ref name="outputRendition"/>
          </zeroOrMore>
          <ref name="att.global.attributes"/>
          <attribute name="behaviour">
@@ -9025,7 +9025,7 @@ You must supply at least two values for @target on <name/>
                <value>index</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">generate list according to type</a:documentation>
                <value>inline</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">creates inline element out of content if there's something in rendition, use that formatting otherwise just show text of selected content.</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">creates inline element out of content if there's something in outputRendition, use that formatting otherwise just show text of selected content.</a:documentation>
                <value>link</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">create hyperlink</a:documentation>
                <value>list</value>
@@ -9134,7 +9134,7 @@ You must supply at least two values for @target on <name/>
                 </choice>
             </oneOrMore>
                 <optional>
-               <ref name="rendition"/>
+               <ref name="outputRendition"/>
             </optional>
                 <oneOrMore>
                <choice>
@@ -9160,6 +9160,21 @@ You must supply at least two values for @target on <name/>
                   <value>plaintext</value>
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">the output is intended for presentation in a plain text format</a:documentation>
                </choice>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="outputRendition">
+      <element name="outputRendition">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies information about the desired output or rendition or appearance of one or more elements in the source text.</a:documentation>
+         <text/>
+         <ref name="att.global.attributes"/>
+         <optional>
+            <attribute name="scope">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">provides a way of defining pseudo-elements, that is, styling rules applicable to specific sub-portions of an element.
+Sample values include: 1] first-line; 2] first-letter; 3] before; 4] after</a:documentation>
+               <ref name="data.enumerated"/>
             </attribute>
          </optional>
          <empty/>

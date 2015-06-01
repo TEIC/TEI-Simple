@@ -143,23 +143,18 @@ of this software, even if advised of the possibility of such damage.
   <xsl:function name="tei:heading" as="node()*">
     <xsl:param name="model"/>
     <xsl:param name="content"/>
+    <xsl:param name="level"/>
     <xsl:param name="class"/>
     <xsl:param name="number"/>
-    <xsl:for-each select="$model">
-      <xslo:variable name="p" select="local-name(..)"/>
-      <xslo:variable name="depth">
-        <xslo:value-of>
-          <xsl:attribute name="select">
-            <xsl:text>count(</xsl:text>
-	    <xsl:text>ancestor::*[name(.)=$p]</xsl:text>
-            <xsl:text>)</xsl:text>
-          </xsl:attribute>
-        </xslo:value-of>
-      </xslo:variable>
-    </xsl:for-each>
+    <xslo:variable name="depth">
+	<xsl:value-of select="$level"/>
+    </xslo:variable>
+
     <xslo:element>
       <xsl:attribute name="name">
-        <xsl:text>{concat('h',$depth)}</xsl:text>
+	<xsl:text>{concat('h',</xsl:text>
+	<xsl:value-of select="$level"/>
+	<xsl:text>)}</xsl:text>
       </xsl:attribute>
       <xsl:if test="string($class)">
         <xslo:attribute name="class">
@@ -635,7 +630,7 @@ of this software, even if advised of the possibility of such damage.
     <style  type="text/css">
       <xsl:for-each select="$content">
         <xsl:if test="position()=1">
-          <xsl:for-each select="//rendition[@xml:id and  not(parent::model)]">
+          <xsl:for-each select="//outputRendition[@xml:id and  not(parent::model)]">
             <xsl:text>.simple_</xsl:text>
             <xsl:value-of select="@xml:id"/>
             <xsl:text> { </xsl:text>
@@ -653,7 +648,7 @@ of this software, even if advised of the possibility of such damage.
             <xsl:value-of select="ancestor::elementSpec/@ident"/>
           </xsl:variable>
           <xsl:variable name="pos" select="if  (count(../model) &gt; 1) then position() else  ''"/>
-          <xsl:for-each select="./rendition">
+          <xsl:for-each select="./outputRendition">
             <xsl:variable name="scope" select="@scope"/>
             <xsl:variable name="rendition" select="normalize-space(.)"/>
             <xsl:for-each select="$container/node()">
