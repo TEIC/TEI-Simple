@@ -15,14 +15,26 @@ xmlns="http://www.tei-c.org/ns/1.0" exclude-result-prefixes="XSL xsl skos rng te
                         <rule
 			    xmlns="http://purl.oclc.org/dsdl/schematron">
 			  <XSL:attribute name="context">
+			    <XSL:text>tei:</XSL:text>
 			    <XSL:value-of select="(//row[  position()&gt;1   and
-						  not(cell[1]='')   and cell[10] = 'header']/cell[1])" separator="|&#10;"/>
+						  not(cell[1]='')
+						  and cell[10] =
+						  'header']/cell[1])"
+					  separator=" | tei:"/>
 			  </XSL:attribute>
-                           <report test="ancestor::tei:text">Error:  The element <name/>
-is not permitted outside the header</report>
+                           <report test="ancestor::tei:text">Error:  The element <name/> is not permitted outside the header</report>
                         </rule>
                      </constraint>
                   </constraintSpec>
+    </XSL:result-document>
+    <XSL:result-document href="headerelements.xml">
+      <specGrp xml:id="header">
+        <moduleRef key="header"/>
+      <XSL:for-each select="//row[  position()&gt;1   and
+			    not(cell[1]='')   and cell[10] = 'header']/cell[1]">
+	<elementRef key="{.}"/>
+      </XSL:for-each>
+      </specGrp>
     </XSL:result-document>
     <XSL:result-document href="elementsummary.xml">
       <div>
@@ -114,9 +126,12 @@ to another element.</p>
       <specGrp xml:id="simpleelements">
 	<XSL:for-each select="//row[position()&gt;1 and not(cell[1]='')]">
         <XSL:choose>
-          <XSL:when test="contains(cell[10],'header')"/>
+          <XSL:when test="contains(cell[10],'header')">
+	    <XSL:message>header element <XSL:value-of select="cell[1]"/></XSL:message>
+	  </XSL:when>
           <XSL:when test="normalize-space(cell[10])=''"/>
           <XSL:otherwise>
+	    <XSL:message>text element <XSL:value-of select="cell[1]"/></XSL:message>
             <elementRef key="{normalize-space(cell[1])}"/>
           </XSL:otherwise>
         </XSL:choose>

@@ -4,11 +4,11 @@
    <head>Summary</head>
    <p>A total of 105 elements are selected for use in
 	the <gi>text</gi> part of a document; an additional
-40
+44
 elements are allowed for in the header. The following table
 	shows the usage of all elements in six existing corpora, and
 	classifies them 11 usage groups. There are
-16 elements 
+15 elements 
 listed which are <emph>not</emph> allowed in TEI Simple, but should be transformed
 to another element.</p>
    <table>
@@ -1221,6 +1221,17 @@ to another element.</p>
          </cell>
       </row>
       <row>
+         <cell>person</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell>header</cell>
+         <cell/>
+      </row>
+      <row>
          <cell>physDesc</cell>
          <cell rend="right">0</cell>
          <cell rend="right">0</cell>
@@ -1649,6 +1660,17 @@ to another element.</p>
          <cell/>
       </row>
       <row>
+         <cell>tag</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell>header</cell>
+         <cell/>
+      </row>
+      <row>
          <cell>teiCorpus</cell>
          <cell rend="right">0</cell>
          <cell rend="right">0</cell>
@@ -1678,7 +1700,7 @@ to another element.</p>
          <cell rend="right">51</cell>
          <cell rend="right">0</cell>
          <cell rend="right">0</cell>
-         <cell/>
+         <cell>header</cell>
          <cell>
             <gi>seg</gi>
          </cell>
@@ -1805,6 +1827,17 @@ to another element.</p>
          <cell/>
       </row>
       <row>
+         <cell>val</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell rend="right">0</cell>
+         <cell>header</cell>
+         <cell/>
+      </row>
+      <row>
          <cell>value</cell>
          <cell rend="right">0</cell>
          <cell rend="right">0</cell>
@@ -1891,6 +1924,7 @@ to another element.</p>
          <gi>monogr</gi> 
          <gi>msDesc</gi> 
          <gi>msIdentifier</gi> 
+         <gi>person</gi> 
          <gi>physDesc</gi> 
          <gi>profileDesc</gi> 
          <gi>publicationStmt</gi> 
@@ -1899,11 +1933,14 @@ to another element.</p>
          <gi>resp</gi> 
          <gi>respStmt</gi> 
          <gi>sourceDesc</gi> 
+         <gi>tag</gi> 
          <gi>teiHeader</gi> 
+         <gi>term</gi> 
          <gi>textClass</gi> 
          <gi>textDesc</gi> 
          <gi>titleStmt</gi> 
          <gi>typeDesc</gi> 
+         <gi>val</gi> 
          <gi>value</gi> 
       </item>
       <label>interpretation</label>

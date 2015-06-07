@@ -7,7 +7,7 @@ namespace sch = "http://purl.oclc.org/dsdl/schematron"
 namespace skos = "http://www.w3.org/2004/02/skos/core#"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 1970-01-01. Version 0.3: 12th May 2015.
+# Schema generated from ODD source 1970-01-01. Version 0.4: 6th June 2015.
 # TEI Edition: Version 2.8.0. Last updated on
 #	6th April 2015, revision 13197
 # TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.8.0/
@@ -68,6 +68,7 @@ data.versionNumber =
   xsd:token { pattern = "[\d]+[a-z]*[\d]*(\.[\d]+[a-z]*[\d]*){0,3}" }
 data.replacement = text
 data.word = xsd:token { pattern = "(\p{L}|\p{N}|\p{P}|\p{S})+" }
+data.sex = data.word
 data.text = xsd:string
 data.name = xsd:Name
 data.enumerated = data.word
@@ -400,7 +401,7 @@ att.global.rendition.attribute.rendition =
          ## marked with a brace on the left side of the text
          "simple:leftbraced"
        | 
-         ## letter-spaced
+         ## larger-than-normal spacing between letters, usually for emphasis
          "simple:letterspace"
        | 
          ## fixed-width typeface, spacing preserved
@@ -1256,7 +1257,7 @@ model.lPart = rhyme
 model.global.meta = listTranspose
 model.milestoneLike = anchor | cb | fw | lb | milestone | pb
 model.gLike = g
-model.phrase.xml = att | gi
+model.phrase.xml = att | gi | tag | val
 model.biblLike = biblFull | biblStruct | msDesc | bibl | listBibl
 model.biblLike_alternation =
   biblFull | biblStruct | msDesc | bibl | listBibl
@@ -1306,10 +1307,14 @@ model.stageLike_sequenceOptionalRepeatable = stage*
 model.stageLike_sequenceRepeatable = stage+
 model.global.edit = damageSpan | addSpan | gap | space
 model.divPart = model.lLike | model.pLike | lg | sp | spGrp
-model.personLike = notAllowed
+model.persStateLike = notAllowed
+model.persEventLike = notAllowed
+model.personLike = person
+model.personPart =
+  model.biblLike | model.persStateLike | model.persEventLike | idno
 model.publicationStmtPart.agency = distributor | authority | publisher
 model.publicationStmtPart.detail =
-  idno | availability | address | date | pubPlace
+  availability | idno | address | date | pubPlace
 model.availabilityPart = licence
 model.descLike = desc
 model.quoteLike = cit | quote
@@ -1393,8 +1398,8 @@ model.biblPart =
   model.respLike
   | model.imprintPart
   | edition
-  | extent
   | availability
+  | extent
   | msIdentifier
   | relatedItem
   | bibl
@@ -1438,7 +1443,6 @@ model.sourceDescPart = notAllowed
 model.encodingDescPart =
   projectDesc
   | samplingDecl
-  | editorialDecl
   | tagsDecl
   | styleDefDecl
   | refsDecl
@@ -1447,6 +1451,7 @@ model.encodingDescPart =
   | geoDecl
   | appInfo
   | charDecl
+  | editorialDecl
 model.editorialDeclPart =
   correction
   | normalization
@@ -1460,9 +1465,9 @@ model.profileDescPart =
   abstract
   | creation
   | langUsage
-  | textClass
   | calendarDesc
   | correspDesc
+  | textClass
   | textDesc
   | listTranspose
 model.correspActionPart =
@@ -1511,26 +1516,6 @@ att.patternReplacement.attribute.replacementPattern =
   
   ## specifies a replacement pattern, that is, the skeleton of a relative or absolute URI containing references to groups in the matchPattern which, once subpattern substitution has been performed, complete the URI.
   attribute replacementPattern { data.replacement }
-fileDesc =
-  
-  ## (file description) contains a full bibliographic description of an electronic file. [2.2. The File Description 2.1.1. The TEI Header and Its Components]
-  element fileDesc {
-    ((titleStmt,
-      editionStmt?,
-      extent?,
-      publicationStmt,
-      seriesStmt?,
-      notesStmt?),
-     sourceDesc+),
-    att.global.attributes,
-    empty
-  }
-titleStmt =
-  
-  ## (title statement) groups information about the title of a work and those responsible for its content. [2.2.1. The Title Statement 2.2. The File Description]
-  element titleStmt {
-    (title+, model.respLike*), att.global.attributes, empty
-  }
 sponsor =
   
   ## specifies the name of a sponsoring organization or institution. [2.2.1. The Title Statement]
@@ -1570,21 +1555,6 @@ edition =
   
   ## describes the particularities of one edition of a text. [2.2.2. The Edition Statement]
   element edition { macro.phraseSeq, att.global.attributes, empty }
-extent =
-  
-  ## describes the approximate size of a text stored on some carrier medium or of some other object, digital or non-digital, specified in any convenient units. [2.2.3. Type and Extent of File 2.2. The File Description 3.11.2.4. Imprint, Size of a Document, and Reprint Information 10.7.1. Object Description]
-  element extent { macro.phraseSeq, att.global.attributes, empty }
-publicationStmt =
-  
-  ## (publication statement) groups information concerning the publication or distribution of an electronic or other text. [2.2.4. Publication, Distribution,
-  ## Licensing, etc. 2.2. The File Description]
-  element publicationStmt {
-    ((model.publicationStmtPart.agency,
-      model.publicationStmtPart.detail*)+
-     | model.pLike+),
-    att.global.attributes,
-    empty
-  }
 distributor =
   
   ## supplies the name of a person or other agency responsible for the distribution of a text. [2.2.4. Publication, Distribution,
@@ -1596,19 +1566,6 @@ authority =
   ## Licensing, etc.]
   element authority {
     macro.phraseSeq.limited, att.global.attributes, empty
-  }
-idno =
-  
-  ## (identifier) supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way. [2.2.4. Publication, Distribution,
-  ## Licensing, etc. 2.2.5. The Series Statement 3.11.2.4. Imprint, Size of a Document, and Reprint Information]
-  element idno {
-    (text | model.gLike | idno)*,
-    att.global.attributes,
-    att.sortable.attributes,
-    
-    ## categorizes the identifier, for example as an ISBN, Social Security number, etc.
-    attribute type { data.enumerated }?,
-    empty
   }
 availability =
   
@@ -1633,17 +1590,6 @@ availability =
     }?,
     empty
   }
-licence =
-  
-  ## contains information about a licence or other legal agreement applicable to the text. [2.2.4. Publication, Distribution,
-  ## Licensing, etc.]
-  element licence {
-    macro.specialPara,
-    att.global.attributes,
-    att.pointing.attributes,
-    att.datable.attributes,
-    empty
-  }
 seriesStmt =
   
   ## (series statement) groups information about the series, if any, to which a publication belongs. [2.2.5. The Series Statement 2.2. The File Description]
@@ -1659,39 +1605,6 @@ notesStmt =
   element notesStmt {
     (model.noteLike | relatedItem)+, att.global.attributes, empty
   }
-sourceDesc =
-  
-  ## (source description) describes the source from which an electronic text was derived or generated, typically a bibliographic description in the case of a digitized text, or a phrase such as "born digital" for a text which has no previous existence. [2.2.7. The Source Description]
-  element sourceDesc {
-    (model.pLike+
-     | (model.biblLike | model.sourceDescPart | model.listLike)+),
-    att.global.attributes,
-    empty
-  }
-biblFull =
-  
-  ## (fully-structured bibliographic citation) contains a fully-structured bibliographic citation, in which all components of the TEI file description are present. [3.11.1. Methods of Encoding Bibliographic References and Lists of References 2.2. The File Description 2.2.7. The Source Description 15.3.2. Declarable Elements]
-  element biblFull {
-    ((titleStmt,
-      editionStmt?,
-      extent?,
-      publicationStmt,
-      seriesStmt?,
-      notesStmt?),
-     sourceDesc*),
-    att.global.attributes,
-    att.sortable.attributes,
-    att.docStatus.attributes,
-    empty
-  }
-encodingDesc =
-  
-  ## (encoding description) documents the relationship between an electronic text and the source or sources from which it was derived. [2.3. The Encoding Description 2.1.1. The TEI Header and Its Components]
-  element encodingDesc {
-    (model.encodingDescPart | model.pLike)+,
-    att.global.attributes,
-    empty
-  }
 projectDesc =
   
   ## (project description) describes in detail the aim or purpose for which an electronic file was encoded, together with any other relevant information concerning the process by which it was assembled or collected. [2.3.1. The Project Description 2.3. The Encoding Description 15.3.2. Declarable Elements]
@@ -1700,14 +1613,6 @@ samplingDecl =
   
   ## (sampling declaration) contains a prose description of the rationale and methods used in sampling texts in the creation of a corpus or collection. [2.3.2. The Sampling Declaration 2.3. The Encoding Description 15.3.2. Declarable Elements]
   element samplingDecl { model.pLike+, att.global.attributes, empty }
-editorialDecl =
-  
-  ## (editorial practice declaration) provides details of editorial principles and practices applied during the encoding of a text. [2.3.3. The Editorial Practices Declaration 2.3. The Encoding Description 15.3.2. Declarable Elements]
-  element editorialDecl {
-    (model.pLike | model.editorialDeclPart)+,
-    att.global.attributes,
-    empty
-  }
 correction =
   
   ## (correction principles) states how and under what circumstances corrections have been made in the text. [2.3.3. The Editorial Practices Declaration 15.3.2. Declarable Elements]
@@ -2069,12 +1974,6 @@ application =
     attribute version { data.versionNumber },
     empty
   }
-profileDesc =
-  
-  ## (text-profile description) provides a detailed description of non-bibliographic aspects of a text, specifically the languages and sublanguages used, the situation in which it was produced, the participants and their setting. [2.4. The Profile Description 2.1.1. The TEI Header and Its Components]
-  element profileDesc {
-    model.profileDescPart*, att.global.attributes, empty
-  }
 abstract =
   
   ## contains a summary or formal abstract prefixed to an existing source document by the encoder. [2.4.4. Abstracts]
@@ -2111,23 +2010,6 @@ language =
     attribute usage {
       xsd:nonNegativeInteger { maxInclusive = "100" }
     }?,
-    empty
-  }
-textClass =
-  
-  ## (text classification) groups information which describes the nature or topic of a text in terms of a standard classification scheme, thesaurus, etc. [2.4.3. The Text Classification]
-  element textClass {
-    (classCode | catRef | keywords)*, att.global.attributes, empty
-  }
-keywords =
-  
-  ## contains a list of keywords or phrases identifying the topic or nature of a text. [2.4.3. The Text Classification]
-  element keywords {
-    (term+ | \list),
-    att.global.attributes,
-    
-    ## identifies the controlled vocabulary within which the set of keywords concerned is defined identifies the classification scheme within which the set of categories concerned is defined, for example by a taxonomy element, or by some other resource.
-    attribute scheme { data.pointer }?,
     empty
   }
 classCode =
@@ -2220,23 +2102,6 @@ revisionDesc =
     att.docStatus.attributes,
     empty
   }
-change =
-  
-  ## documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.5. The Revision Description 2.4.1. Creation 11.7. Changes]
-  element change {
-    macro.specialPara,
-    att.ascribed.attributes,
-    att.datable.attributes,
-    att.docStatus.attributes,
-    att.global.attributes,
-    att.typed.attributes,
-    
-    ## points to one or more elements that belong to this change.
-    attribute target {
-      list { data.pointer+ }
-    }?,
-    empty
-  }
 typeNote =
   
   ## describes a particular font or other significant typographic feature distinguished within the description of a printed resource. [10.7.2. Writing, Decoration, and Other Notations]
@@ -2244,18 +2109,6 @@ typeNote =
     macro.specialPara,
     att.global.attributes,
     att.handFeatures.attributes,
-    empty
-  }
-listChange =
-  
-  ## groups a number of change descriptions associated with either the creation of a source text or the revision of an encoded text. [2.5. The Revision Description 11.7. Changes]
-  element listChange {
-    (listChange | change)+,
-    att.global.attributes,
-    att.sortable.attributes,
-    
-    ## indicates whether the ordering of its child change elements is to be considered significant or not
-    [ a:defaultValue = "true" ] attribute ordered { data.truthValue }?,
     empty
   }
 att =
@@ -2269,6 +2122,28 @@ att =
     ## Sample values include: 1] TEI(text encoding initiative) ; 2] DBK(docbook) ; 3] XX(unknown) ; 4] imaginary; 5] XHTML; 6] XML; 7] XI
     [ a:defaultValue = "TEI" ] attribute scheme { data.enumerated }?,
     empty
+  }
+biblFull =
+  
+  ## (fully-structured bibliographic citation) contains a fully-structured bibliographic citation, in which all components of the TEI file description are present. [3.11.1. Methods of Encoding Bibliographic References and Lists of References 2.2. The File Description 2.2.7. The Source Description 15.3.2. Declarable Elements]
+  element biblFull {
+    ((titleStmt,
+      editionStmt?,
+      extent?,
+      publicationStmt,
+      seriesStmt?,
+      notesStmt?),
+     sourceDesc*),
+    att.global.attributes,
+    att.sortable.attributes,
+    att.docStatus.attributes,
+    empty
+  }
+biblScope =
+  
+  ## (scope of bibliographic reference) defines the scope of a bibliographic reference, for example as a list of page numbers, or a named subdivision of a larger work. [3.11.2.5. Scopes and Ranges in Bibliographic Citations]
+  element biblScope {
+    macro.phraseSeq, att.global.attributes, att.citing.attributes, empty
   }
 biblStruct =
   
@@ -2301,11 +2176,22 @@ biblStruct =
     att.docStatus.attributes,
     empty
   }
-biblScope =
+change =
   
-  ## (scope of bibliographic reference) defines the scope of a bibliographic reference, for example as a list of page numbers, or a named subdivision of a larger work. [3.11.2.5. Scopes and Ranges in Bibliographic Citations]
-  element biblScope {
-    macro.phraseSeq, att.global.attributes, att.citing.attributes, empty
+  ## documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.5. The Revision Description 2.4.1. Creation 11.7. Changes]
+  element change {
+    macro.specialPara,
+    att.ascribed.attributes,
+    att.datable.attributes,
+    att.docStatus.attributes,
+    att.global.attributes,
+    att.typed.attributes,
+    
+    ## points to one or more elements that belong to this change.
+    attribute target {
+      list { data.pointer+ }
+    }?,
+    empty
   }
 charDecl =
   
@@ -2330,10 +2216,44 @@ editor =
   element editor {
     macro.phraseSeq, att.global.attributes, att.naming.attributes, empty
   }
+editorialDecl =
+  
+  ## (editorial practice declaration) provides details of editorial principles and practices applied during the encoding of a text. [2.3.3. The Editorial Practices Declaration 2.3. The Encoding Description 15.3.2. Declarable Elements]
+  element editorialDecl {
+    (model.pLike | model.editorialDeclPart)+,
+    att.global.attributes,
+    empty
+  }
 email =
   
   ## (electronic mail address) contains an email address identifying a location to which email messages can be delivered. [3.5.2. Addresses]
   element email { macro.phraseSeq, att.global.attributes, empty }
+encodingDesc =
+  
+  ## (encoding description) documents the relationship between an electronic text and the source or sources from which it was derived. [2.3. The Encoding Description 2.1.1. The TEI Header and Its Components]
+  element encodingDesc {
+    (model.encodingDescPart | model.pLike)+,
+    att.global.attributes,
+    empty
+  }
+extent =
+  
+  ## describes the approximate size of a text stored on some carrier medium or of some other object, digital or non-digital, specified in any convenient units. [2.2.3. Type and Extent of File 2.2. The File Description 3.11.2.4. Imprint, Size of a Document, and Reprint Information 10.7.1. Object Description]
+  element extent { macro.phraseSeq, att.global.attributes, empty }
+fileDesc =
+  
+  ## (file description) contains a full bibliographic description of an electronic file. [2.2. The File Description 2.1.1. The TEI Header and Its Components]
+  element fileDesc {
+    ((titleStmt,
+      editionStmt?,
+      extent?,
+      publicationStmt,
+      seriesStmt?,
+      notesStmt?),
+     sourceDesc+),
+    att.global.attributes,
+    empty
+  }
 gi =
   
   ## (element name) contains the name (generic identifier) of an element. [22. Documentation Elements 22.4.4. Element Specifications]
@@ -2363,6 +2283,19 @@ glyphName =
   
   ## (character glyph name) contains the name of a glyph, expressed following Unicode conventions for character names. [5.2. Markup Constructs for Representation of Characters and Glyphs]
   element glyphName { text, att.global.attributes, empty }
+idno =
+  
+  ## (identifier) supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way. [2.2.4. Publication, Distribution,
+  ## Licensing, etc. 2.2.5. The Series Statement 3.11.2.4. Imprint, Size of a Document, and Reprint Information]
+  element idno {
+    (text | model.gLike | idno)*,
+    att.global.attributes,
+    att.sortable.attributes,
+    
+    ## categorizes the identifier, for example as an ISBN, Social Security number, etc.
+    attribute type { data.enumerated }?,
+    empty
+  }
 imprint =
   
   ## groups information relating to the publication or distribution of a bibliographic item. [3.11.2.4. Imprint, Size of a Document, and Reprint Information]
@@ -2372,10 +2305,40 @@ imprint =
     att.global.attributes,
     empty
   }
-localName =
+keywords =
   
-  ## (locally-defined property name) contains a locally defined name for some property. [5.2.1. Character Properties]
-  element localName { text, att.global.attributes, empty }
+  ## contains a list of keywords or phrases identifying the topic or nature of a text. [2.4.3. The Text Classification]
+  element keywords {
+    (term+ | \list),
+    att.global.attributes,
+    
+    ## identifies the controlled vocabulary within which the set of keywords concerned is defined identifies the classification scheme within which the set of categories concerned is defined, for example by a taxonomy element, or by some other resource.
+    attribute scheme { data.pointer }?,
+    empty
+  }
+licence =
+  
+  ## contains information about a licence or other legal agreement applicable to the text. [2.2.4. Publication, Distribution,
+  ## Licensing, etc.]
+  element licence {
+    macro.specialPara,
+    att.global.attributes,
+    att.pointing.attributes,
+    att.datable.attributes,
+    empty
+  }
+listChange =
+  
+  ## groups a number of change descriptions associated with either the creation of a source text or the revision of an encoded text. [2.5. The Revision Description 11.7. Changes]
+  element listChange {
+    (listChange | change)+,
+    att.global.attributes,
+    att.sortable.attributes,
+    
+    ## indicates whether the ordering of its child change elements is to be considered significant or not
+    [ a:defaultValue = "true" ] attribute ordered { data.truthValue }?,
+    empty
+  }
 listPerson =
   
   ## (list of persons) contains a list of descriptions, each of which provides information about an identifiable person or a group of people, for example the participants in a language interaction, or the people referred to in a historical source. [13.3.2. The Person Element 15.2. Contextual Information 2.4. The Profile Description 15.3.2. Declarable Elements]
@@ -2386,6 +2349,10 @@ listPerson =
     att.sortable.attributes,
     empty
   }
+localName =
+  
+  ## (locally-defined property name) contains a locally defined name for some property. [5.2.1. Character Properties]
+  element localName { text, att.global.attributes, empty }
 monogr =
   
   ## (monographic level) contains bibliographic elements describing an item (e.g. a book or journal) published as an independent item (i.e. as a separate physical object). [3.11.2.1. Analytic, Monographic, and Series Levels]
@@ -2443,11 +2410,51 @@ msIdentifier =
     att.global.attributes,
     empty
   }
+person =
+  
+  ## provides information about an identifiable individual, for example a participant in a language interaction, or a person referred to in a historical source. [13.3.2. The Person Element 15.2.2. The Participant Description]
+  element person {
+    (model.pLike+ | (model.personPart | model.global)*),
+    att.global.attributes,
+    att.editLike.attributes,
+    att.sortable.attributes,
+    
+    ## specifies a primary role or classification for the person.
+    attribute role {
+      list { data.enumerated+ }
+    }?,
+    
+    ## specifies the sex of the person.
+    attribute sex {
+      list { data.sex+ }
+    }?,
+    
+    ## specifies an age group for the person.
+    attribute age { data.enumerated }?,
+    empty
+  }
 physDesc =
   
   ## (physical description) contains a full physical description of a manuscript or manuscript part, optionally subdivided using more specialized elements from the model.physDescPart class. [10.7. Physical Description]
   element physDesc {
     (model.pLike*, model.physDescPart_sequenceOptional),
+    att.global.attributes,
+    empty
+  }
+profileDesc =
+  
+  ## (text-profile description) provides a detailed description of non-bibliographic aspects of a text, specifically the languages and sublanguages used, the situation in which it was produced, the participants and their setting. [2.4. The Profile Description 2.1.1. The TEI Header and Its Components]
+  element profileDesc {
+    model.profileDescPart*, att.global.attributes, empty
+  }
+publicationStmt =
+  
+  ## (publication statement) groups information concerning the publication or distribution of an electronic or other text. [2.2.4. Publication, Distribution,
+  ## Licensing, etc. 2.2. The File Description]
+  element publicationStmt {
+    ((model.publicationStmtPart.agency,
+      model.publicationStmtPart.detail*)+
+     | model.pLike+),
     att.global.attributes,
     empty
   }
@@ -2529,6 +2536,49 @@ respStmt =
     att.canonical.attributes,
     empty
   }
+sourceDesc =
+  
+  ## (source description) describes the source from which an electronic text was derived or generated, typically a bibliographic description in the case of a digitized text, or a phrase such as "born digital" for a text which has no previous existence. [2.2.7. The Source Description]
+  element sourceDesc {
+    (model.pLike+
+     | (model.biblLike | model.sourceDescPart | model.listLike)+),
+    att.global.attributes,
+    empty
+  }
+tag =
+  
+  ## contains text of a complete start- or end-tag, possibly including attribute specifications, but excluding the opening and closing markup delimiter characters. [22. Documentation Elements]
+  element tag {
+    text,
+    att.global.attributes,
+    
+    ## indicates the type of XML tag intended
+    attribute type {
+      
+      ## a start-tag, with delimiters < and > is intended
+      "start"
+      | 
+        ## an end-tag, with delimiters </ and > is intended
+        "end"
+      | 
+        ## a empty tag, with delimiters < and /> is intended
+        "empty"
+      | 
+        ## a pi (processing instruction), with delimiters <? and ?> is intended
+        "pi"
+      | 
+        ## a comment, with delimiters <!-- and --> is intended
+        "comment"
+      | 
+        ## a marked-section, with delimiters <[CDATA[ and ]]> is intended
+        "ms"
+    }?,
+    
+    ## supplies the name of the schema in which this tag is defined.
+    ## Sample values include: 1] TEI(text encoding initiative) ; 2] DBK(docbook) ; 3] XX(unknown) ; 4] Schematron; 5] HTML
+    [ a:defaultValue = "TEI" ] attribute scheme { data.enumerated }?,
+    empty
+  }
 teiHeader =
   
   ## (TEI header) supplies the descriptive and declarative information making up an electronic title page for every TEI-conformant document. [2.1.1. The TEI Header and Its Components 15.1. Varieties of Composite Text]
@@ -2555,11 +2605,23 @@ term =
     att.cReferencing.attributes,
     empty
   }
+textClass =
+  
+  ## (text classification) groups information which describes the nature or topic of a text in terms of a standard classification scheme, thesaurus, etc. [2.4.3. The Text Classification]
+  element textClass {
+    (classCode | catRef | keywords)*, att.global.attributes, empty
+  }
 textDesc =
   
   ## (text description) provides a description of a text in terms of its situational parameters. [15.2.1. The Text Description]
   element textDesc {
     model.textDescPart_sequence, att.global.attributes, empty
+  }
+titleStmt =
+  
+  ## (title statement) groups information about the title of a work and those responsible for its content. [2.2.1. The Title Statement 2.2. The File Description]
+  element titleStmt {
+    (title+, model.respLike*), att.global.attributes, empty
   }
 typeDesc =
   
@@ -2567,6 +2629,10 @@ typeDesc =
   element typeDesc {
     (model.pLike+ | typeNote+), att.global.attributes, empty
   }
+val =
+  
+  ## (value) contains a single attribute value. [22. Documentation Elements 22.4.5. Attribute List Specification]
+  element val { text, att.global.attributes, empty }
 value =
   
   ## contains a single value for some property, attribute, or other analysis. [5.2.1. Character Properties]
@@ -3833,7 +3899,7 @@ name =
         "nameLink"
       | 
         ##
-        "organisation"
+        "org"
       | 
         ##
         "country"
@@ -4221,6 +4287,8 @@ s =
       | undo
       | att
       | gi
+      | tag
+      | val
       | ref
       | c
       | pc
@@ -4498,46 +4566,7 @@ teiCorpus =
          "            "
          sch:rule [
            context =
-             "att|\x{a}" ~
-             "biblFull|\x{a}" ~
-             "biblScope|\x{a}" ~
-             "biblStruct|\x{a}" ~
-             "change|\x{a}" ~
-             "charDecl|\x{a}" ~
-             "charProp|\x{a}" ~
-             "editor|\x{a}" ~
-             "editorialDecl|\x{a}" ~
-             "email|\x{a}" ~
-             "encodingDesc|\x{a}" ~
-             "extent|\x{a}" ~
-             "fileDesc|\x{a}" ~
-             "gi|\x{a}" ~
-             "glyph|\x{a}" ~
-             "glyphName|\x{a}" ~
-             "idno|\x{a}" ~
-             "imprint|\x{a}" ~
-             "keywords|\x{a}" ~
-             "licence|\x{a}" ~
-             "listChange|\x{a}" ~
-             "listPerson|\x{a}" ~
-             "localName|\x{a}" ~
-             "monogr|\x{a}" ~
-             "msDesc|\x{a}" ~
-             "msIdentifier|\x{a}" ~
-             "physDesc|\x{a}" ~
-             "profileDesc|\x{a}" ~
-             "publicationStmt|\x{a}" ~
-             "relatedItem|\x{a}" ~
-             "repository|\x{a}" ~
-             "resp|\x{a}" ~
-             "respStmt|\x{a}" ~
-             "sourceDesc|\x{a}" ~
-             "teiHeader|\x{a}" ~
-             "textClass|\x{a}" ~
-             "textDesc|\x{a}" ~
-             "titleStmt|\x{a}" ~
-             "typeDesc|\x{a}" ~
-             "value"
+             "tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value"
            "\x{a}" ~
            "               "
            sch:report [

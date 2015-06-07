@@ -53,7 +53,20 @@
       <param name="verbose" expression="${verbose}" if="verbose"/>
     </xslt>
   </target>
+    <xslt force="yes" style="${XSL}/tools/iden.xsl" in="teisimple.odd" out="xsimple.odd">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+    </xslt>
   <target name="schemas">
+    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="teisimple.odd" out="teisimple.compiled.xml">
+      <factory name="net.sf.saxon.TransformerFactoryImpl">
+        <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
+      </factory>
+      <param name="lang" expression="${lang}" if="lang"/>
+      <param name="verbose" expression="${verbose}" if="verbose"/>
+    </xslt>
+
     <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="teisimple.odd" out="teisimple.compiled.xml">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>

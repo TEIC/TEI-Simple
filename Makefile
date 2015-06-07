@@ -4,7 +4,6 @@ XSL=../Stylesheets
 ANT_OPTS="-Xss2m -Xmx752m" 
 
 teisimple:
-	xmllint --xinclude teisimple.odd > xsimple.odd
 	ANT_OPTS=${ANT_OPTS} ant -lib lib/saxon9he.jar:lib/jing.jar -DXSL=$(XSL) 
 
 chain:

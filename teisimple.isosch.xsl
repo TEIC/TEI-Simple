@@ -711,7 +711,7 @@ The @spanTo attribute of <xsl:text/>
 
 
 	  <!--RULE -->
-   <xsl:template match="att|&#xA;biblFull|&#xA;biblScope|&#xA;biblStruct|&#xA;change|&#xA;charDecl|&#xA;charProp|&#xA;editor|&#xA;editorialDecl|&#xA;email|&#xA;encodingDesc|&#xA;extent|&#xA;fileDesc|&#xA;gi|&#xA;glyph|&#xA;glyphName|&#xA;idno|&#xA;imprint|&#xA;keywords|&#xA;licence|&#xA;listChange|&#xA;listPerson|&#xA;localName|&#xA;monogr|&#xA;msDesc|&#xA;msIdentifier|&#xA;physDesc|&#xA;profileDesc|&#xA;publicationStmt|&#xA;relatedItem|&#xA;repository|&#xA;resp|&#xA;respStmt|&#xA;sourceDesc|&#xA;teiHeader|&#xA;textClass|&#xA;textDesc|&#xA;titleStmt|&#xA;typeDesc|&#xA;value"
+   <xsl:template match="tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value"
                  priority="1000"
                  mode="M28">
 
