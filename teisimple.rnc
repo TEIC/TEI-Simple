@@ -4573,8 +4573,7 @@ teiCorpus =
              test = "ancestor::tei:text"
              "Error:  The element "
              sch:name [ ]
-             "\x{a}" ~
-             "is not permitted outside the header"
+             " is not permitted outside the header"
            ]
            "\x{a}" ~
            "            "

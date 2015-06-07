@@ -719,8 +719,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:if test="ancestor::tei:text">
          <xsl:message>Error:  The element <xsl:text/>
             <xsl:value-of select="name(.)"/>
-            <xsl:text/>
-is not permitted outside the header (ancestor::tei:text)</xsl:message>
+            <xsl:text/> is not permitted outside the header (ancestor::tei:text)</xsl:message>
       </xsl:if>
       <xsl:apply-templates select="*" mode="M28"/>
    </xsl:template>

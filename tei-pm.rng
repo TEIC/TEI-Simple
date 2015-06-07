@@ -9017,7 +9017,7 @@ You must supply at least two values for @target on <name/>
                <value>figure</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">make a figure with the title as caption</a:documentation>
                <value>glyph</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">show a character by looking up reference</a:documentation>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">show a character by looking up reference to a chardesc at the given URI</a:documentation>
                <value>graphic</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if url is present, uses it to display graphic, else display a placeholder image.</a:documentation>
                <value>heading</value>
