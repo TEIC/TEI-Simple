@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    <fileDesc>
+      <titleStmt>
+        <title>TEI with ODD elements</title>
+        <author>Sebastian Rahtz</author>
+      </titleStmt>
+      <publicationStmt>
+        <p> </p>
+      </publicationStmt>
+      <sourceDesc>
+        <p>authored from scratch</p>
+      </sourceDesc>
+    </fileDesc>
+  </teiHeader>
+  <text xmlns:xi="http://www.w3.org/2001/XInclude">
+    <body>
+      <schemaSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ns="http://www.tei-c.org/ns/Examples" ident="tei-pm-examples" prefix="TEI_" start="p egXML">
+        <moduleRef key="tei"/>
+        <moduleRef key="core"/>
+        <moduleRef key="analysis"/>
+        <moduleRef key="certainty"/>
+        <moduleRef key="corpus"/>
+        <moduleRef key="declarefs"/>
+        <moduleRef key="dictionaries"/>
+        <moduleRef key="drama"/>
+        <moduleRef key="figures"/>
+        <moduleRef key="gaiji"/>
+        <moduleRef key="header"/>
+        <moduleRef key="iso-fs"/>
+        <moduleRef key="linking"/>
+        <moduleRef key="msdescription"/>
+        <moduleRef key="namesdates"/>
+        <moduleRef key="nets"/>
+        <moduleRef key="spoken"/>
+        <moduleRef key="tagdocs"/>
+        <moduleRef key="textcrit"/>
+        <moduleRef key="textstructure"/>
+        <moduleRef key="transcr"/>
+        <moduleRef key="verse"/>
+      </schemaSpec>
+    </body>
+  </text>
+</TEI>
