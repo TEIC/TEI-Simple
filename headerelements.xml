@@ -10,6 +10,7 @@
    <elementRef key="change"/>
    <elementRef key="charDecl"/>
    <elementRef key="charProp"/>
+   <elementRef key="correspDesc"/>
    <elementRef key="editor"/>
    <elementRef key="editorialDecl"/>
    <elementRef key="email"/>
@@ -29,6 +30,7 @@
    <elementRef key="monogr"/>
    <elementRef key="msDesc"/>
    <elementRef key="msIdentifier"/>
+   <elementRef key="particDesc"/>
    <elementRef key="person"/>
    <elementRef key="physDesc"/>
    <elementRef key="profileDesc"/>
@@ -37,6 +39,7 @@
    <elementRef key="repository"/>
    <elementRef key="resp"/>
    <elementRef key="respStmt"/>
+   <elementRef key="settingDesc"/>
    <elementRef key="sourceDesc"/>
    <elementRef key="tag"/>
    <elementRef key="teiHeader"/>
