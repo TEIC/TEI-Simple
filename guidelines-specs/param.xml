@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright TEI Consortium.
+Dual-licensed under CC-by and BSD2 licences
+See the file COPYING.txt for details
+$Date: 2015-08-21 10:44:07 +0100 (Fri, 21 Aug 2015) $
+$Id:  $
+-->
+<?xml-model href="http://tei.it.ox.ac.uk/jenkins/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<elementSpec xmlns="http://www.tei-c.org/ns/1.0" ident="param" module="tagdocs">  
+  <desc versionDate="2015-05-15" xml:lang="en">parameter of a model behaviour</desc>
+  <classes>
+    <memberOf key="att.global"/>
+  </classes>
+  <content>
+    <macroRef key="data.xpath"/>
+  </content>
+  <attList>
+    <attDef ident="name" usage="req">
+      <desc  versionDate="2015-08-21" xml:lang="en">Name of parameter</desc>
+    </attDef>
+  </attList>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <model predicate="sic and corr" behaviour="alternate">
+        <param name="default">corr</param>
+        <param name="alternate">sic</param>
+      </model>
+      <model predicate="abbr and expan[1]" behaviour="alternate">
+        <param name="default">expan</param>
+        <param name="alternate">abbr</param>
+      </model>
+      <model predicate="orig and reg" behaviour="alternate">
+        <param name="default">reg</param>
+        <param name="alternate">orig</param>
+      </model>
+    </egXML>
+  </exemplum>
+  
+  <remarks versionDate="2015-08-21" xml:lang="en">
+    <p>The content of parameter is an XPath Predicate Expression. The names of the expected parameters may be documented in the corresponding customization using <gi>paramSpec</gi>.</p>
+  </remarks>
+  
+  
+  <!--
+  <listRef>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+  </listRef>-->
+  
+</elementSpec>

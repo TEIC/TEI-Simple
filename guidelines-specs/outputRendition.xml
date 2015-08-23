@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright TEI Consortium.
+    Dual-licensed under CC-by and BSD2 licences
+    See the file COPYING.txt for details
+    $Date: 2015-08-21 10:44:07 +0100 (Fri, 21 Aug 2015) $
+    $Id:  $
+-->
+<?xml-model href="http://tei.it.ox.ac.uk/jenkins/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<elementSpec xmlns="http://www.tei-c.org/ns/1.0" ident="outputRendition" module="tagdocs">
+  <desc versionDate="2015-08-21" xml:lang="en">supplies information about the desired output rendition, format, or appearance of one or more elements in the source
+    text.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="model.oddDecl"/>
+  </classes>
+  <content>
+    <textNode/>
+  </content>
+  <attList>
+    <attDef ident="scope">
+      <desc versionDate="2009-05-29" xml:lang="en">provides a way of defining
+        <soCalled>pseudo-elements</soCalled>, that is, styling rules
+        applicable to specific sub-portions of an element.</desc>
+      <datatype>
+        <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+      </datatype>
+      <valList type="open">
+        <valItem ident="first-line">
+          <desc versionDate="2009-05-29" xml:lang="en">styling applies to the first line of
+            the target element</desc>
+        </valItem>
+        <valItem ident="first-letter">
+          <desc versionDate="2009-05-29" xml:lang="en">styling applies to the first letter of
+            the target element</desc>
+        </valItem>
+        <valItem ident="before">
+          <desc versionDate="2009-05-29" xml:lang="en">styling should be applied immediately before
+            the content of the target element</desc>
+        </valItem>
+        <valItem ident="after">
+          <desc versionDate="2009-05-29" xml:lang="en">styling  should be applied immediately after
+            the content of
+            the target element</desc>
+        </valItem>
+      </valList>
+    </attDef>
+  </attList>
+  <exemplum xml:lang="en">
+      <egXML xmlns="http://www.tei-c.org/ns/Examples">
+        <model predicate="ancestor::p" behaviour="inline">
+          <outputRendition>font-style: italic;</outputRendition>
+        </model>
+        <model behaviour="block">
+          <outputRendition>left-margin: 2em;</outputRendition>
+        </model>
+      </egXML>
+  </exemplum>
+  <remarks  versionDate="2015-08-21" xml:lang="en">
+    <p>The <gi>outputRendition</gi> element differs from the <gi>rendition</gi> element: the former documents rendering information in one or more possible outputs, usually recorded in the TEI customization file, the latter must only be used to document the original rendition of the source text.</p>
+  </remarks>
+  
+  <!-- 
+  <listRef>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+  </listRef>
+  -->
+  
+</elementSpec>
+  

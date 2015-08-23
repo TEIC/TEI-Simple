@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright TEI Consortium.
+    Dual-licensed under CC-by and BSD2 licences
+    See the file COPYING.txt for details
+    $Date: 2015-08-21 10:44:07 +0100 (Fri, 21 Aug 2015) $
+    $Id:  $
+-->
+<?xml-model href="http://tei.it.ox.ac.uk/jenkins/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<elementSpec xmlns="http://www.tei-c.org/ns/1.0" ident="model" module="tagdocs">
+  <gloss versionDate="2015-05-15" xml:lang="en">processing model</gloss>
+  <desc versionDate="2015-05-15" xml:lang="en">documentation of an intended processing model for this element</desc>
+  <classes>
+    <memberOf key="att.global"/>
+  </classes>
+  <content>
+    <alternate minOccurs="0" maxOccurs="unbounded">
+      <classRef key="model.glossLike"/>
+      <classRef key="model.descLike"/>
+    </alternate>
+    <elementRef key="param" minOccurs="0" maxOccurs="unbounded"/>
+    <elementRef key="outputRendition" minOccurs="0" maxOccurs="unbounded"/>
+  </content>
+  <attList>
+    <attDef ident="behaviour" usage="req">
+      <desc versionDate="2015-08-21" xml:lang="en">which processing function, with optional named parameters, should be
+        used to present this element output</desc>
+      <valList type="closed">
+        <valItem ident="alternate">
+          <paramList>
+            <paramSpec ident="default">
+              <desc versionDate="2015-08-21" xml:lang="en">preferred content</desc>
+            </paramSpec>
+            <paramSpec ident="alternate">
+              <desc versionDate="2015-08-21" xml:lang="en">alternate content</desc>
+            </paramSpec>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a specialized display of alternating elements for
+            displaying the preferred version and an alternative, both at once or by some method of toggling between the
+            two.</desc>
+        </valItem>
+        <valItem ident="anchor">
+          <paramList>
+            <paramSpec ident="id"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create an anchor with ID</desc>
+        </valItem>
+        <valItem ident="block">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a block structure</desc>
+          <equiv name="div"/>
+        </valItem>
+        <valItem ident="body">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create the body of a document.</desc>
+          <equiv name="body"/>
+        </valItem>
+        <valItem ident="break">
+          <paramList>
+            <paramSpec ident="type"/>
+            <paramSpec ident="label"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a line, column, or page break according to
+              <term>type</term></desc>
+        </valItem>
+        <valItem ident="cell">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a table cell</desc>
+          <equiv name="td"/>
+        </valItem>
+        <valItem ident="cit">
+          <paramList>
+            <paramSpec ident="content"/>
+            <paramSpec ident="source"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">show the content, with an indication of the source</desc>
+        </valItem>
+        <valItem ident="document">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">start a new output document</desc>
+        </valItem>
+        <valItem ident="figure">
+          <paramList>
+            <paramSpec ident="title"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">make a figure with the <term>title</term> as caption</desc>
+          <equiv name="div"/>
+        </valItem>
+        <valItem ident="glyph">
+          <paramList>
+            <paramSpec ident="uri"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">show a character by looking up reference to a chardesc at the
+            given URI</desc>
+        </valItem>
+        <valItem ident="graphic">
+          <paramList>
+            <paramSpec ident="url">
+              <desc versionDate="2015-08-21" xml:lang="en">url of image file</desc>
+            </paramSpec>
+            <paramSpec ident="width">
+              <desc versionDate="2015-08-21" xml:lang="en">desired width of image</desc>
+            </paramSpec>
+            <paramSpec ident="height">
+              <desc versionDate="2015-08-21" xml:lang="en">desired height of image</desc>
+            </paramSpec>
+            <paramSpec ident="scale">
+              <desc versionDate="2015-08-21" xml:lang="en">scaling for image</desc>
+            </paramSpec>
+            <paramSpec ident="title">
+              <desc versionDate="2015-08-21" xml:lang="en">title of figure (usually not displayed directly)</desc>
+            </paramSpec>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">if <att>url</att> is present, uses it to display graphic, else
+            display a placeholder image. </desc>
+          <equiv name="img"/>
+        </valItem>
+        <valItem ident="heading">
+          <paramList>
+            <paramSpec ident="content"/>
+            <paramSpec ident="level"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">creates a heading. </desc>
+          <equiv name="span"/>
+        </valItem>
+        <valItem ident="index">
+          <paramList>
+            <paramSpec ident="type"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">generate list according to <term>type</term></desc>
+        </valItem>
+        <valItem ident="inline">
+          <paramList>
+            <paramSpec ident="content"/>
+            <paramSpec ident="label"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">creates inline element out of <term>content</term> if there's
+            something in <gi>outputRendition</gi>, use that formatting otherwise just show text of selected
+            content.</desc>
+          <equiv name="span"/>
+        </valItem>
+        <valItem ident="link">
+          <paramList>
+            <paramSpec ident="content"/>
+            <paramSpec ident="link">
+              <desc versionDate="2015-08-21" xml:lang="en">link url</desc>
+            </paramSpec>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create hyperlink</desc>
+          <equiv name="a"/>
+        </valItem>
+        <valItem ident="list">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a list by following <term>content</term></desc>
+          <equiv name="ol"/>
+        </valItem>
+        <valItem ident="listItem">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create list item</desc>
+          <equiv name="li"/>
+        </valItem>
+        <valItem ident="metadata">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create metadata section</desc>
+          <equiv name="head"/>
+        </valItem>
+        <valItem ident="note">
+          <paramList>
+            <paramSpec ident="content"/>
+            <paramSpec ident="place"/>
+            <paramSpec ident="label"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create an note, often out of line, depending on the value of
+              <term>place</term>; could be margin, footnote, endnote, inline</desc>
+        </valItem>
+        <valItem ident="omit">
+          <desc versionDate="2015-08-21" xml:lang="en">do nothing, do not process children</desc>
+        </valItem>
+        <valItem ident="paragraph">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a paragraph out of <term>content</term>.</desc>
+          <equiv name="p"/>
+        </valItem>
+        <valItem ident="row">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a table row</desc>
+          <equiv name="tr"/>
+        </valItem>
+        <valItem ident="section">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a new section of the output document</desc>
+        </valItem>
+        <valItem ident="table">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create a table</desc>
+          <equiv name="table"/>
+        </valItem>
+        <valItem ident="text">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create literal text</desc>
+        </valItem>
+        <valItem ident="title">
+          <paramList>
+            <paramSpec ident="content"/>
+          </paramList>
+          <desc versionDate="2015-08-21" xml:lang="en">create document title</desc>
+          <equiv name="title"/>
+        </valItem>
+      </valList>
+    </attDef>
+    <attDef ident="predicate" usage="opt">
+      <desc versionDate="2015-08-21" xml:lang="en">the condition under which this model applies, given as an XPath
+        Predicate Expression</desc>
+      <datatype>
+        <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
+      </datatype>
+    </attDef>
+    <attDef ident="useSourceRendition" usage="opt">
+      <desc versionDate="2015-08-21" xml:lang="en">whether to obey any rendition attribute which is present</desc>
+      <datatype>
+        <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
+      </datatype>
+    </attDef>
+    <attDef ident="output" usage="opt">
+      <desc versionDate="2015-08-21" xml:lang="en">the intended output method</desc>
+      <datatype>
+        <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+      </datatype>
+      <valList type="closed">
+        <valItem ident="web">
+          <desc versionDate="2015-08-21" xml:lang="en">the output is intended for presentation in a web format</desc>
+        </valItem>
+        <valItem ident="print">
+          <desc versionDate="2015-08-21" xml:lang="en">the output is intended for presentation in a print format</desc>
+        </valItem>
+        <valItem ident="plain">
+          <desc versionDate="2015-08-21" xml:lang="en">the output is intended for presentation in a plain text
+            format</desc>
+        </valItem>
+      </valList>
+    </attDef>
+  </attList>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <model behaviour="inline"/>
+     </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <elementSpec mode="change" ident="quote">
+                  <model predicate="ancestor::p" behaviour="inline">
+                    <desc versionDate="2015-08-21" xml:lang="en">If it's inside a paragraph then it's inline</desc>
+                  </model>
+                  <model predicate="not(ancestor::p)" behaviour="block">
+                    <desc versionDate="2015-08-21" xml:lang="en">If it's not inside a paragraph then it is block level</desc>
+                  </model>
+                </elementSpec>
+              </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model predicate="parent::person" behaviour="inline">
+                  <desc versionDate="2015-08-21" xml:lang="en">If it is a child of a person element, treat as inline</desc>
+                </model>
+              </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model behaviour="inline">
+                  <outputRendition>font-weight:bold</outputRendition>
+                </model>
+              </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model behaviour="inline" output="print"/>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+    <model predicate="ancestor::p" behaviour="inline">
+                  <param name="content">@n</param>
+    </model>
+              </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="omit"/>
+              </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+                <elementSpec mode="change" ident="date">
+                  <model output="print" predicate="text()" behaviour="inline"/>
+                  <model output="print" predicate="@when and  not(text())" behaviour="inline">
+                    <param name="content">@when</param>
+                  </model>
+                  <model predicate="@when" output="web" behaviour="alternate">
+                    <param name="default">.</param>
+                    <param name="alternate">@when</param>
+                  </model>
+                </elementSpec>
+              </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+<elementSpec mode="change" ident="choice">
+		 <model predicate="sic and corr" behaviour="alternate">
+		   <param name="default">corr</param>
+		   <param name="alternate">sic</param>
+		 </model>
+	   <model predicate="abbr and expan" behaviour="alternate">
+	     <param name="default">expan</param>
+	     <param name="alternate">abbr</param>
+	   </model>
+     <model predicate="orig and reg" behaviour="alternate">
+       <param name="default">reg</param>
+       <param name="alternate">orig</param>
+     </model>
+</elementSpec>
+</egXML>
+  </exemplum>
+
+  <remarks versionDate="2015-08-21" xml:lang="en">
+    <p>The <gi>model</gi> element may be used in customizations to document an intended processing output. There is no
+      assumption that allpossible processing outputs will be documented since this is impossible.</p>
+  </remarks>
+  <!--
+  <listRef>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+  </listRef>
+-->
+</elementSpec>

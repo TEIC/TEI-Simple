@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Copyright TEI Consortium.
+    Dual-licensed under CC-by and BSD2 licences
+    See the file COPYING.txt for details
+    $Date: 2015-08-21 10:44:07 +0100 (Fri, 21 Aug 2015) $
+    $Id:  $
+-->
+<?xml-model href="http://tei.it.ox.ac.uk/jenkins/job/TEIP5/lastSuccessfulBuild/artifact/release/xml/tei/odd/p5.nvdl" type="application/xml" schematypens="http://purl.oclc.org/dsdl/nvdl/ns/structure/1.0"?>
+<elementSpec xmlns="http://www.tei-c.org/ns/1.0" ident="modelSequence" module="tagdocs">
+  <gloss versionDate="2015-05-15" xml:lang="en">sequence of processing model </gloss>
+  <desc versionDate="2015-05-15" xml:lang="en">a group of model elements documenting intended processing models
+    for this element, to be acted upon in sequence</desc>
+  <classes>
+    <memberOf key="att.global"/>
+  </classes>
+  <content>
+    <sequence>
+      <alternate minOccurs="0" maxOccurs="unbounded">
+        <classRef key="model.glossLike"/>
+        <classRef key="model.descLike"/>
+      </alternate>
+      <alternate maxOccurs="unbounded">
+        <elementRef key="model"/>
+        <elementRef key="model"/>
+      </alternate>
+    </sequence>
+  </content>
+  <attList>
+    <attDef ident="predicate" usage="opt">
+      <desc versionDate="2015-05-15" xml:lang="en">the condition under which this model applies given as an XPath Predicate Expression</desc>
+      <datatype>
+        <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.xpath"/>
+      </datatype>
+    </attDef>
+    <attDef ident="useSourceRendition" usage="opt">
+      <desc versionDate="2015-05-15" xml:lang="en">whether to obey any rendition attribute which is present</desc>
+      <datatype>
+        <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.boolean"/>
+      </datatype>
+    </attDef>
+    <attDef ident="output" usage="opt">
+      <desc versionDate="2015-05-15" xml:lang="en">the intended output method</desc>
+      <datatype>
+        <rng:ref xmlns:rng="http://relaxng.org/ns/structure/1.0" name="data.enumerated"/>
+      </datatype>
+      <valList type="closed">
+        <valItem ident="web">
+          <desc versionDate="2015-05-15" xml:lang="en">the output is intended for presentation in a web format</desc>
+        </valItem>
+        <valItem ident="print">
+          <desc versionDate="2015-05-15" xml:lang="en">the output is intended for presentation in a print format</desc>
+        </valItem>
+        <valItem ident="plaintext">
+          <desc versionDate="2015-05-15" xml:lang="en">the output is intended for presentation in a plain text format</desc>
+        </valItem>
+      </valList>
+    </attDef>
+  </attList>
+      <exemplum xml:lang="en">
+        <egXML xmlns="http://www.tei-c.org/ns/Examples">
+          <modelGrp output="print">
+            <modelSequence>
+              <model behaviour="inline">
+                <param name="content">@n</param>
+              </model>
+              <model behaviour="note">
+                <param name="place">'foot'</param>
+              </model>
+            </modelSequence>
+          </modelGrp>
+        </egXML>
+      </exemplum>
+  
+  <remarks versionDate="2015-05-15" xml:lang="en">
+    <p>The <gi>modelSequence</gi> element groups <gi>model</gi> elements which document processing models that are intended to be acted upon in sequence.</p>
+  </remarks
+  >
+  <!-- 
+  <listRef>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+    <ptr target="#WhereWeDiscussIt" type="div2"/>
+  </listRef>
+  -->
+</elementSpec>
+
