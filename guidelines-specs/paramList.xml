@@ -13,7 +13,7 @@ $Id:  $
     <memberOf key="att.global"/>
   </classes>
   <content>
-    <elementRef key="paramSpec"/>
+    <elementRef maxOccurs="unlimited" key="paramSpec"/>
   </content>
   <exemplum xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" >
@@ -32,7 +32,7 @@ $Id:  $
   </exemplum>
   
   <remarks>
-    <p>The <gi>paramList</gi> element provides a customization a mechanism to document parameter specifications using child <gi>paramSpec</gi> elements.</p>
+    <p>The <gi>paramList</gi> element provides a a mechanism to document parameter specifications using child <gi>paramSpec</gi> elements.</p>
   </remarks>
 <!--
   <listRef>
