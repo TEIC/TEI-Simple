@@ -9,14 +9,14 @@ namespace tei = "http://www.tei-c.org/ns/1.0"
 namespace xi = "http://www.w3.org/2001/XInclude"
 namespace xlink = "http://www.w3.org/1999/xlink"
 
-# Schema generated from ODD source 1970-01-01. Version 0.4: 6th June 2015.
+# Schema generated from ODD source 1970-01-01. Version 0.9: August 2015.
 # TEI Edition: Version 2.9.1. Last updated on
 #	15th October 2015, revision 46ac023
 # TEI Edition Location: http://www.tei-c.org/Vault/P5/Version 2.9.1/
 #
 
 # This material is dual-licensed.
-# [http://creativecommons.org/licenses/by-sa/3.0/] Distributed under a Creative Commons Attribution-ShareAlike 3.0 Unported License  [http://www.opensource.org/licenses/BSD-2-Clause] Copyright 2014 TEI Consortium. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage. TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of TEI content in a software environment. For further information or clarification, please contact the TEI Consortium.
+# [http://creativecommons.org/licenses/by-sa/3.0/] Distributed under a Creative Commons Attribution-ShareAlike 3.0 Unported License  [http://www.opensource.org/licenses/BSD-2-Clause] Copyright 2015 TEI Consortium. All rights reserved. Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution. This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright holder or contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage. TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of TEI content in a software environment. For further information or clarification, please contact the TEI Consortium.
 macro.paraContent =
   (text
    | model.gLike
@@ -478,12 +478,9 @@ sch:pattern [
     "                    "
     sch:assert [
       test = "every $x in $results satisfies $x"
-      " Error: Each of\x{a}" ~
-      '                                       the rendition values in "'
+      ' Error: Each of the rendition values in "'
       sch:value-of [ select = "@rendition" ]
-      '"\x{a}' ~
-      "                                       must point to a local ID or to a token in the Simple scheme\x{a}" ~
-      "                                          ("
+      '" must point to a local ID or to a token in the Simple scheme ('
       sch:value-of [ select = "$results" ]
       ")"
     ]
@@ -510,11 +507,9 @@ sch:pattern [
     "                    "
     sch:report [
       test = "some $x in $results  satisfies $x"
-      " Error: Every\x{a}" ~
-      '                                       local pointer in "'
+      ' Error: Every local pointer in "'
       sch:value-of [ select = "@corresp" ]
-      '" must point to\x{a}' ~
-      "                                       an ID in this document ("
+      '" must point to an ID in this document ('
       sch:value-of [ select = "$results" ]
       ")"
     ]
@@ -897,11 +892,9 @@ sch:pattern [
     "                        "
     sch:report [
       test = "some $x in $results  satisfies $x"
-      " Error: Every\x{a}" ~
-      '                                       local pointer in "'
+      ' Error: Every local pointer in "'
       sch:value-of [ select = "@target" ]
-      '" must point to\x{a}' ~
-      "                                       an ID in this document ("
+      '" must point to an ID in this document ('
       sch:value-of [ select = "$results" ]
       ")"
     ]
@@ -3233,11 +3226,10 @@ bibl =
            sch:assert [
              test = "child::* or child::text()[normalize-space()]"
              role = "ERROR"
-             "\x{a}" ~
-             '                Element "'
+             ' Element "'
              sch:name [ ]
-             '" may not be empty.\x{a}' ~
-             "            "
+             '" may not be\x{a}' ~
+             "                    empty. "
            ]
            "\x{a}" ~
            "            "
@@ -3387,11 +3379,10 @@ choice =
            sch:assert [
              test = "count(*) > 1"
              role = "ERROR"
-             "\x{a}" ~
-             '                    Element "'
+             " Element\x{a}" ~
+             '                    "'
              sch:name [ ]
-             '" must have at least two child\x{a}' ~
-             "		    elements."
+             '" must have at least two child elements.'
            ]
            "\x{a}" ~
            "            "
@@ -3411,8 +3402,7 @@ choice =
              test =
                "(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))"
              role = "ERROR"
-             "\x{a}" ~
-             '                    Element "'
+             ' Element "'
              sch:name [ ]
              '" must have corresponding corr/sic, expand/abbr, reg/orig '
            ]

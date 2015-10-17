@@ -322,11 +322,12 @@ links</change>
 	<oneOrMore xmlns="http://relaxng.org/ns/structure/1.0">
 	  <choice>
 	    <text/>
-	    <ref name="macro.anyThing"/>
+            <anyName/>
 	  </choice>
 	</oneOrMore>
       </content>
     </elementSpec>
+
 
         </schemaSpec>
       </div>

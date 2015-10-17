@@ -235,12 +235,9 @@ belongs, but this <xsl:text/>
       <xsl:choose>
          <xsl:when test="every $x in $results satisfies $x"/>
          <xsl:otherwise>
-            <xsl:message> Error: Each of
-                                       the rendition values in "<xsl:text/>
+            <xsl:message> Error: Each of the rendition values in "<xsl:text/>
                <xsl:value-of select="@rendition"/>
-               <xsl:text/>"
-                                       must point to a local ID or to a token in the Simple scheme
-                                          (<xsl:text/>
+               <xsl:text/>" must point to a local ID or to a token in the Simple scheme (<xsl:text/>
                <xsl:value-of select="$results"/>
                <xsl:text/>) (every $x in $results satisfies $x)</xsl:message>
          </xsl:otherwise>
@@ -262,11 +259,9 @@ belongs, but this <xsl:text/>
 
 		    <!--REPORT -->
       <xsl:if test="some $x in $results  satisfies $x">
-         <xsl:message> Error: Every
-                                       local pointer in "<xsl:text/>
+         <xsl:message> Error: Every local pointer in "<xsl:text/>
             <xsl:value-of select="@corresp"/>
-            <xsl:text/>" must point to
-                                       an ID in this document (<xsl:text/>
+            <xsl:text/>" must point to an ID in this document (<xsl:text/>
             <xsl:value-of select="$results"/>
             <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
       </xsl:if>
@@ -334,11 +329,9 @@ belongs, but this <xsl:text/>
 
 		    <!--REPORT -->
       <xsl:if test="some $x in $results  satisfies $x">
-         <xsl:message> Error: Every
-                                       local pointer in "<xsl:text/>
+         <xsl:message> Error: Every local pointer in "<xsl:text/>
             <xsl:value-of select="@target"/>
-            <xsl:text/>" must point to
-                                       an ID in this document (<xsl:text/>
+            <xsl:text/>" must point to an ID in this document (<xsl:text/>
             <xsl:value-of select="$results"/>
             <xsl:text/>) (some $x in $results satisfies $x)</xsl:message>
       </xsl:if>
@@ -574,11 +567,10 @@ The @spanTo attribute of <xsl:text/>
       <xsl:choose>
          <xsl:when test="child::* or child::text()[normalize-space()]"/>
          <xsl:otherwise>
-            <xsl:message>
-                Element "<xsl:text/>
+            <xsl:message> Element "<xsl:text/>
                <xsl:value-of select="name(.)"/>
-               <xsl:text/>" may not be empty.
-             (child::* or child::text()[normalize-space()] / ERROR)</xsl:message>
+               <xsl:text/>" may not be
+                    empty.  (child::* or child::text()[normalize-space()] / ERROR)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M21"/>
@@ -598,11 +590,10 @@ The @spanTo attribute of <xsl:text/>
       <xsl:choose>
          <xsl:when test="count(*) &gt; 1"/>
          <xsl:otherwise>
-            <xsl:message>
-                    Element "<xsl:text/>
+            <xsl:message> Element
+                    "<xsl:text/>
                <xsl:value-of select="name(.)"/>
-               <xsl:text/>" must have at least two child
-		    elements. (count(*) &gt; 1 / ERROR)</xsl:message>
+               <xsl:text/>" must have at least two child elements. (count(*) &gt; 1 / ERROR)</xsl:message>
          </xsl:otherwise>
       </xsl:choose>
       <xsl:apply-templates select="*" mode="M22"/>
@@ -622,8 +613,7 @@ The @spanTo attribute of <xsl:text/>
       <xsl:choose>
          <xsl:when test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))"/>
          <xsl:otherwise>
-            <xsl:message>
-                    Element "<xsl:text/>
+            <xsl:message> Element "<xsl:text/>
                <xsl:value-of select="name(.)"/>
                <xsl:text/>" must have corresponding corr/sic, expand/abbr, reg/orig  ((tei:corr or tei:sic or tei:expan or tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan and tei:abbr) or (tei:reg and tei:orig)) / ERROR)</xsl:message>
          </xsl:otherwise>
