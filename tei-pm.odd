@@ -315,6 +315,19 @@ links</change>
           <moduleRef key="linking"/>
           <specGrpRef target="#additions"/>
           <specGrpRef target="#changes"/>
+
+
+    <elementSpec ident="egXML" mode="change" module="tagdocs" ns="http://www.tei-c.org/ns/Examples">
+      <content>
+	<oneOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+	  <choice>
+	    <text/>
+	    <ref name="macro.anyThing"/>
+	  </choice>
+	</oneOrMore>
+      </content>
+    </elementSpec>
+
         </schemaSpec>
       </div>
     </body>

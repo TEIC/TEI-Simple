@@ -10,15 +10,14 @@
     <namespace ns="http://relaxng.org/ns/compatibility/annotations/1.0">
       <allow/>
     </namespace>
-<!--
-      commented this out as there's no such file in the repo
-      <namespace ns="http://www.tei-c.org/ns/Examples">
+    <namespace ns="http://www.tei-c.org/ns/Examples">
       <validate schema="tei-pm-examples.rng" useMode="nested">
         <option name="http://www.thaiopensource.com/validate/feasible"/>
       </validate>
       <attach useMode="allow"/>
     </namespace>
--->    <!-- allow XInclude without checking -->
+
+<!-- allow XInclude without checking -->
     <namespace ns="http://www.w3.org/2001/XInclude">
       <allow/>
     </namespace>

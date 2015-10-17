@@ -52,7 +52,7 @@ belongs, but this <name/> element has no textual content.</assert>
     </pattern>
    <pattern id="teisimple-att.pointing-targetLang-constraint-targetLang-5">
           <rule context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
-            <assert test="count(@target)">@targetLang can only be used if @target is specified.</assert>
+            <assert test="@target">@targetLang should only be used on <name/> if @target is specified.</assert>
           </rule>
         </pattern>
    <pattern id="teisimple-att.pointing-target-constraint-validtarget-6">
@@ -109,68 +109,124 @@ relatedItem element must be empty</report>
 The @spanTo attribute of <name/> is required.</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-addSpan-constraint-spanTo-15">
+   <pattern id="teisimple-ab-constraint-abstractModel-structure-p-15">
+      <rule context="tei:ab">
+         <report test="(ancestor::tei:p or ancestor::tei:ab)          and not(parent::tei:exemplum         |parent::tei:item         |parent::tei:note         |parent::tei:q         |parent::tei:quote         |parent::tei:remarks         |parent::tei:said         |parent::tei:sp         |parent::tei:stage         |parent::tei:cell         |parent::tei:figure)">
+        Abstract model violation: ab may not contain paragraphs or other ab elements.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-ab-constraint-abstractModel-structure-l-16">
+      <rule context="tei:ab">
+         <report test="ancestor::tei:l or ancestor::tei:lg">
+        Abstract model violation: Lines may not contain higher-level divisions such as p or ab.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-addSpan-constraint-spanTo-17">
       <rule context="tei:addSpan">
          <assert test="@spanTo">The @spanTo attribute of <name/> is required.</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-bibl-constraint-noEmptyBibl-17">
+   <pattern id="teisimple-bibl-constraint-noEmptyBibl-19">
       <rule context="tei:bibl">
                   <assert test="child::* or child::text()[normalize-space()]" role="ERROR">
                 Element "<name/>" may not be empty.
             </assert>
                 </rule>
    </pattern>
-   <pattern id="teisimple-choice-constraint-choiceSize-18">
+   <pattern id="teisimple-choice-constraint-choiceSize-20">
       <rule context="tei:choice">
                   <assert test="count(*) &gt; 1" role="ERROR">
                     Element "<name/>" must have at least two child
 		    elements.</assert>
                 </rule>
    </pattern>
-   <pattern id="teisimple-choice-constraint-choiceContent-19">
+   <pattern id="teisimple-choice-constraint-choiceContent-21">
       <rule context="tei:choice">
                   <assert test="(tei:corr or tei:sic or tei:expan or     tei:abbr or tei:reg or tei:orig) and ((tei:corr and tei:sic) or (tei:expan     and tei:abbr) or (tei:reg and tei:orig))"
                  role="ERROR">
                     Element "<name/>" must have corresponding corr/sic, expand/abbr, reg/orig </assert>
                 </rule>
    </pattern>
-   <pattern id="teisimple-lg-constraint-atleast1oflggapl-20">
+   <pattern id="teisimple-div-constraint-abstractModel-structure-l-22">
+      <rule context="tei:div">
+         <report test="ancestor::tei:l">
+        Abstract model violation: Lines may not contain higher-level structural elements such as div.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-div-constraint-abstractModel-structure-p-23">
+      <rule context="tei:div">
+         <report test="ancestor::tei:p or ancestor::tei:ab and not(ancestor::tei:floatingText)">
+        Abstract model violation: p and ab may not contain higher-level structural elements such as div.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-l-constraint-abstractModel-structure-l-24">
+      <rule context="tei:l">
+         <report test="ancestor::tei:l[not(.//tei:note//tei:l[. = current()])]">
+        Abstract model violation: Lines may not contain lines or lg elements.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-lg-constraint-atleast1oflggapl-25">
       <rule context="tei:lg">
          <assert test="count(descendant::tei:lg|descendant::tei:l|descendant::tei:gap) &gt; 0">An lg element
         must contain at least one child l, lg or gap element.</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-list-constraint-gloss-list-must-have-labels-21">
+   <pattern id="teisimple-lg-constraint-abstractModel-structure-l-26">
+      <rule context="tei:lg">
+         <report test="ancestor::tei:l[not(.//tei:note//tei:lg[. = current()])]">
+        Abstract model violation: Lines may not contain line groups.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-list-constraint-gloss-list-must-have-labels-27">
       <rule context="tei:list[@type='gloss']">
 	        <assert test="tei:label">The content of a "gloss" list should include a sequence of one or more pairs of a label element followed by an item element</assert>
       </rule>
     </pattern>
-   <pattern id="teisimple-pb-constraint-pbposition-22">
+   <pattern id="teisimple-p-constraint-abstractModel-p-28">
+      <rule context="tei:p">
+         <report test="(ancestor::tei:p or ancestor::tei:ab)          and not(parent::tei:exemplum                |parent::tei:item                |parent::tei:note                |parent::tei:q                |parent::tei:quote                |parent::tei:remarks                |parent::tei:said                |parent::tei:sp                |parent::tei:stage                |parent::tei:cell                |parent::tei:figure)">
+        Abstract model violation: Paragraphs may not contain other paragraphs or ab elements.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-p-constraint-abstractModel-structure-l-29">
+      <rule context="tei:p">
+         <report test="ancestor::tei:l[not(.//tei:note//tei:p[. = current()])]">
+        Abstract model violation: Lines may not contain higher-level structural elements such as div, p, or ab.
+      </report>
+      </rule>
+   </pattern>
+   <pattern id="teisimple-pb-constraint-pbposition-30">
       <rule context="tei:pb">
                   <report test="parent::*/text() and not           (preceding-sibling::text() and           following-sibling::text())">please make sure pb elements are not at the start or end of mixed content </report>
                 </rule>
    </pattern>
-   <pattern id="teisimple-ref-constraint-refAtts-23">
+   <pattern id="teisimple-ref-constraint-refAtts-31">
       <rule context="tei:ref">
          <report test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
          </report>
       </rule>
    </pattern>
-   <pattern id="teisimple-s-constraint-noNestedS-24">
+   <pattern id="teisimple-s-constraint-noNestedS-32">
       <rule context="tei:s">
          <report test="tei:s">You may not nest one s element within
       another: use seg instead</report>
       </rule>
    </pattern>
-   <pattern id="teisimple-subst-constraint-substContents1-25">
+   <pattern id="teisimple-subst-constraint-substContents1-33">
       <rule context="tei:subst">
          <assert test="child::tei:add and child::tei:del">
             <name/> must have at least one child add and at least one child del</assert>
       </rule>
    </pattern>
-   <pattern id="teisimple-text-constraint-headeronlyelement-28">
+   <pattern id="teisimple-text-constraint-headeronlyelement-36">
       <rule context="tei:att | tei:biblFull | tei:biblScope | tei:biblStruct | tei:change | tei:charDecl | tei:charProp | tei:editor | tei:editorialDecl | tei:email | tei:encodingDesc | tei:extent | tei:fileDesc | tei:gi | tei:glyph | tei:glyphName | tei:idno | tei:imprint | tei:keywords | tei:licence | tei:listChange | tei:listPerson | tei:localName | tei:monogr | tei:msDesc | tei:msIdentifier | tei:person | tei:physDesc | tei:profileDesc | tei:publicationStmt | tei:relatedItem | tei:repository | tei:resp | tei:respStmt | tei:sourceDesc | tei:tag | tei:teiHeader | tei:term | tei:textClass | tei:textDesc | tei:titleStmt | tei:typeDesc | tei:val | tei:value">
          <report test="ancestor::tei:text">Error:  The element <name/> is not permitted outside the header</report>
       </rule>
