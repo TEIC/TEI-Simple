@@ -1,451 +1,674 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-TEI Simple Performance Indicators -- version 0.01 2015-09-16
+TEI Simple Performance Indicators - version 0.01 2015-09-16
  -->
-<taxonomy xml:id="TEISimple-PI" xmlns="http://www.tei-c.org/ns/1.0">
-   <category xml:id="PI-Linked">
-      <catDesc>The elements documented are linked to additional metadata concerning them</catDesc>
-   </category>
-   <category xml:id="PI-NotMarked">
-      <catDesc>Text that would normally be marked with the element referenced is not marked in the document
-         instance.</catDesc>
-   </category>
-   <category xml:id="elements">
-      <catDesc>Pointing to sub-categories in this list indicates that where they exist the document instance intended to
-         mark these, unless #notMarked is also referenced.</catDesc>
-      <category xml:id="ab">
-         <catDesc>If text that would normally be marked with <gi>ab</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="abbr">
-         <catDesc>If text that would normally be marked with <gi>abbr</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="actor">
-         <catDesc>If <gi>actor</gi> is present in the document instance the intention was to mark these.</catDesc>
-      </category>
-      <category xml:id="add">
-         <catDesc>If text that would normally be marked with <gi>add</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="address">
-         <catDesc>If text that would normally be marked with <gi>address</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="addrLine">
-         <catDesc>If text that would normally be marked with <gi>addrLine</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="addSpan">
-         <catDesc>If text that would normally be marked with <gi>addSpan</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="am">
-         <catDesc>If text that would normally be marked with <gi>am</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <!--
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xml:lang="en">
+   <teiHeader>
+      <fileDesc>
+         <titleStmt>
+            <title>TEI Simple: Performance Indicators</title>
+            <author>James Cummings</author>
+            <author>Sebastian Rahtz</author>
+         </titleStmt>
+         <publicationStmt>
+            <publisher>TEI Consortium</publisher>
+            <availability>
+               <licence target="http://creativecommons.org/licenses/by-sa/3.0/"> Distributed under a Creative Commons
+                  Attribution-ShareAlike 3.0 Unported License </licence>
+               <licence target="http://www.opensource.org/licenses/BSD-2-Clause">
+                  <p>Copyright 2015 TEI Consortium.</p>
+                  <p>All rights reserved.</p>
+                  <p>Redistribution and use in source and binary forms, with or without modification, are permitted
+                     provided that the following conditions are met:</p>
+                  <list>
+                     <item>Redistributions of source code must retain the above copyright notice, this list of
+                        conditions and the following disclaimer.</item>
+                     <item>Redistributions in binary form must reproduce the above copyright notice, this list of
+                        conditions and the following disclaimer in the documentation and/or other materials provided
+                        with the distribution.</item>
+                  </list>
+                  <p>This software is provided by the copyright holders and contributors "as is" and any express or
+                     implied warranties, including, but not limited to, the implied warranties of merchantability and
+                     fitness for a particular purpose are disclaimed. In no event shall the copyright holder or
+                     contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential
+                     damages (including, but not limited to, procurement of substitute goods or services; loss of use,
+                     data, or profits; or business interruption) however caused and on any theory of liability, whether
+                     in contract, strict liability, or tort (including negligence or otherwise) arising in any way out
+                     of the use of this software, even if advised of the possibility of such damage.</p>
+               </licence>
+               <p>TEI material can be licensed differently depending on the use you intend to make of it. Hence it is
+                  made available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for
+                  usages which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate
+                  for usage of TEI content in a software environment. For further information or clarification, please
+                  contact the <ref target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
+            </availability>
+         </publicationStmt>
+         <sourceDesc>
+            <p>Created as part of the TEI Simple project.</p>
+         </sourceDesc>
+      </fileDesc>
+      <encodingDesc>
+         <listPrefixDef>
+            <prefixDef ident="simple-pi" matchPattern="([A-Z0-9-]+)"
+               replacementPattern="http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple-pi.xml#$1">
+               <p> Private URIs using the <code>simple-pi</code> prefix are pointers to <gi>category</gi> elements in
+                  the teisimple-pi.xml file. For example, <code>simple-pi:name-person</code> dereferences to
+                     <code>http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple-pi.xml#name-person</code>
+                  and would indicate that names of people have been intended to be marked. If another value in the same
+                     <gi>interpretation</gi> element pointed to <code>simple-pi:PI-NotMarked</code> this would indicate
+                  that these have not been marked.</p>
+            </prefixDef>
+         </listPrefixDef>
+         <classDecl>
+            <taxonomy xml:id="TEISimple-PI" xmlns="http://www.tei-c.org/ns/1.0">
+               <category xml:id="PI-Linked">
+                  <catDesc>The elements documented are linked to additional metadata concerning them</catDesc>
+               </category>
+               <category xml:id="PI-NotMarked">
+                  <catDesc>Text that would normally be marked with the element referenced is not marked in the document
+                     instance.</catDesc>
+               </category>
+               <category xml:id="genres">
+                  <catDesc>Pointing to sub-categories in this list indicates that the work is primarily to be considered
+                     of that genre. If multiple categories are pointed to, then it is assumed that all these genres are
+                     significantly present in the text.</catDesc>
+                  <category xml:id="PI-prose">
+                     <catDesc>The text has a significant amount of prose</catDesc>
+                  </category>
+                  <category xml:id="PI-verse">
+                     <catDesc>The text has a significant amount of verse</catDesc>
+                  </category>
+                  <category xml:id="PI-drama">
+                     <catDesc>The text has a significant amount of verse</catDesc>
+                  </category>
+               </category>
+
+               <category xml:id="elements">
+                  <catDesc>Pointing to sub-categories in this list indicates that where they exist the document instance
+                     intended to mark these, unless #notMarked is also referenced.</catDesc>
+                  <category xml:id="ab">
+                     <catDesc>If text that would normally be marked with <gi>ab</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="abbr">
+                     <catDesc>If text that would normally be marked with <gi>abbr</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="actor">
+                     <catDesc>If text that would normally be marked with <gi>actor</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="add">
+                     <catDesc>If text that would normally be marked with <gi>add</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="address">
+                     <catDesc>If text that would normally be marked with <gi>address</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="addrLine">
+                     <catDesc>If text that would normally be marked with <gi>addrLine</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="addSpan">
+                     <catDesc>If text that would normally be marked with <gi>addSpan</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="am">
+                     <catDesc>If text that would normally be marked with <gi>am</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <!--
                   <category xml:id="anchor">
                      <catDesc>If text that would normally be marked with <gi>anchor</gi> elements is present in the
                         document instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
                   </category>-->
-      <category xml:id="argument">
-         <catDesc>If text that would normally be marked with <gi>argument</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="author">
-         <catDesc>If text that would normally be marked with <gi>author</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="back">
-         <catDesc>If text that would normally be marked with <gi>back</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="bibl">
-         <catDesc>If text that would normally be marked with <gi>bibl</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <!--
+                  <category xml:id="argument">
+                     <catDesc>If text that would normally be marked with <gi>argument</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="author">
+                     <catDesc>If text that would normally be marked with <gi>author</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="back">
+                     <catDesc>If text that would normally be marked with <gi>back</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="bibl">
+                     <catDesc>If text that would normally be marked with <gi>bibl</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <!--
                   <category xml:id="body">
                      <catDesc>If text that would normally be marked with <gi>body</gi> elements is present in the
                         document instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
                   </category>-->
-      <category xml:id="byline">
-         <catDesc>If text that would normally be marked with <gi>byline</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="c">
-         <catDesc>If text that would normally be marked with <gi>c</gi> elements is present in the document instance the
-            intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="castGroup">
-         <catDesc>If text that would normally be marked with <gi>castGroup</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="castItem">
-         <catDesc>If text that would normally be marked with <gi>castItem</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="castList">
-         <catDesc>If text that would normally be marked with <gi>castList</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="cb">
-         <catDesc>If text that would normally be marked with <gi>cb</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="cell">
-         <catDesc>If text that would normally be marked with <gi>cell</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <!--
+                  <category xml:id="byline">
+                     <catDesc>If text that would normally be marked with <gi>byline</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="c">
+                     <catDesc>If text that would normally be marked with <gi>c</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="castGroup">
+                     <catDesc>If text that would normally be marked with <gi>castGroup</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="castItem">
+                     <catDesc>If text that would normally be marked with <gi>castItem</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="castList">
+                     <catDesc>If text that would normally be marked with <gi>castList</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="cb">
+                     <catDesc>If text that would normally be marked with <gi>cb</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="cell">
+                     <catDesc>If text that would normally be marked with <gi>cell</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <!--
                   <category xml:id="choice">
                      <catDesc>If text that would normally be marked with <gi>choice</gi> elements is present in the
                         document instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
                   </category>-->
-      <category xml:id="cit">
-         <catDesc>If text that would normally be marked with <gi>cit</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="closer">
-         <catDesc>If text that would normally be marked with <gi>closer</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="corr">
-         <catDesc>If text that would normally be marked with <gi>corr</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="date">
-         <catDesc>If text that would normally be marked with <gi>date</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="dateline">
-         <catDesc>If text that would normally be marked with <gi>dateline</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="del">
-         <catDesc>If text that would normally be marked with <gi>del</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <!--
+                  <category xml:id="cit">
+                     <catDesc>If text that would normally be marked with <gi>cit</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="closer">
+                     <catDesc>If text that would normally be marked with <gi>closer</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="corr">
+                     <catDesc>If text that would normally be marked with <gi>corr</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="date">
+                     <catDesc>If text that would normally be marked with <gi>date</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="dateline">
+                     <catDesc>If text that would normally be marked with <gi>dateline</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="del">
+                     <catDesc>If text that would normally be marked with <gi>del</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <!--
                   <category xml:id="desc">
                      <catDesc>If text that would normally be marked with <gi>desc</gi> elements is present in the
                         document instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
                   </category>-->
-      <category xml:id="div">
-         <catDesc>If text that would normally be marked with <gi>div</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="docAuthor">
-         <catDesc>If text that would normally be marked with <gi>docAuthor</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="docDate">
-         <catDesc>If text that would normally be marked with <gi>docDate</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="docEdition">
-         <catDesc>If text that would normally be marked with <gi>docEdition</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="docImprint">
-         <catDesc>If text that would normally be marked with <gi>docImprint</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="docTitle">
-         <catDesc>If text that would normally be marked with <gi>docTitle</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="epigraph">
-         <catDesc>If text that would normally be marked with <gi>epigraph</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="ex">
-         <catDesc>If text that would normally be marked with <gi>ex</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="expan">
-         <catDesc>If text that would normally be marked with <gi>expan</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="figDesc">
-         <catDesc>If text that would normally be marked with <gi>figDesc</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="figure">
-         <catDesc>If text that would normally be marked with <gi>figure</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="floatingText">
-         <catDesc>If text that would normally be marked with <gi>floatingText</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="foreign">
-         <catDesc>If text that would normally be marked with <gi>foreign</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="formula">
-         <catDesc>If text that would normally be marked with <gi>formula</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="front">
-         <catDesc>If text that would normally be marked with <gi>front</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="fw">
-         <catDesc>If text that would normally be marked with <gi>fw</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="g">
-         <catDesc>If text that would normally be marked with <gi>g</gi> elements is present in the document instance the
-            intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="gap">
-         <catDesc>If text that would normally be marked with <gi>gap</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="graphic">
-         <catDesc>If text that would normally be marked with <gi>graphic</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="group">
-         <catDesc>If text that would normally be marked with <gi>group</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="handShift">
-         <catDesc>If text that would normally be marked with <gi>handShift</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="head">
-         <catDesc>If text that would normally be marked with <gi>head</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="hi">
-         <catDesc>If text that would normally be marked with <gi>hi</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="imprimatur">
-         <catDesc>If text that would normally be marked with <gi>imprimatur</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="item">
-         <catDesc>If text that would normally be marked with <gi>item</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="l">
-         <catDesc>If text that would normally be marked with <gi>l</gi> elements is present in the document instance the
-            intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="label">
-         <catDesc>If text that would normally be marked with <gi>label</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="lb">
-         <catDesc>If text that would normally be marked with <gi>lb</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="lg">
-         <catDesc>If text that would normally be marked with <gi>lg</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="list">
-         <catDesc>If text that would normally be marked with <gi>list</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="listBibl">
-         <catDesc>If text that would normally be marked with <gi>listBibl</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="measure">
-         <catDesc>If text that would normally be marked with <gi>measure</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="milestone">
-         <catDesc>If text that would normally be marked with <gi>milestone</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="name">
-         <catDesc>If text that would normally be marked with <gi>name</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-         <category xml:id="name-person">
-            <catDesc>If text that would normally be marked with <gi>name</gi> elements with a <att>type</att> attribute
-               of <val>person</val> is present in the document instance the intention was to mark these, unless
-               #notMarked is also referenced.</catDesc>
-         </category>
-         <category xml:id="name-place">
-            <catDesc>If text that would normally be marked with <gi>name</gi> elements with a <att>type</att> attribute
-               of <val>place</val> is present in the document instance the intention was to mark these, unless
-               #notMarked is also referenced.</catDesc>
-         </category>
-      </category>
-      <category xml:id="note">
-         <catDesc>If text that would normally be marked with <gi>note</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="num">
-         <catDesc>If text that would normally be marked with <gi>num</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="opener">
-         <catDesc>If text that would normally be marked with <gi>opener</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="orig">
-         <catDesc>If text that would normally be marked with <gi>orig</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="p">
-         <catDesc>If text that would normally be marked with <gi>p</gi> elements is present in the document instance the
-            intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="pb">
-         <catDesc>If text that would normally be marked with <gi>pb</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="pc">
-         <catDesc>If text that would normally be marked with <gi>pc</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="postscript">
-         <catDesc>If text that would normally be marked with <gi>postscript</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="publisher">
-         <catDesc>If text that would normally be marked with <gi>publisher</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="pubPlace">
-         <catDesc>If text that would normally be marked with <gi>pubPlace</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="q">
-         <catDesc>If text that would normally be marked with <gi>q</gi> elements is present in the document instance the
-            intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="quote">
-         <catDesc>If text that would normally be marked with <gi>quote</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="ref">
-         <catDesc>If text that would normally be marked with <gi>ref</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="reg">
-         <catDesc>If text that would normally be marked with <gi>reg</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="rhyme">
-         <catDesc>If text that would normally be marked with <gi>rhyme</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="role">
-         <catDesc>If text that would normally be marked with <gi>role</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="roleDesc">
-         <catDesc>If text that would normally be marked with <gi>roleDesc</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="row">
-         <catDesc>If text that would normally be marked with <gi>row</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="rs">
-         <catDesc>If text that would normally be marked with <gi>rs</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="s">
-         <catDesc>If text that would normally be marked with <gi>s</gi> elements is present in the document instance the
-            intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="salute">
-         <catDesc>If text that would normally be marked with <gi>salute</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="seg">
-         <catDesc>If text that would normally be marked with <gi>seg</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="sic">
-         <catDesc>If text that would normally be marked with <gi>sic</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="signed">
-         <catDesc>If text that would normally be marked with <gi>signed</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="sp">
-         <catDesc>If text that would normally be marked with <gi>sp</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="space">
-         <catDesc>If text that would normally be marked with <gi>space</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="speaker">
-         <catDesc>If text that would normally be marked with <gi>speaker</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="spGrp">
-         <catDesc>If text that would normally be marked with <gi>spGrp</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="stage">
-         <catDesc>If text that would normally be marked with <gi>stage</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="subst">
-         <catDesc>If text that would normally be marked with <gi>subst</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="supplied">
-         <catDesc>If text that would normally be marked with <gi>supplied</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="table">
-         <catDesc>If text that would normally be marked with <gi>table</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <!--
+                  <category xml:id="div">
+                     <catDesc>If text that would normally be marked with <gi>div</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="docAuthor">
+                     <catDesc>If text that would normally be marked with <gi>docAuthor</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="docDate">
+                     <catDesc>If text that would normally be marked with <gi>docDate</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="docEdition">
+                     <catDesc>If text that would normally be marked with <gi>docEdition</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="docImprint">
+                     <catDesc>If text that would normally be marked with <gi>docImprint</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="docTitle">
+                     <catDesc>If text that would normally be marked with <gi>docTitle</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="epigraph">
+                     <catDesc>If text that would normally be marked with <gi>epigraph</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="ex">
+                     <catDesc>If text that would normally be marked with <gi>ex</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="expan">
+                     <catDesc>If text that would normally be marked with <gi>expan</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="figDesc">
+                     <catDesc>If text that would normally be marked with <gi>figDesc</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="figure">
+                     <catDesc>If text that would normally be marked with <gi>figure</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="floatingText">
+                     <catDesc>If text that would normally be marked with <gi>floatingText</gi> elements is present in
+                        the document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="foreign">
+                     <catDesc>If text that would normally be marked with <gi>foreign</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="formula">
+                     <catDesc>If text that would normally be marked with <gi>formula</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="front">
+                     <catDesc>If text that would normally be marked with <gi>front</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="fw">
+                     <catDesc>If text that would normally be marked with <gi>fw</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="g">
+                     <catDesc>If text that would normally be marked with <gi>g</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="gap">
+                     <catDesc>If text that would normally be marked with <gi>gap</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="graphic">
+                     <catDesc>If text that would normally be marked with <gi>graphic</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="group">
+                     <catDesc>If text that would normally be marked with <gi>group</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="handShift">
+                     <catDesc>If text that would normally be marked with <gi>handShift</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="head">
+                     <catDesc>If text that would normally be marked with <gi>head</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="hi">
+                     <catDesc>If text that would normally be marked with <gi>hi</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="imprimatur">
+                     <catDesc>If text that would normally be marked with <gi>imprimatur</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="item">
+                     <catDesc>If text that would normally be marked with <gi>item</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="l">
+                     <catDesc>If text that would normally be marked with <gi>l</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="label">
+                     <catDesc>If text that would normally be marked with <gi>label</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="lb">
+                     <catDesc>If text that would normally be marked with <gi>lb</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="lg">
+                     <catDesc>If text that would normally be marked with <gi>lg</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="list">
+                     <catDesc>If text that would normally be marked with <gi>list</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="listBibl">
+                     <catDesc>If text that would normally be marked with <gi>listBibl</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="measure">
+                     <catDesc>If text that would normally be marked with <gi>measure</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="milestone">
+                     <catDesc>If text that would normally be marked with <gi>milestone</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="name">
+                     <catDesc>If text that would normally be marked with <gi>name</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                     <category xml:id="name-person">
+                        <catDesc>If text that would normally be marked with <gi>name</gi> elements with a
+                              <att>type</att> attribute of <val>person</val> is present in the document instance the
+                           intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                     </category>
+                     <category xml:id="name-place">
+                        <catDesc>If text that would normally be marked with <gi>name</gi> elements with a
+                              <att>type</att> attribute of <val>place</val> is present in the document instance the
+                           intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                     </category>
+                  </category>
+                  <category xml:id="note">
+                     <catDesc>If text that would normally be marked with <gi>note</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="num">
+                     <catDesc>If text that would normally be marked with <gi>num</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="opener">
+                     <catDesc>If text that would normally be marked with <gi>opener</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="orig">
+                     <catDesc>If text that would normally be marked with <gi>orig</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="p">
+                     <catDesc>If text that would normally be marked with <gi>p</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="pb">
+                     <catDesc>If text that would normally be marked with <gi>pb</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="pc">
+                     <catDesc>If text that would normally be marked with <gi>pc</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="postscript">
+                     <catDesc>If text that would normally be marked with <gi>postscript</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="publisher">
+                     <catDesc>If text that would normally be marked with <gi>publisher</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="pubPlace">
+                     <catDesc>If text that would normally be marked with <gi>pubPlace</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="q">
+                     <catDesc>If text that would normally be marked with <gi>q</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="quote">
+                     <catDesc>If text that would normally be marked with <gi>quote</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="ref">
+                     <catDesc>If text that would normally be marked with <gi>ref</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="reg">
+                     <catDesc>If text that would normally be marked with <gi>reg</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="rhyme">
+                     <catDesc>If text that would normally be marked with <gi>rhyme</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="role">
+                     <catDesc>If text that would normally be marked with <gi>role</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="roleDesc">
+                     <catDesc>If text that would normally be marked with <gi>roleDesc</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="row">
+                     <catDesc>If text that would normally be marked with <gi>row</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="rs">
+                     <catDesc>If text that would normally be marked with <gi>rs</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="s">
+                     <catDesc>If text that would normally be marked with <gi>s</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="salute">
+                     <catDesc>If text that would normally be marked with <gi>salute</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="seg">
+                     <catDesc>If text that would normally be marked with <gi>seg</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="sic">
+                     <catDesc>If text that would normally be marked with <gi>sic</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="signed">
+                     <catDesc>If text that would normally be marked with <gi>signed</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="sp">
+                     <catDesc>If text that would normally be marked with <gi>sp</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                  </category>
+                  <category xml:id="space">
+                     <catDesc>If text that would normally be marked with <gi>space</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="speaker">
+                     <catDesc>If text that would normally be marked with <gi>speaker</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="spGrp">
+                     <catDesc>If text that would normally be marked with <gi>spGrp</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="stage">
+                     <catDesc>If text that would normally be marked with <gi>stage</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="subst">
+                     <catDesc>If text that would normally be marked with <gi>subst</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="supplied">
+                     <catDesc>If text that would normally be marked with <gi>supplied</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="table">
+                     <catDesc>If text that would normally be marked with <gi>table</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <!--
                   <category xml:id="TEI">
                      <catDesc>If text that would normally be marked with <gi>TEI</gi> elements is present in the
                         document instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
                   </category>-->
-      <!--<category xml:id="teiCorpus">
+                  <!--<category xml:id="teiCorpus">
                      <catDesc>If text that would normally be marked with <gi>teiCorpus</gi> elements is present in the
                         document instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
                   </category>-->
-      <category xml:id="text">
-         <catDesc>If text that would normally be marked with <gi>text</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="time">
-         <catDesc>If text that would normally be marked with <gi>time</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="title">
-         <catDesc>If text that would normally be marked with <gi>title</gi> elements is present in the document instance
-            the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="titlePage">
-         <catDesc>If text that would normally be marked with <gi>titlePage</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="titlePart">
-         <catDesc>If text that would normally be marked with <gi>titlePart</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="trailer">
-         <catDesc>If text that would normally be marked with <gi>trailer</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="unclear">
-         <catDesc>If text that would normally be marked with <gi>unclear</gi> elements is present in the document
-            instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-      <category xml:id="w">
-         <catDesc>If text that would normally be marked with <gi>w</gi> elements is present in the document instance the
-            intention was to mark these, unless #notMarked is also referenced.</catDesc>
-      </category>
-   </category>
-</taxonomy>
+                  <category xml:id="text">
+                     <catDesc>If text that would normally be marked with <gi>text</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="time">
+                     <catDesc>If text that would normally be marked with <gi>time</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="title">
+                     <catDesc>If text that would normally be marked with <gi>title</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="titlePage">
+                     <catDesc>If text that would normally be marked with <gi>titlePage</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="titlePart">
+                     <catDesc>If text that would normally be marked with <gi>titlePart</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="trailer">
+                     <catDesc>If text that would normally be marked with <gi>trailer</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="unclear">
+                     <catDesc>If text that would normally be marked with <gi>unclear</gi> elements is present in the
+                        document instance the intention was to mark these, unless #notMarked is also
+                        referenced.</catDesc>
+                  </category>
+                  <category xml:id="w">
+                     <catDesc>If text that would normally be marked with <gi>w</gi> elements is present in the document
+                        instance the intention was to mark these, unless #notMarked is also referenced.</catDesc>
+                     <category xml:id="w-pos">
+                        <catDesc>Where <gi>w</gi> elements are marked, their parts of speech are marked through use of
+                           the <att>ana</att> attribute.</catDesc>
+                     </category>
+                  </category>
+               </category>
+            </taxonomy>
+         </classDecl>
+      </encodingDesc>
+   </teiHeader>
+   <text>
+      <front>
+         <titlePage>
+            <docTitle>
+               <titlePart type="main">TEI Simple: Performance Indicators</titlePart>
+            </docTitle>
+            <docAuthor>James Cummings</docAuthor>
+            <docAuthor>Sebastian Rahtz</docAuthor>
+         </titlePage>
+      </front>
+      <body>
+         <p> Although TEI Simple is designed to be very constrained, it will still allow for many choices by the
+            encoder. Do they choose, for example, to explicitly identify names of people and places? Will they mark
+            where spelling has been normalized? Will all the words be marked with part of speech information for
+            linguistic analysis? This will affect the query potential of a corpus of texts, and cannot be done simply by
+            analyzing the markup. The TEI already has extensive provision in the metadata header for describing the
+            encoding decisions which have been made, but this is largely targeted at storing human-readable notes, and
+            is thus not machine readable. This objective is to develop and implement an extra level of notation aimed at
+            automatically profiling a text. This notation is be stored as machine-readable data in the <gi>teiHeader</gi> using the 
+            <gi>interpretation</gi> element in <gi>editorialDecl</gi>. If
+            mediated through a good visualizing tool, such data can alert an end user to the fact that texts in a corpus
+            do or not include linguistic annotation, named entity identification, etc. They are, if you will, metadata
+            about metadata. TEI Simple has not developed that visualizing tool, but it will lay the groundwork for data
+            structures that routine visualizing tools can easily access and mediate, provided the data are there in the
+            first place and in a machine-readable form. </p>
+         <p>The TEI Simple Performance Indicators can be used in the <gi>editorialDecl</gi> of any TEI Simple document
+            by pointing to the file <ref
+               target="http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple-pi.xml"
+               >http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple-pi.xml</ref> and the <att>xml:id</att>
+            values of categories in its taxonomy. This is done by using the <gi>interpretation</gi> element, one for
+            each element or aspect being recorded.
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+               <editorialDecl>
+                  <interpretation ana="simple-pi:name-person simple-pi:PI-Linked"><p>Where present in the text names of people are marked.</p></interpretation>
+                  <interpretation ana="simple-pi:name-place simple-pi:PI-NotMarked"><p>Where present in the text names of places are not marked.</p></interpretation>
+                  <interpretation ana="simple-pi:date"><p>Where present in the text dates have been marked.</p></interpretation>
+                  <interpretation ana="simple-pi:prose"><p>The work is primarily prose.</p></interpretation>
+               </editorialDecl>  
+            </egXML>
+         </p>
+         <p> Here the private URI prefix <val>simple-pi:</val> is used before the value of the <att>xml:id</att> of the
+            relevant category in the <att>ana</att> attribute of the <gi>interpretation</gi> element to point to that
+            category. This should be documented with a <gi>listPrefixDecl</gi> in the TEI Simple document instance. For
+            example:
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+               <listPrefixDef>
+                  <prefixDef ident="simple-pi" matchPattern="([A-Z0-9-]+)" replacementPattern="http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple-pi.xml#$1">
+                     <p> Private URIs using the <code>simple-pi</code> prefix are pointers to <gi>category</gi> elements in
+                        the teisimple-pi.xml file. For example, <code>simple-pi:name-person</code> dereferences to
+                        <code>http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple-pi.xml#name-person</code>
+                        and would indicate that names of people have been intended to be marked. If another value in the same
+                        <gi>interpretation</gi> element pointed to <code>simple-pi:PI-NotMarked</code> this would indicate
+                        that these have not been marked.</p>
+                  </prefixDef>
+               </listPrefixDef>
+            </egXML>
+         </p>
+         <p>The list of category <att>xml:id</att>s of TEI Simple Performance Indicators can be seen in the XML source
+            for this file at: <ref target="https://github.com/TEIC/TEI-Simple/blob/master/teisimple-pi.xml">https://github.com/TEIC/TEI-Simple/blob/master/teisimple-pi.xml</ref>. </p>
+      </body>
+   </text>
+</TEI>
