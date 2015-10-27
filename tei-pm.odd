@@ -34,33 +34,359 @@
           <p>TEI material can be licensed differently depending on the use you intend to make of it. Hence it is made
             available under both the CC+BY and BSD-2 licences. The CC+BY licence is generally appropriate for usages
             which treat TEI content as data or documentation. The BSD-2 licence is generally appropriate for usage of
-            TEI content in a software environment. For further information or clarification, please contact the <ref target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
+            TEI content in a software environment. For further information or clarification, please contact the <ref
+              target="mailto:info@tei-c.org">TEI Consortium</ref>. </p>
         </availability>
       </publicationStmt>
       <sourceDesc>
-        <p>created ab initio during a meeting in Oxford</p>
+        <p>created ab initio during a meeting in Oxford; Significantly edited by James Cummings later.</p>
       </sourceDesc>
     </fileDesc>
-<revisionDesc>
-<change when="2015-09-11">Replaced elementspecs with xinclude
-links</change>
-</revisionDesc>
+    <revisionDesc>
+      <change when="2015-09-11">Replaced elementspecs with xinclude links</change>
+    </revisionDesc>
   </teiHeader>
   <text>
     <front>
       <titlePage>
         <docTitle>
-          <titlePart type="main">TEI ODD extensions for processing models</titlePart>
+          <titlePart type="main">Proposed Guidelines Prose for TEI Processing Models</titlePart>
         </docTitle>
         <docAuthor>Sebastian Rahtz</docAuthor>
-        <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>James Cummings</docAuthor>
+        <docAuthor>Brian Pytlik Zillig</docAuthor>
         <docAuthor>Magdalena Turska</docAuthor>
-        <docDate>Version 0.4:  29th May 2015</docDate>
+        <docDate>Version 0.9: 29th May 2015</docDate>
       </titlePage>
     </front>
     <body>
       <div>
+        <head>Editing Note (to be removed)</head>
+        <p rend="italic bold">I (JamesC) believe that the appropriate place for this draft guidelines prose is 22.4.8
+          shortly after <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/TD.html#TDENT"
+            >http://www.tei-c.org/release/doc/tei-p5-doc/en/html/TD.html#TDENT</ref> or another possibility is as a new
+          22.5 (pushing the current one down to 22.6).</p>
+      </div>
+
+      <div>
+        <head>Documenting a Processing Model</head>
+        <p>Where desired, the recording of the original rendition of source documents is catered for through use of the
+          global attributes (<att>rend</att>, <att>rendition</att> and <att>style</att>) as well as the
+            <gi>rendition</gi> element (see <ptr target="#COHQW"/>). What is needed in some other instances is a method
+          through which to document one or more possible 'processing models' for the document instance being encoded. In
+          this case a processing model is a template description for how the element should be transformed in one or
+          more particular outputs. It might say that this element should be displayed in italics or presented alongside
+          its alternative (e.g. in the example of <gi>sic</gi> and <gi>corr</gi>), with no details on how or in what
+          processing language this might be accomplished. It should be noted that any processing model documentation
+          should be considered illustrative rather than restrictive. This is a method for documenting one or more
+            <emph>possible</emph> processing models in abstract terms and it should be clear that processing of such
+          documents is not limited to only these possibilities. This enables the creator of a TEI customization to
+          specify how they intend particular elements could be processed. </p>
+        <p>This method of working <!-- informally known as the 'Rahtz Rationale' --> assumes a workflow with at least
+          three distinct parts and roles, in creating digital outputs from TEI texts. These roles may be held all by a
+          single individual or multiple large teams depending on the scope and available resources. The minimal
+          divisions that underlie this approach to documenting processing models are:</p>
+        <list type="ordered">
+          <item>an editor manages the text integrity and makes the high-level output decisions. These fall into (at
+            least) two parts:<list type="ordered">
+              <item>Structural descriptions, e.g. 'should the original or corrected version be displayed by default', or
+                'is this a block level or inline component'</item>
+              <item>Indications of appearance ('titles are in italics').</item>
+            </list></item>
+          <item>a programmer takes the editor's specification, and the TEI text(s), and creates the input for a designer
+            to make the output.</item>
+          <item>a designer creates the output envelope (for example, and book layout using typesetting software, or a
+            web site using their locally-supported web framework), making decisions in conjunction with the editor ('use
+            Garamond font throughout' or 'every page must show the departmental logo')</item>
+        </list>
+        <p>It is crucial to understand here that neither the designer nor the programmer necessarily need have any
+          understanding of the semantics of TEI elements or the structure of a TEI document. The programmer,
+          particularly, can use the processing model rules to extract material from the TEI text in a relatively simple
+          way. The method works for a variety of output formats, as the programmer simply has to provide implementations
+          for a small number of model behaviours, and understand the well-documented features of CSS. The concepts
+          addressed by the behaviours (e.g. <val>block</val> and <val>inline</val>) are generally in line with XSL-FO,
+          and HTML; the catalogue of functions is given under the element <gi>model</gi>.</p>
+
+        <p>The following elements are used to document processing models: <specList>
+            <specDesc key="model"/>
+            <specDesc key="modelSequence"/>
+            <specDesc key="modelGrp"/>
+          </specList>
+        </p>
+        <p>A processing model may by documented by one or more <gi>model</gi> elements. If these are provided within a
+            <gi>modelGrp</gi> element, or appear inside the <gi>elementSpec</gi> itself, then they document alternative
+          processing models. The <gi>modelGrp</gi> is used to group elements all of which are alternatives for the same
+            <att>output</att>. If multiple <gi>model</gi> elements are provided within a <gi>modelSequence</gi> element,
+          then they document a single model composed of a sequence of models to be processed as a unit.</p>
+
+
+        <div>
+          <head>Processing Models</head>
+          <p>The <gi>model</gi> element is the basis of any processing model documentation. The <gi>model</gi> element
+            is used to document the intended processing model for a particular element in an abstract manner which
+            separates the documentation of intended processing from its implementation in whatever processing language
+            is chosen. A required <att>behaviour</att> attribute which documents the intended processing behaviour and
+            controls which processing function should be used to present this element in output. By default the
+            behaviour specified by a <gi>model</gi> element is applicable to every occurrence of the element documented
+            by the parent <gi>elementSpec</gi> within which it appears. However, a <gi>model</gi> element's scope may be
+            modified using the <att>predicate</att> attribute to supply an XPath predicate determining the context under
+            which this model is applicable. </p>
+
+          <p>
+            <specList>
+              <specDesc key="model" atts="predicate behaviour useSourceRendition output"/>
+              <specDesc key="outputRendition" atts="scope"/>
+            </specList>
+          </p>
+
+          <p>The processing model notation allows each element to be assigned to one or more general categories
+              (<gi>model</gi>), and optionally given an output rendition description (<gi>outputRendition</gi>). This
+            allows a processor to know whether to handle the element or not, and broadly speaking how to display or
+            otherwise process it. The <gi>model</gi> and <gi>outputRendition</gi> documentation are recorded in the TEI
+            ODD customization. The editor or customization creator can document the intended output without having any
+            knowledge about the implementation language or methodologies employed. The scope of a <gi>model</gi> and its
+              <att>behaviour</att> may be limited by the <att>predicate</att> attribute. For a given
+              <gi>elementSpec</gi>, there can be as many <gi>model</gi> statements as required. Multiple <gi>model</gi>
+            statements are regarded as an alternation -- only one of them should be applied. This is comparable to a
+            'case statement' in some programming languages. </p>
+          <p>If the intention is for several <gi>model</gi> statements to be active at the same time, they can be
+            enclosed inside a <gi>modelSequence</gi>. If it is desired to group sets of <gi>model</gi> statements
+            without implying a sequence, for example grouping all of those for the same kind of output, then a
+              <gi>modelGrp</gi> element may be used.</p>
+        </div>
+        <div>
+          <head>Output Rendition </head>
+          <p>Within each <gi>model</gi> there can be set of <gi>outputRendition</gi> elements. For example, with the
+            simple case of handling of the <gi>hi</gi> element a customization writer may decide that this should be
+            treated as an inline element and normally output in italics:</p>
+
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <model behaviour="inline">
+              <outputRendition>font-style: italic;</outputRendition>
+            </model>
+          </egXML>
+
+          <p>The <att>behaviour</att> attribute specifies the name of a model behaviour <val>inline</val>. This
+            behaviour and its parameters can be documented in a using the <gi>paramSpec</gi> element. While these
+            express different categories of output possibilities they do not specify the precise details of
+            implementation since that is dependent on the processing language chosen. The <gi>outputRendition</gi>
+            element uses CSS syntax to specify the appearance. It would have been possible here to simply add 'display:
+            inline;' to the rendition, to indicate that it is inline, but the intention is to separate the structural
+            decision from the presentation of its appearance. </p>
+          <p>It is common for <gi>hi</gi> to use a <att>rendition</att> attribute to indicate appearance. By default,
+            this is ignored, but <att>useSourceRendition</att> can be used to indicate that it should be taken account
+            of:</p>
+
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <model behaviour="inline" useSourceRendition="true">
+              <outputRendition>font-style: italic;</outputRendition>
+            </model>
+          </egXML>
+
+          <p>In this case the <gi>outputRendition</gi> should be considered only a fallback and will be overridden by
+            the rendition attribute if it exists. This uses the same behaviour as CSS; i.e. if rendition involves a
+            change to a different property from 'font-style', then this local modification remains active.</p>
+
+        </div>
+        <div>
+          <head>Model Contexts</head>
+          <p>If the processing model is context-dependent, the <att>predicate</att> attribute can provide an XPath
+            expression to document when different models apply. In document processing for the <gi>q</gi> element, it
+            may be desired to indicate that when it is inside a paragraph it should be treated as <val>inline</val>
+            (with an italic font style), but when it isn't inside a paragraph, it should be treated as a block. </p>
+
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <model predicate="ancestor::p" behaviour="inline">
+              <outputRendition>font-style: italic;</outputRendition>
+            </model>
+            
+            <model behaviour="block">
+              <outputRendition>left-margin: 2em;</outputRendition>
+            </model>
+          </egXML>
+
+          <p>The <gi>model</gi> elements here are alternatives and are so by default. It is only if the test (the
+              <att>predicate</att> attribute) does not match the context will the second <gi>model</gi> be applied. The
+              <gi>model</gi> elements could be grouped in a <gi>modelGrp</gi> element if there was a reason to do so,
+            for example they are all for one particular form of output. This enables a convenient distinction between
+            sets of models whose difference is not their predicate but their form of output.</p>
+
+        </div>
+
+        <div>
+          <head>Parameters for Model Behaviour</head>
+
+          <p>In the examples above TEI elements have been mapped to to simple block and inline concepts. There are other
+            behaviours possible and these can have parameters which themselves need to be documented. <specList>
+              <specDesc key="param" atts="name"/>
+              <specDesc key="paramList"/>
+              <specDesc key="paramDesc"/>
+            </specList>
+          </p>
+          <p>A more complex example is provided by processing the <gi>choice</gi> element; this is commonly used to
+            provide a pair of alternates (e.g. <gi>sic</gi> and <gi>corr</gi>). An editor or customization writer may
+            wish to document that the corrected version should be shown by default in the output, but still allow for
+            the implementation to switch to (or note or display in some form, such as a tooltip) the original version.
+            This may be documented with a <att>behaviour</att> attribute, for example, of <val>alternate</val> depending
+            on the function library being used. In documenting the processing model for <gi>choice</gi> there are three
+            common pairs of <gi>sic</gi> and <gi>corr</gi>, <gi>abbr</gi> and <gi>expan</gi>, as well as <gi>orig</gi>
+            and <gi>reg</gi> to record:</p>
+
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <model predicate="sic and corr" behaviour="alternate">
+              <param name="default">corr</param>
+              <param name="alternate">sic</param>
+            </model>
+            
+            <model predicate="abbr and expan[1]" behaviour="alternate">
+              <param name="default">expan</param>
+              <param name="alternate">abbr</param>
+            </model>
+            
+            <model predicate="orig and reg" behaviour="alternate">
+              <param name="default">reg</param>
+              <param name="alternate">orig</param>
+            </model>
+          </egXML>
+          <p>This example provides explicit behaviour parameters as named <gi>param</gi> children of the <gi>model</gi>.
+            The <gi>param</gi> elements provide parameters to the behaviour implementation documented by the
+              <att>behaviour</att> attribute and their content is always assumed to be an XPath expression. Thus in the
+            example above, we specify <val>expan[1]</val> to choose the first of any available set of <gi>expan</gi>
+            children. The behaviours and their parameters may be documented separately for a customization using a
+              <gi>paramSpec</gi> element. If no <gi>param</gi> is supplied, or it is <val>.</val>, the content of the
+            object documented by this <gi>model</gi> and subject to the <att>behaviour</att> is assumed to be the
+            content of the current node including all child nodes of the element, its attribute nodes, text nodes, etc. </p>
+          <p>When a different behaviour is desired for other outputs this may be specified with the <att>output</att>
+            attribute. In the following example the processing intention for the <gi>date</gi> element is documented
+            where this has options when containing both regularized and human readable data. This example copes with
+            three situations but could be expanded. It records what to do when: </p>
+          <list type="ordered">
+            <item>there is text inside the element, and the output is print; </item>
+            <item>there is no text inside the element but there is a when attribute, and the output is print; and </item>
+            <item>there is a <att>when</att> attribute and text inside the element, and the output is web</item>
+          </list>
+          <p>In the third case, the same alternate function as in the previous example is used, but for print we
+            document that the <att>when</att> attribute should be used when there is no text.</p>
+
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <model output="print" predicate="text()" behaviour="inline"/>
+            
+            <model output="print" predicate="@when and not(text())" behaviour="inline">
+              <param name="content">@when</param>
+            </model>
+            
+            <model predicate="@when" output="web" behaviour="alternate">
+              <param name="default">.</param>
+              <param name="alternate">@when</param>
+            </model>
+        </egXML>
+
+          <p>When documenting the output for elements with attributes, the processing model documentation can access
+            these attributes and their values using standard XPath notation (either abbreviated or unabbreviated
+            syntax). For example, the <gi>ref</gi> element usually has a <att>target</att> attribute providing the
+            location to which a link should be created. The <gi>ref</gi> element may or may not have text content, but
+            sometimes just the target. The processing model documentation below caters for these two situations:</p>
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <model predicate="not(text())" behaviour="link">
+              <param name="content">@target</param>
+              <param name="link">@target</param>
+            </model>
+            
+            <model behaviour="link">
+              <param name="content">.</param>
+              <param name="link">@target</param>
+            </model>
+            </egXML>
+
+          <p>Here the link function has two <gi>param</gi> elements, the text to be shown (<val>content</val>), and the
+            URL to which it should be linked (<val>link</val>). The first of these <gi>model</gi> elements documents
+            that when there is no text nodes inside the <gi>ref</gi> element it should use the content of the
+              <att>target</att> attribute <emph>as if</emph> it was textual content. This <att>predicate</att> attribute
+            could be made more specific as <val>not(text()) and @target</val> to assure that there is a
+              <att>target</att> attribute. The second of these uses this <att>target</att> attribute for providing the
+            link, but the element itself (and any text nodes or child elements) of the <gi>ref</gi> element for its
+            content.</p>
+          <p>The documentation for the suggested model behaviours is provided in the element specification for the
+              <gi>model</gi> element. For example, the <val>inline</val> behaviour has two optional parameters
+              <val>content</val> and <val>label</val>:</p>
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <valItem ident="inline">
+              <paramList>
+                <paramSpec ident="content"/>
+                <paramSpec ident="label"/>
+              </paramList>
+              <desc versionDate="2015-08-21" xml:lang="en">creates inline element out of <term>content</term> if there's something in <gi>outputRendition</gi>, use that formatting otherwise just show text of selected content.</desc>
+            </valItem>
+            </egXML>
+
+          <p>This documentation inside the <gi>elementSpec</gi> for the <gi>model</gi> element because it is there that
+            we specify the list of attribute values that <val>behaviour</val> allows. Similarly the value for the
+            behaviour attribute <val>alternate</val> has two parameters: <val>alternate</val> and
+            <val>default</val>:</p>
+
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <valItem ident="alternate">
+              <paramList>
+                <paramSpec ident="default">
+                  <desc versionDate="2015-08-21" xml:lang="en">preferred content</desc>
+                </paramSpec>
+                <paramSpec ident="alternate">
+                  <desc versionDate="2015-08-21" xml:lang="en">alternate content</desc>
+                </paramSpec>
+              </paramList>
+              <desc versionDate="2015-08-21" xml:lang="en">create a specialized display of alternating elements for displaying the preferred version and an alternative, both at once or by some method of toggling between the two.</desc>
+            </valItem>
+            </egXML>
+          <p>The nature of the documentation of these behaviour parameters intentionally makes no reference to the
+            processing functions which might implement since that is a decision that should be left to the implementor
+            and might vary by choice of processing language and form of output.</p>
+
+        </div>
+        <div>
+          <head>Implementing a TEI Processing Model</head>
+          <p>It is a principle of the processing model <!--(known informally as the 'Turska Tenet') --> that the
+            transformation stage should be minimally intelligent; that is to say, it should contain as few TEI-specific
+            rules as possible. The ODD should be as explicit as possible, and provide maximum expressivity to the
+            editor without recording details of implementation.</p>
+          <p>An implementation of a TEI Processing Model can take at least two approaches. One can read the TEI ODD
+            customization in advance and produce a processing pipeline (which itself consults the ODD or
+            not), or a processing implementation could consult the TEI ODD customization for information while processing a document
+            instance. Software which implements this processing model might proceed as follows:</p>
+          <list type="ordered">
+            <item>When processing an element in the instance document, any applicable <gi>model</gi> or
+                <gi>modelSequence</gi> for the current output format should be followed whether this is done by
+              consulting the TEI ODD customization directly or rules abstracted into the processing toolchain. </item>
+            <item>The <gi>model</gi> elements should be processed in order until a match with the predicate is found, or
+              a <gi>model</gi> with no predicate applies. If a <gi>model</gi> has no predicate, it matches any
+              occurrence of the element. If a <gi>model</gi> has no output, it applies to all forms of output. If there
+              is not a <att>useSourceRendition</att> attribute of <val>true</val> on the <gi>model</gi> then any
+                <att>rendition</att> attribute on the source element can be ignored.</item>
+            <item>All of the <gi>model</gi> elements inside a <gi>modelSequence</gi> should be applied in order if the
+              context matches any optional limiting predicates</item>
+            <item>The processing should follow the function provided by the <att>behaviour</att> attribute. Where the
+              parameter passed to that function is '.' or no <gi>param</gi> is supplied, then the object of the
+                <att>behaviour</att> attribute is all child nodes of the element including its attributes, element, and
+              text nodes. These nodes should be subject to processing within this context. Thus a block should create a
+              block-type object in the output for this element and all the results from processing its children.</item>
+            <item>If there are possible <gi>model</gi> elements, but none has a predicate which matches the current
+              element, processing should proceed to its child nodes and see if there are models for them. Likewise, if
+              there is no <gi>model</gi> provided for the current element, proceed to its children and see if there are
+              models for them.</item>
+            <item>The special behaviour <val>omit</val> should be interpreted to direct processing to stop for that
+              element and to proceed to the next sibling.</item>
+          </list>
+          <p>While this implementation system is lightly sketched it should be interpreted as broadly similar to the
+            processing model for XSLT.</p>
+        </div>
+      </div>
+
+
+
+
+
+<!-- Previous text preserved in a comment here for sentimental and to enable my future checking on original intent -->
+
+      <!--<div>
         <head>The TEI Processing Model</head>
         <div>
           <head>Introduction</head>
@@ -253,16 +579,25 @@ links</change>
 	   </p>
         <p>This is broadly similar to the processing model for XSLT. </p>
       </div>
+      
+      
+      -->
+
+
+    </body>
+
+
+    <back>
       <div>
         <head>Extensions to the TEI</head>
         <specGrp xml:id="additions">
-<include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/param.xml"/>
-<include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/paramSpec.xml"/>
-<include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/paramList.xml"/>
-<include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/model.xml"/>
-<include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/modelSequence.xml"/>
-<include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/modelGrp.xml"/>
-<include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/outputRendition.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/param.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/paramSpec.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/paramList.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/model.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/modelSequence.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/modelGrp.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/outputRendition.xml"/>
         </specGrp>
       </div>
       <div>
@@ -317,20 +652,21 @@ links</change>
           <specGrpRef target="#changes"/>
 
 
-    <elementSpec ident="egXML" mode="change" module="tagdocs" ns="http://www.tei-c.org/ns/Examples">
-      <content>
-	<oneOrMore xmlns="http://relaxng.org/ns/structure/1.0">
-	  <choice>
-	    <text/>
-            <anyName/>
-	  </choice>
-	</oneOrMore>
-      </content>
-    </elementSpec>
+          <elementSpec ident="egXML" mode="change" module="tagdocs" ns="http://www.tei-c.org/ns/Examples">
+            <content>
+              <oneOrMore xmlns="http://relaxng.org/ns/structure/1.0">
+                <choice>
+                  <text/>
+                  <anyName/>
+                </choice>
+              </oneOrMore>
+            </content>
+          </elementSpec>
 
 
         </schemaSpec>
       </div>
-    </body>
+    </back>
+
   </text>
 </TEI>

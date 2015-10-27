@@ -13,7 +13,7 @@ $Id:  $
     <memberOf key="att.global"/>
   </classes>
   <content>
-    <elementRef maxOccurs="unlimited" key="paramSpec"/>
+    <elementRef maxOccurs="unbounded" key="paramSpec"/>
   </content>
   <exemplum xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" >
