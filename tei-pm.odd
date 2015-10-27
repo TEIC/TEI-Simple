@@ -220,7 +220,7 @@
             behaviours possible and these can have parameters which themselves need to be documented. <specList>
               <specDesc key="param" atts="name"/>
               <specDesc key="paramList"/>
-              <specDesc key="paramDesc"/>
+              <specDesc key="paramSpec"/>
             </specList>
           </p>
           <p>A more complex example is provided by processing the <gi>choice</gi> element; this is commonly used to
@@ -315,7 +315,9 @@
                 <paramSpec ident="content"/>
                 <paramSpec ident="label"/>
               </paramList>
-              <desc versionDate="2015-08-21" xml:lang="en">creates inline element out of <term>content</term> if there's something in <gi>outputRendition</gi>, use that formatting otherwise just show text of selected content.</desc>
+              <desc versionDate="2015-08-21" xml:lang="en">creates inline element out 
+                of <term>content</term> if there's something in <gi>outputRendition</gi>, 
+                use that formatting otherwise just show text of selected content.</desc>
             </valItem>
             </egXML>
 
@@ -334,7 +336,9 @@
                   <desc versionDate="2015-08-21" xml:lang="en">alternate content</desc>
                 </paramSpec>
               </paramList>
-              <desc versionDate="2015-08-21" xml:lang="en">create a specialized display of alternating elements for displaying the preferred version and an alternative, both at once or by some method of toggling between the two.</desc>
+              <desc versionDate="2015-08-21" xml:lang="en">create a specialized display 
+                of alternating elements for displaying the preferred version and an alternative, 
+                both at once or by some method of toggling between the two.</desc>
             </valItem>
             </egXML>
           <p>The nature of the documentation of these behaviour parameters intentionally makes no reference to the
