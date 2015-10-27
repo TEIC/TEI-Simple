@@ -72,36 +72,36 @@
         <head>Documenting a Processing Model</head>
         <p>Where desired, the recording of the original rendition of source documents is catered for through use of the
           global attributes (<att>rend</att>, <att>rendition</att> and <att>style</att>) as well as the
-            <gi>rendition</gi> element (see <ptr target="#COHQW"/>). What is needed in some other instances is a method
-          through which to document one or more possible 'processing models' for the document instance being encoded. In
-          this case a processing model is a template description for how the element should be transformed in one or
+            <gi>rendition</gi> element (see <ptr target="#COHQW"/>). Another common requirement is a method
+          through which to document one or more possible <soCalled>processing models</soCalled> for the document instance being encoded. In
+          this case a processing model is a template description specifying how the element should be transformed in one or
           more particular outputs. It might say that this element should be displayed in italics or presented alongside
           its alternative (e.g. in the example of <gi>sic</gi> and <gi>corr</gi>), with no details on how or in what
           processing language this might be accomplished. It should be noted that any processing model documentation
           should be considered illustrative rather than restrictive. This is a method for documenting one or more
             <emph>possible</emph> processing models in abstract terms and it should be clear that processing of such
-          documents is not limited to only these possibilities. This enables the creator of a TEI customization to
-          specify how they intend particular elements could be processed. </p>
+          documents is not limited only to these possibilities. This enables the creator of a TEI customization to
+          specify how they intend particular elements to be processed. </p>
         <p>This method of working <!-- informally known as the 'Rahtz Rationale' --> assumes a workflow with at least
-          three distinct parts and roles, in creating digital outputs from TEI texts. These roles may be held all by a
-          single individual or multiple large teams depending on the scope and available resources. The minimal
+          three distinct roles in the creation of digital outputs from TEI texts. These roles may all be held by a
+          single individual or may be shared among multiple large teams, depending on the scope of the project and available resources. The minimal
           divisions that underlie this approach to documenting processing models are:</p>
         <list type="ordered">
-          <item>an editor manages the text integrity and makes the high-level output decisions. These fall into (at
+          <item>an <emph>editor</emph> manages the text integrity and makes the high-level output decisions. These fall into (at
             least) two parts:<list type="ordered">
-              <item>Structural descriptions, e.g. 'should the original or corrected version be displayed by default', or
-                'is this a block level or inline component'</item>
-              <item>Indications of appearance ('titles are in italics').</item>
+              <item>Structural descriptions, e.g. <q>should the original or corrected version be displayed by default</q>, or
+                <q>is this a block level or inline component</q></item>
+              <item>Indications of appearance (<q>titles are in italics</q>).</item>
             </list></item>
-          <item>a programmer takes the editor's specification, and the TEI text(s), and creates the input for a designer
+          <item>a <emph>programmer</emph> takes the editor's specification, along with the TEI text(s), and creates the input for a designer
             to make the output.</item>
-          <item>a designer creates the output envelope (for example, and book layout using typesetting software, or a
-            web site using their locally-supported web framework), making decisions in conjunction with the editor ('use
-            Garamond font throughout' or 'every page must show the departmental logo')</item>
+          <item>a <emph>designer</emph> creates the output envelope (for example, a traditional book layout using typesetting software, or a
+            web site using a locally-supported web framework), making decisions in conjunction with the editor (<q>use
+            Garamond font throughout</q> or <q>every page must show the departmental logo</q>)</item>
         </list>
-        <p>It is crucial to understand here that neither the designer nor the programmer necessarily need have any
+        <p>It is crucial to understand here that neither the designer nor the programmer need necessarily  have any
           understanding of the semantics of TEI elements or the structure of a TEI document. The programmer,
-          particularly, can use the processing model rules to extract material from the TEI text in a relatively simple
+          in particular, can use the processing model rules to extract material from the TEI text in a relatively simple
           way. The method works for a variety of output formats, as the programmer simply has to provide implementations
           for a small number of model behaviours, and understand the well-documented features of CSS. The concepts
           addressed by the behaviours (e.g. <val>block</val> and <val>inline</val>) are generally in line with XSL-FO,
@@ -115,11 +115,11 @@
         </p>
         <p>A processing model may by documented by one or more <gi>model</gi> elements. If these are provided within a
             <gi>modelGrp</gi> element, or appear inside the <gi>elementSpec</gi> itself, then they document alternative
-          processing models. The <gi>modelGrp</gi> is used to group elements all of which are alternatives for the same
-            <att>output</att>. If multiple <gi>model</gi> elements are provided within a <gi>modelSequence</gi> element,
-          then they document a single model composed of a sequence of models to be processed as a unit.</p>
+          processing models. A <gi>modelGrp</gi> is used to group elements all of which are alternatives for the same
+            <att>output</att>. On the other hand, if multiple <gi>model</gi> elements are provided within a <gi>modelSequence</gi> element,
+          then they document a single operation composed of a sequence of models to be processed as a unit.</p>
 
-
+<!-- MDH: I think the opening of this section is a bit repetitive of material from the previous bit. -->
         <div>
           <head>Processing Models</head>
           <p>The <gi>model</gi> element is the basis of any processing model documentation. The <gi>model</gi> element
