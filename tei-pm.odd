@@ -122,10 +122,10 @@
 <!-- MDH: I think the opening of this section is a bit repetitive of material from the previous bit. -->
         <div>
           <head>Processing Models</head>
-          <p>The <gi>model</gi> element is the basis of any processing model documentation. The <gi>model</gi> element
+          <p>The <gi>model</gi> element
             is used to document the intended processing model for a particular element in an abstract manner which
             separates the documentation of intended processing from its implementation in whatever processing language
-            is chosen. A required <att>behaviour</att> attribute which documents the intended processing behaviour and
+            is chosen. A required <att>behaviour</att> attribute documents the intended processing behaviour and
             controls which processing function should be used to present this element in output. By default the
             behaviour specified by a <gi>model</gi> element is applicable to every occurrence of the element documented
             by the parent <gi>elementSpec</gi> within which it appears. However, a <gi>model</gi> element's scope may be
@@ -148,7 +148,7 @@
               <att>behaviour</att> may be limited by the <att>predicate</att> attribute. For a given
               <gi>elementSpec</gi>, there can be as many <gi>model</gi> statements as required. Multiple <gi>model</gi>
             statements are regarded as an alternation -- only one of them should be applied. This is comparable to a
-            'case statement' in some programming languages. </p>
+            <soCalled>case statement</soCalled> in some programming languages. </p>
           <p>If the intention is for several <gi>model</gi> statements to be active at the same time, they can be
             enclosed inside a <gi>modelSequence</gi>. If it is desired to group sets of <gi>model</gi> statements
             without implying a sequence, for example grouping all of those for the same kind of output, then a
@@ -156,8 +156,7 @@
         </div>
         <div>
           <head>Output Rendition </head>
-          <p>Within each <gi>model</gi> there can be set of <gi>outputRendition</gi> elements. For example, with the
-            simple case of handling of the <gi>hi</gi> element a customization writer may decide that this should be
+          <p>Within each <gi>model</gi> there may be set of <gi>outputRendition</gi> elements. For example, when handling <gi>hi</gi> element a customization writer may decide that it should be
             treated as an inline element and normally output in italics:</p>
 
           <egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -166,13 +165,13 @@
             </model>
           </egXML>
 
-          <p>The <att>behaviour</att> attribute specifies the name of a model behaviour <val>inline</val>. This
-            behaviour and its parameters can be documented in a using the <gi>paramSpec</gi> element. While these
+          <p>The <att>behaviour</att> attribute specifies the name of a model behaviour here (<val>inline</val>). This
+            behaviour and its parameters can be documented using the <gi>paramSpec</gi> element. While these <!-- MDH: I don't understand what "these" refers to here. -->
             express different categories of output possibilities they do not specify the precise details of
-            implementation since that is dependent on the processing language chosen. The <gi>outputRendition</gi>
+            implementation since those are dependent on the processing language chosen. The <gi>outputRendition</gi>
             element uses CSS syntax to specify the appearance. It would have been possible here to simply add 'display:
             inline;' to the rendition, to indicate that it is inline, but the intention is to separate the structural
-            decision from the presentation of its appearance. </p>
+            decision from the textual appearance. </p>
           <p>It is common for <gi>hi</gi> to use a <att>rendition</att> attribute to indicate appearance. By default,
             this is ignored, but <att>useSourceRendition</att> can be used to indicate that it should be taken account
             of:</p>
@@ -184,8 +183,7 @@
           </egXML>
 
           <p>In this case the <gi>outputRendition</gi> should be considered only a fallback and will be overridden by
-            the rendition attribute if it exists. This uses the same behaviour as CSS; i.e. if rendition involves a
-            change to a different property from 'font-style', then this local modification remains active.</p>
+            the rendition attribute if it exists. This uses the same <soCalled>cascading</soCalled> behaviour as CSS; i.e. if rendition makes no explicit change to 'font-style', then this local modification remains active.</p>
 
         </div>
         <div>
