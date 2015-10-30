@@ -13,6 +13,9 @@ TEI Simple schema (RELAX NG): https://raw.githubusercontent.com/TEIC/TEI-Simple/
 
 Test file https://github.com/TEIC/TEI-Simple/blob/master/tests/testsimple.xml (before) and http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/tests/testsimple.html (after)
 
+Exist-db based showcase app http://showcases.exist-db.org/exist/apps/tei-simple/index.html and GitHub repo https://github.com/wolfgangmm/tei-simple-pm
+
+
 # Background
 
 The Text Encoding Initiative (TEI) has developed over 20 years into a key technology in text-centric humanities disciplines, with an extremely wide range of applications, from diplomatic editions to dictionaries, from prosopography to speech transcription and linguistic analysis. It has been able to achieve its range of use by adopting a descriptive rather than prescriptive  approach , by recommending customization to suit particular projects, and by eschewing any attempt to dictate how the digital texts should be rendered or exchanged. However, this flexibility has come at the cost of relatively limited success in interoperability. In our view there is a distinct set of uses (primarily in the area of digitized ‘European’-style books) that would benefit from a prescriptive recipe for digital text; this will sit alongside other domain-specific, constrained TEI customizations, such as the very successful Epidoc in the epigraphic community. TEI Simple may become a prototype for a new family of constrained customizations. For instance, a TEI Simple MS for manuscript based work could be built on top of the ENRICH project, drawing on many of the lessons and some of the code for TEI Simple.
