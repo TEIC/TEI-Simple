@@ -169,8 +169,8 @@
             behaviour and its parameters can be documented using the <gi>paramSpec</gi> element. While these <!-- MDH: I don't understand what "these" refers to here. -->
             express different categories of output possibilities they do not specify the precise details of
             implementation since those are dependent on the processing language chosen. The <gi>outputRendition</gi>
-            element uses CSS syntax to specify the appearance. It would have been possible here to simply add 'display:
-            inline;' to the rendition, to indicate that it is inline, but the intention is to separate the structural
+            element uses CSS syntax to specify the appearance. It would have been possible here to simply add <q>display:
+            inline;</q> to the rendition, to indicate that it is inline, but the intention is to separate the structural
             decision from the textual appearance. </p>
           <p>It is common for <gi>hi</gi> to use a <att>rendition</att> attribute to indicate appearance. By default,
             this is ignored, but <att>useSourceRendition</att> can be used to indicate that it should be taken account
@@ -191,7 +191,7 @@
           <p>If the processing model is context-dependent, the <att>predicate</att> attribute can provide an XPath
             expression to document when different models apply. In document processing for the <gi>q</gi> element, it
             may be desired to indicate that when it is inside a paragraph it should be treated as <val>inline</val>
-            (with an italic font style), but when it isn't inside a paragraph, it should be treated as a block. </p>
+            (with an italic font style), but when it is not, it should be treated as a block. </p>
 
           <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <model predicate="ancestor::p" behaviour="inline">
@@ -204,9 +204,9 @@
           </egXML>
 
           <p>The <gi>model</gi> elements here are alternatives and are so by default. It is only if the test (the
-              <att>predicate</att> attribute) does not match the context will the second <gi>model</gi> be applied. The
-              <gi>model</gi> elements could be grouped in a <gi>modelGrp</gi> element if there was a reason to do so,
-            for example they are all for one particular form of output. This enables a convenient distinction between
+              <att>predicate</att> attribute) does not match the context that the second <gi>model</gi> will be applied. The
+              <gi>model</gi> elements may be grouped in a <gi>modelGrp</gi> element if there is a reason to do so
+            (for example if they are all for one particular form of output). This enables a convenient distinction between
             sets of models whose difference is not their predicate but their form of output.</p>
 
         </div>
@@ -214,8 +214,7 @@
         <div>
           <head>Parameters for Model Behaviour</head>
 
-          <p>In the examples above TEI elements have been mapped to to simple block and inline concepts. There are other
-            behaviours possible and these can have parameters which themselves need to be documented. <specList>
+          <p>In the examples above TEI elements have been mapped to to simple block and inline concepts. Other behaviours aree possible, and these may have parameters which themselves need to be documented. <specList>
               <specDesc key="param" atts="name"/>
               <specDesc key="paramList"/>
               <specDesc key="paramSpec"/>
@@ -225,10 +224,10 @@
             provide a pair of alternates (e.g. <gi>sic</gi> and <gi>corr</gi>). An editor or customization writer may
             wish to document that the corrected version should be shown by default in the output, but still allow for
             the implementation to switch to (or note or display in some form, such as a tooltip) the original version.
-            This may be documented with a <att>behaviour</att> attribute, for example, of <val>alternate</val> depending
+            This may be documented with a <att>behaviour</att> attribute, for example, of <val>alternate</val> <!-- MDH: I don't understand why this attribute value would be dependent on the function library being used. If you want alternate behaviour, you want it whatever your output looks like. The IMPLEMENTATION will vary based on the function library and the target output format. -->depending
             on the function library being used. In documenting the processing model for <gi>choice</gi> there are three
-            common pairs of <gi>sic</gi> and <gi>corr</gi>, <gi>abbr</gi> and <gi>expan</gi>, as well as <gi>orig</gi>
-            and <gi>reg</gi> to record:</p>
+            common pairs: <gi>sic</gi> / <gi>corr</gi>, <gi>abbr</gi> / <gi>expan</gi>, and <gi>orig</gi>
+            / <gi>reg</gi>:</p>
 
           <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <model predicate="sic and corr" behaviour="alternate">
@@ -250,7 +249,7 @@
             The <gi>param</gi> elements provide parameters to the behaviour implementation documented by the
               <att>behaviour</att> attribute and their content is always assumed to be an XPath expression. Thus in the
             example above, we specify <val>expan[1]</val> to choose the first of any available set of <gi>expan</gi>
-            children. The behaviours and their parameters may be documented separately for a customization using a
+            children.<!-- MDH: the foregoing seems utterly magic and ad-hoc. As an XPath predicate, the [1] achieves nothing (expan[1] is true whenever expan is true, and false when it's false). If this is functioning as a processing instruction, then it does not belong in a predicate attribute. --> The behaviours and their parameters may be documented separately for a customization using a
               <gi>paramSpec</gi> element. If no <gi>param</gi> is supplied, or it is <val>.</val>, the content of the
             object documented by this <gi>model</gi> and subject to the <att>behaviour</att> is assumed to be the
             content of the current node including all child nodes of the element, its attribute nodes, text nodes, etc. </p>
