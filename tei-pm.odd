@@ -249,18 +249,17 @@
             The <gi>param</gi> elements provide parameters to the behaviour implementation documented by the
               <att>behaviour</att> attribute and their content is always assumed to be an XPath expression. Thus in the
             example above, we specify <val>expan[1]</val> to choose the first of any available set of <gi>expan</gi>
-            children.<!-- MDH: the foregoing seems utterly magic and ad-hoc. As an XPath predicate, the [1] achieves nothing (expan[1] is true whenever expan is true, and false when it's false). If this is functioning as a processing instruction, then it does not belong in a predicate attribute. --> The behaviours and their parameters may be documented separately for a customization using a
+            children.<!-- MDH: the foregoing seems utterly magic and ad-hoc. As an XPath predicate, the [1] achieves nothing (expan[1] is true whenever expan is true, and false when it's false). If this is functioning as a processing instruction, then it does not belong in a predicate attribute. WHY ARE YOU NOT USING <param name="whichCorr">1</param> or similar? --> The behaviours and their parameters may be documented separately for a customization using a
               <gi>paramSpec</gi> element. If no <gi>param</gi> is supplied, or it is <val>.</val>, the content of the
             object documented by this <gi>model</gi> and subject to the <att>behaviour</att> is assumed to be the
-            content of the current node including all child nodes of the element, its attribute nodes, text nodes, etc. </p>
+            content of the current node including all child nodes of the element, its attribute nodes, text nodes, etc. <!-- MDH: It's not clear what this means. If a <p> is behaviour="block", surely that doesn't mean that child <emph> elements are also block, does it? --></p>
           <p>When a different behaviour is desired for other outputs this may be specified with the <att>output</att>
-            attribute. In the following example the processing intention for the <gi>date</gi> element is documented
-            where this has options when containing both regularized and human readable data. This example copes with
+            attribute. In the following example the processing intention for the <gi>date</gi> element provides options for both regularized and non-regularized content. This example copes with
             three situations but could be expanded. It records what to do when: </p>
           <list type="ordered">
             <item>there is text inside the element, and the output is print; </item>
-            <item>there is no text inside the element but there is a when attribute, and the output is print; and </item>
-            <item>there is a <att>when</att> attribute and text inside the element, and the output is web</item>
+            <item>there is no text inside the element but there is a <att>when</att> attribute, and the output is print; and </item>
+            <item>there is a <att>when</att> attribute and text inside the element, and the output is HTML</item>
           </list>
           <p>In the third case, the same alternate function as in the previous example is used, but for print we
             document that the <att>when</att> attribute should be used when there is no text.</p>
@@ -272,6 +271,7 @@
               <param name="content">@when</param>
             </model>
             
+<!--        MDH:   @output="web" is not really meaningful. The web is full of text and PDFs. -->
             <model predicate="@when" output="web" behaviour="alternate">
               <param name="default">.</param>
               <param name="alternate">@when</param>
@@ -281,8 +281,7 @@
           <p>When documenting the output for elements with attributes, the processing model documentation can access
             these attributes and their values using standard XPath notation (either abbreviated or unabbreviated
             syntax). For example, the <gi>ref</gi> element usually has a <att>target</att> attribute providing the
-            location to which a link should be created. The <gi>ref</gi> element may or may not have text content, but
-            sometimes just the target. The processing model documentation below caters for these two situations:</p>
+            location to which a link should be created. The <gi>ref</gi> element may or may not have text content. The processing model documentation below caters for these two situations:</p>
           <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <model predicate="not(text())" behaviour="link">
               <param name="content">@target</param>
@@ -295,14 +294,14 @@
             </model>
             </egXML>
 
-          <p>Here the link function has two <gi>param</gi> elements, the text to be shown (<val>content</val>), and the
+          <p>Here the link model has two <gi>param</gi> elements, the text to be shown (<val>content</val>), and the
             URL to which it should be linked (<val>link</val>). The first of these <gi>model</gi> elements documents
-            that when there is no text nodes inside the <gi>ref</gi> element it should use the content of the
+            that when there is no text inside the <gi>ref</gi> element it should use the content of the
               <att>target</att> attribute <emph>as if</emph> it was textual content. This <att>predicate</att> attribute
             could be made more specific as <val>not(text()) and @target</val> to assure that there is a
               <att>target</att> attribute. The second of these uses this <att>target</att> attribute for providing the
-            link, but the element itself (and any text nodes or child elements) of the <gi>ref</gi> element for its
-            content.</p>
+            link, but the content (and any text nodes or child elements) of the <gi>ref</gi> element for the
+            content of the output link.</p>
           <p>The documentation for the suggested model behaviours is provided in the element specification for the
               <gi>model</gi> element. For example, the <val>inline</val> behaviour has two optional parameters
               <val>content</val> and <val>label</val>:</p>
@@ -312,16 +311,18 @@
                 <paramSpec ident="content"/>
                 <paramSpec ident="label"/>
               </paramList>
+<!--  MDH: This is the wrong explanation for the paramSpecs above. It does not 
+               explain what "label" means. -->
               <desc versionDate="2015-08-21" xml:lang="en">creates inline element out 
                 of <term>content</term> if there's something in <gi>outputRendition</gi>, 
                 use that formatting otherwise just show text of selected content.</desc>
             </valItem>
             </egXML>
 
-          <p>This documentation inside the <gi>elementSpec</gi> for the <gi>model</gi> element because it is there that
+          <p>This documentation appears inside the <gi>elementSpec</gi> for the <gi>model</gi> element because it is there that
             we specify the list of attribute values that <val>behaviour</val> allows. Similarly the value for the
-            behaviour attribute <val>alternate</val> has two parameters: <val>alternate</val> and
-            <val>default</val>:</p>
+            <att>behaviour</att> attribute <val>alternate</val> has two parameters: <val>default</val> <val>alternate</val>
+            :</p>
 
           <egXML xmlns="http://www.tei-c.org/ns/Examples">
             <valItem ident="alternate">
@@ -339,7 +340,7 @@
             </valItem>
             </egXML>
           <p>The nature of the documentation of these behaviour parameters intentionally makes no reference to the
-            processing functions which might implement since that is a decision that should be left to the implementor
+            processing functions which might implement the model since that is a decision that should be left to the implementor
             and might vary by choice of processing language and form of output.</p>
 
         </div>
