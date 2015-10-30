@@ -350,29 +350,33 @@
             transformation stage should be minimally intelligent; that is to say, it should contain as few TEI-specific
             rules as possible. The ODD should be as explicit as possible, and provide maximum expressivity to the
             editor without recording details of implementation.</p>
-          <p>An implementation of a TEI Processing Model can take at least two approaches. One can read the TEI ODD
+          <p>An implementation of a TEI Processing Model can take at least two approaches. It might read the TEI ODD
             customization in advance and produce a processing pipeline (which itself consults the ODD or
-            not), or a processing implementation could consult the TEI ODD customization for information while processing a document
-            instance. Software which implements this processing model might proceed as follows:</p>
+            not), or consult the TEI ODD customization for information while processing a document
+            instance. Processing might proceed as follows:</p>
           <list type="ordered">
             <item>When processing an element in the instance document, any applicable <gi>model</gi> or
                 <gi>modelSequence</gi> for the current output format should be followed whether this is done by
               consulting the TEI ODD customization directly or rules abstracted into the processing toolchain. </item>
-            <item>The <gi>model</gi> elements should be processed in order until a match with the predicate is found, or
-              a <gi>model</gi> with no predicate applies. If a <gi>model</gi> has no predicate, it matches any
+            <item>The <gi>model</gi>, <gi>modelGrp</gi> and <gi>modelSequence</gi> elements should be processed in order until a match with the predicate is found, or
+              an element with no predicate applies. 
+<!-- MDH: In what follows, I think most instances of <gi>model</gi> actually mean
+          any of <gi>model</gi>, <gi>modelGrp</gi> and <gi>modelSequence</gi>.    -->
+              
+              If a <gi>model</gi> has no predicate, it matches any
               occurrence of the element. If a <gi>model</gi> has no output, it applies to all forms of output. If there
-              is not a <att>useSourceRendition</att> attribute of <val>true</val> on the <gi>model</gi> then any
+              is no <att>useSourceRendition</att> attribute with a value of <val>true</val> on the <gi>model</gi> then any
                 <att>rendition</att> attribute on the source element can be ignored.</item>
             <item>All of the <gi>model</gi> elements inside a <gi>modelSequence</gi> should be applied in order if the
-              context matches any optional limiting predicates</item>
+              context matches any optional limiting predicates.</item>
             <item>The processing should follow the function provided by the <att>behaviour</att> attribute. Where the
-              parameter passed to that function is '.' or no <gi>param</gi> is supplied, then the object of the
+              parameter passed to that function is <q>.</q> or no <gi>param</gi> is supplied, then the object of the
                 <att>behaviour</att> attribute is all child nodes of the element including its attributes, element, and
-              text nodes. These nodes should be subject to processing within this context. Thus a block should create a
-              block-type object in the output for this element and all the results from processing its children.</item>
+              text nodes. These nodes should be subject to processing within this context. Thus a block behaviour should result in a
+              block-type object in the output for this element, containing all the results from processing its children.</item>
             <item>If there are possible <gi>model</gi> elements, but none has a predicate which matches the current
               element, processing should proceed to its child nodes and see if there are models for them. Likewise, if
-              there is no <gi>model</gi> provided for the current element, proceed to its children and see if there are
+              there is no <gi>model</gi> provided for the current element, proceed to its children and search for
               models for them.</item>
             <item>The special behaviour <val>omit</val> should be interpreted to direct processing to stop for that
               element and to proceed to the next sibling.</item>
