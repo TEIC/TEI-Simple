@@ -87,15 +87,15 @@
           single individual or may be shared among multiple large teams, depending on the scope of the project and available resources. The minimal
           divisions that underlie this approach to documenting processing models are:</p>
         <list type="ordered">
-          <item>an <emph>editor</emph> manages the text integrity and makes the high-level output decisions. These fall into (at
+          <item>an <term>editor</term> manages the text integrity and makes the high-level output decisions. These fall into (at
             least) two parts:<list type="ordered">
               <item>Structural descriptions, e.g. <q>should the original or corrected version be displayed by default</q>, or
                 <q>is this a block level or inline component</q></item>
               <item>Indications of appearance (<q>titles are in italics</q>).</item>
             </list></item>
-          <item>a <emph>programmer</emph> takes the editor's specification, along with the TEI text(s), and creates the input for a designer
+          <item>a <term>programmer</term> takes the editor's specification, along with the TEI text(s), and creates the input for a designer
             to make the output.</item>
-          <item>a <emph>designer</emph> creates the output envelope (for example, a traditional book layout using typesetting software, or a
+          <item>a <term>designer</term> creates the output envelope (for example, a traditional book layout using typesetting software, or a
             web site using a locally-supported web framework), making decisions in conjunction with the editor (<q>use
             Garamond font throughout</q> or <q>every page must show the departmental logo</q>)</item>
         </list>
