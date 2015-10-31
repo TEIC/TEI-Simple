@@ -372,7 +372,10 @@
             <item>The processing should follow the function provided by the <att>behaviour</att> attribute. Where the
               parameter passed to that function is <q>.</q> or no <gi>param</gi> is supplied, then the object of the
                 <att>behaviour</att> attribute is all child nodes of the element including its attributes, element, and
-              text nodes. These nodes should be subject to processing within this context. Thus a block behaviour should result in a
+              text nodes. 
+<!-- MDH: Note that attributes are not processed by default in XSLT; if the TEI's behaviour is
+                going to differ from this, it should be clearly articulated. -->
+              These nodes should be subject to processing within this context. Thus a block behaviour should result in a
               block-type object in the output for this element, containing all the results from processing its children.</item>
             <item>If there are possible <gi>model</gi> elements, but none has a predicate which matches the current
               element, processing should proceed to its child nodes and see if there are models for them. Likewise, if
