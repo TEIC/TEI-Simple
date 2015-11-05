@@ -111,10 +111,10 @@
           people will make better choices if they are offered well-designed default solutions, as long as they are free
           to opt out of them. The TEI
           architecture facilitates customizations of many kinds; TEI Simple aims to produce a complete <q>out of the box</q>
-          customization which meets the needs of the many users for whom the task of creating a customization is
+          customization that meets the needs of the many users for whom the task of creating a customization is
           daunting or seems irrelevant. TEI Simple in no way intends to constrain the expressive liberty of encoders who
           do not think that it is either possible or desirable to follow this path. It does, however, promise to make
-          life easier for those who think there is some virtue in travelling that path as far as it will take you, which
+          life easier for those who think there is some virtue in travelling that path as far as it will take them, which
           for quite a few projects will be far enough. Some users will never feel the need to move beyond it, others
           will outgrow it, and when they do they will have learned enough to do so.</p>
         <p> The most distinctive feature of TEI Simple is a <q>cradle to
@@ -140,7 +140,7 @@
           other individuals who primarily care about getting the encoding right need not concern themselves with
           subsequent stages. If they can do their encoding within the limits of TEI Simple, they can be confident that
           the fruits of their en-coding are available to users. Users, in turn, can have greater confidence that the
-          query poten-tial of encoded texts is in fact made available to them through appropriate query routines. This
+          query potential of encoded texts is in fact made available to them through appropriate query routines. This
           is conspicuously not the case with most TEI-encoded texts now: it is very difficult to write or train a search
           engine if you cannot make reasonably stable assumptions about the structure of the documents to be queried. </p>
         <p>This introduction to TEI Simple consists of three parts. They address different audiences and make different assumptions about what the reader is likely to know. The first of these addresses readers who know little or nothing about XML and can safely be skipped by readers who are familiar with it. The second is a tour of the elements in TEI Simple from an encoder's perspective. This section is a revision of  the excellent introduction to TEI Lite by Lou Burnard and Michael Sperberg-McQueen. It follows that document wherever it can while adding this or deleting that. The third part is a short tour of the Processing Model and is written for   programmers who are familiar with Web technologies but new to TEI.</p>
@@ -182,7 +182,7 @@
               <term>parent</term> may have an indefinite number of <term>child</term> elements, but a <term>child</term>
             element has only one parent. It may have many <term>ancestors</term>, but at any level of the hierarchy
             there is only one of them. It is a defining feature of such hierarchical structures that for any
-              <term>node</term> there is one and only <term>path</term> from the root to any node, or from any node to
+              <term>node</term> there is one and only one <term>path</term> from the root to any node, or from any node to
             any other node. In XML the technical term for that path is XPath, which is both a name for such a path and a
             quite complicated computer language for getting from any "here" to any "there". </p>
           <p>On your hard drive a container is known as a directory or folder. In an XML document, containers are known
@@ -192,7 +192,7 @@
           <p>The resemblances between your hard drive and an XML document in it are closer than you may think. XQuery is
             the name of a computer language that handles XML documents. In that language
             <eg>declare variable $collection := collection('/Users/martin/dropbox/speechdirectory');</eg> is a way of
-            saying <q rend="block"> Follow the Xpath that starts from the top container and follow it through its branchings
+            saying <q rend="block"> Follow the XPath that starts from the top container and follow it through its branchings
               (expressed by the <term>solidus</term> or forward slash) until you come to the container called
               "speechdirectory." Call it "collection" and identify it as an object on which further operations can be
               performed.</q> The dollar sign identifies a <term>variable</term> and its name. "speechdirectory" happens
@@ -222,8 +222,8 @@
             follow a nested structure beyond the third level. An interesting technical term in this regard is
               <term>serialize</term>. You don't need to know (I certainly don't) just how the data of an XML document
             are stored in the innards of a computer. But when they are produced by the machine for you in a manner that
-            you can make sense of they are <term>serialized</term>. This serialization appears typically on the two
-            dimensional space of a page, where the single text stream is broken into familiar lines. The typographical
+            you can make sense of they are <term>serialized</term>. This serialization appears typically on the 
+          two-dimensional space of a page, where the single text stream is broken into familiar lines. The typographical
             line has been a remarkably stable structure for millennia, with limits imposed by the capacities of the
             human eye. But it is helpful to remember that a line is a convenient construct of a longer discursive linear
             stream.</p>
@@ -266,18 +266,19 @@
             text is known as a <term>parser</term>, a term borrowed from traditional grammar. Just as you parse a
             sentence by determining where its different parts begin and end, so an XML parser goes through an XML file
             and inspects its parts. It looks for opening and closing tags of each element as well as the stuff enclosed
-            by them, which consists either of other elements or of PCDATA or <term>parsed character data</term>, stuff
+            by them, which consists either of other elements or of  <term>parsed character data</term> (PCDATA), stuff
             that the XML Parser after examination has recognized as proper text. </p>
           <p>Except for the left angle bracket (&lt;) and the ampersand (&amp;) any Unicode character can show up in
             PCDATA. Because the XML parser uses (&lt;) to identify the beginning of an element tag, it cannot be used
-            directly in plain text or PCDATA. Instead you use a <term>character entity</term> to represent them. A
+            directly in plain text or PCDATA. You must <term>escape</term> it by using a <term>character entity</term>
+            to represent it. A
             character entity is a periphrastic expression that is wrapped in an opening ampersand and a closing
-            semicolon. Since there are no words that begin with the former and end with the latter they act as an
+            semicolon. Since there are no words that begin with the former and end with the latter their combination acts as an
             unambiguous marker that their content refers to and retrieves something special, whether a single character
             or all of <title>Hamlet</title>. The character entity for the left angle bracket is (&amp;lt;), where <q>lt</q>
             stands for <q>less than</q> to reflect the common use of that character in mathematical notation. </p>
           <p>Because the ampersand is used as the opening symbol for a character entity, it also must be
-              <term>escaped</term> and cannot be used directly. Its character entity is "ampersand + amp + semicolon"
+              <term>escaped</term>. Its character entity is "ampersand + amp + semicolon"
             (&amp;amp;). These character entities are two of five <term>predefined entities</term> in the XML
             specifications that you can use without formally <term>declaring</term> them. The other three are the
             apostrophe (&apos;), the double quotation mark (&quot;), and the "greater-than" symbol or right angle
@@ -295,7 +296,7 @@
             XML becomes interesting and useful only when it is <term>valid</term>. XML has rules for making rules that specify for any element
             <list>
               <item>what elements it may or must contain or be contained by</item> 
-              <item>how often it may appear in its parent elemtn</item>  
+              <item>how often it may appear in its parent element</item>  
               <item>in what order it may or must appear</item></list> A set of such rules is
             known as a <term>schema</term>. You can use these rules about rules to make up your own schema, but if you
             want to share your documents and make sure that others can use them you are better off using a schema that
@@ -303,7 +304,7 @@
             is such a schema, and its purpose is to facilitate the encoding of documents that fall under the category of
               <term>Letters</term> very broadly defined. </p>
 
-          <p>How does a machine know that a document is an XML document,whether with or without a schema? Any XML
+          <p>How does a machine know that a document is an XML document, whether with or without a schema? Any XML
             document must begin with one or more <term>processing instructions</term> that tell the machine what to do
             with it. The minimal processing instruction simply says <q>I am an XML document</q> and does so with the
             line <eg>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</eg> at the top of the file. The statement <q>I am a TEI
@@ -440,7 +441,8 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             nodes and combine them into a single utterance.</p>
 
           <p> So much for the header, at least for now. Let us turn to <gi>text</gi>, the container for encoding the
-            actual document, including its title page if it has one. A <term>book</term> is a bibliographical unit, which may contain one or more <term>work(s)</term>. The second quarto of Hamlet is a book with one work. The Shakespeare Folio of 1623
+            actual document, including its title page if it has one. A <term>book</term> is a bibliographical unit,
+            which may contain one or more <term>work(s)</term>. The second quarto of <term>Hamlet</term> is a book with one work. The Shakespeare Folio of 1623
             contains three dozen separate works. While the TEI can handle both situations, we will focus here on the
             normal case of <q>one book, one work</q>, but it is useful to acknowledge the fact that the relationship between <term>book</term> and <term>work</term> and be very complex and raises tricky encoding questions. </p>
           <p>The <gi>text</gi> element MUST contain one and only one <gi>body</gi> element. It MAY contain
@@ -531,7 +533,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
         </div>
         <div>
           <head>About Namespaces</head>
-          <p>Namespaces are a little like surnames, letting you distinguish between Miller, Henry and Smith, Henry. For
+          <p>Namespaces are  like surnames, letting you distinguish between Miller, Henry and Smith, Henry. For
             instance, HTML and TEI both use elements with the names <gi>p</gi> and <gi>div</gi>. But these are "false
             friends" with very different meanings and operating rules. By convention a namespace takes the form of a
             URL. The full name of an element is known as its "qualified name" or QName, and in one conventional notation
@@ -555,7 +557,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             containing "Act III" of some play. </p>
           <p>In well-formed XML, there are rules about the names of attributes, but no rules about what attributes to
             use with what elements or what values to associate with the attributes. In valid XML, the rules for
-            attributes are specified in the schema. There are rules about what attributes may be used with with what
+            attributes are specified in the schema. There are rules about what attributes may be used  with what
             elements and what kinds of data may, must, or may not appear in attribute values. In the TEI schema some attributes
             are <term>global</term> and can be used in the same manner for any element. Other attributes are specific to a
             particular set of elements. </p>
@@ -570,14 +572,14 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             it for that purpose. TEI has its own rules for what values may, may not, or must appear in different
             attributes. </p>
           <p>The two most widely used global attributes in TEI are <att>n</att> and <att>rendition</att>. The name of
-            the former is short for "number," and numbering of one kind or another is its most common, but not its only
+            the former is short for "number," and numbering of one kind or another is its most common, but not its only,
             use. There are hardly any restrictions on what you can use for its attribute values. You can even, while you are
             working with a document, embed comments, as long as you remember to remove them in time. If n="5" is a
             proper value, so is n="5 check this again later." But you will be better off using the formal commenting
-            protocol of XML, wrapping any kind of comment in &lt;!-- [my comment] --&gt; </p>
+            protocol of XML, wrapping any kind of comment in &lt;!-- [my comment] --&gt;. </p>
           <p> Other attributes values are much fussier. The <gi>l</gi> supports a <att>part</att> attributed with a
             fixed list of values Y, N, I, M, F for <term>yes</term>, <term>no</term>, <term>initial</term>, <term>medial</term>, and <term>final</term>. The value for the
-              <att>target</att> attributes for the linking element  <gi>ref</gi>  may consist of one or
+              <att>target</att> attribute of the linking element  <gi>ref</gi>  may consist of one or
             more URL's separated by white space. </p>
           <p>The <att>type</att> attribute, which is available for some but not all elements, is a very powerful device
             for making more granular distinctions among kinds of discourse, especially when it is combined with a
@@ -586,7 +588,8 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
         <div>
           <head>Limitations of TEI as an XML Markup Language</head>
 
-          <p>As an XML markup language TEI is committed to two axioms: <list>
+          <p>The <term>soul</term> of the TEI could take different form, but in practice it is embodied in XML and
+          as such is limited  by two XML axioms: <list>
               <item> A document is an OHCO or ordered hierarchy of content objects</item>
               <item>The presentation of a document can be neatly separated from its structure</item>
             </list> Both of these axioms are deeply problematical when it comes to texts, but they are true often enough
@@ -617,8 +620,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
         </quote></egXML>
             Using the punctuation element <gi>pc</gi> you would get a similar articulation:
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><quote>
-         <l>The fair Ophelia<pc unit="sentence">!</pc>
-          <milestone unit="sentence"/> Nymph, in thy orisons</l>
+         <l>The fair Ophelia<pc unit="sentence">!</pc>Nymph, in thy orisons</l>
          <l> Be all my sins remembered<pc unit="sentence">.</pc></l>
         </quote></egXML>
             You could also use the <att>next</att> and <att>previous</att> attributes to tie the two <gi>s</gi> elements
@@ -629,7 +631,10 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
          <l> <s xml:id="s2" previous="#s1">Be all my sins remembered.</s></l>
         </quote></egXML>
             These workarounds do a more or less adequate job at articulating a secondary structure in the face of a
-            dominant structure, but they are workarounds. There are other and more powerful workarounds. Chapter 18 of the Guidelines discusses <term>feature structures</term>, and there is <term>stand-off markup</term>, where different forms of textual segmentation and annotation are kept in separate documents that point to individual tokens or token ranges in the text. Feature structures take you well beyond TEI Simple, and stand-off will also be most beyond its range.  </p>
+            dominant structure, but they are workarounds. There are other and more powerful workarounds. Chapter 18 of the Guidelines discusses <term>feature structures</term>,
+            and there is <term>stand-off markup</term>, where different forms of textual segmentation and annotation 
+            are kept in separate documents that point to individual tokens or token ranges in the text. 
+            Feature structures take you well beyond TEI Simple, and stand-off will also be mostly beyond its range.  </p>
           <p>The second axiom, that content is entirely separable from presentation, will rub most literary critics the
             wrong way. If you are used to reading a book printed in <term>Fraktur</term> you may feel that printing it
             in <term>Antiqua</term> robs it of its spirit. In Vergil's <title>Eclogues</title> up or down things happen
@@ -638,8 +643,8 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             happening to bad guys). There are countless examples of playing with layout and typography, from George
             Herbert to concrete poetry.</p>
           <p> If you make the physical layout of a text the organizing structure you can do that by using the
-              <gi>surface </gi> element and its children. That is also beyond the scope of TEI Simple, but it is fully
-            documented in Chapter 11 of the <title>Guidelines</title>
+              <gi>surface</gi> element and its children. That is also beyond the scope of TEI Simple, but it is fully
+            documented in Chapter 11 of the <title>Guidelines</title>.
           </p>
           <p>TEI is about <term>text</term>, and texts are written in <term>natural</term> languages. Natural Language
             Processing (NLP) is a very important part of computing. If you engage in it you will discover early on that
@@ -658,7 +663,18 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
         </div>
         <div xml:id = "tagabuse">
           <head>Should, Should Not, and Tag Abuse</head>
-          <p>Valid encoding is not necessarily good encoding, just as rigid compliance with the law does not always square with justice. Here we are in the realm of Aristotle's <foreign>epieikia</foreign> or equity as a principle that complements rigid compliance with a set of rules. The word  lives in a space tenuously circumscribed by the probable, the reasonable, and the appropriate--very much like the space of the French twins <term>vraisemblance</term> and <term>bienséance</term>What SHOULD you do when confronted with a problem to which the schema offers no obvious solution? Do as your neighbours do is good advice when you live in a good neighbourhood, and as a TEI encoder you happen to live in a very friendly and helpful neighbourhood. Sign up for the <ref target ="https://listserv.brown.edu/archives/cgi-bin/wa?A0=TEI-L" >TEI listserv </ref> and ask for advice.  It will come to you from just about any continent, very promptly at any hour of the day or night, and it is nearly always relevant. Following the TEI list and pondering its advice is the best way of getting a feel for the discretionary space surrounds all rulles, and it will keep you from committing <term>tag abuse</term>, the TEI community's term for encoding practices that are valid but make no sense or worse.</p>
+          <p>Valid encoding is not necessarily good encoding, just as rigid compliance with the law does not always square
+          with justice. Here we are in the realm of Aristotle's <foreign>epieikia</foreign> or equity as a principle
+          that complements rigid compliance with a set of rules. The word  lives in a space tenuously circumscribed
+          by the probable, the reasonable, and the appropriate--very much like the space of the French twins
+          <term>vraisemblance</term> and <term>bienséance</term>. What SHOULD you do when confronted with a problem to which
+          the schema offers no obvious solution? Do as your neighbours do is good advice when you live in a good neighbourhood, 
+          and as a TEI encoder you happen to live in a very friendly and helpful neighbourhood.
+          Sign up for the <ref target ="https://listserv.brown.edu/archives/cgi-bin/wa?A0=TEI-L" >TEI listserv </ref> and ask 
+          for advice.  It will come to you from just about any continent, very promptly at any hour of the day or night, 
+          and it is nearly always relevant. Following the TEI list and pondering its advice is the best way of getting a 
+          feel for the discretionary space that surrounds all rules in a given environment. It will keep you from committing <term>tag abuse</term>, 
+          the TEI community's term for encoding practices that are valid but make no sense or worse.</p>
         </div>
 
       </div>
@@ -836,9 +852,10 @@ live without God in the world, and only mind earthly things.
           <p>Almost all TEI-conformant texts contain (a) a <term>TEI header</term> (marked up as a <gi>teiHeader</gi>
             element) and (b) the transcription of the text proper (marked up as a <gi>text</gi> element). These two
             elements are combined together to form a single <gi>TEI</gi> element, which must be declared within the TEI
-            namespace. The full name of the <gi>TEI</gi> element is &lt; xmlns="http://www.tei-c.org/ns/1.0"&gt; .</p>
-          <p> The header is described in more detail in section <ptr target="#Simple-header"/>. The word "almost" in the
-            paragraph above acknowledges the existence of a form of TEI encoding that seeks to capture what is often
+            namespace. The full name of the <gi>TEI</gi> element is &lt;TEI xmlns="http://www.tei-c.org/ns/1.0"&gt; .</p>
+          <p> The header is described in more detail in section <ptr target="#Simple-header"/>. The word "almost" at
+          the beginning of the previous  paragraph acknowledges the existence of a form of TEI encoding that seeks
+          to capture what is often
             called the <term>materiality</term> of the text. Some of the relevant element names , <gi>facsimile</gi>,
               <gi>surface</gi>, <gi>zone</gi>, give you a sense of this approach, where the content of element would be
             images or other media types rather than transcribed text. While this set of elements is outside the scope of
@@ -927,8 +944,8 @@ live without God in the world, and only mind earthly things.
               below.</p>
             <p>The <att>rendition</att> attribute may be used to supply information about the rendition (appearance) of
               a division, or any other element, as further discussed in section <ptr target="#Simple-hilites"/> below. You
-              should document your use of the possible values of <att>rendition</att> in the taggin declaration
-                (<gi>tagsDecl</gi> of your header.</p>
+              should document your use of the possible values of <att>rendition</att> in the tagging declaration
+                (<gi>tagsDecl</gi>) of your header.</p>
             <p> These four attributes, <att>xml:id</att>, <att>n</att>, <att>xml:lang</att>, and <att>rend</att> are so
               widely useful that they are allowed on any element in any TEI schema: they are <term>global
                 attributes</term>. Other global attributes defined in the TEI Simple schema are discussed in section
@@ -1047,7 +1064,7 @@ live without God in the world, and only mind earthly things.
               indicating who is speaking, either paragraphs (if the speech is in prose) or verse lines or stanzas as in
               the next example. In this case, it is quite common to find that verse lines are split between speakers.
               The easiest way of encoding this is to use the <att>part</att> attribute to indicate that the lines so
-              fragmented are incomplete :
+              fragmented are incomplete:
               <egXML xmlns="http://www.tei-c.org/ns/Examples"><div type="Act" n="I">
         <head>ACT I</head>
         <div type="Scene" n="1">
@@ -1434,7 +1451,12 @@ live without God in the world, and only mind earthly things.
               <term>standoff</term> manner, that is to say, keep them next to their place of attachment or in a separate
             place.</p>
           <p>If the note lacks an explicit point of attachment in the text, which is often the case with marginal notes,
-            you can use the pointer element <gi>ptr</gi>, which differs from <gi>ref</gi> in being empty. </p>
+            you can use the <gi>ref</gi> as an empty element:  
+            <egXML xmlns="http://www.tei-c.org/ns/Examples">
+       <p>...some text <ref xml:id="r7" target="n7"/><note xml:id="n7" n="7">a note about some text</note></p>      
+      </egXML>
+            
+            </p>
 
 
           <p>Marginal notes often are subject to different interpretations about their status. They are very common in
@@ -1458,7 +1480,7 @@ live without God in the world, and only mind earthly things.
             yourself whether text in the margins provides additional information or is more like an abstract of what is
             to come, it may be quite easy to distinguish between <gi>note</gi> and <gi>label</gi> in most cases. As for
             stage directions in the margin, think of <code>&lt;stage&gt;</code> as syntactic sugar for <code>&lt;note
-              type="stage"&gt;</code>
+              type="stage"&gt;</code>.
           </p>
         </div>
         <div xml:id="Simple-ptrs">
@@ -2137,7 +2159,7 @@ live without God in the world, and only mind earthly things.
                 <specDesc key="w"/>
                 <specDesc key="pc"/>
               </specList></p>
-            <p>For example, the output from a part of speech tagger might be recorded in TEI Lite as follows:
+            <p>For example, the output from a part of speech tagger might be recorded in TEI Simple as follows:
               <egXML xmlns="http://www.tei-c.org/ns/Examples">
        <s n="1">
         <w ana="#NP0">Marley</w>
@@ -2803,7 +2825,7 @@ live without God in the world, and only mind earthly things.
             
           </list>
           <p>There are several things to be said about this list. First, the names of the <term>behaviours</term> as well as their explanations, will be familiar to programmers who work with texts on the Web. Secondly, there are far fewer behaviours (26) than elements. </p>
-          <p>Of the 106  elements in TEI Simple 76 have only one behaviour associated with them. Not quite two dozen elements have two behaviours associated with them. The <term>omit</term> behaviour is used to suppress the display of elements that can occur both in the &lt;teiHeader&gt; and the &lt;text&gt; element, as in the following example:
+          <p>Of the 105  elements in TEI Simple 76 have only one behaviour associated with them. Not quite two dozen elements have two behaviours associated with them. The <term>omit</term> behaviour is used to suppress the display of elements that can occur both in the &lt;teiHeader&gt; and the &lt;text&gt; element, as in the following example:
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="docDate" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
