@@ -62,6 +62,8 @@
         <!-- Who should appear here?  What should appear in respSmt in titleStmt above.  -->
         <docAuthor>Sebastian Rahtz</docAuthor>
         <docAuthor>Brian Pytlik Zillig</docAuthor>
+        <docAuthor>James Cummings</docAuthor>
+        <docAuthor>Magdalena Turska</docAuthor>
         <docDate>Version 0.9: August 2015</docDate>
       </titlePage>
 
@@ -77,103 +79,50 @@
       </titlePage>-->
     </front>
     <body>
-      <div xml:id="Simple-Summary">
-        <head>Summary</head>
-        <p>The <hi>TEI Simple</hi> project aims to define a <hi rend="italic">highly-constrained</hi> and <hi
-            rend="italic">prescriptive</hi> subset of the Text Encoding Initiative (TEI) Guidelines suited to the
-          representation of early modern and modern books, a formally-defined set of processing rules which permit
-          modern web applications to easily present and analyze the encoded texts, mapping to other ontologies, and
-          processes to describe the encoding status and richness of a TEI digital text. This document describes the
-          constrained subset</p>
-      </div>
+      
       <div xml:id="Simple-Background">
-        <head>Background</head>
+        <head>Preface</head>
         <p>The Text Encoding Initiative (TEI) has developed over 20 years into a key technology in text-centric
           humanities disciplines, with an extremely wide range of applications, from diplomatic editions to
           dictionaries, from prosopography to speech transcription and linguistic analysis. It has been able to achieve
-          its range of use by adopting a <hi rend="italic">descriptive</hi> rather than <hi rend="italic">prescriptive
-          </hi> approach , by recommending <hi rend="italic">customization</hi> to suit particular projects, and by
+          its range of use by adopting a <term>descriptive</term> rather than <hi rend="italic">prescriptive
+          </hi> approach , by recommending <term>customization</term> to suit particular projects, and by
           eschewing any attempt to dictate how the digital texts should be rendered or exchanged. However, this
           flexibility has come at the cost of relatively limited success in interoperability. In our view there is a
           distinct set of uses (primarily in the area of digitized ‘European’-style books) that would benefit from a <hi
             rend="italic">prescriptive</hi> recipe for digital text; this will sit alongside other domain-specific,
-          constrained TEI customizations, such as the very successful <hi rend="italic">Epidoc</hi> in the epigraphic
+          constrained TEI customizations, such as the very successful <term>Epidoc</term> in the epigraphic
           community. TEI Simple may become a prototype for a new family of constrained customizations. For instance, a
           TEI Simple MS for manuscript based work could be built on top of the ENRICH project, drawing on many of the
           lessons and some of the code for TEI Simple. </p>
         <p>The TEI has long maintained an introductory subset (TEI Lite), and a constrained customization for use in
           outsourcing production to commercial vendors (TEI Tite), but both of these permit enormous variation, and have
-          nothing to say about processing. The present project can be viewed in some ways as a revision of TEI Lite,
-          re-examining the basis of the choices therein, focusing it for a more specific area, and adding a "cradle to
-          grave" processing model that associates the TEI Simple schema with explicit and standardized options for
-          displaying and querying texts. This means being able to specify what a programmer should do with particular
-          TEI elements when they are encountered, allowing programmers to build stylesheets that work for everybody and
-          to query a corpus of documents reliably.</p>
-        <p>This project, TEI Simple, focuses on interoperability, machine generation, and low-cost integration. The TEI
-          architecture facilitates customizations of many kinds; TEI Simple aims to produce a complete 'out of the box'
+          nothing to say about processing. The TEI Simple project can be viewed in some ways as a revision of TEI Lite. Leaving aside
+          elements for the <gi>teiHeader</gi>, TEI Lite and TEI Simple are customization of approximately the same
+          scope, choosing respectively 91 and 105 out of the 552 TEI elements and sharing 80 of them. TEI Simple targets
+          the area of  <term>Letters</term> in the broad and old-fashioned sense of that term.
+          Its choice of elements reflects the practices followed in the encoding of large-scale archives, notably the
+          archives produced by the Text Creation Partnership, but also the German Text Archive and a variety of archives
+          encoded according to Level 4 of the Best Practices for TEI in Libraries.  It is simple only with regard to its <gi>text</gi> element.
+          The <gi>teiHeader</gi> follows the same rules as TEI-All. </p>
+
+        <p>TEI Simple focuses on interoperability, machine generation, and low-cost integration. In earlier discussions this project was called "TEI Nudge" because it was offered in the spirit of Richard
+          Thaler's and Cass Sunstein's <title>Nudge</title> with its persuasive argument that in many walks of life
+          people will make better choices if they are offered well-designed default solutions, as long as they are free
+          to opt out of them. The TEI
+          architecture facilitates customizations of many kinds; TEI Simple aims to produce a complete <q>out of the box</q>
           customization which meets the needs of the many users for whom the task of creating a customization is
           daunting or seems irrelevant. TEI Simple in no way intends to constrain the expressive liberty of encoders who
           do not think that it is either possible or desirable to follow this path. It does, however, promise to make
           life easier for those who think there is some virtue in travelling that path as far as it will take you, which
           for quite a few projects will be far enough. Some users will never feel the need to move beyond it, others
           will outgrow it, and when they do they will have learned enough to do so.</p>
-        <p>A major driver for this project is the texts created by phase 1 of the EEBO-TCP project, which were placed in
-          the public domain on 1 January 2015. Another 45,000 texts will join over the following five years, creating by
-          2020 an archive of 70,000 consistently encoded books published in England from 1475 to 1700, including works
-          of literature, philosophy, politics, religion, geography, science and all other areas of human endeavor. When
-          we compare the query potential of the EEBO TCP texts in their current and quite simple encoding with flat file
-          versions of those text, it is clear that the difference in query potential is very high, especially if you add
-          to that coarse encoding simple forms of linguistic annotation or named entity tagging that can be added in a
-          largely algorithmic fashion. During 2012 and 2013 extensive work has been undertaken at Northwestern, Michigan
-          and Oxford to enrich these texts and bring them into line with the current TEI Guidelines (where necessary
-          working with the TEI to modify the Guidelines). TEI Simple uses this corpus as a point of departure and will
-          provide its users with a friendlier environment for manipulating EEBO texts in various projects. But TEI
-          Simple should not be understood as an EEBO specific project. We believe that, given the extraordinary degree
-          of internal diversity in the EEBO source files, a project that starts from them can, with appropriate
-          modifications, accommodate a wide range of printed texts differing in language, genre, or time and place of
-          origin. </p>
-      </div>
-
-
-      <div xml:id="Simple-pref">
-        <head>Prefatory note</head>
-        <p>This introduction to TEI Simple is based on the introduction to TEI Lite first published in 1996 by Lou
-          Burnard and C. M. Sperberg-McQueen and revised in 2012 by Lou Burnard. With their permission, I have freely
-          their language without quotation, adding and subtracting as seems fit. Most of the "Tour of TEI Simple" comes
-          straight out of the 2012 revision. </p>
-        <p>TEI Lite was the name adopted for what the TEI editors originally conceived of as a simple demonstration of
-          how the TEI (Text Encoding Initiative) encoding scheme might be adopted to meet 90% of the needs of 90% of the
-          TEI user community.The original TEI Lite (1996) was based largely on observations of existing and previous
-          practice in the encoding of texts, particularly as manifest in the collections of the <ref
-            target="http://ota.ahds.ac.uk/">Oxford Text Archive</ref> and other collections of the period. Leaving aside
-          elements for the <gi>teiHeader</gi>, TEI Lite and TEI Simple are customization of approximately the same
-          scope, choosing respectively 91 and 105 out of the 552 TEI elements and sharing 80 of them. TEI Simple targets
-          the area of "post-Gutenberg" books or <term>Letters</term> in the broad and old-fashioned sense of that term.
-          Its choice of elements reflects the practices followed in the encoding of large-scale archives, notably the
-          archives produced by the Text Creation Partnership, but also the German Text Archive and a variety of archives
-          encoded according to Level 4 of the Best Practices for TEI in Libraries. TEI Simple also provides a suitable
-          element for light-weight encoding of manuscripts. It is simple only with regard to its <gi>text</gi> element.
-          The <gi>teiHeader</gi> follows the same rules as "TEI-all." The teiHeader, a mandatory part of any TEI
-          document, contains metadata, somewhat in the manner of a library catalogue entry </p>
-
-        <p>In earlier discussions this project was called "TEI Nudge" because it was offered in the spirit of Richard
-          Thaler's and Cass Sunstein's <title>Nudge</title> with its persuasive argument that in many walks of life
-          people will make better choices if they are offered well-designed default solutions, as long as they are free
-          to opt out of them. The TEI architecture facilitates customizations of many kinds; TEI Simple aims to produce
-          an "out of the box" customization that meets the needs of the many users for whom the task of creating a
-          customization is daunting or seems irrelevant. TEI Simple in no way intends to constrain the expressive
-          liberty of encoders who do not think that it is either possible or desirable to follow this path. It does,
-          however, promise to make life easier for those who think there is some virtue in travelling that path as far
-          as it will take you, which for quite a few projects will be far enough. Some users will never feel the need to
-          move beyond it, others will outgrow it, and when they do they will have learned enough to do so.</p>
-
-        <p>The distinctive feature of TEI Simple is its Processing Model. TEI elements are generally
-            <emph>descriptive</emph> of the interpreted semantics of the source text (<q>this is a title</q>, <q>this is
-            a quotation</q>), where the interpretation is often based on a human interpretation of layout. The
-            <att>rend</att>, <att>rendition</att> and <att>style</att> attributes are sometimes, but not necessarily,
-          used to describe that layout. The resulting encoded text is very amenable to analysis, but for the common case
-          of re-presenting the text on the web or in print as a digital edition, the TEI model by itself is
-          incomplete.</p>
+        <p> The most distinctive feature of TEI Simple is a <q>cradle to
+          grave</q> processing model that associates the TEI Simple schema with explicit and standardized options for
+          displaying and querying texts. This means being able to specify what a programmer should do with particular
+          TEI elements when they are encountered, allowing programmers to build stylesheets that work for everybody and
+          to query a corpus of documents reliably.</p>
+        
         <p>The modal case of a TEI project is a scholarly edition of some text that originated in a print or manuscript
           world. The edition may start from the fresh transcription of a source or it may start from the existing
           encoding of a text, e.g. a text from the EEBO TCP archive. Such projects call on a combination of skills that
@@ -194,47 +143,16 @@
           query poten-tial of encoded texts is in fact made available to them through appropriate query routines. This
           is conspicuously not the case with most TEI-encoded texts now: it is very difficult to write or train a search
           engine if you cannot make reasonably stable assumptions about the structure of the documents to be queried. </p>
-        <p> The key feature of the Processing Model is a notation that allows each element to be assigned to a
-          structural category (<gi>model</gi>),which in turns is mapped to an outline rendition description
-            (<gi>outputRendition</gi>). This allows a processor to know whether to handle the element or not, and
-          broadly speaking how to display or otherwise process it. The model and rendition instructions are part of the
-          TEI ODD and can be customized.</p>
-        <p>
-          <figure>
-            <graphic url="SPM2.png"/>
-            <head>Processing model workflow</head>
-          </figure>
-        </p>
-        <p>This method of working assumes a workflow with three parts, and three distinct roles, to create a digital
-          edition from a TEI text: <list rend="ordered">
-            <item>an <emph>editor</emph> is responsible for the encoding and makes high-level output decisions. These
-              fall into two parts <list rend="ordered">
-                <item><emph>Structural</emph> descriptions, eg <q>should the original or corrected version be displayed
-                    by default</q>, or <q>is this a block level or inline component</q></item>
-                <item>Indications of <emph>appearance</emph> (<q>titles are in italics</q>).</item>
-              </list>
-            </item>
-            <item>a <emph>designer</emph> creates the output envelope (for example, a book layout using InDesign or a
-              web site using Drupal), making decisions in conjunction with the editor (<q>use Garamond font
-                throughout</q> or <q>every page must show the departmental logo</q>)</item>
-            <item>a <emph>programmer</emph> takes the <emph>editor</emph>'s specification, and the TEI text(s), and
-              creates the input for the <emph>designer</emph> to make the output.</item>
-          </list> It is crucial to understand here that neither the designer nor the programmer need have any
-          understanding of the semantics of TEI elements, or the structure of a TEI document. The programmer,
-          particularly, can use the processing model rules to extract material from the TEI text in a relatively simple
-          way. The method works for a variety of output formats, as the programmer simply has to provide implementations
-          for a small number of functions, and understand the well-documented features of CSS. The concepts addressed by
-          the functions (eg <q>block</q> and <q>inline</q>) are in line with XSL FO, and HTML. Implementations of the
-          processing model can be done in a variety or languages or environments, but any implementation must include an
-          XPath 2.0 interpreter, as this is used in several places in the processing notation. </p>
+        <p>This introduction to TEI Simple consists of three parts. They address different audiences and make different assumptions about what the reader is likely to know. The first of these addresses readers who know little or nothing about XML and can safely be skipped by readers who are familiar with it. The second is a tour of the elements in TEI Simple from an encoder's perspective. This section is a revision of  the excellent introduction to TEI Lite by Lou Burnard and Michael Sperberg-McQueen. It follows that document wherever it can while adding this or deleting that. The third part is a short tour of the Processing Model and is written for   programmers who are familiar with Web technologies but new to TEI.</p>
+        
       </div>
+
 
       <div xml:id="Simple-very-gentle">
         <head>A very gentle introduction to XML and TEI</head>
         <div>
           <head>Hierarchies and Metaphors in XML</head>
-          <p>The best full-scale introduction to the technologies that undergird TEI is found in the prefatory chapter V
-            of the Guidelines, "A Gentle Introduction to XML." If you come from a History, Literature, or Philosophy
+          <p>The best full-scale introduction to the technologies that undergird TEI is found in Lou Buranrd's  <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/SG.html">"Gentle Introduction to XML</ref> in Chapter 5 of the <title>TEI:P5 Guidelines</title>. " If you come from a History, Literature, or Philosophy
             department and have never worked with XML you may not find it quite so gentle, especially in its later
             chapters. This chapter addresses you and tries to lay out some basic facts about XML and TEI in language
             that stays as close to layman's language as possible. Examples are chosen from TEI Simple, but their point
@@ -274,7 +192,7 @@
           <p>The resemblances between your hard drive and an XML document in it are closer than you may think. XQuery is
             the name of a computer language that handles XML documents. In that language
             <eg>declare variable $collection := collection('/Users/martin/dropbox/speechdirectory');</eg> is a way of
-            saying <q> Follow the Xpath that starts from the top container and follow it through its branchings
+            saying <q rend="block"> Follow the Xpath that starts from the top container and follow it through its branchings
               (expressed by the <term>solidus</term> or forward slash) until you come to the container called
               "speechdirectory." Call it "collection" and identify it as an object on which further operations can be
               performed.</q> The dollar sign identifies a <term>variable</term> and its name. "speechdirectory" happens
@@ -283,7 +201,7 @@
             <eg>for $title in
          $collection//filesDesc/titleStmt/title
          return $title</eg> This is a
-              <term>for</term> statement used in many computer languages. It loops through a set of files, in this case
+            <term>for statement</term>  used in many computer languages. It loops through a set of files, in this case
             all the files defined as the variable $collection. For each of these files it follows any path that leads
             via the elements <gi>fileDesc</gi> and <gi>titleStmt</gi> to the element <gi>title</gi>. It gives to that
             element the variable name $title and <term>returns</term>, i.e. produces as the result of its operation, the
@@ -293,6 +211,8 @@
             The XQuery chained together the hard drive's filepath and all the XPaths in the $collection variable that
             lead to <gi>title</gi> children of <gi>titleStmt</gi> elements. You might say that the root element of the
             XML document becomes a child element of your drive.</p>
+          
+          <p>Why is the piece of code frame with a black border while its output is displayed in green field and with a green border?  Anything that appears in green is a valid TEI XML fragment if it appears in the right context. Code framed in black makes no such claim.</p>
 
           <p> As this example demonstrates, it takes a fair amount of prose to describe a very simple operation. Just
             about any individual operation with XML is quite simple, but there are a lot of them and they nest. Some of
@@ -312,12 +232,12 @@
             names. The opening tag of an element with the name "someElement" looks like
             <code>&lt;someElement&gt;</code>, while the closing tag adds a <term>solidus</term> after the left angle
               brackets:<code>&lt;/someElement&gt;</code>. As with a directory on your computer, you can put as much
-            stuff between those tags as your hard drive will hold. The following is a "well-formed" XML document</p>
+            stuff between those tags as your hard drive will hold. The following is a <term>well-formed</term> XML document</p>
 
-          <egXML xmlns="http://www.tei-c.org/ns/Examples"><someELement>Mary had a little lamb</someELement></egXML>
+          <eg>&lt;someELement>Mary had a little lamb&lt;/someELement></eg>
 
           <p>But so is
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><someELement>	 In the beginning God created the heaven and the earth....The grace of our Lord Jesus Christ be with you all. Amen.</someELement></egXML>
+            <eg>&lt;someELement>	 In the beginning God created the heaven and the earth....The grace of our Lord Jesus Christ be with you all. Amen.&lt;/someELement></eg>
             with all the other words of the Bible in between.</p>
         </div>
         <div>
@@ -333,27 +253,29 @@
             <eg><lb/>&lt;line&gt;Mary had a little lamb&lt;/line&gt;
          <lb/>&lt;line&gt;Its fleece was white as snow&lt;/line&gt;</eg>
             But
-            <egXML xmlns="http://www.tei-c.org/ns/Examples">
-         <linegroup><line>Mary had a little lamb</line>
-          <line>Its fleece was white as snow</line></linegroup>
-        </egXML>
-            is well-formed XML because the two <gi>line</gi> elements are enclosed by the root element
-              <gi>linegroup</gi> and the opening and closing tag names are spelled the same way.</p>
+            <eg>
+              &lt;linegroup>
+              <lb/>&lt;line>Mary had a little lamb&lt;/line>
+              <lb/>&lt;line>Its fleece was white as snow&lt;/line>
+              <lb/>&lt;/linegroup>
+        </eg>
+            is well-formed XML because the two &lt;line&gt; elements are enclosed by the root element
+            &lt;linegroup&gt; and the opening and closing tag names are spelled the same way.</p>
           <p>These simple examples of well-formed XML consist of element wrappers that enclose text. From a reader's
-            perspective XML has slightly awkward ways of referring to "just text". The software that processes an XML
+            perspective XML has slightly awkward ways of referring to <q>just text</q>. The software that processes an XML
             text is known as a <term>parser</term>, a term borrowed from traditional grammar. Just as you parse a
-            sentence by determining where its different parts begin and end so an XML parser goes through an XML file
+            sentence by determining where its different parts begin and end, so an XML parser goes through an XML file
             and inspects its parts. It looks for opening and closing tags of each element as well as the stuff enclosed
             by them, which consists either of other elements or of PCDATA or <term>parsed character data</term>, stuff
             that the XML Parser after examination has recognized as proper text. </p>
           <p>Except for the left angle bracket (&lt;) and the ampersand (&amp;) any Unicode character can show up in
-            PCDATA. Because the XML parser uses &lt; to identify the beginning of an element tag, it cannot be used
+            PCDATA. Because the XML parser uses (&lt;) to identify the beginning of an element tag, it cannot be used
             directly in plain text or PCDATA. Instead you use a <term>character entity</term> to represent them. A
             character entity is a periphrastic expression that is wrapped in an opening ampersand and a closing
             semicolon. Since there are no words that begin with the former and end with the latter they act as an
             unambiguous marker that their content refers to and retrieves something special, whether a single character
-            or all of <title>Hamlet</title> The character entity for the left angle bracket is &amp;lt;, where 'lt'
-            stands for 'less than' to reflect the common use of that character in mathematical notation. </p>
+            or all of <title>Hamlet</title>. The character entity for the left angle bracket is (&amp;lt;), where <q>lt</q>
+            stands for <q>less than</q> to reflect the common use of that character in mathematical notation. </p>
           <p>Because the ampersand is used as the opening symbol for a character entity, it also must be
               <term>escaped</term> and cannot be used directly. Its character entity is "ampersand + amp + semicolon"
             (&amp;amp;). These character entities are two of five <term>predefined entities</term> in the XML
@@ -370,8 +292,11 @@
           <head>Valid XML</head>
           <p>The requirement that everything in a well-formed XML document must be enclosed by a root element does not
             take you very far. A well-formed directory structure on a hard drive can be, and often is, a complete mess.
-            XML becomes interesting and useful only when it is <term>valid</term>. XML has rules for making rules about
-            what elements can be put inside other elements, how many of them, and in what order. A set of such rules is
+            XML becomes interesting and useful only when it is <term>valid</term>. XML has rules for making rules that specify for any element
+            <list>
+              <item>what elements it may or must contain or be contained by</item> 
+              <item>how often it may appear in its parent elemtn</item>  
+              <item>in what order it may or must appear</item></list> A set of such rules is
             known as a <term>schema</term>. You can use these rules about rules to make up your own schema, but if you
             want to share your documents and make sure that others can use them you are better off using a schema that
             has been designed by others for general use in some domain, whether Chemistry, Mathematics, or whatever. TEI
@@ -381,21 +306,21 @@
           <p>How does a machine know that a document is an XML document,whether with or without a schema? Any XML
             document must begin with one or more <term>processing instructions</term> that tell the machine what to do
             with it. The minimal processing instruction simply says <q>I am an XML document</q> and does so with the
-            line <q>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</q> at the top of the file. The statement <q>I am a TEI
-              Simple document</q> is more elaborate affair:</p>
+            line <eg>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</eg> at the top of the file. The statement <q>I am a TEI
+              Simple document</q> is a more elaborate affair:</p>
 
-          <eg><?xml-model href="http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple.rng"
+       <eg>  &lt;?xml-model href="http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple.rng"
 type="application/xml"
 schematypens="http://relaxng.org/ns/structure/1.0"?>
-        <?xml-model href="http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple.rng"
+<lb/>&lt;?xml-model href="http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple.rng"
 type="application/xml"
 schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
 
-          <p>You can encode quite successfully in TEI Simple by just cutting and pasting this code. If you wok with a
+          <p>You can encode quite successfully in TEI Simple by just cutting and pasting this code. If you work with a
             program like oXygen, you can choose a new document as a TEI Simple document, and it will open with all the
             required processing instructions. It is, however, useful to hava rough idea of what is going on here. A
             processing instruction comes in a &lt;? ...?&gt; wrapper, which answers to the machine's question <q>What
-              shall I do here?</q> In our example there are two instructions. The first one says <q>Followg th
+              shall I do here?</q> In our example there are two instructions. The first one says <q rend="block">Follow the
               instructions in the schema <term>teisimple.rng</term>. which you will find at the URL
               "http://raw.githubusercontent.com/TEIC/TEI-Simple/master/teisimple.rng".</q> The second instruction, which
             is rather more cryptic, specifies that the rules for the <gi>teiHeader</gi> element differ from the rules
@@ -409,8 +334,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             are very easy to make and very hard to find or fix in a document of any complexity. Modern editing software
             wil <term>validate</term> your document as you work on it. That is to say, it will read your document and
             check whether it complies with the rules declared in the schema. If it discovers an error, it will tell you
-            about the what and where of that error, and the error message typically is sufficiently to tell you how to
-            make the necessary correction. </p>
+            about the what and where of that error right then and there. It is a good investment of your time to learn how to read such error messages. </p>
 
           <p>Although working with XML is much less painful than it used to, you still have to understand the particular
             rules that are formulated in the arcane language of the schema. You also need to know something about the
@@ -438,7 +362,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
               <item> the<gi> date</gi> element declares that "my content is a date"</item>
             </list>
           </p>
-          <p>These declarations include no instructions about what to do with them. They do allow a machine retrieve the
+          <p>These declarations include no instructions about what to do with them. They do allow a machine to retrieve the
             content of all elements that have the tags <gi>name</gi>, <gi>date</gi> or <gi>s</gi>. If the sentence came
             from an Early Modern document in which names are frequently italicized, the encoding might go like
             <egXML xmlns="http://www.tei-c.org/ns/Examples"><s><name rendition="#italics">Julius Caesar</name> was assassinated on <date>March 15, 44 BCE</date></s></egXML>
@@ -451,10 +375,10 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
           <head>The Nature of XML rules</head>
 
           <p> TEI is a specific markup language designed to encode texts that originated in a print or manuscript world.
-            You can also use it to generate "born digital" documents, but you will understand its quirks more readily if
+            You can also use it to generate <term>born digital</term> documents, but you will understand its quirks more readily if
             you keep its original purpose in mind. The XML rules for specifying the TEI markup language have to do with
-            what elements may contain or are contained by other elements, the order of child elements within a
-            particular parent element, and the number of child elements that a parent element may contain. The words
+            <list><item>what elements may contain or are contained by other elements</item> <item>the order of child elements within a
+            particular parent element</item> <item>the number of child elements that a parent element may contain</item></list> The words
               <term>may</term>, <term>must</term> and <term>may not </term>are important technical terms that the
             machine can understand when it validates an encoding. There is also the ocasional <term>should</term>, but
               <term>should</term> is not a term the machine can make sense of. It involves conventions that it is
@@ -464,7 +388,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
         </div>
         <div>
           <head>A simple example of the rules</head>
-          <p>The outer skeleton of a TEI document provides a good example for the ways in which the rule-making
+          <p>The  skeleton of a TEI document provides a good example for the ways in which the rule-making
             capabilities of XML are exercised. A TEI document MUST have one and only one root element, and it name is
             TEI. The element name TEI is a specific feature of the TEI schema. The requirement for a root element is a
             requirement of well-formed XML. </p>
@@ -472,7 +396,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             one of each, and <gi>teiHeader</gi> MUST come before <gi>text</gi>. These are TEI specific rules, but they
             observe the rule-making rules of XML. </p>
           <p><gi>teiHeader</gi> and <gi>text</gi> relate to each other as a catalogue record to the item it catalogues.
-              <gi>teiHeader</gi> consists of data about <gi>text</gi> or "metadata." </p>
+              <gi>teiHeader</gi> consists of data about <gi>text</gi> or <term>metadata</term>. </p>
           <p>Encoding the header is a very different thing from encoding the text, and information from the header is
             never included in a representation of the text. We will leave the header alone, except for noting briefly
             what MUST be in it. Here is an example of a minimal header:</p>
@@ -494,14 +418,14 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
           <p>The header MUST have a <gi>fileDesc</gi> element or file description, which answers at least the following
             three questions: <list>
               <item>What is my name? (<gi>titleStmt</gi>)</item>
-              <item>Who published me? (<gi>pubStatement</gi>)</item>
+              <item>Who published me? (<gi>pubStmt</gi>)</item>
               <item>Where do I come from? (<gi>sourceDesc</gi>) </item>
             </list> The <gi>fileDesc</gi> element MAY have a lot of other child elements, but it MUST have
               <gi>titleStmt</gi>, <gi>pubStmt</gi>, <gi>sourceDesc</gi>, only one of each and in that order. This is a
             very simple example of XML rules codifying practices from some domain, here the world of published books.
             The normal case of a TEI document represents a file that has been digitized and published from a printed
-            source. But this hypothetical example represents a digital file that has not been published and was "born
-            digital." </p>
+            source. But this hypothetical example represents a digital file that has not been published and was <term>born
+            digital</term>. </p>
           <p>In this simple example, <gi>titleStmt</gi>,<gi>pubStmt</gi>,and <gi>sourceDesc</gi> do not have text
             content, but their child elements <gi>p</gi> and <gi>title</gi> do. Some elements can only contain other
             elements, some elements can contain <term>mixed content</term>, i.e. <term>text nodes</term> and child
@@ -516,10 +440,9 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             nodes and combine them into a single utterance.</p>
 
           <p> So much for the header, at least for now. Let us turn to <gi>text</gi>, the container for encoding the
-            actual document, including its title page if it has one. A book is a bibliographical unit, which may contain
-            one or more "work(s)." The second quarto of Hamlet is a book with one work. The Shakespeare Folio of 1623
+            actual document, including its title page if it has one. A <term>book</term> is a bibliographical unit, which may contain one or more <term>work(s)</term>. The second quarto of Hamlet is a book with one work. The Shakespeare Folio of 1623
             contains three dozen separate works. While the TEI can handle both situations, we will focus here on the
-            normal case of "one book, one work."</p>
+            normal case of <q>one book, one work</q>, but it is useful to acknowledge the fact that the relationship between <term>book</term> and <term>work</term> and be very complex and raises tricky encoding questions. </p>
           <p>The <gi>text</gi> element MUST contain one and only one <gi>body</gi> element. It MAY contain
               a<gi>front</gi> or <gi>back</gi> element, or both of them, but only one of each. <gi>front</gi> MUST
             precede and <gi>back</gi> MUST follow <gi>body</gi>. This is another example of perfectly obvious and
@@ -552,7 +475,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
           <list>
             <item><term>Text structure</term> elements elements articulate the macrostructure of your document, e.g.
                 <gi>front</gi>,<gi>body</gi>,<gi>back</gi>,<gi>div</gi>. With some very specialized exceptions, such
-              elements MAY NOT contain PCDATA </item>
+              elements MAY NOT contain PCDATA. </item>
             <item><term>Block elements</term>, principally <gi>p</gi> and <gi>l</gi> contain stretches of plain text
               whose end is almost universally marked by a line break in print. </item>
             <item><term>Inline elements</term> operate at the microstructure of discourse. Printed text will often use
@@ -561,8 +484,8 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
               phrases that have been highlighted.</item>
           </list>
           <p>But wherever one draws a line, there are phenomena that want to cross that line. In TEI there are several
-            "inter" elements that can occur within paragraphs (inline) or between paragraphs (block). The most common of
-            these the versatile and slippery <gi>q</gi> element. It is common for a paragraph to end with a quotation in
+            <term>inter</term> elements that can occur within paragraphs (inline) or between paragraphs (block). The most common of
+            these is  the versatile and slippery <gi>q</gi> element. Paragraphs often end with a quotation in
             a pattern like the following:</p>
 
           <egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -602,8 +525,8 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
          he means that...</p>
        </egXML>
           <p> In the latter case there is no ambiguity or choice, and there is nothing strained about <gi>l</gi> as a
-            descendant of <gi>p</gi> In the former case, there is ambiguity, and you can reasonably choose the option
-            that get you out of a case of strained nesting. With nested structures it is useful to follow the advice
+            descendant of <gi>p</gi> In the former case, there is ambiguity, and you may want to choose the option
+            that avoids strained nesting. With nested structures it is useful to follow the advice
               <q>as much as necessary but as little as possible</q>.</p>
         </div>
         <div>
@@ -612,7 +535,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             instance, HTML and TEI both use elements with the names <gi>p</gi> and <gi>div</gi>. But these are "false
             friends" with very different meanings and operating rules. By convention a namespace takes the form of a
             URL. The full name of an element is known as its "qualified name" or QName, and in one conventional notation
-            it is written by prefixing the element name with the namespaces in curly braces Thus the namespace of TEI is
+            it is written by prefixing the element name with the namespace in curly braces Thus the namespace of TEI is
             http://www.tei-c.org/ns/1.0, and the full name of a TEI element such as <gi>p</gi> is
             {http://www.tei-c.org/ns/1.0}p.</p>
           <p>Because QNames are very clumsy things to manipulate, shortcuts have been invented. If you map the namespace
@@ -620,27 +543,27 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             choice of the prefix is arbitrary, but the prefix and element name must be connected by a colon. Unless you
             manipulate an XML text with XSLT, xquery, or some other language, you don't have to worry much about
             namespaces. But it is useful to know about them. If you do have to use them remember that they are fussy and
-            a very common source of error. </p>
+            a common source of error. </p>
         </div>
         <div n="looke at this later">
           <head>About Attributes</head>
           <p> Elements can have attributes. The term is borrowed from grammar, and attributes relate to elements pretty
-            much as adjectives relate to nouns. An attribute consists of a "key-value" pair, such as 'type="act"', where
+            much as adjectives relate to nouns. An attribute consists of a <term>key-value</term> pair, such as <hi>type='act'</hi>, where
             the term before the equal sign is the name of the attribute and the term after the equal sign is the value.
-            The value must be in quotation marks,whether single or double, but "smart" quotation marks will raise an
+            The value must be in quotation marks,whether single or double, but <hi>smart</hi> quotation marks will raise an
             error message. Thus &lt;div typ="act" n=3"&gt; would be a way of specifying a particular <gi>div</gi> as
             containing "Act III" of some play. </p>
           <p>In well-formed XML, there are rules about the names of attributes, but no rules about what attributes to
             use with what elements or what values to associate with the attributes. In valid XML, the rules for
             attributes are specified in the schema. There are rules about what attributes may be used with with what
-            elements and what kinds of data may, must, or may not in attribute values. In the TEI schema some attributes
-            are "global" and can be used in the same manner for any element. Other attributes are specific to a
+            elements and what kinds of data may, must, or may not appear in attribute values. In the TEI schema some attributes
+            are <term>global</term> and can be used in the same manner for any element. Other attributes are specific to a
             particular set of elements. </p>
           <p> A few of the global attributes in the TEI schema belong to the xml namespace. The two that you are likely
             to encounter often are xml:id and xml:lang. The former specifies an ID for an element that is unique within
             the document. The latter specifies the language in which the document (or part of it) is written. The rules
             for these two attributes are not TEI specific but follow the general rules for XML. That is why instead of
-            "id" and "lang" these attributes always appear with their XML prefix "xml:id" and "xml:lang" </p>
+            <hi>id</hi> and <hi>lang</hi> these attributes always appear with their XML prefix <hi>xml:id</hi> and <hi>xml:lang</hi>. </p>
           <p>In the TEI schema the value of an xml:id attribute must be a proper <term>XML Name</term>: it must begin
             with an alphabetic character; it may include digits, periods, hyphens, and underscores, but not commas, or
             semicolons. Because the colon required to link a namespace prefix to an attribute name you should only use
@@ -648,30 +571,28 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             attributes. </p>
           <p>The two most widely used global attributes in TEI are <att>n</att> and <att>rendition</att>. The name of
             the former is short for "number," and numbering of one kind or another is its most common, but not its only
-            use. There are hardly any restrictions that you can put as the attribute value. You can even, while you're
+            use. There are hardly any restrictions on what you can use for its attribute values. You can even, while you are
             working with a document, embed comments, as long as you remember to remove them in time. If n="5" is a
             proper value, so is n="5 check this again later." But you will be better off using the formal commenting
             protocol of XML, wrapping any kind of comment in &lt;!-- [my comment] --&gt; </p>
           <p> Other attributes values are much fussier. The <gi>l</gi> supports a <att>part</att> attributed with a
-            fixed list of values Y, N, I, M, F for 'yes' 'no', 'initial', 'medial', and 'final'. The value for the
-              <att>target</att> attributes of linking elements like <gi>ref</gi> or <gi>ptr</gi> may consist of one or
+            fixed list of values Y, N, I, M, F for <term>yes</term>, <term>no</term>, <term>initial</term>, <term>medial</term>, and <term>final</term>. The value for the
+              <att>target</att> attributes for the linking element  <gi>ref</gi>  may consist of one or
             more URL's separated by white space. </p>
           <p>The <att>type</att> attribute, which is available for some but not all elements, is a very powerful device
             for making more granular distinctions among kinds of discourse, especially when it is combined with a
-            controlled vocabulary. The <gi>lg</gi> element is used to encode any kind of grouping of lines of verse. A
-            controlled vocabulary of stanzaic and metrical patterns is a great device for enhancing the query potential
-            of a corpus of poems. </p>
+            <term>controlled vocabulary</term>. For instance, the TEI schema include a <gi>lg</gi> element for encoding any kind of grouping of lines of verse.  A controlled vocabulary for tagging  stanzaic and metrical patterns is a great device for enhancing the query potential of a corpus of poems. </p>
         </div>
         <div>
           <head>Limitations of TEI as an XML Markup Language</head>
 
           <p>As an XML markup language TEI is committed to two axioms: <list>
-              <item> A document is OHCO or ordered hierarchy of content objects</item>
+              <item> A document is an OHCO or ordered hierarchy of content objects</item>
               <item>The presentation of a document can be neatly separated from its structure</item>
             </list> Both of these axioms are deeply problematical when it comes to texts, but they are true often enough
             to be useful. Many texts divide neatly into single hierarchical structures, but others do not, and
             rhetorical effects frequently rely on the reader's or listener's effortless management of what in TEI
-            parlance is called "overlapping" or "concurrent hierarchies. Take the last two lines of Hamlet's
+            parlance is called <term>overlapping</term> or <term>concurrent</term> hierarchies. Take the last two lines of Hamlet's
             soliloquy:</p>
 
           <quote>
@@ -708,8 +629,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
          <l> <s xml:id="s2" previous="#s1">Be all my sins remembered.</s></l>
         </quote></egXML>
             These workarounds do a more or less adequate job at articulating a secondary structure in the face of a
-            dominant structure, but they are workarounds, and TEI encoders typically are happy if they don't have to
-            resort to them. </p>
+            dominant structure, but they are workarounds. There are other and more powerful workarounds. Chapter 18 of the Guidelines discusses <term>feature structures</term>, and there is <term>stand-off markup</term>, where different forms of textual segmentation and annotation are kept in separate documents that point to individual tokens or token ranges in the text. Feature structures take you well beyond TEI Simple, and stand-off will also be most beyond its range.  </p>
           <p>The second axiom, that content is entirely separable from presentation, will rub most literary critics the
             wrong way. If you are used to reading a book printed in <term>Fraktur</term> you may feel that printing it
             in <term>Antiqua</term> robs it of its spirit. In Vergil's <title>Eclogues</title> up or down things happen
@@ -718,7 +638,7 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             happening to bad guys). There are countless examples of playing with layout and typography, from George
             Herbert to concrete poetry.</p>
           <p> If you make the physical layout of a text the organizing structure you can do that by using the
-              <gi>surface </gi> element and its children. That is beyond the scope of TEI Simple, but it is fully
+              <gi>surface </gi> element and its children. That is also beyond the scope of TEI Simple, but it is fully
             documented in Chapter 11 of the <title>Guidelines</title>
           </p>
           <p>TEI is about <term>text</term>, and texts are written in <term>natural</term> languages. Natural Language
@@ -735,6 +655,10 @@ schematypens="http://purl.oclc.org/dsdl/schematron"?></eg>
             Stevens' <title>Connoisseurs of Chaos:</title>
           </p>
           <l>The squirming facts exceed the squamous mind.</l>
+        </div>
+        <div xml:id = "tagabuse">
+          <head>Should, Should Not, and Tag Abuse</head>
+          <p>Valid encoding is not necessarily good encoding, just as rigid compliance with the law does not always square with justice. Here we are in the realm of Aristotle's <foreign>epieikia</foreign> or equity as a principle that complements rigid compliance with a set of rules. The word  lives in a space tenuously circumscribed by the probable, the reasonable, and the appropriate--very much like the space of the French twins <term>vraisemblance</term> and <term>bienséance</term>What SHOULD you do when confronted with a problem to which the schema offers no obvious solution? Do as your neighbours do is good advice when you live in a good neighbourhood, and as a TEI encoder you happen to live in a very friendly and helpful neighbourhood. Sign up for the <ref target ="https://listserv.brown.edu/archives/cgi-bin/wa?A0=TEI-L" >TEI listserv </ref> and ask for advice.  It will come to you from just about any continent, very promptly at any hour of the day or night, and it is nearly always relevant. Following the TEI list and pondering its advice is the best way of getting a feel for the discretionary space surrounds all rulles, and it will keep you from committing <term>tag abuse</term>, the TEI community's term for encoding practices that are valid but make no sense or worse.</p>
         </div>
 
       </div>
@@ -918,10 +842,10 @@ live without God in the world, and only mind earthly things.
             called the <term>materiality</term> of the text. Some of the relevant element names , <gi>facsimile</gi>,
               <gi>surface</gi>, <gi>zone</gi>, give you a sense of this approach, where the content of element would be
             images or other media types rather than transcribed text. While this set of elements is outside the scope of
-            TEI Simple, Digital representations that combine transcription with facsimiles are likely to be more common
-            in the future. The global <att>facs</att> attribute is the obvious device for linking paged or other chunks
-            of transcribed TEI Simple text to facsimiles. For more information consult the chapter on Digital Facsimiles
-            in the Guidelines 11.1. </p>
+            TEI Simple, digital representations that combine transcription with facsimiles are likely to be more common
+            in the future. The global <att>facs</att> attribute is the obvious device for linking pages or other chunks
+            of transcribed TEI Simple text to facsimiles. For more information consult the section on <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/PH.html#PHFAX">Digital Facsimiles</ref>
+            in the <title>Guidelines</title>. </p>
           <p>A TEI text may be <term>unitary</term> (a single work) or <term>composite</term> (a collection of single
             works, such as an anthology). In either case, the text may have an optional <term>front</term> or
               <term>back</term>. In between is the <term>body</term> of the text, which, in the case of a composite
@@ -1545,26 +1469,25 @@ live without God in the world, and only mind earthly things.
             discussed in section <ptr target="#xatts"/>.</p>
           <div xml:id="ptrs">
             <head>Simple Cross References</head>
-            <p>A cross reference from one point within a single document to another can be encoded using either of the
-              following elements: <specList>
+            <p>A cross reference from one point within a single document to another can be encoded by a tacit or explicit use of the &lt;ref&gt; element: <specList>
                 <specDesc key="ref"/>
-                <specDesc key="ptr"/>
+
               </specList>
             </p>
-            <p>The difference between these two elements is that <gi>ptr</gi> is an empty element, simply marking a
-              point from which a link is to be made, whereas <gi>ref</gi> may contain some text as well, typically
-              identifying the target of the cross reference. The <gi>ptr</gi> element would be used for a cross
+            <p>In the tacit use of the &lt;ref&gt; element you use it as as an <term>empty</term> element, simply marking a
+              point from which a link is to be made, whereas in the explicit use the element may contain some text as well, typically
+              identifying the target of the cross reference. You can use the element tacitly  in  a cross
               reference which is to be indicated by some non-verbal means such as a symbol or icon, or in an electronic
               text by a button. It is also useful in document production systems, where the formatter can generate the
               correct verbal form of the cross reference.</p>
             <p>The following two forms, for example, are logically equivalent : <egXML xmlns="http://www.tei-c.org/ns/Examples">See especially <ref target="#SEC12">section 12 on
         page 34</ref>.</egXML>
-              <egXML xmlns="http://www.tei-c.org/ns/Examples">See especially <ptr target="#SEC12"/>.</egXML> The value
+              <egXML xmlns="http://www.tei-c.org/ns/Examples">See especially <ref target="#SEC12"/>.</egXML> The value
               of the <att>target</att> attribute on either element may be the identifier of some other element within
               the current document. The passage or phrase being pointed at must bear an identifier, and must therefore
               be tagged as an element of some kind. In the following example, the cross reference is to a <gi>div</gi>
               element:
-              <egXML xmlns="http://www.tei-c.org/ns/Examples"> ... see especially <ptr target="#SEC12"/>. ... <div xml:id="SEC12">
+              <egXML xmlns="http://www.tei-c.org/ns/Examples"> ... see especially <ref target="#SEC12"/>. ... <div xml:id="SEC12">
         <head>Concerning Identifiers</head>
         <!-- ... -->
        </div></egXML>
@@ -1602,8 +1525,8 @@ live without God in the world, and only mind earthly things.
           </div>
           <div xml:id="xptrs">
             <head>Pointing to other documents</head>
-            <p>So far, we have shown how the elements <gi>ptr</gi> and <gi>ref</gi> may be used for cross-references or
-              links whose targets occur within the same document as their source. However, the same elements may also be
+            <p>So far, we have shown how the &lt;ref&gt; element may be used for cross-references or
+              links whose targets occur within the same document as their source. The  element may also be
               used to refer to elements in any other XML document or resource, such as a document on the web, or a
               database component. This is possible because the value of the <att>target</att> attribute may be any valid
                 <term>universal resource indicator</term> (URI)<note>A full definition of this term, defined by the W3C
@@ -1621,7 +1544,7 @@ live without God in the world, and only mind earthly things.
             <p>Parts of an XML document can be specified by means of other more sophisticated mechanisms using a special
               language called Xpath, also defined by the W3C. This is particularly useful where the elements to be
               linked to do not bear identifiers and must therefore be located by some other means.
-              <!--A full specification of the language is well beyond
+              A full specification of the language is well beyond
       the scope of this document; here we provide only a flavour of its power. </p>
      <p>In the XPath language, locations are defined as a series of <term>steps</term>, each one
       identifying some part of the document, often in terms of the locations identified by the
@@ -1630,7 +1553,7 @@ live without God in the world, and only mind earthly things.
       step, and the third sentence in the last step. A step can be defined in terms of the document
       tree itself, using such concepts as <val>parent</val>, <val>descendent</val>,
        <val>preceding</val>, etc. or, more loosely, in terms of text patterns, word or character
-      positions. --></p>
+      positions. This is not the document to describe in detail the powers of XPath. But unless you think of TEI encoding as just another form of typesetting—which emphatically is not its purpose—the decision to <term>encode</term> any part of a text this way rather than that way should always be guided by the sense that somebody at some time will want to <term>decode</term> or retrieve that part of the text for some purpose, about which you may not know very much at the point of encoding. XPath has been, and is likely to remain, the set of rules for <term>decoding</term> the <term>encoded</term>. A general understanding of what you can or cannot do with XPath is a useful thing to know in any encoding project. </p>
           </div>
           <div xml:id="xatts">
             <head>Special kinds of Linking</head>
@@ -1706,6 +1629,7 @@ live without God in the world, and only mind earthly things.
                 expressing thoughts and ideas (text and graphics) which are often just single words, unfinished
                 sentences or sketches, and unrelated to previous or following entries.</item>
               <item>rubrics or interspersed commentary in liturgical texts</item>
+
               <item>The question and answer structure of catechisms as well as the alternating structures common in 17th
                 century polemtical literature </item>
               <item>table-like content that cannot be wrangled into a row/column structure and where &lt;ab
@@ -1714,7 +1638,7 @@ live without God in the world, and only mind earthly things.
 
             </list>
 
-            <p>The list could go on and certainly demonstrates that a lot of prose does not come in paragraphs with
+            <p>Finally, &lt;p&gt; has been a useful element for identifying prose in dramatic dialogue, whether or not it is conducted in paragraphs, which it usually is not. Whether a speech in a play is in prose or verse is not always to tell. When Gertrude says <q>The lady does protest too much methinks</q> her words happen to scan but are surrounded by prose.If you want avoid jumping off the fence you could use &lt;ab&gt;. The list could go on and certainly demonstrates that a lot of prose does not come in paragraphs with
               semantic baggage. The "Best Practices for TEI in Libraries" offers a somewhat off-beat use of <gi>ab</gi>
               as an answer to the question how to encode asterisks or similar horizontally oriented symbols that mark
               some degree of separation between the stuff below and above. They recommend &lt;ab type="typography"&gt; *
@@ -1859,7 +1783,7 @@ live without God in the world, and only mind earthly things.
       </egXML>
               For a fuller discussion of abbreviations and the intricacies of representing them consult the section on
                 <ref target="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/PH.html#PHAB">Abbreviations and
-                Expansion</ref> in the Guidelines. </p>
+                Expansion</ref> in the <title>Guidelines</title>. </p>
           </div>
         </div>
         <div xml:id="Simple-names">
@@ -2778,6 +2702,205 @@ live without God in the world, and only mind earthly things.
           </div>
         </div>
       </div>
+      <div xml:id="processingmodel"> 
+        <head>A Short Tour of the Processing Model</head>
+        <p></p>
+        
+        <p> The key feature of the Processing Model is a notation that allows each element to be assigned to a
+        structural category, which in turn is mapped to a description of how to render it. This allows a processor to know whether to handle the element or not, and broadly speaking how to display or otherwise process it. Several projects that have used TEI Simple and its Processing Model report that it cuts the length of required code by two thirds, reduces its complexity, and makes it easier to maintain.  The model and rendition instructions are part of the TEI ODD and can be customized. </p>
+        <p>ODD, short for <q>One Document Does it all</q>, is the technology used by the TEI for maintaining its rules. An ODD is an XML document written in a <term>literate programming</term> style, mixing code and explanatory prose. From an ODD and with the use of an <term>ODD Processor</term> you can produce reference documentation as well as schemas. Support for the Processing Model is a significant extension of the TEI ODD and provides and answer to the question of what to do with a text once you have encoded it. Encoding is often the easy part.  For a fuller account of ODD see the chapter on <ref target = "http://www.tei-c.org/release/doc/tei-p5-doc/en/html/TD.html">Documentation Elements</ref> in the Guidelines. </p>
+        <p>In principle there are a variety of ways in which a processor can use processing instructions encoded in the ODD to produce a readable text, whether a Web page, an epub, or a PDF. In practice <ref target ="http://showcases.exist-db.org/exist/apps/tei-simple/index.html">Wolfgang Meier's XQuery based ODD processor</ref>  is the fullest and most thoroughly tested current implementation. From the instructions in the ODD it creates an XQuery Library module that relies heavily on  XQuery's typeswitch, a switch or case statement whose structure lends itself to transforming each processing instruction in the ODD into an XQuery function.  In  a second step the XQuery Library module is used to transform the TEI Simple text.  </p>
+        
+       
+     <div><head>The &lt;model&gt; element with some of its attributes and children</head>
+       
+       <p>  In the TEI ODD, the specifications for a particular element are recorded
+        in an element called <gi>elementSpec</gi>. The processing instructions for each element are kept in one or more <gi>model </gi> elements that are children of &lt;elementSpec&gt;. In the simplest and modal case the processing instruction is recorded as the value of a <att>behaviour</att> attribute:
+        <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="back" mode="change" >
+          <model behaviour="block"/>
+        </elementSpec></egXML>
+        This means  <q>Apply the behaviour <term>block</term> to the element &lt;back&gt;</q>.
+      </p>
+        
+        <p>A   slightly more complex processing instruction says that the rendering of the source document should be followed but specifies a rendition if there is nothing in the source:
+          <egXML xmlns="http://www.tei-c.org/ns/Examples">
+            <elementSpec ident="l" mode="change" >
+            <model behaviour="block" useSourceRendition="true">
+              <outputRendition> margin-left: 1em; </outputRendition>
+            </model>
+          </elementSpec></egXML>
+        </p>
+        <p>The <term>behaviour</term> of an element may depend on its attributes or place in the XML hierarchy.  Here is the processing rule that distinguishes between a header row and an ordinary row in a table: 
+          
+          <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="row" mode="change" >
+            <model predicate="@role='label'" behaviour="row">
+              <outputRendition>font-weight: bold;</outputRendition>
+            </model>
+            <model behaviour="row">
+              <desc>Insert table row. </desc>
+            </model>
+          </elementSpec></egXML>
+          
+          The  first &lt;model&gt; with its <att>predicate</att> attribute specifies the condition under which you use bold type for text in a table row. The second model specifies the default behaviour. The <gi>desc</gi> element in the second model explains the meaning of <term>row</term> behaviour. It is optional. The next example shows the different treatment of &lt;div&gt;, depending on whether it contains a title-page, is a child element of &lt;front&gt;, &lt;body&gt;, or &lt;back&gt;, or a child element of &lt;div&gt;:
+          
+          <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="div" mode="change" >
+            <model predicate="@type='title_page'" behaviour="block">
+              <outputRendition>border: 1px solid black; padding: 5px;</outputRendition>
+            </model>
+            <model behaviour="section" predicate="parent::body or parent::front or parent::back"/>
+            <model behaviour="block"/>
+          </elementSpec></egXML>
+        
+        </p>
+        <p>The <gi>param</gi> child of &lt;model&gt; associates  a <term>behaviour</term> with the parameters or objects to which it applies. Thus the processing instruction for &lt;list&gt; tells you that the behaviour <term>list</term> targets items:
+          <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="list" mode="change" >
+            <model predicate="@rendition" behaviour="list" useSourceRendition="true">
+              <param name="content">item</param>
+            </model>
+            <model predicate="not(@rendition)" behaviour="list">
+              <param name="content">item</param>
+            </model>
+          </elementSpec></egXML>
+        </p></div>
+        
+        <div>
+          <head>More about Behaviours</head>
+          
+          <p>The <att>behaviour</att> attribute has 26 different values, each of them describing what needs to be done to a TEI element for it to be transformed into part of a Web document, PDF file,or other output. We list them below, together with the names of the elements to which they apply, in descending order of the number of elements with which they are associated: </p>
+          <list>
+            <item><label> INLINE (49)  </label><hi>creates inline element out of content if there's something in &lt;outputRendition&gt;, use that formatting; otherwise just show text of selected content.: </hi>abbr, actor, add, am author, bibl, c, choice, corr, date, del, desc, docAuthor, docDate, docEdition, docImprint, ex, expan, figDesc, figure, foreign, formula, formula, gap, handShift, hi, label, measure, milestone, name, note, num, orig, pc, ref, reg, rhyme, rs, s, salute, seg, sic, signed, space, subst, supplied, time, unclear, w, quote</item>
+            <item><label>BLOCK (35) </label><hi>create a block structure: </hi>address, addrLine, argument, back, body, byline, closer, dateline,  div, doctitle, epigraph, figure, floatingText, formula, front, fw, group, head, imprimatur, l, lg, listBibl, note, opener, postscript, q, quote, role, roleDesc, salute, signed, sp, speaker, titlePage, titlePart, trailer </item>
+            <item><label>OMIT (10) </label><hi>do nothing, do not process children: </hi>author, docAuthor, docDate, docEdition, docImprint, docTitle, encodingDesc, profileDesc, publisher, pubPlace, revisionDesc</item>
+            <item><label>LIST (4) </label><hi>create a list by following content: </hi>castGroup, castList, list, listBibl</item>
+            
+            
+            <item><label>BREAK (3) </label><hi>create a line, column, or page break according to type: </hi>cb, lb, pb</item>
+            <item><label>LISTITEM (3) </label><hi>create list item: </hi>bibl, castItem, item</item>
+            <item><label>ALTERNATE (2) </label><hi>: </hi> <hi>create a specialized display of alternating elements for displaying the preferred version and an alternative, both at once or by some method of toggling between the two:</hi> date,choice</item>
+            <item><label>PARAGRAPH (2) </label><hi>create a paragraph out of content.: </hi>ab, p</item>
+            
+            <item><label>ANCHOR </label><hi>create an anchor with ID: </hi>anchor</item>
+            <item><label>BODY </label><hi>create the body of a document body: </hi></item>
+            <item><label>CELL </label><hi>create a table cell: </hi>cit</item>
+            <item><label>CIT </label><hi>show the content, with an indication of the source: </hi>cit</item>
+            <item><label>DOCUMENT </label><hi>start a new output document: </hi> TEI</item>
+            <item><label>FIGURE </label><hi>make a figure with the title as caption: </hi> figure</item>
+            
+            <item><label>GLYPH </label><hi>show a character by looking up reference to a chardesc at the given URI: </hi> g</item>
+            <item><label>GRAPHIC </label><hi>if url is present, uses it to display graphic, else display a placeholder image.
+              heading: </hi> graphic</item>
+            <item><label>HEADING </label><hi>creates a heading.: </hi> head</item>
+            <item><label>INDEX </label><hi>generate list according to type: </hi> body</item>
+            <item><label>LINK</label><hi>create hyperlink: </hi> ref</item>
+            <item><label>METADATA </label><hi>create metadata section: </hi> teiHeader</item>
+            <item><label>NOTE </label><hi>create an note, often out of line, depending on the value of place; could be margin, footnote, endnote, inline: </hi>note</item>
+            <item><label>ROW </label><hi>create a table row: </hi> row</item>
+            <item><label>SECTION </label><hi>create a new section of the output document: </hi> div</item>
+            
+            <item><label>TABLE </label><hi>create a table: </hi>table</item>
+            <item><label>TEXT </label><hi>create literal text: </hi>title</item>            
+            <item><label>TITLE </label><hi>create document title: </hi>fileDesc</item>            
+            
+          </list>
+          <p>There are several things to be said about this list. First, the names of the <term>behaviours</term> as well as their explanations, will be familiar to programmers who work with texts on the Web. Secondly, there are far fewer behaviours (26) than elements. </p>
+          <p>Of the 106  elements in TEI Simple 76 have only one behaviour associated with them. Not quite two dozen elements have two behaviours associated with them. The <term>omit</term> behaviour is used to suppress the display of elements that can occur both in the &lt;teiHeader&gt; and the &lt;text&gt; element, as in the following example:
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="docDate" mode="change" >
+              <model predicate="ancestor::teiHeader" behaviour="omit">
+                <desc>Omit if located in teiHeader. </desc>
+              </model>
+              <model behaviour="inline"/>
+            </elementSpec></egXML>
+            
+            
+ Because the processor moves across  &lt;model&gt; elements in the order of their occurrence, it is important to put the more specific condition first. In the following examples the alternatives are stated with equal degrees of explicitness, and the order does not matter:
+ 
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="list" mode="change" >
+              <model predicate="@rendition" behaviour="list" useSourceRendition="true">
+                <param name="content">item</param>
+              </model>
+              <model predicate="not(@rendition)" behaviour="list">
+                <param name="content">item</param>
+              </model>
+            </elementSpec></egXML>
+          
+          </p>
+          
+          <p>Half a dozen elements have more than two models, but <hi>more  </hi>does not necessarily mean <hi>more complex</hi>. Take the &lt;head&gt; element, which can appear in a variety of environments and for which the Processing Model enumerates five explicit cases followed by a default case:
+            
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="head" mode="change" >
+              <model predicate="parent::figure" behaviour="block">
+                <outputRendition>font-style: italic;</outputRendition>
+              </model>
+              <model predicate="parent::table" behaviour="block">
+                <outputRendition>font-style: italic;</outputRendition>
+              </model>
+              <model predicate="parent::lg" behaviour="block">
+                <outputRendition>font-style: italic;</outputRendition>
+              </model>
+              <model predicate="parent::list" behaviour="block">
+                <outputRendition>font-weight: bold;</outputRendition>
+              </model>
+              <model predicate="parent::div" behaviour="heading">
+                <param name="level">count(ancestor::div)</param>
+              </model>
+              <model behaviour="block"/>
+            </elementSpec></egXML>
+          
+          Four of these models combine a predicate specifying the parent element with a simple CSS rendering instruction. The instruction for headings of &lt;div&gt; elements is a little more interesting: <code>count(ancestor::div)</code> is a little function that numbers the divs automatically. </p>
+          
+          <p>A few processing instructions are quite complex. Take the behaviour <term>alternate</term>, which allows you to toggle between two different elements that are alternative child elements of <gi>choice</gi> and lets you choose between
+          <list>
+            <item>an abbreviation and its expansion (<gi>abbr</gi> ad <gi>expan</gi></item>
+            <item>an error in the text and its correction (<gi>sic</gi> ad <gi>corr</gi>)</item>
+            <item>an orthographic variant and its regular form (<gi>orig</gi> ad <gi>reg</gi>) </item>
+          </list>           
+          </p>
+          <p>Two elements (<gi>body</gi> and <gi>title</gi> have processing instructions in which several model elements are chained together as a sequence and wrapped in a <gi>modelSequence</gi>. The processing instruction for <gi>body</gi> reads
+          <egXML xmlns="http://www.tei-c.org/ns/Examples"><elementSpec ident="body" mode="change" >
+            <modelSequence>
+              <model behaviour="index">
+                <param name="type">'toc'</param>
+              </model>
+              <model behaviour="block"/>
+            </modelSequence>
+          </elementSpec></egXML>
+          
+      This sequence creates the framework for a display of the text together with a navigation panel that contains a table of context. The other (and rather daunting) <gi>modelSequence</gi> works through all the options of displaying titles in various bibliographical environments.    
+          </p></div>
+        
+        
+        <div xml:id ='customization'>
+          <head>Customizing the Processing Model</head>
+          <p>The point of the Processing Model is to reduce the time and effort it takes to publish a TEI text that meets scholarly standards. Its virtues are Spartan rather than Corinthian. If you can get acceptable results by staying within its rules you probably should. But modifications are possible and will sometimes be necessary. Some of them are easier to achieve than others. 
+            A processing instruction like 
+            
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><outputRendition>font-style: italic;</outputRendition></egXML>
+            
+            is just a specific form of the more general
+            
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><outputRendition>{some CSS}</outputRendition></egXML>
+            
+            It is not hard to replace one set of CSS instructions with another. Changing the basic behaviour of a model is a different matter, and you need to think about unintended consequences. The following figure illustrates the general workflow of the Processing Model. Red and green are used as they are in traffic signals. Traveling along the green lines will be relatively easy. The red lines may cause trouble and will certainly involve a lot more work. 
+           
+            
+          </p>
+          
+          <p>
+            <figure>
+              <graphic url="SPM2.png"/>
+              <head>Processing model workflow</head>
+            </figure>
+          </p>
+          
+          
+        </div>
+        
+        
+        
+        
+      </div>
+        
+      
 
 
 
@@ -2789,8 +2912,34 @@ live without God in the world, and only mind earthly things.
 
 
 
-
-
+      <div> <p>
+        <figure>
+          <graphic url="SPM2.png"/>
+          <head>Processing model workflow</head>
+        </figure>
+      </p>
+        <p>This method of working assumes a workflow with three parts, and three distinct roles, to create a digital
+          edition from a TEI text: <list rend="ordered">
+            <item>an <emph>editor</emph> is responsible for the encoding and makes high-level output decisions. These
+              fall into two parts <list rend="ordered">
+                <item><emph>Structural</emph> descriptions, eg <q>should the original or corrected version be displayed
+                  by default</q>, or <q>is this a block level or inline component</q></item>
+                <item>Indications of <emph>appearance</emph> (<q>titles are in italics</q>).</item>
+              </list>
+            </item>
+            <item>a <emph>designer</emph> creates the output envelope (for example, a book layout using InDesign or a
+              web site using Drupal), making decisions in conjunction with the editor (<q>use Garamond font
+                throughout</q> or <q>every page must show the departmental logo</q>)</item>
+            <item>a <emph>programmer</emph> takes the <emph>editor</emph>'s specification, and the TEI text(s), and
+              creates the input for the <emph>designer</emph> to make the output.</item>
+          </list> It is crucial to understand here that neither the designer nor the programmer need have any
+          understanding of the semantics of TEI elements, or the structure of a TEI document. The programmer,
+          particularly, can use the processing model rules to extract material from the TEI text in a relatively simple
+          way. The method works for a variety of output formats, as the programmer simply has to provide implementations
+          for a small number of functions, and understand the well-documented features of CSS. The concepts addressed by
+          the functions (eg <q>block</q> and <q>inline</q>) are in line with XSL FO, and HTML. Implementations of the
+          processing model can be done in a variety or languages or environments, but any implementation must include an
+          XPath 2.0 interpreter, as this is used in several places in the processing notation. </p></div>
 
       <div>
         <head>The TEI Simple schema</head>
@@ -3225,57 +3374,57 @@ live without God in the world, and only mind earthly things.
           <include xmlns="http://www.w3.org/2001/XInclude" href="simpleelements.xml"/>
           <specGrp xmlns="http://www.tei-c.org/ns/1.0" xmlns:XSL="http://www.w3.org/1999/XSL/Transform"
             xml:id="simpleelementspm">
-            <elementSpec mode="change" ident="ab">
+            <elementSpec ident="ab" mode="change" >
               <model behaviour="paragraph"/>
             </elementSpec>
-            <elementSpec mode="change" ident="abbr">
+            <elementSpec ident="abbr" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="actor">
+            <elementSpec ident="actor" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="add">
+            <elementSpec ident="add" mode="change" >
               <model behaviour="inline">
                 <outputRendition>color: green; text-decoration: underline;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="address">
+            <elementSpec ident="address" mode="change" >
               <model behaviour="block">
                 <outputRendition>margin-top: 2em; margin-left: 2em; margin-right: 2em; margin-bottom:
                   2em;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="addrLine">
+            <elementSpec ident="addrLine" mode="change" >
               <model behaviour="block">
                 <outputRendition>white-space: nowrap;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="addSpan">
+            <elementSpec ident="addSpan" mode="change" >
               <model behaviour="anchor">
                 <param name="id">@xml:id</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="am">
+            <elementSpec  ident="am" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="anchor">
+            <elementSpec ident="anchor" mode="change" >
               <model behaviour="anchor">
                 <param name="id">@xml:id</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="argument">
+            <elementSpec ident="argument" mode="change" >
               <model behaviour="block">
                 <outputRendition>margin-bottom: 0.5em;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="author">
+            <elementSpec  ident="author" mode="change"   >
               <model predicate="ancestor::teiHeader" behaviour="omit"/>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="back">
+            <elementSpec ident="back" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="bibl">
+            <elementSpec ident="bibl" mode="change" >
               <constraintSpec mode="add" ident="noEmptyBibl" scheme="isoschematron">
                 <constraint>
                   <assert xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -3286,7 +3435,7 @@ live without God in the world, and only mind earthly things.
               <model predicate="parent::listBibl" behaviour="listItem"/>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="body">
+            <elementSpec ident="body" mode="change" >
               <modelSequence>
                 <model behaviour="index">
                   <param name="type">'toc'</param>
@@ -3294,41 +3443,41 @@ live without God in the world, and only mind earthly things.
                 <model behaviour="block"/>
               </modelSequence>
             </elementSpec>
-            <elementSpec mode="change" ident="byline">
+            <elementSpec ident="byline" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="c">
+            <elementSpec  ident="c" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="castGroup">
+            <elementSpec ident="castGroup" mode="change" >
               <model predicate="child::*" behaviour="list">
                 <desc>Insert list. </desc>
                 <param name="content">castItem|castGroup</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="castItem">
+            <elementSpec ident="castItem" mode="change" >
               <model behaviour="listItem">
                 <desc>Insert item, rendered as described in parent list rendition. </desc>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="castList">
+            <elementSpec ident="castList" mode="change" >
               <model predicate="child::*" behaviour="list" useSourceRendition="true">
                 <param name="content">castItem</param>
                 <outputRendition>list-style: ordered;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="cb">
+            <elementSpec ident="cb" mode="change" >
               <model behaviour="break">
                 <param name="type">'column'</param>
                 <param name="label">@n</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="cell">
+            <elementSpec ident="cell" mode="change" >
               <model behaviour="cell">
                 <desc>Insert table cell. </desc>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="choice">
+            <elementSpec ident="choice" mode="change" >
               <constraintSpec ident="choiceSize" scheme="isoschematron" mode="add">
                 <constraint>
                   <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="count(*) &gt; 1" role="ERROR"> Element
@@ -3364,17 +3513,17 @@ live without God in the world, and only mind earthly things.
                 <param name="alternate">orig[1]</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="cit">
+            <elementSpec ident="cit" mode="change" >
               <model predicate="child::quote and child::bibl" behaviour="cit">
                 <desc>Insert citation </desc>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="closer">
+            <elementSpec ident="closer" mode="change" >
               <model behaviour="block">
                 <outputRendition>margin-top: 1em; margin-left: 1em; margin-left: 1em;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="corr">
+            <elementSpec ident="corr" mode="change" >
               <model predicate="parent::choice and count(parent::*/*) gt 1" behaviour="inline">
                 <desc>simple inline, if in parent choice. </desc>
               </model>
@@ -3383,7 +3532,7 @@ live without God in the world, and only mind earthly things.
                 <outputRendition scope="after">content: ']';</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="date">
+            <elementSpec ident="date" mode="change" >
               <model output="print" predicate="text()" behaviour="inline"/>
               <model output="print" predicate="@when and not(text())" behaviour="inline">
                 <param name="content">@when</param>
@@ -3394,49 +3543,49 @@ live without God in the world, and only mind earthly things.
               </model>
               <model predicate="text()" behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="dateline">
+            <elementSpec ident="dateline" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="del">
+            <elementSpec ident="del" mode="change" >
               <model behaviour="inline">
                 <outputRendition> text-decoration: line-through;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="desc">
+            <elementSpec ident="desc" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="div">
+            <elementSpec ident="div" mode="change" >
               <model predicate="@type='title_page'" behaviour="block">
                 <outputRendition>border: 1px solid black; padding: 5px;</outputRendition>
               </model>
               <model behaviour="section" predicate="parent::body or parent::front or parent::back"/>
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="docAuthor">
+            <elementSpec ident="docAuthor" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="docDate">
+            <elementSpec ident="docDate" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="docEdition">
+            <elementSpec ident="docEdition" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="docImprint">
+            <elementSpec ident="docImprint" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="docTitle">
+            <elementSpec ident="docTitle" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
@@ -3444,57 +3593,57 @@ live without God in the world, and only mind earthly things.
                 <outputRendition>font-size: larger;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="epigraph">
+            <elementSpec ident="epigraph" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="ex">
+            <elementSpec ident="ex" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="expan">
+            <elementSpec ident="expan" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="figDesc">
+            <elementSpec ident="figDesc" mode="change" >
               <model behaviour="inline">
                 <outputRendition scope="before">content: '[..';</outputRendition>
                 <outputRendition scope="after">content: '..]';</outputRendition>
                 <outputRendition>color: grey;font-style:italic;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="figure">
+            <elementSpec ident="figure" mode="change" >
               <model predicate="head or @rendition='simple:display'" behaviour="block"/>
               <model behaviour="inline">
                 <outputRendition> display: block; border-top: solid 1pt blue; border-bottom: solid 1pt blue;
                 </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="floatingText">
+            <elementSpec ident="floatingText" mode="change" >
               <model behaviour="block">
                 <outputRendition> margin: 6pt; border: solid black 1pt; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="foreign">
+            <elementSpec ident="foreign" mode="change" >
               <model behaviour="inline">
                 <outputRendition>font-style:italic;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="formula">
+            <elementSpec ident="formula" mode="change" >
               <model predicate="@rendition='simple:display'" behaviour="block"/>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="front">
+            <elementSpec ident="front" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="fw">
+            <elementSpec ident="fw" mode="change" >
               <model predicate="ancestor::p or ancestor::ab" behaviour="inline"/>
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="g">
+            <elementSpec ident="g" mode="change" >
               <model predicate="not(text())" behaviour="glyph">
                 <param name="uri">@ref</param>
               </model>
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="gap">
+            <elementSpec ident="gap" mode="change" >
               <model predicate="desc" behaviour="inline">
                 <outputRendition>color: grey;</outputRendition>
               </model>
@@ -3508,7 +3657,7 @@ live without God in the world, and only mind earthly things.
                 <outputRendition scope="before">content: '[...]';</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="graphic">
+            <elementSpec ident="graphic" mode="change" >
               <model behaviour="graphic">
                 <param name="url">@url</param>
                 <param name="width">@width</param>
@@ -3517,13 +3666,13 @@ live without God in the world, and only mind earthly things.
                 <param name="title">desc</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="group">
+            <elementSpec ident="group" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="handShift">
+            <elementSpec ident="handShift" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="head">
+            <elementSpec ident="head" mode="change" >
               <model predicate="parent::figure" behaviour="block">
                 <outputRendition>font-style: italic;</outputRendition>
               </model>
@@ -3541,7 +3690,7 @@ live without God in the world, and only mind earthly things.
               </model>
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="hi">
+            <elementSpec ident="hi" mode="change" >
               <model predicate="@rendition" behaviour="inline" useSourceRendition="true">
                 <outputRendition>font-style: italic;</outputRendition>
               </model>
@@ -3549,30 +3698,30 @@ live without God in the world, and only mind earthly things.
                 <outputRendition>font-style: italic;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="imprimatur">
+            <elementSpec ident="imprimatur" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="item">
+            <elementSpec ident="item" mode="change" >
               <model behaviour="listItem"/>
             </elementSpec>
-            <elementSpec mode="change" ident="l">
+            <elementSpec ident="l" mode="change" >
               <model behaviour="block" useSourceRendition="true">
                 <outputRendition> margin-left: 1em; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="label">
+            <elementSpec ident="label" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="lb">
+            <elementSpec ident="lb"  mode="change" >
               <model behaviour="break" useSourceRendition="true">
                 <param name="type">'line'</param>
                 <param name="label">@n</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="lg">
+            <elementSpec ident="lg" mode="change">
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="list">
+            <elementSpec ident="list" mode="change" >
               <model predicate="@rendition" behaviour="list" useSourceRendition="true">
                 <param name="content">item</param>
               </model>
@@ -3580,22 +3729,22 @@ live without God in the world, and only mind earthly things.
                 <param name="content">item</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="listBibl">
+            <elementSpec ident="listBibl" mode="change" >
               <model predicate="bibl" behaviour="list">
                 <param name="content">bibl</param>
               </model>
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="measure">
+            <elementSpec ident="measure" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="milestone">
+            <elementSpec ident="milestone" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="name">
+            <elementSpec ident="name" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="note">
+            <elementSpec ident="note" mode="change" >
               <model predicate="@place" behaviour="note">
                 <param name="place">@place</param>
                 <param name="label">@n</param>
@@ -3609,21 +3758,21 @@ live without God in the world, and only mind earthly things.
                 <outputRendition>font-size:small;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="num">
+            <elementSpec ident="num" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="opener">
+            <elementSpec ident="opener" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="orig">
+            <elementSpec ident="orig" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="p">
+            <elementSpec ident="p" mode="change" >
               <model behaviour="paragraph" useSourceRendition="true">
                 <outputRendition>text-align: justify;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="pb">
+            <elementSpec ident="pb" mode="change" >
               <constraintSpec ident="pbposition" scheme="isoschematron">
                 <constraint>
                   <report xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -3640,23 +3789,23 @@ live without God in the world, and only mind earthly things.
                 <outputRendition scope="after">content: ']';</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="pc">
+            <elementSpec ident="pc" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="postscript">
+            <elementSpec ident="postscript" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="publisher">
+            <elementSpec ident="publisher" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="pubPlace">
+            <elementSpec  ident="pubPlace" mode="change" >
               <model predicate="ancestor::teiHeader" behaviour="omit">
                 <desc>Omit if located in teiHeader. </desc>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="q">
+            <elementSpec ident="q" mode="change" >
               <model predicate="l" behaviour="block" useSourceRendition="true">
                 <outputRendition>margin-left: 10px; margin-right: 10px; </outputRendition>
               </model>
@@ -3668,7 +3817,7 @@ live without God in the world, and only mind earthly things.
                 <outputRendition>margin-left: 10px; margin-right: 10px; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="quote">
+            <elementSpec ident="quote" mode="change" >
               <model predicate="ancestor::p" behaviour="inline" useSourceRendition="true">
                 <desc>If it is inside a paragraph then it is inline, otherwise it is block level</desc>
                 <outputRendition scope="before">content: '‘';</outputRendition>
@@ -3679,7 +3828,7 @@ live without God in the world, and only mind earthly things.
                 <outputRendition>margin-left: 10px; margin-right: 10px; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="ref">
+            <elementSpec ident="ref" mode="change" >
               <model behaviour="inline" predicate="not(@target)"/>
               <model predicate="not(text())" behaviour="link">
                 <param name="content">@target</param>
@@ -3689,19 +3838,19 @@ live without God in the world, and only mind earthly things.
                 <param name="link">@target</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="reg">
+            <elementSpec ident="reg" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="rhyme">
+            <elementSpec ident="rhyme" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="role">
+            <elementSpec ident="role" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="roleDesc">
+            <elementSpec ident="roleDesc" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="row">
+            <elementSpec ident="row" mode="change" >
               <model predicate="@role='label'" behaviour="row">
                 <outputRendition>font-weight: bold;</outputRendition>
               </model>
@@ -3709,17 +3858,17 @@ live without God in the world, and only mind earthly things.
                 <desc>Insert table row. </desc>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="rs">
+            <elementSpec ident="rs" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="s">
+            <elementSpec ident="s" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="salute">
+            <elementSpec ident="salute" mode="change" >
               <model predicate="parent::closer" behaviour="inline"/>
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="seg">
+            <elementSpec ident="seg" mode="change" >
               <model behaviour="inline" useSourceRendition="true"/>
             </elementSpec>
             <elementSpec ident="sic" mode="change">
@@ -3729,7 +3878,7 @@ live without God in the world, and only mind earthly things.
                 <outputRendition scope="after">content: '}';</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="signed">
+            <elementSpec ident="signed" mode="change" >
               <model behaviour="block" predicate="parent::closer">
                 <outputRendition> text-align: right; </outputRendition>
               </model>
@@ -3737,29 +3886,29 @@ live without God in the world, and only mind earthly things.
                 <outputRendition> font-style: italic; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="sp">
+            <elementSpec ident="sp" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="space">
+            <elementSpec ident="space" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="speaker">
+            <elementSpec ident="speaker" mode="change" >
               <model behaviour="block">
                 <outputRendition> font-style:italic; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="spGrp">
+            <elementSpec ident="spGrp" mode="change" >
               <model behaviour="block"/>
             </elementSpec>
-            <elementSpec mode="change" ident="stage">
+            <elementSpec ident="stage" mode="change" >
               <model behaviour="block">
                 <outputRendition>font-style: italic;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="subst">
+            <elementSpec ident="subst" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="supplied">
+            <elementSpec ident="supplied" mode="change" >
               <model predicate="parent::choice" behaviour="inline"/>
               <model predicate="@reason='damage'" behaviour="inline">
                 <outputRendition scope="before">content:"&lt;";</outputRendition>
@@ -3778,41 +3927,41 @@ live without God in the world, and only mind earthly things.
                 <outputRendition scope="after">content:"}";</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="table">
+            <elementSpec ident="table" mode="change" >
               <model behaviour="table">
                 <outputRendition> font-size: smaller; background-color: #F0F0F0; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="fileDesc">
+            <elementSpec ident="fileDesc" mode="change" >
               <model behaviour="title">
                 <param name="content">titleStmt</param>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="profileDesc">
+            <elementSpec ident="profileDesc" mode="change" >
               <model behaviour="omit"/>
             </elementSpec>
-            <elementSpec mode="change" ident="revisionDesc">
+            <elementSpec ident="revisionDesc" mode="change" >
               <model behaviour="omit"/>
             </elementSpec>
-            <elementSpec mode="change" ident="encodingDesc">
+            <elementSpec ident="encodingDesc" mode="change" >
               <model behaviour="omit"/>
             </elementSpec>
-            <elementSpec mode="change" ident="teiHeader">
+            <elementSpec ident="teiHeader" mode="change" >
               <model behaviour="metadata"/>
             </elementSpec>
-            <elementSpec mode="change" ident="TEI">
+            <elementSpec ident="TEI" mode="change" >
               <model behaviour="document"/>
             </elementSpec>
-            <elementSpec mode="change" ident="text">
+            <elementSpec  ident="text" mode="change" >
               <model behaviour="body">
                 <outputRendition> max-width: 80%; margin: auto; font-family: Verdana, Tahoma, Geneva, Arial, Helvetica,
                   sans-serif; </outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="time">
+            <elementSpec ident="time" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
-            <elementSpec mode="change" ident="title">
+            <elementSpec ident="title" mode="change" >
               <modelSequence predicate="parent::titleStmt/parent::fileDesc">
                 <model predicate="preceding-sibling::title" behaviour="text">
                   <param name="content">' — '</param>
@@ -3852,25 +4001,25 @@ live without God in the world, and only mind earthly things.
                 <outputRendition>font-style: italic;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="titlePage">
+            <elementSpec ident="titlePage" mode="change" >
               <model behaviour="block" useSourceRendition="true">
                 <outputRendition> text-align: center;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="titlePart">
+            <elementSpec ident="titlePart" mode="change" >
               <model behaviour="block" useSourceRendition="true"/>
             </elementSpec>
-            <elementSpec mode="change" ident="trailer">
+            <elementSpec ident="trailer" mode="change" >
               <model behaviour="block">
                 <outputRendition>color: green;</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="unclear">
+            <elementSpec ident="unclear" mode="change" >
               <model behaviour="inline">
                 <outputRendition scope="after">content: ' [?] ';</outputRendition>
               </model>
             </elementSpec>
-            <elementSpec mode="change" ident="w">
+            <elementSpec ident="w" mode="change" >
               <model behaviour="inline"/>
             </elementSpec>
           </specGrp>

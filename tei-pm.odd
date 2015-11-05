@@ -595,13 +595,13 @@
       <div>
         <head>Extensions to the TEI</head>
         <specGrp xml:id="additions">
-          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/param.xml"/>
-          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/paramSpec.xml"/>
-          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/paramList.xml"/>
-          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/model.xml"/>
-          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/modelSequence.xml"/>
-          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/modelGrp.xml"/>
-          <include xmlns="http://www.w3.org/2001/XInclude" href="guidelines-specs/outputRendition.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="processingModel/guidelines-specs/param.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="processingModel/guidelines-specs/paramSpec.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="processingModel/guidelines-specs/paramList.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="processingModel/guidelines-specs/model.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="processingModel/guidelines-specs/modelSequence.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="processingModel/guidelines-specs/modelGrp.xml"/>
+          <include xmlns="http://www.w3.org/2001/XInclude" href="processingModel/guidelines-specs/outputRendition.xml"/>
         </specGrp>
       </div>
       <div>
