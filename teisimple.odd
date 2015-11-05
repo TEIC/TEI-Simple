@@ -143,7 +143,14 @@
           query potential of encoded texts is in fact made available to them through appropriate query routines. This
           is conspicuously not the case with most TEI-encoded texts now: it is very difficult to write or train a search
           engine if you cannot make reasonably stable assumptions about the structure of the documents to be queried. </p>
-        <p>This introduction to TEI Simple consists of three parts. They address different audiences and make different assumptions about what the reader is likely to know. The first of these addresses readers who know little or nothing about XML and can safely be skipped by readers who are familiar with it. The second is a tour of the elements in TEI Simple from an encoder's perspective. This section is a revision of  the excellent introduction to TEI Lite by Lou Burnard and Michael Sperberg-McQueen. It follows that document wherever it can while adding this or deleting that. The third part is a short tour of the Processing Model and is written for   programmers who are familiar with Web technologies but new to TEI.</p>
+        <p>This introduction to TEI Simple consists of three parts. They address different audiences and make different
+        assumptions about what the reader is likely to know. The first of these addresses readers who know little or
+        nothing about XML and can safely be skipped by readers who are familiar with it. The second is a tour of the
+        elements in TEI Simple from an encoder's perspective. This section is a revision of  the excellent introduction 
+        to TEI Lite by Lou Burnard and Michael Sperberg-McQueen. It follows that document wherever it can while adding this
+        or deleting that. The third part is a short tour of the Processing Model and is written for 
+        programmers who are familiar with Web technologies but new to TEI. This document also includes a formal description of 
+        TEI Simple, which appears at the end and takes the form of an appendix.</p>
         
       </div>
 
