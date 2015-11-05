@@ -2065,7 +2065,7 @@ live without God in the world, and only mind earthly things.
             normally considered part of the document proper.)</p>
           <p>The simplest use for these elements is to mark the position of a graphic and provide a link to it, as in
             this example;
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><pb n="412"/><figure><graphic url="p412fig.png"/></figure><pb n="413"/></egXML>
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><pb n="412"/><figure><graphic url="images/p412fig.png"/></figure><pb n="413"/></egXML>
             This indicates that the graphic contained by the file <ident>p412fig.png</ident> appears between pages 412
             and 413. </p>
           <p>The <gi>graphic</gi> element can appear anywhere that textual content is permitted, within but not between
@@ -2077,7 +2077,7 @@ live without God in the world, and only mind earthly things.
               <gi>head</gi> element, or a number of figures may be grouped together in a particular structure. It is
             also often convenient to include a brief description of the image. The <gi>figure</gi> element provides a
             means of wrapping one or more such elements together as a kind of graphic <soCalled>block</soCalled>:
-            <egXML xmlns="http://www.tei-c.org/ns/Examples"><figure><graphic url="fessipic.png"/><head>Mr Fezziwig's Ball</head><figDesc>A Cruikshank
+            <egXML xmlns="http://www.tei-c.org/ns/Examples"><figure><graphic url="images/fessipic.png"/><head>Mr Fezziwig's Ball</head><figDesc>A Cruikshank
         engraving showing Mr Fezziwig leading a group of revellers.</figDesc></figure></egXML></p>
           <p>These cases should be carefully distinguished from the case where an encoded text is complemented by a
             collection of digital images, maintained as a distinct resource. The <att>facs</att> attribute may be used
@@ -2887,7 +2887,7 @@ live without God in the world, and only mind earthly things.
           
           <p>
             <figure>
-              <graphic url="SPM2.png"/>
+              <graphic url="images/SPM2.png"/>
               <head>Processing model workflow</head>
             </figure>
           </p>
@@ -2914,7 +2914,7 @@ live without God in the world, and only mind earthly things.
 
       <div> <p>
         <figure>
-          <graphic url="SPM2.png"/>
+          <graphic url="images/SPM2.png"/>
           <head>Processing model workflow</head>
         </figure>
       </p>
