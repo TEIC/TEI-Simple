@@ -63,7 +63,7 @@ elements are allowed for in the header. The following table
 		      normalize-space(cell[10]) = ''])"/> elements 
 listed which are <emph>not</emph> allowed in TEI Simple, but should be transformed
 to another element.</p>
-        <XSL:variable name="corpses" select="distinct-values(doc('count.xml')//elementRef/@corpus)"/>
+        <XSL:variable name="corpses" select="distinct-values(doc('auxiliary/count.xml')//elementRef/@corpus)"/>
         <table>
           <row role="label">
             <cell>Element</cell>
@@ -86,7 +86,7 @@ to another element.</p>
                 <XSL:variable name="c" select="."/>
                 <cell rend="right">
                   <XSL:value-of
-		      select="format-number(number(sum(doc('count.xml')//elementRef[@key=$e
+		      select="format-number(number(sum(doc('auxiliary/count.xml')//elementRef[@key=$e
 			      and @corpus=$c]/@count)),'########')"/>
                 </cell>
               </XSL:for-each>
@@ -143,7 +143,7 @@ to another element.</p>
       
       <xsl:stylesheet version="2.0">	
 	<XSL:for-each-group
-	    select="doc('teisimple.odd')//attDef[.//processing-instruction()[name()='exactMatch']]"
+	    select="doc('odd/teisimple.odd')//attDef[.//processing-instruction()[name()='exactMatch']]"
 	    group-by="@ident">
 	  <XSL:variable name="att" select="current-grouping-key()"/>
 	  <xsl:template  mode="pass2 #default" match="@{if ($att='rendition') then 'rend' else $att}">

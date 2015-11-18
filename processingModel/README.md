@@ -85,7 +85,7 @@ Processing model implementation files can be found in polygon subdirectory https
 
 To generate the XSLT stylesheet one can run following command:
 
-    saxon -xi  -s:../teisimple.odd -o:simple.xsl -xsl:simpleoddtoxsl.xsl
+    saxon -xi  -s:../odd/teisimple.odd -o:simple.xsl -xsl:simpleoddtoxsl.xsl
 
 That will generate simple.xsl file which can be used in turn to transform the TEI Simple documents, eg:
 

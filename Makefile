@@ -1,6 +1,6 @@
 default: teisimple  pm
 TEXTS=/Users/rahtz/GDrive/Simple/
-XSL=../Stylesheets
+XSL=../TEI/Stylesheets
 ANT_OPTS="-Xss2m -Xmx752m" 
 
 teisimple:
@@ -20,7 +20,7 @@ validate:
 
 oxygen:
 	mkdir -p frameworks/teisimple
-	cp tei_simple.framework build-oxygen.xml teisimple.odd elementsummary.xml headeronly.xml simpleelements.xml teisimple.rng teisimple.isosch teisimple.nvdl polygon/*xsl tests/simple.css tests/simple.js frameworks/teisimple
+	cp oxygen/tei_simple.framework oxygen/build-oxygen.xml odd/teisimple.odd odd/elementsummary.xml odd/headeronly.xml odd/simpleelements.xml teisimple.rng teisimple.isosch teisimple.nvdl processingModel/*xsl tests/simple.css tests/simple.js frameworks/teisimple
 	zip -r simpleoxygen frameworks
 
 

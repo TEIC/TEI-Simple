@@ -53,13 +53,13 @@
       <param name="verbose" expression="${verbose}" if="verbose"/>
     </xslt>
   </target>
-    <xslt force="yes" style="${XSL}/tools/iden.xsl" in="teisimple.odd" out="xsimple.odd">
+    <xslt force="yes" style="${XSL}/tools/iden.xsl" in="odd/teisimple.odd" out="xsimple.odd">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
     </xslt>
   <target name="schemas">
-    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="teisimple.odd" out="teisimple.compiled.xml">
+    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="odd/teisimple.odd" out="teisimple.compiled.xml">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
@@ -67,7 +67,7 @@
       <param name="verbose" expression="${verbose}" if="verbose"/>
     </xslt>
 
-    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="teisimple.odd" out="teisimple.compiled.xml">
+    <xslt force="yes" style="${XSL}/odds/odd2odd.xsl" in="odd/teisimple.odd" out="teisimple.compiled.xml">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
@@ -157,7 +157,7 @@
       <param name="autoToc" expression="false"/>
       <param name="displayMode" expression="rnc"/>
     </xslt>
-    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="teisimple.odd" out="teisimple.html">
+    <xslt force="yes" style="${XSL}/profiles/tei/html5/to.xsl" in="odd/teisimple.odd" out="teisimple.html">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
@@ -258,19 +258,19 @@
 
   <target name="pm">
     <echo>create simple XSL from PM</echo>
-    <xslt force="yes" style="polygon/simpleoddtoxsl.xsl" in="teisimple.odd" out="teisimple-pm.xsl">
+    <xslt force="yes" style="processingModel/simpleoddtoxsl.xsl" in="odd/teisimple.odd" out="teisimple-pm.xsl">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
     </xslt>
     <echo>create MS XSL from PM</echo>
-    <xslt force="yes" style="polygon/simpleoddtoxsl.xsl" in="teipm-ms.odd" out="teipm-ms.xsl">
+    <xslt force="yes" style="processingModel/simpleoddtoxsl.xsl" in="teipm-ms.odd" out="teipm-ms.xsl">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
     </xslt>
     <!--
-	<xslt force="yes" style="polygon/simpleoddtoxsl-latex.xsl" in="teisimple.odd" out="teisimple-pm-latex.xsl">
+	<xslt force="yes" style="processingModel/simpleoddtoxsl-latex.xsl" in="odd/teisimple.odd" out="teisimple-pm-latex.xsl">
       <factory name="net.sf.saxon.TransformerFactoryImpl">
         <attribute name="http://saxon.sf.net/feature/xinclude-aware" value="true"/>
       </factory>
