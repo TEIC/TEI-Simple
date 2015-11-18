@@ -2,6 +2,13 @@ TEI Simple
 ==========
 TEI Simple aims to define a new _highly-constrained_ and _prescriptive_ subset of the Text Encoding Initiative (TEI) Guidelines suited to the representation of early modern and modern books, a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts, mapping to other ontologies, and processes to describe the encoding status and richness of a TEI digital text.
 
+# Quick start
+
+  * For the processing model implementation in XSLT, start with `processingModel` subdirectory and README file there.
+  * For the eXist-db based showcase see http://showcases.exist-db.org/exist/apps/tei-simple/index.html and GitHub repo https://github.com/wolfgangmm/tei-simple-pm
+  * ODD files for TEI Simple are in the `odd` subdirectory
+  * Presentations from workshops, conferences and advisory committee meetings can be found in `presentations`
+
 # Useful links
 
 Documented ODD for Simple: http://htmlpreview.github.io/?https://github.com/TEIC/TEI-Simple/blob/master/teisimple.html for differences
