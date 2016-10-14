@@ -1,3 +1,12 @@
+
+PREFATORY NOTE (October 2016)
+=============================
+
+This repository holds material relating to the TEI Simple Project, which completed during 2015. Its major output
+was the TEI Simple ODD and associated documentation. These outputs have now been incorporated into the TEI Guidelines,
+and are maintained along with other Exemplars at the main TEIC repository : https://github.com/TEIC/TEI/blob/dev/P5/Exemplars/tei_simple.odd
+
+
 TEI Simple
 ==========
 TEI Simple aims to define a new _highly-constrained_ and _prescriptive_ subset of the Text Encoding Initiative (TEI) Guidelines suited to the representation of early modern and modern books, a formally-defined set of processing rules which permit modern web applications to easily present and analyze the encoded texts, mapping to other ontologies, and processes to describe the encoding status and richness of a TEI digital text.
