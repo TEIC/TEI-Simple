@@ -1,10 +1,13 @@
 
-PREFATORY NOTE (October 2016)
+PREFATORY NOTE (November 2016)
 =============================
 
 This repository holds material relating to the TEI Simple Project, which completed during 2015. Its major output
 was the TEI Simple ODD and associated documentation. These outputs have now been incorporated into the TEI Guidelines,
-and are maintained along with other Exemplars at the main TEIC repository : https://github.com/TEIC/TEI/blob/dev/P5/Exemplars/tei_simple.odd
+and are maintained along with other Exemplars at the main TEIC repository : https://github.com/TEIC/TEI/blob/dev/P5/Exemplars/tei_simplePrint.odd
+
+PLEASE NOTE THAT THE CONTENTS OF THIS REPOSITORY ARE OF ARCHIVAL INTEREST ONLY
+==============================================================================
 
 
 TEI Simple
